@@ -13,7 +13,7 @@ type SortDirection = "asc" | "desc" | null;
 
 interface Column<T> {
   header: string;
-  accessor: keyof T | ((row: T) => React.ReactNode);
+  accessor: keyof T | ((row: any) => React.ReactNode);
   sortable?: boolean;
   className?: string;
   headerClassName?: string;

@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { TrendingUp, TrendingDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-type StatVariant = "default" | "terracotta" | "gold" | "teal";
+type StatVariant = "default" | "terracotta" | "gold" | "teal" | "amber";
 
 interface StatCardProps {
   title: string;
@@ -34,6 +34,11 @@ const variantStyles: Record<StatVariant, { iconBg: string; iconColor: string; bo
     iconBg: "bg-gold-100",
     iconColor: "text-gold-600",
     border: "border-gold-200",
+  },
+  amber: {
+    iconBg: "bg-amber-100",
+    iconColor: "text-amber-600",
+    border: "border-amber-200",
   },
   teal: {
     iconBg: "bg-teal-100",

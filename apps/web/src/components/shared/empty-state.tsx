@@ -14,7 +14,7 @@ interface EmptyStateAction {
 interface EmptyStateProps {
   icon?: React.ReactNode;
   title: string;
-  description: string;
+  description?: string;
   action?: EmptyStateAction;
   secondaryAction?: EmptyStateAction;
   className?: string;
@@ -61,7 +61,7 @@ export function EmptyState({
       )}
 
       <h3 className="font-serif text-xl text-charcoal-900 mb-2">{title}</h3>
-      <p className="text-warm-gray-600 max-w-sm mb-8">{description}</p>
+      {description && <p className="text-warm-gray-600 max-w-sm mb-8">{description}</p>}
 
       {(action || secondaryAction) && (
         <div className="flex flex-col sm:flex-row gap-3">

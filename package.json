@@ -3,6 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "description": "Loopingon - Where Sri Lankan Craft Meets the World",
+  "packageManager": "npm@11.12.1",
   "workspaces": ["apps/*"],
   "scripts": {
     "dev": "turbo dev",

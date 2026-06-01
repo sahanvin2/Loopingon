@@ -6,8 +6,8 @@ import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface TagInputProps {
-  tags: string[];
-  onChange: (tags: string[]) => void;
+  tags?: string[];
+  onChange?: (tags: string[]) => void;
   suggestions?: string[];
   placeholder?: string;
   className?: string;
@@ -20,15 +20,18 @@ export function TagInput({
   placeholder = "Type and press Enter to add...",
   className,
 }: TagInputProps) {
+  const [internalTags, setInternalTags] = useState<string[]>([]);
   const [inputValue, setInputValue] = useState("");
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [highlightIndex, setHighlightIndex] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const resolvedTags = tags ?? internalTags;
+  const updateTags = onChange ?? setInternalTags;
 
   const filteredSuggestions = suggestions.filter(
     (s) =>
-      s.toLowerCase().includes(inputValue.toLowerCase()) && !tags.includes(s),
+      s.toLowerCase().includes(inputValue.toLowerCase()) && !resolvedTags.includes(s),
   );
 
   useEffect(() => {
@@ -46,8 +49,8 @@ export function TagInput({
 
   const addTag = (tag: string) => {
     const trimmed = tag.trim();
-    if (trimmed && !tags.includes(trimmed)) {
-      onChange([...tags, trimmed]);
+    if (trimmed && !resolvedTags.includes(trimmed)) {
+      updateTags([...resolvedTags, trimmed]);
     }
     setInputValue("");
     setShowSuggestions(false);
@@ -56,7 +59,7 @@ export function TagInput({
   };
 
   const removeTag = (index: number) => {
-    onChange(tags.filter((_, i) => i !== index));
+    updateTags(resolvedTags.filter((_, i) => i !== index));
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -103,7 +106,7 @@ export function TagInput({
         onClick={() => inputRef.current?.focus()}
       >
         <AnimatePresence>
-          {tags.map((tag, index) => (
+          {resolvedTags.map((tag, index) => (
             <motion.span
               key={`${tag}-${index}`}
               initial={{ opacity: 0, scale: 0.8 }}
@@ -137,7 +140,7 @@ export function TagInput({
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
           onFocus={() => setShowSuggestions(true)}
-          placeholder={tags.length === 0 ? placeholder : ""}
+          placeholder={resolvedTags.length === 0 ? placeholder : ""}
           className={cn(
             "flex-1 min-w-[120px] outline-none text-sm text-charcoal-700 bg-transparent",
             "placeholder:text-warm-gray-400",

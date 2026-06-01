@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
@@ -12,6 +12,27 @@ import { vendorApplicationSchema } from "@/lib/validators";
 import { cn } from "@/lib/utils";
 import { SRI_LANKAN_DISTRICTS, CRAFT_TYPES } from "@/lib/constants";
 import { useDebounce } from "@/hooks/use-debounce";
+
+type VendorApplicationFormValues = {
+  email: string;
+  password: string;
+  confirmPassword: string;
+  fullName: string;
+  phone: string;
+  storeName: string;
+  storeDescription: string;
+  businessName: string;
+  businessRegistrationNo: string;
+  businessType: string;
+  craftType: string[];
+  craftDescription: string;
+  yearsOfExperience: number | undefined;
+  employeeCount: number | undefined;
+  workshopCity: string;
+  workshopDistrict: string;
+  taxId: string;
+  acceptTerms: true;
+};
 
 const steps = ["Account", "Business Details", "Craft Details", "Documents"];
 
@@ -39,7 +60,7 @@ export default function SignUpVendorPage() {
     trigger,
     setValue,
     formState: { errors },
-  } = useForm({
+  } = useForm<VendorApplicationFormValues>({
     resolver: zodResolver(vendorApplicationSchema),
     defaultValues: {
       email: "", password: "", confirmPassword: "", fullName: "", phone: "",
@@ -62,7 +83,11 @@ export default function SignUpVendorPage() {
     finally { setCheckingStore(false); }
   }, []);
 
-  useState(() => { if (debouncedStore && debouncedStore.length >= 3) checkStore(debouncedStore); },);
+  useEffect(() => {
+    if (debouncedStore && debouncedStore.length >= 3) {
+      void checkStore(debouncedStore);
+    }
+  }, [checkStore, debouncedStore]);
 
   const password = watch("password");
   const strength = password
@@ -72,7 +97,7 @@ export default function SignUpVendorPage() {
     : null;
 
   const handleNext = async () => {
-    const fields: Record<number, (keyof ReturnType<typeof watch>)[]> = {
+    const fields: Record<number, (keyof VendorApplicationFormValues)[]> = {
       0: ["email", "password", "confirmPassword", "fullName", "phone"],
       1: ["storeName", "storeDescription", "businessType", "workshopCity", "workshopDistrict"],
       2: ["craftType", "craftDescription"],

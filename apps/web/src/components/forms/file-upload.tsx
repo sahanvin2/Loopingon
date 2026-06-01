@@ -13,7 +13,7 @@ interface UploadedFile {
 }
 
 interface FileUploadProps {
-  onUpload: (files: File[]) => void;
+  onUpload?: (files: File[]) => void;
   maxFiles?: number;
   maxSize?: number;
   accept?: string;
@@ -82,9 +82,11 @@ export function FileUpload({
           }, 200);
         });
 
-        setTimeout(() => {
-          onUpload(validFiles.map((f) => f.file));
-        }, 1200);
+        if (onUpload) {
+          setTimeout(() => {
+            onUpload(validFiles.map((f) => f.file));
+          }, 1200);
+        }
       }
     },
     [maxFiles, maxSize, preview, onUpload, validateFile],

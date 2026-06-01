@@ -27,7 +27,8 @@ import {
 import { cn } from "@/lib/utils";
 
 interface RichEditorProps {
-  content: string;
+  content?: string;
+  value?: string;
   onChange: (html: string) => void;
   placeholder?: string;
   className?: string;
@@ -66,10 +67,13 @@ function ToolbarButton({
 
 export function RichEditor({
   content,
+  value,
   onChange,
   placeholder = "Write something...",
   className,
 }: RichEditorProps) {
+  const initialContent = value ?? content ?? "";
+
   const editor = useEditor({
     extensions: [
       StarterKit.configure({
@@ -91,7 +95,7 @@ export function RichEditor({
         placeholder,
       }),
     ],
-    content,
+    content: initialContent,
     onUpdate: ({ editor: ed }) => {
       onChange(ed.getHTML());
     },

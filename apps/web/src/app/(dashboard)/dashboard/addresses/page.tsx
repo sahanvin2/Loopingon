@@ -77,6 +77,7 @@ export default function AddressesPage() {
           addressLine2: editingAddress.addressLine2 || undefined,
           city: editingAddress.city,
           district: editingAddress.district,
+          country: editingAddress.country,
           isDefault: editingAddress.isDefault,
         }
       : undefined,
@@ -99,14 +100,14 @@ export default function AddressesPage() {
 
   const openAdd = () => {
     setEditingAddress(null);
-    reset({});
+    reset({ country: "LK" });
     setIsModalOpen(true);
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
     setEditingAddress(null);
-    reset({});
+    reset({ country: "LK" });
   };
 
   return (
