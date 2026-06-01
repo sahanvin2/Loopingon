@@ -1,0 +1,85 @@
+name: Database Backup
+
+on:
+  schedule:
+    - cron: "0 2 * * *"
+  workflow_dispatch:
+
+jobs:
+  backup:
+    name: Backup Database to DigitalOcean Spaces
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Create Database Dump
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.PRODUCTION_HOST }}
+          username: ${{ secrets.PRODUCTION_USER }}
+          key: ${{ secrets.PRODUCTION_SSH_KEY }}
+          script: |
+            cd /opt/loopingon
+            TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+            BACKUP_FILE="/opt/backups/loopingon_db_${TIMESTAMP}.sql.gz"
+            mkdir -p /opt/backups
+
+            docker compose -f docker/docker-compose.prod.yml exec -T postgres \
+              pg_dump \
+              -U ${POSTGRES_USER} \
+              -d ${POSTGRES_DB} \
+              --no-owner \
+              --no-acl \
+              --clean \
+              --if-exists | gzip > $BACKUP_FILE
+
+            echo "Backup created: $BACKUP_FILE ($(du -h $BACKUP_FILE | cut -f1))"
+
+      - name: Upload to DigitalOcean Spaces
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.PRODUCTION_HOST }}
+          username: ${{ secrets.PRODUCTION_USER }}
+          key: ${{ secrets.PRODUCTION_SSH_KEY }}
+          script: |
+            cd /opt/loopingon
+
+            TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+            BACKUP_FILE="/opt/backups/loopingon_db_${TIMESTAMP}.sql.gz"
+            BACKUP_NAME="loopingon_db_${TIMESTAMP}.sql.gz"
+
+            s3cmd \
+              --access_key=$SPACES_ACCESS_KEY \
+              --secret_key=$SPACES_SECRET_KEY \
+              --host=$SPACES_ENDPOINT \
+              --host-bucket="%(bucket)s.$SPACES_ENDPOINT" \
+              put $BACKUP_FILE s3://$SPACES_BACKUP_BUCKET/database/$BACKUP_NAME
+
+            echo "Uploaded $BACKUP_NAME to Spaces"
+
+      - name: Cleanup Old Backups
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.PRODUCTION_HOST }}
+          username: ${{ secrets.PRODUCTION_USER }}
+          key: ${{ secrets.PRODUCTION_SSH_KEY }}
+          script: |
+            find /opt/backups -name "loopingon_db_*.sql.gz" -mtime +7 -delete
+            echo "Cleaned up backups older than 7 days"
+
+            s3cmd \
+              --access_key=$SPACES_ACCESS_KEY \
+              --secret_key=$SPACES_SECRET_KEY \
+              --host=$SPACES_ENDPOINT \
+              --host-bucket="%(bucket)s.$SPACES_ENDPOINT" \
+              ls s3://$SPACES_BACKUP_BUCKET/database/ | sort -r | tail -n +31 | while read -r line; do
+                FILE=$(echo "$line" | awk '{print $NF}')
+                if [ -n "$FILE" ]; then
+                  s3cmd \
+                    --access_key=$SPACES_ACCESS_KEY \
+                    --secret_key=$SPACES_SECRET_KEY \
+                    --host=$SPACES_ENDPOINT \
+                    --host-bucket="%(bucket)s.$SPACES_ENDPOINT" \
+                    del "s3://$SPACES_BACKUP_BUCKET/database/$FILE"
+                  echo "Deleted old backup: $FILE"
+                fi
+              done

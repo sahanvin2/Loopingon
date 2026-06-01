@@ -1,0 +1,32 @@
+{
+  "name": "loopingon",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Loopingon - Where Sri Lankan Craft Meets the World",
+  "workspaces": ["apps/*"],
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "start": "turbo start",
+    "lint": "turbo lint",
+    "typecheck": "turbo typecheck",
+    "test": "turbo test",
+    "format": "prettier --write .",
+    "db:migrate": "cd apps/server && npx prisma migrate dev",
+    "db:push": "cd apps/server && npx prisma db push",
+    "db:seed": "cd apps/server && npx prisma db seed",
+    "db:studio": "cd apps/server && npx prisma studio",
+    "db:generate": "cd apps/server && npx prisma generate",
+    "docker:dev": "docker compose -f docker/docker-compose.yml up -d",
+    "docker:prod": "docker compose -f docker/docker-compose.prod.yml up -d",
+    "docker:down": "docker compose -f docker/docker-compose.yml down"
+  },
+  "devDependencies": {
+    "turbo": "^2.3.0",
+    "prettier": "^3.4.0",
+    "typescript": "^5.5.0"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  }
+}

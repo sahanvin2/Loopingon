@@ -1,0 +1,141 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: loopingon-postgres
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-loopingon}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-loopingon_dev}
+      POSTGRES_DB: ${POSTGRES_DB:-loopingon}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./docker/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-loopingon} -d ${POSTGRES_DB:-loopingon}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - loopingon_network
+
+  redis:
+    image: redis:7-alpine
+    container_name: loopingon-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes --maxmemory 256mb --maxmemory-policy allkeys-lru
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - loopingon_network
+
+  server:
+    build:
+      context: ../apps/server
+      dockerfile: Dockerfile
+      target: runner
+    container_name: loopingon-server
+    restart: unless-stopped
+    ports:
+      - "4000:4000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    env_file:
+      - ../apps/server/.env
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-loopingon}:${POSTGRES_PASSWORD:-loopingon_dev}@postgres:5432/${POSTGRES_DB:-loopingon}
+      REDIS_URL: redis://redis:6379
+      NODE_ENV: development
+    volumes:
+      - ../apps/server/src:/app/src:ro
+      - ../apps/server/logs:/app/logs
+    networks:
+      - loopingon_network
+
+  web:
+    build:
+      context: ../apps/web
+      dockerfile: Dockerfile
+      target: runner
+    container_name: loopingon-web
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    depends_on:
+      - server
+    env_file:
+      - ../apps/web/.env
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:4000/api/v1
+      NODE_ENV: development
+    volumes:
+      - ../apps/web/src:/app/src:ro
+      - ../apps/web/public:/app/public:ro
+    networks:
+      - loopingon_network
+
+  worker:
+    build:
+      context: ../apps/server
+      dockerfile: Dockerfile
+      target: runner
+    container_name: loopingon-worker
+    restart: unless-stopped
+    command: node dist/workers/index.worker.js
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    env_file:
+      - ../apps/server/.env
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-loopingon}:${POSTGRES_PASSWORD:-loopingon_dev}@postgres:5432/${POSTGRES_DB:-loopingon}
+      REDIS_URL: redis://redis:6379
+      NODE_ENV: development
+    volumes:
+      - ../apps/server/src:/app/src:ro
+      - ../apps/server/logs:/app/logs
+    networks:
+      - loopingon_network
+
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    container_name: loopingon-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - web
+      - server
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+    networks:
+      - loopingon_network
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+
+networks:
+  loopingon_network:
+    driver: bridge
