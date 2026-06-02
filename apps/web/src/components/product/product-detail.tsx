@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import type { Product } from "@/types";
 import { ProductImages } from "@/components/product/product-images";
 import { ProductInfo } from "@/components/product/product-info";
+import { ProductBuyBox } from "@/components/product/product-buy-box";
 import { ProductReviews } from "@/components/product/product-reviews";
 import { RelatedProducts } from "@/components/product/related-products";
 import { ProductBreadcrumb } from "@/components/product/product-breadcrumb";
@@ -37,13 +38,16 @@ export function ProductDetail({ product }: ProductDetailProps) {
         categorySlug={primaryCategory?.slug}
       />
 
-      <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
-        <div className="lg:col-span-3">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+        {/* Left Column: Images */}
+        <div className="w-full">
           <ProductImages images={images} videos={videos} />
         </div>
 
-        <div className="lg:col-span-2 lg:sticky lg:top-20 lg:self-start">
+        {/* Right Column: Info & Checkout */}
+        <div className="w-full lg:sticky lg:top-24 space-y-8">
           <ProductInfo product={product} />
+          <ProductBuyBox product={product} />
         </div>
       </div>
 

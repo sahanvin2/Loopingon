@@ -24,8 +24,8 @@ router.post(
   validate(signupSchema),
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const user = await authService.signup(req.body);
-      createdResponse(res, user);
+      const result = await authService.signup(req.body);
+      createdResponse(res, result);
     } catch (err) {
       next(err);
     }

@@ -266,7 +266,7 @@ function SignUpForm({ onSwitch, onSuccess }: { onSwitch: () => void; onSuccess: 
             <label htmlFor="modal-signup-pw" className="block text-sm font-medium text-charcoal-700 mb-1.5">Password</label>
             <div className="relative">
               <Lock className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-400" />
-              <input id="modal-signup-pw" type={showPassword ? "text" : "password"} autoComplete="new-password" {...register("password")} placeholder="Min 8 characters"
+              <input id="modal-signup-pw" type={showPassword ? "text" : "password"} autoComplete="new-password" {...register("password")} placeholder="8+ chars, Aa1!"
                 className={cn("w-full rounded-xl border py-3 pl-10 pr-10 text-sm text-charcoal-900 placeholder:text-muted-400 focus:border-rose-500 focus:ring-2 focus:ring-rose-500/20 focus:outline-none transition-shadow", errors.password ? "border-red-400" : "border-blush-200")} />
               <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-400">
                 {showPassword ? <EyeOff className="h-3.5 w-3.5" /> : <Eye className="h-3.5 w-3.5" />}

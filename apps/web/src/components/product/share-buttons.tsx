@@ -71,9 +71,16 @@ export function ShareButtons({
   productUrl,
   className,
 }: ShareButtonsProps) {
+  const [mounted, setMounted] = React.useState(false);
+  const [currentUrl, setCurrentUrl] = React.useState("");
+
+  React.useEffect(() => {
+    setMounted(true);
+    setCurrentUrl(window.location.href);
+  }, []);
+
   const resolvedTitle = title || productTitle || "";
-  const resolvedUrl =
-    url || productUrl || (typeof window !== "undefined" ? window.location.href : "");
+  const resolvedUrl = url || productUrl || currentUrl;
 
   const handleCopyLink = async () => {
     const ok = await copyToClipboard(resolvedUrl);
@@ -83,6 +90,22 @@ export function ShareButtons({
       showToast.error("Failed to copy link");
     }
   };
+
+  if (!mounted) {
+    return (
+      <div className={cn("flex items-center gap-2", className)}>
+        <span className="text-sm text-muted-500 mr-1 flex items-center gap-1.5">
+          <Share2 className="w-4 h-4" />
+          Share:
+        </span>
+        <div className="flex gap-2 opacity-50">
+           {shareButtons.map((btn) => (
+             <div key={btn.label} className={cn("w-9 h-9 rounded-full", btn.color)} />
+           ))}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={cn("flex items-center gap-2", className)}>

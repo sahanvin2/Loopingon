@@ -17,8 +17,18 @@ export function ProductImages({ images, videos = [] }: ProductImagesProps) {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
 
+  const [isZooming, setIsZooming] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 50, y: 50 });
+
   const activeImage = images[activeIndex];
   const hasVideos = videos.length > 0;
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
+    const x = Math.max(0, Math.min(100, ((e.clientX - left) / width) * 100));
+    const y = Math.max(0, Math.min(100, ((e.clientY - top) / height) * 100));
+    setMousePosition({ x, y });
+  };
 
   const openLightbox = (index: number) => {
     setLightboxIndex(index);
@@ -34,53 +44,21 @@ export function ProductImages({ images, videos = [] }: ProductImagesProps) {
   };
 
   return (
-    <div className="space-y-4">
-      <div
-        className="relative aspect-[4/5] rounded-lg overflow-hidden bg-muted-100 cursor-zoom-in"
-        onClick={() => openLightbox(activeIndex)}
-        role="button"
-        tabIndex={0}
-        onKeyDown={(e) => {
-          if (e.key === "Enter") openLightbox(activeIndex);
-        }}
-        aria-label="Open image lightbox"
-      >
-        <Image
-          src={getImageUrl(activeImage?.large || activeImage?.url)}
-          alt={activeImage?.alt || "Product image"}
-          fill
-          className="object-cover"
-          sizes="60vw"
-          priority
-        />
-
-        {hasVideos && (
-          <div className="absolute bottom-4 left-4">
-            <span
-              className={cn(
-                "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full",
-                "bg-charcoal-900/60 backdrop-blur-sm text-white text-xs font-medium",
-              )}
-            >
-              <Play className="w-3 h-3 fill-current" />
-              {videos.length} video{videos.length > 1 ? "s" : ""}
-            </span>
-          </div>
-        )}
-      </div>
-
-      {images.length > 1 && (
-        <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-thin">
+    <div className="flex flex-col-reverse lg:flex-row gap-4">
+      {/* Thumbnails */}
+      {(images.length > 1 || hasVideos) && (
+        <div className="flex lg:flex-col gap-3 overflow-x-auto lg:overflow-y-auto pb-2 lg:pb-0 scrollbar-thin lg:w-20 shrink-0 lg:max-h-[600px] items-start">
           {images.map((image, index) => (
             <button
               key={image.id}
               type="button"
+              onMouseEnter={() => setActiveIndex(index)}
               onClick={() => setActiveIndex(index)}
               className={cn(
-                "relative w-20 h-20 rounded-md overflow-hidden shrink-0 border-2 transition-colors",
+                "relative w-16 h-16 lg:w-20 lg:h-20 rounded-md overflow-hidden shrink-0 border-2 transition-all",
                 index === activeIndex
-                  ? "border-rose-500"
-                  : "border-transparent hover:border-muted-300",
+                  ? "border-rose-500 shadow-sm"
+                  : "border-transparent opacity-70 hover:opacity-100 hover:border-blush-300",
               )}
               aria-label={`View image ${index + 1}`}
             >
@@ -99,8 +77,8 @@ export function ProductImages({ images, videos = [] }: ProductImagesProps) {
               key={video.id}
               type="button"
               className={cn(
-                "relative w-20 h-20 rounded-md overflow-hidden shrink-0 border-2 border-transparent",
-                "hover:border-muted-300",
+                "relative w-16 h-16 lg:w-20 lg:h-20 rounded-md overflow-hidden shrink-0 border-2 border-transparent",
+                "opacity-70 hover:opacity-100 hover:border-blush-300",
               )}
               aria-label={`Watch video ${index + 1}`}
             >
@@ -112,12 +90,60 @@ export function ProductImages({ images, videos = [] }: ProductImagesProps) {
                 sizes="80px"
               />
               <div className="absolute inset-0 bg-charcoal-900/30 flex items-center justify-center">
-                <Play className="w-6 h-6 text-white fill-white" />
+                <Play className="w-5 h-5 lg:w-6 lg:h-6 text-white fill-white" />
               </div>
             </button>
           ))}
         </div>
       )}
+
+      {/* Main Image */}
+      <div className="flex-1 w-full min-w-0">
+        <div
+          className="relative aspect-square md:aspect-[4/5] lg:aspect-[4/4] rounded-xl overflow-hidden bg-white border border-blush-200 cursor-zoom-in group"
+          onMouseEnter={() => setIsZooming(true)}
+          onMouseLeave={() => setIsZooming(false)}
+          onMouseMove={handleMouseMove}
+          onClick={() => openLightbox(activeIndex)}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") openLightbox(activeIndex);
+          }}
+          aria-label="Open image lightbox"
+        >
+          <Image
+            src={getImageUrl(activeImage?.large || activeImage?.url)}
+            alt={activeImage?.alt || "Product image"}
+            fill
+            className={cn(
+              "object-contain transition-transform duration-100 ease-out",
+              isZooming ? "scale-[2.5]" : "scale-100"
+            )}
+            style={
+              isZooming
+                ? { transformOrigin: `${mousePosition.x}% ${mousePosition.y}%` }
+                : { transformOrigin: "center center" }
+            }
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            priority
+          />
+
+          {hasVideos && !isZooming && (
+            <div className="absolute bottom-4 left-4">
+              <span
+                className={cn(
+                  "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full",
+                  "bg-charcoal-900/60 backdrop-blur-sm text-white text-xs font-medium",
+                )}
+              >
+                <Play className="w-3 h-3 fill-current" />
+                {videos.length} video{videos.length > 1 ? "s" : ""}
+              </span>
+            </div>
+          )}
+        </div>
+      </div>
 
       <AnimatePresence>
         {lightboxOpen && (

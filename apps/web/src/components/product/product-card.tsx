@@ -40,7 +40,7 @@ export function ProductCard({ product, className, showQuickView = true }: Produc
         className,
       )}
     >
-      <Link href={`/products/${product.slug}`} className="block relative aspect-[4/5] overflow-hidden bg-muted-100">
+      <Link href={`/products/${product.slug}`} className="block relative aspect-[4/3] overflow-hidden bg-muted-100">
         <Image
           src={imageUrl}
           alt={product.title}

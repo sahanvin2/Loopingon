@@ -54,14 +54,31 @@ export async function signup(data: {
   }
 
   const updatedToken = signEmailVerificationToken(user.id, data.email);
-  await sendEmail(
-    data.email,
-    "Verify your email - Loopingon",
-    `<p>Welcome! Click <a href="${process.env.FRONTEND_URL}/verify-email?token=${updatedToken}">here</a> to verify your email.</p>`
-  );
+  try {
+    await sendEmail(
+      data.email,
+      "Verify your email - Loopingon",
+      `<p>Welcome! Click <a href="${process.env.FRONTEND_URL || 'http://localhost:3000'}/verify-email?token=${updatedToken}">here</a> to verify your email.</p>`
+    );
+  } catch {
+    console.log("Email sending skipped (SMTP not configured)");
+  }
+
+  const tokenPayload: TokenPayload = { sub: user.id, email: user.email, role: user.role };
+  const accessToken = signAccessToken(tokenPayload);
+  const refreshToken = signRefreshToken(tokenPayload, generateTokenFamily());
+
+  await prisma.refreshToken.create({
+    data: {
+      userId: user.id,
+      token: refreshToken,
+      family: tokenPayload.sub + Date.now().toString(),
+      expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+    },
+  });
 
   const { passwordHash: _, ...userWithoutPassword } = user;
-  return userWithoutPassword;
+  return { user: userWithoutPassword, accessToken, refreshToken };
 }
 
 export async function signin(email: string, password: string, ipAddress?: string) {
