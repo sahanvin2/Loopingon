@@ -83,7 +83,7 @@ export default function NotFound() {
                 if (e.key === "Enter") {
                   const query = (e.target as HTMLInputElement).value.trim();
                   if (query) {
-                    window.location.href = `/shop?q=${encodeURIComponent(query)}`;
+                    window.location.href = `/products?q=${encodeURIComponent(query)}`;
                   }
                 }
               }}

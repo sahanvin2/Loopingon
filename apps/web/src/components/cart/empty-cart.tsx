@@ -6,9 +6,11 @@ import { motion } from "framer-motion";
 import { ShoppingBag, LogIn } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useAuthStore } from "@/stores/auth-store";
+import { useUIStore } from "@/stores/ui-store";
 
 export function EmptyCart() {
   const { isAuthenticated } = useAuthStore();
+  const { openModal } = useUIStore();
 
   return (
     <motion.div
@@ -40,8 +42,8 @@ export function EmptyCart() {
         </Link>
 
         {!isAuthenticated && (
-          <Link
-            href="/auth/signin"
+          <button
+            onClick={() => openModal("signin")}
             className={cn(
               "inline-flex items-center justify-center gap-2 px-8 py-3 rounded-lg",
               "border border-blush-300 text-charcoal-700 font-medium",
@@ -50,7 +52,7 @@ export function EmptyCart() {
           >
             <LogIn className="w-4 h-4" />
             Sign in to see saved items
-          </Link>
+          </button>
         )}
       </div>
     </motion.div>

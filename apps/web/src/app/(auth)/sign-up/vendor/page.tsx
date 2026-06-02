@@ -59,6 +59,7 @@ export default function SignUpVendorPage() {
     watch,
     trigger,
     setValue,
+    getValues,
     formState: { errors },
   } = useForm<VendorApplicationFormValues>({
     resolver: zodResolver(vendorApplicationSchema),
@@ -131,7 +132,56 @@ export default function SignUpVendorPage() {
   const onSubmit = async () => {
     setError("");
     try {
-      await post("/vendors/register", {});
+      const email = getValues("email");
+      const password = getValues("password");
+      const fullName = getValues("fullName");
+      const phone = getValues("phone");
+
+      // Step 1: Create the user account
+      await post("/auth/signup", {
+        email,
+        password,
+        fullName,
+        phone: phone || undefined,
+        acceptTerms: true,
+      });
+
+      // Step 2: Sign in to get tokens
+      const signinRes = await post("/auth/signin", {
+        email,
+        password,
+      }) as { data?: { accessToken?: string; refreshToken?: string; user?: Record<string, unknown> } };
+
+      if (signinRes?.data?.accessToken) {
+        localStorage.setItem("accessToken", signinRes.data.accessToken);
+        localStorage.setItem("refreshToken", signinRes.data.refreshToken || "");
+      }
+
+      // Update auth store
+      if (signinRes?.data?.user) {
+        const { useAuthStore } = await import("@/stores/auth-store");
+        useAuthStore.getState().setUser(signinRes.data.user as never);
+      }
+
+      // Step 3: Apply for vendor
+      const storeNameVal = getValues("storeName");
+      const storeSlug = storeNameVal.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+
+      await post("/vendors/apply", {
+        storeName: storeNameVal,
+        storeSlug,
+        storeDescription: getValues("storeDescription"),
+        businessName: getValues("businessName") || undefined,
+        businessRegistrationNo: getValues("businessRegistrationNo") || undefined,
+        businessType: getValues("businessType") || "individual",
+        taxId: getValues("taxId") || undefined,
+        craftType: getValues("craftType"),
+        craftDescription: getValues("craftDescription"),
+        yearsOfExperience: getValues("yearsOfExperience") ? Number(getValues("yearsOfExperience")) : undefined,
+        workshopCity: getValues("workshopCity") || undefined,
+        workshopDistrict: getValues("workshopDistrict") || undefined,
+      });
+
       router.push("/vendor/dashboard?welcome=true");
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Application failed");

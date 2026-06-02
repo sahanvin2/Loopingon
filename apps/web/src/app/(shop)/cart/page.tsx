@@ -4,6 +4,7 @@ import { useMemo } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, ShoppingBag } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useCartStore } from "@/stores/cart-store";
 import { CartItem } from "@/components/cart/cart-item";
 import { CartSummary } from "@/components/cart/cart-summary";
@@ -11,6 +12,7 @@ import { EmptyCart } from "@/components/cart/empty-cart";
 import { cn } from "@/lib/utils";
 
 export default function CartPage() {
+  const router = useRouter();
   const { items, itemCount, subtotal } = useCartStore();
 
   const cartItems = useMemo(() => items, [items]);
@@ -50,7 +52,11 @@ export default function CartPage() {
           </div>
 
           <div className="lg:sticky lg:top-24 lg:self-start">
-            <CartSummary subtotal={subtotal} itemCount={itemCount} />
+            <CartSummary 
+              subtotal={subtotal} 
+              itemCount={itemCount} 
+              onCheckout={() => router.push("/checkout")}
+            />
           </div>
         </div>
       </div>
