@@ -105,7 +105,7 @@ export function ProductCard({ product, className, showQuickView = true }: Produc
       <div className="p-3">
         {product.vendor && (
           <Link
-            href={`/artisans/${product.vendor.storeSlug}`}
+            href={`/vendors/${product.vendor.storeSlug}`}
             className="text-xs uppercase tracking-wider text-muted-500 hover:text-rose-600 transition-colors"
           >
             {product.vendor.storeName}

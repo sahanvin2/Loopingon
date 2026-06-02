@@ -97,7 +97,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
                   {product.vendor.storeDescription}
                 </p>
                 <Link
-                  href={`/artisans/${product.vendor.storeSlug}`}
+                  href={`/vendors/${product.vendor.storeSlug}`}
                   className={cn(
                     "text-sm font-medium text-rose-600 hover:text-rose-700",
                     "hover:underline",

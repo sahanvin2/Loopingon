@@ -129,7 +129,7 @@ export function Header() {
               </Link>
             )}
             <Link
-              href="/about"
+              href="/about-us"
               className="rounded-full px-3 py-2 text-charcoal-600 hover:bg-blush-100 hover:text-charcoal-900 transition-colors hidden md:inline-flex"
             >
               About

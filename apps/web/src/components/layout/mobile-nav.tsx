@@ -28,11 +28,11 @@ import { CurrencySwitcher } from "@/components/shared/currency-switcher";
 const navSections = [
   { icon: ShoppingBag, label: "Shop", href: "/products" },
   { icon: Grid3X3, label: "Categories", href: "/categories" },
-  { icon: Store, label: "Sell on Loopingon", href: "/vendor/register" },
-  { icon: Info, label: "About", href: "/about" },
+  { icon: Store, label: "Sell on Loopingon", href: "/sign-up/vendor" },
+  { icon: Info, label: "About", href: "/about-us" },
   { icon: Newspaper, label: "Blog", href: "/blog" },
   { icon: Trophy, label: "Competitions", href: "/competitions" },
-  { icon: HelpCircle, label: "Help", href: "/help" },
+  { icon: HelpCircle, label: "Help", href: "/help-center" },
 ];
 
 const categories = [

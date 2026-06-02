@@ -64,8 +64,8 @@ export default function VerifyEmailPage() {
               <h1 className="font-serif text-2xl font-bold text-charcoal-900">Verification Failed</h1>
               <p className="mt-2 text-sm text-muted-600">{error || "Invalid or expired verification link."}</p>
               <p className="mt-4">
-                <Link href="/verify-email/request" className="inline-flex items-center gap-1 text-sm font-medium text-rose-600 hover:text-rose-700">
-                  <Mail className="h-4 w-4" /> Request new verification email
+                <Link href="/sign-in" className="inline-flex items-center gap-1 text-sm font-medium text-rose-600 hover:text-rose-700">
+                  <Mail className="h-4 w-4" /> Return to Sign In
                 </Link>
               </p>
             </>

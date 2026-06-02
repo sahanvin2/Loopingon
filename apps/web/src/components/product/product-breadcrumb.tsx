@@ -30,7 +30,7 @@ export function ProductBreadcrumb({
   if (subcategoryName && subcategorySlug) {
     items.push({
       label: subcategoryName,
-      href: `/categories/${categorySlug}/${subcategorySlug}`,
+      href: `/categories/${subcategorySlug}`,
     });
   }
 

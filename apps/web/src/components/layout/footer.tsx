@@ -34,32 +34,32 @@ export function Footer() {
       links: [
         ...(isSeller
           ? [
-              { label: "Open a shop", href: "/vendor/register" },
               { label: "Seller dashboard", href: "/vendor/dashboard" },
             ]
-          : []),
+          : [
+              { label: "Open a shop", href: "/sell-on-loopingon" },
+            ]),
         { label: "How it works", href: "/how-it-works" },
-        { label: "Success stories", href: "/success-stories" },
       ],
     },
     {
       title: "Company",
       links: [
-        { label: "Our story", href: "/about" },
-        { label: "Blog", href: "/blog" },
-        { label: "Sustainability", href: "/sustainability" },
-        { label: "Careers", href: "/careers" },
-        { label: "Contact us", href: "/contact" },
+          { label: "Our story", href: "/about-us" },
+          { label: "Blog", href: "/blog" },
+          { label: "Sustainability", href: "/sustainability" },
+          { label: "Careers", href: "/careers" },
+          { label: "Contact us", href: "/contact" },
       ],
     },
     {
       title: "Help",
       links: [
-        { label: "Help center", href: "/help" },
-        { label: "Shipping policy", href: "/shipping" },
-        { label: "Return policy", href: "/legal/returns" },
-        { label: "Privacy policy", href: "/legal/privacy" },
-        { label: "Terms of service", href: "/legal/terms" },
+          { label: "Help center", href: "/help-center" },
+          { label: "Shipping policy", href: "/shipping-policy" },
+          { label: "Return policy", href: "/return-policy" },
+          { label: "Privacy policy", href: "/privacy-policy" },
+          { label: "Terms of service", href: "/terms-of-service" },
       ],
     },
   ];

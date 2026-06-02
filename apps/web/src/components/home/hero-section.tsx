@@ -46,7 +46,7 @@ export function HeroSection() {
                 <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link
-                href="/vendor/register"
+                href="/sign-up/vendor"
                 className={cn(
                   "inline-flex items-center px-6 py-3 rounded-full",
                   "bg-white text-charcoal-800 font-medium text-sm",

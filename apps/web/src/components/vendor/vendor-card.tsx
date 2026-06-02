@@ -26,7 +26,7 @@ export function VendorCard({ vendor, className }: VendorCardProps) {
       )}
     >
       <Link
-        href={`/artisans/${vendor.storeSlug}`}
+        href={`/vendors/${vendor.storeSlug}`}
         className="block p-6 text-center"
       >
         <div className="w-20 h-20 mx-auto rounded-full border-2 border-blush-200 overflow-hidden bg-muted-100 mb-4">
