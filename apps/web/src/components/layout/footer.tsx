@@ -59,7 +59,7 @@ export function Footer() {
   return (
     <footer className="mt-24 border-t border-blush-200 bg-blush-100/40">
       <div className="max-w-8xl mx-auto px-4">
-        <div className="grid gap-10 py-14 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-10 py-14 md:grid-cols-3 lg:grid-cols-5">
           {/* Brand */}
           <div>
             <div className="flex items-center gap-2">
