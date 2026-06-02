@@ -55,7 +55,7 @@ export function AuthModal() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 10 }}
             transition={{ duration: 0.2 }}
-            className="relative w-full max-w-md max-h-[95vh] overflow-y-auto rounded-3xl bg-white p-6 md:p-8 shadow-[0_30px_80px_-20px_rgba(176,86,110,0.5)]"
+            className="relative w-full max-w-md max-h-[95vh] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] rounded-3xl bg-white p-6 md:p-8 shadow-[0_30px_80px_-20px_rgba(176,86,110,0.5)]"
             onClick={(e) => e.stopPropagation()}
           >
             <button

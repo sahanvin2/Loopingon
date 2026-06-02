@@ -40,42 +40,74 @@ export default function ResetPasswordPage() {
 
   if (!token) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-cream-50 px-4">
-        <div className="max-w-md rounded-2xl bg-white p-8 text-center shadow-soft-sm">
-          <h1 className="font-serif text-2xl font-bold text-charcoal-900">Invalid Reset Link</h1>
-          <p className="mt-2 text-sm text-muted-600">This password reset link is missing or invalid. Please request a new one.</p>
-          <Link href="/forgot-password" className="mt-4 inline-block text-sm font-medium text-rose-600 hover:text-rose-700">Request New Link</Link>
-        </div>
+      <div className="relative flex min-h-screen items-center justify-center bg-gradient-to-br from-cream-50 via-white to-blush-50 px-4">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="w-full max-w-md">
+          <div className="rounded-3xl bg-white/80 backdrop-blur-xl p-8 md:p-10 shadow-[0_20px_60px_-20px_rgba(176,86,110,0.3)] border border-white/50 text-center">
+            <h1 className="font-serif text-2xl font-bold text-charcoal-900">Invalid Reset Link</h1>
+            <p className="mt-2 text-sm text-muted-500">This password reset link is missing or invalid. Please request a new one.</p>
+            <Link href="/forgot-password" className="mt-5 inline-flex items-center justify-center h-11 px-6 rounded-xl bg-rose-500 text-sm font-medium text-white shadow-sm hover:bg-rose-600 transition-colors">
+              Request New Link
+            </Link>
+          </div>
+        </motion.div>
       </div>
     );
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-cream-50 px-4 py-12">
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="w-full max-w-md">
-        <div className="rounded-2xl bg-white p-8 shadow-soft-sm md:p-10">
-          <div className="mb-6 text-center"><Link href="/" className="font-serif text-2xl font-bold text-rose-600">Loopingon</Link></div>
-          <h1 className="text-center font-serif text-3xl font-bold text-charcoal-900">Reset Password</h1>
-          <p className="mt-1 text-center text-sm text-muted-500">Create a new password for your account.</p>
+    <div className="relative flex min-h-screen items-center justify-center bg-gradient-to-br from-cream-50 via-white to-blush-50 px-4 py-12 overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <motion.div animate={{ x: [0, 30, 0], y: [0, -40, 0] }} transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }} className="absolute -top-20 -right-20 w-[400px] h-[400px] bg-rose-100/30 rounded-full blur-3xl" />
+        <motion.div animate={{ x: [0, -30, 0], y: [0, 40, 0] }} transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 3 }} className="absolute -bottom-20 -left-20 w-[400px] h-[400px] bg-blush-200/20 rounded-full blur-3xl" />
+      </div>
 
-          {error && <div className="mt-4 rounded-lg bg-red-50 px-4 py-3 text-sm text-red-600">{error}</div>}
+      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="relative w-full max-w-md">
+        <div className="rounded-3xl bg-white/80 backdrop-blur-xl p-8 md:p-10 shadow-[0_20px_60px_-20px_rgba(176,86,110,0.3)] border border-white/50">
+          <div className="mb-8 text-center">
+            <Link href="/" className="inline-flex items-center justify-center h-12 w-12 rounded-full bg-gradient-to-br from-rose-400 to-rose-600 text-white font-serif text-xl shadow-[0_8px_24px_-8px_rgba(176,86,110,0.6)] mb-4">L</Link>
+            <h1 className="font-serif text-3xl font-bold text-charcoal-900 tracking-tight">Reset password</h1>
+            <p className="mt-1.5 text-sm text-muted-500">Create a new password for your account</p>
+          </div>
 
-          <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-4">
+          {error && (
+            <div className="mb-5 rounded-xl bg-red-50 px-4 py-3 text-sm text-red-600 border border-red-100">{error}</div>
+          )}
+
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
             <div>
-              <label className="text-sm font-medium text-charcoal-700">New Password</label>
-              <div className="relative mt-1.5"><Lock className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-400" /><input type={showPw ? "text" : "password"} {...register("password")} placeholder="Min 8 characters" className={cn("w-full rounded-lg border py-3 pl-10 pr-12 text-sm focus:border-rose-500 focus:ring-2 focus:ring-rose-500/20 focus:outline-none", errors.password ? "border-red-400" : "border-charcoal-200")} /><button type="button" onClick={() => setShowPw(!showPw)} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-400">{showPw ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}</button></div>
-              {errors.password && <p className="mt-1 text-xs text-red-500">{errors.password.message}</p>}
+              <label htmlFor="password" className="block text-sm font-medium text-charcoal-700 mb-1.5">New Password</label>
+              <div className="relative">
+                <Lock className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-400" />
+                <input id="password" type={showPw ? "text" : "password"} {...register("password")} placeholder="Min 8 characters"
+                  className={cn("w-full rounded-xl border py-3.5 pl-12 pr-12 text-sm text-charcoal-900 placeholder:text-muted-400 bg-white/80 focus:border-rose-400 focus:ring-4 focus:ring-rose-400/10 focus:outline-none transition-all", errors.password ? "border-red-400" : "border-blush-200")} />
+                <button type="button" onClick={() => setShowPw(!showPw)} className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-400 hover:text-charcoal-600 transition-colors">
+                  {showPw ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                </button>
+              </div>
+              {errors.password && <p className="mt-1.5 text-xs text-red-500">{errors.password.message}</p>}
             </div>
             <div>
-              <label className="text-sm font-medium text-charcoal-700">Confirm Password</label>
-              <div className="relative mt-1.5"><Lock className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-400" /><input type={showCpw ? "text" : "password"} {...register("confirmPassword")} placeholder="Re-enter password" className={cn("w-full rounded-lg border py-3 pl-10 pr-12 text-sm focus:border-rose-500 focus:ring-2 focus:ring-rose-500/20 focus:outline-none", errors.confirmPassword ? "border-red-400" : "border-charcoal-200")} /><button type="button" onClick={() => setShowCpw(!showCpw)} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-400">{showCpw ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}</button></div>
-              {errors.confirmPassword && <p className="mt-1 text-xs text-red-500">{errors.confirmPassword.message}</p>}
+              <label htmlFor="confirmPassword" className="block text-sm font-medium text-charcoal-700 mb-1.5">Confirm Password</label>
+              <div className="relative">
+                <Lock className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-400" />
+                <input id="confirmPassword" type={showCpw ? "text" : "password"} {...register("confirmPassword")} placeholder="Re-enter password"
+                  className={cn("w-full rounded-xl border py-3.5 pl-12 pr-12 text-sm text-charcoal-900 placeholder:text-muted-400 bg-white/80 focus:border-rose-400 focus:ring-4 focus:ring-rose-400/10 focus:outline-none transition-all", errors.confirmPassword ? "border-red-400" : "border-blush-200")} />
+                <button type="button" onClick={() => setShowCpw(!showCpw)} className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-400 hover:text-charcoal-600 transition-colors">
+                  {showCpw ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                </button>
+              </div>
+              {errors.confirmPassword && <p className="mt-1.5 text-xs text-red-500">{errors.confirmPassword.message}</p>}
             </div>
-            <button type="submit" disabled={isPending} className="flex h-12 w-full items-center justify-center rounded-lg bg-rose-600 text-sm font-semibold text-white shadow-soft hover:bg-rose-700 disabled:cursor-not-allowed disabled:opacity-60">
+            <button type="submit" disabled={isPending} className="flex h-13 w-full items-center justify-center rounded-xl bg-gradient-to-r from-rose-500 to-rose-600 text-base font-semibold text-white shadow-lg shadow-rose-500/25 transition-all hover:shadow-xl hover:shadow-rose-500/30 hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0">
               {isPending ? <span className="h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent" /> : "Reset Password"}
             </button>
           </form>
-          <p className="mt-6 text-center text-sm"><Link href="/sign-in" className="inline-flex items-center gap-1 text-charcoal-600 hover:text-charcoal-800"><ArrowLeft className="h-4 w-4" /> Back to Sign In</Link></p>
+
+          <div className="mt-8 pt-6 border-t border-blush-100 text-center">
+            <Link href="/sign-in" className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-500 hover:text-charcoal-700 transition-colors">
+              <ArrowLeft className="h-4 w-4" /> Back to Sign In
+            </Link>
+          </div>
         </div>
       </motion.div>
     </div>

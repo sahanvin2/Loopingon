@@ -5,48 +5,7 @@ import Link from "next/link";
 import { Facebook, Instagram, Youtube, Music2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { SOCIAL_LINKS } from "@/lib/constants";
-
-const footerColumns = [
-  {
-    title: "Shop",
-    links: [
-      { label: "All items", href: "/products" },
-      { label: "Home & Living", href: "/products?category=home-living" },
-      { label: "Jewelry", href: "/products?category=jewelry" },
-      { label: "Gifts", href: "/products?category=gifts" },
-      { label: "Art & Prints", href: "/products?category=art-prints" },
-    ],
-  },
-  {
-    title: "Sell",
-    links: [
-      { label: "Open a shop", href: "/vendor/register" },
-      { label: "Seller dashboard", href: "/vendor/dashboard" },
-      { label: "How it works", href: "/how-it-works" },
-      { label: "Success stories", href: "/success-stories" },
-    ],
-  },
-  {
-    title: "Company",
-    links: [
-      { label: "Our story", href: "/about" },
-      { label: "Blog", href: "/blog" },
-      { label: "Sustainability", href: "/sustainability" },
-      { label: "Careers", href: "/careers" },
-      { label: "Contact us", href: "/contact" },
-    ],
-  },
-  {
-    title: "Help",
-    links: [
-      { label: "Help center", href: "/help" },
-      { label: "Shipping policy", href: "/shipping" },
-      { label: "Return policy", href: "/legal/returns" },
-      { label: "Privacy policy", href: "/legal/privacy" },
-      { label: "Terms of service", href: "/legal/terms" },
-    ],
-  },
-];
+import { useAuthStore } from "@/stores/auth-store";
 
 const socialLinks = [
   { icon: Facebook, href: SOCIAL_LINKS.facebook, label: "Facebook" },
@@ -56,6 +15,55 @@ const socialLinks = [
 ];
 
 export function Footer() {
+  const { user } = useAuthStore();
+  const isSeller = user?.role === "VENDOR";
+
+  const footerColumns = [
+    {
+      title: "Shop",
+      links: [
+        { label: "All items", href: "/products" },
+        { label: "Home & Living", href: "/products?category=home-living" },
+        { label: "Jewelry", href: "/products?category=jewelry" },
+        { label: "Gifts", href: "/products?category=gifts" },
+        { label: "Art & Prints", href: "/products?category=art-prints" },
+      ],
+    },
+    {
+      title: "Sell",
+      links: [
+        ...(isSeller
+          ? [
+              { label: "Open a shop", href: "/vendor/register" },
+              { label: "Seller dashboard", href: "/vendor/dashboard" },
+            ]
+          : []),
+        { label: "How it works", href: "/how-it-works" },
+        { label: "Success stories", href: "/success-stories" },
+      ],
+    },
+    {
+      title: "Company",
+      links: [
+        { label: "Our story", href: "/about" },
+        { label: "Blog", href: "/blog" },
+        { label: "Sustainability", href: "/sustainability" },
+        { label: "Careers", href: "/careers" },
+        { label: "Contact us", href: "/contact" },
+      ],
+    },
+    {
+      title: "Help",
+      links: [
+        { label: "Help center", href: "/help" },
+        { label: "Shipping policy", href: "/shipping" },
+        { label: "Return policy", href: "/legal/returns" },
+        { label: "Privacy policy", href: "/legal/privacy" },
+        { label: "Terms of service", href: "/legal/terms" },
+      ],
+    },
+  ];
+
   return (
     <footer className="mt-24 border-t border-blush-200 bg-blush-100/40">
       <div className="max-w-8xl mx-auto px-4">

@@ -5,6 +5,7 @@ import { get, post, patch, del } from "@/lib/api-client";
 import type { Cart, CartItem, ApiResponse } from "@/types";
 import { useCartStore } from "@/stores/cart-store";
 import { useAuthStore } from "@/stores/auth-store";
+import { useUIStore } from "@/stores/ui-store";
 import { toast } from "sonner";
 
 export function useCart() {
@@ -28,6 +29,7 @@ export function useAddToCart() {
   const queryClient = useQueryClient();
   const { addItem, items } = useCartStore();
   const { isAuthenticated } = useAuthStore();
+  const { openModal } = useUIStore();
 
   return useMutation({
     mutationFn: async ({
@@ -50,6 +52,10 @@ export function useAddToCart() {
       return { productId, variantId, quantity, id: crypto.randomUUID(), price: "0", cartId: "", createdAt: "", updatedAt: "" } as unknown as CartItem;
     },
     onMutate: async ({ productId, variantId, quantity }) => {
+      if (!isAuthenticated) {
+        openModal("signin");
+        throw new Error("UNAUTHORIZED");
+      }
       await queryClient.cancelQueries({ queryKey: ["cart"] });
       const previousItems = items;
       const safeQuantity = quantity ?? 1;
@@ -65,7 +71,8 @@ export function useAddToCart() {
       });
       return { previousItems };
     },
-    onError: (_err, _vars, context) => {
+    onError: (err, _vars, context) => {
+      if (err instanceof Error && err.message === "UNAUTHORIZED") return;
       if (context?.previousItems) {
         useCartStore.setState({ items: context.previousItems });
       }

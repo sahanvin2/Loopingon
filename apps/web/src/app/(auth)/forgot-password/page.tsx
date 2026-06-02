@@ -52,59 +52,63 @@ export default function ForgotPasswordPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-cream-50 px-4 py-12">
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="w-full max-w-md">
-        <div className="rounded-2xl bg-white p-8 shadow-soft-sm md:p-10">
-          <div className="mb-6 text-center">
-            <Link href="/" className="inline-block font-serif text-2xl font-bold text-rose-600">Loopingon</Link>
+    <div className="relative flex min-h-screen items-center justify-center bg-gradient-to-br from-cream-50 via-white to-blush-50 px-4 py-12 overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <motion.div animate={{ x: [0, 30, 0], y: [0, -40, 0] }} transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }} className="absolute -top-20 -right-20 w-[400px] h-[400px] bg-rose-100/30 rounded-full blur-3xl" />
+        <motion.div animate={{ x: [0, -30, 0], y: [0, 40, 0] }} transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 3 }} className="absolute -bottom-20 -left-20 w-[400px] h-[400px] bg-blush-200/20 rounded-full blur-3xl" />
+      </div>
+
+      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="relative w-full max-w-md">
+        <div className="rounded-3xl bg-white/80 backdrop-blur-xl p-8 md:p-10 shadow-[0_20px_60px_-20px_rgba(176,86,110,0.3)] border border-white/50">
+          <div className="mb-8 text-center">
+            <Link href="/" className="inline-flex items-center justify-center h-12 w-12 rounded-full bg-gradient-to-br from-rose-400 to-rose-600 text-white font-serif text-xl shadow-[0_8px_24px_-8px_rgba(176,86,110,0.6)] mb-4">L</Link>
+            <h1 className="font-serif text-3xl font-bold text-charcoal-900 tracking-tight">Forgot password?</h1>
+            <p className="mt-1.5 text-sm text-muted-500">Enter your email and we'll send you a reset link</p>
           </div>
 
           {status === "success" ? (
             <div className="text-center">
-              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-muted-100">
-                <CheckCircle className="h-8 w-8 text-muted-600" />
+              <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
+                <CheckCircle className="h-8 w-8 text-green-500" />
               </div>
-              <h1 className="font-serif text-2xl font-bold text-charcoal-900">Check Your Email</h1>
-              <p className="mt-2 text-sm text-muted-600">
+              <h2 className="font-serif text-xl font-semibold text-charcoal-900">Check your email</h2>
+              <p className="mt-2 text-sm text-muted-500">
                 We&apos;ve sent a password reset link to{" "}
-                <span className="font-medium text-charcoal-800">{email}</span>. The link expires in 1 hour.
+                <span className="font-medium text-charcoal-700">{email}</span>. The link expires in 1 hour.
               </p>
-              <button
-                onClick={handleResend}
-                disabled={cooldown > 0}
-                className={cn("mt-4 text-sm font-medium", cooldown > 0 ? "text-muted-400" : "text-rose-600 hover:text-rose-700")}
-              >
+              <button onClick={handleResend} disabled={cooldown > 0} className={cn("mt-4 text-sm font-medium", cooldown > 0 ? "text-muted-400 cursor-default" : "text-rose-500 hover:text-rose-600 transition-colors")}>
                 {cooldown > 0 ? `Resend in ${cooldown}s` : "Resend email"}
               </button>
-              <div className="mt-6">
-                <Link href="/sign-in" className="inline-flex items-center gap-1 text-sm font-medium text-charcoal-600 hover:text-charcoal-800">
+              <div className="mt-8 pt-6 border-t border-blush-100">
+                <Link href="/sign-in" className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-500 hover:text-charcoal-700 transition-colors">
                   <ArrowLeft className="h-4 w-4" /> Back to Sign In
                 </Link>
               </div>
             </div>
           ) : (
             <>
-              <h1 className="text-center font-serif text-3xl font-bold text-charcoal-900">Forgot Password?</h1>
-              <p className="mt-2 text-center text-sm text-muted-500">Enter your email and we&apos;ll send you a reset link.</p>
-
-              {status === "error" && <div className="mt-4 rounded-lg bg-red-50 px-4 py-3 text-sm text-red-600">{error}</div>}
-
-              <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-4">
+              {status === "error" && (
+                <div className="mb-5 rounded-xl bg-red-50 px-4 py-3 text-sm text-red-600 border border-red-100">{error}</div>
+              )}
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
                 <div>
-                  <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-charcoal-700">Email</label>
+                  <label htmlFor="email" className="block text-sm font-medium text-charcoal-700 mb-1.5">Email address</label>
                   <div className="relative">
-                    <Mail className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-400" />
-                    <input id="email" type="email" autoComplete="email" {...register("email")} placeholder="you@example.com" className={cn("w-full rounded-lg border py-3 pl-10 pr-4 text-sm focus:border-rose-500 focus:ring-2 focus:ring-rose-500/20 focus:outline-none", errors.email ? "border-red-400" : "border-charcoal-200")} />
+                    <Mail className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-400" />
+                    <input id="email" type="email" autoComplete="email" {...register("email")} placeholder="you@example.com"
+                      className={cn("w-full rounded-xl border py-3.5 pl-12 pr-4 text-sm text-charcoal-900 placeholder:text-muted-400 bg-white/80 focus:border-rose-400 focus:ring-4 focus:ring-rose-400/10 focus:outline-none transition-all", errors.email ? "border-red-400" : "border-blush-200")} />
                   </div>
-                  {errors.email && <p className="mt-1 text-xs text-red-500">{errors.email.message}</p>}
+                  {errors.email && <p className="mt-1.5 text-xs text-red-500">{errors.email.message}</p>}
                 </div>
-                <button type="submit" disabled={isPending} className="flex h-12 w-full items-center justify-center gap-2 rounded-lg bg-rose-600 text-sm font-semibold text-white shadow-soft transition-all hover:bg-rose-700 disabled:cursor-not-allowed disabled:opacity-60">
+                <button type="submit" disabled={isPending} className="flex h-13 w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-rose-500 to-rose-600 text-base font-semibold text-white shadow-lg shadow-rose-500/25 transition-all hover:shadow-xl hover:shadow-rose-500/30 hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0">
                   {isPending ? <span className="h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent" /> : <><Send className="h-4 w-4" /> Send Reset Link</>}
                 </button>
               </form>
-              <p className="mt-6 text-center text-sm text-muted-500">
-                <Link href="/sign-in" className="font-medium text-rose-600 hover:text-rose-700">Back to Sign In</Link>
-              </p>
+              <div className="mt-8 pt-6 border-t border-blush-100 text-center">
+                <Link href="/sign-in" className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-500 hover:text-charcoal-700 transition-colors">
+                  <ArrowLeft className="h-4 w-4" /> Back to Sign In
+                </Link>
+              </div>
             </>
           )}
         </div>

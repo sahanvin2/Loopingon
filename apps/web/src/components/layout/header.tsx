@@ -120,12 +120,14 @@ export function Header() {
               >
                 Shop
               </Link>
-            <Link
-              href="/vendor/register"
-              className="rounded-full px-3 py-2 text-charcoal-600 hover:bg-blush-100 hover:text-charcoal-900 transition-colors hidden sm:inline-flex items-center gap-1"
-            >
-              <Store className="h-4 w-4" /> Sell
-            </Link>
+            {user?.role === "VENDOR" && (
+              <Link
+                href="/vendor/dashboard"
+                className="rounded-full px-3 py-2 text-charcoal-600 hover:bg-blush-100 hover:text-charcoal-900 transition-colors hidden sm:inline-flex items-center gap-1"
+              >
+                <Store className="h-4 w-4" /> Seller Dashboard
+              </Link>
+            )}
             <Link
               href="/about"
               className="rounded-full px-3 py-2 text-charcoal-600 hover:bg-blush-100 hover:text-charcoal-900 transition-colors hidden md:inline-flex"
@@ -141,18 +143,25 @@ export function Header() {
           </div>
 
           {/* Wishlist */}
-          <Link
-            href="/dashboard/wishlist"
+          <button
+            type="button"
+            onClick={(e) => {
+              if (isAuthenticated) {
+                window.location.href = "/dashboard/wishlist";
+              } else {
+                e.preventDefault();
+                openModal("signin");
+              }
+            }}
             className="grid h-10 w-10 place-items-center rounded-full hover:bg-blush-100 transition-colors"
             aria-label="Wishlist"
           >
             <Heart className="h-5 w-5 text-charcoal-600" />
-          </Link>
+          </button>
 
           {/* Cart */}
-          <button
-            type="button"
-            onClick={openCartDrawer}
+          <Link
+            href="/cart"
             className="relative grid h-10 w-10 place-items-center rounded-full hover:bg-blush-100 transition-colors group"
             aria-label={`Cart (${itemCount} items)`}
           >
@@ -162,7 +171,7 @@ export function Header() {
                 {itemCount > 99 ? "99+" : itemCount}
               </span>
             )}
-          </button>
+          </Link>
 
           {/* User menu or Sign in */}
           {isAuthenticated && user ? (
