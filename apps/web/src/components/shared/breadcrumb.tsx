@@ -5,7 +5,7 @@ import Link from "next/link";
 import { ChevronRight, Home } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-interface BreadcrumbItem {
+export interface BreadcrumbItem {
   label: string;
   href?: string;
 }
@@ -28,12 +28,12 @@ export function Breadcrumb({ items, className, homeHref = "/" }: BreadcrumbProps
         <li className="flex items-center">
           <Link
             href={homeHref}
-            className="text-warm-gray-500 hover:text-terracotta-600 transition-colors flex items-center gap-1"
+            className="text-muted-500 hover:text-rose-600 transition-colors flex items-center gap-1"
             aria-label="Home"
           >
             <Home className="w-3.5 h-3.5" />
           </Link>
-          <ChevronRight className="w-3.5 h-3.5 text-warm-gray-400 mx-1.5 shrink-0" aria-hidden="true" />
+          <ChevronRight className="w-3.5 h-3.5 text-muted-400 mx-1.5 shrink-0" aria-hidden="true" />
         </li>
         {items.map((item, index) => {
           const isLast = index === items.length - 1;
@@ -43,7 +43,7 @@ export function Breadcrumb({ items, className, homeHref = "/" }: BreadcrumbProps
               {item.href && !isLast ? (
                 <Link
                   href={item.href}
-                  className="text-warm-gray-500 hover:text-terracotta-600 transition-colors truncate max-w-[200px]"
+                  className="text-muted-500 hover:text-rose-600 transition-colors truncate max-w-[200px]"
                 >
                   {item.label}
                 </Link>
@@ -53,7 +53,7 @@ export function Breadcrumb({ items, className, homeHref = "/" }: BreadcrumbProps
                     "truncate max-w-[200px]",
                     isLast
                       ? "font-semibold text-charcoal-900"
-                      : "text-warm-gray-500",
+                      : "text-muted-500",
                   )}
                   aria-current={isLast ? "page" : undefined}
                 >
@@ -62,7 +62,7 @@ export function Breadcrumb({ items, className, homeHref = "/" }: BreadcrumbProps
               )}
               {!isLast && (
                 <ChevronRight
-                  className="w-3.5 h-3.5 text-warm-gray-400 mx-1.5 shrink-0"
+                  className="w-3.5 h-3.5 text-muted-400 mx-1.5 shrink-0"
                   aria-hidden="true"
                 />
               )}

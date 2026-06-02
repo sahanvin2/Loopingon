@@ -7,12 +7,12 @@ export const metadata: Metadata = {
 
 export default function ShippingPolicyPage() {
   return (
-    <div className="bg-cream-100 py-16">
+    <div className="bg-cream-50 py-16">
       <div className="mx-auto max-w-3xl px-4">
         <h1 className="font-serif text-4xl font-bold text-charcoal-900">Shipping Policy</h1>
-        <p className="mt-2 text-sm text-warm-gray-500">Last updated: June 2026</p>
+        <p className="mt-2 text-sm text-muted-500">Last updated: June 2026</p>
 
-        <div className="mt-10 space-y-8 text-sm leading-relaxed text-warm-gray-700 [&_h2]:font-serif [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-charcoal-900 [&_h3]:font-semibold [&_h3]:text-charcoal-800 [&_p]:mt-3 [&_ul]:mt-3 [&_ul]:list-disc [&_ul]:pl-6">
+        <div className="mt-10 space-y-8 text-sm leading-relaxed text-muted-700 [&_h2]:font-serif [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-charcoal-900 [&_h3]:font-semibold [&_h3]:text-charcoal-800 [&_p]:mt-3 [&_ul]:mt-3 [&_ul]:list-disc [&_ul]:pl-6">
           <section>
             <h2>Processing Time</h2>
             <p>All products on Loopingon are handmade, which means each item is crafted with care. After you place an order, the artisan needs time to prepare, package, and hand over your item to the courier.</p>

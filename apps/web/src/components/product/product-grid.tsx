@@ -52,15 +52,15 @@ export function ProductGrid({
   if (isError) {
     return (
       <div className={cn("text-center py-12", className)}>
-        <p className="text-warm-gray-600 mb-4">Failed to load products.</p>
+        <p className="text-muted-600 mb-4">Failed to load products.</p>
         {onRetry && (
           <button
             type="button"
             onClick={onRetry}
             className={cn(
               "inline-flex items-center gap-2 px-4 py-2 rounded-lg",
-              "bg-terracotta-600 text-white text-sm font-medium",
-              "hover:bg-terracotta-700 transition-colors",
+              "bg-rose-600 text-white text-sm font-medium",
+              "hover:bg-rose-700 transition-colors",
             )}
           >
             <RefreshCw className="w-4 h-4" /> Retry

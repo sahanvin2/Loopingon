@@ -70,8 +70,8 @@ export function TagInput({
       } else if (inputValue.trim()) {
         addTag(inputValue);
       }
-    } else if (e.key === "Backspace" && !inputValue && tags.length > 0) {
-      removeTag(tags.length - 1);
+    } else if (e.key === "Backspace" && !inputValue && resolvedTags.length > 0) {
+      removeTag(resolvedTags.length - 1);
     } else if (e.key === "Escape") {
       setShowSuggestions(false);
       setHighlightIndex(-1);
@@ -99,8 +99,8 @@ export function TagInput({
       <div
         className={cn(
           "flex flex-wrap items-center gap-1.5 p-2 rounded-lg min-h-[42px]",
-          "border border-cream-300 bg-white",
-          "focus-within:ring-2 focus-within:ring-terracotta-500 focus-within:border-transparent",
+          "border border-blush-300 bg-white",
+          "focus-within:ring-2 focus-within:ring-rose-500 focus-within:border-transparent",
           "cursor-text",
         )}
         onClick={() => inputRef.current?.focus()}
@@ -114,7 +114,7 @@ export function TagInput({
               exit={{ opacity: 0, scale: 0.8 }}
               className={cn(
                 "inline-flex items-center gap-1 px-2.5 py-1 rounded-full",
-                "bg-terracotta-100 text-terracotta-700 text-sm font-medium",
+                "bg-rose-100 text-rose-700 text-sm font-medium",
               )}
             >
               {tag}
@@ -124,7 +124,7 @@ export function TagInput({
                   e.stopPropagation();
                   removeTag(index);
                 }}
-                className="p-0.5 rounded-full hover:bg-terracotta-200 transition-colors"
+                className="p-0.5 rounded-full hover:bg-rose-200 transition-colors"
                 aria-label={`Remove ${tag}`}
               >
                 <X className="w-3 h-3" />
@@ -143,7 +143,7 @@ export function TagInput({
           placeholder={resolvedTags.length === 0 ? placeholder : ""}
           className={cn(
             "flex-1 min-w-[120px] outline-none text-sm text-charcoal-700 bg-transparent",
-            "placeholder:text-warm-gray-400",
+            "placeholder:text-muted-400",
           )}
           aria-label="Add a tag"
         />
@@ -158,7 +158,7 @@ export function TagInput({
             transition={{ duration: 0.15 }}
             className={cn(
               "absolute z-10 w-full mt-1 bg-white rounded-lg shadow-soft-md",
-              "border border-cream-200 overflow-hidden max-h-48 overflow-y-auto",
+              "border border-blush-200 overflow-hidden max-h-48 overflow-y-auto",
             )}
           >
             {filteredSuggestions.map((suggestion, index) => (
@@ -169,8 +169,8 @@ export function TagInput({
                 className={cn(
                   "w-full text-left px-3 py-2 text-sm transition-colors",
                   index === highlightIndex
-                    ? "bg-terracotta-50 text-terracotta-700"
-                    : "text-charcoal-700 hover:bg-warm-gray-50",
+                    ? "bg-rose-50 text-rose-700"
+                    : "text-charcoal-700 hover:bg-blush-50",
                 )}
               >
                 {suggestion}

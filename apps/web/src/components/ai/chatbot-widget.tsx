@@ -85,9 +85,9 @@ export function ChatbotWidget() {
         onClick={() => setIsOpen(true)}
         className={cn(
           "fixed bottom-6 right-6 z-40 w-14 h-14 rounded-full",
-          "bg-teal-600 text-white shadow-teal",
+          "bg-muted-600 text-white shadow-blush",
           "flex items-center justify-center",
-          "hover:bg-teal-700 transition-colors",
+          "hover:bg-muted-700 transition-colors",
           isOpen && "hidden",
         )}
         aria-label="Open chat assistant"
@@ -109,21 +109,21 @@ export function ChatbotWidget() {
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
             className={cn(
               "fixed bottom-6 right-6 z-50 w-[380px] max-w-[calc(100vw-2rem)]",
-              "bg-white rounded-xl shadow-soft-lg border border-cream-200",
+              "bg-white rounded-xl shadow-soft-lg border border-blush-200",
               "flex flex-col overflow-hidden",
             )}
             style={{ height: "520px", maxHeight: "calc(100vh - 80px)" }}
           >
-            <div className="flex items-center gap-3 px-4 py-3 bg-teal-600 text-white">
+            <div className="flex items-center gap-3 px-4 py-3 bg-muted-600 text-white">
               <Sparkles className="w-5 h-5" />
               <div className="flex-1">
                 <h3 className="text-sm font-semibold">Loopingon Assistant</h3>
-                <p className="text-xs text-teal-100">We typically reply instantly</p>
+                <p className="text-xs text-muted-100">We typically reply instantly</p>
               </div>
               <button
                 type="button"
                 onClick={() => setIsOpen(false)}
-                className="p-1 rounded hover:bg-teal-700 transition-colors"
+                className="p-1 rounded hover:bg-muted-700 transition-colors"
                 aria-label="Close chat"
               >
                 <X className="w-4 h-4" />
@@ -143,8 +143,8 @@ export function ChatbotWidget() {
                     className={cn(
                       "max-w-[85%] px-4 py-2.5 rounded-2xl text-sm",
                       msg.role === "user"
-                        ? "bg-terracotta-600 text-white rounded-br-md"
-                        : "bg-white text-charcoal-700 rounded-bl-md shadow-sm border border-cream-200",
+                        ? "bg-rose-600 text-white rounded-br-md"
+                        : "bg-white text-charcoal-700 rounded-bl-md shadow-sm border border-blush-200",
                     )}
                   >
                     {msg.content}
@@ -154,12 +154,12 @@ export function ChatbotWidget() {
 
               {isTyping && (
                 <div className="flex justify-start">
-                  <div className="bg-white rounded-2xl rounded-bl-md shadow-sm border border-cream-200 px-4 py-3">
+                  <div className="bg-white rounded-2xl rounded-bl-md shadow-sm border border-blush-200 px-4 py-3">
                     <div className="flex items-center gap-1">
                       {[0, 1, 2].map((i) => (
                         <motion.div
                           key={i}
-                          className="w-2 h-2 rounded-full bg-warm-gray-400"
+                          className="w-2 h-2 rounded-full bg-muted-400"
                           animate={{ y: [0, -4, 0] }}
                           transition={{
                             repeat: Infinity,
@@ -176,7 +176,7 @@ export function ChatbotWidget() {
               <div ref={messagesEndRef} />
             </div>
 
-            <div className="p-3 border-t border-cream-200 bg-white">
+            <div className="p-3 border-t border-blush-200 bg-white">
               <div className="flex items-center gap-2">
                 <input
                   type="text"
@@ -187,9 +187,9 @@ export function ChatbotWidget() {
                   }}
                   placeholder="Type your question..."
                   className={cn(
-                    "flex-1 px-4 py-2.5 rounded-full border border-cream-300 text-sm",
-                    "focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent",
-                    "placeholder:text-warm-gray-400",
+                    "flex-1 px-4 py-2.5 rounded-full border border-blush-300 text-sm",
+                    "focus:outline-none focus:ring-2 focus:ring-muted-500 focus:border-transparent",
+                    "placeholder:text-muted-400",
                   )}
                   aria-label="Chat message"
                 />
@@ -199,7 +199,7 @@ export function ChatbotWidget() {
                   disabled={!input.trim()}
                   className={cn(
                     "w-10 h-10 rounded-full flex items-center justify-center transition-colors",
-                    "bg-teal-600 text-white hover:bg-teal-700",
+                    "bg-muted-600 text-white hover:bg-muted-700",
                     "disabled:opacity-50 disabled:cursor-not-allowed",
                   )}
                   aria-label="Send message"

@@ -42,7 +42,7 @@ export default function SignInPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-cream-100 px-4 py-12">
+    <div className="flex min-h-screen items-center justify-center bg-cream-50 px-4 py-12">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -51,13 +51,13 @@ export default function SignInPage() {
       >
         <div className="rounded-2xl bg-white p-8 shadow-soft-sm md:p-10">
           <div className="mb-6 text-center">
-            <Link href="/" className="inline-block font-serif text-2xl font-bold text-terracotta-600">
+            <Link href="/" className="inline-block font-serif text-2xl font-bold text-rose-600">
               Loopingon
             </Link>
           </div>
 
           <h1 className="text-center font-serif text-3xl font-bold text-charcoal-900">Welcome Back</h1>
-          <p className="mt-1 text-center text-sm text-warm-gray-500">Sign in to your Loopingon account</p>
+          <p className="mt-1 text-center text-sm text-muted-500">Sign in to your Loopingon account</p>
 
           {error && (
             <div className="mt-4 rounded-lg bg-red-50 px-4 py-3 text-sm text-red-600">
@@ -69,12 +69,12 @@ export default function SignInPage() {
             <div>
               <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-charcoal-700">Email</label>
               <div className="relative">
-                <Mail className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-warm-gray-400" />
+                <Mail className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-400" />
                 <input
                   id="email" type="email" autoComplete="email"
                   {...register("email")}
                   placeholder="you@example.com"
-                  className={cn("w-full rounded-lg border py-3 pl-10 pr-4 text-sm text-charcoal-900 placeholder:text-warm-gray-400 focus:border-terracotta-500 focus:ring-2 focus:ring-terracotta-500/20 focus:outline-none", errors.email ? "border-red-400" : "border-charcoal-200")}
+                  className={cn("w-full rounded-lg border py-3 pl-10 pr-4 text-sm text-charcoal-900 placeholder:text-muted-400 focus:border-rose-500 focus:ring-2 focus:ring-rose-500/20 focus:outline-none", errors.email ? "border-red-400" : "border-charcoal-200")}
                 />
               </div>
               {errors.email && <p className="mt-1 text-xs text-red-500">{errors.email.message}</p>}
@@ -83,14 +83,14 @@ export default function SignInPage() {
             <div>
               <label htmlFor="password" className="mb-1.5 block text-sm font-medium text-charcoal-700">Password</label>
               <div className="relative">
-                <Lock className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-warm-gray-400" />
+                <Lock className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-400" />
                 <input
                   id="password" type={showPassword ? "text" : "password"} autoComplete="current-password"
                   {...register("password")}
                   placeholder="Enter your password"
-                  className={cn("w-full rounded-lg border py-3 pl-10 pr-12 text-sm text-charcoal-900 placeholder:text-warm-gray-400 focus:border-terracotta-500 focus:ring-2 focus:ring-terracotta-500/20 focus:outline-none", errors.password ? "border-red-400" : "border-charcoal-200")}
+                  className={cn("w-full rounded-lg border py-3 pl-10 pr-12 text-sm text-charcoal-900 placeholder:text-muted-400 focus:border-rose-500 focus:ring-2 focus:ring-rose-500/20 focus:outline-none", errors.password ? "border-red-400" : "border-charcoal-200")}
                 />
-                <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-warm-gray-400 hover:text-charcoal-600">
+                <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-400 hover:text-charcoal-600">
                   {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 </button>
               </div>
@@ -99,10 +99,10 @@ export default function SignInPage() {
 
             <div className="flex items-center justify-between">
               <label className="flex items-center gap-2">
-                <input type="checkbox" {...register("rememberMe")} className="h-4 w-4 rounded border-charcoal-300 text-terracotta-600 focus:ring-terracotta-500" />
-                <span className="text-sm text-warm-gray-600">Remember me</span>
+                <input type="checkbox" {...register("rememberMe")} className="h-4 w-4 rounded border-charcoal-300 text-rose-600 focus:ring-rose-500" />
+                <span className="text-sm text-muted-600">Remember me</span>
               </label>
-              <Link href="/forgot-password" className="text-sm font-medium text-terracotta-600 hover:text-terracotta-700">
+              <Link href="/forgot-password" className="text-sm font-medium text-rose-600 hover:text-rose-700">
                 Forgot Password?
               </Link>
             </div>
@@ -110,7 +110,7 @@ export default function SignInPage() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="flex h-12 w-full items-center justify-center rounded-lg bg-terracotta-600 text-sm font-semibold text-white shadow-soft transition-all hover:bg-terracotta-700 disabled:cursor-not-allowed disabled:opacity-60"
+              className="flex h-12 w-full items-center justify-center rounded-lg bg-rose-600 text-sm font-semibold text-white shadow-soft transition-all hover:bg-rose-700 disabled:cursor-not-allowed disabled:opacity-60"
             >
               {isSubmitting ? (
                 <span className="h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent" />
@@ -122,7 +122,7 @@ export default function SignInPage() {
 
           <div className="mt-6 flex items-center gap-3">
             <div className="h-px flex-1 bg-charcoal-200" />
-            <span className="text-xs text-warm-gray-400">or continue with</span>
+            <span className="text-xs text-muted-400">or continue with</span>
             <div className="h-px flex-1 bg-charcoal-200" />
           </div>
 
@@ -137,9 +137,9 @@ export default function SignInPage() {
             </button>
           </div>
 
-          <p className="mt-6 text-center text-sm text-warm-gray-500">
+          <p className="mt-6 text-center text-sm text-muted-500">
             Don&apos;t have an account?{" "}
-            <Link href="/sign-up/customer" className="font-medium text-terracotta-600 hover:text-terracotta-700">Sign Up</Link>
+            <Link href="/sign-up/customer" className="font-medium text-rose-600 hover:text-rose-700">Sign Up</Link>
           </p>
         </div>
       </motion.div>
@@ -148,8 +148,8 @@ export default function SignInPage() {
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <pattern id="pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
-              <path d="M0 50 Q25 30 50 50 T100 50" stroke="#C75B39" fill="none" strokeWidth="1" />
-              <circle cx="50" cy="50" r="3" fill="#D4A843" />
+              <path d="M0 50 Q25 30 50 50 T100 50" stroke="#b0566e" fill="none" strokeWidth="1" />
+              <circle cx="50" cy="50" r="3" fill="#dc9b91" />
             </pattern>
           </defs>
           <rect width="100%" height="100%" fill="url(#pattern)" />

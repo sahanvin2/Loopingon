@@ -41,6 +41,9 @@
     "winston": "^3.15.0",
     "zod": "^3.23.0"
   },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  },
   "devDependencies": {
     "@types/compression": "^1.7.5",
     "@types/cookie-parser": "^1.4.7",

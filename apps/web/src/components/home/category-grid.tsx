@@ -91,7 +91,7 @@ export function CategoryGrid() {
               className={cn(
                 "group block relative aspect-[3/2] rounded-lg overflow-hidden",
                 "shadow-sm hover:shadow-md transition-shadow duration-300",
-                "focus:outline-none focus:ring-2 focus:ring-terracotta-500 focus:ring-offset-2",
+                "focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2",
               )}
             >
               <Image
@@ -107,10 +107,10 @@ export function CategoryGrid() {
                   {category.name}
                 </h3>
                 <span
-                  className={cn(
-                    "inline-flex items-center px-2 py-0.5 rounded-full mt-1",
-                    "bg-cream-100/20 backdrop-blur-sm text-cream-100 text-xs",
-                  )}
+                    className={cn(
+                      "inline-flex items-center px-2 py-0.5 rounded-full mt-1",
+                      "bg-white/20 backdrop-blur-sm text-white text-xs",
+                    )}
                 >
                   {category.count.toLocaleString()} products
                 </span>

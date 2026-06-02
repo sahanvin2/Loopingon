@@ -36,7 +36,7 @@ export function ProductImages({ images, videos = [] }: ProductImagesProps) {
   return (
     <div className="space-y-4">
       <div
-        className="relative aspect-[4/5] rounded-lg overflow-hidden bg-warm-gray-100 cursor-zoom-in"
+        className="relative aspect-[4/5] rounded-lg overflow-hidden bg-muted-100 cursor-zoom-in"
         onClick={() => openLightbox(activeIndex)}
         role="button"
         tabIndex={0}
@@ -59,7 +59,7 @@ export function ProductImages({ images, videos = [] }: ProductImagesProps) {
             <span
               className={cn(
                 "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full",
-                "bg-charcoal-900/60 backdrop-blur-sm text-cream-100 text-xs font-medium",
+                "bg-charcoal-900/60 backdrop-blur-sm text-white text-xs font-medium",
               )}
             >
               <Play className="w-3 h-3 fill-current" />
@@ -79,8 +79,8 @@ export function ProductImages({ images, videos = [] }: ProductImagesProps) {
               className={cn(
                 "relative w-20 h-20 rounded-md overflow-hidden shrink-0 border-2 transition-colors",
                 index === activeIndex
-                  ? "border-terracotta-500"
-                  : "border-transparent hover:border-warm-gray-300",
+                  ? "border-rose-500"
+                  : "border-transparent hover:border-muted-300",
               )}
               aria-label={`View image ${index + 1}`}
             >
@@ -100,7 +100,7 @@ export function ProductImages({ images, videos = [] }: ProductImagesProps) {
               type="button"
               className={cn(
                 "relative w-20 h-20 rounded-md overflow-hidden shrink-0 border-2 border-transparent",
-                "hover:border-warm-gray-300",
+                "hover:border-muted-300",
               )}
               aria-label={`Watch video ${index + 1}`}
             >
@@ -131,7 +131,7 @@ export function ProductImages({ images, videos = [] }: ProductImagesProps) {
             <button
               type="button"
               onClick={() => setLightboxOpen(false)}
-              className="absolute top-4 right-4 p-2 rounded-lg bg-charcoal-800 text-cream-100 hover:bg-charcoal-700 transition-colors z-10"
+              className="absolute top-4 right-4 p-2 rounded-lg bg-charcoal-800 text-white hover:bg-charcoal-700 transition-colors z-10"
               aria-label="Close lightbox"
             >
               <X className="w-6 h-6" />
@@ -145,7 +145,7 @@ export function ProductImages({ images, videos = [] }: ProductImagesProps) {
               }}
               className={cn(
                 "absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-lg",
-                "bg-charcoal-800 text-cream-100 hover:bg-charcoal-700 transition-colors z-10",
+                "bg-charcoal-800 text-white hover:bg-charcoal-700 transition-colors z-10",
               )}
               aria-label="Previous image"
             >
@@ -160,7 +160,7 @@ export function ProductImages({ images, videos = [] }: ProductImagesProps) {
               }}
               className={cn(
                 "absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-lg",
-                "bg-charcoal-800 text-cream-100 hover:bg-charcoal-700 transition-colors z-10",
+                "bg-charcoal-800 text-white hover:bg-charcoal-700 transition-colors z-10",
               )}
               aria-label="Next image"
             >
@@ -195,7 +195,7 @@ export function ProductImages({ images, videos = [] }: ProductImagesProps) {
                   className={cn(
                     "w-14 h-14 rounded-md overflow-hidden border-2 transition-colors",
                     index === lightboxIndex
-                      ? "border-terracotta-500"
+                      ? "border-rose-500"
                       : "border-transparent opacity-60 hover:opacity-100",
                   )}
                   aria-label={`View image ${index + 1}`}

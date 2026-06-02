@@ -17,8 +17,8 @@ export function getRedisClient(): Redis {
         }
         return delay;
       },
-      lazyConnect: true,
-      enableOfflineQueue: false,
+      lazyConnect: false,
+      enableOfflineQueue: true,
     });
 
     redisClient.on("error", (err) => {
@@ -36,11 +36,15 @@ export function getRedisClient(): Redis {
   return redisClient;
 }
 
-export async function connectRedis(): Promise<void> {
+export async function connectRedis(): Promise<Redis> {
   const client = getRedisClient();
-  if (client.status !== "ready" && client.status !== "connecting") {
-    await client.connect();
+  if (client.status !== "ready") {
+    return new Promise((resolve, reject) => {
+      client.once("ready", () => resolve(client));
+      client.once("error", (err) => reject(err));
+    });
   }
+  return client;
 }
 
 export async function disconnectRedis(): Promise<void> {

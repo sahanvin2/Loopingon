@@ -92,8 +92,8 @@ export default function SignUpVendorPage() {
   const password = watch("password");
   const strength = password
     ? password.length < 8 ? { label: "Weak", color: "bg-red-500", w: "25%" }
-    : password.length < 12 ? { label: "Medium", color: "bg-gold-500", w: "50%" }
-    : { label: "Strong", color: "bg-teal-500", w: "100%" }
+    : password.length < 12 ? { label: "Medium", color: "bg-blush-500", w: "50%" }
+    : { label: "Strong", color: "bg-muted-500", w: "100%" }
     : null;
 
   const handleNext = async () => {
@@ -139,21 +139,21 @@ export default function SignUpVendorPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-cream-100 px-4 py-12">
+    <div className="flex min-h-screen items-center justify-center bg-cream-50 px-4 py-12">
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="w-full max-w-2xl">
         <div className="rounded-2xl bg-white p-8 shadow-soft-sm md:p-10">
           <div className="mb-6 text-center">
-            <Link href="/" className="font-serif text-2xl font-bold text-terracotta-600">Loopingon</Link>
-            <p className="mt-1 text-sm text-warm-gray-500">Vendor Application</p>
+            <Link href="/" className="font-serif text-2xl font-bold text-rose-600">Loopingon</Link>
+            <p className="mt-1 text-sm text-muted-500">Vendor Application</p>
           </div>
 
           <div className="mb-8 flex items-center justify-between">
             {steps.map((label, i) => (
               <div key={label} className="flex items-center">
-                <div className={cn("flex h-8 w-8 items-center justify-center rounded-full text-sm font-medium transition-colors", i < step ? "bg-teal-600 text-white" : i === step ? "bg-terracotta-600 text-white" : "bg-charcoal-100 text-charcoal-500")}>
+                <div className={cn("flex h-8 w-8 items-center justify-center rounded-full text-sm font-medium transition-colors", i < step ? "bg-muted-600 text-white" : i === step ? "bg-rose-600 text-white" : "bg-charcoal-100 text-charcoal-500")}>
                   {i < step ? <Check className="h-4 w-4" /> : i + 1}
                 </div>
-                {i < steps.length - 1 && <div className={cn("mx-2 h-0.5 w-8", i < step ? "bg-teal-600" : "bg-charcoal-200")} />}
+                {i < steps.length - 1 && <div className={cn("mx-2 h-0.5 w-8", i < step ? "bg-muted-600" : "bg-charcoal-200")} />}
               </div>
             ))}
           </div>
@@ -168,24 +168,24 @@ export default function SignUpVendorPage() {
                 <div className="space-y-4">
                   <div>
                     <label className="text-sm font-medium text-charcoal-700">Full Name</label>
-                    <div className="relative mt-1.5"><User className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-warm-gray-400" /><input {...register("fullName")} placeholder="Your full name" className={cn("w-full rounded-lg border py-3 pl-10 pr-4 text-sm focus:border-terracotta-500 focus:ring-2 focus:ring-terracotta-500/20 focus:outline-none", errors.fullName ? "border-red-400" : "border-charcoal-200")} /></div>
+                    <div className="relative mt-1.5"><User className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-400" /><input {...register("fullName")} placeholder="Your full name" className={cn("w-full rounded-lg border py-3 pl-10 pr-4 text-sm focus:border-rose-500 focus:ring-2 focus:ring-rose-500/20 focus:outline-none", errors.fullName ? "border-red-400" : "border-charcoal-200")} /></div>
                   </div>
                   <div>
                     <label className="text-sm font-medium text-charcoal-700">Email</label>
-                    <div className="relative mt-1.5"><Mail className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-warm-gray-400" /><input {...register("email")} type="email" placeholder="you@example.com" className={cn("w-full rounded-lg border py-3 pl-10 pr-4 text-sm focus:border-terracotta-500 focus:ring-2 focus:ring-terracotta-500/20 focus:outline-none", errors.email ? "border-red-400" : "border-charcoal-200")} /></div>
+                    <div className="relative mt-1.5"><Mail className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-400" /><input {...register("email")} type="email" placeholder="you@example.com" className={cn("w-full rounded-lg border py-3 pl-10 pr-4 text-sm focus:border-rose-500 focus:ring-2 focus:ring-rose-500/20 focus:outline-none", errors.email ? "border-red-400" : "border-charcoal-200")} /></div>
                   </div>
                   <div>
                     <label className="text-sm font-medium text-charcoal-700">Phone</label>
-                    <div className="relative mt-1.5"><Phone className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-warm-gray-400" /><input {...register("phone")} placeholder="+94 XX XXX XXXX" className={cn("w-full rounded-lg border py-3 pl-10 pr-4 text-sm focus:border-terracotta-500 focus:ring-2 focus:ring-terracotta-500/20 focus:outline-none", errors.phone ? "border-red-400" : "border-charcoal-200")} /></div>
+                    <div className="relative mt-1.5"><Phone className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-400" /><input {...register("phone")} placeholder="+94 XX XXX XXXX" className={cn("w-full rounded-lg border py-3 pl-10 pr-4 text-sm focus:border-rose-500 focus:ring-2 focus:ring-rose-500/20 focus:outline-none", errors.phone ? "border-red-400" : "border-charcoal-200")} /></div>
                   </div>
                   <div>
                     <label className="text-sm font-medium text-charcoal-700">Password</label>
-                    <div className="relative mt-1.5"><Lock className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-warm-gray-400" /><input {...register("password")} type={showPw ? "text" : "password"} placeholder="Min 8 characters" className={cn("w-full rounded-lg border py-3 pl-10 pr-12 text-sm focus:border-terracotta-500 focus:ring-2 focus:ring-terracotta-500/20 focus:outline-none", errors.password ? "border-red-400" : "border-charcoal-200")} /><button type="button" onClick={() => setShowPw(!showPw)} className="absolute right-3 top-1/2 -translate-y-1/2">{showPw ? <EyeOff className="h-4 w-4 text-warm-gray-400" /> : <Eye className="h-4 w-4 text-warm-gray-400" />}</button></div>
-                    {strength && <div className="mt-2"><div className="h-1.5 rounded-full bg-charcoal-200"><div className={cn("h-1.5 rounded-full transition-all", strength.color)} style={{ width: strength.w }} /></div><p className="mt-1 text-xs text-warm-gray-500">{strength.label}</p></div>}
+                    <div className="relative mt-1.5"><Lock className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-400" /><input {...register("password")} type={showPw ? "text" : "password"} placeholder="Min 8 characters" className={cn("w-full rounded-lg border py-3 pl-10 pr-12 text-sm focus:border-rose-500 focus:ring-2 focus:ring-rose-500/20 focus:outline-none", errors.password ? "border-red-400" : "border-charcoal-200")} /><button type="button" onClick={() => setShowPw(!showPw)} className="absolute right-3 top-1/2 -translate-y-1/2">{showPw ? <EyeOff className="h-4 w-4 text-muted-400" /> : <Eye className="h-4 w-4 text-muted-400" />}</button></div>
+                    {strength && <div className="mt-2"><div className="h-1.5 rounded-full bg-charcoal-200"><div className={cn("h-1.5 rounded-full transition-all", strength.color)} style={{ width: strength.w }} /></div><p className="mt-1 text-xs text-muted-500">{strength.label}</p></div>}
                   </div>
                   <div>
                     <label className="text-sm font-medium text-charcoal-700">Confirm Password</label>
-                    <div className="relative mt-1.5"><Lock className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-warm-gray-400" /><input {...register("confirmPassword")} type={showCpw ? "text" : "password"} placeholder="Re-enter password" className={cn("w-full rounded-lg border py-3 pl-10 pr-12 text-sm focus:border-terracotta-500 focus:ring-2 focus:ring-terracotta-500/20 focus:outline-none", errors.confirmPassword ? "border-red-400" : "border-charcoal-200")} /><button type="button" onClick={() => setShowCpw(!showCpw)} className="absolute right-3 top-1/2 -translate-y-1/2">{showCpw ? <EyeOff className="h-4 w-4 text-warm-gray-400" /> : <Eye className="h-4 w-4 text-warm-gray-400" />}</button></div>
+                    <div className="relative mt-1.5"><Lock className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-400" /><input {...register("confirmPassword")} type={showCpw ? "text" : "password"} placeholder="Re-enter password" className={cn("w-full rounded-lg border py-3 pl-10 pr-12 text-sm focus:border-rose-500 focus:ring-2 focus:ring-rose-500/20 focus:outline-none", errors.confirmPassword ? "border-red-400" : "border-charcoal-200")} /><button type="button" onClick={() => setShowCpw(!showCpw)} className="absolute right-3 top-1/2 -translate-y-1/2">{showCpw ? <EyeOff className="h-4 w-4 text-muted-400" /> : <Eye className="h-4 w-4 text-muted-400" />}</button></div>
                   </div>
                 </div>
               )}
@@ -194,16 +194,16 @@ export default function SignUpVendorPage() {
                 <div className="space-y-4">
                   <div>
                     <label className="text-sm font-medium text-charcoal-700">Store Name</label>
-                    <div className="relative mt-1.5"><Store className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-warm-gray-400" /><input {...register("storeName")} placeholder="Your store name" className={cn("w-full rounded-lg border py-3 pl-10 pr-10 text-sm focus:border-terracotta-500 focus:ring-2 focus:ring-terracotta-500/20 focus:outline-none", errors.storeName ? "border-red-400" : "border-charcoal-200")} /><div className="absolute right-3 top-1/2 -translate-y-1/2">{checkingStore ? <span className="h-4 w-4 animate-spin rounded-full border-2 border-charcoal-300 border-t-terracotta-500" /> : storeAvailable === true ? <Check className="h-4 w-4 text-teal-500" /> : storeAvailable === false ? <X className="h-4 w-4 text-red-500" /> : null}</div></div>
+                    <div className="relative mt-1.5"><Store className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-400" /><input {...register("storeName")} placeholder="Your store name" className={cn("w-full rounded-lg border py-3 pl-10 pr-10 text-sm focus:border-rose-500 focus:ring-2 focus:ring-rose-500/20 focus:outline-none", errors.storeName ? "border-red-400" : "border-charcoal-200")} /><div className="absolute right-3 top-1/2 -translate-y-1/2">{checkingStore ? <span className="h-4 w-4 animate-spin rounded-full border-2 border-charcoal-300 border-t-rose-500" /> : storeAvailable === true ? <Check className="h-4 w-4 text-muted-500" /> : storeAvailable === false ? <X className="h-4 w-4 text-red-500" /> : null}</div></div>
                   </div>
                   <div>
                     <label className="text-sm font-medium text-charcoal-700">Business Type</label>
-                    <select {...register("businessType")} className="mt-1.5 w-full rounded-lg border border-charcoal-200 px-4 py-3 text-sm focus:border-terracotta-500 focus:ring-2 focus:ring-terracotta-500/20 focus:outline-none">
+                    <select {...register("businessType")} className="mt-1.5 w-full rounded-lg border border-charcoal-200 px-4 py-3 text-sm focus:border-rose-500 focus:ring-2 focus:ring-rose-500/20 focus:outline-none">
                       {businessTypes.map((bt) => <option key={bt.value} value={bt.value}>{bt.label}</option>)}
                     </select>
                   </div>
-                  <div><label className="text-sm font-medium text-charcoal-700">Business Registration Number</label><input {...register("businessRegistrationNo")} placeholder="Optional" className="mt-1.5 w-full rounded-lg border border-charcoal-200 px-4 py-3 text-sm focus:border-terracotta-500 focus:ring-2 focus:ring-terracotta-500/20 focus:outline-none" /></div>
-                  <div><label className="text-sm font-medium text-charcoal-700">Tax ID</label><input {...register("taxId")} placeholder="Optional" className="mt-1.5 w-full rounded-lg border border-charcoal-200 px-4 py-3 text-sm focus:border-terracotta-500 focus:ring-2 focus:ring-terracotta-500/20 focus:outline-none" /></div>
+                  <div><label className="text-sm font-medium text-charcoal-700">Business Registration Number</label><input {...register("businessRegistrationNo")} placeholder="Optional" className="mt-1.5 w-full rounded-lg border border-charcoal-200 px-4 py-3 text-sm focus:border-rose-500 focus:ring-2 focus:ring-rose-500/20 focus:outline-none" /></div>
+                  <div><label className="text-sm font-medium text-charcoal-700">Tax ID</label><input {...register("taxId")} placeholder="Optional" className="mt-1.5 w-full rounded-lg border border-charcoal-200 px-4 py-3 text-sm focus:border-rose-500 focus:ring-2 focus:ring-rose-500/20 focus:outline-none" /></div>
                   <div><label className="text-sm font-medium text-charcoal-700">Workshop City</label><input {...register("workshopCity")} placeholder="e.g. Colombo" className="mt-1.5 w-full rounded-lg border border-charcoal-200 px-4 py-3 text-sm" /></div>
                   <div>
                     <label className="text-sm font-medium text-charcoal-700">District</label>
@@ -214,7 +214,7 @@ export default function SignUpVendorPage() {
                   </div>
                   <div>
                     <label className="text-sm font-medium text-charcoal-700">Store Description</label>
-                    <textarea {...register("storeDescription")} rows={4} placeholder="Describe your store and craft (min 50 chars)..." className={cn("mt-1.5 w-full rounded-lg border px-4 py-3 text-sm resize-y focus:border-terracotta-500 focus:ring-2 focus:ring-terracotta-500/20 focus:outline-none", errors.storeDescription ? "border-red-400" : "border-charcoal-200")} />
+                    <textarea {...register("storeDescription")} rows={4} placeholder="Describe your store and craft (min 50 chars)..." className={cn("mt-1.5 w-full rounded-lg border px-4 py-3 text-sm resize-y focus:border-rose-500 focus:ring-2 focus:ring-rose-500/20 focus:outline-none", errors.storeDescription ? "border-red-400" : "border-charcoal-200")} />
                     {errors.storeDescription && <p className="mt-1 text-xs text-red-500">{errors.storeDescription.message}</p>}
                   </div>
                 </div>
@@ -235,7 +235,7 @@ export default function SignUpVendorPage() {
                               const current = watch("craftType") || [];
                               setValue("craftType", selected ? current.filter((v: string) => v !== ct.value) : [...current, ct.value], { shouldValidate: true });
                             }}
-                            className={cn("rounded-lg border px-3 py-2 text-xs font-medium transition-colors text-left", selected ? "border-terracotta-400 bg-terracotta-50 text-terracotta-700" : "border-charcoal-200 text-charcoal-600 hover:border-charcoal-300")}
+                            className={cn("rounded-lg border px-3 py-2 text-xs font-medium transition-colors text-left", selected ? "border-rose-400 bg-rose-50 text-rose-700" : "border-charcoal-200 text-charcoal-600 hover:border-charcoal-300")}
                           >
                             {ct.label}
                           </button>
@@ -248,7 +248,7 @@ export default function SignUpVendorPage() {
                   <div><label className="text-sm font-medium text-charcoal-700">Employee Count</label><input type="number" {...register("employeeCount", { valueAsNumber: true })} placeholder="e.g. 2" className="mt-1.5 w-full rounded-lg border border-charcoal-200 px-4 py-3 text-sm" /></div>
                   <div>
                     <label className="text-sm font-medium text-charcoal-700">Craft Description / Story</label>
-                    <textarea {...register("craftDescription")} rows={4} placeholder="Tell us about your craft journey, techniques, and materials (min 30 chars)..." className={cn("mt-1.5 w-full rounded-lg border px-4 py-3 text-sm resize-y focus:border-terracotta-500 focus:ring-2 focus:ring-terracotta-500/20 focus:outline-none", errors.craftDescription ? "border-red-400" : "border-charcoal-200")} />
+                    <textarea {...register("craftDescription")} rows={4} placeholder="Tell us about your craft journey, techniques, and materials (min 30 chars)..." className={cn("mt-1.5 w-full rounded-lg border px-4 py-3 text-sm resize-y focus:border-rose-500 focus:ring-2 focus:ring-rose-500/20 focus:outline-none", errors.craftDescription ? "border-red-400" : "border-charcoal-200")} />
                     {errors.craftDescription && <p className="mt-1 text-xs text-red-500">{errors.craftDescription.message}</p>}
                   </div>
                 </div>
@@ -270,11 +270,11 @@ export default function SignUpVendorPage() {
                         <div
                           onDragOver={(e) => e.preventDefault()}
                           onDrop={(e) => handleDocDrop(doc.key, e)}
-                          className="mt-2 rounded-lg border-2 border-dashed border-charcoal-300 bg-cream-50 p-6 text-center transition-colors hover:border-terracotta-400"
+                          className="mt-2 rounded-lg border-2 border-dashed border-charcoal-300 bg-cream-50 p-6 text-center transition-colors hover:border-rose-400"
                         >
-                          <Upload className="mx-auto h-8 w-8 text-warm-gray-400" />
-                          <p className="mt-2 text-sm text-warm-gray-500">Drag & drop files here, or{" "}
-                            <label className="cursor-pointer text-terracotta-600 hover:underline">
+                          <Upload className="mx-auto h-8 w-8 text-muted-400" />
+                          <p className="mt-2 text-sm text-muted-500">Drag & drop files here, or{" "}
+                            <label className="cursor-pointer text-rose-600 hover:underline">
                               browse
                               <input type="file" multiple={doc.key === "workshopPhotos"} accept="image/*,.pdf" onChange={(e) => handleDocSelect(doc.key, e)} className="hidden" />
                             </label>
@@ -285,7 +285,7 @@ export default function SignUpVendorPage() {
                             {files.map((file, i) => (
                               <div key={i} className="relative rounded-lg border border-charcoal-200 bg-white p-2">
                                 <div className="flex items-center gap-2">
-                                  <FileText className="h-4 w-4 text-warm-gray-400" />
+                                  <FileText className="h-4 w-4 text-muted-400" />
                                   <span className="max-w-[150px] truncate text-xs text-charcoal-700">{file.name}</span>
                                   <button type="button" onClick={() => removeDoc(doc.key, i)} className="ml-1 text-red-400 hover:text-red-600"><X className="h-3 w-3" /></button>
                                 </div>
@@ -308,11 +308,11 @@ export default function SignUpVendorPage() {
               </button>
             ) : <div />}
             {step < 3 ? (
-              <button type="button" onClick={handleNext} className="inline-flex items-center gap-1 rounded-lg bg-terracotta-600 px-6 py-2.5 text-sm font-semibold text-white shadow-soft hover:bg-terracotta-700">
+              <button type="button" onClick={handleNext} className="inline-flex items-center gap-1 rounded-lg bg-rose-600 px-6 py-2.5 text-sm font-semibold text-white shadow-soft hover:bg-rose-700">
                 Next <ChevronRight className="h-4 w-4" />
               </button>
             ) : (
-              <button type="button" onClick={onSubmit} className="inline-flex items-center gap-1 rounded-lg bg-teal-600 px-6 py-2.5 text-sm font-semibold text-white shadow-soft hover:bg-teal-700">
+              <button type="button" onClick={onSubmit} className="inline-flex items-center gap-1 rounded-lg bg-muted-600 px-6 py-2.5 text-sm font-semibold text-white shadow-soft hover:bg-muted-700">
                 Submit Application <ChevronRight className="h-4 w-4" />
               </button>
             )}

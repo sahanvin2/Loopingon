@@ -26,7 +26,7 @@ import { LanguageSwitcher } from "@/components/shared/language-switcher";
 import { CurrencySwitcher } from "@/components/shared/currency-switcher";
 
 const navSections = [
-  { icon: ShoppingBag, label: "Shop", href: "/shop" },
+  { icon: ShoppingBag, label: "Shop", href: "/products" },
   { icon: Grid3X3, label: "Categories", href: "/categories" },
   { icon: Store, label: "Sell on Loopingon", href: "/vendor/register" },
   { icon: Info, label: "About", href: "/about" },
@@ -55,7 +55,7 @@ const accountLinks = [
 
 export function MobileNav() {
   const { isAuthenticated } = useAuthStore();
-  const { isMobileMenuOpen, closeMobileMenu } = useUIStore();
+  const { isMobileMenuOpen, closeMobileMenu, openModal } = useUIStore();
   const [categoriesOpen, setCategoriesOpen] = useState(false);
 
   return (
@@ -84,18 +84,18 @@ export function MobileNav() {
             aria-label="Mobile navigation"
             aria-modal="true"
           >
-            <div className="flex items-center justify-between px-5 py-4 border-b border-cream-200">
+            <div className="flex items-center justify-between px-5 py-4 border-b border-blush-200">
               <Link
                 href="/"
                 onClick={closeMobileMenu}
-                className="font-serif text-xl text-terracotta-600 font-bold"
+                className="font-serif text-xl text-rose-600 font-bold"
               >
                 Loopingon
               </Link>
               <button
                 type="button"
                 onClick={closeMobileMenu}
-                className="p-1.5 rounded-lg text-warm-gray-500 hover:text-charcoal-700 hover:bg-warm-gray-100"
+                className="p-1.5 rounded-lg text-muted-500 hover:text-charcoal-700 hover:bg-muted-100"
                 aria-label="Close menu"
               >
                 <X className="w-5 h-5" />
@@ -113,14 +113,14 @@ export function MobileNav() {
                           onClick={() => setCategoriesOpen(!categoriesOpen)}
                           className={cn(
                             "flex items-center gap-3 w-full px-3 py-2.5 rounded-lg",
-                            "text-charcoal-700 hover:bg-warm-gray-50 transition-colors text-sm font-medium",
+                            "text-charcoal-700 hover:bg-blush-50 transition-colors text-sm font-medium",
                           )}
                         >
-                          <section.icon className="w-5 h-5 text-warm-gray-500" />
+                          <section.icon className="w-5 h-5 text-muted-500" />
                           <span className="flex-1 text-left">{section.label}</span>
                           <ChevronDown
                             className={cn(
-                              "w-4 h-4 text-warm-gray-400 transition-transform duration-200",
+                              "w-4 h-4 text-muted-400 transition-transform duration-200",
                               categoriesOpen && "rotate-180",
                             )}
                           />
@@ -131,14 +131,14 @@ export function MobileNav() {
                               initial={{ opacity: 0, height: 0 }}
                               animate={{ opacity: 1, height: "auto" }}
                               exit={{ opacity: 0, height: 0 }}
-                              className="overflow-hidden ml-9 border-l-2 border-terracotta-200 pl-3 mt-1"
+                              className="overflow-hidden ml-9 border-l-2 border-rose-200 pl-3 mt-1"
                             >
                               {categories.map((cat) => (
                                 <Link
                                   key={cat.label}
                                   href={cat.href}
                                   onClick={closeMobileMenu}
-                                  className="block py-2 text-sm text-warm-gray-600 hover:text-terracotta-600 transition-colors"
+                                  className="block py-2 text-sm text-muted-600 hover:text-rose-600 transition-colors"
                                 >
                                   {cat.label}
                                 </Link>
@@ -153,10 +153,10 @@ export function MobileNav() {
                         onClick={closeMobileMenu}
                         className={cn(
                           "flex items-center gap-3 px-3 py-2.5 rounded-lg",
-                          "text-charcoal-700 hover:bg-warm-gray-50 transition-colors text-sm font-medium",
+                          "text-charcoal-700 hover:bg-blush-50 transition-colors text-sm font-medium",
                         )}
                       >
-                        <section.icon className="w-5 h-5 text-warm-gray-500" />
+                        <section.icon className="w-5 h-5 text-muted-500" />
                         {section.label}
                       </Link>
                     )}
@@ -166,8 +166,8 @@ export function MobileNav() {
 
               {isAuthenticated && (
                 <>
-                  <div className="mt-6 pt-6 border-t border-cream-200">
-                    <p className="px-3 text-xs font-semibold text-warm-gray-500 uppercase tracking-wider mb-2">
+                  <div className="mt-6 pt-6 border-t border-blush-200">
+                    <p className="px-3 text-xs font-semibold text-muted-500 uppercase tracking-wider mb-2">
                       My Account
                     </p>
                     <ul className="space-y-1">
@@ -178,10 +178,10 @@ export function MobileNav() {
                             onClick={closeMobileMenu}
                             className={cn(
                               "flex items-center gap-3 px-3 py-2.5 rounded-lg",
-                              "text-charcoal-700 hover:bg-warm-gray-50 transition-colors text-sm font-medium",
+                              "text-charcoal-700 hover:bg-blush-50 transition-colors text-sm font-medium",
                             )}
                           >
-                            <link.icon className="w-5 h-5 text-warm-gray-500" />
+                            <link.icon className="w-5 h-5 text-muted-500" />
                             {link.label}
                           </Link>
                         </li>
@@ -193,22 +193,21 @@ export function MobileNav() {
 
               {!isAuthenticated && (
                 <div className="mt-6 px-3">
-                  <Link
-                    href="/auth/signin"
-                    onClick={closeMobileMenu}
+                  <button
+                    onClick={() => { closeMobileMenu(); openModal("signin"); }}
                     className={cn(
                       "flex items-center justify-center gap-2 w-full py-2.5 rounded-lg",
-                      "bg-terracotta-600 text-white text-sm font-medium hover:bg-terracotta-700",
+                      "bg-rose-600 text-white text-sm font-medium hover:bg-rose-700",
                     )}
                   >
                     <LogIn className="w-4 h-4" />
                     Sign In
-                  </Link>
+                  </button>
                 </div>
               )}
             </nav>
 
-            <div className="sticky bottom-0 bg-white border-t border-cream-200 px-4 py-3 flex items-center gap-3">
+            <div className="sticky bottom-0 bg-white border-t border-blush-200 px-4 py-3 flex items-center gap-3">
               <LanguageSwitcher />
               <CurrencySwitcher />
             </div>

@@ -1,0 +1,13 @@
+{
+  "name": "Loopingon",
+  "short_name": "Loopingon",
+  "description": "Sri Lanka's Handmade Craft Marketplace",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FDF8F0",
+  "theme_color": "#D35400",
+  "icons": [
+    { "src": "/favicon-16x16.png", "sizes": "16x16", "type": "image/png" },
+    { "src": "/favicon-32x32.png", "sizes": "32x32", "type": "image/png" }
+  ]
+}

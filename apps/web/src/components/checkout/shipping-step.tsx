@@ -44,15 +44,15 @@ export function ShippingStep({ onNext, addresses = [], className }: ShippingStep
         <h2 className="font-serif text-xl text-charcoal-900 mb-1">
           Shipping Address
         </h2>
-        <p className="text-sm text-warm-gray-500 mb-4">
+        <p className="text-sm text-muted-500 mb-4">
           Select a delivery address
         </p>
 
-        <div className="p-4 rounded-lg border border-cream-300 bg-cream-50">
+        <div className="p-4 rounded-lg border border-blush-300 bg-cream-50">
           <p className="text-charcoal-700 font-medium">
             Add a new delivery address
           </p>
-          <p className="text-sm text-warm-gray-500 mt-1">
+          <p className="text-sm text-muted-500 mt-1">
             You&apos;ll enter your address details below.
           </p>
 
@@ -66,8 +66,8 @@ export function ShippingStep({ onNext, addresses = [], className }: ShippingStep
                   type="text"
                   placeholder="Full name"
                   className={cn(
-                    "w-full px-3 py-2 rounded-lg border border-cream-300 text-sm",
-                    "focus:outline-none focus:ring-2 focus:ring-terracotta-500 focus:border-transparent",
+                    "w-full px-3 py-2 rounded-lg border border-blush-300 text-sm",
+                    "focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent",
                   )}
                 />
               </div>
@@ -79,8 +79,8 @@ export function ShippingStep({ onNext, addresses = [], className }: ShippingStep
                   type="tel"
                   placeholder="+94 XXX XXX XXXX"
                   className={cn(
-                    "w-full px-3 py-2 rounded-lg border border-cream-300 text-sm",
-                    "focus:outline-none focus:ring-2 focus:ring-terracotta-500 focus:border-transparent",
+                    "w-full px-3 py-2 rounded-lg border border-blush-300 text-sm",
+                    "focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent",
                   )}
                 />
               </div>
@@ -93,8 +93,8 @@ export function ShippingStep({ onNext, addresses = [], className }: ShippingStep
                 type="text"
                 placeholder="Street address"
                 className={cn(
-                  "w-full px-3 py-2 rounded-lg border border-cream-300 text-sm",
-                  "focus:outline-none focus:ring-2 focus:ring-terracotta-500 focus:border-transparent",
+                  "w-full px-3 py-2 rounded-lg border border-blush-300 text-sm",
+                  "focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent",
                 )}
               />
             </div>
@@ -107,8 +107,8 @@ export function ShippingStep({ onNext, addresses = [], className }: ShippingStep
                   type="text"
                   placeholder="City"
                   className={cn(
-                    "w-full px-3 py-2 rounded-lg border border-cream-300 text-sm",
-                    "focus:outline-none focus:ring-2 focus:ring-terracotta-500 focus:border-transparent",
+                    "w-full px-3 py-2 rounded-lg border border-blush-300 text-sm",
+                    "focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent",
                   )}
                 />
               </div>
@@ -120,8 +120,8 @@ export function ShippingStep({ onNext, addresses = [], className }: ShippingStep
                   type="text"
                   placeholder="Postal code"
                   className={cn(
-                    "w-full px-3 py-2 rounded-lg border border-cream-300 text-sm",
-                    "focus:outline-none focus:ring-2 focus:ring-terracotta-500 focus:border-transparent",
+                    "w-full px-3 py-2 rounded-lg border border-blush-300 text-sm",
+                    "focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent",
                   )}
                 />
               </div>
@@ -143,28 +143,28 @@ export function ShippingStep({ onNext, addresses = [], className }: ShippingStep
               className={cn(
                 "w-full flex items-center gap-4 p-4 rounded-lg border text-left transition-colors",
                 selectedMethod === method.id
-                  ? "border-terracotta-500 bg-terracotta-50"
-                  : "border-cream-300 hover:border-warm-gray-400",
+                  ? "border-rose-500 bg-rose-50"
+                  : "border-blush-300 hover:border-muted-400",
               )}
             >
               <div
                 className={cn(
                   "w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0",
                   selectedMethod === method.id
-                    ? "border-terracotta-600"
-                    : "border-warm-gray-300",
+                    ? "border-rose-600"
+                    : "border-muted-300",
                 )}
               >
                 {selectedMethod === method.id && (
-                  <div className="w-2.5 h-2.5 rounded-full bg-terracotta-600" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-rose-600" />
                 )}
               </div>
-              <Truck className="w-5 h-5 text-warm-gray-500 shrink-0" />
+              <Truck className="w-5 h-5 text-muted-500 shrink-0" />
               <div className="flex-1">
                 <p className="text-sm font-medium text-charcoal-700">
                   {method.label}
                 </p>
-                <p className="text-xs text-warm-gray-500">{method.description}</p>
+                <p className="text-xs text-muted-500">{method.description}</p>
               </div>
               <span className="text-sm font-medium text-charcoal-700">
                 {method.price}
@@ -179,8 +179,8 @@ export function ShippingStep({ onNext, addresses = [], className }: ShippingStep
         onClick={onNext}
         className={cn(
           "w-full py-3.5 rounded-lg text-base font-medium transition-colors",
-          "bg-terracotta-600 text-white hover:bg-terracotta-700",
-          "shadow-terracotta",
+          "bg-rose-600 text-white hover:bg-rose-700",
+          "shadow-rose",
         )}
       >
         Continue to Payment

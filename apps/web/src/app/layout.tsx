@@ -1,10 +1,14 @@
 import type { Metadata, Viewport } from "next";
-import { Playfair_Display, Inter } from "next/font/google";
+import { Cormorant_Garamond, Inter } from "next/font/google";
 import { Providers } from "@/providers";
+import { Header } from "@/components/layout/header";
+import { Footer } from "@/components/layout/footer";
+import { AuthModal } from "@/components/shared/auth-modal";
 import "@/styles/globals.css";
 
-const playfairDisplay = Playfair_Display({
+const cormorantGaramond = Cormorant_Garamond({
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
   variable: "--font-playfair-display",
   display: "swap",
 });
@@ -20,8 +24,8 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#FDF8F0" },
-    { media: "(prefers-color-scheme: dark)", color: "#1E1E1E" },
+    { media: "(prefers-color-scheme: light)", color: "#fdfaf5" },
+    { media: "(prefers-color-scheme: dark)", color: "#1e191c" },
   ],
 };
 
@@ -115,7 +119,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${playfairDisplay.variable} ${inter.variable}`}
+      className={`${cormorantGaramond.variable} ${inter.variable}`}
       suppressHydrationWarning
     >
       <head>
@@ -141,26 +145,29 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-title" content="Loopingon" />
         <meta name="application-name" content="Loopingon" />
       </head>
-      <body className="min-h-screen bg-cream-100 font-sans text-charcoal-900 antialiased">
+      <body className="min-h-screen bg-cream-50 font-sans text-charcoal-900 antialiased">
         <Providers>
           <div className="relative flex min-h-screen flex-col">
             <a
               href="#main-content"
-              className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-terracotta-600 focus:px-4 focus:py-3 focus:text-sm focus:font-medium focus:text-white focus:shadow-soft-lg focus:outline-none"
+              className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-rose-600 focus:px-4 focus:py-3 focus:text-sm focus:font-medium focus:text-white focus:shadow-soft-lg focus:outline-none"
             >
               Skip to main content
             </a>
 
-            {/* Header - loaded dynamically via layout group */}
-            <header id="site-header" className="sticky top-0 z-40" />
+            {/* Header */}
+            <Header />
 
             <main id="main-content" className="flex-1">
               {children}
             </main>
 
-            {/* Footer - loaded dynamically via layout group */}
-            <footer id="site-footer" />
+            {/* Footer */}
+            <Footer />
           </div>
+
+          {/* Auth Modal */}
+          <AuthModal />
 
           {/* Floating action buttons */}
           <div className="pointer-events-none fixed inset-0 z-50">
@@ -168,7 +175,7 @@ export default function RootLayout({
               {/* AI Chatbot FAB */}
               <button
                 aria-label="Open chat assistant"
-                className="group flex h-14 w-14 items-center justify-center rounded-full bg-terracotta-600 text-white shadow-terracotta transition-all duration-300 hover:scale-110 hover:bg-terracotta-700 focus:outline-none focus:ring-2 focus:ring-terracotta-500 focus:ring-offset-2"
+                className="group flex h-14 w-14 items-center justify-center rounded-full bg-rose-500 text-white shadow-rose transition-all duration-300 hover:scale-110 hover:bg-rose-600 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:ring-offset-2"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -186,7 +193,7 @@ export default function RootLayout({
                   <path d="M8 13h6" />
                 </svg>
                 <span className="sr-only">Open AI Chat Assistant</span>
-                <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-gold-400 text-[10px] font-bold text-charcoal-900">
+                <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-blush-400 text-[10px] font-bold text-charcoal-900">
                   AI
                 </span>
               </button>

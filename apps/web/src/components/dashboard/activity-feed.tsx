@@ -48,10 +48,10 @@ export function ActivityFeed({
           <div
             className={cn(
               "w-10 h-10 rounded-full flex items-center justify-center shrink-0 relative z-10",
-              item.iconBg || "bg-warm-gray-100",
+              item.iconBg || "bg-muted-100",
             )}
           >
-            <item.icon className={cn("w-4 h-4", item.iconColor || "text-warm-gray-600")} />
+            <item.icon className={cn("w-4 h-4", item.iconColor || "text-muted-600")} />
           </div>
 
           <div className="flex-1 min-w-0 pt-1">
@@ -60,14 +60,14 @@ export function ActivityFeed({
               {" "}{item.description}
             </p>
             <div className="flex items-center gap-3 mt-1">
-              <span className="text-xs text-warm-gray-500">
+              <span className="text-xs text-muted-500">
                 {formatRelativeTime(item.timestamp)}
               </span>
               {item.action && (
                 <button
                   type="button"
                   onClick={item.action.onClick}
-                  className="text-xs font-medium text-terracotta-600 hover:text-terracotta-700 transition-colors"
+                  className="text-xs font-medium text-rose-600 hover:text-rose-700 transition-colors"
                 >
                   {item.action.label}
                 </button>
@@ -78,7 +78,7 @@ export function ActivityFeed({
       ))}
 
       {displayItems.length === 0 && (
-        <p className="text-sm text-warm-gray-500 text-center py-8">
+        <p className="text-sm text-muted-500 text-center py-8">
           No recent activity
         </p>
       )}

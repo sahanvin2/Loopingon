@@ -13,7 +13,7 @@ import type { ApiResponse } from "@/types";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell } from "recharts";
 import { DollarSign, ShoppingBag, Users, Store, TrendingUp } from "lucide-react";
 
-const COLORS = ["#C75B39", "#D4A843", "#2D8B7D", "#6B5E53", "#1E1E1E"];
+const COLORS = ["#c86482", "#dc9b91", "#827378", "#a39296", "#1e191c"];
 
 export default function AdminAnalyticsPage() {
   const [dateRange, setDateRange] = useState("30d");
@@ -30,19 +30,19 @@ export default function AdminAnalyticsPage() {
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold text-charcoal-900">Analytics</h1>
         <div className="flex items-center gap-2">
-          <div className="flex gap-1 bg-white rounded-lg border border-cream-200 p-1">
+          <div className="flex gap-1 bg-white rounded-lg border border-blush-200 p-1">
             {["7d", "30d", "90d", "1y"].map((range) => (
               <button
                 key={range}
                 type="button"
                 onClick={() => setDateRange(range)}
-                className={`px-3 py-1.5 text-xs font-medium rounded-md ${dateRange === range ? "bg-terracotta-600 text-white" : "text-warm-gray-600"}`}
+                className={`px-3 py-1.5 text-xs font-medium rounded-md ${dateRange === range ? "bg-rose-600 text-white" : "text-muted-600"}`}
               >
                 {range}
               </button>
             ))}
           </div>
-          <button className="px-4 py-2 bg-white border border-cream-200 rounded-lg text-sm font-medium flex items-center gap-2">
+          <button className="px-4 py-2 bg-white border border-blush-200 rounded-lg text-sm font-medium flex items-center gap-2">
             <Download className="w-4 h-4" /> Export
           </button>
         </div>
@@ -52,10 +52,10 @@ export default function AdminAnalyticsPage() {
         <LoadingSkeleton variant="card" count={5} />
       ) : (
         <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-          <StatCard title="Revenue" value={formatPrice(Number(stats?.revenue || 0))} icon={DollarSign} variant="gold" />
-          <StatCard title="Orders" value={stats?.orders ?? 0} icon={ShoppingBag} variant="terracotta" />
+          <StatCard title="Revenue" value={formatPrice(Number(stats?.revenue || 0))} icon={DollarSign} variant="blush" />
+          <StatCard title="Orders" value={stats?.orders ?? 0} icon={ShoppingBag} variant="rose" />
           <StatCard title="New Users" value={stats?.newUsers ?? 0} icon={Users} variant="default" />
-          <StatCard title="New Vendors" value={stats?.newVendors ?? 0} icon={Store} variant="teal" />
+          <StatCard title="New Vendors" value={stats?.newVendors ?? 0} icon={Store} variant="muted" />
           <StatCard title="Avg Order" value={formatPrice(Number(stats?.avgOrderValue || 0))} icon={TrendingUp} variant="default" />
         </div>
       )}
@@ -64,7 +64,7 @@ export default function AdminAnalyticsPage() {
         <ChartCard title="Revenue Trend">
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={[]}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="date" /><YAxis /><Tooltip /><Line type="monotone" dataKey="revenue" stroke="#C75B39" strokeWidth={2} /></LineChart>
+              <LineChart data={[]}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="date" /><YAxis /><Tooltip /><Line type="monotone" dataKey="revenue" stroke="#c86482" strokeWidth={2} /></LineChart>
             </ResponsiveContainer>
           </div>
         </ChartCard>

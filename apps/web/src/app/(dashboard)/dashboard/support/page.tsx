@@ -87,17 +87,17 @@ export default function SupportPage() {
         <h1 className="text-2xl font-bold text-charcoal-900">
           Support Center
         </h1>
-        <p className="text-warm-gray-600 mt-2">
+        <p className="text-muted-600 mt-2">
           How can we help you today?
         </p>
         <div className="relative mt-4">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-warm-gray-400" />
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-400" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search help articles and FAQs..."
-            className="w-full pl-12 pr-4 py-3 border border-cream-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-terracotta-500"
+            className="w-full pl-12 pr-4 py-3 border border-blush-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-rose-500"
           />
         </div>
       </div>
@@ -106,9 +106,9 @@ export default function SupportPage() {
         {commonTopics.map((topic) => (
           <div
             key={topic.label}
-            className="bg-white rounded-lg border border-cream-200 p-5 text-center hover:shadow-soft transition-shadow"
+            className="bg-white rounded-lg border border-blush-200 p-5 text-center hover:shadow-soft transition-shadow"
           >
-            <div className="w-12 h-12 rounded-full bg-terracotta-100 text-terracotta-600 flex items-center justify-center mx-auto mb-3">
+            <div className="w-12 h-12 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center mx-auto mb-3">
               <topic.icon className="w-5 h-5" />
             </div>
             <h3 className="text-sm font-medium text-charcoal-900">
@@ -116,7 +116,7 @@ export default function SupportPage() {
             </h3>
             <button
               type="button"
-              className="mt-2 text-xs text-terracotta-600 hover:text-terracotta-700 font-medium"
+              className="mt-2 text-xs text-rose-600 hover:text-rose-700 font-medium"
             >
               Browse Articles
             </button>
@@ -128,27 +128,27 @@ export default function SupportPage() {
         <button
           type="button"
           onClick={openChatWithAI}
-          className="flex flex-col items-center justify-center gap-3 p-6 bg-gradient-to-br from-teal-500 to-teal-600 text-white rounded-xl hover:from-teal-600 hover:to-teal-700 transition-all"
+          className="flex flex-col items-center justify-center gap-3 p-6 bg-gradient-to-br from-muted-500 to-muted-600 text-white rounded-xl hover:from-muted-600 hover:to-muted-700 transition-all"
         >
           <MessageCircle className="w-8 h-8" />
           <span className="font-semibold">Chat with AI Assistant</span>
-          <span className="text-xs text-teal-100">Get instant answers</span>
+          <span className="text-xs text-muted-100">Get instant answers</span>
         </button>
 
         <button
           type="button"
           onClick={() => setShowTicketModal(true)}
-          className="flex flex-col items-center justify-center gap-3 p-6 bg-gradient-to-br from-terracotta-500 to-terracotta-600 text-white rounded-xl hover:from-terracotta-600 hover:to-terracotta-700 transition-all"
+          className="flex flex-col items-center justify-center gap-3 p-6 bg-gradient-to-br from-rose-500 to-rose-600 text-white rounded-xl hover:from-rose-600 hover:to-rose-700 transition-all"
         >
           <Plus className="w-8 h-8" />
           <span className="font-semibold">Create New Ticket</span>
-          <span className="text-xs text-terracotta-100">
+          <span className="text-xs text-rose-100">
             Our team will help
           </span>
         </button>
       </div>
 
-      <div className="bg-white rounded-xl border border-cream-200 p-6">
+      <div className="bg-white rounded-xl border border-blush-200 p-6">
         <h2 className="text-lg font-semibold text-charcoal-900 mb-4">
           My Recent Tickets
         </h2>
@@ -174,7 +174,7 @@ export default function SupportPage() {
                     <Badge
                       variant={
                         ticket.status === "RESOLVED"
-                          ? "teal"
+                          ? "muted"
                           : ticket.status === "OPEN"
                             ? "amber"
                             : "gray"
@@ -184,11 +184,11 @@ export default function SupportPage() {
                       {ticket.status}
                     </Badge>
                   </div>
-                  <span className="text-xs text-warm-gray-500">
+                  <span className="text-xs text-muted-500">
                     {ticket.ticketNumber} - {formatDate(ticket.createdAt)}
                   </span>
                 </div>
-                <ChevronRight className="w-4 h-4 text-warm-gray-400" />
+                <ChevronRight className="w-4 h-4 text-muted-400" />
               </div>
             ))}
           </div>
@@ -223,7 +223,7 @@ export default function SupportPage() {
                   </label>
                   <input
                     {...register("subject")}
-                    className="w-full px-3 py-2 border border-cream-200 rounded-lg text-sm focus:ring-2 focus:ring-terracotta-500"
+                    className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm focus:ring-2 focus:ring-rose-500"
                     placeholder="Brief summary of your issue"
                   />
                   {errors.subject && (
@@ -236,7 +236,7 @@ export default function SupportPage() {
                   </label>
                   <select
                     {...register("category")}
-                    className="w-full px-3 py-2 border border-cream-200 rounded-lg text-sm focus:ring-2 focus:ring-terracotta-500"
+                    className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm focus:ring-2 focus:ring-rose-500"
                   >
                     <option value="">Select a category</option>
                     <option value="order">Order</option>
@@ -259,7 +259,7 @@ export default function SupportPage() {
                   <textarea
                     {...register("message")}
                     rows={4}
-                    className="w-full px-3 py-2 border border-cream-200 rounded-lg text-sm focus:ring-2 focus:ring-terracotta-500"
+                    className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm focus:ring-2 focus:ring-rose-500"
                     placeholder="Describe your issue in detail..."
                   />
                   {errors.message && (
@@ -272,7 +272,7 @@ export default function SupportPage() {
                   </label>
                   <input
                     {...register("orderId")}
-                    className="w-full px-3 py-2 border border-cream-200 rounded-lg text-sm focus:ring-2 focus:ring-terracotta-500"
+                    className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm focus:ring-2 focus:ring-rose-500"
                     placeholder="e.g., LOOP-..."
                   />
                 </div>
@@ -286,14 +286,14 @@ export default function SupportPage() {
                   <button
                     type="button"
                     onClick={() => setShowTicketModal(false)}
-                    className="flex-1 px-4 py-2.5 border border-cream-200 rounded-lg text-sm font-medium text-charcoal-700 hover:bg-cream-50"
+                    className="flex-1 px-4 py-2.5 border border-blush-200 rounded-lg text-sm font-medium text-charcoal-700 hover:bg-cream-50"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="flex-1 px-4 py-2.5 bg-terracotta-600 text-white rounded-lg text-sm font-medium hover:bg-terracotta-700 disabled:opacity-50"
+                    className="flex-1 px-4 py-2.5 bg-rose-600 text-white rounded-lg text-sm font-medium hover:bg-rose-700 disabled:opacity-50"
                   >
                     {isSubmitting ? "Submitting..." : "Submit Ticket"}
                   </button>

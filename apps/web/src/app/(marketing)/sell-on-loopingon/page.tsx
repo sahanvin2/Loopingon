@@ -66,7 +66,7 @@ export default function SellOnLoopingonPage() {
             </p>
             <Link
               href="/sign-up/vendor"
-              className="mt-8 inline-flex items-center gap-2 rounded-lg bg-gold-400 px-8 py-3.5 text-sm font-bold text-charcoal-900 shadow-soft transition-all hover:bg-gold-500"
+              className="mt-8 inline-flex items-center gap-2 rounded-lg bg-blush-400 px-8 py-3.5 text-sm font-bold text-charcoal-900 shadow-soft transition-all hover:bg-blush-500"
             >
               Apply Now
               <svg className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clipRule="evenodd" /></svg>
@@ -76,7 +76,7 @@ export default function SellOnLoopingonPage() {
       </section>
 
       {/* Benefits */}
-      <section className="bg-cream-100 py-20">
+      <section className="bg-cream-50 py-20">
         <div className="mx-auto max-w-6xl px-4">
           <h2 className="text-center font-serif text-3xl font-bold text-charcoal-900 md:text-4xl">
             Why Sell on Loopingon?
@@ -84,11 +84,11 @@ export default function SellOnLoopingonPage() {
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {benefits.map((b) => (
               <div key={b.title} className="rounded-xl bg-white p-6 shadow-soft-sm transition-shadow hover:shadow-soft">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-terracotta-50">
-                  <b.icon className="h-6 w-6 text-terracotta-600" />
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-rose-50">
+                  <b.icon className="h-6 w-6 text-rose-600" />
                 </div>
                 <h3 className="font-serif text-lg font-semibold text-charcoal-800">{b.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-warm-gray-600">{b.description}</p>
+                <p className="mt-2 text-sm leading-relaxed text-muted-600">{b.description}</p>
               </div>
             ))}
           </div>
@@ -101,15 +101,15 @@ export default function SellOnLoopingonPage() {
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <div>
               <h2 className="font-serif text-3xl font-bold text-charcoal-900">Transparent Commission</h2>
-              <p className="mt-4 text-lg text-warm-gray-600">No hidden fees. No surprises. Just a simple, fair model.</p>
+              <p className="mt-4 text-lg text-muted-600">No hidden fees. No surprises. Just a simple, fair model.</p>
               <div className="mt-8 space-y-4">
-                <div className="flex items-center gap-4 rounded-xl border border-teal-200 bg-teal-50 p-4">
-                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-teal-100">
-                    <TrendingUp className="h-7 w-7 text-teal-600" />
+                <div className="flex items-center gap-4 rounded-xl border border-muted-200 bg-muted-50 p-4">
+                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-muted-100">
+                    <TrendingUp className="h-7 w-7 text-muted-600" />
                   </div>
                   <div>
-                    <p className="text-2xl font-bold text-teal-700">80%</p>
-                    <p className="text-sm text-teal-600">Goes directly to you</p>
+                    <p className="text-2xl font-bold text-muted-700">80%</p>
+                    <p className="text-sm text-muted-600">Goes directly to you</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-4 rounded-xl border border-charcoal-200 bg-charcoal-50 p-4">
@@ -130,13 +130,13 @@ export default function SellOnLoopingonPage() {
                   "Full transparency: track every transaction in real-time",
                 ].map((item) => (
                   <div key={item} className="flex items-start gap-2">
-                    <svg className="mt-0.5 h-5 w-5 shrink-0 text-teal-500" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" /></svg>
-                    <span className="text-sm text-warm-gray-700">{item}</span>
+                    <svg className="mt-0.5 h-5 w-5 shrink-0 text-muted-500" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" /></svg>
+                    <span className="text-sm text-muted-700">{item}</span>
                   </div>
                 ))}
               </div>
             </div>
-            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-gradient-to-br from-terracotta-600 to-gold-500 p-10 text-white">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-gradient-to-br from-rose-600 to-blush-500 p-10 text-white">
               <div className="relative z-10">
                 <p className="text-lg font-medium text-cream-200">For example</p>
                 <div className="mt-6 space-y-4">
@@ -146,7 +146,7 @@ export default function SellOnLoopingonPage() {
                   </div>
                   <div className="flex justify-between border-b border-white/20 pb-3">
                     <span>Loopingon commission (20%)</span>
-                    <span className="font-bold text-gold-300">- රු 2,000</span>
+                    <span className="font-bold text-blush-300">- රු 2,000</span>
                   </div>
                   <div className="flex justify-between pt-2 text-xl">
                     <span className="font-bold">You receive</span>
@@ -155,29 +155,29 @@ export default function SellOnLoopingonPage() {
                 </div>
               </div>
               <div className="absolute -bottom-10 -right-10 h-48 w-48 rounded-full bg-white/10" />
-              <div className="absolute -left-6 -top-6 h-24 w-24 rounded-full bg-gold-400/20" />
+              <div className="absolute -left-6 -top-6 h-24 w-24 rounded-full bg-blush-400/20" />
             </div>
           </div>
         </div>
       </section>
 
       {/* Success Stories */}
-      <section className="bg-cream-100 py-20">
+      <section className="bg-cream-50 py-20">
         <div className="mx-auto max-w-6xl px-4">
           <h2 className="text-center font-serif text-3xl font-bold text-charcoal-900">Artisan Success Stories</h2>
           <div className="mt-12 grid gap-8 md:grid-cols-3">
             {successStories.map((s) => (
               <div key={s.name} className="overflow-hidden rounded-xl bg-white shadow-soft-sm">
-                <div className="relative aspect-[4/3] bg-warm-gray-200">
+                <div className="relative aspect-[4/3] bg-muted-200">
                   <Image src={s.image} alt={s.name} fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
                 </div>
                 <div className="p-6">
-                  <div className="mb-2 inline-block rounded-full bg-teal-50 px-3 py-1 text-xs font-medium text-teal-700">{s.craft}</div>
+                  <div className="mb-2 inline-block rounded-full bg-muted-50 px-3 py-1 text-xs font-medium text-muted-700">{s.craft}</div>
                   <h3 className="font-serif text-xl font-bold text-charcoal-900">{s.name}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-warm-gray-600">{s.story}</p>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-600">{s.story}</p>
                   <div className="mt-4 flex gap-4 border-t border-charcoal-100 pt-4 text-sm">
-                    <span className="font-semibold text-terracotta-600">{s.earnings}</span>
-                    <span className="text-warm-gray-500">{s.orders}</span>
+                    <span className="font-semibold text-rose-600">{s.earnings}</span>
+                    <span className="text-muted-500">{s.orders}</span>
                   </div>
                 </div>
               </div>
@@ -187,23 +187,23 @@ export default function SellOnLoopingonPage() {
       </section>
 
       {/* CTA */}
-      <section className="bg-terracotta-600 py-20">
+      <section className="bg-rose-600 py-20">
         <div className="mx-auto max-w-3xl px-4 text-center">
           <h2 className="font-serif text-3xl font-bold text-white md:text-4xl">Ready to Start Selling?</h2>
-          <p className="mt-4 text-lg text-terracotta-200">
+          <p className="mt-4 text-lg text-rose-200">
             Join thousands of Sri Lankan artisans who have found their global audience on Loopingon.
           </p>
           <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <Link
               href="/sign-up/vendor"
-              className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-white px-8 py-3.5 text-sm font-bold text-terracotta-600 shadow-soft transition-all hover:bg-cream-100 sm:w-auto"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-white px-8 py-3.5 text-sm font-bold text-rose-600 shadow-soft transition-all hover:bg-cream-50 sm:w-auto"
             >
               Apply Now
               <svg className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clipRule="evenodd" /></svg>
             </Link>
             <Link
               href="/contact"
-              className="inline-flex w-full items-center justify-center rounded-lg border border-terracotta-400 px-8 py-3.5 text-sm font-semibold text-white transition-all hover:bg-terracotta-500 sm:w-auto"
+              className="inline-flex w-full items-center justify-center rounded-lg border border-rose-400 px-8 py-3.5 text-sm font-semibold text-white transition-all hover:bg-rose-500 sm:w-auto"
             >
               Talk to Us
             </Link>

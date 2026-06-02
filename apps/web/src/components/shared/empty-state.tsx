@@ -39,13 +39,13 @@ export function EmptyState({
       )}
     >
       {icon ? (
-        <div className="mb-6 text-warm-gray-400 flex items-center justify-center w-16 h-16">
+        <div className="mb-6 text-muted-400 flex items-center justify-center w-16 h-16">
           {icon}
         </div>
       ) : (
-        <div className="mb-6 w-16 h-16 rounded-full bg-warm-gray-100 flex items-center justify-center">
+        <div className="mb-6 w-16 h-16 rounded-full bg-muted-100 flex items-center justify-center">
           <svg
-            className="w-8 h-8 text-warm-gray-400"
+            className="w-8 h-8 text-muted-400"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -61,7 +61,7 @@ export function EmptyState({
       )}
 
       <h3 className="font-serif text-xl text-charcoal-900 mb-2">{title}</h3>
-      {description && <p className="text-warm-gray-600 max-w-sm mb-8">{description}</p>}
+      {description && <p className="text-muted-600 max-w-sm mb-8">{description}</p>}
 
       {(action || secondaryAction) && (
         <div className="flex flex-col sm:flex-row gap-3">
@@ -71,9 +71,9 @@ export function EmptyState({
                 href={action.href}
                 className={cn(
                   "inline-flex items-center justify-center px-6 py-2.5 rounded-lg",
-                  "bg-terracotta-600 text-white font-medium text-sm",
-                  "hover:bg-terracotta-700 transition-colors",
-                  "focus:outline-none focus:ring-2 focus:ring-terracotta-500 focus:ring-offset-2",
+                  "bg-rose-600 text-white font-medium text-sm",
+                  "hover:bg-rose-700 transition-colors",
+                  "focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2",
                 )}
               >
                 {action.label}
@@ -84,9 +84,9 @@ export function EmptyState({
                 onClick={action.onClick}
                 className={cn(
                   "inline-flex items-center justify-center px-6 py-2.5 rounded-lg",
-                  "bg-terracotta-600 text-white font-medium text-sm",
-                  "hover:bg-terracotta-700 transition-colors",
-                  "focus:outline-none focus:ring-2 focus:ring-terracotta-500 focus:ring-offset-2",
+                  "bg-rose-600 text-white font-medium text-sm",
+                  "hover:bg-rose-700 transition-colors",
+                  "focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2",
                 )}
               >
                 {action.label}
@@ -98,9 +98,9 @@ export function EmptyState({
                 href={secondaryAction.href}
                 className={cn(
                   "inline-flex items-center justify-center px-6 py-2.5 rounded-lg",
-                  "border border-warm-gray-300 text-charcoal-700 font-medium text-sm",
-                  "hover:bg-warm-gray-50 transition-colors",
-                  "focus:outline-none focus:ring-2 focus:ring-warm-gray-400 focus:ring-offset-2",
+                  "border border-muted-300 text-charcoal-700 font-medium text-sm",
+                  "hover:bg-blush-50 transition-colors",
+                  "focus:outline-none focus:ring-2 focus:ring-muted-400 focus:ring-offset-2",
                 )}
               >
                 {secondaryAction.label}
@@ -111,9 +111,9 @@ export function EmptyState({
                 onClick={secondaryAction.onClick}
                 className={cn(
                   "inline-flex items-center justify-center px-6 py-2.5 rounded-lg",
-                  "border border-warm-gray-300 text-charcoal-700 font-medium text-sm",
-                  "hover:bg-warm-gray-50 transition-colors",
-                  "focus:outline-none focus:ring-2 focus:ring-warm-gray-400 focus:ring-offset-2",
+                  "border border-muted-300 text-charcoal-700 font-medium text-sm",
+                  "hover:bg-blush-50 transition-colors",
+                  "focus:outline-none focus:ring-2 focus:ring-muted-400 focus:ring-offset-2",
                 )}
               >
                 {secondaryAction.label}

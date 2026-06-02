@@ -43,7 +43,7 @@ export function SearchSuggestions({
     <div
       className={cn(
         "absolute top-full mt-2 w-full bg-white rounded-lg shadow-soft-md",
-        "border border-cream-200 overflow-hidden z-50",
+        "border border-blush-200 overflow-hidden z-50",
         className,
       )}
     >
@@ -53,8 +53,8 @@ export function SearchSuggestions({
           onClick={onSelect}
           className={cn(
             "flex items-center gap-3 px-4 py-2.5 text-sm",
-            "hover:bg-terracotta-50 text-terracotta-600 font-medium",
-            "border-b border-cream-100",
+            "hover:bg-rose-50 text-rose-600 font-medium",
+            "border-b border-blush-100",
           )}
         >
           <Search className="w-4 h-4" />
@@ -63,8 +63,8 @@ export function SearchSuggestions({
       )}
 
       {suggestions.length === 0 && query && (
-        <div className="px-4 py-2.5 border-b border-cream-100">
-          <div className="flex items-center gap-2 text-xs text-warm-gray-500 mb-2">
+        <div className="px-4 py-2.5 border-b border-blush-100">
+          <div className="flex items-center gap-2 text-xs text-muted-500 mb-2">
             <TrendingUp className="w-3.5 h-3.5" /> Trending Searches
           </div>
         </div>
@@ -78,11 +78,11 @@ export function SearchSuggestions({
             onClick={onSelect}
             className={cn(
               "flex items-center gap-3 px-4 py-2.5 text-sm transition-colors",
-              "hover:bg-warm-gray-50 text-charcoal-700",
+              "hover:bg-blush-50 text-charcoal-700",
             )}
           >
             {suggestion.thumbnail ? (
-              <div className="w-10 h-10 rounded-md bg-warm-gray-100 overflow-hidden shrink-0">
+              <div className="w-10 h-10 rounded-md bg-muted-100 overflow-hidden shrink-0">
                 <img
                   src={suggestion.thumbnail}
                   alt={suggestion.label}
@@ -90,9 +90,9 @@ export function SearchSuggestions({
                 />
               </div>
             ) : suggestion.type === "trending" ? (
-              <TrendingUp className="w-4 h-4 text-warm-gray-400 shrink-0" />
+              <TrendingUp className="w-4 h-4 text-muted-400 shrink-0" />
             ) : (
-              <Search className="w-4 h-4 text-warm-gray-400 shrink-0" />
+              <Search className="w-4 h-4 text-muted-400 shrink-0" />
             )}
             <span>{suggestion.label}</span>
           </Link>

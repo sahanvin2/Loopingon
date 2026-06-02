@@ -57,9 +57,9 @@ export function FeaturedProducts() {
           Handpicked Treasures
         </h2>
         <Link
-          href="/shop?sort=featured"
+          href="/products?sort=featured"
           className={cn(
-            "inline-flex items-center gap-1.5 text-sm font-medium text-terracotta-600 hover:text-terracotta-700",
+            "inline-flex items-center gap-1.5 text-sm font-medium text-rose-600 hover:text-rose-700",
             "hover:underline transition-colors",
           )}
         >
@@ -71,14 +71,14 @@ export function FeaturedProducts() {
 
       {isError && (
         <div className="text-center py-12">
-          <p className="text-warm-gray-600 mb-4">Failed to load featured products.</p>
+          <p className="text-muted-600 mb-4">Failed to load featured products.</p>
           <button
             type="button"
             onClick={() => refetch()}
             className={cn(
               "inline-flex items-center gap-2 px-4 py-2 rounded-lg",
-              "bg-terracotta-600 text-white text-sm font-medium",
-              "hover:bg-terracotta-700 transition-colors",
+              "bg-rose-600 text-white text-sm font-medium",
+              "hover:bg-rose-700 transition-colors",
             )}
           >
             <RefreshCw className="w-4 h-4" /> Retry

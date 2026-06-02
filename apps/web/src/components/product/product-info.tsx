@@ -31,7 +31,7 @@ function getStockStatus(product: Product): {
   color: string;
 } {
   if (product.quantity === 0) return { label: "Out of Stock", color: "text-red-600" };
-  if (product.madeToOrder) return { label: "Made to Order", color: "text-teal-600" };
+  if (product.madeToOrder) return { label: "Made to Order", color: "text-muted-600" };
   if (product.quantity <= 5) return { label: "Low Stock", color: "text-amber-600" };
   return { label: "In Stock", color: "text-green-600" };
 }
@@ -60,7 +60,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
       {product.vendor && (
         <Link
           href={`/artisans/${product.vendor.storeSlug}`}
-          className="inline-flex items-center gap-2 text-sm text-warm-gray-600 hover:text-terracotta-600 transition-colors"
+          className="inline-flex items-center gap-2 text-sm text-muted-600 hover:text-rose-600 transition-colors"
         >
           {product.vendor.storeName}
           <VendorBadge />
@@ -80,7 +80,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
         />
         <Link
           href="#reviews"
-          className="text-sm text-warm-gray-500 hover:text-terracotta-600 underline underline-offset-4"
+          className="text-sm text-muted-500 hover:text-rose-600 underline underline-offset-4"
         >
           Write a Review
         </Link>
@@ -92,7 +92,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
             <span className="text-3xl sm:text-4xl font-bold text-red-600">
               {formatPrice(price)}
             </span>
-            <span className="text-lg line-through text-warm-gray-500">
+            <span className="text-lg line-through text-muted-500">
               {formatPrice(originalPrice!)}
             </span>
             <Badge variant="red" size="md">
@@ -100,29 +100,29 @@ export function ProductInfo({ product }: ProductInfoProps) {
             </Badge>
           </div>
         ) : (
-          <span className="text-3xl sm:text-4xl font-bold text-terracotta-600">
+          <span className="text-3xl sm:text-4xl font-bold text-rose-600">
             {formatPrice(price)}
           </span>
         )}
-        <span className="block text-xs text-warm-gray-500 mt-1">
+        <span className="block text-xs text-muted-500 mt-1">
           All prices include VAT
         </span>
       </div>
 
       {product.shortDescription && (
-        <p className="text-warm-gray-600 leading-relaxed">
+        <p className="text-muted-600 leading-relaxed">
           {product.shortDescription}
         </p>
       )}
 
       <div className="flex items-center gap-4">
-        <div className="flex items-center border border-cream-300 rounded-lg">
+        <div className="flex items-center border border-blush-300 rounded-lg">
           <button
             type="button"
             onClick={() => setQuantity((q) => Math.max(1, q - 1))}
             disabled={quantity <= 1}
             className={cn(
-              "p-2.5 text-warm-gray-600 hover:text-charcoal-700 transition-colors",
+              "p-2.5 text-muted-600 hover:text-charcoal-700 transition-colors",
               "disabled:opacity-40 disabled:cursor-not-allowed",
             )}
             aria-label="Decrease quantity"
@@ -135,7 +135,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
           <button
             type="button"
             onClick={() => setQuantity((q) => q + 1)}
-            className="p-2.5 text-warm-gray-600 hover:text-charcoal-700 transition-colors"
+            className="p-2.5 text-muted-600 hover:text-charcoal-700 transition-colors"
             aria-label="Increase quantity"
           >
             <Plus className="w-4 h-4" />
@@ -154,9 +154,9 @@ export function ProductInfo({ product }: ProductInfoProps) {
           disabled={addToCart.isPending || product.quantity === 0}
           className={cn(
             "w-full py-3.5 rounded-lg text-base font-medium transition-colors",
-            "bg-terracotta-600 text-white hover:bg-terracotta-700",
+            "bg-rose-600 text-white hover:bg-rose-700",
             "disabled:opacity-60 disabled:cursor-not-allowed",
-            "shadow-terracotta",
+            "shadow-rose",
           )}
         >
           {addToCart.isPending
@@ -172,8 +172,8 @@ export function ProductInfo({ product }: ProductInfoProps) {
           disabled={product.quantity === 0}
           className={cn(
             "w-full py-3.5 rounded-lg text-base font-medium transition-colors",
-            "border-2 border-terracotta-600 text-terracotta-600 bg-transparent",
-            "hover:bg-terracotta-50",
+            "border-2 border-rose-600 text-rose-600 bg-transparent",
+            "hover:bg-rose-50",
             "disabled:opacity-60 disabled:cursor-not-allowed",
           )}
         >
@@ -189,8 +189,8 @@ export function ProductInfo({ product }: ProductInfoProps) {
           className={cn(
             "w-full py-2.5 text-sm font-medium transition-colors",
             isWishlisted
-              ? "text-terracotta-600"
-              : "text-warm-gray-600 hover:text-terracotta-600",
+              ? "text-rose-600"
+              : "text-muted-600 hover:text-rose-600",
           )}
         >
           <Heart
@@ -203,9 +203,9 @@ export function ProductInfo({ product }: ProductInfoProps) {
         </button>
       </div>
 
-      <div className="space-y-3 pt-4 border-t border-cream-200">
-        <div className="flex items-center gap-3 text-sm text-warm-gray-600">
-          <Truck className="w-4 h-4 text-teal-600 shrink-0" />
+      <div className="space-y-3 pt-4 border-t border-blush-200">
+        <div className="flex items-center gap-3 text-sm text-muted-600">
+          <Truck className="w-4 h-4 text-muted-600 shrink-0" />
           <span>
             {product.freeShippingDomestic
               ? "Free domestic shipping"
@@ -213,17 +213,17 @@ export function ProductInfo({ product }: ProductInfoProps) {
             &nbsp;&middot;&nbsp;Estimated delivery: 5-7 business days
           </span>
         </div>
-        <div className="flex items-center gap-3 text-sm text-warm-gray-600">
-          <RotateCcw className="w-4 h-4 text-teal-600 shrink-0" />
+        <div className="flex items-center gap-3 text-sm text-muted-600">
+          <RotateCcw className="w-4 h-4 text-muted-600 shrink-0" />
           <span>Easy 7-day returns on most items</span>
         </div>
-        <div className="flex items-center gap-3 text-sm text-warm-gray-600">
-          <Shield className="w-4 h-4 text-teal-600 shrink-0" />
+        <div className="flex items-center gap-3 text-sm text-muted-600">
+          <Shield className="w-4 h-4 text-muted-600 shrink-0" />
           <span>Buyer protection guarantee</span>
         </div>
       </div>
 
-      <div className="pt-4 border-t border-cream-200">
+      <div className="pt-4 border-t border-blush-200">
         <ShareButtons productTitle={product.title} />
       </div>
     </div>

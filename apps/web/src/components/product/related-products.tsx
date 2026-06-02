@@ -73,7 +73,7 @@ export function RelatedProducts({ productId, categoryId }: RelatedProductsProps)
             disabled={!canScrollLeft}
             className={cn(
               "w-9 h-9 rounded-full flex items-center justify-center",
-              "border border-cream-300 text-warm-gray-600 hover:bg-warm-gray-100",
+              "border border-blush-300 text-muted-600 hover:bg-muted-100",
               "disabled:opacity-40 disabled:cursor-not-allowed transition-colors",
             )}
             aria-label="Scroll left"
@@ -86,7 +86,7 @@ export function RelatedProducts({ productId, categoryId }: RelatedProductsProps)
             disabled={!canScrollRight}
             className={cn(
               "w-9 h-9 rounded-full flex items-center justify-center",
-              "border border-cream-300 text-warm-gray-600 hover:bg-warm-gray-100",
+              "border border-blush-300 text-muted-600 hover:bg-muted-100",
               "disabled:opacity-40 disabled:cursor-not-allowed transition-colors",
             )}
             aria-label="Scroll right"

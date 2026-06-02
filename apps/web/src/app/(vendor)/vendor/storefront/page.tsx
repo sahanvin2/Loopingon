@@ -35,12 +35,12 @@ export default function VendorStorefrontPage() {
     formState: { isSubmitting },
   } = useForm({
     defaultValues: {
-      themeColor: data?.data?.themeColor || "#C75B39",
+      themeColor: data?.data?.themeColor || "#b0566e",
       aboutSection: data?.data?.aboutSection || "",
       storySection: data?.data?.storySection || "",
     },
     values: data?.data ? {
-      themeColor: data.data.themeColor || "#C75B39",
+      themeColor: data.data.themeColor || "#b0566e",
       aboutSection: data.data.aboutSection || "",
       storySection: data.data.storySection || "",
     } : undefined,
@@ -67,7 +67,7 @@ export default function VendorStorefrontPage() {
       <h1 className="text-2xl font-bold text-charcoal-900">Storefront</h1>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-        <div className="bg-white rounded-xl border border-cream-200 p-6 space-y-4">
+        <div className="bg-white rounded-xl border border-blush-200 p-6 space-y-4">
           <h2 className="text-lg font-semibold text-charcoal-900">Theme</h2>
           <div>
             <label className="block text-sm font-medium text-charcoal-700 mb-1">
@@ -77,33 +77,33 @@ export default function VendorStorefrontPage() {
               <input
                 type="color"
                 {...register("themeColor")}
-                className="w-10 h-10 rounded border border-cream-200 cursor-pointer"
+                className="w-10 h-10 rounded border border-blush-200 cursor-pointer"
               />
-              <span className="text-sm text-warm-gray-600 font-mono">
+              <span className="text-sm text-muted-600 font-mono">
                 {watch("themeColor")}
               </span>
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-xl border border-cream-200 p-6 space-y-4">
+        <div className="bg-white rounded-xl border border-blush-200 p-6 space-y-4">
           <h2 className="text-lg font-semibold text-charcoal-900">
             Store Banner
           </h2>
-          <p className="text-xs text-warm-gray-500">
+          <p className="text-xs text-muted-500">
             Recommended: 1920 x 400px
           </p>
           <FileUpload maxFiles={1} accept="image/*" />
         </div>
 
-        <div className="bg-white rounded-xl border border-cream-200 p-6 space-y-4">
+        <div className="bg-white rounded-xl border border-blush-200 p-6 space-y-4">
           <h2 className="text-lg font-semibold text-charcoal-900">
             Store Logo
           </h2>
           <FileUpload maxFiles={1} accept="image/*" />
         </div>
 
-        <div className="bg-white rounded-xl border border-cream-200 p-6 space-y-4">
+        <div className="bg-white rounded-xl border border-blush-200 p-6 space-y-4">
           <h2 className="text-lg font-semibold text-charcoal-900">
             About Section
           </h2>
@@ -113,7 +113,7 @@ export default function VendorStorefrontPage() {
           />
         </div>
 
-        <div className="bg-white rounded-xl border border-cream-200 p-6 space-y-4">
+        <div className="bg-white rounded-xl border border-blush-200 p-6 space-y-4">
           <h2 className="text-lg font-semibold text-charcoal-900">
             Story Section
           </h2>
@@ -126,7 +126,7 @@ export default function VendorStorefrontPage() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="inline-flex items-center gap-2 px-6 py-3 bg-terracotta-600 text-white rounded-lg font-medium hover:bg-terracotta-700 disabled:opacity-50"
+          className="inline-flex items-center gap-2 px-6 py-3 bg-rose-600 text-white rounded-lg font-medium hover:bg-rose-700 disabled:opacity-50"
         >
           <Save className="w-4 h-4" />
           {isSubmitting ? "Saving..." : "Save Changes"}

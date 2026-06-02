@@ -48,15 +48,15 @@ export default function AdminUserDetailPage() {
     >
       <Link
         href="/admin/users"
-        className="inline-flex items-center gap-1.5 text-sm font-medium text-warm-gray-600 hover:text-charcoal-700"
+        className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-600 hover:text-charcoal-700"
       >
         <ArrowLeft className="w-4 h-4" />
         Back to Users
       </Link>
 
-      <div className="bg-white rounded-xl border border-cream-200 p-6">
+      <div className="bg-white rounded-xl border border-blush-200 p-6">
         <div className="flex items-center gap-4 mb-6">
-          <div className="w-16 h-16 rounded-full bg-warm-gray-200 flex items-center justify-center text-2xl font-bold text-warm-gray-500">
+          <div className="w-16 h-16 rounded-full bg-muted-200 flex items-center justify-center text-2xl font-bold text-muted-500">
             {user.fullName?.charAt(0)}
           </div>
           <div>
@@ -64,13 +64,13 @@ export default function AdminUserDetailPage() {
               {user.fullName}
             </h1>
             <div className="flex items-center gap-2 mt-1">
-              <Badge variant={user.isActive ? "teal" : "red"} size="sm">
+              <Badge variant={user.isActive ? "muted" : "red"} size="sm">
                 {user.isActive ? "Active" : "Banned"}
               </Badge>
               <select
                 value={user.role}
                 onChange={(e) => roleMutation.mutate(e.target.value)}
-                className="px-2 py-1 text-xs border border-cream-200 rounded-md"
+                className="px-2 py-1 text-xs border border-blush-200 rounded-md"
               >
                 <option value="CUSTOMER">Customer</option>
                 <option value="VENDOR">Vendor</option>
@@ -82,27 +82,27 @@ export default function AdminUserDetailPage() {
 
         <dl className="grid grid-cols-2 gap-4 text-sm">
           <div>
-            <dt className="text-warm-gray-500">Email</dt>
+            <dt className="text-muted-500">Email</dt>
             <dd className="font-medium text-charcoal-900">{user.email}</dd>
           </div>
           <div>
-            <dt className="text-warm-gray-500">Phone</dt>
+            <dt className="text-muted-500">Phone</dt>
             <dd className="font-medium text-charcoal-900">{user.phone || "—"}</dd>
           </div>
           <div>
-            <dt className="text-warm-gray-500">Orders</dt>
+            <dt className="text-muted-500">Orders</dt>
             <dd className="font-medium text-charcoal-900">
               {user.customerProfile?.totalOrders || 0}
             </dd>
           </div>
           <div>
-            <dt className="text-warm-gray-500">Total Spent</dt>
+            <dt className="text-muted-500">Total Spent</dt>
             <dd className="font-medium text-charcoal-900">
               {formatPrice(Number(user.customerProfile?.totalSpent || 0))}
             </dd>
           </div>
           <div>
-            <dt className="text-warm-gray-500">Joined</dt>
+            <dt className="text-muted-500">Joined</dt>
             <dd className="font-medium text-charcoal-900">
               {formatDate(user.createdAt)}
             </dd>

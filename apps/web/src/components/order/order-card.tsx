@@ -14,14 +14,14 @@ interface OrderCardProps {
 }
 
 function getStatusBadge(status: string) {
-  const map: Record<string, { label: string; variant: "terracotta" | "gold" | "teal" | "green" | "red" | "amber" | "gray" | "outline" }> = {
+  const map: Record<string, { label: string; variant: "rose" | "blush" | "muted" | "green" | "red" | "amber" | "gray" | "outline" }> = {
     PENDING_PAYMENT: { label: "Pending Payment", variant: "amber" },
-    PAYMENT_CONFIRMED: { label: "Paid", variant: "teal" },
-    PROCESSING: { label: "Processing", variant: "gold" },
-    READY_TO_SHIP: { label: "Ready to Ship", variant: "gold" },
-    SHIPPED: { label: "Shipped", variant: "teal" },
-    IN_TRANSIT: { label: "In Transit", variant: "teal" },
-    OUT_FOR_DELIVERY: { label: "Out for Delivery", variant: "teal" },
+    PAYMENT_CONFIRMED: { label: "Paid", variant: "muted" },
+    PROCESSING: { label: "Processing", variant: "blush" },
+    READY_TO_SHIP: { label: "Ready to Ship", variant: "blush" },
+    SHIPPED: { label: "Shipped", variant: "muted" },
+    IN_TRANSIT: { label: "In Transit", variant: "muted" },
+    OUT_FOR_DELIVERY: { label: "Out for Delivery", variant: "muted" },
     DELIVERED: { label: "Delivered", variant: "green" },
     CANCELLED: { label: "Cancelled", variant: "red" },
     RETURN_REQUESTED: { label: "Return Requested", variant: "gray" },
@@ -42,7 +42,7 @@ export function OrderCard({ order, className }: OrderCardProps) {
     <motion.div
       whileHover={{ y: -1 }}
       className={cn(
-        "bg-white rounded-lg border border-cream-200 shadow-sm overflow-hidden",
+        "bg-white rounded-lg border border-blush-200 shadow-sm overflow-hidden",
         "hover:shadow-soft transition-shadow",
         className,
       )}
@@ -53,7 +53,7 @@ export function OrderCard({ order, className }: OrderCardProps) {
             <p className="text-sm font-medium text-charcoal-900">
               Order #{order.orderNumber}
             </p>
-            <p className="text-xs text-warm-gray-500 mt-0.5">
+            <p className="text-xs text-muted-500 mt-0.5">
               {formatDate(order.createdAt)}
             </p>
           </div>
@@ -68,7 +68,7 @@ export function OrderCard({ order, className }: OrderCardProps) {
               <div
                 key={item.id}
                 className={cn(
-                  "w-10 h-10 rounded-md border-2 border-white bg-warm-gray-100 overflow-hidden",
+                  "w-10 h-10 rounded-md border-2 border-white bg-muted-100 overflow-hidden",
                   i > 0 && "-ml-2",
                 )}
               >
@@ -79,19 +79,19 @@ export function OrderCard({ order, className }: OrderCardProps) {
                     className="w-full h-full object-cover"
                   />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center text-xs text-warm-gray-500">
+                  <div className="w-full h-full flex items-center justify-center text-xs text-muted-500">
                     N/A
                   </div>
                 )}
               </div>
             ))}
             {items.length > 3 && (
-              <div className="w-10 h-10 rounded-md border-2 border-white bg-warm-gray-200 flex items-center justify-center text-xs text-warm-gray-600 font-medium -ml-2">
+              <div className="w-10 h-10 rounded-md border-2 border-white bg-muted-200 flex items-center justify-center text-xs text-muted-600 font-medium -ml-2">
                 +{items.length - 3}
               </div>
             )}
           </div>
-          <span className="text-xs text-warm-gray-500">
+          <span className="text-xs text-muted-500">
             {items.length} item{items.length !== 1 ? "s" : ""}
           </span>
         </div>
@@ -103,7 +103,7 @@ export function OrderCard({ order, className }: OrderCardProps) {
           <Link
             href={`/dashboard/orders/${order.id}`}
             className={cn(
-              "text-sm font-medium text-terracotta-600 hover:text-terracotta-700",
+              "text-sm font-medium text-rose-600 hover:text-rose-700",
               "hover:underline transition-colors",
             )}
           >

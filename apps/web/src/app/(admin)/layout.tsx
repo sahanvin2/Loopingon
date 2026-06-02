@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, LogOut, ChevronDown, Shield } from "lucide-react";
+import { Menu, LogOut, ChevronDown } from "lucide-react";
 import { Sidebar } from "@/components/layout/sidebar";
 import { Badge } from "@/components/shared/badge";
 import { useAuthStore } from "@/stores/auth-store";
@@ -17,18 +17,34 @@ export default function AdminLayout({
 }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
-  const { user, isAuthenticated } = useAuthStore();
+  const { user, isAuthenticated, isLoading } = useAuthStore();
   const { mutate: logout } = useLogout();
   const router = useRouter();
 
-  if (!isAuthenticated) {
-    router.replace("/sign-in");
-    return null;
+  useEffect(() => {
+    if (!isLoading && !isAuthenticated) {
+      router.replace("/sign-in");
+      return;
+    }
+    if (!isLoading && isAuthenticated && user?.role !== "ADMIN" && user?.role !== "SUPER_ADMIN") {
+      router.replace("/dashboard");
+    }
+  }, [isLoading, isAuthenticated, user?.role, router]);
+
+  if (isLoading || !isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-cream-50 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-rose-600" />
+      </div>
+    );
   }
 
   if (user?.role !== "ADMIN" && user?.role !== "SUPER_ADMIN") {
-    router.replace("/dashboard");
-    return null;
+    return (
+      <div className="min-h-screen bg-cream-50 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-rose-600" />
+      </div>
+    );
   }
 
   const firstName = user?.firstName || user?.fullName?.split(" ")[0] || "Admin";
@@ -36,7 +52,7 @@ export default function AdminLayout({
   const avatarBg = getInitialsColor(user?.fullName || "");
 
   return (
-    <div className="min-h-screen bg-cream-100 flex">
+    <div className="min-h-screen bg-cream-50 flex">
       <Sidebar variant="admin" className="hidden md:flex" />
 
       <AnimatePresence>
@@ -65,12 +81,12 @@ export default function AdminLayout({
       </AnimatePresence>
 
       <div className="flex-1 flex flex-col min-w-0">
-        <header className="sticky top-0 z-30 bg-white/80 backdrop-blur-md border-b border-cream-200">
+        <header className="sticky top-0 z-30 bg-white/80 backdrop-blur-md border-b border-blush-200">
           <div className="flex items-center justify-between px-6 py-3">
             <button
               type="button"
               onClick={() => setMobileMenuOpen(true)}
-              className="md:hidden p-2 rounded-lg text-warm-gray-600 hover:bg-cream-100"
+              className="md:hidden p-2 rounded-lg text-muted-600 hover:bg-cream-50"
             >
               <Menu className="w-5 h-5" />
             </button>
@@ -79,7 +95,7 @@ export default function AdminLayout({
               <h1 className="text-lg font-semibold text-charcoal-900">
                 Admin Dashboard
               </h1>
-              <Badge variant="terracotta" size="sm">
+              <Badge variant="rose" size="sm">
                 {user?.role === "SUPER_ADMIN" ? "Super Admin" : "Admin"}
               </Badge>
             </div>
@@ -101,7 +117,7 @@ export default function AdminLayout({
                 <span className="text-sm text-charcoal-700 hidden sm:block">
                   {firstName}
                 </span>
-                <ChevronDown className="w-3.5 h-3.5 text-warm-gray-500 hidden sm:block" />
+                <ChevronDown className="w-3.5 h-3.5 text-muted-500 hidden sm:block" />
               </button>
 
               <AnimatePresence>
@@ -110,13 +126,13 @@ export default function AdminLayout({
                     initial={{ opacity: 0, y: 8, scale: 0.95 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 8, scale: 0.95 }}
-                    className="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-cream-200 py-1 z-50"
+                    className="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-blush-200 py-1 z-50"
                   >
-                    <div className="px-4 py-3 border-b border-cream-100">
+                    <div className="px-4 py-3 border-b border-blush-100">
                       <p className="text-sm font-medium text-charcoal-900">
                         {user?.fullName}
                       </p>
-                      <p className="text-xs text-warm-gray-500">
+                      <p className="text-xs text-muted-500">
                         {user?.email}
                       </p>
                     </div>

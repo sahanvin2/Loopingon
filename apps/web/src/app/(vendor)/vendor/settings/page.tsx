@@ -62,7 +62,7 @@ export default function VendorSettingsPage() {
       <h1 className="text-2xl font-bold text-charcoal-900">Store Settings</h1>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-        <div className="bg-white rounded-xl border border-cream-200 p-6 space-y-4 max-w-lg">
+        <div className="bg-white rounded-xl border border-blush-200 p-6 space-y-4 max-w-lg">
           <h2 className="text-lg font-semibold text-charcoal-900">
             General
           </h2>
@@ -72,7 +72,7 @@ export default function VendorSettingsPage() {
             </label>
             <input
               {...register("storeName")}
-              className="w-full px-3 py-2 border border-cream-200 rounded-lg text-sm focus:ring-2 focus:ring-terracotta-500"
+              className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm focus:ring-2 focus:ring-rose-500"
             />
           </div>
           <div>
@@ -82,12 +82,12 @@ export default function VendorSettingsPage() {
             <textarea
               {...register("storeDescription")}
               rows={4}
-              className="w-full px-3 py-2 border border-cream-200 rounded-lg text-sm focus:ring-2 focus:ring-terracotta-500"
+              className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm focus:ring-2 focus:ring-rose-500"
             />
           </div>
         </div>
 
-        <div className="bg-white rounded-xl border border-cream-200 p-6 space-y-4 max-w-lg">
+        <div className="bg-white rounded-xl border border-blush-200 p-6 space-y-4 max-w-lg">
           <h2 className="text-lg font-semibold text-charcoal-900">
             Social Media Links
           </h2>
@@ -105,13 +105,13 @@ export default function VendorSettingsPage() {
               <input
                 {...register(field.key as any)}
                 placeholder={field.placeholder}
-                className="w-full px-3 py-2 border border-cream-200 rounded-lg text-sm focus:ring-2 focus:ring-terracotta-500"
+                className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm focus:ring-2 focus:ring-rose-500"
               />
             </div>
           ))}
         </div>
 
-        <div className="bg-white rounded-xl border border-cream-200 p-6 space-y-4 max-w-lg">
+        <div className="bg-white rounded-xl border border-blush-200 p-6 space-y-4 max-w-lg">
           <h2 className="text-lg font-semibold text-charcoal-900">
             Vacation Mode
           </h2>
@@ -120,12 +120,12 @@ export default function VendorSettingsPage() {
             <input
               type="checkbox"
               {...register("vacationMode")}
-              className="w-4 h-4 rounded text-terracotta-600 focus:ring-terracotta-500"
+              className="w-4 h-4 rounded text-rose-600 focus:ring-rose-500"
             />
           </label>
         </div>
 
-        <div className="bg-white rounded-xl border border-cream-200 p-6 space-y-4 max-w-lg">
+        <div className="bg-white rounded-xl border border-blush-200 p-6 space-y-4 max-w-lg">
           <h2 className="text-lg font-semibold text-charcoal-900">
             Notification Preferences
           </h2>
@@ -139,7 +139,7 @@ export default function VendorSettingsPage() {
               <input
                 type="checkbox"
                 defaultChecked
-                className="w-4 h-4 rounded text-terracotta-600 focus:ring-terracotta-500"
+                className="w-4 h-4 rounded text-rose-600 focus:ring-rose-500"
               />
             </label>
           ))}
@@ -148,7 +148,7 @@ export default function VendorSettingsPage() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="inline-flex items-center gap-2 px-6 py-3 bg-terracotta-600 text-white rounded-lg font-medium hover:bg-terracotta-700 disabled:opacity-50"
+          className="inline-flex items-center gap-2 px-6 py-3 bg-rose-600 text-white rounded-lg font-medium hover:bg-rose-700 disabled:opacity-50"
         >
           <Save className="w-4 h-4" />
           {isSubmitting ? "Saving..." : "Save Changes"}

@@ -36,15 +36,15 @@ export function ProductVariants({
             className={cn(
               "px-4 py-2 rounded-lg text-sm font-medium border transition-colors",
               selectedVariantId === variant.id
-                ? "border-terracotta-500 bg-terracotta-50 text-terracotta-700"
-                : "border-cream-300 text-charcoal-700 hover:border-warm-gray-400",
+                ? "border-rose-500 bg-rose-50 text-rose-700"
+                : "border-blush-300 text-charcoal-700 hover:border-muted-400",
               variant.quantity === 0 &&
                 "opacity-40 cursor-not-allowed line-through",
             )}
           >
             {variant.name}
             {hasPrice && variant.price && (
-              <span className="ml-1 text-warm-gray-500">
+              <span className="ml-1 text-muted-500">
                 (+Rs. {parseFloat(variant.price).toLocaleString()})
               </span>
             )}

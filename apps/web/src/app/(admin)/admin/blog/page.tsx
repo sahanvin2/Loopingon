@@ -68,7 +68,7 @@ export default function AdminBlogPage() {
         <button
           type="button"
           onClick={() => { setEditing(null); reset({}); setShowModal(true); }}
-          className="inline-flex items-center gap-2 px-5 py-2.5 bg-terracotta-600 text-white rounded-lg text-sm font-medium hover:bg-terracotta-700"
+          className="inline-flex items-center gap-2 px-5 py-2.5 bg-rose-600 text-white rounded-lg text-sm font-medium hover:bg-rose-700"
         >
           <Plus className="w-4 h-4" /> Create Post
         </button>
@@ -79,10 +79,10 @@ export default function AdminBlogPage() {
       ) : posts.length === 0 ? (
         <EmptyState title="No blog posts" />
       ) : (
-        <div className="bg-white rounded-lg border border-cream-200 overflow-x-auto">
+        <div className="bg-white rounded-lg border border-blush-200 overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-cream-200 bg-cream-50">
+              <tr className="border-b border-blush-200 bg-cream-50">
                 <th className="px-4 py-3 text-left text-xs font-semibold uppercase">Title</th>
                 <th className="px-4 py-3 text-left text-xs font-semibold uppercase">Category</th>
                 <th className="px-4 py-3 text-left text-xs font-semibold uppercase">Status</th>
@@ -91,13 +91,13 @@ export default function AdminBlogPage() {
                 <th className="px-4 py-3 text-left text-xs font-semibold uppercase">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-cream-100">
+            <tbody className="divide-y divide-cream-50">
               {posts.map((post) => (
                 <tr key={post.id}>
                   <td className="px-4 py-3 font-medium text-charcoal-900">{post.title}</td>
                   <td className="px-4 py-3">{post.category || "—"}</td>
                   <td className="px-4 py-3">
-                    <Badge variant={post.isPublished ? "teal" : "gray"} size="sm">
+                    <Badge variant={post.isPublished ? "muted" : "gray"} size="sm">
                       {post.isPublished ? "Published" : "Draft"}
                     </Badge>
                   </td>
@@ -105,8 +105,8 @@ export default function AdminBlogPage() {
                   <td className="px-4 py-3 text-right">{post.viewCount}</td>
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-1">
-                      <button type="button" onClick={() => { setEditing(post); setShowModal(true); }} className="p-1 text-warm-gray-500 hover:text-terracotta-600"><Pencil className="w-3.5 h-3.5" /></button>
-                      <button type="button" onClick={() => deleteMutation.mutate(post.id)} className="p-1 text-warm-gray-500 hover:text-red-600"><Trash2 className="w-3.5 h-3.5" /></button>
+                      <button type="button" onClick={() => { setEditing(post); setShowModal(true); }} className="p-1 text-muted-500 hover:text-rose-600"><Pencil className="w-3.5 h-3.5" /></button>
+                      <button type="button" onClick={() => deleteMutation.mutate(post.id)} className="p-1 text-muted-500 hover:text-red-600"><Trash2 className="w-3.5 h-3.5" /></button>
                     </div>
                   </td>
                 </tr>
@@ -124,15 +124,15 @@ export default function AdminBlogPage() {
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium text-charcoal-700 mb-1">Title *</label>
-                  <input {...register("title", { required: true })} className="w-full px-3 py-2 border border-cream-200 rounded-lg text-sm" />
+                  <input {...register("title", { required: true })} className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-charcoal-700 mb-1">Slug</label>
-                  <input {...register("slug")} className="w-full px-3 py-2 border border-cream-200 rounded-lg text-sm" />
+                  <input {...register("slug")} className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-charcoal-700 mb-1">Excerpt</label>
-                  <textarea {...register("excerpt")} rows={2} className="w-full px-3 py-2 border border-cream-200 rounded-lg text-sm" />
+                  <textarea {...register("excerpt")} rows={2} className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-charcoal-700 mb-1">Content</label>
@@ -144,7 +144,7 @@ export default function AdminBlogPage() {
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-charcoal-700 mb-1">Category</label>
-                  <input {...register("category")} className="w-full px-3 py-2 border border-cream-200 rounded-lg text-sm" />
+                  <input {...register("category")} className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-charcoal-700 mb-1">Tags</label>
@@ -155,8 +155,8 @@ export default function AdminBlogPage() {
                   <span className="text-sm">Published</span>
                 </label>
                 <div className="flex gap-3 pt-3">
-                  <button type="button" onClick={() => setShowModal(false)} className="flex-1 px-4 py-2.5 border border-cream-200 rounded-lg text-sm">Cancel</button>
-                  <button type="submit" disabled={isSubmitting} className="flex-1 px-4 py-2.5 bg-terracotta-600 text-white rounded-lg text-sm font-medium hover:bg-terracotta-700 disabled:opacity-50">
+                  <button type="button" onClick={() => setShowModal(false)} className="flex-1 px-4 py-2.5 border border-blush-200 rounded-lg text-sm">Cancel</button>
+                  <button type="submit" disabled={isSubmitting} className="flex-1 px-4 py-2.5 bg-rose-600 text-white rounded-lg text-sm font-medium hover:bg-rose-700 disabled:opacity-50">
                     {isSubmitting ? "Saving..." : "Save"}
                   </button>
                 </div>

@@ -95,22 +95,22 @@ export function DataTable<T extends Record<string, unknown>>({
   const renderSortIcon = (columnAccessor: keyof T | string) => {
     if (typeof columnAccessor !== "string") return null;
     if (sortColumn !== columnAccessor)
-      return <ChevronsUpDown className="w-3.5 h-3.5 text-warm-gray-400" />;
+      return <ChevronsUpDown className="w-3.5 h-3.5 text-muted-400" />;
     if (sortDirection === "asc")
-      return <ChevronUp className="w-3.5 h-3.5 text-terracotta-600" />;
-    return <ChevronDown className="w-3.5 h-3.5 text-terracotta-600" />;
+      return <ChevronUp className="w-3.5 h-3.5 text-rose-600" />;
+    return <ChevronDown className="w-3.5 h-3.5 text-rose-600" />;
   };
 
   if (isLoading) {
     return (
-      <div className={cn("bg-white rounded-lg border border-cream-200 overflow-hidden", className)}>
+      <div className={cn("bg-white rounded-lg border border-blush-200 overflow-hidden", className)}>
         <div className="divide-y divide-cream-200">
           {Array.from({ length: 5 }).map((_, i) => (
             <div key={i} className="flex items-center gap-4 p-4">
-              <div className="h-4 w-4 rounded bg-warm-gray-200 animate-pulse" />
-              <div className="h-4 flex-1 rounded bg-warm-gray-200 animate-pulse" />
-              <div className="h-4 w-20 rounded bg-warm-gray-200 animate-pulse" />
-              <div className="h-6 w-20 rounded-full bg-warm-gray-200 animate-pulse" />
+              <div className="h-4 w-4 rounded bg-muted-200 animate-pulse" />
+              <div className="h-4 flex-1 rounded bg-muted-200 animate-pulse" />
+              <div className="h-4 w-20 rounded bg-muted-200 animate-pulse" />
+              <div className="h-6 w-20 rounded-full bg-muted-200 animate-pulse" />
             </div>
           ))}
         </div>
@@ -121,21 +121,21 @@ export function DataTable<T extends Record<string, unknown>>({
   return (
     <div
       className={cn(
-        "bg-white rounded-lg border border-cream-200 overflow-hidden",
+        "bg-white rounded-lg border border-blush-200 overflow-hidden",
         className,
       )}
     >
       <div className="overflow-x-auto">
         <table className="w-full">
           <thead>
-            <tr className="border-b border-cream-200 bg-cream-50">
+            <tr className="border-b border-blush-200 bg-cream-50">
               {showSelection && (
                 <th className="w-10 px-4 py-3">
                   <input
                     type="checkbox"
                     checked={data.length > 0 && selectedRows.size === data.length}
                     onChange={handleSelectAll}
-                    className="w-4 h-4 rounded border-cream-300 text-terracotta-600 focus:ring-terracotta-500"
+                    className="w-4 h-4 rounded border-blush-300 text-rose-600 focus:ring-rose-500"
                     aria-label="Select all rows"
                   />
                 </th>
@@ -146,7 +146,7 @@ export function DataTable<T extends Record<string, unknown>>({
                   <th
                     key={i}
                     className={cn(
-                      "px-4 py-3 text-left text-xs font-semibold text-warm-gray-600 uppercase tracking-wider",
+                      "px-4 py-3 text-left text-xs font-semibold text-muted-600 uppercase tracking-wider",
                       col.headerClassName,
                     )}
                   >
@@ -167,12 +167,12 @@ export function DataTable<T extends Record<string, unknown>>({
               })}
             </tr>
           </thead>
-          <tbody className="divide-y divide-cream-100">
+          <tbody className="divide-y divide-cream-50">
             {sortedData.length === 0 ? (
               <tr>
                 <td
                   colSpan={columns.length + (showSelection ? 1 : 0)}
-                  className="px-4 py-12 text-center text-sm text-warm-gray-500"
+                  className="px-4 py-12 text-center text-sm text-muted-500"
                 >
                   {emptyMessage}
                 </td>
@@ -187,8 +187,8 @@ export function DataTable<T extends Record<string, unknown>>({
                     className={cn(
                       "transition-colors",
                       rowIndex % 2 === 0 ? "bg-white" : "bg-cream-50/50",
-                      onRowClick && "cursor-pointer hover:bg-terracotta-50",
-                      selectedRows.has(rowId) && "bg-terracotta-50",
+                      onRowClick && "cursor-pointer hover:bg-rose-50",
+                      selectedRows.has(rowId) && "bg-rose-50",
                     )}
                   >
                     {showSelection && (
@@ -197,7 +197,7 @@ export function DataTable<T extends Record<string, unknown>>({
                           type="checkbox"
                           checked={selectedRows.has(rowId)}
                           onChange={() => handleSelectRow(rowId)}
-                          className="w-4 h-4 rounded border-cream-300 text-terracotta-600 focus:ring-terracotta-500"
+                          className="w-4 h-4 rounded border-blush-300 text-rose-600 focus:ring-rose-500"
                           aria-label={`Select row ${rowId}`}
                         />
                       </td>

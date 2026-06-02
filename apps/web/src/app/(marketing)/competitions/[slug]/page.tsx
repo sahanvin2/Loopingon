@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: CompetitionDetailPageProps): 
 }
 
 const statusStyles: Record<string, string> = {
-  ACTIVE: "bg-teal-100 text-teal-800",
+  ACTIVE: "bg-muted-100 text-muted-800",
   UPCOMING: "bg-blue-100 text-blue-800",
   JUDGING: "bg-purple-100 text-purple-800",
   COMPLETED: "bg-charcoal-100 text-charcoal-600",
@@ -59,7 +59,7 @@ export default async function CompetitionDetailPage({ params }: CompetitionDetai
         {competition.bannerImage ? (
           <Image src={getImageUrl(competition.bannerImage)} alt={competition.title} fill className="object-cover" priority sizes="100vw" />
         ) : (
-          <div className="flex h-full items-center justify-center bg-gradient-to-br from-terracotta-600 to-gold-500" />
+          <div className="flex h-full items-center justify-center bg-gradient-to-br from-rose-600 to-blush-500" />
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-charcoal-900/80 to-charcoal-900/20" />
         <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12">
@@ -81,20 +81,20 @@ export default async function CompetitionDetailPage({ params }: CompetitionDetai
             <div className="lg:col-span-2 space-y-10">
               <section>
                 <h2 className="font-serif text-2xl font-bold text-charcoal-900">Description</h2>
-                <p className="mt-3 leading-relaxed text-warm-gray-700 whitespace-pre-line">{competition.description}</p>
+                <p className="mt-3 leading-relaxed text-muted-700 whitespace-pre-line">{competition.description}</p>
               </section>
 
               <section>
                 <h2 className="font-serif text-2xl font-bold text-charcoal-900">Rules</h2>
-                <div className="mt-3 leading-relaxed text-warm-gray-700 whitespace-pre-line">{competition.rules}</div>
+                <div className="mt-3 leading-relaxed text-muted-700 whitespace-pre-line">{competition.rules}</div>
               </section>
 
               <section>
                 <h2 className="font-serif text-2xl font-bold text-charcoal-900">Prizes</h2>
                 <div className="mt-3">
-                  <p className="leading-relaxed text-warm-gray-700">{competition.prizeDescription}</p>
+                  <p className="leading-relaxed text-muted-700">{competition.prizeDescription}</p>
                   {competition.prizeValue && (
-                    <p className="mt-2 inline-block rounded-lg bg-gold-50 px-4 py-2 text-lg font-bold text-gold-700">Total Prize Value: {competition.prizeValue}</p>
+                    <p className="mt-2 inline-block rounded-lg bg-blush-50 px-4 py-2 text-lg font-bold text-blush-700">Total Prize Value: {competition.prizeValue}</p>
                   )}
                 </div>
               </section>
@@ -106,21 +106,21 @@ export default async function CompetitionDetailPage({ params }: CompetitionDetai
                   </h2>
                   <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                     {entries.map((entry) => (
-                      <div key={entry.id} className="overflow-hidden rounded-xl bg-cream-100 shadow-soft-sm">
-                        <div className="relative aspect-[4/3] bg-warm-gray-200">
+                      <div key={entry.id} className="overflow-hidden rounded-xl bg-cream-50 shadow-soft-sm">
+                        <div className="relative aspect-[4/3] bg-muted-200">
                           {entry.images[0] ? (
                             <Image src={getImageUrl(entry.images[0])} alt={entry.title} fill className="object-cover" sizes="(max-width: 768px) 50vw, 33vw" />
                           ) : (
-                            <div className="flex h-full items-center justify-center text-warm-gray-400">No Image</div>
+                            <div className="flex h-full items-center justify-center text-muted-400">No Image</div>
                           )}
                         </div>
                         <div className="p-4">
                           <h3 className="font-serif text-base font-bold text-charcoal-900">{entry.title}</h3>
-                          {entry.user && <p className="mt-1 text-xs text-warm-gray-500">by {entry.user.fullName}</p>}
+                          {entry.user && <p className="mt-1 text-xs text-muted-500">by {entry.user.fullName}</p>}
                           <div className="mt-3 flex items-center justify-between text-sm">
-                            <span className="font-semibold text-terracotta-600">{entry.voteCount} votes</span>
+                            <span className="font-semibold text-rose-600">{entry.voteCount} votes</span>
                             {isActive && (
-                              <button className="rounded-lg bg-terracotta-600 px-3 py-1 text-xs font-medium text-white transition-colors hover:bg-terracotta-700">
+                              <button className="rounded-lg bg-rose-600 px-3 py-1 text-xs font-medium text-white transition-colors hover:bg-rose-700">
                                 Vote
                               </button>
                             )}
@@ -134,35 +134,35 @@ export default async function CompetitionDetailPage({ params }: CompetitionDetai
             </div>
 
             <aside className="space-y-6">
-              <div className="rounded-2xl bg-cream-100 p-6">
+              <div className="rounded-2xl bg-cream-50 p-6">
                 <h3 className="font-serif text-lg font-bold text-charcoal-900">Competition Details</h3>
                 <div className="mt-4 space-y-3 text-sm">
-                  <div className="flex justify-between"><span className="text-warm-gray-500">Status</span><span className="font-medium text-charcoal-800">{competition.status}</span></div>
-                  <div className="flex justify-between"><span className="text-warm-gray-500">Start Date</span><span className="font-medium text-charcoal-800">{formatDate(competition.startDate)}</span></div>
-                  <div className="flex justify-between"><span className="text-warm-gray-500">End Date</span><span className="font-medium text-charcoal-800">{formatDate(competition.endDate)}</span></div>
-                  <div className="flex justify-between"><span className="text-warm-gray-500">Max Entries</span><span className="font-medium text-charcoal-800">{competition.maxEntries}</span></div>
+                  <div className="flex justify-between"><span className="text-muted-500">Status</span><span className="font-medium text-charcoal-800">{competition.status}</span></div>
+                  <div className="flex justify-between"><span className="text-muted-500">Start Date</span><span className="font-medium text-charcoal-800">{formatDate(competition.startDate)}</span></div>
+                  <div className="flex justify-between"><span className="text-muted-500">End Date</span><span className="font-medium text-charcoal-800">{formatDate(competition.endDate)}</span></div>
+                  <div className="flex justify-between"><span className="text-muted-500">Max Entries</span><span className="font-medium text-charcoal-800">{competition.maxEntries}</span></div>
                   <div className="flex justify-between">
-                    <span className="text-warm-gray-500">Entry Fee</span>
+                    <span className="text-muted-500">Entry Fee</span>
                     <span className="font-medium text-charcoal-800">{competition.isFreeEntry ? "Free" : `${competition.entryFee} LKR`}</span>
                   </div>
                 </div>
               </div>
 
               {isActive && (
-                <div className="rounded-2xl bg-terracotta-50 p-6">
-                  <h3 className="font-serif text-lg font-bold text-terracotta-800">Enter Competition</h3>
-                  <p className="mt-2 text-sm text-terracotta-600">Submit your best handmade product for a chance to win.</p>
-                  <Link href={`/competitions/${competition.slug}/enter`} className="mt-4 inline-block w-full rounded-lg bg-terracotta-600 px-4 py-2.5 text-center text-sm font-semibold text-white transition-colors hover:bg-terracotta-700">
+                <div className="rounded-2xl bg-rose-50 p-6">
+                  <h3 className="font-serif text-lg font-bold text-rose-800">Enter Competition</h3>
+                  <p className="mt-2 text-sm text-rose-600">Submit your best handmade product for a chance to win.</p>
+                  <Link href={`/competitions/${competition.slug}/enter`} className="mt-4 inline-block w-full rounded-lg bg-rose-600 px-4 py-2.5 text-center text-sm font-semibold text-white transition-colors hover:bg-rose-700">
                     Enter Competition
                   </Link>
                 </div>
               )}
 
               {competition.status === "COMPLETED" && (
-                <div className="rounded-2xl bg-gold-50 p-6">
-                  <h3 className="font-serif text-lg font-bold text-gold-800">Winners Announced</h3>
-                  <p className="mt-2 text-sm text-gold-600">This competition has ended. View the winning entries.</p>
-                  <Link href={`/competitions/${competition.slug}/winners`} className="mt-4 inline-block w-full rounded-lg bg-gold-500 px-4 py-2.5 text-center text-sm font-semibold text-white transition-colors hover:bg-gold-600">
+                <div className="rounded-2xl bg-blush-50 p-6">
+                  <h3 className="font-serif text-lg font-bold text-blush-800">Winners Announced</h3>
+                  <p className="mt-2 text-sm text-blush-600">This competition has ended. View the winning entries.</p>
+                  <Link href={`/competitions/${competition.slug}/winners`} className="mt-4 inline-block w-full rounded-lg bg-blush-500 px-4 py-2.5 text-center text-sm font-semibold text-white transition-colors hover:bg-blush-600">
                     View Winners
                   </Link>
                 </div>

@@ -63,19 +63,19 @@ export default function AdminProductsPage() {
 
       <div className="flex flex-col sm:flex-row gap-4">
         <div className="relative flex-1 max-w-xs">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-warm-gray-400" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-400" />
           <input
             type="text"
             placeholder="Search products..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 border border-cream-200 rounded-lg text-sm focus:ring-2 focus:ring-terracotta-500"
+            className="w-full pl-10 pr-4 py-2 border border-blush-200 rounded-lg text-sm focus:ring-2 focus:ring-rose-500"
           />
         </div>
         <select
           value={status}
           onChange={(e) => { setStatus(e.target.value); setPage(1); }}
-          className="px-3 py-2 border border-cream-200 rounded-lg text-sm"
+          className="px-3 py-2 border border-blush-200 rounded-lg text-sm"
         >
           {statusFilters.map((f) => (
             <option key={f.key} value={f.key}>{f.label}</option>
@@ -84,12 +84,12 @@ export default function AdminProductsPage() {
       </div>
 
       {selectedRows.size > 0 && (
-        <div className="flex items-center gap-2 p-3 bg-teal-50 border border-teal-200 rounded-lg">
-          <span className="text-sm font-medium text-teal-700">{selectedRows.size} selected</span>
+        <div className="flex items-center gap-2 p-3 bg-muted-50 border border-muted-200 rounded-lg">
+          <span className="text-sm font-medium text-muted-700">{selectedRows.size} selected</span>
           <button
             type="button"
             onClick={() => bulkApproveMutation.mutate(Array.from(selectedRows))}
-            className="px-3 py-1 text-xs font-medium bg-teal-600 text-white rounded-md"
+            className="px-3 py-1 text-xs font-medium bg-muted-600 text-white rounded-md"
           >
             Bulk Approve
           </button>
@@ -113,7 +113,7 @@ export default function AdminProductsPage() {
                   {row.images?.[0]?.url ? (
                     <img src={row.images[0].url} alt={row.title} className="w-full h-full object-cover" />
                   ) : (
-                    <div className="w-full h-full bg-cream-100" />
+                    <div className="w-full h-full bg-cream-50" />
                   )}
                 </div>
               ),
@@ -124,7 +124,7 @@ export default function AdminProductsPage() {
               accessor: (row: Product) => (
                 <div>
                   <p className="text-sm font-medium text-charcoal-900">{row.title}</p>
-                  <p className="text-xs text-warm-gray-500">{row.vendor?.storeName}</p>
+                  <p className="text-xs text-muted-500">{row.vendor?.storeName}</p>
                 </div>
               ),
             },
@@ -136,7 +136,7 @@ export default function AdminProductsPage() {
               header: "Status",
               accessor: (row: Product) => (
                 <Badge
-                  variant={row.status === "PUBLISHED" ? "teal" : row.status === "PENDING_REVIEW" ? "amber" : "red"}
+                  variant={row.status === "PUBLISHED" ? "muted" : row.status === "PENDING_REVIEW" ? "amber" : "red"}
                   size="sm"
                 >
                   {PRODUCT_STATUS_MAP[row.status]?.label || row.status}
@@ -151,7 +151,7 @@ export default function AdminProductsPage() {
               header: "Actions",
               accessor: (row: Product) => (
                 <div className="flex items-center gap-1">
-                  <button className="px-2 py-1 text-xs font-medium text-teal-600 hover:bg-teal-50 rounded">
+                  <button className="px-2 py-1 text-xs font-medium text-muted-600 hover:bg-muted-50 rounded">
                     Approve
                   </button>
                   <button className="px-2 py-1 text-xs font-medium text-red-600 hover:bg-red-50 rounded">

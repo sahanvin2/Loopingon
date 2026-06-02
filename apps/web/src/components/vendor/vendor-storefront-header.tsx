@@ -53,7 +53,7 @@ export function VendorStorefrontHeader({ vendor }: VendorStorefrontHeaderProps) 
 
       <div className="max-w-6xl mx-auto px-4 -mt-16 relative z-10">
         <div className="flex flex-col sm:flex-row items-center sm:items-end gap-4 sm:gap-6">
-          <div className="w-28 h-28 rounded-full border-4 border-cream-100 bg-white overflow-hidden shadow-md">
+          <div className="w-28 h-28 rounded-full border-4 border-blush-100 bg-white overflow-hidden shadow-md">
             {vendor.storeLogo ? (
               <Image
                 src={getImageUrl(vendor.storeLogo)}
@@ -63,7 +63,7 @@ export function VendorStorefrontHeader({ vendor }: VendorStorefrontHeaderProps) 
                 className="w-full h-full object-cover"
               />
             ) : (
-              <div className="w-full h-full flex items-center justify-center text-3xl font-serif text-terracotta-600 bg-cream-50">
+              <div className="w-full h-full flex items-center justify-center text-3xl font-serif text-rose-600 bg-cream-50">
                 {vendor.storeName.charAt(0)}
               </div>
             )}
@@ -79,13 +79,13 @@ export function VendorStorefrontHeader({ vendor }: VendorStorefrontHeaderProps) 
 
             <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 mb-2">
               {vendor.craftType.slice(0, 4).map((craft) => (
-                <Badge key={craft} variant="gold" size="sm">
+                <Badge key={craft} variant="blush" size="sm">
                   {craft}
                 </Badge>
               ))}
             </div>
 
-            <p className="text-sm text-warm-gray-500">
+            <p className="text-sm text-muted-500">
               {vendor.workshopCity}
               {vendor.workshopDistrict && `, ${vendor.workshopDistrict}`}
               &nbsp;&middot;&nbsp;Crafting since {new Date(vendor.storeSince).getFullYear()}
@@ -97,7 +97,7 @@ export function VendorStorefrontHeader({ vendor }: VendorStorefrontHeaderProps) 
               type="button"
               className={cn(
                 "px-4 py-2 rounded-lg text-sm font-medium transition-colors",
-                "bg-terracotta-600 text-white hover:bg-terracotta-700",
+                "bg-rose-600 text-white hover:bg-rose-700",
               )}
             >
               Follow
@@ -106,7 +106,7 @@ export function VendorStorefrontHeader({ vendor }: VendorStorefrontHeaderProps) 
               type="button"
               className={cn(
                 "px-4 py-2 rounded-lg text-sm font-medium transition-colors",
-                "border border-cream-300 text-charcoal-700 hover:bg-warm-gray-50",
+                "border border-blush-300 text-charcoal-700 hover:bg-blush-50",
               )}
             >
               Contact
@@ -114,34 +114,34 @@ export function VendorStorefrontHeader({ vendor }: VendorStorefrontHeaderProps) 
           </div>
         </div>
 
-        <div className="mt-6 bg-white rounded-lg border border-cream-200 p-4">
+        <div className="mt-6 bg-white rounded-lg border border-blush-200 p-4">
           <div className="grid grid-cols-2 sm:grid-cols-5 gap-4">
             <div className="flex items-center gap-2">
-              <Star className="w-5 h-5 text-gold-500" />
+              <Star className="w-5 h-5 text-blush-500" />
               <div>
                 <p className="text-lg font-bold text-charcoal-900">4.9</p>
-                <p className="text-xs text-warm-gray-500">Rating</p>
+                <p className="text-xs text-muted-500">Rating</p>
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <Package className="w-5 h-5 text-terracotta-600" />
+              <Package className="w-5 h-5 text-rose-600" />
               <div>
                 <p className="text-lg font-bold text-charcoal-900">{vendor.totalProducts}</p>
-                <p className="text-xs text-warm-gray-500">Products</p>
+                <p className="text-xs text-muted-500">Products</p>
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <BarChart3 className="w-5 h-5 text-teal-600" />
+              <BarChart3 className="w-5 h-5 text-muted-600" />
               <div>
                 <p className="text-lg font-bold text-charcoal-900">{vendor.totalOrders}</p>
-                <p className="text-xs text-warm-gray-500">Sales</p>
+                <p className="text-xs text-muted-500">Sales</p>
               </div>
             </div>
             <div className="flex items-center gap-2">
               <MessageSquare className="w-5 h-5 text-blue-600" />
               <div>
                 <p className="text-lg font-bold text-charcoal-900">{vendor.responseRate}%</p>
-                <p className="text-xs text-warm-gray-500">Response</p>
+                <p className="text-xs text-muted-500">Response</p>
               </div>
             </div>
             <div className="flex items-center gap-2">
@@ -150,13 +150,13 @@ export function VendorStorefrontHeader({ vendor }: VendorStorefrontHeaderProps) 
                 <p className="text-lg font-bold text-charcoal-900">
                   {vendor.onTimeDeliveryRate}%
                 </p>
-                <p className="text-xs text-warm-gray-500">Delivery</p>
+                <p className="text-xs text-muted-500">Delivery</p>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="flex overflow-x-auto mt-6 border-b border-cream-200 scrollbar-hide">
+        <div className="flex overflow-x-auto mt-6 border-b border-blush-200 scrollbar-hide">
           {tabs.map((tab) => (
             <button
               key={tab}
@@ -165,8 +165,8 @@ export function VendorStorefrontHeader({ vendor }: VendorStorefrontHeaderProps) 
               className={cn(
                 "px-6 py-3 text-sm font-medium transition-colors border-b-2 shrink-0",
                 activeTab === tab
-                  ? "border-terracotta-500 text-terracotta-600"
-                  : "border-transparent text-warm-gray-600 hover:text-charcoal-700",
+                  ? "border-rose-500 text-rose-600"
+                  : "border-transparent text-muted-600 hover:text-charcoal-700",
               )}
             >
               {tab}

@@ -19,14 +19,14 @@ export function VendorStory({ story, image, videoUrl, className }: VendorStoryPr
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
         <div className="lg:col-span-3">
           <div
-            className="prose prose-sm max-w-none text-warm-gray-600 leading-relaxed"
+            className="prose prose-sm max-w-none text-muted-600 leading-relaxed"
             dangerouslySetInnerHTML={{ __html: story }}
           />
         </div>
 
         <div className="lg:col-span-2 space-y-4">
           {image && (
-            <div className="relative aspect-[4/3] rounded-lg overflow-hidden bg-warm-gray-100">
+            <div className="relative aspect-[4/3] rounded-lg overflow-hidden bg-muted-100">
               <Image
                 src={image}
                 alt="Artisan workshop"

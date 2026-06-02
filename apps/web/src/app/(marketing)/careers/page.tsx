@@ -43,33 +43,33 @@ export default function CareersPage() {
           <h2 className="text-center font-serif text-3xl font-bold text-charcoal-900">What We Stand For</h2>
           <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {values.map((v) => (
-              <div key={v.title} className="rounded-xl bg-cream-100 p-6 text-center">
-                <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-terracotta-50">
-                  <v.icon className="h-7 w-7 text-terracotta-600" />
+              <div key={v.title} className="rounded-xl bg-cream-50 p-6 text-center">
+                <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-rose-50">
+                  <v.icon className="h-7 w-7 text-rose-600" />
                 </div>
                 <h3 className="font-serif text-lg font-semibold text-charcoal-800">{v.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-warm-gray-600">{v.description}</p>
+                <p className="mt-2 text-sm leading-relaxed text-muted-600">{v.description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-cream-100 py-20">
+      <section className="bg-cream-50 py-20">
         <div className="mx-auto max-w-4xl px-4">
           <h2 className="text-center font-serif text-3xl font-bold text-charcoal-900">Open Positions</h2>
-          <p className="mt-2 text-center text-warm-gray-600">Based in Colombo, Sri Lanka</p>
+          <p className="mt-2 text-center text-muted-600">Based in Colombo, Sri Lanka</p>
           <div className="mt-10 space-y-6">
             {positions.map((pos) => (
               <div key={pos.title} className="rounded-xl bg-white p-6 shadow-soft-sm transition-shadow hover:shadow-soft">
                 <div className="flex flex-wrap items-start justify-between gap-4">
                   <div>
                     <h3 className="font-serif text-xl font-bold text-charcoal-900">{pos.title}</h3>
-                    <p className="mt-1 text-sm text-terracotta-600">{pos.department}</p>
-                    <p className="mt-3 text-sm leading-relaxed text-warm-gray-600">{pos.description}</p>
+                    <p className="mt-1 text-sm text-rose-600">{pos.department}</p>
+                    <p className="mt-3 text-sm leading-relaxed text-muted-600">{pos.description}</p>
                   </div>
                 </div>
-                <div className="mt-4 flex flex-wrap items-center gap-4 text-sm text-warm-gray-500">
+                <div className="mt-4 flex flex-wrap items-center gap-4 text-sm text-muted-500">
                   <span className="inline-flex items-center gap-1"><MapPin className="h-4 w-4" /> {pos.location}</span>
                   <span className="inline-flex items-center gap-1"><Briefcase className="h-4 w-4" /> {pos.type}</span>
                 </div>
@@ -77,13 +77,13 @@ export default function CareersPage() {
             ))}
           </div>
 
-          <div className="mt-16 rounded-2xl bg-terracotta-50 p-8 text-center">
-            <Mail className="mx-auto h-8 w-8 text-terracotta-600" />
+          <div className="mt-16 rounded-2xl bg-rose-50 p-8 text-center">
+            <Mail className="mx-auto h-8 w-8 text-rose-600" />
             <h3 className="mt-4 font-serif text-xl font-bold text-charcoal-900">Don&apos;t see the right role?</h3>
-            <p className="mt-2 text-warm-gray-600">
+            <p className="mt-2 text-muted-600">
               We&apos;re always looking for talented people. Send your CV and tell us how you can contribute.
             </p>
-            <a href="mailto:careers@loopingon.com" className="mt-4 inline-block rounded-lg bg-terracotta-600 px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-terracotta-700">
+            <a href="mailto:careers@loopingon.com" className="mt-4 inline-block rounded-lg bg-rose-600 px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-rose-700">
               careers@loopingon.com
             </a>
           </div>

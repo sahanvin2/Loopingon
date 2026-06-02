@@ -6,34 +6,42 @@ export const signInSchema = z.object({
   rememberMe: z.boolean().optional(),
 });
 
-export const signUpSchema = z
-  .object({
-    fullName: z.string().min(2, "Full name must be at least 2 characters"),
-    email: z.string().email("Please enter a valid email address"),
-    password: z
+const signUpBaseSchema = z.object({
+  fullName: z.string().min(2, "Full name must be at least 2 characters"),
+  email: z.string().email("Please enter a valid email address"),
+  password: z
+    .string()
+    .min(8, "Password must be at least 8 characters")
+    .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
+    .regex(/[a-z]/, "Password must contain at least one lowercase letter")
+    .regex(/[0-9]/, "Password must contain at least one number"),
+  confirmPassword: z.string(),
+  acceptTerms: z.literal(true, {
+    errorMap: () => ({ message: "You must accept the terms and conditions" }),
+  }),
+});
+
+export const signUpSchema = signUpBaseSchema.refine(
+  (data) => data.password === data.confirmPassword,
+  {
+    message: "Passwords do not match",
+    path: ["confirmPassword"],
+  },
+);
+
+export const customerSignUpSchema = signUpBaseSchema
+  .extend({
+    phone: z
       .string()
-      .min(8, "Password must be at least 8 characters")
-      .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
-      .regex(/[a-z]/, "Password must contain at least one lowercase letter")
-      .regex(/[0-9]/, "Password must contain at least one number"),
-    confirmPassword: z.string(),
-    acceptTerms: z.literal(true, {
-      errorMap: () => ({ message: "You must accept the terms and conditions" }),
-    }),
+      .regex(/^\+94\d{9}$/, "Please enter a valid Sri Lankan phone number (+94XXXXXXXXX)")
+      .optional(),
+    preferredLanguage: z.enum(["en", "si", "ta"]).optional(),
+    newsletterOptIn: z.boolean().optional(),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords do not match",
     path: ["confirmPassword"],
   });
-
-export const customerSignUpSchema = signUpSchema.extend({
-  phone: z
-    .string()
-    .regex(/^\+94\d{9}$/, "Please enter a valid Sri Lankan phone number (+94XXXXXXXXX)")
-    .optional(),
-  preferredLanguage: z.enum(["en", "si", "ta"]).optional(),
-  newsletterOptIn: z.boolean().optional(),
-});
 
 export const vendorApplicationSchema = z.object({
   storeName: z

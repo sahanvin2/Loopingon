@@ -65,13 +65,13 @@ export default function AdminVendorsPage() {
 
       <div className="flex flex-col sm:flex-row gap-4">
         <div className="relative flex-1 max-w-xs">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-warm-gray-400" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-400" />
           <input
             type="text"
             placeholder="Search vendors..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 border border-cream-200 rounded-lg text-sm focus:ring-2 focus:ring-terracotta-500"
+            className="w-full pl-10 pr-4 py-2 border border-blush-200 rounded-lg text-sm focus:ring-2 focus:ring-rose-500"
           />
         </div>
         <select
@@ -80,7 +80,7 @@ export default function AdminVendorsPage() {
             setStatus(e.target.value);
             setPage(1);
           }}
-          className="px-3 py-2 border border-cream-200 rounded-lg text-sm focus:ring-2 focus:ring-terracotta-500"
+          className="px-3 py-2 border border-blush-200 rounded-lg text-sm focus:ring-2 focus:ring-rose-500"
         >
           {statusFilters.map((f) => (
             <option key={f.key} value={f.key}>
@@ -91,13 +91,13 @@ export default function AdminVendorsPage() {
       </div>
 
       {selectedRows.size > 0 && (
-        <div className="flex items-center gap-2 p-3 bg-teal-50 border border-teal-200 rounded-lg">
-          <span className="text-sm font-medium text-teal-700">
+        <div className="flex items-center gap-2 p-3 bg-muted-50 border border-muted-200 rounded-lg">
+          <span className="text-sm font-medium text-muted-700">
             {selectedRows.size} selected
           </span>
           <button
             type="button"
-            className="px-3 py-1 text-xs font-medium bg-teal-600 text-white rounded-md"
+            className="px-3 py-1 text-xs font-medium bg-muted-600 text-white rounded-md"
           >
             Verify Selected
           </button>
@@ -115,11 +115,11 @@ export default function AdminVendorsPage() {
               header: "Store",
               accessor: (row: Vendor) => (
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-warm-gray-200 overflow-hidden">
+                  <div className="w-10 h-10 rounded-full bg-muted-200 overflow-hidden">
                     {row.storeLogo ? (
                       <img src={row.storeLogo} alt={row.storeName} className="w-full h-full object-cover" />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center text-warm-gray-500 text-xs font-bold">
+                      <div className="w-full h-full flex items-center justify-center text-muted-500 text-xs font-bold">
                         {row.storeName?.charAt(0)?.toUpperCase()}
                       </div>
                     )}
@@ -128,7 +128,7 @@ export default function AdminVendorsPage() {
                     <p className="text-sm font-medium text-charcoal-900">
                       {row.storeName}
                     </p>
-                    <p className="text-xs text-warm-gray-500">
+                    <p className="text-xs text-muted-500">
                       {row.user?.fullName} | {row.user?.email}
                     </p>
                   </div>
@@ -153,7 +153,7 @@ export default function AdminVendorsPage() {
                 <Badge
                   variant={
                     row.status === "VERIFIED"
-                      ? "teal"
+                      ? "muted"
                       : row.status === "PENDING"
                         ? "amber"
                         : "red"
@@ -172,7 +172,7 @@ export default function AdminVendorsPage() {
               header: "Rating",
               accessor: (row: Vendor) => (
                 <div className="flex items-center gap-1">
-                  <span className="text-sm text-gold-600">
+                  <span className="text-sm text-blush-600">
                     {(row.rating || 0).toFixed(1)}
                   </span>
                 </div>
@@ -188,7 +188,7 @@ export default function AdminVendorsPage() {
                 <div className="flex items-center gap-1">
                   <Link
                     href={`/admin/vendors/${row.id}`}
-                    className="px-2 py-1 text-xs font-medium text-terracotta-600 hover:bg-terracotta-50 rounded"
+                    className="px-2 py-1 text-xs font-medium text-rose-600 hover:bg-rose-50 rounded"
                   >
                     View
                   </Link>
@@ -196,7 +196,7 @@ export default function AdminVendorsPage() {
                     <button
                       type="button"
                       onClick={() => verifyMutation.mutate(row.id)}
-                      className="px-2 py-1 text-xs font-medium text-teal-600 hover:bg-teal-50 rounded"
+                      className="px-2 py-1 text-xs font-medium text-muted-600 hover:bg-muted-50 rounded"
                     >
                       Verify
                     </button>

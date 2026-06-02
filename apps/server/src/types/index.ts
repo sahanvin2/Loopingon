@@ -22,9 +22,10 @@ declare global {
       };
       currentToken?: {
         sub: string;
-        email: string;
+        email?: string;
         role: string;
         type?: string;
+        sessionId?: string;
       };
     }
   }

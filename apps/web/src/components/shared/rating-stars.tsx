@@ -43,23 +43,23 @@ export function RatingStars({
           key={`full-${i}`}
           className={cn(
             sizes.icon,
-            "fill-gold-500 text-gold-500",
+            "fill-blush-500 text-blush-500",
           )}
           aria-hidden="true"
         />
       ))}
       {hasHalf && (
         <div className="relative" aria-hidden="true">
-          <Star className={cn(sizes.icon, "text-warm-gray-300")} />
+          <Star className={cn(sizes.icon, "text-muted-300")} />
           <div className="absolute inset-0 overflow-hidden w-1/2">
-            <Star className={cn(sizes.icon, "fill-gold-500 text-gold-500")} />
+            <Star className={cn(sizes.icon, "fill-blush-500 text-blush-500")} />
           </div>
         </div>
       )}
       {Array.from({ length: emptyStars }).map((_, i) => (
         <Star
           key={`empty-${i}`}
-          className={cn(sizes.icon, "text-warm-gray-300")}
+          className={cn(sizes.icon, "text-muted-300")}
           aria-hidden="true"
         />
       ))}
@@ -69,7 +69,7 @@ export function RatingStars({
         </span>
       )}
       {reviewCount !== undefined && (
-        <span className={cn(sizes.text, "text-warm-gray-500 ml-1")}>
+        <span className={cn(sizes.text, "text-muted-500 ml-1")}>
           ({reviewCount.toLocaleString()})
         </span>
       )}

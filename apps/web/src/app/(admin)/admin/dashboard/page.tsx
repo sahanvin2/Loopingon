@@ -68,13 +68,13 @@ export default function AdminDashboardPage() {
         <h1 className="text-2xl font-bold text-charcoal-900">
           Admin Dashboard
         </h1>
-        <p className="text-warm-gray-600 mt-1">Platform overview and KPIs</p>
+        <p className="text-muted-600 mt-1">Platform overview and KPIs</p>
       </motion.div>
 
       {isLoading ? (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {Array.from({ length: 8 }).map((_, i) => (
-            <div key={i} className="h-28 rounded-lg bg-warm-gray-200 animate-pulse" />
+            <div key={i} className="h-28 rounded-lg bg-muted-200 animate-pulse" />
           ))}
         </div>
       ) : (
@@ -83,12 +83,12 @@ export default function AdminDashboardPage() {
           className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4"
         >
           <StatCard title="Total Users" value={stats?.totalUsers?.toLocaleString() ?? "0"} icon={Users} variant="default" />
-          <StatCard title="Total Vendors" value={stats?.totalVendors ?? 0} icon={Store} variant="teal" />
-          <StatCard title="Total Products" value={stats?.totalProducts ?? 0} icon={Package} variant="terracotta" />
-          <StatCard title="Total Orders" value={stats?.totalOrders ?? 0} icon={ShoppingBag} variant="gold" />
-          <StatCard title="Gross Revenue" value={formatPrice(Number(stats?.grossRevenue || 0))} icon={DollarSign} variant="gold" />
-          <StatCard title="Commission" value={formatPrice(Number(stats?.commissionEarned || 0))} icon={Percent} variant="teal" />
-          <StatCard title="Active Disputes" value={stats?.activeDisputes ?? 0} icon={AlertTriangle} variant="terracotta" />
+          <StatCard title="Total Vendors" value={stats?.totalVendors ?? 0} icon={Store} variant="muted" />
+          <StatCard title="Total Products" value={stats?.totalProducts ?? 0} icon={Package} variant="rose" />
+          <StatCard title="Total Orders" value={stats?.totalOrders ?? 0} icon={ShoppingBag} variant="blush" />
+          <StatCard title="Gross Revenue" value={formatPrice(Number(stats?.grossRevenue || 0))} icon={DollarSign} variant="blush" />
+          <StatCard title="Commission" value={formatPrice(Number(stats?.commissionEarned || 0))} icon={Percent} variant="muted" />
+          <StatCard title="Active Disputes" value={stats?.activeDisputes ?? 0} icon={AlertTriangle} variant="rose" />
           <StatCard title="Pending V." value={stats?.pendingVerifications ?? 0} icon={ShieldCheck} variant="amber" />
         </motion.div>
       )}
@@ -104,9 +104,9 @@ export default function AdminDashboardPage() {
         </Link>
         <Link
           href="/admin/products?status=PENDING_REVIEW"
-          className="bg-teal-50 border border-teal-200 rounded-lg p-4 hover:shadow-soft transition-shadow"
+          className="bg-muted-50 border border-muted-200 rounded-lg p-4 hover:shadow-soft transition-shadow"
         >
-          <p className="text-sm font-medium text-teal-800">
+          <p className="text-sm font-medium text-muted-800">
             Products Pending Review
           </p>
         </Link>
@@ -137,7 +137,7 @@ export default function AdminDashboardPage() {
                 <XAxis dataKey="date" tick={{ fontSize: 12 }} />
                 <YAxis tick={{ fontSize: 12 }} />
                 <Tooltip />
-                <Line type="monotone" dataKey="revenue" stroke="#C75B39" strokeWidth={2} dot={false} />
+                <Line type="monotone" dataKey="revenue" stroke="#c86482" strokeWidth={2} dot={false} />
               </LineChart>
             </ResponsiveContainer>
           </div>

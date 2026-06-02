@@ -71,7 +71,7 @@ export default function VendorProductsPage() {
         </h1>
         <Link
           href="/vendor/products/new"
-          className="inline-flex items-center gap-2 px-5 py-2.5 bg-terracotta-600 text-white rounded-lg text-sm font-medium hover:bg-terracotta-700 transition-colors"
+          className="inline-flex items-center gap-2 px-5 py-2.5 bg-rose-600 text-white rounded-lg text-sm font-medium hover:bg-rose-700 transition-colors"
         >
           <Plus className="w-4 h-4" />
           Add Product
@@ -80,13 +80,13 @@ export default function VendorProductsPage() {
 
       <div className="flex flex-col sm:flex-row gap-4">
         <div className="relative flex-1 max-w-xs">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-warm-gray-400" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-400" />
           <input
             type="text"
             placeholder="Search products..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 border border-cream-200 rounded-lg text-sm focus:ring-2 focus:ring-terracotta-500"
+            className="w-full pl-10 pr-4 py-2 border border-blush-200 rounded-lg text-sm focus:ring-2 focus:ring-rose-500"
           />
         </div>
         <select
@@ -95,7 +95,7 @@ export default function VendorProductsPage() {
             setStatusFilter(e.target.value);
             setPage(1);
           }}
-          className="px-3 py-2 border border-cream-200 rounded-lg text-sm focus:ring-2 focus:ring-terracotta-500"
+          className="px-3 py-2 border border-blush-200 rounded-lg text-sm focus:ring-2 focus:ring-rose-500"
         >
           {statusFilters.map((f) => (
             <option key={f.key} value={f.key}>
@@ -106,8 +106,8 @@ export default function VendorProductsPage() {
       </div>
 
       {selectedRows.size > 0 && (
-        <div className="flex items-center gap-2 p-3 bg-terracotta-50 border border-terracotta-200 rounded-lg">
-          <span className="text-sm font-medium text-terracotta-700">
+        <div className="flex items-center gap-2 p-3 bg-rose-50 border border-rose-200 rounded-lg">
+          <span className="text-sm font-medium text-rose-700">
             {selectedRows.size} selected
           </span>
           <button
@@ -118,7 +118,7 @@ export default function VendorProductsPage() {
           </button>
           <button
             type="button"
-            className="px-3 py-1 text-xs font-medium text-charcoal-600 bg-white hover:bg-cream-50 rounded-md border border-cream-200"
+            className="px-3 py-1 text-xs font-medium text-charcoal-600 bg-white hover:bg-cream-50 rounded-md border border-blush-200"
           >
             Bulk Apply Discount
           </button>
@@ -145,7 +145,7 @@ export default function VendorProductsPage() {
             {
               header: "Image",
               accessor: (row: Product) => (
-                <div className="w-12 h-12 rounded-md border border-cream-200 overflow-hidden bg-cream-50">
+                <div className="w-12 h-12 rounded-md border border-blush-200 overflow-hidden bg-cream-50">
                   {row.images?.[0]?.url ? (
                     <img
                       src={row.images[0].url}
@@ -153,7 +153,7 @@ export default function VendorProductsPage() {
                       className="w-full h-full object-cover"
                     />
                   ) : (
-                    <div className="w-full h-full bg-cream-100" />
+                    <div className="w-full h-full bg-cream-50" />
                   )}
                 </div>
               ),
@@ -167,7 +167,7 @@ export default function VendorProductsPage() {
                     {row.title}
                   </p>
                   {row.sku && (
-                    <p className="text-xs text-warm-gray-500">{row.sku}</p>
+                    <p className="text-xs text-muted-500">{row.sku}</p>
                   )}
                 </div>
               ),
@@ -188,7 +188,7 @@ export default function VendorProductsPage() {
                       ? "text-red-600"
                       : row.quantity < 5
                         ? "text-amber-600"
-                        : "text-teal-600",
+                        : "text-muted-600",
                   )}
                 >
                   {row.quantity}
@@ -202,7 +202,7 @@ export default function VendorProductsPage() {
                 <Badge
                   variant={
                     row.status === "PUBLISHED"
-                      ? "teal"
+                      ? "muted"
                       : row.status === "DRAFT"
                         ? "gray"
                         : "amber"
@@ -221,7 +221,7 @@ export default function VendorProductsPage() {
             {
               header: "Rating",
               accessor: (row: Product) => (
-                <span className="text-sm text-gold-600">
+                <span className="text-sm text-blush-600">
                   {(row.averageRating || 0).toFixed(1)}
                 </span>
               ),
@@ -232,7 +232,7 @@ export default function VendorProductsPage() {
                 <div className="flex items-center gap-1">
                   <Link
                     href={`/vendor/products/${row.id}/edit`}
-                    className="px-3 py-1 text-xs font-medium text-terracotta-600 hover:bg-terracotta-50 rounded-md"
+                    className="px-3 py-1 text-xs font-medium text-rose-600 hover:bg-rose-50 rounded-md"
                   >
                     Edit
                   </Link>
@@ -270,14 +270,14 @@ export default function VendorProductsPage() {
             <h3 className="text-lg font-semibold text-charcoal-900 mb-2">
               Delete Product?
             </h3>
-            <p className="text-sm text-warm-gray-600 mb-6">
+            <p className="text-sm text-muted-600 mb-6">
               This action cannot be undone.
             </p>
             <div className="flex gap-3">
               <button
                 type="button"
                 onClick={() => setDeleteConfirm(null)}
-                className="flex-1 px-4 py-2.5 border border-cream-200 rounded-lg text-sm font-medium text-charcoal-700"
+                className="flex-1 px-4 py-2.5 border border-blush-200 rounded-lg text-sm font-medium text-charcoal-700"
               >
                 Cancel
               </button>

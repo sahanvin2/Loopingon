@@ -31,28 +31,28 @@ export default function VerifyEmailPage() {
   }, [token, router]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-cream-100 px-4 py-12">
+    <div className="flex min-h-screen items-center justify-center bg-cream-50 px-4 py-12">
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="w-full max-w-md">
         <div className="rounded-2xl bg-white p-8 shadow-soft-sm text-center">
-          <div className="mb-6"><Link href="/" className="font-serif text-2xl font-bold text-terracotta-600">Loopingon</Link></div>
+          <div className="mb-6"><Link href="/" className="font-serif text-2xl font-bold text-rose-600">Loopingon</Link></div>
 
           {status === "loading" && (
             <>
-              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-cream-100">
-                <Loader2 className="h-8 w-8 animate-spin text-terracotta-600" />
+              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-cream-50">
+                <Loader2 className="h-8 w-8 animate-spin text-rose-600" />
               </div>
               <h1 className="font-serif text-2xl font-bold text-charcoal-900">Verifying Your Email</h1>
-              <p className="mt-2 text-sm text-warm-gray-500">Please wait while we verify your email address...</p>
+              <p className="mt-2 text-sm text-muted-500">Please wait while we verify your email address...</p>
             </>
           )}
 
           {status === "success" && (
             <>
-              <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", delay: 0.2 }} className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-teal-100">
-                <CheckCircle className="h-8 w-8 text-teal-600" />
+              <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", delay: 0.2 }} className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-muted-100">
+                <CheckCircle className="h-8 w-8 text-muted-600" />
               </motion.div>
               <h1 className="font-serif text-2xl font-bold text-charcoal-900">Email Verified!</h1>
-              <p className="mt-2 text-sm text-warm-gray-500">Your email has been verified. Redirecting you to sign in...</p>
+              <p className="mt-2 text-sm text-muted-500">Your email has been verified. Redirecting you to sign in...</p>
             </>
           )}
 
@@ -62,9 +62,9 @@ export default function VerifyEmailPage() {
                 <XCircle className="h-8 w-8 text-red-500" />
               </div>
               <h1 className="font-serif text-2xl font-bold text-charcoal-900">Verification Failed</h1>
-              <p className="mt-2 text-sm text-warm-gray-600">{error || "Invalid or expired verification link."}</p>
+              <p className="mt-2 text-sm text-muted-600">{error || "Invalid or expired verification link."}</p>
               <p className="mt-4">
-                <Link href="/verify-email/request" className="inline-flex items-center gap-1 text-sm font-medium text-terracotta-600 hover:text-terracotta-700">
+                <Link href="/verify-email/request" className="inline-flex items-center gap-1 text-sm font-medium text-rose-600 hover:text-rose-700">
                   <Mail className="h-4 w-4" /> Request new verification email
                 </Link>
               </p>

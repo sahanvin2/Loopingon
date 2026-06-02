@@ -4,9 +4,9 @@ import React from "react";
 import { cn } from "@/lib/utils";
 
 type BadgeVariant =
-  | "terracotta"
-  | "gold"
-  | "teal"
+  | "rose"
+  | "blush"
+  | "muted"
   | "green"
   | "red"
   | "amber"
@@ -21,14 +21,14 @@ interface BadgeProps {
 }
 
 const variantStyles: Record<BadgeVariant, string> = {
-  terracotta: "bg-terracotta-100 text-terracotta-700",
-  gold: "bg-gold-100 text-gold-700",
-  teal: "bg-teal-100 text-teal-700",
+  rose: "bg-rose-100 text-rose-700",
+  blush: "bg-blush-100 text-blush-700",
+  muted: "bg-muted-100 text-muted-700",
   green: "bg-green-100 text-green-700",
   red: "bg-red-100 text-red-700",
   amber: "bg-amber-100 text-amber-700",
   gray: "bg-charcoal-100 text-charcoal-700",
-  outline: "border border-warm-gray-300 text-warm-gray-700 bg-transparent",
+  outline: "border border-muted-300 text-muted-700 bg-transparent",
 };
 
 const sizeStyles = {
@@ -37,7 +37,7 @@ const sizeStyles = {
 };
 
 export function Badge({
-  variant = "terracotta",
+  variant = "rose",
   size = "md",
   children,
   className,

@@ -33,10 +33,10 @@ export function CheckoutForm({ className }: CheckoutFormProps) {
                 className={cn(
                   "w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-colors",
                   i < currentIndex
-                    ? "bg-teal-600 text-white"
+                    ? "bg-muted-600 text-white"
                     : i === currentIndex
-                      ? "bg-terracotta-600 text-white"
-                      : "bg-warm-gray-200 text-warm-gray-500",
+                      ? "bg-rose-600 text-white"
+                      : "bg-muted-200 text-muted-500",
                 )}
               >
                 {i < currentIndex ? "✓" : i + 1}
@@ -44,7 +44,7 @@ export function CheckoutForm({ className }: CheckoutFormProps) {
               <span
                 className={cn(
                   "text-sm font-medium hidden sm:inline",
-                  i <= currentIndex ? "text-charcoal-900" : "text-warm-gray-400",
+                  i <= currentIndex ? "text-charcoal-900" : "text-muted-400",
                 )}
               >
                 {step.label}
@@ -54,7 +54,7 @@ export function CheckoutForm({ className }: CheckoutFormProps) {
               <div
                 className={cn(
                   "w-12 sm:w-24 h-0.5 mx-2 transition-colors",
-                  i < currentIndex ? "bg-teal-600" : "bg-warm-gray-200",
+                  i < currentIndex ? "bg-muted-600" : "bg-muted-200",
                 )}
               />
             )}
@@ -95,15 +95,15 @@ export function CheckoutForm({ className }: CheckoutFormProps) {
             animate={{ opacity: 1, scale: 1 }}
             className="text-center py-16"
           >
-            <div className="w-20 h-20 rounded-full bg-teal-100 flex items-center justify-center mx-auto mb-6">
-              <svg className="w-10 h-10 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <div className="w-20 h-20 rounded-full bg-muted-100 flex items-center justify-center mx-auto mb-6">
+              <svg className="w-10 h-10 text-muted-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
               </svg>
             </div>
             <h2 className="font-serif text-3xl text-charcoal-900 mb-3">
               Order Confirmed!
             </h2>
-            <p className="text-warm-gray-600 max-w-md mx-auto mb-8">
+            <p className="text-muted-600 max-w-md mx-auto mb-8">
               Thank you for your order! You&apos;ll receive a confirmation email
               shortly. Your handcrafted treasures are being prepared.
             </p>
@@ -111,7 +111,7 @@ export function CheckoutForm({ className }: CheckoutFormProps) {
               href="/dashboard/orders"
               className={cn(
                 "inline-flex items-center px-8 py-3 rounded-lg",
-                "bg-terracotta-600 text-white font-medium hover:bg-terracotta-700 transition-colors",
+                "bg-rose-600 text-white font-medium hover:bg-rose-700 transition-colors",
               )}
             >
               View Order

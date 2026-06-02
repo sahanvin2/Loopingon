@@ -48,33 +48,33 @@ export function PaymentStep({ onBack, onPlaceOrder, className }: PaymentStepProp
           onClick={() => setIsExpanded(!isExpanded)}
           className={cn(
             "w-full flex items-center justify-between p-4 rounded-lg",
-            "bg-cream-50 border border-cream-200 text-left",
-            "hover:bg-cream-100 transition-colors",
+            "bg-cream-50 border border-blush-200 text-left",
+            "hover:bg-cream-50 transition-colors",
           )}
         >
           <span className="font-medium text-charcoal-700">
             Order Summary ({orderItems.length} items)
           </span>
           <div className="flex items-center gap-3">
-            <span className="text-sm text-terracotta-600 font-semibold">
+            <span className="text-sm text-rose-600 font-semibold">
               {formatPrice(total)}
             </span>
             {isExpanded ? (
-              <ChevronUp className="w-4 h-4 text-warm-gray-500" />
+              <ChevronUp className="w-4 h-4 text-muted-500" />
             ) : (
-              <ChevronDown className="w-4 h-4 text-warm-gray-500" />
+              <ChevronDown className="w-4 h-4 text-muted-500" />
             )}
           </div>
         </button>
 
         {isExpanded && (
-          <div className="mt-2 border border-cream-200 rounded-lg overflow-hidden">
+          <div className="mt-2 border border-blush-200 rounded-lg overflow-hidden">
             {orderItems.map((item, i) => (
               <div
                 key={i}
-                className="flex items-center gap-4 p-3 border-b border-cream-200 last:border-b-0"
+                className="flex items-center gap-4 p-3 border-b border-blush-200 last:border-b-0"
               >
-                <div className="w-12 h-12 rounded-md bg-warm-gray-100 overflow-hidden shrink-0">
+                <div className="w-12 h-12 rounded-md bg-muted-100 overflow-hidden shrink-0">
                   <img
                     src={item.image}
                     alt={item.name}
@@ -83,7 +83,7 @@ export function PaymentStep({ onBack, onPlaceOrder, className }: PaymentStepProp
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-sm text-charcoal-700 truncate">{item.name}</p>
-                  <p className="text-xs text-warm-gray-500">Qty: {item.qty}</p>
+                  <p className="text-xs text-muted-500">Qty: {item.qty}</p>
                 </div>
                 <span className="text-sm font-medium text-charcoal-700">
                   {formatPrice(item.price * item.qty)}
@@ -98,7 +98,7 @@ export function PaymentStep({ onBack, onPlaceOrder, className }: PaymentStepProp
         <button
           type="button"
           onClick={() => setIsGift(!isGift)}
-          className="flex items-center gap-2 text-sm text-warm-gray-600 hover:text-terracotta-600 transition-colors"
+          className="flex items-center gap-2 text-sm text-muted-600 hover:text-rose-600 transition-colors"
         >
           <Gift className="w-4 h-4" />
           {isGift ? "Remove gift options" : "Add a gift message"}
@@ -112,8 +112,8 @@ export function PaymentStep({ onBack, onPlaceOrder, className }: PaymentStepProp
               placeholder="Write your gift message..."
               rows={2}
               className={cn(
-                "w-full px-3 py-2 rounded-lg border border-cream-300 text-sm",
-                "focus:outline-none focus:ring-2 focus:ring-terracotta-500 focus:border-transparent",
+                "w-full px-3 py-2 rounded-lg border border-blush-300 text-sm",
+                "focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent",
                 "resize-none",
               )}
             />
@@ -132,20 +132,20 @@ export function PaymentStep({ onBack, onPlaceOrder, className }: PaymentStepProp
               className={cn(
                 "w-full flex items-center gap-4 p-4 rounded-lg border text-left transition-colors",
                 selectedPayment === method.id
-                  ? "border-terracotta-500 bg-terracotta-50"
-                  : "border-cream-300 hover:border-warm-gray-400",
+                  ? "border-rose-500 bg-rose-50"
+                  : "border-blush-300 hover:border-muted-400",
               )}
             >
               <div
                 className={cn(
                   "w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0",
                   selectedPayment === method.id
-                    ? "border-terracotta-600"
-                    : "border-warm-gray-300",
+                    ? "border-rose-600"
+                    : "border-muted-300",
                 )}
               >
                 {selectedPayment === method.id && (
-                  <div className="w-2.5 h-2.5 rounded-full bg-terracotta-600" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-rose-600" />
                 )}
               </div>
               <span
@@ -153,7 +153,7 @@ export function PaymentStep({ onBack, onPlaceOrder, className }: PaymentStepProp
                   "w-10 h-10 rounded-lg flex items-center justify-center text-sm font-bold shrink-0",
                   method.id === "payhere"
                     ? "bg-blue-600 text-white"
-                    : "bg-teal-600 text-white",
+                    : "bg-muted-600 text-white",
                 )}
               >
                 {method.icon}
@@ -162,25 +162,25 @@ export function PaymentStep({ onBack, onPlaceOrder, className }: PaymentStepProp
                 <p className="text-sm font-medium text-charcoal-700">
                   {method.label}
                 </p>
-                <p className="text-xs text-warm-gray-500">{method.description}</p>
+                <p className="text-xs text-muted-500">{method.description}</p>
               </div>
             </button>
           ))}
         </div>
       </div>
 
-      <div className="bg-cream-50 rounded-lg p-4 border border-cream-200">
+      <div className="bg-cream-50 rounded-lg p-4 border border-blush-200">
         <div className="flex justify-between text-sm mb-2">
-          <span className="text-warm-gray-600">Subtotal</span>
+          <span className="text-muted-600">Subtotal</span>
           <span className="text-charcoal-700">{formatPrice(subtotal)}</span>
         </div>
         <div className="flex justify-between text-sm mb-2">
-          <span className="text-warm-gray-600">Shipping</span>
+          <span className="text-muted-600">Shipping</span>
           <span className="text-charcoal-700">{formatPrice(shipping)}</span>
         </div>
-        <div className="flex justify-between font-semibold pt-2 border-t border-cream-200">
+        <div className="flex justify-between font-semibold pt-2 border-t border-blush-200">
           <span className="text-charcoal-900">Total</span>
-          <span className="text-terracotta-600 text-lg">{formatPrice(total)}</span>
+          <span className="text-rose-600 text-lg">{formatPrice(total)}</span>
         </div>
       </div>
 
@@ -190,8 +190,8 @@ export function PaymentStep({ onBack, onPlaceOrder, className }: PaymentStepProp
           onClick={onBack}
           className={cn(
             "flex items-center justify-center gap-2 py-3 px-6 rounded-lg",
-            "border border-cream-300 text-charcoal-700 font-medium transition-colors",
-            "hover:bg-warm-gray-50",
+            "border border-blush-300 text-charcoal-700 font-medium transition-colors",
+            "hover:bg-blush-50",
           )}
         >
           <ChevronLeft className="w-4 h-4" />
@@ -202,8 +202,8 @@ export function PaymentStep({ onBack, onPlaceOrder, className }: PaymentStepProp
           onClick={onPlaceOrder}
           className={cn(
             "flex-1 py-3.5 rounded-lg text-base font-medium transition-colors",
-            "bg-terracotta-600 text-white hover:bg-terracotta-700",
-            "shadow-terracotta",
+            "bg-rose-600 text-white hover:bg-rose-700",
+            "shadow-rose",
           )}
         >
           Place Order

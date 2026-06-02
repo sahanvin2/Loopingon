@@ -11,13 +11,13 @@ import { EmptyCart } from "@/components/cart/empty-cart";
 import { cn } from "@/lib/utils";
 
 export default function CartPage() {
-  const { items, itemCount } = useCartStore();
+  const { items, itemCount, subtotal } = useCartStore();
 
   const cartItems = useMemo(() => items, [items]);
 
   if (items.length === 0) {
     return (
-      <div className="min-h-screen bg-cream-100 py-16">
+      <div className="min-h-screen bg-cream-50 py-16">
         <div className="mx-auto max-w-2xl px-4">
           <EmptyCart />
         </div>
@@ -26,14 +26,14 @@ export default function CartPage() {
   }
 
   return (
-    <div className="min-h-screen bg-cream-100 py-8 md:py-12">
+    <div className="min-h-screen bg-cream-50 py-8 md:py-12">
       <div className="mx-auto max-w-7xl px-4">
         <div className="mb-6 flex items-center justify-between">
           <div>
             <h1 className="font-serif text-3xl font-bold text-charcoal-900">Shopping Cart</h1>
-            <p className="mt-1 text-sm text-warm-gray-500">{itemCount} item{itemCount !== 1 ? "s" : ""}</p>
+            <p className="mt-1 text-sm text-muted-500">{itemCount} item{itemCount !== 1 ? "s" : ""}</p>
           </div>
-          <Link href="/products" className="inline-flex items-center gap-1 text-sm font-medium text-terracotta-600 hover:text-terracotta-700">
+          <Link href="/products" className="inline-flex items-center gap-1 text-sm font-medium text-rose-600 hover:text-rose-700">
             <ArrowLeft className="h-4 w-4" /> Continue Shopping
           </Link>
         </div>
@@ -50,7 +50,7 @@ export default function CartPage() {
           </div>
 
           <div className="lg:sticky lg:top-24 lg:self-start">
-            <CartSummary />
+            <CartSummary subtotal={subtotal} itemCount={itemCount} />
           </div>
         </div>
       </div>

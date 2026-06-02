@@ -36,14 +36,14 @@ export default function AdminDisputesPage() {
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
       <h1 className="text-2xl font-bold text-charcoal-900">Disputes</h1>
 
-      <div className="flex gap-1 bg-white rounded-lg border border-cream-200 p-1 w-fit">
+      <div className="flex gap-1 bg-white rounded-lg border border-blush-200 p-1 w-fit">
         {["PENDING", "UNDER_REVIEW", "RESOLVED"].map((status) => (
           <button
             key={status}
             type="button"
             onClick={() => setStatusFilter(status)}
             className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
-              statusFilter === status ? "bg-terracotta-600 text-white" : "text-warm-gray-600 hover:text-charcoal-700"
+              statusFilter === status ? "bg-rose-600 text-white" : "text-muted-600 hover:text-charcoal-700"
             }`}
           >
             {status.replace("_", " ")}
@@ -58,19 +58,19 @@ export default function AdminDisputesPage() {
       ) : (
         <div className="space-y-3">
           {disputes.map((dispute) => (
-            <div key={dispute.id} className="bg-white rounded-lg border border-cream-200 p-5 flex items-center justify-between">
+            <div key={dispute.id} className="bg-white rounded-lg border border-blush-200 p-5 flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-charcoal-900">
                   {dispute.reason}
                 </p>
-                <p className="text-xs text-warm-gray-500 mt-1">
+                <p className="text-xs text-muted-500 mt-1">
                   Order #{dispute.orderId} - {formatDate(dispute.createdAt)}
                 </p>
               </div>
               <div className="flex items-center gap-3">
                 <Badge
                   variant={
-                    dispute.status === "RESOLVED" ? "teal" : dispute.status === "UNDER_REVIEW" ? "amber" : "red"
+                    dispute.status === "RESOLVED" ? "muted" : dispute.status === "UNDER_REVIEW" ? "amber" : "red"
                   }
                   size="sm"
                 >
@@ -82,7 +82,7 @@ export default function AdminDisputesPage() {
                     const resolution = prompt("Resolution notes:");
                     if (resolution) resolveMutation.mutate({ id: dispute.id, resolution });
                   }}
-                  className="px-3 py-1 text-xs font-medium text-teal-600 hover:bg-teal-50 rounded"
+                  className="px-3 py-1 text-xs font-medium text-muted-600 hover:bg-muted-50 rounded"
                 >
                   Resolve
                 </button>

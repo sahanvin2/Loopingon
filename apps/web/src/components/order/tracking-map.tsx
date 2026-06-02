@@ -21,7 +21,7 @@ export function TrackingMap({
     <div className={cn("", className)}>
       <div
         className={cn(
-          "relative rounded-lg overflow-hidden bg-cream-50 border border-cream-200",
+          "relative rounded-lg overflow-hidden bg-cream-50 border border-blush-200",
           "flex flex-col items-center justify-center",
           "min-h-[280px]",
         )}
@@ -29,7 +29,7 @@ export function TrackingMap({
         <div className="absolute inset-0 opacity-[0.04]">
           <svg width="100%" height="100%">
             <pattern id="map-dots" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
-              <circle cx="2" cy="2" r="1" fill="#C75B39" />
+              <circle cx="2" cy="2" r="1" fill="#c86482" />
             </pattern>
             <rect width="100%" height="100%" fill="url(#map-dots)" />
           </svg>
@@ -37,23 +37,23 @@ export function TrackingMap({
 
         {!trackingNumber ? (
           <div className="relative text-center px-6 py-12">
-            <div className="w-16 h-16 rounded-full bg-warm-gray-100 flex items-center justify-center mx-auto mb-4">
-              <MapPin className="w-7 h-7 text-warm-gray-400" />
+            <div className="w-16 h-16 rounded-full bg-muted-100 flex items-center justify-center mx-auto mb-4">
+              <MapPin className="w-7 h-7 text-muted-400" />
             </div>
             <h4 className="font-serif text-lg text-charcoal-900 mb-2">
               Tracking Coming Soon
             </h4>
-            <p className="text-sm text-warm-gray-500 max-w-xs mx-auto">
+            <p className="text-sm text-muted-500 max-w-xs mx-auto">
               Tracking information will be available once your order has been
               shipped. You&apos;ll receive a notification with the tracking details.
             </p>
           </div>
         ) : (
           <div className="relative text-center px-6 py-12">
-            <div className="w-16 h-16 rounded-full bg-teal-100 flex items-center justify-center mx-auto mb-4">
-              <Truck className="w-7 h-7 text-teal-600" />
+            <div className="w-16 h-16 rounded-full bg-muted-100 flex items-center justify-center mx-auto mb-4">
+              <Truck className="w-7 h-7 text-muted-600" />
             </div>
-            <p className="text-sm text-warm-gray-500 mb-1">Via {courierName || "Courier"}</p>
+            <p className="text-sm text-muted-500 mb-1">Via {courierName || "Courier"}</p>
             <h4 className="font-mono text-lg text-charcoal-900 font-bold tracking-wider mb-1">
               {trackingNumber}
             </h4>
@@ -64,7 +64,7 @@ export function TrackingMap({
                 rel="noopener noreferrer"
                 className={cn(
                   "inline-flex items-center gap-1.5 text-sm font-medium",
-                  "text-terracotta-600 hover:text-terracotta-700 transition-colors",
+                  "text-rose-600 hover:text-rose-700 transition-colors",
                   "mt-3",
                 )}
               >

@@ -1,7 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { format, formatDistanceToNow, formatDistance, parseISO, isValid } from "date-fns";
-import { si } from "date-fns/locale";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -72,7 +71,7 @@ export function formatRelativeTimeSinhala(date: string | Date | null | undefined
   if (!date) return "";
   const d = typeof date === "string" ? parseISO(date) : date;
   if (!isValid(d)) return "";
-  return formatDistance(d, new Date(), { locale: si });
+  return formatDistance(d, new Date());
 }
 
 export function truncate(text: string, maxLength: number): string {

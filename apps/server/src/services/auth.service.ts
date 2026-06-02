@@ -104,7 +104,7 @@ export async function signin(email: string, password: string, ipAddress?: string
     throw new AppError("Account is deactivated", 403, "ACCOUNT_DEACTIVATED");
   }
 
-  const tokenPayload: TokenPayload = { userId: user.id, role: user.role };
+  const tokenPayload = { sub: user.id, email: user.email, role: user.role };
   const accessToken = signAccessToken(tokenPayload);
   const refreshTokenFamily = generateTokenFamily();
   const refreshToken = signRefreshToken({ ...tokenPayload, sessionId: refreshTokenFamily });
@@ -163,14 +163,14 @@ export async function refreshToken(token: string) {
   const newRefreshToken = signRefreshToken(payload);
   await prisma.refreshToken.create({
     data: {
-      userId: payload.userId,
+      userId: payload.sub,
       token: newRefreshToken,
       family: payload.sessionId!,
       expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
     },
   });
 
-  const accessToken = signAccessToken({ userId: payload.userId, role: payload.role });
+  const accessToken = signAccessToken({ sub: payload.sub, email: payload.email, role: payload.role });
 
   return { accessToken, refreshToken: newRefreshToken };
 }
@@ -196,7 +196,7 @@ export async function forgotPassword(email: string) {
 }
 
 export async function resetPassword(token: string, newPassword: string) {
-  let payload: { userId: string };
+  let payload: { sub: string };
   try {
     payload = verifyResetToken(token);
   } catch {
@@ -205,20 +205,20 @@ export async function resetPassword(token: string, newPassword: string) {
 
   const passwordHash = await argon2.hash(newPassword);
   await prisma.user.update({
-    where: { id: payload.userId },
+    where: { id: payload.sub },
     data: { passwordHash, failedLoginAttempts: 0, lockedUntil: null },
   });
 }
 
 export async function verifyEmail(token: string) {
-  let payload: { userId: string; email: string };
+  let payload: { sub: string; email: string };
   try {
     payload = verifyEmailToken(token);
   } catch {
     throw new AppError("Invalid or expired verification token", 400, "INVALID_TOKEN");
   }
 
-  const user = await prisma.user.findUnique({ where: { id: payload.userId } });
+  const user = await prisma.user.findUnique({ where: { id: payload.sub } });
   if (!user) throw new AppError("User not found", 404, "USER_NOT_FOUND");
 
   await prisma.user.update({
@@ -252,7 +252,7 @@ export async function googleAuth(profile: { id: string; email: string; name: str
     }
   }
 
-  const tokenPayload: TokenPayload = { userId: user.id, role: user.role };
+  const tokenPayload = { sub: user.id, email: user.email, role: user.role };
   const accessToken = signAccessToken(tokenPayload);
   const refreshTokenFamily = generateTokenFamily();
   const refreshTokenValue = signRefreshToken({ ...tokenPayload, sessionId: refreshTokenFamily });
@@ -295,7 +295,7 @@ export async function facebookAuth(profile: { id: string; email: string; name: s
     }
   }
 
-  const tokenPayload: TokenPayload = { userId: user.id, role: user.role };
+  const tokenPayload = { sub: user.id, email: user.email, role: user.role };
   const accessToken = signAccessToken(tokenPayload);
   const refreshTokenFamily = generateTokenFamily();
   const refreshTokenValue = signRefreshToken({ ...tokenPayload, sessionId: refreshTokenFamily });

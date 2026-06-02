@@ -25,12 +25,12 @@ async function CategoriesContent() {
 
   return (
     <>
-      <section className="bg-cream-100 py-12">
+      <section className="bg-cream-50 py-12">
         <div className="mx-auto max-w-7xl px-4">
           <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Categories" }]} />
           <h1 className="mt-4 font-serif text-3xl font-bold text-charcoal-900 md:text-4xl">Browse by Craft Category</h1>
           <div className="relative mx-auto mt-4 max-w-md">
-            <input type="text" placeholder="Search categories..." className="w-full rounded-lg border border-charcoal-200 bg-white px-4 py-3 text-sm focus:border-terracotta-500 focus:ring-2 focus:ring-terracotta-500/20 focus:outline-none" />
+            <input type="text" placeholder="Search categories..." className="w-full rounded-lg border border-charcoal-200 bg-white px-4 py-3 text-sm focus:border-rose-500 focus:ring-2 focus:ring-rose-500/20 focus:outline-none" />
           </div>
         </div>
       </section>
@@ -41,11 +41,11 @@ async function CategoriesContent() {
             <h2 className="font-serif text-2xl font-bold text-charcoal-900">Featured Categories</h2>
             <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {featured.map((cat) => (
-                <Link key={cat.id} href={`/categories/${cat.slug}`} className="group relative aspect-[4/3] overflow-hidden rounded-xl bg-warm-gray-200">
+                <Link key={cat.id} href={`/categories/${cat.slug}`} className="group relative aspect-[4/3] overflow-hidden rounded-xl bg-muted-200">
                   {cat.image ? (
                     <Image src={getImageUrl(cat.image)} alt={cat.name} fill className="object-cover transition-transform duration-500 group-hover:scale-105" sizes="(max-width: 768px) 100vw, 33vw" />
                   ) : (
-                    <div className="flex h-full items-center justify-center bg-gradient-to-br from-terracotta-400 to-gold-400" />
+                    <div className="flex h-full items-center justify-center bg-gradient-to-br from-rose-400 to-blush-400" />
                   )}
                   <div className="absolute inset-0 bg-gradient-to-t from-charcoal-900/60 to-transparent" />
                   <div className="absolute bottom-0 left-0 right-0 p-5">
@@ -59,18 +59,18 @@ async function CategoriesContent() {
         </section>
       )}
 
-      <section className="bg-cream-100 py-12">
+      <section className="bg-cream-50 py-12">
         <div className="mx-auto max-w-7xl px-4">
           <h2 className="font-serif text-2xl font-bold text-charcoal-900">All Categories</h2>
           <div className="mt-6 grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {rest.map((cat) => (
               <Link key={cat.id} href={`/categories/${cat.slug}`} className="flex items-center gap-4 rounded-xl bg-white p-4 shadow-soft-sm transition-shadow hover:shadow-soft">
-                <div className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-lg bg-cream-100">
+                <div className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-lg bg-cream-50">
                   {cat.image ? <Image src={getImageUrl(cat.image)} alt={cat.name} width={56} height={56} className="object-cover" /> : <span className="text-2xl">{cat.icon || "🛍️"}</span>}
                 </div>
                 <div>
                   <h3 className="font-medium text-charcoal-800">{cat.name}</h3>
-                  <span className="text-xs text-warm-gray-500">{cat.productCount} products</span>
+                  <span className="text-xs text-muted-500">{cat.productCount} products</span>
                 </div>
               </Link>
             ))}

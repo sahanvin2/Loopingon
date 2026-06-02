@@ -101,24 +101,24 @@ export default function HelpCenterPage() {
       <section className="bg-white py-16">
         <div className="mx-auto max-w-4xl px-4 text-center">
           <h1 className="font-serif text-4xl font-bold text-charcoal-900 md:text-5xl">Help Center</h1>
-          <p className="mt-4 text-lg text-warm-gray-600">How can we help you today?</p>
+          <p className="mt-4 text-lg text-muted-600">How can we help you today?</p>
           <div className="relative mx-auto mt-8 max-w-xl">
-            <Search className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-warm-gray-400" />
+            <Search className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-400" />
             <input
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search for answers..."
-              className="w-full rounded-xl border border-charcoal-200 bg-cream-100 py-3.5 pl-12 pr-4 text-sm text-charcoal-900 placeholder:text-warm-gray-400 focus:border-terracotta-500 focus:ring-2 focus:ring-terracotta-500/20 focus:outline-none"
+              className="w-full rounded-xl border border-charcoal-200 bg-cream-50 py-3.5 pl-12 pr-4 text-sm text-charcoal-900 placeholder:text-muted-400 focus:border-rose-500 focus:ring-2 focus:ring-rose-500/20 focus:outline-none"
             />
           </div>
         </div>
       </section>
 
-      <section className="bg-cream-100 py-16">
+      <section className="bg-cream-50 py-16">
         <div className="mx-auto max-w-3xl px-4">
           {filteredSections.length === 0 && (
-            <p className="py-12 text-center text-warm-gray-500">No results found. Try different keywords or browse the categories below.</p>
+            <p className="py-12 text-center text-muted-500">No results found. Try different keywords or browse the categories below.</p>
           )}
           <div className="space-y-4">
             {filteredSections.map((section) => (
@@ -130,13 +130,13 @@ export default function HelpCenterPage() {
                   <span className="flex items-center gap-3">
                     <span className="text-xl">{section.icon}</span>
                     <span className="font-serif text-lg font-semibold text-charcoal-900">{section.title}</span>
-                    <span className="text-sm text-warm-gray-400">({section.questions.length})</span>
+                    <span className="text-sm text-muted-400">({section.questions.length})</span>
                   </span>
                   <motion.div
                     animate={{ rotate: openSections[section.title] ? 180 : 0 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <ChevronDown className="h-5 w-5 text-warm-gray-400" />
+                    <ChevronDown className="h-5 w-5 text-muted-400" />
                   </motion.div>
                 </button>
                 <AnimatePresence>
@@ -151,10 +151,10 @@ export default function HelpCenterPage() {
                       <div className="space-y-1 px-6 pb-4">
                         {section.questions.map((faq) => (
                           <details key={faq.q} className="group border-t border-charcoal-100 pt-3 first:border-t-0 first:pt-0">
-                            <summary className="cursor-pointer py-2 text-sm font-medium text-charcoal-700 hover:text-terracotta-600">
+                            <summary className="cursor-pointer py-2 text-sm font-medium text-charcoal-700 hover:text-rose-600">
                               {faq.q}
                             </summary>
-                            <p className="pb-2 text-sm leading-relaxed text-warm-gray-600">{faq.a}</p>
+                            <p className="pb-2 text-sm leading-relaxed text-muted-600">{faq.a}</p>
                           </details>
                         ))}
                       </div>
@@ -169,14 +169,14 @@ export default function HelpCenterPage() {
 
       <section className="bg-white py-16">
         <div className="mx-auto max-w-2xl px-4 text-center">
-          <div className="rounded-2xl bg-cream-100 p-8 md:p-10">
-            <HeadphonesIcon className="mx-auto h-10 w-10 text-terracotta-600" />
+          <div className="rounded-2xl bg-cream-50 p-8 md:p-10">
+            <HeadphonesIcon className="mx-auto h-10 w-10 text-rose-600" />
             <h2 className="mt-4 font-serif text-2xl font-bold text-charcoal-900">Still Need Help?</h2>
-            <p className="mt-2 text-warm-gray-600">Our support team is here to help you with any questions or issues.</p>
+            <p className="mt-2 text-muted-600">Our support team is here to help you with any questions or issues.</p>
             <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
               <Link
                 href="/contact"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-terracotta-600 px-6 py-3 text-sm font-semibold text-white shadow-soft transition-all hover:bg-terracotta-700 sm:w-auto"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-rose-600 px-6 py-3 text-sm font-semibold text-white shadow-soft transition-all hover:bg-rose-700 sm:w-auto"
               >
                 <MessageCircle className="h-4 w-4" /> Contact Us
               </Link>

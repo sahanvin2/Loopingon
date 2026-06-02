@@ -14,8 +14,8 @@ import type { LoyaltyAccount, LoyaltyTransaction, ApiResponse, PaginatedResponse
 
 const tierInfo: Record<string, { next: string; min: number; color: string; icon: string }> = {
   Bronze: { next: "Silver", min: 500, color: "bg-amber-100 text-amber-700", icon: "🥉" },
-  Silver: { next: "Gold", min: 2000, color: "bg-charcoal-100 text-charcoal-700", icon: "🥈" },
-  Gold: { next: "Platinum", min: 5000, color: "bg-gold-100 text-gold-700", icon: "🥇" },
+  Silver: { next: "blush", min: 2000, color: "bg-charcoal-100 text-charcoal-700", icon: "🥈" },
+  Gold: { next: "Platinum", min: 5000, color: "bg-blush-100 text-blush-700", icon: "🥇" },
   Platinum: { next: "", min: 10000, color: "bg-purple-100 text-purple-700", icon: "💎" },
 };
 
@@ -88,19 +88,19 @@ export default function LoyaltyPage() {
         />
       ) : (
         <>
-          <div className="bg-white rounded-xl border border-cream-200 p-6">
+          <div className="bg-white rounded-xl border border-blush-200 p-6">
             <div className="flex items-center justify-between mb-4">
               <div>
-                <p className="text-sm text-warm-gray-500">Available Points</p>
+                <p className="text-sm text-muted-500">Available Points</p>
                 <div className="flex items-center gap-2">
-                  <Gem className="w-5 h-5 text-gold-500" />
+                  <Gem className="w-5 h-5 text-blush-500" />
                   <span className="text-3xl font-bold text-charcoal-900">
                     {currentPoints.toLocaleString()}
                   </span>
                 </div>
               </div>
               <Badge
-                variant={tier === "Gold" || tier === "Platinum" ? "gold" : "gray"}
+                variant={tier === "blush" || tier === "Platinum" ? "blush" : "gray"}
                 size="md"
                 className={cn("text-lg px-4 py-2", tierData.color)}
               >
@@ -111,16 +111,16 @@ export default function LoyaltyPage() {
             {tierData.next && (
               <div>
                 <div className="flex items-center justify-between mb-1">
-                  <span className="text-xs text-warm-gray-500">
+                  <span className="text-xs text-muted-500">
                     Progress to {tierData.next}
                   </span>
-                  <span className="text-xs font-medium text-warm-gray-600">
+                  <span className="text-xs font-medium text-muted-600">
                     {pointsToNext.toLocaleString()} points needed
                   </span>
                 </div>
                 <div className="w-full h-2 bg-cream-200 rounded-full overflow-hidden">
                   <div
-                    className="h-full bg-gradient-to-r from-gold-400 to-terracotta-500 rounded-full transition-all"
+                    className="h-full bg-gradient-to-r from-blush-400 to-rose-500 rounded-full transition-all"
                     style={{ width: `${tierProgress}%` }}
                   />
                 </div>
@@ -129,34 +129,34 @@ export default function LoyaltyPage() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <div className="bg-white rounded-xl border border-cream-200 p-6">
+            <div className="bg-white rounded-xl border border-blush-200 p-6">
               <h2 className="text-lg font-semibold text-charcoal-900 mb-4">
                 Points History
               </h2>
               {transactions.length === 0 ? (
-                <p className="text-sm text-warm-gray-500 text-center py-8">
+                <p className="text-sm text-muted-500 text-center py-8">
                   No points transactions yet.
                 </p>
               ) : (
                 <div className="overflow-x-auto">
                   <table className="w-full">
                     <thead>
-                      <tr className="border-b border-cream-200 text-left">
-                        <th className="px-3 py-3 text-xs font-semibold text-warm-gray-500 uppercase">
+                      <tr className="border-b border-blush-200 text-left">
+                        <th className="px-3 py-3 text-xs font-semibold text-muted-500 uppercase">
                           Date
                         </th>
-                        <th className="px-3 py-3 text-xs font-semibold text-warm-gray-500 uppercase">
+                        <th className="px-3 py-3 text-xs font-semibold text-muted-500 uppercase">
                           Description
                         </th>
-                        <th className="px-3 py-3 text-xs font-semibold text-warm-gray-500 uppercase text-right">
+                        <th className="px-3 py-3 text-xs font-semibold text-muted-500 uppercase text-right">
                           Points
                         </th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-cream-100">
+                    <tbody className="divide-y divide-cream-50">
                       {transactions.map((tx) => (
                         <tr key={tx.id}>
-                          <td className="px-3 py-3 text-xs text-warm-gray-500 whitespace-nowrap">
+                          <td className="px-3 py-3 text-xs text-muted-500 whitespace-nowrap">
                             {formatDate(tx.createdAt)}
                           </td>
                           <td className="px-3 py-3 text-sm text-charcoal-700">
@@ -166,7 +166,7 @@ export default function LoyaltyPage() {
                             <span
                               className={cn(
                                 tx.type === "EARN" || tx.points > 0
-                                  ? "text-teal-600"
+                                  ? "text-muted-600"
                                   : "text-red-600",
                               )}
                             >
@@ -183,7 +183,7 @@ export default function LoyaltyPage() {
             </div>
 
             <div className="space-y-6">
-              <div className="bg-white rounded-xl border border-cream-200 p-6">
+              <div className="bg-white rounded-xl border border-blush-200 p-6">
                 <h2 className="text-lg font-semibold text-charcoal-900 mb-3">
                   How to Earn Points
                 </h2>
@@ -193,7 +193,7 @@ export default function LoyaltyPage() {
                       key={i}
                       className="flex items-start gap-2 text-sm text-charcoal-700"
                     >
-                      <span className="w-5 h-5 rounded-full bg-teal-100 text-teal-600 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">
+                      <span className="w-5 h-5 rounded-full bg-muted-100 text-muted-600 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">
                         {i + 1}
                       </span>
                       {rule}
@@ -202,7 +202,7 @@ export default function LoyaltyPage() {
                 </ul>
               </div>
 
-              <div className="bg-white rounded-xl border border-cream-200 p-6">
+              <div className="bg-white rounded-xl border border-blush-200 p-6">
                 <h2 className="text-lg font-semibold text-charcoal-900 mb-4">
                   Redeem Points
                 </h2>
@@ -216,10 +216,10 @@ export default function LoyaltyPage() {
                         <p className="text-sm font-medium text-charcoal-900">
                           {opt.label}
                         </p>
-                        <p className="text-xs text-warm-gray-500">
+                        <p className="text-xs text-muted-500">
                           {opt.description}
                         </p>
-                        <Badge variant="gold" size="sm" className="mt-1">
+                        <Badge variant="blush" size="sm" className="mt-1">
                           {opt.points.toLocaleString()} pts
                         </Badge>
                       </div>
@@ -229,7 +229,7 @@ export default function LoyaltyPage() {
                         disabled={
                           currentPoints < opt.points || redeemMutation.isPending
                         }
-                        className="px-4 py-2 bg-terracotta-600 text-white rounded-lg text-sm font-medium hover:bg-terracotta-700 transition-colors disabled:opacity-50 whitespace-nowrap"
+                        className="px-4 py-2 bg-rose-600 text-white rounded-lg text-sm font-medium hover:bg-rose-700 transition-colors disabled:opacity-50 whitespace-nowrap"
                       >
                         {redeemMutation.isPending
                           ? "Redeeming..."

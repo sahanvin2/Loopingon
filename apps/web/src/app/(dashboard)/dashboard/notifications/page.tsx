@@ -33,9 +33,9 @@ const notificationIconMap: Record<string, React.ComponentType<{ className?: stri
 };
 
 const iconColors: Record<string, { bg: string; color: string }> = {
-  ORDER: { bg: "bg-teal-100", color: "text-teal-600" },
-  PROMOTIONAL: { bg: "bg-gold-100", color: "text-gold-600" },
-  SYSTEM: { bg: "bg-warm-gray-100", color: "text-warm-gray-600" },
+  ORDER: { bg: "bg-muted-100", color: "text-muted-600" },
+  PROMOTIONAL: { bg: "bg-blush-100", color: "text-blush-600" },
+  SYSTEM: { bg: "bg-muted-100", color: "text-muted-600" },
 };
 
 export default function NotificationsPage() {
@@ -82,14 +82,14 @@ export default function NotificationsPage() {
           type="button"
           onClick={() => markAllReadMutation.mutate()}
           disabled={markAllReadMutation.isPending}
-          className="inline-flex items-center gap-1.5 text-sm font-medium text-terracotta-600 hover:text-terracotta-700 disabled:opacity-50"
+          className="inline-flex items-center gap-1.5 text-sm font-medium text-rose-600 hover:text-rose-700 disabled:opacity-50"
         >
           <CheckCheck className="w-4 h-4" />
           Mark All Read
         </button>
       </div>
 
-      <div className="flex gap-1 bg-white rounded-lg border border-cream-200 p-1 w-fit">
+      <div className="flex gap-1 bg-white rounded-lg border border-blush-200 p-1 w-fit">
         {tabs.map((tab) => (
           <button
             key={tab.key}
@@ -101,8 +101,8 @@ export default function NotificationsPage() {
             className={cn(
               "px-4 py-2 text-sm font-medium rounded-md transition-colors",
               activeTab === tab.key
-                ? "bg-terracotta-600 text-white"
-                : "text-warm-gray-600 hover:text-charcoal-700",
+                ? "bg-rose-600 text-white"
+                : "text-muted-600 hover:text-charcoal-700",
             )}
           >
             {tab.label}
@@ -141,7 +141,7 @@ export default function NotificationsPage() {
                 animate={{ opacity: 1, x: 0 }}
                 className={cn(
                   "bg-white rounded-lg border p-4 flex items-start gap-3 transition-colors",
-                  notif.isRead ? "border-cream-200" : "bg-cream-50 border-cream-300",
+                  notif.isRead ? "border-blush-200" : "bg-cream-50 border-blush-300",
                 )}
               >
                 <div
@@ -157,11 +157,11 @@ export default function NotificationsPage() {
                     <p className="text-sm font-semibold text-charcoal-900">
                       {notif.title}
                     </p>
-                    <span className="text-xs text-warm-gray-500 whitespace-nowrap">
+                    <span className="text-xs text-muted-500 whitespace-nowrap">
                       {formatRelativeTime(notif.createdAt)}
                     </span>
                   </div>
-                  <p className="text-sm text-warm-gray-600 mt-0.5">
+                  <p className="text-sm text-muted-600 mt-0.5">
                     {notif.body}
                   </p>
                   <div className="flex items-center gap-3 mt-2">
@@ -169,7 +169,7 @@ export default function NotificationsPage() {
                       <button
                         type="button"
                         onClick={() => markReadMutation.mutate(notif.id)}
-                        className="text-xs font-medium text-terracotta-600 hover:text-terracotta-700"
+                        className="text-xs font-medium text-rose-600 hover:text-rose-700"
                       >
                         Mark as Read
                       </button>

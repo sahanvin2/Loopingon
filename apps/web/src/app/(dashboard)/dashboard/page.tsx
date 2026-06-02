@@ -38,7 +38,7 @@ const item = {
 const tierColors: Record<string, string> = {
   Bronze: "bg-amber-100 text-amber-700",
   Silver: "bg-charcoal-100 text-charcoal-700",
-  Gold: "bg-gold-100 text-gold-700",
+  Gold: "bg-blush-100 text-blush-700",
   Platinum: "bg-purple-100 text-purple-700",
 };
 
@@ -112,7 +112,7 @@ export default function DashboardOverviewPage() {
           <h1 className="text-2xl font-bold text-charcoal-900">
             Welcome back, {firstName}!
           </h1>
-          <p className="text-warm-gray-600 mt-1">Here&apos;s what&apos;s happening with your account.</p>
+          <p className="text-muted-600 mt-1">Here&apos;s what&apos;s happening with your account.</p>
         </div>
       </motion.div>
 
@@ -124,13 +124,13 @@ export default function DashboardOverviewPage() {
           title="Total Orders"
           value={orders.length}
           icon={ShoppingBag}
-          variant="terracotta"
+          variant="rose"
         />
         <StatCard
           title="Wishlist Items"
           value={wishlistData?.data?.count || 0}
           icon={Heart}
-          variant="gold"
+          variant="blush"
         />
         <StatCard
           title="Loyalty Points"
@@ -138,7 +138,7 @@ export default function DashboardOverviewPage() {
             <div className="flex items-center gap-2">
               {loyalty?.availablePoints ?? 0}
               <Badge
-                variant={tier === "Gold" || tier === "Platinum" ? "gold" : "gray"}
+                variant={tier === "blush" || tier === "Platinum" ? "blush" : "gray"}
                 size="sm"
                 className={tierColors[loyalty?.tier || "Bronze"]}
               >
@@ -147,14 +147,14 @@ export default function DashboardOverviewPage() {
             </div>
           }
           icon={Crown}
-          variant="teal"
+          variant="muted"
         />
         <StatCard
           title="Active Referrals"
           value={
             <div className="flex items-center gap-2">
               {referrals.totalReferrals}
-              <span className="text-sm text-warm-gray-500 font-normal">
+              <span className="text-sm text-muted-500 font-normal">
                 {formatPrice(Number(referrals.totalEarnings))}
               </span>
             </div>
@@ -171,7 +171,7 @@ export default function DashboardOverviewPage() {
           </h2>
           <Link
             href="/dashboard/orders"
-            className="flex items-center gap-1 text-sm font-medium text-terracotta-600 hover:text-terracotta-700"
+            className="flex items-center gap-1 text-sm font-medium text-rose-600 hover:text-rose-700"
           >
             View All Orders
             <ChevronRight className="w-4 h-4" />
@@ -220,7 +220,7 @@ export default function DashboardOverviewPage() {
             </h2>
             <Link
               href="/competitions"
-              className="flex items-center gap-1 text-sm font-medium text-terracotta-600 hover:text-terracotta-700"
+              className="flex items-center gap-1 text-sm font-medium text-rose-600 hover:text-rose-700"
             >
               View All
               <ChevronRight className="w-4 h-4" />
@@ -231,13 +231,13 @@ export default function DashboardOverviewPage() {
               <Link
                 key={comp.id}
                 href={`/competitions/${comp.slug}`}
-                className="block bg-white rounded-lg border border-cream-200 p-5 hover:shadow-soft transition-shadow"
+                className="block bg-white rounded-lg border border-blush-200 p-5 hover:shadow-soft transition-shadow"
               >
                 <h3 className="font-semibold text-charcoal-900">{comp.title}</h3>
-                <p className="text-sm text-warm-gray-600 mt-1 line-clamp-2">
+                <p className="text-sm text-muted-600 mt-1 line-clamp-2">
                   {comp.prizeDescription}
                 </p>
-                <Badge variant="teal" size="sm" className="mt-3">
+                <Badge variant="muted" size="sm" className="mt-3">
                   Active
                 </Badge>
               </Link>
@@ -249,12 +249,12 @@ export default function DashboardOverviewPage() {
       {referralCodeData?.data?.code && (
         <motion.div
           variants={item}
-          className="bg-gradient-to-r from-terracotta-500 to-terracotta-600 rounded-xl p-6 text-white"
+          className="bg-gradient-to-r from-rose-500 to-rose-600 rounded-xl p-6 text-white"
         >
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div>
               <h3 className="text-lg font-semibold">Share & Earn Rewards</h3>
-              <p className="text-sm text-terracotta-100 mt-1">
+              <p className="text-sm text-rose-100 mt-1">
                 Refer friends and earn rewards when they make their first purchase
               </p>
               <div className="flex items-center gap-3 mt-3">
@@ -270,7 +270,7 @@ export default function DashboardOverviewPage() {
                   <Copy className="w-4 h-4" />
                 </button>
               </div>
-              <p className="text-sm text-terracotta-100 mt-2">
+              <p className="text-sm text-rose-100 mt-2">
                 Total Earnings: {formatPrice(Number(referrals.totalEarnings))}
               </p>
             </div>
@@ -309,12 +309,12 @@ export default function DashboardOverviewPage() {
             <Link
               key={link.label}
               href={link.href}
-              className="flex flex-col items-center gap-3 p-4 bg-white rounded-lg border border-cream-200 hover:border-terracotta-200 hover:shadow-soft transition-all group"
+              className="flex flex-col items-center gap-3 p-4 bg-white rounded-lg border border-blush-200 hover:border-rose-200 hover:shadow-soft transition-all group"
             >
-              <div className="w-12 h-12 rounded-full bg-teal-100 text-teal-600 flex items-center justify-center">
+              <div className="w-12 h-12 rounded-full bg-muted-100 text-muted-600 flex items-center justify-center">
                 <link.icon className="w-5 h-5" />
               </div>
-              <span className="text-sm font-medium text-charcoal-700 group-hover:text-terracotta-600">
+              <span className="text-sm font-medium text-charcoal-700 group-hover:text-rose-600">
                 {link.label}
               </span>
             </Link>

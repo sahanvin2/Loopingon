@@ -85,19 +85,19 @@ export default function VendorOrderDetailPage() {
     >
       <Link
         href="/vendor/orders"
-        className="inline-flex items-center gap-1.5 text-sm font-medium text-warm-gray-600 hover:text-charcoal-700"
+        className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-600 hover:text-charcoal-700"
       >
         <ArrowLeft className="w-4 h-4" />
         Back to Orders
       </Link>
 
-      <div className="bg-white rounded-xl border border-cream-200 p-6">
+      <div className="bg-white rounded-xl border border-blush-200 p-6">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-6">
           <div>
             <h1 className="text-xl font-mono font-bold text-charcoal-900">
               {order.orderNumber}
             </h1>
-            <p className="text-sm text-warm-gray-500 mt-1">
+            <p className="text-sm text-muted-500 mt-1">
               Placed on {formatDate(order.createdAt)}
             </p>
           </div>
@@ -114,7 +114,7 @@ export default function VendorOrderDetailPage() {
                 updateStatusMutation.mutate({ status: "PROCESSING" })
               }
               disabled={updateStatusMutation.isPending}
-              className="px-4 py-2 bg-teal-600 text-white rounded-lg text-sm font-medium hover:bg-teal-700 disabled:opacity-50"
+              className="px-4 py-2 bg-muted-600 text-white rounded-lg text-sm font-medium hover:bg-muted-700 disabled:opacity-50"
             >
               Mark as Processing
             </button>
@@ -126,7 +126,7 @@ export default function VendorOrderDetailPage() {
                 updateStatusMutation.mutate({ status: "READY_TO_SHIP" })
               }
               disabled={updateStatusMutation.isPending}
-              className="px-4 py-2 bg-gold-500 text-white rounded-lg text-sm font-medium hover:bg-gold-600 disabled:opacity-50"
+              className="px-4 py-2 bg-blush-500 text-white rounded-lg text-sm font-medium hover:bg-blush-600 disabled:opacity-50"
             >
               Mark as Ready to Ship
             </button>
@@ -157,7 +157,7 @@ export default function VendorOrderDetailPage() {
       </div>
 
       {order.shippingAddress && (
-        <div className="bg-white rounded-xl border border-cream-200 p-6">
+        <div className="bg-white rounded-xl border border-blush-200 p-6">
           <h2 className="text-lg font-semibold text-charcoal-900 mb-3">
             Customer Info
           </h2>
@@ -170,28 +170,28 @@ export default function VendorOrderDetailPage() {
         </div>
       )}
 
-      <div className="bg-white rounded-xl border border-cream-200 p-6">
+      <div className="bg-white rounded-xl border border-blush-200 p-6">
         <h2 className="text-lg font-semibold text-charcoal-900 mb-4">
           Order Items
         </h2>
         <table className="w-full">
           <thead>
-            <tr className="border-b border-cream-200">
-              <th className="px-3 py-3 text-left text-xs font-semibold text-warm-gray-500 uppercase">
+            <tr className="border-b border-blush-200">
+              <th className="px-3 py-3 text-left text-xs font-semibold text-muted-500 uppercase">
                 Item
               </th>
-              <th className="px-3 py-3 text-right text-xs font-semibold text-warm-gray-500 uppercase">
+              <th className="px-3 py-3 text-right text-xs font-semibold text-muted-500 uppercase">
                 Qty
               </th>
-              <th className="px-3 py-3 text-right text-xs font-semibold text-warm-gray-500 uppercase">
+              <th className="px-3 py-3 text-right text-xs font-semibold text-muted-500 uppercase">
                 Price
               </th>
-              <th className="px-3 py-3 text-right text-xs font-semibold text-warm-gray-500 uppercase">
+              <th className="px-3 py-3 text-right text-xs font-semibold text-muted-500 uppercase">
                 Total
               </th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-cream-100">
+          <tbody className="divide-y divide-cream-50">
             {order.items?.map((item) => (
               <tr key={item.id}>
                 <td className="px-3 py-3 text-sm text-charcoal-700">
@@ -212,30 +212,30 @@ export default function VendorOrderDetailPage() {
         </table>
       </div>
 
-      <div className="bg-white rounded-xl border border-cream-200 p-6">
+      <div className="bg-white rounded-xl border border-blush-200 p-6">
         <h2 className="text-lg font-semibold text-charcoal-900 mb-4">
           Earnings Breakdown
         </h2>
         <div className="space-y-2 text-sm">
           <div className="flex justify-between">
-            <span className="text-warm-gray-500">Order Total</span>
+            <span className="text-muted-500">Order Total</span>
             <span className="font-medium text-charcoal-900">
               {formatPrice(Number(order.totalAmount || 0))}
             </span>
           </div>
           <div className="flex justify-between">
-            <span className="text-warm-gray-500">
+            <span className="text-muted-500">
               Commission ({order.commissionRate || 20}%)
             </span>
             <span className="font-medium text-red-600">
               -{formatPrice(Number(order.commissionAmount || 0))}
             </span>
           </div>
-          <div className="flex justify-between border-t border-cream-200 pt-2">
+          <div className="flex justify-between border-t border-blush-200 pt-2">
             <span className="font-semibold text-charcoal-900">
               Your Earnings
             </span>
-            <span className="font-semibold text-teal-600">
+            <span className="font-semibold text-muted-600">
               {formatPrice(Number(order.vendorPayoutAmount || 0))}
             </span>
           </div>
@@ -244,7 +244,7 @@ export default function VendorOrderDetailPage() {
 
       <Link
         href={`/vendor/messages?order=${order.id}`}
-        className="inline-flex items-center gap-2 px-5 py-2.5 bg-white border border-cream-200 rounded-lg text-sm font-medium text-charcoal-700 hover:bg-cream-50"
+        className="inline-flex items-center gap-2 px-5 py-2.5 bg-white border border-blush-200 rounded-lg text-sm font-medium text-charcoal-700 hover:bg-cream-50"
       >
         <MessageSquare className="w-4 h-4" />
         Message Customer
@@ -281,7 +281,7 @@ export default function VendorOrderDetailPage() {
                     onChange={(e) =>
                       setTrackingForm({ ...trackingForm, courierName: e.target.value })
                     }
-                    className="w-full px-3 py-2 border border-cream-200 rounded-lg text-sm"
+                    className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm"
                   >
                     <option value="">Select courier</option>
                     <option value="Domex">Domex</option>
@@ -302,7 +302,7 @@ export default function VendorOrderDetailPage() {
                     onChange={(e) =>
                       setTrackingForm({ ...trackingForm, trackingNumber: e.target.value })
                     }
-                    className="w-full px-3 py-2 border border-cream-200 rounded-lg text-sm"
+                    className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm"
                   />
                 </div>
                 <div>
@@ -315,7 +315,7 @@ export default function VendorOrderDetailPage() {
                     onChange={(e) =>
                       setTrackingForm({ ...trackingForm, trackingUrl: e.target.value })
                     }
-                    className="w-full px-3 py-2 border border-cream-200 rounded-lg text-sm"
+                    className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm"
                   />
                 </div>
               </div>
@@ -323,7 +323,7 @@ export default function VendorOrderDetailPage() {
                 <button
                   type="button"
                   onClick={() => setShowTrackingModal(false)}
-                  className="flex-1 px-4 py-2.5 border border-cream-200 rounded-lg text-sm font-medium"
+                  className="flex-1 px-4 py-2.5 border border-blush-200 rounded-lg text-sm font-medium"
                 >
                   Cancel
                 </button>
@@ -331,7 +331,7 @@ export default function VendorOrderDetailPage() {
                   type="button"
                   onClick={() => addTrackingMutation.mutate(trackingForm)}
                   disabled={!trackingForm.trackingNumber || addTrackingMutation.isPending}
-                  className="flex-1 px-4 py-2.5 bg-terracotta-600 text-white rounded-lg text-sm font-medium hover:bg-terracotta-700 disabled:opacity-50"
+                  className="flex-1 px-4 py-2.5 bg-rose-600 text-white rounded-lg text-sm font-medium hover:bg-rose-700 disabled:opacity-50"
                 >
                   {addTrackingMutation.isPending ? "Saving..." : "Save"}
                 </button>

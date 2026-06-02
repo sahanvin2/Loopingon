@@ -62,7 +62,7 @@ export default function WishlistPage() {
   if (isLoading) {
     return (
       <div className="space-y-6">
-        <div className="h-8 w-48 rounded bg-warm-gray-200 animate-pulse" />
+        <div className="h-8 w-48 rounded bg-muted-200 animate-pulse" />
         <LoadingSkeleton variant="product-card" count={8} />
       </div>
     );
@@ -91,7 +91,7 @@ export default function WishlistPage() {
           <button
             type="button"
             onClick={handleShare}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-cream-200 rounded-lg text-sm font-medium text-charcoal-700 hover:bg-cream-50 transition-colors"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-blush-200 rounded-lg text-sm font-medium text-charcoal-700 hover:bg-cream-50 transition-colors"
           >
             <Share2 className="w-4 h-4" />
             Share Wishlist
@@ -102,7 +102,7 @@ export default function WishlistPage() {
               setIsPublic(!isPublic);
               toggleVisibilityMutation.mutate(!isPublic);
             }}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-cream-200 rounded-lg text-sm font-medium text-charcoal-700 hover:bg-cream-50 transition-colors"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-blush-200 rounded-lg text-sm font-medium text-charcoal-700 hover:bg-cream-50 transition-colors"
           >
             {isPublic ? (
               <>
@@ -132,7 +132,7 @@ export default function WishlistPage() {
             <button
               type="button"
               onClick={handleAddAllToCart}
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-terracotta-600 text-white rounded-lg text-sm font-medium hover:bg-terracotta-700 transition-colors"
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-rose-600 text-white rounded-lg text-sm font-medium hover:bg-rose-700 transition-colors"
             >
               <ShoppingCart className="w-4 h-4" />
               Add All to Cart ({items.length})
@@ -163,7 +163,7 @@ export default function WishlistPage() {
                     </button>
                     <button
                       type="button"
-                      className="flex items-center gap-1 px-3 py-1.5 text-xs font-medium text-teal-600 bg-teal-50 hover:bg-teal-100 rounded-md transition-colors"
+                      className="flex items-center gap-1 px-3 py-1.5 text-xs font-medium text-muted-600 bg-muted-50 hover:bg-muted-100 rounded-md transition-colors"
                     >
                       <ShoppingCart className="w-3.5 h-3.5" />
                       Add to Cart
@@ -171,7 +171,7 @@ export default function WishlistPage() {
                   </div>
                   {priceDropped && (
                     <div className="absolute top-2 left-2 z-10">
-                      <Badge variant="teal" size="sm">
+                      <Badge variant="muted" size="sm">
                         <TrendingDown className="w-3 h-3 mr-1" />
                         Price Drop
                       </Badge>

@@ -54,7 +54,7 @@ export function HowItWorks() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-warm-gray-600 text-center max-w-xl mx-auto mb-16"
+          className="text-muted-600 text-center max-w-xl mx-auto mb-16"
         >
           From discovering unique crafts to receiving them at your door, here&apos;s
           how Loopingon connects you with Sri Lanka&apos;s finest artisans.
@@ -71,21 +71,21 @@ export function HowItWorks() {
               viewport={{ once: true, margin: "-50px" }}
               className="relative text-center px-4"
             >
-              <span className="text-xs font-bold text-terracotta-600 uppercase tracking-widest mb-4 block">
+              <span className="text-xs font-bold text-rose-600 uppercase tracking-widest mb-4 block">
                 Step {step.number}
               </span>
 
               <div
                 className={cn(
-                  "w-20 h-20 rounded-full bg-terracotta-600 flex items-center justify-center",
-                  "mx-auto mb-6 shadow-terracotta",
+                  "w-20 h-20 rounded-full bg-rose-600 flex items-center justify-center",
+                  "mx-auto mb-6 shadow-rose",
                 )}
               >
-                <step.icon className="w-9 h-9 text-cream-100" />
+                <step.icon className="w-9 h-9 text-white" />
               </div>
 
               <h3 className="font-serif text-lg text-charcoal-900 mb-3">{step.title}</h3>
-              <p className="text-warm-gray-600 text-sm leading-relaxed">
+              <p className="text-muted-600 text-sm leading-relaxed">
                 {step.description}
               </p>
 

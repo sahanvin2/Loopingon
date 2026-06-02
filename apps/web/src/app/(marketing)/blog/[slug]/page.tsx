@@ -47,44 +47,44 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   return (
     <article className="bg-white">
-      <div className="relative aspect-[21/9] overflow-hidden bg-warm-gray-200">
+      <div className="relative aspect-[21/9] overflow-hidden bg-muted-200">
         {post.featuredImage ? (
           <Image src={getImageUrl(post.featuredImage)} alt={post.title} fill className="object-cover" priority sizes="100vw" />
         ) : (
-          <div className="flex h-full items-center justify-center bg-gradient-to-br from-terracotta-600 to-gold-500">
+          <div className="flex h-full items-center justify-center bg-gradient-to-br from-rose-600 to-blush-500">
             <span className="font-serif text-4xl font-bold text-white/30">{post.title.charAt(0)}</span>
           </div>
         )}
       </div>
 
       <div className="mx-auto max-w-3xl px-4 py-12">
-        <Link href="/blog" className="mb-6 inline-flex items-center gap-1 text-sm font-medium text-terracotta-600 hover:text-terracotta-700">
+        <Link href="/blog" className="mb-6 inline-flex items-center gap-1 text-sm font-medium text-rose-600 hover:text-rose-700">
           <svg className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M17 10a.75.75 0 01-.75.75H5.612l4.158 3.96a.75.75 0 11-1.04 1.08l-5.5-5.25a.75.75 0 010-1.08l5.5-5.25a.75.75 0 111.04 1.08L5.612 9.25H16.25A.75.75 0 0117 10z" clipRule="evenodd" /></svg>
           Back to Blog
         </Link>
 
         <h1 className="font-serif text-3xl font-bold text-charcoal-900 md:text-4xl">{post.title}</h1>
 
-        <div className="mt-4 flex flex-wrap items-center gap-4 text-sm text-warm-gray-600">
+        <div className="mt-4 flex flex-wrap items-center gap-4 text-sm text-muted-600">
           {post.publishedAt && <span>{formatDate(post.publishedAt)}</span>}
           {post.category && (
             <>
               <span>·</span>
-              <span className="rounded-full bg-terracotta-50 px-3 py-0.5 text-xs font-medium text-terracotta-600">{post.category}</span>
+              <span className="rounded-full bg-rose-50 px-3 py-0.5 text-xs font-medium text-rose-600">{post.category}</span>
             </>
           )}
           <span>·</span>
           <span>5 min read</span>
         </div>
 
-        <div className="mt-10 prose-headings:font-serif prose-a:text-terracotta-600 prose-p:leading-relaxed prose-img:rounded-xl max-w-none text-warm-gray-700 [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-charcoal-900 [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:text-charcoal-800 [&_p]:text-base [&_p]:leading-7 [&_a]:underline [&_blockquote]:border-l-4 [&_blockquote]:border-gold-400 [&_blockquote]:bg-cream-50 [&_blockquote]:py-4 [&_blockquote]:pl-6 [&_blockquote]:italic [&_blockquote]:text-warm-gray-600 [&_img]:my-6 [&_ul]:list-disc [&_ul]:pl-6 [&_ol]:list-decimal [&_ol]:pl-6"
+        <div className="mt-10 prose-headings:font-serif prose-a:text-rose-600 prose-p:leading-relaxed prose-img:rounded-xl max-w-none text-muted-700 [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-charcoal-900 [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:text-charcoal-800 [&_p]:text-base [&_p]:leading-7 [&_a]:underline [&_blockquote]:border-l-4 [&_blockquote]:border-blush-400 [&_blockquote]:bg-cream-50 [&_blockquote]:py-4 [&_blockquote]:pl-6 [&_blockquote]:italic [&_blockquote]:text-muted-600 [&_img]:my-6 [&_ul]:list-disc [&_ul]:pl-6 [&_ol]:list-decimal [&_ol]:pl-6"
           dangerouslySetInnerHTML={{ __html: post.content }}
         />
 
         <div className="mt-10 border-t border-charcoal-200 pt-6">
           <div className="flex items-center justify-between">
             <ShareButtons url={`https://loopingon.com/blog/${post.slug}`} title={post.title} />
-            <Link href="/blog" className="text-sm font-medium text-terracotta-600 hover:underline">
+            <Link href="/blog" className="text-sm font-medium text-rose-600 hover:underline">
               ← Back to all posts
             </Link>
           </div>

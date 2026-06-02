@@ -35,12 +35,12 @@ export function ProductCard({ product, className, showQuickView = true }: Produc
     <motion.div
       whileHover={{ y: -2 }}
       className={cn(
-        "group bg-white rounded-lg border border-cream-300 overflow-hidden shadow-sm",
+        "group bg-white rounded-lg border border-blush-300 overflow-hidden shadow-sm",
         "hover:shadow-md transition-shadow duration-300",
         className,
       )}
     >
-      <Link href={`/products/${product.slug}`} className="block relative aspect-[4/5] overflow-hidden bg-warm-gray-100">
+      <Link href={`/products/${product.slug}`} className="block relative aspect-[4/5] overflow-hidden bg-muted-100">
         <Image
           src={imageUrl}
           alt={product.title}
@@ -51,7 +51,7 @@ export function ProductCard({ product, className, showQuickView = true }: Produc
 
         <div className="absolute top-2 left-2 flex flex-col gap-1">
           {product.isHandmade && (
-            <Badge variant="terracotta" size="sm">Handmade</Badge>
+            <Badge variant="rose" size="sm">Handmade</Badge>
           )}
           {discount > 0 && (
             <Badge variant="red" size="sm">Sale -{discount}%</Badge>
@@ -96,8 +96,8 @@ export function ProductCard({ product, className, showQuickView = true }: Produc
           className={cn(
             "w-4 h-4 transition-colors",
             isWishlisted
-              ? "fill-terracotta-500 text-terracotta-500"
-              : "text-warm-gray-500 hover:text-terracotta-500",
+              ? "fill-rose-500 text-rose-500"
+              : "text-muted-500 hover:text-rose-500",
           )}
         />
       </button>
@@ -106,14 +106,14 @@ export function ProductCard({ product, className, showQuickView = true }: Produc
         {product.vendor && (
           <Link
             href={`/artisans/${product.vendor.storeSlug}`}
-            className="text-xs uppercase tracking-wider text-warm-gray-500 hover:text-terracotta-600 transition-colors"
+            className="text-xs uppercase tracking-wider text-muted-500 hover:text-rose-600 transition-colors"
           >
             {product.vendor.storeName}
           </Link>
         )}
 
         <Link href={`/products/${product.slug}`} className="block mt-1">
-          <h3 className="font-medium text-charcoal-900 line-clamp-2 text-sm leading-snug group-hover:text-terracotta-600 transition-colors">
+          <h3 className="font-medium text-charcoal-900 line-clamp-2 text-sm leading-snug group-hover:text-rose-600 transition-colors">
             {product.title}
           </h3>
         </Link>
@@ -143,8 +143,8 @@ export function ProductCard({ product, className, showQuickView = true }: Produc
           disabled={addToCart.isPending}
           className={cn(
             "mt-3 w-full py-2 rounded-lg text-sm font-medium",
-            "bg-terracotta-600 text-white",
-            "hover:bg-terracotta-700 transition-colors",
+            "bg-rose-600 text-white",
+            "hover:bg-rose-700 transition-colors",
             "disabled:opacity-60 disabled:cursor-not-allowed",
           )}
         >

@@ -12,10 +12,10 @@ import { get } from "@/lib/api-client";
 import { cn, formatPrice, formatDate } from "@/lib/utils";
 import type { PayoutSchedule, PaginatedResponse, ApiResponse } from "@/types";
 
-const payoutStatusColors: Record<string, { variant: "teal" | "gold" | "amber" | "red"; label: string }> = {
-  COMPLETED: { variant: "teal", label: "Completed" },
+const payoutStatusColors: Record<string, { variant: "muted" | "blush" | "amber" | "red"; label: string }> = {
+  COMPLETED: { variant: "muted", label: "Completed" },
   PENDING: { variant: "amber", label: "Pending" },
-  PROCESSING: { variant: "gold", label: "Processing" },
+  PROCESSING: { variant: "blush", label: "Processing" },
   FAILED: { variant: "red", label: "Failed" },
 };
 
@@ -49,10 +49,10 @@ export default function VendorPaymentsPage() {
         Payments & Payouts
       </h1>
 
-      <div className="bg-gradient-to-r from-teal-500 to-teal-600 rounded-xl p-6 text-white">
+      <div className="bg-gradient-to-r from-muted-500 to-muted-600 rounded-xl p-6 text-white">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div>
-            <p className="text-sm text-teal-100">Pending Payout</p>
+            <p className="text-sm text-muted-100">Pending Payout</p>
             <p className="text-3xl font-bold mt-1">
               {formatPrice(Number(summary?.pendingPayout || 0))}
             </p>
@@ -71,7 +71,7 @@ export default function VendorPaymentsPage() {
         </div>
       </div>
 
-      <div className="bg-white rounded-xl border border-cream-200 p-6">
+      <div className="bg-white rounded-xl border border-blush-200 p-6">
         <h2 className="text-lg font-semibold text-charcoal-900 mb-4">
           Payout History
         </h2>
@@ -87,34 +87,34 @@ export default function VendorPaymentsPage() {
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-cream-200">
-                  <th className="px-4 py-3 text-left text-xs font-semibold text-warm-gray-500 uppercase">
+                <tr className="border-b border-blush-200">
+                  <th className="px-4 py-3 text-left text-xs font-semibold text-muted-500 uppercase">
                     Period
                   </th>
-                  <th className="px-4 py-3 text-right text-xs font-semibold text-warm-gray-500 uppercase">
+                  <th className="px-4 py-3 text-right text-xs font-semibold text-muted-500 uppercase">
                     Orders
                   </th>
-                  <th className="px-4 py-3 text-right text-xs font-semibold text-warm-gray-500 uppercase">
+                  <th className="px-4 py-3 text-right text-xs font-semibold text-muted-500 uppercase">
                     Revenue
                   </th>
-                  <th className="px-4 py-3 text-right text-xs font-semibold text-warm-gray-500 uppercase">
+                  <th className="px-4 py-3 text-right text-xs font-semibold text-muted-500 uppercase">
                     Commission
                   </th>
-                  <th className="px-4 py-3 text-right text-xs font-semibold text-warm-gray-500 uppercase">
+                  <th className="px-4 py-3 text-right text-xs font-semibold text-muted-500 uppercase">
                     Payout
                   </th>
-                  <th className="px-4 py-3 text-left text-xs font-semibold text-warm-gray-500 uppercase">
+                  <th className="px-4 py-3 text-left text-xs font-semibold text-muted-500 uppercase">
                     Status
                   </th>
-                  <th className="px-4 py-3 text-left text-xs font-semibold text-warm-gray-500 uppercase">
+                  <th className="px-4 py-3 text-left text-xs font-semibold text-muted-500 uppercase">
                     Date
                   </th>
-                  <th className="px-4 py-3 text-left text-xs font-semibold text-warm-gray-500 uppercase">
+                  <th className="px-4 py-3 text-left text-xs font-semibold text-muted-500 uppercase">
                     Report
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-cream-100">
+              <tbody className="divide-y divide-cream-50">
                 {payouts.map((payout) => {
                   const statusInfo = payoutStatusColors[payout.status] || payoutStatusColors.PENDING;
                   return (
@@ -131,7 +131,7 @@ export default function VendorPaymentsPage() {
                       <td className="px-4 py-3 text-sm text-red-600 text-right">
                         -{formatPrice(Number(payout.totalCommission))}
                       </td>
-                      <td className="px-4 py-3 text-sm font-medium text-teal-600 text-right">
+                      <td className="px-4 py-3 text-sm font-medium text-muted-600 text-right">
                         {formatPrice(Number(payout.payoutAmount))}
                       </td>
                       <td className="px-4 py-3">
@@ -139,7 +139,7 @@ export default function VendorPaymentsPage() {
                           {statusInfo.label}
                         </Badge>
                       </td>
-                      <td className="px-4 py-3 text-xs text-warm-gray-500">
+                      <td className="px-4 py-3 text-xs text-muted-500">
                         {payout.processedAt
                           ? formatDate(payout.processedAt)
                           : "—"}
@@ -147,7 +147,7 @@ export default function VendorPaymentsPage() {
                       <td className="px-4 py-3">
                         <button
                           type="button"
-                          className="p-1.5 text-warm-gray-500 hover:text-terracotta-600 rounded"
+                          className="p-1.5 text-muted-500 hover:text-rose-600 rounded"
                           aria-label="Download report"
                         >
                           <Download className="w-4 h-4" />

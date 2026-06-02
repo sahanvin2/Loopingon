@@ -43,16 +43,16 @@ export default function AdminAuditLogsPage() {
         <h1 className="text-2xl font-bold text-charcoal-900">Audit Logs</h1>
         <div className="flex items-center gap-3">
           <div className="relative max-w-xs">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-warm-gray-400" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-400" />
             <input
               type="text"
               placeholder="Search logs..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-cream-200 rounded-lg text-sm focus:ring-2 focus:ring-terracotta-500"
+              className="w-full pl-10 pr-4 py-2 border border-blush-200 rounded-lg text-sm focus:ring-2 focus:ring-rose-500"
             />
           </div>
-          <button className="px-4 py-2 bg-white border border-cream-200 rounded-lg text-sm font-medium flex items-center gap-2">
+          <button className="px-4 py-2 bg-white border border-blush-200 rounded-lg text-sm font-medium flex items-center gap-2">
             <Download className="w-4 h-4" /> Export CSV
           </button>
         </div>
@@ -63,20 +63,20 @@ export default function AdminAuditLogsPage() {
       ) : logs.length === 0 ? (
         <EmptyState title="No audit logs found" />
       ) : (
-        <div className="bg-white rounded-lg border border-cream-200 overflow-x-auto">
+        <div className="bg-white rounded-lg border border-blush-200 overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-cream-200 bg-cream-50">
-                <th className="px-4 py-3 text-left text-xs font-semibold text-warm-gray-500 uppercase">Timestamp</th>
-                <th className="px-4 py-3 text-left text-xs font-semibold text-warm-gray-500 uppercase">User</th>
-                <th className="px-4 py-3 text-left text-xs font-semibold text-warm-gray-500 uppercase">Action</th>
-                <th className="px-4 py-3 text-left text-xs font-semibold text-warm-gray-500 uppercase">Entity</th>
-                <th className="px-4 py-3 text-left text-xs font-semibold text-warm-gray-500 uppercase">Entity ID</th>
-                <th className="px-4 py-3 text-left text-xs font-semibold text-warm-gray-500 uppercase">Details</th>
-                <th className="px-4 py-3 text-left text-xs font-semibold text-warm-gray-500 uppercase">IP</th>
+              <tr className="border-b border-blush-200 bg-cream-50">
+                <th className="px-4 py-3 text-left text-xs font-semibold text-muted-500 uppercase">Timestamp</th>
+                <th className="px-4 py-3 text-left text-xs font-semibold text-muted-500 uppercase">User</th>
+                <th className="px-4 py-3 text-left text-xs font-semibold text-muted-500 uppercase">Action</th>
+                <th className="px-4 py-3 text-left text-xs font-semibold text-muted-500 uppercase">Entity</th>
+                <th className="px-4 py-3 text-left text-xs font-semibold text-muted-500 uppercase">Entity ID</th>
+                <th className="px-4 py-3 text-left text-xs font-semibold text-muted-500 uppercase">Details</th>
+                <th className="px-4 py-3 text-left text-xs font-semibold text-muted-500 uppercase">IP</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-cream-100">
+            <tbody className="divide-y divide-cream-50">
               {logs.map((log) => (
                 <tr key={log.id}>
                   <td className="px-4 py-3 text-xs whitespace-nowrap">{formatDateTime(log.timestamp)}</td>
@@ -87,7 +87,7 @@ export default function AdminAuditLogsPage() {
                   <td className="px-4 py-3 text-xs max-w-xs">
                     <button
                       type="button"
-                      className="text-terracotta-600 hover:underline"
+                      className="text-rose-600 hover:underline"
                       onClick={() => {
                         const details = JSON.stringify(log.details, null, 2);
                         alert(details);

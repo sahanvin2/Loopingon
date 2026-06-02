@@ -198,14 +198,14 @@ export function Sidebar({ variant = "vendor", className }: SidebarProps) {
   return (
     <aside
       className={cn(
-        "hidden md:flex flex-col w-64 h-full bg-white border-r border-cream-200 overflow-y-auto",
+        "hidden md:flex flex-col w-64 h-full bg-white border-r border-blush-200 overflow-y-auto",
         className,
       )}
     >
       <nav className="flex-1 px-3 py-4 space-y-6">
         {sections.map((section) => (
           <div key={section.heading}>
-            <h3 className="px-3 mb-2 text-xs font-semibold text-warm-gray-500 uppercase tracking-wider">
+            <h3 className="px-3 mb-2 text-xs font-semibold text-muted-500 uppercase tracking-wider">
               {section.heading}
             </h3>
             <ul className="space-y-0.5">
@@ -224,14 +224,14 @@ export function Sidebar({ variant = "vendor", className }: SidebarProps) {
                         className={cn(
                           "flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors",
                           isItemActive
-                            ? "bg-terracotta-50 text-terracotta-700 font-medium border-l-2 border-terracotta-500"
-                            : "text-charcoal-600 hover:bg-warm-gray-50 border-l-2 border-transparent",
+                            ? "bg-rose-50 text-rose-700 font-medium border-l-2 border-rose-500"
+                            : "text-charcoal-600 hover:bg-blush-50 border-l-2 border-transparent",
                         )}
                       >
                         <item.icon className="w-4 h-4 shrink-0" />
                         <span className="flex-1">{item.label}</span>
                         {item.badge && (
-                          <span className="px-2 py-0.5 rounded-full bg-terracotta-100 text-terracotta-700 text-xs font-medium">
+                          <span className="px-2 py-0.5 rounded-full bg-rose-100 text-rose-700 text-xs font-medium">
                             {item.badge}
                           </span>
                         )}
@@ -244,8 +244,8 @@ export function Sidebar({ variant = "vendor", className }: SidebarProps) {
                           className={cn(
                             "flex items-center gap-3 w-full px-3 py-2 rounded-lg text-sm transition-colors",
                             isItemActive
-                              ? "bg-terracotta-50 text-terracotta-700 font-medium border-l-2 border-terracotta-500"
-                              : "text-charcoal-600 hover:bg-warm-gray-50 border-l-2 border-transparent",
+                              ? "bg-rose-50 text-rose-700 font-medium border-l-2 border-rose-500"
+                              : "text-charcoal-600 hover:bg-blush-50 border-l-2 border-transparent",
                           )}
                         >
                           <item.icon className="w-4 h-4 shrink-0" />
@@ -263,7 +263,7 @@ export function Sidebar({ variant = "vendor", className }: SidebarProps) {
                               initial={{ opacity: 0, height: 0 }}
                               animate={{ opacity: 1, height: "auto" }}
                               exit={{ opacity: 0, height: 0 }}
-                              className="overflow-hidden ml-7 border-l-2 border-cream-200"
+                              className="overflow-hidden ml-7 border-l-2 border-blush-200"
                             >
                               {item.children?.map((child) => (
                                 <Link
@@ -272,8 +272,8 @@ export function Sidebar({ variant = "vendor", className }: SidebarProps) {
                                   className={cn(
                                     "block py-2 pl-4 text-sm transition-colors",
                                     isActive(child.href)
-                                      ? "text-terracotta-700 font-medium bg-terracotta-50/50"
-                                      : "text-warm-gray-600 hover:text-charcoal-700",
+                                      ? "text-rose-700 font-medium bg-rose-50/50"
+                                      : "text-muted-600 hover:text-charcoal-700",
                                   )}
                                 >
                                   {child.label}

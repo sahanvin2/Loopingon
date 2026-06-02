@@ -97,15 +97,15 @@ export default function ReviewsPage() {
     >
       <h1 className="text-2xl font-bold text-charcoal-900">My Reviews</h1>
 
-      <div className="flex gap-1 bg-white rounded-lg border border-cream-200 p-1 w-fit">
+      <div className="flex gap-1 bg-white rounded-lg border border-blush-200 p-1 w-fit">
         <button
           type="button"
           onClick={() => setActiveTab("submitted")}
           className={cn(
             "px-4 py-2 text-sm font-medium rounded-md transition-colors",
             activeTab === "submitted"
-              ? "bg-terracotta-600 text-white"
-              : "text-warm-gray-600 hover:text-charcoal-700",
+              ? "bg-rose-600 text-white"
+              : "text-muted-600 hover:text-charcoal-700",
           )}
         >
           Submitted Reviews ({submitted.length})
@@ -116,8 +116,8 @@ export default function ReviewsPage() {
           className={cn(
             "px-4 py-2 text-sm font-medium rounded-md transition-colors",
             activeTab === "pending"
-              ? "bg-terracotta-600 text-white"
-              : "text-warm-gray-600 hover:text-charcoal-700",
+              ? "bg-rose-600 text-white"
+              : "text-muted-600 hover:text-charcoal-700",
           )}
         >
           Pending Reviews ({pending.length})
@@ -137,13 +137,13 @@ export default function ReviewsPage() {
             pending.map((p) => (
               <div
                 key={p.id}
-                className="bg-white rounded-lg border border-cream-200 p-4 flex items-center gap-4"
+                className="bg-white rounded-lg border border-blush-200 p-4 flex items-center gap-4"
               >
-                <div className="w-16 h-16 rounded-md border border-cream-200 overflow-hidden bg-cream-50 flex-shrink-0">
+                <div className="w-16 h-16 rounded-md border border-blush-200 overflow-hidden bg-cream-50 flex-shrink-0">
                   {p.image ? (
                     <img src={p.image} alt={p.title} className="w-full h-full object-cover" />
                   ) : (
-                    <div className="w-full h-full bg-cream-100" />
+                    <div className="w-full h-full bg-cream-50" />
                   )}
                 </div>
                 <div className="flex-1 min-w-0">
@@ -158,7 +158,7 @@ export default function ReviewsPage() {
                     setShowReviewModal(true);
                     reset({ rating: 5 });
                   }}
-                  className="px-4 py-2 bg-terracotta-600 text-white rounded-lg text-sm font-medium hover:bg-terracotta-700 transition-colors"
+                  className="px-4 py-2 bg-rose-600 text-white rounded-lg text-sm font-medium hover:bg-rose-700 transition-colors"
                 >
                   Write Review
                 </button>
@@ -177,11 +177,11 @@ export default function ReviewsPage() {
             submitted.map((review) => (
               <div
                 key={review.id}
-                className="bg-white rounded-lg border border-cream-200 p-5"
+                className="bg-white rounded-lg border border-blush-200 p-5"
               >
                 <div className="flex items-start gap-4">
                   {review.product && (
-                    <div className="w-16 h-16 rounded-md border border-cream-200 overflow-hidden bg-cream-50 flex-shrink-0">
+                    <div className="w-16 h-16 rounded-md border border-blush-200 overflow-hidden bg-cream-50 flex-shrink-0">
                       {review.product.images?.[0]?.url ? (
                         <img
                           src={review.product.images[0].url}
@@ -189,14 +189,14 @@ export default function ReviewsPage() {
                           className="w-full h-full object-cover"
                         />
                       ) : (
-                        <div className="w-full h-full bg-cream-100" />
+                        <div className="w-full h-full bg-cream-50" />
                       )}
                     </div>
                   )}
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
                       <RatingStars rating={review.rating} size="sm" />
-                      <span className="text-xs text-warm-gray-500">
+                      <span className="text-xs text-muted-500">
                         {formatDate(review.createdAt)}
                       </span>
                     </div>
@@ -211,7 +211,7 @@ export default function ReviewsPage() {
                       </p>
                     )}
                     {review.vendorReply && (
-                      <div className="mt-3 p-3 bg-cream-50 rounded-lg text-sm text-warm-gray-600">
+                      <div className="mt-3 p-3 bg-cream-50 rounded-lg text-sm text-muted-600">
                         <span className="font-medium text-charcoal-700">
                           Vendor reply:
                         </span>{" "}
@@ -229,7 +229,7 @@ export default function ReviewsPage() {
                             content: review.content || undefined,
                           });
                         }}
-                        className="flex items-center gap-1 text-xs font-medium text-warm-gray-600 hover:text-terracotta-600 transition-colors"
+                        className="flex items-center gap-1 text-xs font-medium text-muted-600 hover:text-rose-600 transition-colors"
                       >
                         <Pencil className="w-3.5 h-3.5" />
                         Edit
@@ -241,7 +241,7 @@ export default function ReviewsPage() {
                             deleteReviewMutation.mutate(review.id);
                           }
                         }}
-                        className="flex items-center gap-1 text-xs font-medium text-warm-gray-600 hover:text-red-600 transition-colors"
+                        className="flex items-center gap-1 text-xs font-medium text-muted-600 hover:text-red-600 transition-colors"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
                         Delete
@@ -292,7 +292,7 @@ export default function ReviewsPage() {
                         className={cn(
                           "w-8 h-8 transition-colors",
                           star <= (rating || 0)
-                            ? "fill-gold-400 text-gold-400"
+                            ? "fill-blush-400 text-blush-400"
                             : "text-cream-300",
                         )}
                       />
@@ -308,7 +308,7 @@ export default function ReviewsPage() {
                   </label>
                   <input
                     {...register("title")}
-                    className="w-full px-3 py-2 border border-cream-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-terracotta-500"
+                    className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-rose-500"
                     placeholder="Summary of your review"
                   />
                   {errors.title && (
@@ -324,7 +324,7 @@ export default function ReviewsPage() {
                   <textarea
                     {...register("content")}
                     rows={4}
-                    className="w-full px-3 py-2 border border-cream-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-terracotta-500"
+                    className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-rose-500"
                     placeholder="Share your experience with this product..."
                   />
                   {errors.content && (
@@ -340,14 +340,14 @@ export default function ReviewsPage() {
                       setShowReviewModal(false);
                       setEditingReview(null);
                     }}
-                    className="flex-1 px-4 py-2.5 border border-cream-200 rounded-lg text-sm font-medium text-charcoal-700 hover:bg-cream-50"
+                    className="flex-1 px-4 py-2.5 border border-blush-200 rounded-lg text-sm font-medium text-charcoal-700 hover:bg-cream-50"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="flex-1 px-4 py-2.5 bg-terracotta-600 text-white rounded-lg text-sm font-medium hover:bg-terracotta-700 disabled:opacity-50"
+                    className="flex-1 px-4 py-2.5 bg-rose-600 text-white rounded-lg text-sm font-medium hover:bg-rose-700 disabled:opacity-50"
                   >
                     {isSubmitting ? "Submitting..." : editingReview ? "Update Review" : "Submit Review"}
                   </button>

@@ -62,14 +62,14 @@ export default function SustainabilityPage() {
         </div>
       </section>
 
-      <section className="bg-terracotta-600 py-14">
+      <section className="bg-rose-600 py-14">
         <div className="mx-auto max-w-5xl px-4">
           <div className="grid gap-8 sm:grid-cols-3">
             {stats.map((s) => (
               <div key={s.label} className="text-center">
-                <s.icon className="mx-auto mb-3 h-8 w-8 text-terracotta-200" />
+                <s.icon className="mx-auto mb-3 h-8 w-8 text-rose-200" />
                 <p className="font-serif text-4xl font-bold text-white">{s.value}</p>
-                <p className="mt-1 text-sm text-terracotta-200">{s.label}</p>
+                <p className="mt-1 text-sm text-rose-200">{s.label}</p>
               </div>
             ))}
           </div>
@@ -81,23 +81,23 @@ export default function SustainabilityPage() {
           <h2 className="text-center font-serif text-3xl font-bold text-charcoal-900">Our Initiatives</h2>
           <div className="mt-12 grid gap-8 sm:grid-cols-2">
             {initiatives.map((i) => (
-              <div key={i.title} className="rounded-xl border border-cream-300 bg-cream-100 p-6">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-teal-100">
-                  <i.icon className="h-6 w-6 text-teal-600" />
+              <div key={i.title} className="rounded-xl border border-blush-300 bg-cream-50 p-6">
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-muted-100">
+                  <i.icon className="h-6 w-6 text-muted-600" />
                 </div>
                 <h3 className="font-serif text-lg font-semibold text-charcoal-800">{i.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-warm-gray-600">{i.description}</p>
+                <p className="mt-2 text-sm leading-relaxed text-muted-600">{i.description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-cream-100 py-20">
+      <section className="bg-cream-50 py-20">
         <div className="mx-auto max-w-6xl px-4">
           <div className="flex items-center justify-between">
             <h2 className="font-serif text-3xl font-bold text-charcoal-900">Shop Eco-Friendly</h2>
-            <Link href="/products?isEcoFriendly=true" className="text-sm font-medium text-terracotta-600 hover:underline">View All</Link>
+            <Link href="/products?isEcoFriendly=true" className="text-sm font-medium text-rose-600 hover:underline">View All</Link>
           </div>
           <Suspense fallback={<LoadingSkeleton variant="product-card" count={4} className="mt-8" />}>
             <div className="mt-8">
@@ -112,23 +112,23 @@ export default function SustainabilityPage() {
           <h2 className="text-center font-serif text-3xl font-bold text-charcoal-900">Tips for Sustainable Shopping</h2>
           <div className="mt-8 space-y-3">
             {tips.map((tip) => (
-              <div key={tip} className="flex items-start gap-3 rounded-xl bg-cream-100 p-4">
-                <Leaf className="mt-0.5 h-5 w-5 shrink-0 text-teal-600" />
-                <span className="text-sm text-warm-gray-700">{tip}</span>
+              <div key={tip} className="flex items-start gap-3 rounded-xl bg-cream-50 p-4">
+                <Leaf className="mt-0.5 h-5 w-5 shrink-0 text-muted-600" />
+                <span className="text-sm text-muted-700">{tip}</span>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-cream-100 py-20">
+      <section className="bg-cream-50 py-20">
         <div className="mx-auto max-w-6xl px-4 text-center">
           <h2 className="font-serif text-3xl font-bold text-charcoal-900">Our Partners</h2>
           <div className="mt-10 grid grid-cols-2 gap-8 sm:grid-cols-4">
             {["Eco-Pack Lanka", "Reforest Sri Lanka", "Green Carbon Fund", "Sustainable Crafts Council"].map((name) => (
               <div key={name} className="rounded-xl bg-white p-6 shadow-soft-sm">
-                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-teal-50">
-                  <Heart className="h-8 w-8 text-teal-500" />
+                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-muted-50">
+                  <Heart className="h-8 w-8 text-muted-500" />
                 </div>
                 <p className="mt-3 text-sm font-medium text-charcoal-700">{name}</p>
               </div>

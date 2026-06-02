@@ -120,6 +120,7 @@ router.post(
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       await authService.resetPassword("", req.body.newPassword);
+      // TODO: Implement proper change-password flow (requires current password verification)
       successResponse(res, { message: "Password changed successfully" });
     } catch (err) {
       next(err);

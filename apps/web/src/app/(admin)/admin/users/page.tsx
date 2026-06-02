@@ -50,13 +50,13 @@ export default function AdminUsersPage() {
           User Management
         </h1>
         <div className="relative max-w-xs">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-warm-gray-400" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-400" />
           <input
             type="text"
             placeholder="Search users..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 border border-cream-200 rounded-lg text-sm focus:ring-2 focus:ring-terracotta-500"
+            className="w-full pl-10 pr-4 py-2 border border-blush-200 rounded-lg text-sm focus:ring-2 focus:ring-rose-500"
           />
         </div>
       </div>
@@ -72,14 +72,14 @@ export default function AdminUsersPage() {
               header: "User",
               accessor: (row: User) => (
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-warm-gray-200 flex items-center justify-center text-sm font-bold text-warm-gray-500">
+                  <div className="w-10 h-10 rounded-full bg-muted-200 flex items-center justify-center text-sm font-bold text-muted-500">
                     {(row.fullName?.charAt(0) || "?").toUpperCase()}
                   </div>
                   <div>
                     <p className="text-sm font-medium text-charcoal-900">
                       {row.fullName}
                     </p>
-                    <p className="text-xs text-warm-gray-500">{row.email}</p>
+                    <p className="text-xs text-muted-500">{row.email}</p>
                   </div>
                 </div>
               ),
@@ -92,7 +92,7 @@ export default function AdminUsersPage() {
               header: "Role",
               accessor: (row: User) => (
                 <Badge
-                  variant={row.role === "CUSTOMER" ? "teal" : "gold"}
+                  variant={row.role === "CUSTOMER" ? "muted" : "blush"}
                   size="sm"
                 >
                   {row.role}
@@ -119,7 +119,7 @@ export default function AdminUsersPage() {
               header: "Status",
               accessor: (row: User) => (
                 <Badge
-                  variant={row.isActive ? "teal" : "red"}
+                  variant={row.isActive ? "muted" : "red"}
                   size="sm"
                 >
                   {row.isActive ? "Active" : "Banned"}
@@ -132,7 +132,7 @@ export default function AdminUsersPage() {
                 <div className="flex items-center gap-1">
                   <Link
                     href={`/admin/users/${row.id}`}
-                    className="px-2 py-1 text-xs font-medium text-terracotta-600 hover:bg-terracotta-50 rounded"
+                    className="px-2 py-1 text-xs font-medium text-rose-600 hover:bg-rose-50 rounded"
                   >
                     View
                   </Link>

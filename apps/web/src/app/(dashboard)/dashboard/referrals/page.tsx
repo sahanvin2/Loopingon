@@ -83,24 +83,24 @@ export default function ReferralsPage() {
           title="Successful"
           value={summary?.successful ?? 0}
           icon={UserPlus}
-          variant="teal"
+          variant="muted"
         />
         <StatCard
           title="Pending"
           value={summary?.pending ?? 0}
           icon={Clock}
-          variant="gold"
+          variant="blush"
         />
         <StatCard
           title="Total Earnings"
           value={formatPrice(Number(summary?.totalEarnings || 0))}
           icon={DollarSign}
-          variant="terracotta"
+          variant="rose"
         />
       </div>
 
       {referralCode && (
-        <div className="bg-gradient-to-r from-gold-400 to-gold-500 rounded-xl p-6 text-white">
+        <div className="bg-gradient-to-r from-blush-400 to-blush-500 rounded-xl p-6 text-white">
           <h2 className="text-lg font-semibold mb-2">Your Referral Code</h2>
           <div className="flex items-center gap-3">
             <code className="px-4 py-2 bg-white/20 rounded-lg text-2xl font-mono font-bold tracking-wider">
@@ -119,7 +119,7 @@ export default function ReferralsPage() {
               )}
             </button>
           </div>
-          <p className="text-sm text-gold-100 mt-2 break-all">
+          <p className="text-sm text-blush-100 mt-2 break-all">
             {shareUrl}
           </p>
           <div className="flex flex-wrap items-center gap-2 mt-4">
@@ -158,7 +158,7 @@ export default function ReferralsPage() {
         </div>
       )}
 
-      <div className="bg-white rounded-xl border border-cream-200 p-6">
+      <div className="bg-white rounded-xl border border-blush-200 p-6">
         <h2 className="text-lg font-semibold text-charcoal-900 mb-4">
           Referral History
         </h2>
@@ -173,34 +173,34 @@ export default function ReferralsPage() {
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-cream-200 text-left">
-                  <th className="px-4 py-3 text-xs font-semibold text-warm-gray-500 uppercase">
+                <tr className="border-b border-blush-200 text-left">
+                  <th className="px-4 py-3 text-xs font-semibold text-muted-500 uppercase">
                     Name
                   </th>
-                  <th className="px-4 py-3 text-xs font-semibold text-warm-gray-500 uppercase">
+                  <th className="px-4 py-3 text-xs font-semibold text-muted-500 uppercase">
                     Date
                   </th>
-                  <th className="px-4 py-3 text-xs font-semibold text-warm-gray-500 uppercase">
+                  <th className="px-4 py-3 text-xs font-semibold text-muted-500 uppercase">
                     Status
                   </th>
-                  <th className="px-4 py-3 text-xs font-semibold text-warm-gray-500 uppercase">
+                  <th className="px-4 py-3 text-xs font-semibold text-muted-500 uppercase">
                     Reward
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-cream-100">
+              <tbody className="divide-y divide-cream-50">
                 {referrals.map((ref) => (
                   <tr key={ref.id}>
                     <td className="px-4 py-3 text-sm text-charcoal-700">
                       {ref.referredUserId || "—"}
                     </td>
-                    <td className="px-4 py-3 text-xs text-warm-gray-500">
+                    <td className="px-4 py-3 text-xs text-muted-500">
                       {formatDate(ref.createdAt)}
                     </td>
                     <td className="px-4 py-3">
                       <Badge
                         variant={
-                          ref.status === "COMPLETED" ? "teal" : "amber"
+                          ref.status === "COMPLETED" ? "muted" : "amber"
                         }
                         size="sm"
                       >
@@ -220,7 +220,7 @@ export default function ReferralsPage() {
         )}
       </div>
 
-      <div className="bg-white rounded-xl border border-cream-200 overflow-hidden">
+      <div className="bg-white rounded-xl border border-blush-200 overflow-hidden">
         <button
           type="button"
           onClick={() => setHowItWorksOpen(!howItWorksOpen)}
@@ -230,9 +230,9 @@ export default function ReferralsPage() {
             How It Works
           </h2>
           {howItWorksOpen ? (
-            <ChevronUp className="w-5 h-5 text-warm-gray-500" />
+            <ChevronUp className="w-5 h-5 text-muted-500" />
           ) : (
-            <ChevronDown className="w-5 h-5 text-warm-gray-500" />
+            <ChevronDown className="w-5 h-5 text-muted-500" />
           )}
         </button>
         {howItWorksOpen && (
@@ -242,38 +242,38 @@ export default function ReferralsPage() {
             className="px-5 pb-5 space-y-4"
           >
             <div className="flex items-start gap-4">
-              <div className="w-8 h-8 rounded-full bg-terracotta-100 text-terracotta-600 flex items-center justify-center font-bold text-sm flex-shrink-0">
+              <div className="w-8 h-8 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center font-bold text-sm flex-shrink-0">
                 1
               </div>
               <div>
                 <h4 className="font-medium text-charcoal-900">Share Your Code</h4>
-                <p className="text-sm text-warm-gray-600">
+                <p className="text-sm text-muted-600">
                   Share your unique referral code with friends via WhatsApp,
                   Facebook, or by copying the link directly.
                 </p>
               </div>
             </div>
             <div className="flex items-start gap-4">
-              <div className="w-8 h-8 rounded-full bg-terracotta-100 text-terracotta-600 flex items-center justify-center font-bold text-sm flex-shrink-0">
+              <div className="w-8 h-8 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center font-bold text-sm flex-shrink-0">
                 2
               </div>
               <div>
                 <h4 className="font-medium text-charcoal-900">
                   Friends Sign Up & Shop
                 </h4>
-                <p className="text-sm text-warm-gray-600">
+                <p className="text-sm text-muted-600">
                   When they sign up using your code and make their first purchase,
                   you both earn rewards.
                 </p>
               </div>
             </div>
             <div className="flex items-start gap-4">
-              <div className="w-8 h-8 rounded-full bg-terracotta-100 text-terracotta-600 flex items-center justify-center font-bold text-sm flex-shrink-0">
+              <div className="w-8 h-8 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center font-bold text-sm flex-shrink-0">
                 3
               </div>
               <div>
                 <h4 className="font-medium text-charcoal-900">Earn Rewards</h4>
-                <p className="text-sm text-warm-gray-600">
+                <p className="text-sm text-muted-600">
                   You earn loyalty points or cash rewards for every successful
                   referral. The more you share, the more you earn!
                 </p>

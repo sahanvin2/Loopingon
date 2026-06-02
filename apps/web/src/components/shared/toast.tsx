@@ -4,12 +4,12 @@ import { toast as sonnerToast } from "sonner";
 
 export { Toaster } from "sonner";
 
-function showToast(message: string, variant: "success" | "error" | "warning" | "info") {
+function triggerToast(message: string, variant: "success" | "error" | "warning" | "info") {
   const styles = {
     success: {
       style: {
         background: "#ecfdf5",
-        border: "1px solid #2D8B7D",
+        border: "1px solid #827378",
         color: "#1a4944",
       },
     },
@@ -23,7 +23,7 @@ function showToast(message: string, variant: "success" | "error" | "warning" | "
     warning: {
       style: {
         background: "#fefce8",
-        border: "1px solid #D4A843",
+        border: "1px solid #dc9b91",
         color: "#735a1f",
       },
     },
@@ -43,8 +43,8 @@ function showToast(message: string, variant: "success" | "error" | "warning" | "
 }
 
 export const showToast = {
-  success: (msg: string) => showToast(msg, "success"),
-  error: (msg: string) => showToast(msg, "error"),
-  warning: (msg: string) => showToast(msg, "warning"),
-  info: (msg: string) => showToast(msg, "info"),
+  success: (msg: string) => triggerToast(msg, "success"),
+  error: (msg: string) => triggerToast(msg, "error"),
+  warning: (msg: string) => triggerToast(msg, "warning"),
+  info: (msg: string) => triggerToast(msg, "info"),
 };

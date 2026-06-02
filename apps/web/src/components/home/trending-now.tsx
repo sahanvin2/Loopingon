@@ -74,8 +74,8 @@ export function TrendingNow() {
             disabled={!canScrollLeft}
             className={cn(
               "w-10 h-10 rounded-full flex items-center justify-center",
-              "border border-cream-300 text-warm-gray-600",
-              "hover:bg-warm-gray-100 transition-colors",
+              "border border-cream-300 text-muted-600",
+              "hover:bg-muted-100 transition-colors",
               "disabled:opacity-40 disabled:cursor-not-allowed",
             )}
             aria-label="Scroll left"
@@ -88,8 +88,8 @@ export function TrendingNow() {
             disabled={!canScrollRight}
             className={cn(
               "w-10 h-10 rounded-full flex items-center justify-center",
-              "border border-cream-300 text-warm-gray-600",
-              "hover:bg-warm-gray-100 transition-colors",
+              "border border-cream-300 text-muted-600",
+              "hover:bg-muted-100 transition-colors",
               "disabled:opacity-40 disabled:cursor-not-allowed",
             )}
             aria-label="Scroll right"
@@ -123,7 +123,7 @@ export function TrendingNow() {
               className="flex-shrink-0 w-64 snap-start"
             >
               <div className="relative">
-                <Badge variant="gold" size="sm" className="absolute top-2 left-2 z-10">
+                <Badge variant="blush" size="sm" className="absolute top-2 left-2 z-10">
                   Trending
                 </Badge>
                 <ProductCard product={product} />

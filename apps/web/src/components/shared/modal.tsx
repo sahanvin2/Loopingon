@@ -83,7 +83,7 @@ export function Modal({
           <motion.div
             className={cn(
               "relative w-full bg-white rounded-xl shadow-lg",
-              "border border-cream-200",
+              "border border-blush-200",
               sizeStyles[size],
               className,
             )}
@@ -99,8 +99,8 @@ export function Modal({
             <div
               className="absolute bottom-0 left-0 right-0 h-1 rounded-b-xl opacity-30"
               style={{
-                background:
-                  "repeating-linear-gradient(90deg, #C75B39 0px, #C75B39 8px, transparent 8px, transparent 16px, #D4A843 16px, #D4A843 20px, transparent 20px, transparent 28px)",
+              background:
+                "repeating-linear-gradient(90deg, #b0566e 0px, #b0566e 8px, transparent 8px, transparent 16px, #dc9b91 16px, #dc9b91 20px, transparent 20px, transparent 28px)",
               }}
             />
 
@@ -117,7 +117,7 @@ export function Modal({
                 {description && (
                   <p
                     id="modal-description"
-                    className="mt-1 text-sm text-warm-gray-600"
+                    className="mt-1 text-sm text-muted-600"
                   >
                     {description}
                   </p>
@@ -130,9 +130,9 @@ export function Modal({
               onClick={onClose}
               className={cn(
                 "absolute top-4 right-4 p-1.5 rounded-lg",
-                "text-warm-gray-500 hover:text-charcoal-700",
-                "hover:bg-warm-gray-100 transition-colors",
-                "focus:outline-none focus:ring-2 focus:ring-terracotta-500",
+                "text-muted-500 hover:text-charcoal-700",
+                "hover:bg-muted-100 transition-colors",
+                "focus:outline-none focus:ring-2 focus:ring-rose-500",
               )}
               aria-label="Close modal"
             >

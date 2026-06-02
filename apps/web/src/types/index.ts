@@ -902,7 +902,7 @@ export interface AuthState {
 export interface CartState {
   items: CartItem[];
   itemCount: number;
-  subtotal: string;
+  subtotal: number;
 }
 
 export interface UIState {

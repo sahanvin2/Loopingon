@@ -47,26 +47,26 @@ export function ProductDetail({ product }: ProductDetailProps) {
         </div>
       </div>
 
-      <div className="mt-12 pt-12 border-t border-cream-200">
+      <div className="mt-12 pt-12 border-t border-blush-200">
         {product.description && (
           <section className="mb-12">
             <h2 className="font-serif text-2xl text-charcoal-900 mb-6">
               Description
             </h2>
             <div
-              className="prose prose-sm max-w-none text-warm-gray-600 leading-relaxed"
+              className="prose prose-sm max-w-none text-muted-600 leading-relaxed"
               dangerouslySetInnerHTML={{ __html: product.description }}
             />
           </section>
         )}
 
         {product.vendor && (
-          <section className="mb-12 bg-cream-50 rounded-xl p-6 border border-cream-200">
+          <section className="mb-12 bg-cream-50 rounded-xl p-6 border border-blush-200">
             <h2 className="font-serif text-2xl text-charcoal-900 mb-6">
               About the Artisan
             </h2>
             <div className="flex flex-col sm:flex-row items-start gap-6">
-              <div className="w-20 h-20 rounded-full border-2 border-cream-200 bg-white overflow-hidden shrink-0">
+              <div className="w-20 h-20 rounded-full border-2 border-blush-200 bg-white overflow-hidden shrink-0">
                 {product.vendor.storeLogo ? (
                   <Image
                     src={getImageUrl(product.vendor.storeLogo)}
@@ -76,7 +76,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
                     className="w-full h-full object-cover"
                   />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center text-2xl font-serif text-terracotta-600">
+                  <div className="w-full h-full flex items-center justify-center text-2xl font-serif text-rose-600">
                     {product.vendor.storeName.charAt(0)}
                   </div>
                 )}
@@ -88,18 +88,18 @@ export function ProductDetail({ product }: ProductDetailProps) {
                   </h3>
                   <VendorBadge />
                 </div>
-                <p className="text-sm text-warm-gray-500 mb-2">
+                <p className="text-sm text-muted-500 mb-2">
                   {product.vendor.workshopCity}, {product.vendor.workshopDistrict}
                   &nbsp;&middot;&nbsp;
                   {product.vendor.yearsOfExperience}+ years experience
                 </p>
-                <p className="text-sm text-warm-gray-600 line-clamp-3 mb-3">
+                <p className="text-sm text-muted-600 line-clamp-3 mb-3">
                   {product.vendor.storeDescription}
                 </p>
                 <Link
                   href={`/artisans/${product.vendor.storeSlug}`}
                   className={cn(
-                    "text-sm font-medium text-terracotta-600 hover:text-terracotta-700",
+                    "text-sm font-medium text-rose-600 hover:text-rose-700",
                     "hover:underline",
                   )}
                 >

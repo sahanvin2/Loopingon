@@ -35,12 +35,12 @@ export function CartItem({ item }: CartItemProps) {
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: 20 }}
       className={cn(
-        "flex gap-4 p-4 bg-white rounded-lg border border-cream-200",
+        "flex gap-4 p-4 bg-white rounded-lg border border-blush-200",
         "hover:shadow-sm transition-shadow",
       )}
     >
       <Link href={`/products/${product.slug}`} className="shrink-0">
-        <div className="w-24 h-24 rounded-lg overflow-hidden bg-warm-gray-100 relative">
+        <div className="w-24 h-24 rounded-lg overflow-hidden bg-muted-100 relative">
           <Image
             src={imageUrl}
             alt={product.title}
@@ -56,27 +56,27 @@ export function CartItem({ item }: CartItemProps) {
           <div>
             <Link
               href={`/products/${product.slug}`}
-              className="font-medium text-charcoal-900 hover:text-terracotta-600 transition-colors line-clamp-2"
+              className="font-medium text-charcoal-900 hover:text-rose-600 transition-colors line-clamp-2"
             >
               {product.title}
             </Link>
             {product.vendor && (
-              <p className="text-xs text-warm-gray-500 mt-0.5">
+              <p className="text-xs text-muted-500 mt-0.5">
                 {product.vendor.storeName}
               </p>
             )}
           </div>
-          <span className="font-semibold text-terracotta-600 whitespace-nowrap">
+          <span className="font-semibold text-rose-600 whitespace-nowrap">
             {formatPrice(subtotal)}
           </span>
         </div>
 
         {variant && (
-          <p className="text-xs text-warm-gray-500 mt-1">{variant.name}</p>
+          <p className="text-xs text-muted-500 mt-1">{variant.name}</p>
         )}
 
         <div className="flex items-center justify-between mt-3">
-          <div className="flex items-center border border-cream-300 rounded-lg">
+          <div className="flex items-center border border-blush-300 rounded-lg">
             <button
               type="button"
               onClick={() =>
@@ -86,7 +86,7 @@ export function CartItem({ item }: CartItemProps) {
                 })
               }
               disabled={updateCartItem.isPending}
-              className="p-1.5 text-warm-gray-600 hover:text-charcoal-700 disabled:opacity-40"
+              className="p-1.5 text-muted-600 hover:text-charcoal-700 disabled:opacity-40"
               aria-label="Decrease quantity"
             >
               <Minus className="w-3.5 h-3.5" />
@@ -103,7 +103,7 @@ export function CartItem({ item }: CartItemProps) {
                 })
               }
               disabled={updateCartItem.isPending}
-              className="p-1.5 text-warm-gray-600 hover:text-charcoal-700 disabled:opacity-40"
+              className="p-1.5 text-muted-600 hover:text-charcoal-700 disabled:opacity-40"
               aria-label="Increase quantity"
             >
               <Plus className="w-3.5 h-3.5" />
@@ -113,7 +113,7 @@ export function CartItem({ item }: CartItemProps) {
           <div className="flex items-center gap-3">
             <button
               type="button"
-              className="text-xs text-warm-gray-500 hover:text-terracotta-600 transition-colors flex items-center gap-1"
+              className="text-xs text-muted-500 hover:text-rose-600 transition-colors flex items-center gap-1"
               aria-label="Save for later"
             >
               <Heart className="w-3.5 h-3.5" /> Save

@@ -30,7 +30,7 @@ export default function AdminBannersPage() {
         <button
           type="button"
           onClick={() => { setEditing(null); setShowModal(true); }}
-          className="inline-flex items-center gap-2 px-5 py-2.5 bg-terracotta-600 text-white rounded-lg text-sm font-medium hover:bg-terracotta-700"
+          className="inline-flex items-center gap-2 px-5 py-2.5 bg-rose-600 text-white rounded-lg text-sm font-medium hover:bg-rose-700"
         >
           <Plus className="w-4 h-4" /> Create Banner
         </button>
@@ -41,10 +41,10 @@ export default function AdminBannersPage() {
       ) : banners.length === 0 ? (
         <EmptyState title="No banners" />
       ) : (
-        <div className="bg-white rounded-lg border border-cream-200 overflow-x-auto">
+        <div className="bg-white rounded-lg border border-blush-200 overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-cream-200 bg-cream-50">
+              <tr className="border-b border-blush-200 bg-cream-50">
                 <th className="px-4 py-3 text-left text-xs font-semibold uppercase">Image</th>
                 <th className="px-4 py-3 text-left text-xs font-semibold uppercase">Title</th>
                 <th className="px-4 py-3 text-left text-xs font-semibold uppercase">Position</th>
@@ -54,7 +54,7 @@ export default function AdminBannersPage() {
                 <th className="px-4 py-3 text-left text-xs font-semibold uppercase">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-cream-100">
+            <tbody className="divide-y divide-cream-50">
               {banners.map((banner: any) => (
                 <tr key={banner.id}>
                   <td className="px-4 py-3">
@@ -64,13 +64,13 @@ export default function AdminBannersPage() {
                   </td>
                   <td className="px-4 py-3 font-medium">{banner.title}</td>
                   <td className="px-4 py-3">{banner.position}</td>
-                  <td className="px-4 py-3"><Badge variant={banner.active ? "teal" : "gray"} size="sm">{banner.active ? "Active" : "Inactive"}</Badge></td>
+                  <td className="px-4 py-3"><Badge variant={banner.active ? "muted" : "gray"} size="sm">{banner.active ? "Active" : "Inactive"}</Badge></td>
                   <td className="px-4 py-3 text-xs">{banner.startDate ? formatDate(banner.startDate) : "—"}</td>
                   <td className="px-4 py-3 text-right">{banner.sortOrder}</td>
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-1">
-                      <button className="p-1 text-warm-gray-500 hover:text-terracotta-600"><Pencil className="w-3.5 h-3.5" /></button>
-                      <button className="p-1 text-warm-gray-500 hover:text-red-600"><Trash2 className="w-3.5 h-3.5" /></button>
+                      <button className="p-1 text-muted-500 hover:text-rose-600"><Pencil className="w-3.5 h-3.5" /></button>
+                      <button className="p-1 text-muted-500 hover:text-red-600"><Trash2 className="w-3.5 h-3.5" /></button>
                     </div>
                   </td>
                 </tr>

@@ -52,12 +52,13 @@ export function useAddToCart() {
     onMutate: async ({ productId, variantId, quantity }) => {
       await queryClient.cancelQueries({ queryKey: ["cart"] });
       const previousItems = items;
+      const safeQuantity = quantity ?? 1;
       addItem({
         id: crypto.randomUUID(),
         cartId: "",
         productId,
         variantId: variantId || null,
-        quantity,
+        quantity: safeQuantity,
         price: "0",
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),

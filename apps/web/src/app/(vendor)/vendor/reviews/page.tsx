@@ -45,7 +45,7 @@ export default function VendorReviewsPage() {
       <div className="flex items-center gap-3">
         <h1 className="text-2xl font-bold text-charcoal-900">Reviews</h1>
         {pendingReplies > 0 && (
-          <Badge variant="terracotta">{pendingReplies} pending replies</Badge>
+          <Badge variant="rose">{pendingReplies} pending replies</Badge>
         )}
       </div>
 
@@ -62,13 +62,13 @@ export default function VendorReviewsPage() {
           {reviews.map((review) => (
             <div
               key={review.id}
-              className="bg-white rounded-lg border border-cream-200 p-5"
+              className="bg-white rounded-lg border border-blush-200 p-5"
             >
               <div className="flex items-start justify-between mb-3">
                 <div>
                   <div className="flex items-center gap-2 mb-1">
                     <RatingStars rating={review.rating} size="sm" />
-                    <span className="text-xs text-warm-gray-500">
+                    <span className="text-xs text-muted-500">
                       {formatDate(review.createdAt)}
                     </span>
                   </div>
@@ -77,7 +77,7 @@ export default function VendorReviewsPage() {
                       {review.customer?.fullName || "Customer"}
                     </span>
                     {review.product && (
-                      <span className="text-warm-gray-500">
+                      <span className="text-muted-500">
                         {" "}
                         - {review.product.title}
                       </span>
@@ -88,7 +88,7 @@ export default function VendorReviewsPage() {
                   <button
                     type="button"
                     onClick={() => setReplyingTo(review.id)}
-                    className="flex items-center gap-1.5 text-xs font-medium text-terracotta-600 hover:text-terracotta-700"
+                    className="flex items-center gap-1.5 text-xs font-medium text-rose-600 hover:text-rose-700"
                   >
                     <MessageSquare className="w-3.5 h-3.5" />
                     Reply
@@ -103,7 +103,7 @@ export default function VendorReviewsPage() {
               )}
 
               {review.vendorReply && (
-                <div className="p-3 bg-cream-50 rounded-lg text-sm text-warm-gray-600">
+                <div className="p-3 bg-cream-50 rounded-lg text-sm text-muted-600">
                   <span className="font-medium text-charcoal-700">
                     Your reply:
                   </span>{" "}
@@ -117,7 +117,7 @@ export default function VendorReviewsPage() {
                     value={replyText}
                     onChange={(e) => setReplyText(e.target.value)}
                     rows={3}
-                    className="w-full px-3 py-2 border border-cream-200 rounded-lg text-sm focus:ring-2 focus:ring-terracotta-500"
+                    className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm focus:ring-2 focus:ring-rose-500"
                     placeholder="Write your reply..."
                   />
                   <div className="flex gap-2 mt-2">
@@ -127,7 +127,7 @@ export default function VendorReviewsPage() {
                         setReplyingTo(null);
                         setReplyText("");
                       }}
-                      className="px-3 py-1.5 text-xs font-medium text-warm-gray-600 hover:bg-cream-100 rounded-md"
+                      className="px-3 py-1.5 text-xs font-medium text-muted-600 hover:bg-cream-50 rounded-md"
                     >
                       Cancel
                     </button>
@@ -140,7 +140,7 @@ export default function VendorReviewsPage() {
                         })
                       }
                       disabled={!replyText.trim() || replyMutation.isPending}
-                      className="px-3 py-1.5 text-xs font-medium bg-terracotta-600 text-white rounded-md hover:bg-terracotta-700 disabled:opacity-50"
+                      className="px-3 py-1.5 text-xs font-medium bg-rose-600 text-white rounded-md hover:bg-rose-700 disabled:opacity-50"
                     >
                       {replyMutation.isPending ? "Posting..." : "Post Reply"}
                     </button>

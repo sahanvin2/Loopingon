@@ -70,7 +70,7 @@ export default function VendorOrdersPage() {
       </div>
 
       <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
-        <div className="flex gap-1 bg-white rounded-lg border border-cream-200 p-1 overflow-x-auto">
+        <div className="flex gap-1 bg-white rounded-lg border border-blush-200 p-1 overflow-x-auto">
           {statusTabs.map((tab) => (
             <button
               key={tab.key}
@@ -82,8 +82,8 @@ export default function VendorOrdersPage() {
               className={cn(
                 "px-3 py-1.5 text-xs font-medium rounded-md whitespace-nowrap transition-colors",
                 activeTab === tab.key
-                  ? "bg-terracotta-600 text-white"
-                  : "text-warm-gray-600 hover:text-charcoal-700",
+                  ? "bg-rose-600 text-white"
+                  : "text-muted-600 hover:text-charcoal-700",
               )}
             >
               {tab.label}
@@ -91,27 +91,27 @@ export default function VendorOrdersPage() {
           ))}
         </div>
         <div className="relative flex-1 max-w-xs">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-warm-gray-400" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-400" />
           <input
             type="text"
             placeholder="Search orders..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 border border-cream-200 rounded-lg text-sm focus:ring-2 focus:ring-terracotta-500"
+            className="w-full pl-10 pr-4 py-2 border border-blush-200 rounded-lg text-sm focus:ring-2 focus:ring-rose-500"
           />
         </div>
       </div>
 
       {selectedRows.size > 0 && (
-        <div className="flex items-center gap-2 p-3 bg-teal-50 border border-teal-200 rounded-lg">
-          <span className="text-sm font-medium text-teal-700">
+        <div className="flex items-center gap-2 p-3 bg-muted-50 border border-muted-200 rounded-lg">
+          <span className="text-sm font-medium text-muted-700">
             {selectedRows.size} selected
           </span>
           <button
             type="button"
             onClick={() => markReadyMutation.mutate(Array.from(selectedRows))}
             disabled={markReadyMutation.isPending}
-            className="px-3 py-1 text-xs font-medium bg-teal-600 text-white rounded-md hover:bg-teal-700 disabled:opacity-50"
+            className="px-3 py-1 text-xs font-medium bg-muted-600 text-white rounded-md hover:bg-muted-700 disabled:opacity-50"
           >
             Mark as Ready to Ship
           </button>
@@ -168,7 +168,7 @@ export default function VendorOrdersPage() {
                 <Badge
                   variant={
                     row.status === "DELIVERED"
-                      ? "teal"
+                      ? "muted"
                       : row.status === "CANCELLED"
                         ? "red"
                         : "amber"
@@ -184,7 +184,7 @@ export default function VendorOrdersPage() {
               accessor: (row: any) => (
                 <Link
                   href={`/vendor/orders/${row.id}`}
-                  className="text-sm font-medium text-terracotta-600 hover:text-terracotta-700"
+                  className="text-sm font-medium text-rose-600 hover:text-rose-700"
                 >
                   View
                 </Link>

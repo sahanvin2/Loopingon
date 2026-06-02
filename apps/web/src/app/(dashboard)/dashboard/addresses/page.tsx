@@ -134,22 +134,22 @@ export default function AddressesPage() {
               <motion.div
                 key={addr.id}
                 layout
-                className="bg-white rounded-lg border border-cream-200 p-5 hover:shadow-soft transition-shadow"
+                className="bg-white rounded-lg border border-blush-200 p-5 hover:shadow-soft transition-shadow"
               >
                 <div className="flex items-start justify-between mb-3">
                   <div className="flex items-center gap-2">
                     {addr.label === "Home" ? (
-                      <Home className="w-4 h-4 text-warm-gray-600" />
+                      <Home className="w-4 h-4 text-muted-600" />
                     ) : addr.label === "Office" ? (
-                      <Briefcase className="w-4 h-4 text-warm-gray-600" />
+                      <Briefcase className="w-4 h-4 text-muted-600" />
                     ) : (
-                      <MapPin className="w-4 h-4 text-warm-gray-600" />
+                      <MapPin className="w-4 h-4 text-muted-600" />
                     )}
                     <span className="text-sm font-medium text-charcoal-900">
                       {addr.label || "Address"}
                     </span>
                     {addr.isDefault && (
-                      <Badge variant="teal" size="sm">
+                      <Badge variant="muted" size="sm">
                         Default
                       </Badge>
                     )}
@@ -158,7 +158,7 @@ export default function AddressesPage() {
                     <button
                       type="button"
                       onClick={() => openEdit(addr)}
-                      className="p-1.5 rounded-md text-warm-gray-500 hover:text-terracotta-600 hover:bg-terracotta-50 transition-colors"
+                      className="p-1.5 rounded-md text-muted-500 hover:text-rose-600 hover:bg-rose-50 transition-colors"
                       aria-label="Edit address"
                     >
                       <Pencil className="w-4 h-4" />
@@ -166,7 +166,7 @@ export default function AddressesPage() {
                     <button
                       type="button"
                       onClick={() => setDeletingId(addr.id)}
-                      className="p-1.5 rounded-md text-warm-gray-500 hover:text-red-600 hover:bg-red-50 transition-colors"
+                      className="p-1.5 rounded-md text-muted-500 hover:text-red-600 hover:bg-red-50 transition-colors"
                       aria-label="Delete address"
                     >
                       <Trash2 className="w-4 h-4" />
@@ -181,7 +181,7 @@ export default function AddressesPage() {
                   <p>
                     {addr.city}, {addr.district}
                   </p>
-                  <p className="flex items-center gap-1.5 text-warm-gray-500">
+                  <p className="flex items-center gap-1.5 text-muted-500">
                     <Phone className="w-3.5 h-3.5" />
                     {addr.phone}
                   </p>
@@ -192,12 +192,12 @@ export default function AddressesPage() {
             <button
               type="button"
               onClick={openAdd}
-              className="flex flex-col items-center justify-center gap-3 p-8 border-2 border-dashed border-cream-300 rounded-lg hover:border-terracotta-300 hover:bg-terracotta-50/30 transition-all min-h-[200px]"
+              className="flex flex-col items-center justify-center gap-3 p-8 border-2 border-dashed border-blush-300 rounded-lg hover:border-rose-300 hover:bg-rose-50/30 transition-all min-h-[200px]"
             >
-              <div className="w-12 h-12 rounded-full bg-cream-200 flex items-center justify-center text-warm-gray-500">
+              <div className="w-12 h-12 rounded-full bg-cream-200 flex items-center justify-center text-muted-500">
                 <Plus className="w-6 h-6" />
               </div>
-              <span className="text-sm font-medium text-warm-gray-600">
+              <span className="text-sm font-medium text-muted-600">
                 Add New Address
               </span>
             </button>
@@ -243,7 +243,7 @@ export default function AddressesPage() {
                   <input
                     {...register("label")}
                     placeholder="e.g., Home, Office"
-                    className="w-full px-3 py-2 border border-cream-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-terracotta-500"
+                    className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-rose-500"
                   />
                 </div>
                 <div>
@@ -252,7 +252,7 @@ export default function AddressesPage() {
                   </label>
                   <input
                     {...register("fullName")}
-                    className="w-full px-3 py-2 border border-cream-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-terracotta-500"
+                    className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-rose-500"
                   />
                   {errors.fullName && (
                     <p className="text-xs text-red-600 mt-1">{errors.fullName.message}</p>
@@ -265,7 +265,7 @@ export default function AddressesPage() {
                   <input
                     {...register("phone")}
                     placeholder="+94XXXXXXXXX"
-                    className="w-full px-3 py-2 border border-cream-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-terracotta-500"
+                    className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-rose-500"
                   />
                   {errors.phone && (
                     <p className="text-xs text-red-600 mt-1">{errors.phone.message}</p>
@@ -277,7 +277,7 @@ export default function AddressesPage() {
                   </label>
                   <input
                     {...register("addressLine1")}
-                    className="w-full px-3 py-2 border border-cream-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-terracotta-500"
+                    className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-rose-500"
                   />
                   {errors.addressLine1 && (
                     <p className="text-xs text-red-600 mt-1">{errors.addressLine1.message}</p>
@@ -289,7 +289,7 @@ export default function AddressesPage() {
                   </label>
                   <input
                     {...register("addressLine2")}
-                    className="w-full px-3 py-2 border border-cream-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-terracotta-500"
+                    className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-rose-500"
                   />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
@@ -299,7 +299,7 @@ export default function AddressesPage() {
                     </label>
                     <input
                       {...register("city")}
-                      className="w-full px-3 py-2 border border-cream-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-terracotta-500"
+                      className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-rose-500"
                     />
                     {errors.city && (
                       <p className="text-xs text-red-600 mt-1">{errors.city.message}</p>
@@ -311,7 +311,7 @@ export default function AddressesPage() {
                     </label>
                     <input
                       {...register("district")}
-                      className="w-full px-3 py-2 border border-cream-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-terracotta-500"
+                      className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-rose-500"
                     />
                     {errors.district && (
                       <p className="text-xs text-red-600 mt-1">{errors.district.message}</p>
@@ -322,7 +322,7 @@ export default function AddressesPage() {
                   <input
                     {...register("isDefault")}
                     type="checkbox"
-                    className="w-4 h-4 rounded border-cream-300 text-terracotta-600 focus:ring-terracotta-500"
+                    className="w-4 h-4 rounded border-blush-300 text-rose-600 focus:ring-rose-500"
                   />
                   <span className="text-sm text-charcoal-700">Set as default address</span>
                 </label>
@@ -330,14 +330,14 @@ export default function AddressesPage() {
                   <button
                     type="button"
                     onClick={closeModal}
-                    className="flex-1 px-4 py-2.5 border border-cream-200 rounded-lg text-sm font-medium text-charcoal-700 hover:bg-cream-50 transition-colors"
+                    className="flex-1 px-4 py-2.5 border border-blush-200 rounded-lg text-sm font-medium text-charcoal-700 hover:bg-cream-50 transition-colors"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="flex-1 px-4 py-2.5 bg-terracotta-600 text-white rounded-lg text-sm font-medium hover:bg-terracotta-700 transition-colors disabled:opacity-50"
+                    className="flex-1 px-4 py-2.5 bg-rose-600 text-white rounded-lg text-sm font-medium hover:bg-rose-700 transition-colors disabled:opacity-50"
                   >
                     {isSubmitting ? "Saving..." : editingAddress ? "Update" : "Save"}
                   </button>
@@ -370,14 +370,14 @@ export default function AddressesPage() {
               <h3 className="text-lg font-semibold text-charcoal-900 mb-2">
                 Delete Address?
               </h3>
-              <p className="text-sm text-warm-gray-600 mb-6">
+              <p className="text-sm text-muted-600 mb-6">
                 This action cannot be undone.
               </p>
               <div className="flex gap-3">
                 <button
                   type="button"
                   onClick={() => setDeletingId(null)}
-                  className="flex-1 px-4 py-2.5 border border-cream-200 rounded-lg text-sm font-medium text-charcoal-700 hover:bg-cream-50 transition-colors"
+                  className="flex-1 px-4 py-2.5 border border-blush-200 rounded-lg text-sm font-medium text-charcoal-700 hover:bg-cream-50 transition-colors"
                 >
                   Cancel
                 </button>

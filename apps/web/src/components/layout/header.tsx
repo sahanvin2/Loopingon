@@ -17,8 +17,9 @@ import {
   Heart as HeartIcon,
   MessageSquare,
   Settings,
+  Store,
 } from "lucide-react";
-import { cn, getAvatarUrl, getInitials, getInitialsColor } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import { useAuthStore } from "@/stores/auth-store";
 import { useCartStore } from "@/stores/cart-store";
 import { useUIStore } from "@/stores/ui-store";
@@ -27,7 +28,7 @@ import { useLogout } from "@/hooks/use-auth";
 export function Header() {
   const { isAuthenticated, user } = useAuthStore();
   const itemCount = useCartStore((s) => s.itemCount);
-  const { openCartDrawer, openMobileMenu, isMobileMenuOpen } = useUIStore();
+  const { openCartDrawer, openMobileMenu, isMobileMenuOpen, openModal } = useUIStore();
   const logoutMutation = useLogout();
   const [isScrolled, setIsScrolled] = useState(false);
   const [searchFocused, setSearchFocused] = useState(false);
@@ -63,38 +64,35 @@ export function Header() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 h-16 bg-cream-100/95 backdrop-blur-sm border-b transition-shadow duration-300",
-        isScrolled ? "border-cream-200 shadow-soft" : "border-transparent",
+        "sticky top-0 z-50 border-b border-blush-200 bg-cream-50/85 backdrop-blur-md transition-all duration-300",
+        isScrolled ? "shadow-soft-sm" : "",
       )}
     >
-      <div className="max-w-8xl mx-auto h-full flex items-center gap-4 px-4">
+      <div className="max-w-8xl mx-auto flex h-16 items-center gap-4 px-4 sm:gap-6">
+        {/* Logo */}
         <Link
           href="/"
-          className="flex items-center gap-2 shrink-0"
+          className="flex items-center gap-2 shrink-0 group"
           aria-label="Loopingon home"
         >
-          <span className="font-serif text-2xl text-terracotta-600 font-bold">
-            Loopingon
+          <span className="grid h-9 w-9 place-items-center rounded-full bg-gradient-to-br from-rose-400 to-rose-600 text-white font-serif text-lg shadow-[0_8px_20px_-8px_rgba(176,86,110,0.7)] group-hover:scale-105 transition-transform">
+            L
           </span>
-          <span className="hidden sm:block w-2 h-2 rounded-full bg-gold-500" />
+          <span className="font-serif text-2xl tracking-tight text-charcoal-900 hidden sm:block">
+            loopingo
+          </span>
         </Link>
 
+        {/* Search */}
         <form
           onSubmit={handleSearch}
           className={cn(
-            "hidden md:flex items-center flex-1 max-w-md mx-auto transition-all duration-300",
-            searchFocused && "max-w-lg",
+            "hidden md:flex items-center flex-1 max-w-xl",
+            searchFocused && "max-w-2xl",
           )}
         >
-          <div
-            className={cn(
-              "relative w-full",
-              "rounded-full bg-white shadow-sm border border-cream-300",
-              "focus-within:ring-2 focus-within:ring-terracotta-500 focus-within:border-transparent",
-              "transition-all duration-300",
-            )}
-          >
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-warm-gray-500" />
+          <div className="relative w-full">
+            <Search className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-400" />
             <input
               type="search"
               placeholder="Search handmade treasures..."
@@ -103,73 +101,84 @@ export function Header() {
               onFocus={() => setSearchFocused(true)}
               onBlur={() => setSearchFocused(false)}
               className={cn(
-                "w-full pl-10 pr-4 py-2.5 rounded-full text-sm",
-                "bg-transparent text-charcoal-700 placeholder:text-warm-gray-400",
-                "focus:outline-none",
+                "h-11 w-full rounded-full border border-blush-200 bg-blush-50/60 pl-10 pr-4 text-sm outline-none transition-all",
+                "focus:border-rose-400 focus:bg-white focus:ring-2 focus:ring-rose-400/20",
+                "placeholder:text-muted-400",
               )}
               aria-label="Search products"
             />
           </div>
         </form>
 
-        <div className="flex items-center gap-1 ml-auto">
+        {/* Right side nav */}
+        <nav className="ml-auto flex items-center gap-0.5 text-sm">
+          {/* Desktop nav links */}
+          <div className="hidden lg:flex items-center gap-1 mr-2">
+              <Link
+                href="/products"
+                className="rounded-full px-3 py-2 text-charcoal-600 hover:bg-blush-100 hover:text-charcoal-900 transition-colors"
+              >
+                Shop
+              </Link>
+            <Link
+              href="/vendor/register"
+              className="rounded-full px-3 py-2 text-charcoal-600 hover:bg-blush-100 hover:text-charcoal-900 transition-colors hidden sm:inline-flex items-center gap-1"
+            >
+              <Store className="h-4 w-4" /> Sell
+            </Link>
+            <Link
+              href="/about"
+              className="rounded-full px-3 py-2 text-charcoal-600 hover:bg-blush-100 hover:text-charcoal-900 transition-colors hidden md:inline-flex"
+            >
+              About
+            </Link>
+            <Link
+              href="/contact"
+              className="rounded-full px-3 py-2 text-charcoal-600 hover:bg-blush-100 hover:text-charcoal-900 transition-colors hidden md:inline-flex"
+            >
+              Contact
+            </Link>
+          </div>
+
+          {/* Wishlist */}
           <Link
             href="/dashboard/wishlist"
-            className="hidden sm:inline-flex p-2 rounded-lg text-charcoal-600 hover:bg-warm-gray-100 transition-colors"
+            className="grid h-10 w-10 place-items-center rounded-full hover:bg-blush-100 transition-colors"
             aria-label="Wishlist"
           >
-            <Heart className="w-5 h-5" />
+            <Heart className="h-5 w-5 text-charcoal-600" />
           </Link>
 
+          {/* Cart */}
           <button
             type="button"
             onClick={openCartDrawer}
-            className="relative p-2 rounded-lg text-charcoal-600 hover:bg-warm-gray-100 transition-colors"
+            className="relative grid h-10 w-10 place-items-center rounded-full hover:bg-blush-100 transition-colors group"
             aria-label={`Cart (${itemCount} items)`}
           >
-            <ShoppingCart className="w-5 h-5" />
+            <ShoppingCart className="h-5 w-5 text-charcoal-600 group-hover:scale-105 transition-transform" />
             {itemCount > 0 && (
-              <span className="absolute -top-0.5 -right-0.5 w-5 h-5 rounded-full bg-terracotta-600 text-white text-xs flex items-center justify-center font-medium">
+              <span className="absolute -right-0.5 -top-0.5 grid h-5 min-w-5 place-items-center rounded-full bg-rose-500 px-1 text-[11px] font-semibold text-white shadow-sm">
                 {itemCount > 99 ? "99+" : itemCount}
               </span>
             )}
           </button>
 
+          {/* User menu or Sign in */}
           {isAuthenticated && user ? (
             <div ref={userMenuRef} className="relative">
               <button
                 type="button"
                 onClick={() => setUserMenuOpen(!userMenuOpen)}
                 className={cn(
-                  "hidden sm:inline-flex items-center gap-2 p-1.5 rounded-lg",
-                  "hover:bg-warm-gray-100 transition-colors",
+                  "ml-1 grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-rose-400 to-rose-600 text-white font-medium text-sm",
+                  "shadow-[0_8px_20px_-8px_rgba(176,86,110,0.6)] hover:scale-105 transition-transform",
                 )}
                 aria-expanded={userMenuOpen}
                 aria-haspopup="true"
                 aria-label="User menu"
               >
-                {user.avatar ? (
-                  <img
-                    src={getAvatarUrl(user.avatar)}
-                    alt={user.fullName}
-                    className="w-8 h-8 rounded-full object-cover border border-cream-300"
-                  />
-                ) : (
-                  <span
-                    className={cn(
-                      "w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium text-white",
-                      getInitialsColor(user.fullName),
-                    )}
-                  >
-                    {getInitials(user.fullName)}
-                  </span>
-                )}
-                <ChevronDown
-                  className={cn(
-                    "w-3.5 h-3.5 text-warm-gray-500 transition-transform duration-200",
-                    userMenuOpen && "rotate-180",
-                  )}
-                />
+                {(user.firstName || user.fullName || "U")[0].toUpperCase()}
               </button>
 
               <AnimatePresence>
@@ -179,84 +188,110 @@ export function Header() {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: -4, scale: 0.95 }}
                     transition={{ duration: 0.15 }}
-                    className="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-soft-md border border-cream-200 overflow-hidden"
+                    className="absolute right-0 top-12 w-60 overflow-hidden rounded-2xl border border-blush-200 bg-white shadow-[0_30px_80px_-20px_rgba(176,86,110,0.4)]"
                     role="menu"
                   >
-                    <Link
-                      href="/dashboard"
-                      className="flex items-center gap-3 px-4 py-2.5 text-sm text-charcoal-700 hover:bg-terracotta-50 transition-colors"
-                      onClick={() => setUserMenuOpen(false)}
-                      role="menuitem"
-                    >
-                      <LayoutDashboard className="w-4 h-4" /> Dashboard
-                    </Link>
-                    <Link
-                      href="/dashboard/orders"
-                      className="flex items-center gap-3 px-4 py-2.5 text-sm text-charcoal-700 hover:bg-terracotta-50 transition-colors"
-                      onClick={() => setUserMenuOpen(false)}
-                      role="menuitem"
-                    >
-                      <Package className="w-4 h-4" /> Orders
-                    </Link>
-                    <Link
-                      href="/dashboard/wishlist"
-                      className="flex items-center gap-3 px-4 py-2.5 text-sm text-charcoal-700 hover:bg-terracotta-50 transition-colors"
-                      onClick={() => setUserMenuOpen(false)}
-                      role="menuitem"
-                    >
-                      <HeartIcon className="w-4 h-4" /> Wishlist
-                    </Link>
-                    <Link
-                      href="/dashboard/messages"
-                      className="flex items-center gap-3 px-4 py-2.5 text-sm text-charcoal-700 hover:bg-terracotta-50 transition-colors"
-                      onClick={() => setUserMenuOpen(false)}
-                      role="menuitem"
-                    >
-                      <MessageSquare className="w-4 h-4" /> Messages
-                    </Link>
-                    <Link
-                      href="/dashboard/settings"
-                      className="flex items-center gap-3 px-4 py-2.5 text-sm text-charcoal-700 hover:bg-terracotta-50 transition-colors"
-                      onClick={() => setUserMenuOpen(false)}
-                      role="menuitem"
-                    >
-                      <Settings className="w-4 h-4" /> Settings
-                    </Link>
-                    <hr className="border-cream-200" />
-                    <button
-                      type="button"
-                      onClick={() => {
-                        logoutMutation.mutate();
-                        setUserMenuOpen(false);
-                      }}
-                      className="flex items-center gap-3 w-full px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition-colors"
-                      role="menuitem"
-                    >
-                      <LogOut className="w-4 h-4" /> Sign Out
-                    </button>
+                    <div className="border-b border-blush-100 px-4 py-3">
+                      <p className="text-xs text-muted-400">Signed in as</p>
+                      <p className="truncate text-sm font-medium text-charcoal-700">{user.email}</p>
+                    </div>
+                    <div className="py-1 text-sm">
+                      <Link
+                        href="/dashboard"
+                        className="flex items-center gap-3 px-4 py-2.5 text-charcoal-600 hover:bg-blush-50 transition-colors"
+                        onClick={() => setUserMenuOpen(false)}
+                        role="menuitem"
+                      >
+                        <LayoutDashboard className="h-4 w-4 text-muted-400" /> Dashboard
+                      </Link>
+                      <Link
+                        href="/dashboard/orders"
+                        className="flex items-center gap-3 px-4 py-2.5 text-charcoal-600 hover:bg-blush-50 transition-colors"
+                        onClick={() => setUserMenuOpen(false)}
+                        role="menuitem"
+                      >
+                        <Package className="h-4 w-4 text-muted-400" /> Orders
+                      </Link>
+                      <Link
+                        href="/dashboard/wishlist"
+                        className="flex items-center gap-3 px-4 py-2.5 text-charcoal-600 hover:bg-blush-50 transition-colors"
+                        onClick={() => setUserMenuOpen(false)}
+                        role="menuitem"
+                      >
+                        <HeartIcon className="h-4 w-4 text-muted-400" /> Wishlist
+                      </Link>
+                      <Link
+                        href="/dashboard/messages"
+                        className="flex items-center gap-3 px-4 py-2.5 text-charcoal-600 hover:bg-blush-50 transition-colors"
+                        onClick={() => setUserMenuOpen(false)}
+                        role="menuitem"
+                      >
+                        <MessageSquare className="h-4 w-4 text-muted-400" /> Messages
+                      </Link>
+                      <Link
+                        href="/dashboard/settings"
+                        className="flex items-center gap-3 px-4 py-2.5 text-charcoal-600 hover:bg-blush-50 transition-colors"
+                        onClick={() => setUserMenuOpen(false)}
+                        role="menuitem"
+                      >
+                        <Settings className="h-4 w-4 text-muted-400" /> Settings
+                      </Link>
+                    </div>
+                    <div className="border-t border-blush-100">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          logoutMutation.mutate();
+                          setUserMenuOpen(false);
+                        }}
+                        className="flex w-full items-center gap-3 px-4 py-2.5 text-sm text-red-500 hover:bg-red-50 transition-colors"
+                        role="menuitem"
+                      >
+                        <LogOut className="h-4 w-4" /> Sign out
+                      </button>
+                    </div>
                   </motion.div>
                 )}
               </AnimatePresence>
             </div>
           ) : (
-            <Link
-              href="/auth/signin"
-              className="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-terracotta-600 text-white text-sm font-medium hover:bg-terracotta-700 transition-colors"
-            >
-              <User className="w-4 h-4" />
-              Sign In
-            </Link>
+            <>
+              <button
+                onClick={() => openModal("signin")}
+                className="ml-1 hidden h-10 items-center rounded-full px-4 text-sm font-medium text-charcoal-600 hover:text-charcoal-900 sm:inline-flex"
+              >
+                Sign in
+              </button>
+              <button
+                onClick={() => openModal("signup")}
+                className="hidden h-10 items-center rounded-full bg-gradient-to-r from-rose-400 to-rose-600 px-4 text-sm font-medium text-white shadow-[0_12px_28px_-14px_rgba(176,86,110,0.7)] hover:opacity-95 hover:scale-105 transition-all sm:inline-flex"
+              >
+                Join
+              </button>
+              <button
+                onClick={() => openModal("signin")}
+                aria-label="Sign in"
+                className="grid h-10 w-10 place-items-center rounded-full hover:bg-blush-100 sm:hidden"
+              >
+                <User className="h-5 w-5 text-charcoal-600" />
+              </button>
+            </>
           )}
 
+          {/* Mobile menu toggle */}
           <button
             type="button"
             onClick={openMobileMenu}
-            className="p-2 rounded-lg text-charcoal-600 hover:bg-warm-gray-100 transition-colors lg:hidden"
+            className="grid h-10 w-10 place-items-center rounded-full hover:bg-blush-100 transition-colors lg:hidden"
             aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
           >
-            {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            {isMobileMenuOpen ? (
+              <X className="h-5 w-5 text-charcoal-600" />
+            ) : (
+              <Menu className="h-5 w-5 text-charcoal-600" />
+            )}
           </button>
-        </div>
+        </nav>
       </div>
     </header>
   );

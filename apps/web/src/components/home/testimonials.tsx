@@ -79,18 +79,18 @@ export function Testimonials() {
               <div
                 key={t.name}
                 className={cn(
-                  "flex-shrink-0 bg-white rounded-lg border border-cream-200 shadow-sm p-6",
+                  "flex-shrink-0 bg-white rounded-lg border border-blush-200 shadow-sm p-6",
                   "w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]",
                 )}
               >
-                <Quote className="w-8 h-8 text-terracotta-200 mb-4" />
+                <Quote className="w-8 h-8 text-rose-200 mb-4" />
 
-                <p className="text-warm-gray-600 italic mb-6 line-clamp-5">
+                <p className="text-muted-600 italic mb-6 line-clamp-5">
                   &ldquo;{t.text}&rdquo;
                 </p>
 
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="w-12 h-12 rounded-full bg-warm-gray-200 overflow-hidden shrink-0">
+                  <div className="w-12 h-12 rounded-full bg-muted-200 overflow-hidden shrink-0">
                     <img
                       src={t.avatar}
                       alt={t.name}
@@ -101,7 +101,7 @@ export function Testimonials() {
                     <p className="text-charcoal-700 font-medium text-sm">
                       {t.name}
                     </p>
-                    <p className="text-warm-gray-500 text-xs">{t.city}</p>
+                    <p className="text-muted-500 text-xs">{t.city}</p>
                   </div>
                 </div>
 
@@ -122,9 +122,9 @@ export function Testimonials() {
           disabled={current === 0}
           className={cn(
             "absolute -left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full",
-            "bg-white border border-cream-300 shadow-sm text-warm-gray-600",
+            "bg-white border border-cream-300 shadow-sm text-muted-600",
             "hidden lg:flex items-center justify-center transition-colors",
-            "hover:bg-warm-gray-50 disabled:opacity-40 disabled:cursor-not-allowed",
+            "hover:bg-muted-50 disabled:opacity-40 disabled:cursor-not-allowed",
           )}
           aria-label="Previous testimonial"
         >
@@ -137,9 +137,9 @@ export function Testimonials() {
           disabled={current >= maxIndex}
           className={cn(
             "absolute -right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full",
-            "bg-white border border-cream-300 shadow-sm text-warm-gray-600",
+            "bg-white border border-cream-300 shadow-sm text-muted-600",
             "hidden lg:flex items-center justify-center transition-colors",
-            "hover:bg-warm-gray-50 disabled:opacity-40 disabled:cursor-not-allowed",
+            "hover:bg-muted-50 disabled:opacity-40 disabled:cursor-not-allowed",
           )}
           aria-label="Next testimonial"
         >
@@ -155,8 +155,8 @@ export function Testimonials() {
               className={cn(
                 "w-2 h-2 rounded-full transition-all duration-300",
                 i === current
-                  ? "bg-terracotta-600 w-6"
-                  : "bg-warm-gray-300 hover:bg-warm-gray-400",
+                  ? "bg-rose-600 w-6"
+                  : "bg-muted-300 hover:bg-muted-400",
               )}
               aria-label={`Go to testimonial group ${i + 1}`}
             />

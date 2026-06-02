@@ -103,20 +103,20 @@ export default function MessagesPage() {
       animate={{ opacity: 1, y: 0 }}
       className="h-[calc(100vh-10rem)]"
     >
-      <div className="flex h-full bg-white rounded-xl border border-cream-200 overflow-hidden">
-        <div className="w-full md:w-80 lg:w-96 border-r border-cream-200 flex flex-col">
-          <div className="p-4 border-b border-cream-100">
+      <div className="flex h-full bg-white rounded-xl border border-blush-200 overflow-hidden">
+        <div className="w-full md:w-80 lg:w-96 border-r border-blush-200 flex flex-col">
+          <div className="p-4 border-b border-blush-100">
             <h1 className="text-lg font-semibold text-charcoal-900 mb-3">
               Messages
             </h1>
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-warm-gray-400" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-400" />
               <input
                 type="text"
                 placeholder="Search conversations..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-cream-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-terracotta-500"
+                className="w-full pl-10 pr-4 py-2 border border-blush-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-rose-500"
               />
             </div>
           </div>
@@ -126,7 +126,7 @@ export default function MessagesPage() {
               <LoadingSkeleton variant="list" count={5} />
             ) : filteredThreads.length === 0 ? (
               <div className="p-8 text-center">
-                <p className="text-sm text-warm-gray-500">No messages yet.</p>
+                <p className="text-sm text-muted-500">No messages yet.</p>
               </div>
             ) : (
               filteredThreads.map((thread) => {
@@ -142,8 +142,8 @@ export default function MessagesPage() {
                     type="button"
                     onClick={() => setSelectedThreadId(thread.id)}
                     className={cn(
-                      "w-full text-left p-4 hover:bg-cream-50 transition-colors border-b border-cream-100",
-                      selectedThreadId === thread.id && "bg-terracotta-50",
+                      "w-full text-left p-4 hover:bg-cream-50 transition-colors border-b border-blush-100",
+                      selectedThreadId === thread.id && "bg-rose-50",
                     )}
                   >
                     <div className="flex items-center gap-3">
@@ -161,12 +161,12 @@ export default function MessagesPage() {
                             {otherParticipant?.fullName || "Unknown"}
                           </span>
                           {thread.lastMessageAt && (
-                            <span className="text-xs text-warm-gray-500">
+                            <span className="text-xs text-muted-500">
                               {formatRelativeTime(thread.lastMessageAt)}
                             </span>
                           )}
                         </div>
-                        <p className="text-xs text-warm-gray-500 truncate mt-0.5">
+                        <p className="text-xs text-muted-500 truncate mt-0.5">
                           {thread.lastMessage || "No messages yet"}
                         </p>
                       </div>
@@ -181,13 +181,13 @@ export default function MessagesPage() {
         <div className="hidden md:flex flex-1 flex-col">
           {!selectedThread ? (
             <div className="flex-1 flex items-center justify-center">
-              <p className="text-sm text-warm-gray-500">
+              <p className="text-sm text-muted-500">
                 Select a conversation to start messaging
               </p>
             </div>
           ) : (
             <>
-              <div className="p-4 border-b border-cream-100 bg-cream-50">
+              <div className="p-4 border-b border-blush-100 bg-cream-50">
                 <div className="flex items-center gap-3">
                   <div
                     className={cn(
@@ -215,11 +215,11 @@ export default function MessagesPage() {
               <div className="flex-1 overflow-y-auto p-4 space-y-3">
                 {messagesLoading ? (
                   <div className="flex justify-center py-8">
-                    <Loader2 className="w-5 h-5 animate-spin text-warm-gray-400" />
+                    <Loader2 className="w-5 h-5 animate-spin text-muted-400" />
                   </div>
                 ) : messages.length === 0 ? (
                   <div className="flex-1 flex items-center justify-center h-full">
-                    <p className="text-sm text-warm-gray-500">
+                    <p className="text-sm text-muted-500">
                       No messages yet. Send one!
                     </p>
                   </div>
@@ -235,8 +235,8 @@ export default function MessagesPage() {
                           className={cn(
                             "max-w-[75%] rounded-2xl px-4 py-2.5",
                             isSent
-                              ? "bg-terracotta-600 text-white rounded-br-md"
-                              : "bg-cream-100 text-charcoal-900 rounded-bl-md",
+                              ? "bg-rose-600 text-white rounded-br-md"
+                              : "bg-cream-50 text-charcoal-900 rounded-bl-md",
                           )}
                         >
                           <p className="text-sm whitespace-pre-wrap">
@@ -255,7 +255,7 @@ export default function MessagesPage() {
                               ))}
                             </div>
                           )}
-                          <p className={cn("text-xs mt-1", isSent ? "text-terracotta-100" : "text-warm-gray-500")}>
+                          <p className={cn("text-xs mt-1", isSent ? "text-rose-100" : "text-muted-500")}>
                             {formatRelativeTime(msg.createdAt)}
                           </p>
                         </div>
@@ -268,11 +268,11 @@ export default function MessagesPage() {
 
               <form
                 onSubmit={handleSend}
-                className="p-4 border-t border-cream-100 flex items-center gap-2"
+                className="p-4 border-t border-blush-100 flex items-center gap-2"
               >
                 <button
                   type="button"
-                  className="p-2 rounded-lg text-warm-gray-500 hover:text-terracotta-600 hover:bg-cream-100 transition-colors"
+                  className="p-2 rounded-lg text-muted-500 hover:text-rose-600 hover:bg-cream-50 transition-colors"
                   aria-label="Attach file"
                 >
                   <Paperclip className="w-4 h-4" />
@@ -282,12 +282,12 @@ export default function MessagesPage() {
                   value={newMessage}
                   onChange={(e) => setNewMessage(e.target.value)}
                   placeholder="Type a message..."
-                  className="flex-1 px-4 py-2 border border-cream-200 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-terracotta-500"
+                  className="flex-1 px-4 py-2 border border-blush-200 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-rose-500"
                 />
                 <button
                   type="submit"
                   disabled={!newMessage.trim() || sendMutation.isPending}
-                  className="p-2 rounded-full bg-terracotta-600 text-white hover:bg-terracotta-700 transition-colors disabled:opacity-50"
+                  className="p-2 rounded-full bg-rose-600 text-white hover:bg-rose-700 transition-colors disabled:opacity-50"
                   aria-label="Send message"
                 >
                   {sendMutation.isPending ? (
@@ -303,11 +303,11 @@ export default function MessagesPage() {
 
         {selectedThread && (
           <div className="md:hidden fixed inset-0 z-50 bg-white flex flex-col">
-            <div className="p-4 border-b border-cream-100 flex items-center gap-3">
+            <div className="p-4 border-b border-blush-100 flex items-center gap-3">
               <button
                 type="button"
                 onClick={() => setSelectedThreadId(null)}
-                className="text-sm text-terracotta-600 font-medium"
+                className="text-sm text-rose-600 font-medium"
               >
                 Back
               </button>
@@ -319,7 +319,7 @@ export default function MessagesPage() {
             <div className="flex-1 overflow-y-auto p-4 space-y-3">
               {messagesLoading ? (
                 <div className="flex justify-center py-8">
-                  <Loader2 className="w-5 h-5 animate-spin text-warm-gray-400" />
+                  <Loader2 className="w-5 h-5 animate-spin text-muted-400" />
                 </div>
               ) : (
                 messages.map((msg) => {
@@ -333,12 +333,12 @@ export default function MessagesPage() {
                         className={cn(
                           "max-w-[75%] rounded-2xl px-4 py-2.5",
                           isSent
-                            ? "bg-terracotta-600 text-white rounded-br-md"
-                            : "bg-cream-100 text-charcoal-900 rounded-bl-md",
+                            ? "bg-rose-600 text-white rounded-br-md"
+                            : "bg-cream-50 text-charcoal-900 rounded-bl-md",
                         )}
                       >
                         <p className="text-sm whitespace-pre-wrap">{msg.content}</p>
-                        <p className={cn("text-xs mt-1", isSent ? "text-terracotta-100" : "text-warm-gray-500")}>
+                        <p className={cn("text-xs mt-1", isSent ? "text-rose-100" : "text-muted-500")}>
                           {formatRelativeTime(msg.createdAt)}
                         </p>
                       </div>
@@ -350,19 +350,19 @@ export default function MessagesPage() {
             </div>
             <form
               onSubmit={handleSend}
-              className="p-4 border-t border-cream-100 flex items-center gap-2"
+              className="p-4 border-t border-blush-100 flex items-center gap-2"
             >
               <input
                 type="text"
                 value={newMessage}
                 onChange={(e) => setNewMessage(e.target.value)}
                 placeholder="Type a message..."
-                className="flex-1 px-4 py-2 border border-cream-200 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-terracotta-500"
+                className="flex-1 px-4 py-2 border border-blush-200 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-rose-500"
               />
               <button
                 type="submit"
                 disabled={!newMessage.trim() || sendMutation.isPending}
-                className="p-2 rounded-full bg-terracotta-600 text-white hover:bg-terracotta-700 disabled:opacity-50"
+                className="p-2 rounded-full bg-rose-600 text-white hover:bg-rose-700 disabled:opacity-50"
               >
                 <Send className="w-4 h-4" />
               </button>

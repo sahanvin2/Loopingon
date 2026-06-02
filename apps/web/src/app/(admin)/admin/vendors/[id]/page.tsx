@@ -65,20 +65,20 @@ export default function AdminVendorDetailPage() {
     >
       <Link
         href="/admin/vendors"
-        className="inline-flex items-center gap-1.5 text-sm font-medium text-warm-gray-600 hover:text-charcoal-700"
+        className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-600 hover:text-charcoal-700"
       >
         <ArrowLeft className="w-4 h-4" />
         Back to Vendors
       </Link>
 
-      <div className="bg-white rounded-xl border border-cream-200 p-6">
+      <div className="bg-white rounded-xl border border-blush-200 p-6">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-6">
           <div className="flex items-center gap-3">
-            <div className="w-16 h-16 rounded-full bg-warm-gray-200 overflow-hidden">
+            <div className="w-16 h-16 rounded-full bg-muted-200 overflow-hidden">
               {vendor.storeLogo ? (
                 <img src={vendor.storeLogo} alt={vendor.storeName} className="w-full h-full object-cover" />
               ) : (
-                <div className="w-full h-full flex items-center justify-center text-2xl text-warm-gray-500 font-bold">
+                <div className="w-full h-full flex items-center justify-center text-2xl text-muted-500 font-bold">
                   {vendor.storeName?.charAt(0)}
                 </div>
               )}
@@ -91,7 +91,7 @@ export default function AdminVendorDetailPage() {
                 <Badge
                   variant={
                     vendor.status === "VERIFIED"
-                      ? "teal"
+                      ? "muted"
                       : vendor.status === "PENDING"
                         ? "amber"
                         : "red"
@@ -99,7 +99,7 @@ export default function AdminVendorDetailPage() {
                 >
                   {VENDOR_STATUS_MAP[vendor.status]?.label}
                 </Badge>
-                <span className="text-sm text-warm-gray-500">
+                <span className="text-sm text-muted-500">
                   Since {formatDate(vendor.storeSince)}
                 </span>
               </div>
@@ -112,7 +112,7 @@ export default function AdminVendorDetailPage() {
                 <button
                   type="button"
                   onClick={() => setShowApproveModal(true)}
-                  className="px-4 py-2 bg-teal-600 text-white rounded-lg text-sm font-medium hover:bg-teal-700"
+                  className="px-4 py-2 bg-muted-600 text-white rounded-lg text-sm font-medium hover:bg-muted-700"
                 >
                   <Check className="w-4 h-4 inline mr-1" />
                   Approve
@@ -146,25 +146,25 @@ export default function AdminVendorDetailPage() {
             </h2>
             <dl className="space-y-2 text-sm">
               <div className="flex justify-between">
-                <dt className="text-warm-gray-500">Owner</dt>
+                <dt className="text-muted-500">Owner</dt>
                 <dd className="font-medium text-charcoal-900">
                   {vendor.user?.fullName}
                 </dd>
               </div>
               <div className="flex justify-between">
-                <dt className="text-warm-gray-500">Email</dt>
+                <dt className="text-muted-500">Email</dt>
                 <dd className="font-medium text-charcoal-900">
                   {vendor.user?.email}
                 </dd>
               </div>
               <div className="flex justify-between">
-                <dt className="text-warm-gray-500">Phone</dt>
+                <dt className="text-muted-500">Phone</dt>
                 <dd className="font-medium text-charcoal-900">
                   {vendor.user?.phone || "—"}
                 </dd>
               </div>
               <div className="flex justify-between">
-                <dt className="text-warm-gray-500">Craft Types</dt>
+                <dt className="text-muted-500">Craft Types</dt>
                 <dd className="font-medium text-charcoal-900 text-right">
                   {vendor.craftType?.map((ct: string) => (
                     <Badge key={ct} variant="outline" size="sm" className="ml-1">
@@ -182,26 +182,26 @@ export default function AdminVendorDetailPage() {
             </h2>
             <dl className="space-y-2 text-sm">
               <div className="flex justify-between">
-                <dt className="text-warm-gray-500">Products</dt>
+                <dt className="text-muted-500">Products</dt>
                 <dd className="font-medium text-charcoal-900">
                   {vendor.totalProducts}
                 </dd>
               </div>
               <div className="flex justify-between">
-                <dt className="text-warm-gray-500">Orders</dt>
+                <dt className="text-muted-500">Orders</dt>
                 <dd className="font-medium text-charcoal-900">
                   {vendor.totalOrders}
                 </dd>
               </div>
               <div className="flex justify-between">
-                <dt className="text-warm-gray-500">Revenue</dt>
+                <dt className="text-muted-500">Revenue</dt>
                 <dd className="font-medium text-charcoal-900">
                   {formatPrice(Number(vendor.totalRevenue))}
                 </dd>
               </div>
               <div className="flex justify-between">
-                <dt className="text-warm-gray-500">Rating</dt>
-                <dd className="font-medium text-gold-600">
+                <dt className="text-muted-500">Rating</dt>
+                <dd className="font-medium text-blush-600">
                   {vendor.rating.toFixed(1)} / 5
                 </dd>
               </div>
@@ -221,13 +221,13 @@ export default function AdminVendorDetailPage() {
               onChange={(e) => setReason(e.target.value)}
               placeholder="Approval notes (optional)"
               rows={3}
-              className="w-full px-3 py-2 border border-cream-200 rounded-lg text-sm mb-4"
+              className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm mb-4"
             />
             <div className="flex gap-3">
               <button
                 type="button"
                 onClick={() => setShowApproveModal(false)}
-                className="flex-1 px-4 py-2.5 border border-cream-200 rounded-lg text-sm"
+                className="flex-1 px-4 py-2.5 border border-blush-200 rounded-lg text-sm"
               >
                 Cancel
               </button>
@@ -237,7 +237,7 @@ export default function AdminVendorDetailPage() {
                   statusMutation.mutate({ status: "VERIFIED", notes: reason })
                 }
                 disabled={statusMutation.isPending}
-                className="flex-1 px-4 py-2.5 bg-teal-600 text-white rounded-lg text-sm font-medium hover:bg-teal-700 disabled:opacity-50"
+                className="flex-1 px-4 py-2.5 bg-muted-600 text-white rounded-lg text-sm font-medium hover:bg-muted-700 disabled:opacity-50"
               >
                 Approve
               </button>
@@ -258,13 +258,13 @@ export default function AdminVendorDetailPage() {
               onChange={(e) => setReason(e.target.value)}
               placeholder="Reason for rejection (required)"
               rows={3}
-              className="w-full px-3 py-2 border border-cream-200 rounded-lg text-sm mb-4"
+              className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm mb-4"
             />
             <div className="flex gap-3">
               <button
                 type="button"
                 onClick={() => setShowRejectModal(false)}
-                className="flex-1 px-4 py-2.5 border border-cream-200 rounded-lg text-sm"
+                className="flex-1 px-4 py-2.5 border border-blush-200 rounded-lg text-sm"
               >
                 Cancel
               </button>

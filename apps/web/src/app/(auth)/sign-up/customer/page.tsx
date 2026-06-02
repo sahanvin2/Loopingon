@@ -52,8 +52,8 @@ export default function SignUpCustomerPage() {
 
   const passwordStrength = (p: string): { label: string; color: string; width: string } => {
     if (p.length < 8) return { label: "Weak", color: "bg-red-500", width: "25%" };
-    if (p.length < 12) return { label: "Medium", color: "bg-gold-500", width: "50%" };
-    return { label: "Strong", color: "bg-teal-500", width: "100%" };
+    if (p.length < 12) return { label: "Medium", color: "bg-blush-500", width: "50%" };
+    return { label: "Strong", color: "bg-muted-500", width: "100%" };
   };
 
   const strength = passwordStrength(password || "");
@@ -69,7 +69,7 @@ export default function SignUpCustomerPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-cream-100 px-4 py-12">
+    <div className="flex min-h-screen items-center justify-center bg-cream-50 px-4 py-12">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -78,11 +78,11 @@ export default function SignUpCustomerPage() {
       >
         <div className="rounded-2xl bg-white p-8 shadow-soft-sm md:p-10">
           <div className="mb-6 text-center">
-            <Link href="/" className="inline-block font-serif text-2xl font-bold text-terracotta-600">Loopingon</Link>
+            <Link href="/" className="inline-block font-serif text-2xl font-bold text-rose-600">Loopingon</Link>
           </div>
 
           <h1 className="text-center font-serif text-3xl font-bold text-charcoal-900">Create Your Account</h1>
-          <p className="mt-1 text-center text-sm text-warm-gray-500">Join Loopingon and discover unique Sri Lankan crafts</p>
+          <p className="mt-1 text-center text-sm text-muted-500">Join Loopingon and discover unique Sri Lankan crafts</p>
 
           {error && <div className="mt-4 rounded-lg bg-red-50 px-4 py-3 text-sm text-red-600">{error}</div>}
 
@@ -90,9 +90,9 @@ export default function SignUpCustomerPage() {
             <div>
               <label htmlFor="fullName" className="mb-1.5 block text-sm font-medium text-charcoal-700">Full Name</label>
               <div className="relative">
-                <User className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-warm-gray-400" />
+                <User className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-400" />
                 <input id="fullName" autoComplete="name" {...register("fullName")} placeholder="John Doe"
-                  className={cn("w-full rounded-lg border py-3 pl-10 pr-4 text-sm text-charcoal-900 placeholder:text-warm-gray-400 focus:border-terracotta-500 focus:ring-2 focus:ring-terracotta-500/20 focus:outline-none", errors.fullName ? "border-red-400" : "border-charcoal-200")} />
+                  className={cn("w-full rounded-lg border py-3 pl-10 pr-4 text-sm text-charcoal-900 placeholder:text-muted-400 focus:border-rose-500 focus:ring-2 focus:ring-rose-500/20 focus:outline-none", errors.fullName ? "border-red-400" : "border-charcoal-200")} />
               </div>
               {errors.fullName && <p className="mt-1 text-xs text-red-500">{errors.fullName.message}</p>}
             </div>
@@ -100,12 +100,12 @@ export default function SignUpCustomerPage() {
             <div>
               <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-charcoal-700">Email</label>
               <div className="relative">
-                <Mail className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-warm-gray-400" />
+                <Mail className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-400" />
                 <input id="email" type="email" autoComplete="email" {...register("email")} placeholder="you@example.com"
-                  className={cn("w-full rounded-lg border py-3 pl-10 pr-10 text-sm text-charcoal-900 placeholder:text-warm-gray-400 focus:border-terracotta-500 focus:ring-2 focus:ring-terracotta-500/20 focus:outline-none", errors.email ? "border-red-400" : "border-charcoal-200")} />
+                  className={cn("w-full rounded-lg border py-3 pl-10 pr-10 text-sm text-charcoal-900 placeholder:text-muted-400 focus:border-rose-500 focus:ring-2 focus:ring-rose-500/20 focus:outline-none", errors.email ? "border-red-400" : "border-charcoal-200")} />
                 <div className="absolute right-3 top-1/2 -translate-y-1/2">
-                  {checkingEmail && <span className="h-4 w-4 animate-spin rounded-full border-2 border-charcoal-300 border-t-terracotta-500" />}
-                  {!checkingEmail && emailAvailable === true && <Check className="h-4 w-4 text-teal-500" />}
+                  {checkingEmail && <span className="h-4 w-4 animate-spin rounded-full border-2 border-charcoal-300 border-t-rose-500" />}
+                  {!checkingEmail && emailAvailable === true && <Check className="h-4 w-4 text-muted-500" />}
                   {!checkingEmail && emailAvailable === false && <X className="h-4 w-4 text-red-500" />}
                 </div>
               </div>
@@ -115,9 +115,9 @@ export default function SignUpCustomerPage() {
             <div>
               <label htmlFor="phone" className="mb-1.5 block text-sm font-medium text-charcoal-700">Phone</label>
               <div className="relative">
-                <Phone className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-warm-gray-400" />
+                <Phone className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-400" />
                 <input id="phone" {...register("phone")} placeholder="+94 XX XXX XXXX"
-                  className={cn("w-full rounded-lg border py-3 pl-10 pr-4 text-sm text-charcoal-900 placeholder:text-warm-gray-400 focus:border-terracotta-500 focus:ring-2 focus:ring-terracotta-500/20 focus:outline-none", errors.phone ? "border-red-400" : "border-charcoal-200")} />
+                  className={cn("w-full rounded-lg border py-3 pl-10 pr-4 text-sm text-charcoal-900 placeholder:text-muted-400 focus:border-rose-500 focus:ring-2 focus:ring-rose-500/20 focus:outline-none", errors.phone ? "border-red-400" : "border-charcoal-200")} />
               </div>
               {errors.phone && <p className="mt-1 text-xs text-red-500">{errors.phone.message}</p>}
             </div>
@@ -125,10 +125,10 @@ export default function SignUpCustomerPage() {
             <div>
               <label htmlFor="password" className="mb-1.5 block text-sm font-medium text-charcoal-700">Password</label>
               <div className="relative">
-                <Lock className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-warm-gray-400" />
+                <Lock className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-400" />
                 <input id="password" type={showPassword ? "text" : "password"} autoComplete="new-password" {...register("password")} placeholder="Min 8 characters"
-                  className={cn("w-full rounded-lg border py-3 pl-10 pr-12 text-sm text-charcoal-900 placeholder:text-warm-gray-400 focus:border-terracotta-500 focus:ring-2 focus:ring-terracotta-500/20 focus:outline-none", errors.password ? "border-red-400" : "border-charcoal-200")} />
-                <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-warm-gray-400 hover:text-charcoal-600">
+                  className={cn("w-full rounded-lg border py-3 pl-10 pr-12 text-sm text-charcoal-900 placeholder:text-muted-400 focus:border-rose-500 focus:ring-2 focus:ring-rose-500/20 focus:outline-none", errors.password ? "border-red-400" : "border-charcoal-200")} />
+                <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-400 hover:text-charcoal-600">
                   {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 </button>
               </div>
@@ -146,10 +146,10 @@ export default function SignUpCustomerPage() {
             <div>
               <label htmlFor="confirmPassword" className="mb-1.5 block text-sm font-medium text-charcoal-700">Confirm Password</label>
               <div className="relative">
-                <Lock className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-warm-gray-400" />
+                <Lock className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-400" />
                 <input id="confirmPassword" type={showConfirmPassword ? "text" : "password"} autoComplete="new-password" {...register("confirmPassword")} placeholder="Re-enter password"
-                  className={cn("w-full rounded-lg border py-3 pl-10 pr-12 text-sm text-charcoal-900 placeholder:text-warm-gray-400 focus:border-terracotta-500 focus:ring-2 focus:ring-terracotta-500/20 focus:outline-none", errors.confirmPassword ? "border-red-400" : "border-charcoal-200")} />
-                <button type="button" onClick={() => setShowConfirmPassword(!showConfirmPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-warm-gray-400 hover:text-charcoal-600">
+                  className={cn("w-full rounded-lg border py-3 pl-10 pr-12 text-sm text-charcoal-900 placeholder:text-muted-400 focus:border-rose-500 focus:ring-2 focus:ring-rose-500/20 focus:outline-none", errors.confirmPassword ? "border-red-400" : "border-charcoal-200")} />
+                <button type="button" onClick={() => setShowConfirmPassword(!showConfirmPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-400 hover:text-charcoal-600">
                   {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 </button>
               </div>
@@ -158,27 +158,27 @@ export default function SignUpCustomerPage() {
 
             <div className="space-y-3">
               <label className="flex items-start gap-2 cursor-pointer">
-                <input type="checkbox" {...register("acceptTerms")} className="mt-0.5 h-4 w-4 rounded border-charcoal-300 text-terracotta-600 focus:ring-terracotta-500" />
-                <span className="text-sm text-warm-gray-600">
+                <input type="checkbox" {...register("acceptTerms")} className="mt-0.5 h-4 w-4 rounded border-charcoal-300 text-rose-600 focus:ring-rose-500" />
+                <span className="text-sm text-muted-600">
                   I agree to the{" "}
-                  <a href="/terms-of-service" target="_blank" className="text-terracotta-600 hover:underline">Terms of Service</a>{" "}
+                  <a href="/terms-of-service" target="_blank" className="text-rose-600 hover:underline">Terms of Service</a>{" "}
                   and{" "}
-                  <a href="/privacy-policy" target="_blank" className="text-terracotta-600 hover:underline">Privacy Policy</a>
+                  <a href="/privacy-policy" target="_blank" className="text-rose-600 hover:underline">Privacy Policy</a>
                 </span>
               </label>
               <label className="flex items-center gap-2 cursor-pointer">
-                <input type="checkbox" {...register("newsletterOptIn")} className="h-4 w-4 rounded border-charcoal-300 text-terracotta-600 focus:ring-terracotta-500" />
-                <span className="text-sm text-warm-gray-600">Send me product updates, craft stories, and exclusive offers</span>
+                <input type="checkbox" {...register("newsletterOptIn")} className="h-4 w-4 rounded border-charcoal-300 text-rose-600 focus:ring-rose-500" />
+                <span className="text-sm text-muted-600">Send me product updates, craft stories, and exclusive offers</span>
               </label>
             </div>
 
-            <button type="submit" disabled={isSubmitting} className="flex h-12 w-full items-center justify-center rounded-lg bg-terracotta-600 text-sm font-semibold text-white shadow-soft transition-all hover:bg-terracotta-700 disabled:cursor-not-allowed disabled:opacity-60">
+            <button type="submit" disabled={isSubmitting} className="flex h-12 w-full items-center justify-center rounded-lg bg-rose-600 text-sm font-semibold text-white shadow-soft transition-all hover:bg-rose-700 disabled:cursor-not-allowed disabled:opacity-60">
               {isSubmitting ? <span className="h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent" /> : "Create Account"}
             </button>
           </form>
 
           <div className="mt-6 flex items-center gap-3">
-            <div className="h-px flex-1 bg-charcoal-200" /><span className="text-xs text-warm-gray-400">or continue with</span><div className="h-px flex-1 bg-charcoal-200" />
+            <div className="h-px flex-1 bg-charcoal-200" /><span className="text-xs text-muted-400">or continue with</span><div className="h-px flex-1 bg-charcoal-200" />
           </div>
 
           <div className="mt-4 grid grid-cols-2 gap-3">
@@ -192,8 +192,8 @@ export default function SignUpCustomerPage() {
             </button>
           </div>
 
-          <p className="mt-6 text-center text-sm text-warm-gray-500">
-            Already have an account? <Link href="/sign-in" className="font-medium text-terracotta-600 hover:text-terracotta-700">Sign In</Link>
+          <p className="mt-6 text-center text-sm text-muted-500">
+            Already have an account? <Link href="/sign-in" className="font-medium text-rose-600 hover:text-rose-700">Sign In</Link>
           </p>
         </div>
       </motion.div>

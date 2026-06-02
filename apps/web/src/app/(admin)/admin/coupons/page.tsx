@@ -70,7 +70,7 @@ export default function AdminCouponsPage() {
         <button
           type="button"
           onClick={() => { setEditingCoupon(null); reset({}); setShowModal(true); }}
-          className="inline-flex items-center gap-2 px-5 py-2.5 bg-terracotta-600 text-white rounded-lg text-sm font-medium hover:bg-terracotta-700"
+          className="inline-flex items-center gap-2 px-5 py-2.5 bg-rose-600 text-white rounded-lg text-sm font-medium hover:bg-rose-700"
         >
           <Plus className="w-4 h-4" /> Create Coupon
         </button>
@@ -81,20 +81,20 @@ export default function AdminCouponsPage() {
       ) : coupons.length === 0 ? (
         <EmptyState title="No coupons" description="Create your first coupon" />
       ) : (
-        <div className="bg-white rounded-lg border border-cream-200 overflow-x-auto">
+        <div className="bg-white rounded-lg border border-blush-200 overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-cream-200 bg-cream-50">
-                <th className="px-4 py-3 text-left text-xs font-semibold text-warm-gray-500 uppercase">Code</th>
-                <th className="px-4 py-3 text-left text-xs font-semibold text-warm-gray-500 uppercase">Type</th>
-                <th className="px-4 py-3 text-right text-xs font-semibold text-warm-gray-500 uppercase">Value</th>
-                <th className="px-4 py-3 text-right text-xs font-semibold text-warm-gray-500 uppercase">Usage</th>
-                <th className="px-4 py-3 text-left text-xs font-semibold text-warm-gray-500 uppercase">Expiry</th>
-                <th className="px-4 py-3 text-left text-xs font-semibold text-warm-gray-500 uppercase">Status</th>
-                <th className="px-4 py-3 text-left text-xs font-semibold text-warm-gray-500 uppercase">Actions</th>
+              <tr className="border-b border-blush-200 bg-cream-50">
+                <th className="px-4 py-3 text-left text-xs font-semibold text-muted-500 uppercase">Code</th>
+                <th className="px-4 py-3 text-left text-xs font-semibold text-muted-500 uppercase">Type</th>
+                <th className="px-4 py-3 text-right text-xs font-semibold text-muted-500 uppercase">Value</th>
+                <th className="px-4 py-3 text-right text-xs font-semibold text-muted-500 uppercase">Usage</th>
+                <th className="px-4 py-3 text-left text-xs font-semibold text-muted-500 uppercase">Expiry</th>
+                <th className="px-4 py-3 text-left text-xs font-semibold text-muted-500 uppercase">Status</th>
+                <th className="px-4 py-3 text-left text-xs font-semibold text-muted-500 uppercase">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-cream-100">
+            <tbody className="divide-y divide-cream-50">
               {coupons.map((c) => (
                 <tr key={c.id}>
                   <td className="px-4 py-3 font-mono font-semibold text-charcoal-900">{c.code}</td>
@@ -103,12 +103,12 @@ export default function AdminCouponsPage() {
                   <td className="px-4 py-3 text-right">{c.usageCount}/{c.usageLimit || "∞"}</td>
                   <td className="px-4 py-3 text-xs">{formatDate(c.expiresAt)}</td>
                   <td className="px-4 py-3">
-                    <Badge variant={c.isActive ? "teal" : "gray"} size="sm">{c.isActive ? "Active" : "Expired"}</Badge>
+                    <Badge variant={c.isActive ? "muted" : "gray"} size="sm">{c.isActive ? "Active" : "Expired"}</Badge>
                   </td>
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-1">
-                      <button type="button" onClick={() => { setEditingCoupon(c); setShowModal(true); }} className="p-1 text-warm-gray-500 hover:text-terracotta-600"><Pencil className="w-3.5 h-3.5" /></button>
-                      <button type="button" onClick={() => deleteMutation.mutate(c.id)} className="p-1 text-warm-gray-500 hover:text-red-600"><Trash2 className="w-3.5 h-3.5" /></button>
+                      <button type="button" onClick={() => { setEditingCoupon(c); setShowModal(true); }} className="p-1 text-muted-500 hover:text-rose-600"><Pencil className="w-3.5 h-3.5" /></button>
+                      <button type="button" onClick={() => deleteMutation.mutate(c.id)} className="p-1 text-muted-500 hover:text-red-600"><Trash2 className="w-3.5 h-3.5" /></button>
                     </div>
                   </td>
                 </tr>
@@ -126,16 +126,16 @@ export default function AdminCouponsPage() {
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
                 <div>
                   <label className="block text-sm font-medium text-charcoal-700 mb-1">Code *</label>
-                  <input {...register("code", { required: true })} className="w-full px-3 py-2 border border-cream-200 rounded-lg text-sm" />
+                  <input {...register("code", { required: true })} className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-charcoal-700 mb-1">Description</label>
-                  <input {...register("description")} className="w-full px-3 py-2 border border-cream-200 rounded-lg text-sm" />
+                  <input {...register("description")} className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm" />
                 </div>
                 <div className="grid grid-cols-2 gap-3">
                   <div>
                     <label className="block text-sm font-medium text-charcoal-700 mb-1">Type</label>
-                    <select {...register("discountType")} className="w-full px-3 py-2 border border-cream-200 rounded-lg text-sm">
+                    <select {...register("discountType")} className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm">
                       <option value="PERCENTAGE">Percentage</option>
                       <option value="FIXED_AMOUNT">Fixed Amount</option>
                       <option value="FREE_SHIPPING">Free Shipping</option>
@@ -143,30 +143,30 @@ export default function AdminCouponsPage() {
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-charcoal-700 mb-1">Value</label>
-                    <input type="number" step="0.01" {...register("discountValue")} className="w-full px-3 py-2 border border-cream-200 rounded-lg text-sm" />
+                    <input type="number" step="0.01" {...register("discountValue")} className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm" />
                   </div>
                 </div>
                 <div className="grid grid-cols-2 gap-3">
                   <div>
                     <label className="block text-sm font-medium text-charcoal-700 mb-1">Min Order</label>
-                    <input {...register("minOrderAmount")} className="w-full px-3 py-2 border border-cream-200 rounded-lg text-sm" />
+                    <input {...register("minOrderAmount")} className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm" />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-charcoal-700 mb-1">Usage Limit</label>
-                    <input type="number" {...register("usageLimit")} className="w-full px-3 py-2 border border-cream-200 rounded-lg text-sm" />
+                    <input type="number" {...register("usageLimit")} className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm" />
                   </div>
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-charcoal-700 mb-1">Expiry Date</label>
-                  <input type="date" {...register("expiresAt")} className="w-full px-3 py-2 border border-cream-200 rounded-lg text-sm" />
+                  <input type="date" {...register("expiresAt")} className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm" />
                 </div>
                 <label className="flex items-center gap-2">
                   <input type="checkbox" {...register("isActive")} className="w-4 h-4 rounded" />
                   <span className="text-sm">Active</span>
                 </label>
                 <div className="flex gap-3 pt-3">
-                  <button type="button" onClick={() => setShowModal(false)} className="flex-1 px-4 py-2.5 border border-cream-200 rounded-lg text-sm">Cancel</button>
-                  <button type="submit" disabled={isSubmitting} className="flex-1 px-4 py-2.5 bg-terracotta-600 text-white rounded-lg text-sm font-medium hover:bg-terracotta-700 disabled:opacity-50">
+                  <button type="button" onClick={() => setShowModal(false)} className="flex-1 px-4 py-2.5 border border-blush-200 rounded-lg text-sm">Cancel</button>
+                  <button type="submit" disabled={isSubmitting} className="flex-1 px-4 py-2.5 bg-rose-600 text-white rounded-lg text-sm font-medium hover:bg-rose-700 disabled:opacity-50">
                     {isSubmitting ? "Saving..." : "Save"}
                   </button>
                 </div>

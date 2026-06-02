@@ -53,9 +53,9 @@ function ToolbarButton({
       onClick={onClick}
       disabled={disabled}
       className={cn(
-        "p-1.5 rounded text-warm-gray-600 hover:bg-warm-gray-100 transition-colors",
+        "p-1.5 rounded text-muted-600 hover:bg-muted-100 transition-colors",
         "disabled:opacity-40 disabled:cursor-not-allowed",
-        isActive && "bg-terracotta-100 text-terracotta-700",
+        isActive && "bg-rose-100 text-rose-700",
       )}
       aria-label={label}
       title={label}
@@ -82,7 +82,7 @@ export function RichEditor({
       LinkExtension.configure({
         openOnClick: false,
         HTMLAttributes: {
-          class: "text-terracotta-600 underline hover:text-terracotta-700",
+          class: "text-rose-600 underline hover:text-rose-700",
         },
       }),
       ImageExtension.configure({
@@ -128,12 +128,12 @@ export function RichEditor({
   return (
     <div
       className={cn(
-        "border border-cream-300 rounded-lg overflow-hidden bg-white",
-        "focus-within:ring-2 focus-within:ring-terracotta-500 focus-within:border-transparent",
+        "border border-blush-300 rounded-lg overflow-hidden bg-white",
+        "focus-within:ring-2 focus-within:ring-rose-500 focus-within:border-transparent",
         className,
       )}
     >
-      <div className="flex items-center gap-0.5 px-2 py-1.5 border-b border-cream-200 bg-cream-50 flex-wrap">
+      <div className="flex items-center gap-0.5 px-2 py-1.5 border-b border-blush-200 bg-cream-50 flex-wrap">
         <ToolbarButton
           onClick={() => editor.chain().focus().toggleBold().run()}
           isActive={editor.isActive("bold")}

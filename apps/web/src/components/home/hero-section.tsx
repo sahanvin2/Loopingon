@@ -1,156 +1,109 @@
 "use client";
 
-import React, { useState, useEffect, useCallback } from "react";
+import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { motion } from "framer-motion";
+import { ChevronRight, ShieldCheck, Users, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const banners = [
-  {
-    image: "/images/hero/handloom.jpg",
-    headline: "Discover Authentic Sri Lankan Handloom",
-    subheadline: "Woven with Tradition, Worn with Pride",
-    cta: { label: "Shop Handloom Collection", href: "/categories/handloom-textiles" },
-  },
-  {
-    image: "/images/hero/artisan.jpg",
-    headline: "Meet the Artisans Behind Every Creation",
-    subheadline: "10,000+ Verified Craftspeople",
-    cta: { label: "Explore Artisan Stories", href: "/artisans" },
-  },
-  {
-    image: "/images/hero/competition.jpg",
-    headline: "Monthly Craft Challenge",
-    subheadline: "Submit Your Best Work, Win Amazing Prizes",
-    cta: { label: "Join Competition", href: "/competitions" },
-  },
-];
-
 export function HeroSection() {
-  const [current, setCurrent] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-
-  useEffect(() => {
-    if (isPaused) return;
-    const timer = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % banners.length);
-    }, 5000);
-    return () => clearInterval(timer);
-  }, [isPaused]);
-
-  const goTo = useCallback(
-    (index: number) => setCurrent((index + banners.length) % banners.length),
-    [],
-  );
-
-  const banner = banners[current];
-
   return (
-    <section
-      className="relative h-[60vh] md:h-[70vh] w-full overflow-hidden bg-charcoal-900"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-      aria-roledescription="carousel"
-      aria-label="Hero banner carousel"
-    >
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={current}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.6 }}
-          className="absolute inset-0"
-        >
-          <Image
-            src={banner.image}
-            alt={banner.headline}
-            fill
-            className="object-cover"
-            priority={current === 0}
-            sizes="100vw"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-charcoal-900/80 via-charcoal-900/30 to-transparent" />
-        </motion.div>
-      </AnimatePresence>
+    <section className="relative w-full py-6 px-4 sm:px-6 lg:px-8 bg-white">
+      <div className="max-w-7xl mx-auto rounded-[2rem] bg-gradient-to-br from-rose-50 to-white overflow-hidden relative border border-blush-100 shadow-soft-sm">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center p-6 lg:p-12">
+          {/* Left Content */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="max-w-xl z-10"
+          >
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white text-xs font-medium text-charcoal-600 mb-6 shadow-sm border border-blush-200">
+              <Sparkles className="w-3.5 h-3.5 text-rose-500" />
+              <span>New spring drop</span>
+            </div>
 
-      <div className="absolute inset-0 flex items-center">
-        <div className="max-w-8xl mx-auto w-full px-6">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={current}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -30 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="max-w-2xl"
-            >
-              <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl text-white leading-tight mb-4">
-                {banner.headline}
-              </h1>
-              <p className="text-lg sm:text-xl text-cream-100/90 mb-8">
-                {banner.subheadline}
-              </p>
+            <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl text-charcoal-900 leading-[1.1] mb-5 tracking-tight">
+              Handmade things,<br />
+              <span className="text-rose-500 italic font-medium">made with care.</span>
+            </h1>
+
+            <p className="text-base text-charcoal-600 mb-8 font-light leading-relaxed max-w-md">
+              A softer marketplace where every piece is one of a kind — by makers you can root for.
+            </p>
+
+            <div className="flex flex-wrap items-center gap-4 mb-8">
               <Link
-                href={banner.cta.href}
+                href="/categories"
                 className={cn(
-                  "inline-flex items-center px-8 py-3.5 rounded-full",
-                  "bg-terracotta-600 text-cream-100 text-base font-medium",
-                  "hover:bg-terracotta-700 hover:scale-105 transition-all duration-300",
-                  "shadow-terracotta",
+                  "inline-flex items-center gap-2 px-6 py-3 rounded-full",
+                  "bg-rose-500 text-white font-medium text-sm",
+                  "hover:bg-rose-600 hover:shadow-md transition-all duration-300 group",
                 )}
               >
-                {banner.cta.label}
+                Shop the collection
+                <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
+              <Link
+                href="/vendor/register"
+                className={cn(
+                  "inline-flex items-center px-6 py-3 rounded-full",
+                  "bg-white text-charcoal-800 font-medium text-sm",
+                  "hover:bg-muted-50 hover:shadow-md transition-all duration-300 shadow-sm border border-blush-200",
+                )}
+              >
+                Become a seller
+              </Link>
+            </div>
+
+            <div className="flex items-center gap-6 text-sm text-charcoal-500 font-medium">
+              <div className="flex items-center gap-2 group">
+                <div className="w-7 h-7 rounded-full bg-rose-100 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <ShieldCheck className="w-4 h-4 text-rose-600" />
+                </div>
+                Buyer protection
+              </div>
+              <div className="flex items-center gap-2 group">
+                <div className="w-7 h-7 rounded-full bg-rose-100 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <Users className="w-4 h-4 text-rose-600" />
+                </div>
+                12k+ makers
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Right Image */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="relative h-[300px] lg:h-[400px] w-full rounded-[1.5rem] overflow-hidden shadow-soft-xl group"
+          >
+            <Image
+              src="/images/hero/handloom.jpg"
+              alt="Handmade pink crafts and candles"
+              fill
+              className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+              priority
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
+            {/* Soft overlay to make it match the pink aesthetic */}
+            <div className="absolute inset-0 bg-rose-500/10 mix-blend-overlay group-hover:bg-rose-500/0 transition-colors duration-500" />
+            
+            <motion.div 
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.5 }}
+              className="absolute bottom-5 left-5 bg-white/90 backdrop-blur-md p-3.5 rounded-xl shadow-soft-lg border border-white/20"
+            >
+              <p className="text-[10px] uppercase tracking-wider text-charcoal-500 mb-0.5 font-semibold">Today's pick</p>
+              <p className="font-serif font-medium text-charcoal-900 text-sm">Rose Petal Candle</p>
+              <p className="text-rose-600 font-bold text-sm mt-0.5">$32</p>
             </motion.div>
-          </AnimatePresence>
+          </motion.div>
         </div>
       </div>
-
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-3">
-        {banners.map((_, i) => (
-          <button
-            key={i}
-            type="button"
-            onClick={() => setCurrent(i)}
-            className={cn(
-              "w-2.5 h-2.5 rounded-full transition-all duration-300",
-              i === current
-                ? "bg-cream-100 w-8"
-                : "bg-cream-100/40 hover:bg-cream-100/70",
-            )}
-            aria-label={`Go to slide ${i + 1}`}
-            aria-current={i === current ? "true" : undefined}
-          />
-        ))}
-      </div>
-
-      <button
-        type="button"
-        onClick={() => goTo(current - 1)}
-        className={cn(
-          "absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full",
-          "bg-white/10 backdrop-blur-sm text-white hover:bg-white/20",
-          "hidden md:flex items-center justify-center transition-colors",
-        )}
-        aria-label="Previous slide"
-      >
-        <ChevronLeft className="w-6 h-6" />
-      </button>
-      <button
-        type="button"
-        onClick={() => goTo(current + 1)}
-        className={cn(
-          "absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full",
-          "bg-white/10 backdrop-blur-sm text-white hover:bg-white/20",
-          "hidden md:flex items-center justify-center transition-colors",
-        )}
-        aria-label="Next slide"
-      >
-        <ChevronRight className="w-6 h-6" />
-      </button>
     </section>
   );
 }

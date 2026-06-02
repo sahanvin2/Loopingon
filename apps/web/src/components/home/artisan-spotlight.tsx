@@ -59,7 +59,7 @@ export function ArtisanSpotlight() {
         className="absolute inset-0 opacity-[0.03]"
         style={{
           backgroundImage:
-            "repeating-radial-gradient(circle at 25% 50%, #C75B39 0px, #C75B39 2px, transparent 2px, transparent 40px)",
+            "repeating-radial-gradient(circle at 25% 50%, #b0566e 0px, #b0566e 2px, transparent 2px, transparent 40px)",
         }}
       />
 
@@ -97,17 +97,17 @@ export function ArtisanSpotlight() {
               </div>
 
               <div className={index % 2 !== 0 ? "lg:order-1" : ""}>
-                <Badge variant="gold" size="sm" className="mb-3">
+                <Badge variant="blush" size="sm" className="mb-3">
                   {artisan.craft}
                 </Badge>
                 <h3 className="font-serif text-2xl text-charcoal-900 mb-1">
                   Meet {artisan.name}
                 </h3>
-                <p className="text-warm-gray-600 text-sm mb-4">
+                <p className="text-muted-600 text-sm mb-4">
                   {artisan.location} &middot; Crafting since {artisan.since}
                 </p>
 
-                <div className="space-y-3 text-warm-gray-600 mb-8">
+                <div className="space-y-3 text-muted-600 mb-8">
                   {artisan.excerpt.map((para, i) => (
                     <p key={i}>{para}</p>
                   ))}
@@ -117,7 +117,7 @@ export function ArtisanSpotlight() {
                   {artisan.products.map((product) => (
                     <div
                       key={product.name}
-                      className="bg-white rounded-lg border border-cream-200 overflow-hidden shadow-sm"
+                      className="bg-white rounded-lg border border-blush-200 overflow-hidden shadow-sm"
                     >
                       <div className="relative aspect-square">
                         <Image
@@ -146,8 +146,8 @@ export function ArtisanSpotlight() {
                   href={`/artisans/${artisan.name.toLowerCase().replace(/\s+/g, "-")}`}
                   className={cn(
                     "inline-flex items-center px-6 py-2.5 rounded-lg",
-                    "bg-terracotta-600 text-white text-sm font-medium",
-                    "hover:bg-terracotta-700 transition-colors",
+                    "bg-rose-600 text-white text-sm font-medium",
+                    "hover:bg-rose-700 transition-colors",
                   )}
                 >
                   Visit Store

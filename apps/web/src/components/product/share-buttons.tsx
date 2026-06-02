@@ -30,7 +30,9 @@ const shareButtons = [
 ];
 
 interface ShareButtonsProps {
-  productTitle: string;
+  title?: string;
+  url?: string;
+  productTitle?: string;
   productUrl?: string;
   className?: string;
 }
@@ -63,16 +65,18 @@ function getLetterIcon(letter: string, color: string) {
 }
 
 export function ShareButtons({
+  title,
+  url,
   productTitle,
   productUrl,
   className,
 }: ShareButtonsProps) {
-  const url =
-    productUrl ||
-    (typeof window !== "undefined" ? window.location.href : "");
+  const resolvedTitle = title || productTitle || "";
+  const resolvedUrl =
+    url || productUrl || (typeof window !== "undefined" ? window.location.href : "");
 
   const handleCopyLink = async () => {
-    const ok = await copyToClipboard(url);
+    const ok = await copyToClipboard(resolvedUrl);
     if (ok) {
       showToast.success("Link copied to clipboard");
     } else {
@@ -82,7 +86,7 @@ export function ShareButtons({
 
   return (
     <div className={cn("flex items-center gap-2", className)}>
-      <span className="text-sm text-warm-gray-500 mr-1 flex items-center gap-1.5">
+      <span className="text-sm text-muted-500 mr-1 flex items-center gap-1.5">
         <Share2 className="w-4 h-4" />
         Share:
       </span>
@@ -90,7 +94,7 @@ export function ShareButtons({
       {shareButtons.map((btn) => (
         <a
           key={btn.label}
-          href={btn.getUrl(url, productTitle)}
+          href={btn.getUrl(resolvedUrl, resolvedTitle)}
           target="_blank"
           rel="noopener noreferrer"
           className={cn(
@@ -108,7 +112,7 @@ export function ShareButtons({
         onClick={handleCopyLink}
         className={cn(
           "w-9 h-9 rounded-full flex items-center justify-center transition-colors",
-          "bg-warm-gray-100 text-warm-gray-600 hover:bg-warm-gray-200",
+          "bg-muted-100 text-muted-600 hover:bg-muted-200",
         )}
         aria-label="Copy link"
       >

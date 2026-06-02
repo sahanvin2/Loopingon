@@ -70,7 +70,7 @@ export default function PaymentMethodsPage() {
           {cards.map((card) => (
             <div
               key={card.id}
-              className="bg-white rounded-lg border border-cream-200 p-5 flex items-center justify-between"
+              className="bg-white rounded-lg border border-blush-200 p-5 flex items-center justify-between"
             >
               <div className="flex items-center gap-4">
                 <div className="w-12 h-8 rounded bg-gradient-to-r from-charcoal-700 to-charcoal-900 flex items-center justify-center text-white text-xs font-bold">
@@ -80,13 +80,13 @@ export default function PaymentMethodsPage() {
                   <p className="text-sm font-medium text-charcoal-900">
                     •••• {card.lastFour}
                   </p>
-                  <p className="text-xs text-warm-gray-500">
+                  <p className="text-xs text-muted-500">
                     Expires {String(card.expiryMonth).padStart(2, "0")}/
                     {card.expiryYear}
                   </p>
                 </div>
                 {card.isDefault && (
-                  <Badge variant="teal" size="sm">
+                  <Badge variant="muted" size="sm">
                     Default
                   </Badge>
                 )}
@@ -94,7 +94,7 @@ export default function PaymentMethodsPage() {
               <button
                 type="button"
                 onClick={() => setDeletingId(card.id)}
-                className="p-2 rounded-md text-warm-gray-500 hover:text-red-600 hover:bg-red-50 transition-colors"
+                className="p-2 rounded-md text-muted-500 hover:text-red-600 hover:bg-red-50 transition-colors"
                 aria-label="Delete card"
               >
                 <Trash2 className="w-4 h-4" />
@@ -113,16 +113,16 @@ export default function PaymentMethodsPage() {
           <button
             type="button"
             onClick={() => setShowAddCard(true)}
-            className="w-full flex items-center justify-center gap-2 p-4 border-2 border-dashed border-cream-300 rounded-lg hover:border-terracotta-300 hover:bg-terracotta-50/30 transition-all"
+            className="w-full flex items-center justify-center gap-2 p-4 border-2 border-dashed border-blush-300 rounded-lg hover:border-rose-300 hover:bg-rose-50/30 transition-all"
           >
-            <Plus className="w-5 h-5 text-warm-gray-500" />
-            <span className="text-sm font-medium text-warm-gray-600">
+            <Plus className="w-5 h-5 text-muted-500" />
+            <span className="text-sm font-medium text-muted-600">
               Add New Card
             </span>
           </button>
 
           <div className="p-4 bg-cream-50 rounded-lg">
-            <p className="text-xs text-warm-gray-500 text-center">
+            <p className="text-xs text-muted-500 text-center">
               Cards are tokenized securely via PayHere. We never store your full
               card details.
             </p>
@@ -151,14 +151,14 @@ export default function PaymentMethodsPage() {
               <h2 className="text-lg font-semibold text-charcoal-900 mb-4">
                 Add New Card
               </h2>
-              <p className="text-sm text-warm-gray-500 mb-6 text-center py-8">
+              <p className="text-sm text-muted-500 mb-6 text-center py-8">
                 Card form will be rendered via PayHere embedded checkout.
                 This is a placeholder for the PayHere card tokenization widget.
               </p>
               <button
                 type="button"
                 onClick={() => setShowAddCard(false)}
-                className="w-full px-4 py-2.5 border border-cream-200 rounded-lg text-sm font-medium text-charcoal-700 hover:bg-cream-50 transition-colors"
+                className="w-full px-4 py-2.5 border border-blush-200 rounded-lg text-sm font-medium text-charcoal-700 hover:bg-cream-50 transition-colors"
               >
                 Cancel
               </button>
@@ -189,14 +189,14 @@ export default function PaymentMethodsPage() {
               <h3 className="text-lg font-semibold text-charcoal-900 mb-2">
                 Remove Card?
               </h3>
-              <p className="text-sm text-warm-gray-600 mb-6">
+              <p className="text-sm text-muted-600 mb-6">
                 This card will be removed from your saved payment methods.
               </p>
               <div className="flex gap-3">
                 <button
                   type="button"
                   onClick={() => setDeletingId(null)}
-                  className="flex-1 px-4 py-2.5 border border-cream-200 rounded-lg text-sm font-medium text-charcoal-700 hover:bg-cream-50"
+                  className="flex-1 px-4 py-2.5 border border-blush-200 rounded-lg text-sm font-medium text-charcoal-700 hover:bg-cream-50"
                 >
                   Cancel
                 </button>

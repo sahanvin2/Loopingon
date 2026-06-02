@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
       openGraph: {
         title: product.title,
         description: product.shortDescription || product.description.substring(0, 160),
-        type: "product",
+        type: "website",
         images: primaryImage ? [{ url: getImageUrl(primaryImage.large || primaryImage.url), width: 800, height: 800 }] : [],
       },
     };
@@ -75,7 +75,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <div className="bg-cream-100 py-6">
+      <div className="bg-cream-50 py-6">
         <div className="mx-auto max-w-7xl px-4">
           <Breadcrumb items={breadcrumbs} />
         </div>

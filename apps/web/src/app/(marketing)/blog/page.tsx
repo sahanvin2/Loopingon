@@ -36,12 +36,12 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
 
   return (
     <>
-      <section className="bg-cream-100 py-16">
+      <section className="bg-cream-50 py-16">
         <div className="mx-auto max-w-6xl px-4">
           <h1 className="text-center font-serif text-4xl font-bold text-charcoal-900 md:text-5xl">
             Stories of Craft & Culture
           </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-center text-lg text-warm-gray-600">
+          <p className="mx-auto mt-4 max-w-2xl text-center text-lg text-muted-600">
             Discover the stories behind Sri Lankan crafts, meet the artisans, and explore the
             rich cultural heritage woven into every handmade creation.
           </p>
@@ -52,16 +52,16 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
         <div className="mx-auto max-w-6xl px-4">
           {featuredPost && (
             <Link href={`/blog/${featuredPost.slug}`} className="group mb-12 block overflow-hidden rounded-2xl">
-              <div className="relative aspect-[21/9] overflow-hidden bg-warm-gray-200">
+              <div className="relative aspect-[21/9] overflow-hidden bg-muted-200">
                 {featuredPost.featuredImage ? (
                   <Image src={getImageUrl(featuredPost.featuredImage)} alt={featuredPost.title} fill className="object-cover transition-transform duration-500 group-hover:scale-105" priority sizes="100vw" />
                 ) : (
-                  <div className="flex h-full items-center justify-center bg-gradient-to-br from-terracotta-600 to-gold-500" />
+                  <div className="flex h-full items-center justify-center bg-gradient-to-br from-rose-600 to-blush-500" />
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-charcoal-900/80 via-charcoal-900/20 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-8 md:p-10">
                   {featuredPost.category && (
-                    <span className="mb-3 inline-block rounded-full bg-gold-400 px-3 py-1 text-xs font-semibold text-charcoal-900">
+                    <span className="mb-3 inline-block rounded-full bg-blush-400 px-3 py-1 text-xs font-semibold text-charcoal-900">
                       {featuredPost.category}
                     </span>
                   )}
@@ -85,29 +85,29 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {posts.length > 0 ? (
               posts.map((post) => (
-                <Link key={post.id} href={`/blog/${post.slug}`} className="group overflow-hidden rounded-xl bg-cream-100 shadow-soft-sm transition-shadow hover:shadow-soft">
-                  <div className="relative aspect-[16/9] overflow-hidden bg-warm-gray-200">
+                <Link key={post.id} href={`/blog/${post.slug}`} className="group overflow-hidden rounded-xl bg-cream-50 shadow-soft-sm transition-shadow hover:shadow-soft">
+                  <div className="relative aspect-[16/9] overflow-hidden bg-muted-200">
                     {post.featuredImage ? (
                       <Image src={getImageUrl(post.featuredImage)} alt={post.title} fill className="object-cover transition-transform duration-500 group-hover:scale-105" sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw" />
                     ) : (
-                      <div className="flex h-full items-center justify-center bg-gradient-to-br from-terracotta-400 to-gold-400" />
+                      <div className="flex h-full items-center justify-center bg-gradient-to-br from-rose-400 to-blush-400" />
                     )}
                   </div>
                   <div className="p-5">
                     {post.category && (
-                      <span className="mb-2 inline-block rounded-full bg-terracotta-50 px-2.5 py-0.5 text-xs font-medium text-terracotta-600">
+                      <span className="mb-2 inline-block rounded-full bg-rose-50 px-2.5 py-0.5 text-xs font-medium text-rose-600">
                         {post.category}
                       </span>
                     )}
-                    <h3 className="font-serif text-lg font-bold text-charcoal-900 group-hover:text-terracotta-600 transition-colors line-clamp-2">
+                    <h3 className="font-serif text-lg font-bold text-charcoal-900 group-hover:text-rose-600 transition-colors line-clamp-2">
                       {post.title}
                     </h3>
                     {post.excerpt && (
-                      <p className="mt-2 text-sm leading-relaxed text-warm-gray-600 line-clamp-2">
+                      <p className="mt-2 text-sm leading-relaxed text-muted-600 line-clamp-2">
                         {post.excerpt}
                       </p>
                     )}
-                    <div className="mt-3 flex items-center gap-3 text-xs text-warm-gray-500">
+                    <div className="mt-3 flex items-center gap-3 text-xs text-muted-500">
                       <span>{post.publishedAt && formatDate(post.publishedAt)}</span>
                       <span>·</span>
                       <span>5 min read</span>

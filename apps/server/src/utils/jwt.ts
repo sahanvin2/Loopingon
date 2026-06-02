@@ -1,77 +1,53 @@
 import jwt from "jsonwebtoken";
-
-export function sign(
-  payload: string | Buffer | object,
-  secret: string,
-  options?: jwt.SignOptions
-): string {
-  return jwt.sign(payload, secret, options);
-}
-
-export function verify<T = unknown>(
-  token: string,
-  secret: string,
-  options?: jwt.VerifyOptions
-): T {
-  return jwt.verify(token, secret, options) as T;
-}
-
-export function decode<T = unknown>(token: string): T | null {
-  return jwt.decode(token) as T | null;
-}
-
-export function extractBearerToken(authHeader?: string): string | null {
-  if (!authHeader) return null;
-  const parts = authHeader.split(" ");
-  if (parts.length === 2 && parts[0] === "Bearer") {
-    return parts[1];
-  }
-  return null;
-}
-
 import { v4 as uuidv4 } from "uuid";
 
-const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET || "access-secret-dev";
-const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET || "refresh-secret-dev";
+const JWT_ACCESS_SECRET = process.env.JWT_ACCESS_SECRET || "loopingon-access-secret-dev";
+const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET || "loopingon-refresh-secret-dev";
 const RESET_TOKEN_SECRET = process.env.RESET_TOKEN_SECRET || "reset-secret-dev";
 const EMAIL_VERIFY_SECRET = process.env.EMAIL_VERIFY_SECRET || "email-verify-secret-dev";
 
 export interface TokenPayload {
-  userId: string;
+  sub: string;
+  email?: string;
   role: string;
+  type?: string;
   sessionId?: string;
 }
 
-export function signAccessToken(payload: TokenPayload): string {
-  return sign(payload, ACCESS_TOKEN_SECRET, { expiresIn: "15m" });
+export function signAccessToken(payload: Omit<TokenPayload, "type" | "sessionId"> & { sessionId?: string }): string {
+  return jwt.sign({ ...payload, type: "access" }, JWT_ACCESS_SECRET, {
+    expiresIn: "15m",
+  } as jwt.SignOptions);
 }
 
-export function signRefreshToken(payload: TokenPayload): string {
-  return sign(payload, REFRESH_TOKEN_SECRET, { expiresIn: "7d" });
+export function signRefreshToken(payload: Omit<TokenPayload, "type">): string {
+  return jwt.sign({ ...payload, type: "refresh" }, JWT_REFRESH_SECRET, {
+    expiresIn: "7d",
+  } as jwt.SignOptions);
 }
 
 export function verifyAccessToken(token: string): TokenPayload {
-  return verify<TokenPayload>(token, ACCESS_TOKEN_SECRET);
+  return jwt.verify(token, JWT_ACCESS_SECRET) as TokenPayload;
 }
 
 export function verifyRefreshToken(token: string): TokenPayload {
-  return verify<TokenPayload>(token, REFRESH_TOKEN_SECRET);
+  return jwt.verify(token, JWT_REFRESH_SECRET) as TokenPayload;
 }
 
-export function signResetToken(userId: string): string {
-  return sign({ userId }, RESET_TOKEN_SECRET, { expiresIn: "1h" });
+export function signResetToken(sub: string): string {
+  return jwt.sign({ sub, type: "reset" }, RESET_TOKEN_SECRET, { expiresIn: "1h" } as jwt.SignOptions);
 }
 
-export function verifyResetToken(token: string): { userId: string } {
-  return verify<{ userId: string }>(token, RESET_TOKEN_SECRET);
+export function verifyResetToken(token: string): { sub: string } {
+  return jwt.verify(token, RESET_TOKEN_SECRET) as { sub: string };
 }
 
-export function signEmailVerificationToken(userId: string, email: string): string {
-  return sign({ userId, email }, EMAIL_VERIFY_SECRET, { expiresIn: "24h" });
+export function signEmailVerificationToken(sub: string, email: string): string {
+  return jwt.sign({ sub, email, type: "email_verify" }, EMAIL_VERIFY_SECRET, { expiresIn: "24h" } as jwt.SignOptions);
 }
 
-export function verifyEmailToken(token: string): { userId: string; email: string } {
-  return verify<{ userId: string; email: string }>(token, EMAIL_VERIFY_SECRET);
+export function verifyEmailToken(token: string): { sub: string; email: string } {
+  return jwt.verify(token, EMAIL_VERIFY_SECRET) as { sub: string; email: string };
 }
 
 export function generateTokenFamily(): string {

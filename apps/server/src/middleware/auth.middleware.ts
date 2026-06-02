@@ -1,5 +1,5 @@
 import { type Request, type Response, type NextFunction } from "express";
-import { verifyAccessToken, type TokenPayload } from "../config/jwt.js";
+import { verifyAccessToken } from "../utils/jwt.js";
 import { prisma } from "../config/database.js";
 import { AppError } from "./errorHandler.middleware.js";
 import { getRedisClient } from "../config/redis.js";
@@ -19,15 +19,6 @@ interface AuthenticatedUser {
     status: string;
     isVerified: boolean;
   } | null;
-}
-
-declare global {
-  namespace Express {
-    interface Request {
-      user?: AuthenticatedUser;
-      currentToken?: TokenPayload;
-    }
-  }
 }
 
 async function findActiveUser(userId: string): Promise<AuthenticatedUser | null> {

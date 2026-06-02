@@ -34,7 +34,7 @@ import {
   CreditCard,
 } from "lucide-react";
 
-const COLORS = ["#C75B39", "#D4A843", "#2D8B7D", "#6B5E53", "#1E1E1E"];
+const COLORS = ["#c86482", "#dc9b91", "#827378", "#a39296", "#1e191c"];
 
 export default function VendorAnalyticsPage() {
   const [dateRange, setDateRange] = useState("30d");
@@ -62,7 +62,7 @@ export default function VendorAnalyticsPage() {
     >
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <h1 className="text-2xl font-bold text-charcoal-900">Analytics</h1>
-        <div className="flex items-center gap-1 bg-white rounded-lg border border-cream-200 p-1">
+        <div className="flex items-center gap-1 bg-white rounded-lg border border-blush-200 p-1">
           {[
             { key: "7d", label: "7d" },
             { key: "30d", label: "30d" },
@@ -75,8 +75,8 @@ export default function VendorAnalyticsPage() {
               onClick={() => setDateRange(range.key)}
               className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors ${
                 dateRange === range.key
-                  ? "bg-terracotta-600 text-white"
-                  : "text-warm-gray-600 hover:text-charcoal-700"
+                  ? "bg-rose-600 text-white"
+                  : "text-muted-600 hover:text-charcoal-700"
               }`}
             >
               {range.label}
@@ -99,25 +99,25 @@ export default function VendorAnalyticsPage() {
             title="Orders"
             value={stats?.totalOrders ?? 0}
             icon={ShoppingBag}
-            variant="teal"
+            variant="muted"
           />
           <StatCard
             title="Revenue"
             value={formatPrice(Number(stats?.totalRevenue || 0))}
             icon={DollarSign}
-            variant="gold"
+            variant="blush"
           />
           <StatCard
             title="Commission"
             value={formatPrice(Number(stats?.commissionPaid || 0))}
             icon={CreditCard}
-            variant="terracotta"
+            variant="rose"
           />
           <StatCard
             title="Conv. Rate"
             value={`${(stats?.conversionRate ?? 0).toFixed(1)}%`}
             icon={Percent}
-            variant="teal"
+            variant="muted"
           />
           <StatCard
             title="Avg Order"
@@ -137,7 +137,7 @@ export default function VendorAnalyticsPage() {
                 <XAxis dataKey="date" tick={{ fontSize: 12 }} />
                 <YAxis tick={{ fontSize: 12 }} />
                 <Tooltip />
-                <Line type="monotone" dataKey="revenue" stroke="#C75B39" strokeWidth={2} />
+                <Line type="monotone" dataKey="revenue" stroke="#c86482" strokeWidth={2} />
               </LineChart>
             </ResponsiveContainer>
           </div>
@@ -174,7 +174,7 @@ export default function VendorAnalyticsPage() {
                 <XAxis type="number" />
                 <YAxis type="category" dataKey="name" width={120} tick={{ fontSize: 11 }} />
                 <Tooltip />
-                <Bar dataKey="sales" fill="#2D8B7D" />
+                <Bar dataKey="sales" fill="#827378" />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -200,14 +200,14 @@ export default function VendorAnalyticsPage() {
       <div className="flex gap-3">
         <button
           type="button"
-          className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-cream-200 rounded-lg text-sm font-medium hover:bg-cream-50"
+          className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-blush-200 rounded-lg text-sm font-medium hover:bg-cream-50"
         >
           <Download className="w-4 h-4" />
           Export CSV
         </button>
         <button
           type="button"
-          className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-cream-200 rounded-lg text-sm font-medium hover:bg-cream-50"
+          className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-blush-200 rounded-lg text-sm font-medium hover:bg-cream-50"
         >
           <Download className="w-4 h-4" />
           Export PDF

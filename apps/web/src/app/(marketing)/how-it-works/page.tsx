@@ -34,10 +34,10 @@ const faqs = [
 export default function HowItWorksPage() {
   return (
     <>
-      <section className="bg-cream-100 py-16">
+      <section className="bg-cream-50 py-16">
         <div className="mx-auto max-w-4xl px-4 text-center">
           <h1 className="font-serif text-4xl font-bold text-charcoal-900 md:text-5xl">How It Works</h1>
-          <p className="mt-4 text-lg text-warm-gray-600">A fair, transparent marketplace connecting Sri Lankan artisans with the world.</p>
+          <p className="mt-4 text-lg text-muted-600">A fair, transparent marketplace connecting Sri Lankan artisans with the world.</p>
         </div>
       </section>
 
@@ -50,39 +50,39 @@ export default function HowItWorksPage() {
           <h2 className="font-serif text-3xl font-bold text-charcoal-900">Find Your Perfect Handmade Treasure</h2>
           <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {buyerSteps.map((step, i) => (
-              <div key={step.title} className="relative rounded-xl bg-cream-100 p-6">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-terracotta-600 text-white">
+              <div key={step.title} className="relative rounded-xl bg-cream-50 p-6">
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-rose-600 text-white">
                   <step.icon className="h-6 w-6" />
                 </div>
-                <div className="absolute -left-2 -top-2 flex h-8 w-8 items-center justify-center rounded-full bg-gold-400 text-sm font-bold text-charcoal-900">
+                <div className="absolute -left-2 -top-2 flex h-8 w-8 items-center justify-center rounded-full bg-blush-400 text-sm font-bold text-charcoal-900">
                   {i + 1}
                 </div>
                 <h3 className="font-serif text-lg font-semibold text-charcoal-800">{step.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-warm-gray-600">{step.description}</p>
+                <p className="mt-2 text-sm leading-relaxed text-muted-600">{step.description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-cream-100 py-20">
+      <section className="bg-cream-50 py-20">
         <div className="mx-auto max-w-6xl px-4">
-          <div className="mb-4 inline-flex items-center rounded-full bg-teal-50 px-4 py-1.5">
-            <BadgeCheck className="mr-2 h-4 w-4 text-teal-600" />
-            <span className="text-sm font-medium text-teal-700">For Sellers</span>
+          <div className="mb-4 inline-flex items-center rounded-full bg-muted-50 px-4 py-1.5">
+            <BadgeCheck className="mr-2 h-4 w-4 text-muted-600" />
+            <span className="text-sm font-medium text-muted-700">For Sellers</span>
           </div>
           <h2 className="font-serif text-3xl font-bold text-charcoal-900">Turn Your Craft Into Income</h2>
           <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {sellerSteps.map((step, i) => (
               <div key={step.title} className="relative rounded-xl bg-white p-6 shadow-soft-sm">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-teal-600 text-white">
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-muted-600 text-white">
                   <step.icon className="h-6 w-6" />
                 </div>
-                <div className="absolute -left-2 -top-2 flex h-8 w-8 items-center justify-center rounded-full bg-gold-400 text-sm font-bold text-charcoal-900">
+                <div className="absolute -left-2 -top-2 flex h-8 w-8 items-center justify-center rounded-full bg-blush-400 text-sm font-bold text-charcoal-900">
                   {i + 1}
                 </div>
                 <h3 className="font-serif text-lg font-semibold text-charcoal-800">{step.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-warm-gray-600">{step.description}</p>
+                <p className="mt-2 text-sm leading-relaxed text-muted-600">{step.description}</p>
               </div>
             ))}
           </div>
@@ -94,27 +94,27 @@ export default function HowItWorksPage() {
           <h2 className="text-center font-serif text-3xl font-bold text-charcoal-900">Frequently Asked Questions</h2>
           <div className="mt-10 space-y-3">
             {faqs.map((faq) => (
-              <details key={faq.q} className="group rounded-xl border border-charcoal-200 bg-cream-100">
+              <details key={faq.q} className="group rounded-xl border border-charcoal-200 bg-cream-50">
                 <summary className="flex cursor-pointer items-center justify-between px-6 py-4 text-left text-sm font-medium text-charcoal-800">
                   {faq.q}
-                  <svg className="h-5 w-5 shrink-0 text-warm-gray-400 transition-transform group-open:rotate-180" viewBox="0 0 20 20" fill="currentColor">
+                  <svg className="h-5 w-5 shrink-0 text-muted-400 transition-transform group-open:rotate-180" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
                   </svg>
                 </summary>
-                <div className="px-6 pb-4 text-sm leading-relaxed text-warm-gray-600">{faq.a}</div>
+                <div className="px-6 pb-4 text-sm leading-relaxed text-muted-600">{faq.a}</div>
               </details>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-cream-100 py-20">
+      <section className="bg-cream-50 py-20">
         <div className="mx-auto max-w-2xl px-4 text-center">
           <h2 className="font-serif text-3xl font-bold text-charcoal-900">Ready to Get Started?</h2>
-          <p className="mt-4 text-lg text-warm-gray-600">Whether you&apos;re buying or selling, Loopingon makes it simple.</p>
+          <p className="mt-4 text-lg text-muted-600">Whether you&apos;re buying or selling, Loopingon makes it simple.</p>
           <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-            <Link href="/products" className="inline-flex w-full items-center justify-center rounded-lg bg-terracotta-600 px-8 py-3.5 text-sm font-semibold text-white shadow-soft transition-all hover:bg-terracotta-700 sm:w-auto">Start Shopping</Link>
-            <Link href="/sign-up/vendor" className="inline-flex w-full items-center justify-center rounded-lg border border-terracotta-300 px-8 py-3.5 text-sm font-semibold text-terracotta-700 transition-all hover:bg-terracotta-50 sm:w-auto">Start Selling</Link>
+            <Link href="/products" className="inline-flex w-full items-center justify-center rounded-lg bg-rose-600 px-8 py-3.5 text-sm font-semibold text-white shadow-soft transition-all hover:bg-rose-700 sm:w-auto">Start Shopping</Link>
+            <Link href="/sign-up/vendor" className="inline-flex w-full items-center justify-center rounded-lg border border-rose-300 px-8 py-3.5 text-sm font-semibold text-rose-700 transition-all hover:bg-rose-50 sm:w-auto">Start Selling</Link>
           </div>
         </div>
       </section>

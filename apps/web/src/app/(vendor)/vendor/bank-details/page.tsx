@@ -83,7 +83,7 @@ export default function VendorBankDetailsPage() {
       {isLoading ? (
         <LoadingSkeleton variant="card" count={2} />
       ) : bank && !isEditing ? (
-        <div className="bg-white rounded-xl border border-cream-200 p-6 max-w-lg">
+        <div className="bg-white rounded-xl border border-blush-200 p-6 max-w-lg">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg font-semibold text-charcoal-900">
               Bank Account
@@ -92,14 +92,14 @@ export default function VendorBankDetailsPage() {
               <button
                 type="button"
                 onClick={() => setIsEditing(true)}
-                className="p-2 rounded-md text-warm-gray-500 hover:text-terracotta-600 hover:bg-terracotta-50"
+                className="p-2 rounded-md text-muted-500 hover:text-rose-600 hover:bg-rose-50"
               >
                 <Pencil className="w-4 h-4" />
               </button>
               <button
                 type="button"
                 onClick={() => setDeletingId(bank.id)}
-                className="p-2 rounded-md text-warm-gray-500 hover:text-red-600 hover:bg-red-50"
+                className="p-2 rounded-md text-muted-500 hover:text-red-600 hover:bg-red-50"
               >
                 <Trash2 className="w-4 h-4" />
               </button>
@@ -107,44 +107,44 @@ export default function VendorBankDetailsPage() {
           </div>
           <div className="space-y-3 text-sm">
             <div className="flex justify-between">
-              <span className="text-warm-gray-500">Bank</span>
+              <span className="text-muted-500">Bank</span>
               <span className="font-medium text-charcoal-900">{bank.bankName}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-warm-gray-500">Branch</span>
+              <span className="text-muted-500">Branch</span>
               <span className="font-medium text-charcoal-900">
                 {bank.branchName || "—"}
               </span>
             </div>
             <div className="flex justify-between">
-              <span className="text-warm-gray-500">Account Holder</span>
+              <span className="text-muted-500">Account Holder</span>
               <span className="font-medium text-charcoal-900">
                 {bank.accountHolderName}
               </span>
             </div>
             <div className="flex justify-between">
-              <span className="text-warm-gray-500">Account Number</span>
+              <span className="text-muted-500">Account Number</span>
               <span className="font-mono text-charcoal-900">
                 {maskAccount(bank.accountNumber)}
               </span>
             </div>
             <div className="flex justify-between">
-              <span className="text-warm-gray-500">Account Type</span>
+              <span className="text-muted-500">Account Type</span>
               <span className="font-medium text-charcoal-900">
                 {bank.accountType}
               </span>
             </div>
             <div className="flex justify-between">
-              <span className="text-warm-gray-500">Verification</span>
+              <span className="text-muted-500">Verification</span>
               <Badge
-                variant={bank.verifiedAt ? "teal" : "amber"}
+                variant={bank.verifiedAt ? "muted" : "amber"}
                 size="sm"
               >
                 {bank.verifiedAt ? "Verified" : "Pending"}
               </Badge>
             </div>
           </div>
-          <p className="text-xs text-warm-gray-500 mt-4 p-3 bg-cream-50 rounded-lg">
+          <p className="text-xs text-muted-500 mt-4 p-3 bg-cream-50 rounded-lg">
             Bank details are verified by our team. Changes may require
             re-verification.
           </p>
@@ -152,7 +152,7 @@ export default function VendorBankDetailsPage() {
       ) : (
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="bg-white rounded-xl border border-cream-200 p-6 space-y-4 max-w-lg"
+          className="bg-white rounded-xl border border-blush-200 p-6 space-y-4 max-w-lg"
         >
           <h2 className="text-lg font-semibold text-charcoal-900">
             {bank ? "Edit" : "Add"} Bank Account
@@ -163,7 +163,7 @@ export default function VendorBankDetailsPage() {
             </label>
             <input
               {...register("bankName", { required: true })}
-              className="w-full px-3 py-2 border border-cream-200 rounded-lg text-sm focus:ring-2 focus:ring-terracotta-500"
+              className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm focus:ring-2 focus:ring-rose-500"
             />
           </div>
           <div>
@@ -172,7 +172,7 @@ export default function VendorBankDetailsPage() {
             </label>
             <input
               {...register("branchName")}
-              className="w-full px-3 py-2 border border-cream-200 rounded-lg text-sm focus:ring-2 focus:ring-terracotta-500"
+              className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm focus:ring-2 focus:ring-rose-500"
             />
           </div>
           <div>
@@ -181,7 +181,7 @@ export default function VendorBankDetailsPage() {
             </label>
             <input
               {...register("accountHolderName", { required: true })}
-              className="w-full px-3 py-2 border border-cream-200 rounded-lg text-sm focus:ring-2 focus:ring-terracotta-500"
+              className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm focus:ring-2 focus:ring-rose-500"
             />
           </div>
           <div>
@@ -190,7 +190,7 @@ export default function VendorBankDetailsPage() {
             </label>
             <input
               {...register("accountNumber", { required: true })}
-              className="w-full px-3 py-2 border border-cream-200 rounded-lg text-sm focus:ring-2 focus:ring-terracotta-500"
+              className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm focus:ring-2 focus:ring-rose-500"
             />
           </div>
           <div>
@@ -199,7 +199,7 @@ export default function VendorBankDetailsPage() {
             </label>
             <select
               {...register("accountType")}
-              className="w-full px-3 py-2 border border-cream-200 rounded-lg text-sm focus:ring-2 focus:ring-terracotta-500"
+              className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm focus:ring-2 focus:ring-rose-500"
             >
               <option value="Savings">Savings</option>
               <option value="Current">Current</option>
@@ -209,7 +209,7 @@ export default function VendorBankDetailsPage() {
             <input
               type="checkbox"
               {...register("isPrimary")}
-              className="w-4 h-4 rounded text-terracotta-600"
+              className="w-4 h-4 rounded text-rose-600"
             />
             <span className="text-sm text-charcoal-700">Set as primary</span>
           </label>
@@ -218,7 +218,7 @@ export default function VendorBankDetailsPage() {
               <button
                 type="button"
                 onClick={() => setIsEditing(false)}
-                className="flex-1 px-4 py-2.5 border border-cream-200 rounded-lg text-sm font-medium"
+                className="flex-1 px-4 py-2.5 border border-blush-200 rounded-lg text-sm font-medium"
               >
                 Cancel
               </button>
@@ -226,12 +226,12 @@ export default function VendorBankDetailsPage() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="flex-1 px-4 py-2.5 bg-terracotta-600 text-white rounded-lg text-sm font-medium hover:bg-terracotta-700 disabled:opacity-50"
+              className="flex-1 px-4 py-2.5 bg-rose-600 text-white rounded-lg text-sm font-medium hover:bg-rose-700 disabled:opacity-50"
             >
               {isSubmitting ? "Saving..." : "Save"}
             </button>
           </div>
-          <p className="text-xs text-warm-gray-500 p-3 bg-cream-50 rounded-lg">
+          <p className="text-xs text-muted-500 p-3 bg-cream-50 rounded-lg">
             Bank details are verified by our team. Changes may require
             re-verification.
           </p>
@@ -269,14 +269,14 @@ export default function VendorBankDetailsPage() {
               <h3 className="text-lg font-semibold text-charcoal-900 mb-2">
                 Remove Bank Account?
               </h3>
-              <p className="text-sm text-warm-gray-600 mb-6">
+              <p className="text-sm text-muted-600 mb-6">
                 You won&apos;t receive payouts without a bank account on file.
               </p>
               <div className="flex gap-3">
                 <button
                   type="button"
                   onClick={() => setDeletingId(null)}
-                  className="flex-1 px-4 py-2.5 border border-cream-200 rounded-lg text-sm font-medium"
+                  className="flex-1 px-4 py-2.5 border border-blush-200 rounded-lg text-sm font-medium"
                 >
                   Cancel
                 </button>

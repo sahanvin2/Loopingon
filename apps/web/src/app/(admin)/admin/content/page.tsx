@@ -61,19 +61,19 @@ export default function AdminContentPage() {
       ) : (
         <div className="space-y-3">
           {pages.map((page: any) => (
-            <div key={page.id} className="bg-white rounded-lg border border-cream-200 p-4 flex items-center justify-between">
+            <div key={page.id} className="bg-white rounded-lg border border-blush-200 p-4 flex items-center justify-between">
               <div>
                 <p className="font-medium text-charcoal-900">{page.title}</p>
-                <p className="text-xs text-warm-gray-500">/{page.slug}</p>
+                <p className="text-xs text-muted-500">/{page.slug}</p>
               </div>
               <div className="flex items-center gap-3">
-                <Badge variant={page.isPublished ? "teal" : "gray"} size="sm">
+                <Badge variant={page.isPublished ? "muted" : "gray"} size="sm">
                   {page.isPublished ? "Published" : "Draft"}
                 </Badge>
                 <button
                   type="button"
                   onClick={() => setEditingPage(page)}
-                  className="px-3 py-1.5 text-xs font-medium text-terracotta-600 hover:bg-terracotta-50 rounded-md"
+                  className="px-3 py-1.5 text-xs font-medium text-rose-600 hover:bg-rose-50 rounded-md"
                 >
                   Edit
                 </button>
@@ -91,11 +91,11 @@ export default function AdminContentPage() {
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium mb-1">Title</label>
-                  <input {...register("title")} className="w-full px-3 py-2 border border-cream-200 rounded-lg text-sm" />
+                  <input {...register("title")} className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-1">Slug</label>
-                  <input {...register("slug")} className="w-full px-3 py-2 border border-cream-200 rounded-lg text-sm" />
+                  <input {...register("slug")} className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-1">Content</label>
@@ -103,19 +103,19 @@ export default function AdminContentPage() {
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-1">Meta Title</label>
-                  <input {...register("metaTitle")} className="w-full px-3 py-2 border border-cream-200 rounded-lg text-sm" />
+                  <input {...register("metaTitle")} className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-1">Meta Description</label>
-                  <textarea {...register("metaDescription")} rows={2} className="w-full px-3 py-2 border border-cream-200 rounded-lg text-sm" />
+                  <textarea {...register("metaDescription")} rows={2} className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm" />
                 </div>
                 <label className="flex items-center gap-2">
                   <input type="checkbox" {...register("isPublished")} className="w-4 h-4 rounded" />
                   <span className="text-sm">Published</span>
                 </label>
                 <div className="flex gap-3">
-                  <button type="button" onClick={() => setEditingPage(null)} className="flex-1 px-4 py-2.5 border border-cream-200 rounded-lg text-sm">Cancel</button>
-                  <button type="submit" disabled={isSubmitting} className="flex-1 px-4 py-2.5 bg-terracotta-600 text-white rounded-lg text-sm font-medium hover:bg-terracotta-700 disabled:opacity-50">
+                  <button type="button" onClick={() => setEditingPage(null)} className="flex-1 px-4 py-2.5 border border-blush-200 rounded-lg text-sm">Cancel</button>
+                  <button type="submit" disabled={isSubmitting} className="flex-1 px-4 py-2.5 bg-rose-600 text-white rounded-lg text-sm font-medium hover:bg-rose-700 disabled:opacity-50">
                     {isSubmitting ? "Saving..." : "Save Changes"}
                   </button>
                 </div>

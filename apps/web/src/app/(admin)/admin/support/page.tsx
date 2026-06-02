@@ -38,14 +38,14 @@ export default function AdminSupportPage() {
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
       <h1 className="text-2xl font-bold text-charcoal-900">Support Tickets</h1>
 
-      <div className="flex gap-1 bg-white rounded-lg border border-cream-200 p-1 w-fit">
+      <div className="flex gap-1 bg-white rounded-lg border border-blush-200 p-1 w-fit">
         {statusFilters.map((status) => (
           <button
             key={status}
             type="button"
             onClick={() => setStatusFilter(status)}
             className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
-              statusFilter === status ? "bg-terracotta-600 text-white" : "text-warm-gray-600 hover:text-charcoal-700"
+              statusFilter === status ? "bg-rose-600 text-white" : "text-muted-600 hover:text-charcoal-700"
             }`}
           >
             {status.replace("_", " ")}
@@ -58,10 +58,10 @@ export default function AdminSupportPage() {
       ) : tickets.length === 0 ? (
         <EmptyState title="No support tickets" />
       ) : (
-        <div className="bg-white rounded-lg border border-cream-200 overflow-x-auto">
+        <div className="bg-white rounded-lg border border-blush-200 overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-cream-200 bg-cream-50">
+              <tr className="border-b border-blush-200 bg-cream-50">
                 <th className="px-4 py-3 text-left text-xs font-semibold uppercase">Ticket #</th>
                 <th className="px-4 py-3 text-left text-xs font-semibold uppercase">User</th>
                 <th className="px-4 py-3 text-left text-xs font-semibold uppercase">Subject</th>
@@ -72,7 +72,7 @@ export default function AdminSupportPage() {
                 <th className="px-4 py-3 text-left text-xs font-semibold uppercase">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-cream-100">
+            <tbody className="divide-y divide-cream-50">
               {tickets.map((ticket) => (
                 <tr key={ticket.id}>
                   <td className="px-4 py-3 font-mono text-xs">{ticket.ticketNumber}</td>
@@ -85,17 +85,17 @@ export default function AdminSupportPage() {
                     </Badge>
                   </td>
                   <td className="px-4 py-3">
-                    <Badge variant={ticket.status === "RESOLVED" ? "teal" : ticket.status === "IN_PROGRESS" ? "gold" : "amber"} size="sm">
+                    <Badge variant={ticket.status === "RESOLVED" ? "muted" : ticket.status === "IN_PROGRESS" ? "blush" : "amber"} size="sm">
                       {ticket.status}
                     </Badge>
                   </td>
                   <td className="px-4 py-3 text-xs">{formatDate(ticket.createdAt)}</td>
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-1">
-                      <button type="button" onClick={() => assignMutation.mutate({ ticketId: ticket.id })} className="px-2 py-1 text-xs font-medium text-teal-600 hover:bg-teal-50 rounded">
+                      <button type="button" onClick={() => assignMutation.mutate({ ticketId: ticket.id })} className="px-2 py-1 text-xs font-medium text-muted-600 hover:bg-muted-50 rounded">
                         Assign
                       </button>
-                      <button type="button" className="px-2 py-1 text-xs font-medium text-terracotta-600 hover:bg-terracotta-50 rounded">
+                      <button type="button" className="px-2 py-1 text-xs font-medium text-rose-600 hover:bg-rose-50 rounded">
                         View
                       </button>
                     </div>

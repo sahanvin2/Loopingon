@@ -75,7 +75,7 @@ export default function VendorShippingPage() {
       <h1 className="text-2xl font-bold text-charcoal-900">Shipping Settings</h1>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 max-w-lg">
-        <div className="bg-white rounded-xl border border-cream-200 p-6 space-y-4">
+        <div className="bg-white rounded-xl border border-blush-200 p-6 space-y-4">
           <h2 className="text-lg font-semibold text-charcoal-900">
             Processing Time
           </h2>
@@ -88,12 +88,12 @@ export default function VendorShippingPage() {
               min={0}
               max={30}
               {...register("processingTime", { valueAsNumber: true })}
-              className="w-full px-3 py-2 border border-cream-200 rounded-lg text-sm focus:ring-2 focus:ring-terracotta-500"
+              className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm focus:ring-2 focus:ring-rose-500"
             />
           </div>
         </div>
 
-        <div className="bg-white rounded-xl border border-cream-200 p-6 space-y-4">
+        <div className="bg-white rounded-xl border border-blush-200 p-6 space-y-4">
           <h2 className="text-lg font-semibold text-charcoal-900">
             Domestic Shipping
           </h2>
@@ -105,7 +105,7 @@ export default function VendorShippingPage() {
               type="number"
               step="0.01"
               {...register("domesticRate")}
-              className="w-full px-3 py-2 border border-cream-200 rounded-lg text-sm focus:ring-2 focus:ring-terracotta-500"
+              className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm focus:ring-2 focus:ring-rose-500"
             />
           </div>
           <label className="flex items-center justify-between">
@@ -113,7 +113,7 @@ export default function VendorShippingPage() {
             <input
               type="checkbox"
               {...register("freeShippingEnabled")}
-              className="w-4 h-4 rounded text-terracotta-600 focus:ring-terracotta-500"
+              className="w-4 h-4 rounded text-rose-600 focus:ring-rose-500"
             />
           </label>
           <div>
@@ -124,12 +124,12 @@ export default function VendorShippingPage() {
               type="number"
               step="0.01"
               {...register("freeShippingMinOrder")}
-              className="w-full px-3 py-2 border border-cream-200 rounded-lg text-sm focus:ring-2 focus:ring-terracotta-500"
+              className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm focus:ring-2 focus:ring-rose-500"
             />
           </div>
         </div>
 
-        <div className="bg-white rounded-xl border border-cream-200 p-6 space-y-4">
+        <div className="bg-white rounded-xl border border-blush-200 p-6 space-y-4">
           <h2 className="text-lg font-semibold text-charcoal-900">
             International Shipping
           </h2>
@@ -138,7 +138,7 @@ export default function VendorShippingPage() {
             <input
               type="checkbox"
               {...register("internationalEnabled")}
-              className="w-4 h-4 rounded text-terracotta-600 focus:ring-terracotta-500"
+              className="w-4 h-4 rounded text-rose-600 focus:ring-rose-500"
             />
           </label>
           <div>
@@ -149,7 +149,7 @@ export default function VendorShippingPage() {
               type="number"
               step="0.01"
               {...register("internationalRate")}
-              className="w-full px-3 py-2 border border-cream-200 rounded-lg text-sm focus:ring-2 focus:ring-terracotta-500"
+              className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm focus:ring-2 focus:ring-rose-500"
             />
           </div>
         </div>
@@ -157,7 +157,7 @@ export default function VendorShippingPage() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="inline-flex items-center gap-2 px-6 py-3 bg-terracotta-600 text-white rounded-lg font-medium hover:bg-terracotta-700 disabled:opacity-50"
+          className="inline-flex items-center gap-2 px-6 py-3 bg-rose-600 text-white rounded-lg font-medium hover:bg-rose-700 disabled:opacity-50"
         >
           <Save className="w-4 h-4" />
           {isSubmitting ? "Saving..." : "Save Changes"}

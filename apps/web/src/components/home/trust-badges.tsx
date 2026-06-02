@@ -33,7 +33,7 @@ const trustItems = [
 
 export function TrustBadges() {
   return (
-    <section className="py-8 bg-cream-50 border-y border-cream-200 overflow-hidden">
+    <section className="py-8 bg-cream-50 border-y border-blush-200 overflow-hidden">
       <div className="relative">
         <div className="flex gap-12 animate-marquee whitespace-nowrap">
           {[...trustItems, ...trustItems].map((item, index) => (
@@ -41,8 +41,8 @@ export function TrustBadges() {
               key={`${item.text}-${index}`}
               className="flex items-center gap-3 px-2 text-charcoal-700"
             >
-              <div className="w-9 h-9 rounded-full bg-terracotta-100 flex items-center justify-center shrink-0">
-                <item.icon className="w-4 h-4 text-terracotta-600" />
+              <div className="w-10 h-10 rounded-full bg-blush-50/80 border border-blush-200/50 flex items-center justify-center shrink-0 shadow-sm">
+                <item.icon className="w-4 h-4 text-blush-600" />
               </div>
               <span className="text-sm font-medium">{item.text}</span>
               {index < trustItems.length * 2 - 1 && (

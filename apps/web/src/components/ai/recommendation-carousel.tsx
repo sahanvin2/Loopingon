@@ -65,7 +65,7 @@ export function RecommendationCarousel({
     <section className={cn("py-8", className)}>
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-2">
-          <Sparkles className="w-5 h-5 text-gold-500" />
+          <Sparkles className="w-5 h-5 text-blush-500" />
           <h2 className="font-serif text-2xl text-charcoal-900">{title}</h2>
         </div>
 
@@ -76,7 +76,7 @@ export function RecommendationCarousel({
             disabled={!canScrollLeft}
             className={cn(
               "w-9 h-9 rounded-full flex items-center justify-center",
-              "border border-cream-300 text-warm-gray-600 hover:bg-warm-gray-100",
+              "border border-blush-300 text-muted-600 hover:bg-muted-100",
               "disabled:opacity-40 disabled:cursor-not-allowed transition-colors",
             )}
             aria-label="Scroll left"
@@ -89,7 +89,7 @@ export function RecommendationCarousel({
             disabled={!canScrollRight}
             className={cn(
               "w-9 h-9 rounded-full flex items-center justify-center",
-              "border border-cream-300 text-warm-gray-600 hover:bg-warm-gray-100",
+              "border border-blush-300 text-muted-600 hover:bg-muted-100",
               "disabled:opacity-40 disabled:cursor-not-allowed transition-colors",
             )}
             aria-label="Scroll right"

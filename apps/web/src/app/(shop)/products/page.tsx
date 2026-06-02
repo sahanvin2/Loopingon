@@ -62,13 +62,13 @@ async function ProductsContent({ searchParams }: ProductsPageProps) {
 
   return (
     <>
-      <div className="bg-cream-100 py-8">
+      <div className="bg-cream-50 py-8">
         <div className="mx-auto max-w-7xl px-4">
           <Breadcrumb items={breadcrumbs} />
           <h1 className="mt-4 font-serif text-3xl font-bold text-charcoal-900 md:text-4xl">
             Explore Handmade Treasures
           </h1>
-          <p className="mt-2 text-warm-gray-500">
+          <p className="mt-2 text-muted-500">
             Showing {products.length} of {total} products
           </p>
         </div>
@@ -87,8 +87,8 @@ async function ProductsContent({ searchParams }: ProductsPageProps) {
             </>
           ) : (
             <div className="py-20 text-center">
-              <p className="text-lg text-warm-gray-500">No products found matching your criteria.</p>
-              <p className="mt-2 text-sm text-warm-gray-400">Try adjusting your filters or search terms.</p>
+              <p className="text-lg text-muted-500">No products found matching your criteria.</p>
+              <p className="mt-2 text-sm text-muted-400">Try adjusting your filters or search terms.</p>
             </div>
           )}
         </div>
