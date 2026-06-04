@@ -7,12 +7,12 @@ export const metadata: Metadata = {
 
 export default function ShippingPolicyPage() {
   return (
-    <div className="bg-cream-50 py-16">
+    <div className="bg-surface-50 py-16">
       <div className="mx-auto max-w-3xl px-4">
-        <h1 className="font-serif text-4xl font-bold text-charcoal-900">Shipping Policy</h1>
+        <h1 className="font-serif text-4xl font-bold text-text-900">Shipping Policy</h1>
         <p className="mt-2 text-sm text-muted-500">Last updated: June 2026</p>
 
-        <div className="mt-10 space-y-8 text-sm leading-relaxed text-muted-700 [&_h2]:font-serif [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-charcoal-900 [&_h3]:font-semibold [&_h3]:text-charcoal-800 [&_p]:mt-3 [&_ul]:mt-3 [&_ul]:list-disc [&_ul]:pl-6">
+        <div className="mt-10 space-y-8 text-sm leading-relaxed text-muted-700 [&_h2]:font-serif [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-text-900 [&_h3]:font-semibold [&_h3]:text-text-800 [&_p]:mt-3 [&_ul]:mt-3 [&_ul]:list-disc [&_ul]:pl-6">
           <section>
             <h2>Processing Time</h2>
             <p>All products on Loopingon are handmade, which means each item is crafted with care. After you place an order, the artisan needs time to prepare, package, and hand over your item to the courier.</p>
@@ -28,19 +28,19 @@ export default function ShippingPolicyPage() {
             <div className="mt-4 overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="bg-cream-50">
-                    <th className="border border-charcoal-200 px-4 py-2 font-semibold text-charcoal-800">Destination</th>
-                    <th className="border border-charcoal-200 px-4 py-2 font-semibold text-charcoal-800">Time</th>
-                    <th className="border border-charcoal-200 px-4 py-2 font-semibold text-charcoal-800">Method</th>
-                    <th className="border border-charcoal-200 px-4 py-2 font-semibold text-charcoal-800">Cost</th>
+                  <tr className="bg-surface-50">
+                    <th className="border border-text-200 px-4 py-2 font-semibold text-text-800">Destination</th>
+                    <th className="border border-text-200 px-4 py-2 font-semibold text-text-800">Time</th>
+                    <th className="border border-text-200 px-4 py-2 font-semibold text-text-800">Method</th>
+                    <th className="border border-text-200 px-4 py-2 font-semibold text-text-800">Cost</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr><td className="border border-charcoal-200 px-4 py-2">Colombo & Suburbs</td><td className="border border-charcoal-200 px-4 py-2">1-2 days</td><td className="border border-charcoal-200 px-4 py-2">Courier / Same-day</td><td className="border border-charcoal-200 px-4 py-2">Rs. 250-500</td></tr>
-                  <tr><td className="border border-charcoal-200 px-4 py-2">Western Province</td><td className="border border-charcoal-200 px-4 py-2">2-3 days</td><td className="border border-charcoal-200 px-4 py-2">Courier</td><td className="border border-charcoal-200 px-4 py-2">Rs. 350-600</td></tr>
-                  <tr><td className="border border-charcoal-200 px-4 py-2">Southern Province</td><td className="border border-charcoal-200 px-4 py-2">3-4 days</td><td className="border border-charcoal-200 px-4 py-2">Courier / SL Post</td><td className="border border-charcoal-200 px-4 py-2">Rs. 400-700</td></tr>
-                  <tr><td className="border border-charcoal-200 px-4 py-2">Central Province</td><td className="border border-charcoal-200 px-4 py-2">3-5 days</td><td className="border border-charcoal-200 px-4 py-2">Courier</td><td className="border border-charcoal-200 px-4 py-2">Rs. 400-700</td></tr>
-                  <tr><td className="border border-charcoal-200 px-4 py-2">Northern & Eastern</td><td className="border border-charcoal-200 px-4 py-2">4-6 days</td><td className="border border-charcoal-200 px-4 py-2">Courier / SL Post</td><td className="border border-charcoal-200 px-4 py-2">Rs. 500-800</td></tr>
+                  <tr><td className="border border-text-200 px-4 py-2">Colombo & Suburbs</td><td className="border border-text-200 px-4 py-2">1-2 days</td><td className="border border-text-200 px-4 py-2">Courier / Same-day</td><td className="border border-text-200 px-4 py-2">Rs. 250-500</td></tr>
+                  <tr><td className="border border-text-200 px-4 py-2">Western Province</td><td className="border border-text-200 px-4 py-2">2-3 days</td><td className="border border-text-200 px-4 py-2">Courier</td><td className="border border-text-200 px-4 py-2">Rs. 350-600</td></tr>
+                  <tr><td className="border border-text-200 px-4 py-2">Southern Province</td><td className="border border-text-200 px-4 py-2">3-4 days</td><td className="border border-text-200 px-4 py-2">Courier / SL Post</td><td className="border border-text-200 px-4 py-2">Rs. 400-700</td></tr>
+                  <tr><td className="border border-text-200 px-4 py-2">Central Province</td><td className="border border-text-200 px-4 py-2">3-5 days</td><td className="border border-text-200 px-4 py-2">Courier</td><td className="border border-text-200 px-4 py-2">Rs. 400-700</td></tr>
+                  <tr><td className="border border-text-200 px-4 py-2">Northern & Eastern</td><td className="border border-text-200 px-4 py-2">4-6 days</td><td className="border border-text-200 px-4 py-2">Courier / SL Post</td><td className="border border-text-200 px-4 py-2">Rs. 500-800</td></tr>
                 </tbody>
               </table>
             </div>

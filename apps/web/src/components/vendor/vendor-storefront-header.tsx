@@ -37,7 +37,7 @@ export function VendorStorefrontHeader({ vendor }: VendorStorefrontHeaderProps) 
 
   return (
     <div>
-      <div className="relative h-48 sm:h-64 rounded-lg overflow-hidden bg-charcoal-800 mb-0">
+      <div className="relative h-48 sm:h-64 rounded-lg overflow-hidden bg-text-800 mb-0">
         {vendor.storeBanner && (
           <Image
             src={getImageUrl(vendor.storeBanner)}
@@ -48,12 +48,12 @@ export function VendorStorefrontHeader({ vendor }: VendorStorefrontHeaderProps) 
             priority
           />
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-charcoal-900/60 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-text-900/60 to-transparent" />
       </div>
 
       <div className="max-w-6xl mx-auto px-4 -mt-16 relative z-10">
         <div className="flex flex-col sm:flex-row items-center sm:items-end gap-4 sm:gap-6">
-          <div className="w-28 h-28 rounded-full border-4 border-blush-100 bg-white overflow-hidden shadow-md">
+          <div className="w-28 h-28 rounded-full border-4 border-accent-100 bg-white overflow-hidden shadow-md">
             {vendor.storeLogo ? (
               <Image
                 src={getImageUrl(vendor.storeLogo)}
@@ -63,7 +63,7 @@ export function VendorStorefrontHeader({ vendor }: VendorStorefrontHeaderProps) 
                 className="w-full h-full object-cover"
               />
             ) : (
-              <div className="w-full h-full flex items-center justify-center text-3xl font-serif text-rose-600 bg-cream-50">
+              <div className="w-full h-full flex items-center justify-center text-3xl font-serif text-primary-600 bg-surface-50">
                 {vendor.storeName.charAt(0)}
               </div>
             )}
@@ -71,7 +71,7 @@ export function VendorStorefrontHeader({ vendor }: VendorStorefrontHeaderProps) 
 
           <div className="flex-1 text-center sm:text-left">
             <div className="flex items-center justify-center sm:justify-start gap-2 mb-1">
-              <h1 className="font-serif text-2xl text-charcoal-900">
+              <h1 className="font-serif text-2xl text-text-900">
                 {vendor.storeName}
               </h1>
               <VendorBadge />
@@ -97,7 +97,7 @@ export function VendorStorefrontHeader({ vendor }: VendorStorefrontHeaderProps) 
               type="button"
               className={cn(
                 "px-4 py-2 rounded-lg text-sm font-medium transition-colors",
-                "bg-rose-600 text-white hover:bg-rose-700",
+                "bg-primary-600 text-white hover:bg-primary-700",
               )}
             >
               Follow
@@ -106,7 +106,7 @@ export function VendorStorefrontHeader({ vendor }: VendorStorefrontHeaderProps) 
               type="button"
               className={cn(
                 "px-4 py-2 rounded-lg text-sm font-medium transition-colors",
-                "border border-blush-300 text-charcoal-700 hover:bg-blush-50",
+                "border border-accent-300 text-text-700 hover:bg-accent-50",
               )}
             >
               Contact
@@ -114,40 +114,40 @@ export function VendorStorefrontHeader({ vendor }: VendorStorefrontHeaderProps) 
           </div>
         </div>
 
-        <div className="mt-6 bg-white rounded-lg border border-blush-200 p-4">
+        <div className="mt-6 bg-white rounded-lg border border-accent-200 p-4">
           <div className="grid grid-cols-2 sm:grid-cols-5 gap-4">
             <div className="flex items-center gap-2">
-              <Star className="w-5 h-5 text-blush-500" />
+              <Star className="w-5 h-5 text-accent-500" />
               <div>
-                <p className="text-lg font-bold text-charcoal-900">4.9</p>
+                <p className="text-lg font-bold text-text-900">4.9</p>
                 <p className="text-xs text-muted-500">Rating</p>
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <Package className="w-5 h-5 text-rose-600" />
+              <Package className="w-5 h-5 text-primary-600" />
               <div>
-                <p className="text-lg font-bold text-charcoal-900">{vendor.totalProducts}</p>
+                <p className="text-lg font-bold text-text-900">{vendor.totalProducts}</p>
                 <p className="text-xs text-muted-500">Products</p>
               </div>
             </div>
             <div className="flex items-center gap-2">
               <BarChart3 className="w-5 h-5 text-muted-600" />
               <div>
-                <p className="text-lg font-bold text-charcoal-900">{vendor.totalOrders}</p>
+                <p className="text-lg font-bold text-text-900">{vendor.totalOrders}</p>
                 <p className="text-xs text-muted-500">Sales</p>
               </div>
             </div>
             <div className="flex items-center gap-2">
               <MessageSquare className="w-5 h-5 text-blue-600" />
               <div>
-                <p className="text-lg font-bold text-charcoal-900">{vendor.responseRate}%</p>
+                <p className="text-lg font-bold text-text-900">{vendor.responseRate}%</p>
                 <p className="text-xs text-muted-500">Response</p>
               </div>
             </div>
             <div className="flex items-center gap-2">
               <Truck className="w-5 h-5 text-green-600" />
               <div>
-                <p className="text-lg font-bold text-charcoal-900">
+                <p className="text-lg font-bold text-text-900">
                   {vendor.onTimeDeliveryRate}%
                 </p>
                 <p className="text-xs text-muted-500">Delivery</p>
@@ -156,7 +156,7 @@ export function VendorStorefrontHeader({ vendor }: VendorStorefrontHeaderProps) 
           </div>
         </div>
 
-        <div className="flex overflow-x-auto mt-6 border-b border-blush-200 scrollbar-hide">
+        <div className="flex overflow-x-auto mt-6 border-b border-accent-200 scrollbar-hide">
           {tabs.map((tab) => (
             <button
               key={tab}
@@ -165,8 +165,8 @@ export function VendorStorefrontHeader({ vendor }: VendorStorefrontHeaderProps) 
               className={cn(
                 "px-6 py-3 text-sm font-medium transition-colors border-b-2 shrink-0",
                 activeTab === tab
-                  ? "border-rose-500 text-rose-600"
-                  : "border-transparent text-muted-600 hover:text-charcoal-700",
+                  ? "border-primary-500 text-primary-600"
+                  : "border-transparent text-muted-600 hover:text-text-700",
               )}
             >
               {tab}

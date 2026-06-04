@@ -33,7 +33,7 @@ export function PriceDisplay({
     <div className={cn("flex items-baseline gap-2 flex-wrap", className)}>
       <span
         className={cn(
-          "font-bold text-rose-600",
+          "font-bold text-primary-600",
           sizes.price,
           hasDiscount && "text-red-600",
         )}

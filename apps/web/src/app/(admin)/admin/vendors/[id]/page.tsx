@@ -65,13 +65,13 @@ export default function AdminVendorDetailPage() {
     >
       <Link
         href="/admin/vendors"
-        className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-600 hover:text-charcoal-700"
+        className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-600 hover:text-text-700"
       >
         <ArrowLeft className="w-4 h-4" />
         Back to Vendors
       </Link>
 
-      <div className="bg-white rounded-xl border border-blush-200 p-6">
+      <div className="bg-white rounded-xl border border-accent-200 p-6">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-6">
           <div className="flex items-center gap-3">
             <div className="w-16 h-16 rounded-full bg-muted-200 overflow-hidden">
@@ -84,7 +84,7 @@ export default function AdminVendorDetailPage() {
               )}
             </div>
             <div>
-              <h1 className="text-xl font-bold text-charcoal-900">
+              <h1 className="text-xl font-bold text-text-900">
                 {vendor.storeName}
               </h1>
               <div className="flex items-center gap-2 mt-1">
@@ -141,31 +141,31 @@ export default function AdminVendorDetailPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <h2 className="text-lg font-semibold text-charcoal-900 mb-3">
+            <h2 className="text-lg font-semibold text-text-900 mb-3">
               Vendor Info
             </h2>
             <dl className="space-y-2 text-sm">
               <div className="flex justify-between">
                 <dt className="text-muted-500">Owner</dt>
-                <dd className="font-medium text-charcoal-900">
+                <dd className="font-medium text-text-900">
                   {vendor.user?.fullName}
                 </dd>
               </div>
               <div className="flex justify-between">
                 <dt className="text-muted-500">Email</dt>
-                <dd className="font-medium text-charcoal-900">
+                <dd className="font-medium text-text-900">
                   {vendor.user?.email}
                 </dd>
               </div>
               <div className="flex justify-between">
                 <dt className="text-muted-500">Phone</dt>
-                <dd className="font-medium text-charcoal-900">
+                <dd className="font-medium text-text-900">
                   {vendor.user?.phone || "—"}
                 </dd>
               </div>
               <div className="flex justify-between">
                 <dt className="text-muted-500">Craft Types</dt>
-                <dd className="font-medium text-charcoal-900 text-right">
+                <dd className="font-medium text-text-900 text-right">
                   {vendor.craftType?.map((ct: string) => (
                     <Badge key={ct} variant="outline" size="sm" className="ml-1">
                       {CRAFT_TYPES.find((c) => c.value === ct)?.label || ct}
@@ -177,31 +177,31 @@ export default function AdminVendorDetailPage() {
           </div>
 
           <div>
-            <h2 className="text-lg font-semibold text-charcoal-900 mb-3">
+            <h2 className="text-lg font-semibold text-text-900 mb-3">
               Stats
             </h2>
             <dl className="space-y-2 text-sm">
               <div className="flex justify-between">
                 <dt className="text-muted-500">Products</dt>
-                <dd className="font-medium text-charcoal-900">
+                <dd className="font-medium text-text-900">
                   {vendor.totalProducts}
                 </dd>
               </div>
               <div className="flex justify-between">
                 <dt className="text-muted-500">Orders</dt>
-                <dd className="font-medium text-charcoal-900">
+                <dd className="font-medium text-text-900">
                   {vendor.totalOrders}
                 </dd>
               </div>
               <div className="flex justify-between">
                 <dt className="text-muted-500">Revenue</dt>
-                <dd className="font-medium text-charcoal-900">
+                <dd className="font-medium text-text-900">
                   {formatPrice(Number(vendor.totalRevenue))}
                 </dd>
               </div>
               <div className="flex justify-between">
                 <dt className="text-muted-500">Rating</dt>
-                <dd className="font-medium text-blush-600">
+                <dd className="font-medium text-accent-600">
                   {vendor.rating.toFixed(1)} / 5
                 </dd>
               </div>
@@ -211,9 +211,9 @@ export default function AdminVendorDetailPage() {
       </div>
 
       {showApproveModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-charcoal-900/50">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-text-900/50">
           <div className="bg-white rounded-xl shadow-xl max-w-sm w-full p-6">
-            <h3 className="text-lg font-semibold text-charcoal-900 mb-2">
+            <h3 className="text-lg font-semibold text-text-900 mb-2">
               Approve Vendor?
             </h3>
             <textarea
@@ -221,13 +221,13 @@ export default function AdminVendorDetailPage() {
               onChange={(e) => setReason(e.target.value)}
               placeholder="Approval notes (optional)"
               rows={3}
-              className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm mb-4"
+              className="w-full px-3 py-2 border border-accent-200 rounded-lg text-sm mb-4"
             />
             <div className="flex gap-3">
               <button
                 type="button"
                 onClick={() => setShowApproveModal(false)}
-                className="flex-1 px-4 py-2.5 border border-blush-200 rounded-lg text-sm"
+                className="flex-1 px-4 py-2.5 border border-accent-200 rounded-lg text-sm"
               >
                 Cancel
               </button>
@@ -247,10 +247,10 @@ export default function AdminVendorDetailPage() {
       )}
 
       {showRejectModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-charcoal-900/50">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-text-900/50">
           <div className="bg-white rounded-xl shadow-xl max-w-sm w-full p-6">
             <AlertTriangle className="w-12 h-12 text-red-500 mx-auto mb-4" />
-            <h3 className="text-lg font-semibold text-charcoal-900 mb-2">
+            <h3 className="text-lg font-semibold text-text-900 mb-2">
               Reject Vendor?
             </h3>
             <textarea
@@ -258,13 +258,13 @@ export default function AdminVendorDetailPage() {
               onChange={(e) => setReason(e.target.value)}
               placeholder="Reason for rejection (required)"
               rows={3}
-              className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm mb-4"
+              className="w-full px-3 py-2 border border-accent-200 rounded-lg text-sm mb-4"
             />
             <div className="flex gap-3">
               <button
                 type="button"
                 onClick={() => setShowRejectModal(false)}
-                className="flex-1 px-4 py-2.5 border border-blush-200 rounded-lg text-sm"
+                className="flex-1 px-4 py-2.5 border border-accent-200 rounded-lg text-sm"
               >
                 Cancel
               </button>

@@ -73,7 +73,7 @@ const itemVariants = {
 export function CategoryGrid() {
   return (
     <section className="py-16 px-4 max-w-8xl mx-auto">
-      <h2 className="font-serif text-3xl text-charcoal-900 text-center mb-10">
+      <h2 className="font-serif text-3xl text-text-900 text-center mb-10">
         Explore by Craft
       </h2>
 
@@ -91,7 +91,7 @@ export function CategoryGrid() {
               className={cn(
                 "group block relative aspect-[3/2] rounded-lg overflow-hidden",
                 "shadow-sm hover:shadow-md transition-shadow duration-300",
-                "focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2",
+                "focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2",
               )}
             >
               <Image
@@ -101,7 +101,7 @@ export function CategoryGrid() {
                 className="object-cover transition-transform duration-500 group-hover:scale-110"
                 sizes="(max-width: 768px) 50vw, 25vw"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-charcoal-900/70 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-text-900/70 via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-4">
                 <h3 className="font-serif text-white text-base sm:text-lg font-medium">
                   {category.name}

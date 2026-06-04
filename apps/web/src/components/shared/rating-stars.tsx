@@ -43,7 +43,7 @@ export function RatingStars({
           key={`full-${i}`}
           className={cn(
             sizes.icon,
-            "fill-blush-500 text-blush-500",
+            "fill-accent-500 text-accent-500",
           )}
           aria-hidden="true"
         />
@@ -52,7 +52,7 @@ export function RatingStars({
         <div className="relative" aria-hidden="true">
           <Star className={cn(sizes.icon, "text-muted-300")} />
           <div className="absolute inset-0 overflow-hidden w-1/2">
-            <Star className={cn(sizes.icon, "fill-blush-500 text-blush-500")} />
+            <Star className={cn(sizes.icon, "fill-accent-500 text-accent-500")} />
           </div>
         </div>
       )}
@@ -64,7 +64,7 @@ export function RatingStars({
         />
       ))}
       {showValue && (
-        <span className={cn(sizes.text, "text-charcoal-700 font-medium ml-1")}>
+        <span className={cn(sizes.text, "text-text-700 font-medium ml-1")}>
           {rating.toFixed(1)}
         </span>
       )}

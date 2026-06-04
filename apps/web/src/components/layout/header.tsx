@@ -64,7 +64,7 @@ export function Header() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 border-b border-blush-200 bg-cream-50/85 backdrop-blur-md transition-all duration-300",
+        "sticky top-0 z-50 border-b border-accent-200 bg-surface-50/85 backdrop-blur-md transition-all duration-300",
         isScrolled ? "shadow-soft-sm" : "",
       )}
     >
@@ -75,10 +75,10 @@ export function Header() {
           className="flex items-center gap-2 shrink-0 group"
           aria-label="Loopingon home"
         >
-          <span className="grid h-9 w-9 place-items-center rounded-full bg-gradient-to-br from-rose-400 to-rose-600 text-white font-serif text-lg shadow-[0_8px_20px_-8px_rgba(176,86,110,0.7)] group-hover:scale-105 transition-transform">
+          <span className="grid h-9 w-9 place-items-center rounded-full bg-gradient-to-br from-primary-400 to-primary-600 text-white font-serif text-lg shadow-[0_8px_20px_-8px_rgba(176,86,110,0.7)] group-hover:scale-105 transition-transform">
             L
           </span>
-          <span className="font-serif text-2xl tracking-tight text-charcoal-900 hidden sm:block">
+          <span className="font-serif text-2xl tracking-tight text-text-900 hidden sm:block">
             loopingo
           </span>
         </Link>
@@ -101,8 +101,8 @@ export function Header() {
               onFocus={() => setSearchFocused(true)}
               onBlur={() => setSearchFocused(false)}
               className={cn(
-                "h-11 w-full rounded-full border border-blush-200 bg-blush-50/60 pl-10 pr-4 text-sm outline-none transition-all",
-                "focus:border-rose-400 focus:bg-white focus:ring-2 focus:ring-rose-400/20",
+                "h-11 w-full rounded-full border border-accent-200 bg-accent-50/60 pl-10 pr-4 text-sm outline-none transition-all",
+                "focus:border-primary-400 focus:bg-white focus:ring-2 focus:ring-primary-400/20",
                 "placeholder:text-muted-400",
               )}
               aria-label="Search products"
@@ -116,27 +116,27 @@ export function Header() {
           <div className="hidden lg:flex items-center gap-1 mr-2">
               <Link
                 href="/products"
-                className="rounded-full px-3 py-2 text-charcoal-600 hover:bg-blush-100 hover:text-charcoal-900 transition-colors"
+                className="rounded-full px-3 py-2 text-text-600 hover:bg-accent-100 hover:text-text-900 transition-colors"
               >
                 Shop
               </Link>
             {user?.role === "VENDOR" && (
               <Link
                 href="/vendor/dashboard"
-                className="rounded-full px-3 py-2 text-charcoal-600 hover:bg-blush-100 hover:text-charcoal-900 transition-colors hidden sm:inline-flex items-center gap-1"
+                className="rounded-full px-3 py-2 text-text-600 hover:bg-accent-100 hover:text-text-900 transition-colors hidden sm:inline-flex items-center gap-1"
               >
                 <Store className="h-4 w-4" /> Seller Dashboard
               </Link>
             )}
             <Link
               href="/about-us"
-              className="rounded-full px-3 py-2 text-charcoal-600 hover:bg-blush-100 hover:text-charcoal-900 transition-colors hidden md:inline-flex"
+              className="rounded-full px-3 py-2 text-text-600 hover:bg-accent-100 hover:text-text-900 transition-colors hidden md:inline-flex"
             >
               About
             </Link>
             <Link
               href="/contact"
-              className="rounded-full px-3 py-2 text-charcoal-600 hover:bg-blush-100 hover:text-charcoal-900 transition-colors hidden md:inline-flex"
+              className="rounded-full px-3 py-2 text-text-600 hover:bg-accent-100 hover:text-text-900 transition-colors hidden md:inline-flex"
             >
               Contact
             </Link>
@@ -153,21 +153,21 @@ export function Header() {
                 openModal("signin");
               }
             }}
-            className="grid h-10 w-10 place-items-center rounded-full hover:bg-blush-100 transition-colors"
+            className="grid h-10 w-10 place-items-center rounded-full hover:bg-accent-100 transition-colors"
             aria-label="Wishlist"
           >
-            <Heart className="h-5 w-5 text-charcoal-600" />
+            <Heart className="h-5 w-5 text-text-600" />
           </button>
 
           {/* Cart */}
           <Link
             href="/cart"
-            className="relative grid h-10 w-10 place-items-center rounded-full hover:bg-blush-100 transition-colors group"
+            className="relative grid h-10 w-10 place-items-center rounded-full hover:bg-accent-100 transition-colors group"
             aria-label={`Cart (${itemCount} items)`}
           >
-            <ShoppingCart className="h-5 w-5 text-charcoal-600 group-hover:scale-105 transition-transform" />
+            <ShoppingCart className="h-5 w-5 text-text-600 group-hover:scale-105 transition-transform" />
             {itemCount > 0 && (
-              <span className="absolute -right-0.5 -top-0.5 grid h-5 min-w-5 place-items-center rounded-full bg-rose-500 px-1 text-[11px] font-semibold text-white shadow-sm">
+              <span className="absolute -right-0.5 -top-0.5 grid h-5 min-w-5 place-items-center rounded-full bg-primary-500 px-1 text-[11px] font-semibold text-white shadow-sm">
                 {itemCount > 99 ? "99+" : itemCount}
               </span>
             )}
@@ -180,7 +180,7 @@ export function Header() {
                 type="button"
                 onClick={() => setUserMenuOpen(!userMenuOpen)}
                 className={cn(
-                  "ml-1 grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-rose-400 to-rose-600 text-white font-medium text-sm",
+                  "ml-1 grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-primary-400 to-primary-600 text-white font-medium text-sm",
                   "shadow-[0_8px_20px_-8px_rgba(176,86,110,0.6)] hover:scale-105 transition-transform",
                 )}
                 aria-expanded={userMenuOpen}
@@ -197,17 +197,17 @@ export function Header() {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: -4, scale: 0.95 }}
                     transition={{ duration: 0.15 }}
-                    className="absolute right-0 top-12 w-60 overflow-hidden rounded-2xl border border-blush-200 bg-white shadow-[0_30px_80px_-20px_rgba(176,86,110,0.4)]"
+                    className="absolute right-0 top-12 w-60 overflow-hidden rounded-2xl border border-accent-200 bg-white shadow-[0_30px_80px_-20px_rgba(176,86,110,0.4)]"
                     role="menu"
                   >
-                    <div className="border-b border-blush-100 px-4 py-3">
+                    <div className="border-b border-accent-100 px-4 py-3">
                       <p className="text-xs text-muted-400">Signed in as</p>
-                      <p className="truncate text-sm font-medium text-charcoal-700">{user.email}</p>
+                      <p className="truncate text-sm font-medium text-text-700">{user.email}</p>
                     </div>
                     <div className="py-1 text-sm">
                       <Link
                         href="/dashboard"
-                        className="flex items-center gap-3 px-4 py-2.5 text-charcoal-600 hover:bg-blush-50 transition-colors"
+                        className="flex items-center gap-3 px-4 py-2.5 text-text-600 hover:bg-accent-50 transition-colors"
                         onClick={() => setUserMenuOpen(false)}
                         role="menuitem"
                       >
@@ -215,7 +215,7 @@ export function Header() {
                       </Link>
                       <Link
                         href="/dashboard/orders"
-                        className="flex items-center gap-3 px-4 py-2.5 text-charcoal-600 hover:bg-blush-50 transition-colors"
+                        className="flex items-center gap-3 px-4 py-2.5 text-text-600 hover:bg-accent-50 transition-colors"
                         onClick={() => setUserMenuOpen(false)}
                         role="menuitem"
                       >
@@ -223,7 +223,7 @@ export function Header() {
                       </Link>
                       <Link
                         href="/dashboard/wishlist"
-                        className="flex items-center gap-3 px-4 py-2.5 text-charcoal-600 hover:bg-blush-50 transition-colors"
+                        className="flex items-center gap-3 px-4 py-2.5 text-text-600 hover:bg-accent-50 transition-colors"
                         onClick={() => setUserMenuOpen(false)}
                         role="menuitem"
                       >
@@ -231,7 +231,7 @@ export function Header() {
                       </Link>
                       <Link
                         href="/dashboard/messages"
-                        className="flex items-center gap-3 px-4 py-2.5 text-charcoal-600 hover:bg-blush-50 transition-colors"
+                        className="flex items-center gap-3 px-4 py-2.5 text-text-600 hover:bg-accent-50 transition-colors"
                         onClick={() => setUserMenuOpen(false)}
                         role="menuitem"
                       >
@@ -239,14 +239,14 @@ export function Header() {
                       </Link>
                       <Link
                         href="/dashboard/settings"
-                        className="flex items-center gap-3 px-4 py-2.5 text-charcoal-600 hover:bg-blush-50 transition-colors"
+                        className="flex items-center gap-3 px-4 py-2.5 text-text-600 hover:bg-accent-50 transition-colors"
                         onClick={() => setUserMenuOpen(false)}
                         role="menuitem"
                       >
                         <Settings className="h-4 w-4 text-muted-400" /> Settings
                       </Link>
                     </div>
-                    <div className="border-t border-blush-100">
+                    <div className="border-t border-accent-100">
                       <button
                         type="button"
                         onClick={() => {
@@ -267,22 +267,22 @@ export function Header() {
             <>
               <button
                 onClick={() => openModal("signin")}
-                className="ml-1 hidden h-10 items-center rounded-full px-4 text-sm font-medium text-charcoal-600 hover:text-charcoal-900 sm:inline-flex"
+                className="ml-1 hidden h-10 items-center rounded-full px-4 text-sm font-medium text-text-600 hover:text-text-900 sm:inline-flex"
               >
                 Sign in
               </button>
               <button
                 onClick={() => openModal("signup")}
-                className="hidden h-10 items-center rounded-full bg-gradient-to-r from-rose-400 to-rose-600 px-4 text-sm font-medium text-white shadow-[0_12px_28px_-14px_rgba(176,86,110,0.7)] hover:opacity-95 hover:scale-105 transition-all sm:inline-flex"
+                className="hidden h-10 items-center rounded-full bg-gradient-to-r from-primary-400 to-primary-600 px-4 text-sm font-medium text-white shadow-[0_12px_28px_-14px_rgba(176,86,110,0.7)] hover:opacity-95 hover:scale-105 transition-all sm:inline-flex"
               >
                 Join
               </button>
               <button
                 onClick={() => openModal("signin")}
                 aria-label="Sign in"
-                className="grid h-10 w-10 place-items-center rounded-full hover:bg-blush-100 sm:hidden"
+                className="grid h-10 w-10 place-items-center rounded-full hover:bg-accent-100 sm:hidden"
               >
-                <User className="h-5 w-5 text-charcoal-600" />
+                <User className="h-5 w-5 text-text-600" />
               </button>
             </>
           )}
@@ -291,13 +291,13 @@ export function Header() {
           <button
             type="button"
             onClick={openMobileMenu}
-            className="grid h-10 w-10 place-items-center rounded-full hover:bg-blush-100 transition-colors lg:hidden"
+            className="grid h-10 w-10 place-items-center rounded-full hover:bg-accent-100 transition-colors lg:hidden"
             aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
           >
             {isMobileMenuOpen ? (
-              <X className="h-5 w-5 text-charcoal-600" />
+              <X className="h-5 w-5 text-text-600" />
             ) : (
-              <Menu className="h-5 w-5 text-charcoal-600" />
+              <Menu className="h-5 w-5 text-text-600" />
             )}
           </button>
         </nav>

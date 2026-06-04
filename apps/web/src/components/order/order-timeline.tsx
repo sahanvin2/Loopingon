@@ -70,9 +70,9 @@ export function OrderTimeline({ events, steps, className }: OrderTimelineProps) 
                   <motion.div
                     animate={{ scale: [1, 1.2, 1] }}
                     transition={{ repeat: Infinity, duration: 2 }}
-                    className="w-10 h-10 rounded-full bg-rose-100 flex items-center justify-center"
+                    className="w-10 h-10 rounded-full bg-primary-100 flex items-center justify-center"
                   >
-                    <Clock className="w-5 h-5 text-rose-600" />
+                    <Clock className="w-5 h-5 text-primary-600" />
                   </motion.div>
                 </div>
               ) : (
@@ -87,7 +87,7 @@ export function OrderTimeline({ events, steps, className }: OrderTimelineProps) 
                 className={cn(
                   "text-sm font-medium",
                   event.completed || event.isCurrent
-                    ? "text-charcoal-900"
+                    ? "text-text-900"
                     : "text-muted-500",
                 )}
               >
@@ -103,9 +103,9 @@ export function OrderTimeline({ events, steps, className }: OrderTimelineProps) 
                   <motion.div
                     animate={{ opacity: [1, 0.4, 1] }}
                     transition={{ repeat: Infinity, duration: 1.5 }}
-                    className="w-2 h-2 rounded-full bg-rose-500"
+                    className="w-2 h-2 rounded-full bg-primary-500"
                   />
-                  <span className="text-xs text-rose-600 font-medium">
+                  <span className="text-xs text-primary-600 font-medium">
                     In Progress
                   </span>
                 </div>

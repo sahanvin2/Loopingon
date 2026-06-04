@@ -86,7 +86,7 @@ export function Pagination({
             className={cn(
               "inline-flex items-center justify-center w-9 h-9 rounded-lg",
               "text-muted-600 hover:bg-muted-100 transition-colors",
-              "focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-1",
+              "focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-1",
             )}
             aria-label="Previous page"
           >
@@ -102,7 +102,7 @@ export function Pagination({
             "inline-flex items-center justify-center w-9 h-9 rounded-lg",
             "text-muted-600 hover:bg-muted-100 transition-colors",
             "disabled:opacity-40 disabled:cursor-not-allowed",
-            "focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-1",
+            "focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-1",
           )}
           aria-label="Previous page"
         >
@@ -126,10 +126,10 @@ export function Pagination({
               href={buildHref(page)}
               className={cn(
                 "inline-flex items-center justify-center w-9 h-9 rounded-lg text-sm font-medium transition-colors",
-                "focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-1",
+                "focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-1",
                 page === currentPage
-                  ? "bg-rose-600 text-white shadow-sm pointer-events-none"
-                  : "text-charcoal-700 hover:bg-rose-50 hover:text-rose-700",
+                  ? "bg-primary-600 text-white shadow-sm pointer-events-none"
+                  : "text-text-700 hover:bg-primary-50 hover:text-primary-700",
               )}
               aria-label={`Page ${page}`}
               aria-current={page === currentPage ? "page" : undefined}
@@ -154,10 +154,10 @@ export function Pagination({
               disabled={page === currentPage}
               className={cn(
                 "inline-flex items-center justify-center w-9 h-9 rounded-lg text-sm font-medium transition-colors",
-                "focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-1",
+                "focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-1",
                 page === currentPage
-                  ? "bg-rose-600 text-white shadow-sm"
-                  : "text-charcoal-700 hover:bg-rose-50 hover:text-rose-700",
+                  ? "bg-primary-600 text-white shadow-sm"
+                  : "text-text-700 hover:bg-primary-50 hover:text-primary-700",
               )}
               aria-label={`Page ${page}`}
               aria-current={page === currentPage ? "page" : undefined}
@@ -199,7 +199,7 @@ export function Pagination({
             className={cn(
               "inline-flex items-center justify-center w-9 h-9 rounded-lg",
               "text-muted-600 hover:bg-muted-100 transition-colors",
-              "focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-1",
+              "focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-1",
             )}
             aria-label="Next page"
           >
@@ -215,7 +215,7 @@ export function Pagination({
             "inline-flex items-center justify-center w-9 h-9 rounded-lg",
             "text-muted-600 hover:bg-muted-100 transition-colors",
             "disabled:opacity-40 disabled:cursor-not-allowed",
-            "focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-1",
+            "focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-1",
           )}
           aria-label="Next page"
         >

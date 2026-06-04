@@ -78,21 +78,21 @@ export default function VendorBankDetailsPage() {
       animate={{ opacity: 1, y: 0 }}
       className="space-y-6"
     >
-      <h1 className="text-2xl font-bold text-charcoal-900">Bank Details</h1>
+      <h1 className="text-2xl font-bold text-text-900">Bank Details</h1>
 
       {isLoading ? (
         <LoadingSkeleton variant="card" count={2} />
       ) : bank && !isEditing ? (
-        <div className="bg-white rounded-xl border border-blush-200 p-6 max-w-lg">
+        <div className="bg-white rounded-xl border border-accent-200 p-6 max-w-lg">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold text-charcoal-900">
+            <h2 className="text-lg font-semibold text-text-900">
               Bank Account
             </h2>
             <div className="flex items-center gap-1">
               <button
                 type="button"
                 onClick={() => setIsEditing(true)}
-                className="p-2 rounded-md text-muted-500 hover:text-rose-600 hover:bg-rose-50"
+                className="p-2 rounded-md text-muted-500 hover:text-primary-600 hover:bg-primary-50"
               >
                 <Pencil className="w-4 h-4" />
               </button>
@@ -108,29 +108,29 @@ export default function VendorBankDetailsPage() {
           <div className="space-y-3 text-sm">
             <div className="flex justify-between">
               <span className="text-muted-500">Bank</span>
-              <span className="font-medium text-charcoal-900">{bank.bankName}</span>
+              <span className="font-medium text-text-900">{bank.bankName}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-muted-500">Branch</span>
-              <span className="font-medium text-charcoal-900">
+              <span className="font-medium text-text-900">
                 {bank.branchName || "—"}
               </span>
             </div>
             <div className="flex justify-between">
               <span className="text-muted-500">Account Holder</span>
-              <span className="font-medium text-charcoal-900">
+              <span className="font-medium text-text-900">
                 {bank.accountHolderName}
               </span>
             </div>
             <div className="flex justify-between">
               <span className="text-muted-500">Account Number</span>
-              <span className="font-mono text-charcoal-900">
+              <span className="font-mono text-text-900">
                 {maskAccount(bank.accountNumber)}
               </span>
             </div>
             <div className="flex justify-between">
               <span className="text-muted-500">Account Type</span>
-              <span className="font-medium text-charcoal-900">
+              <span className="font-medium text-text-900">
                 {bank.accountType}
               </span>
             </div>
@@ -144,7 +144,7 @@ export default function VendorBankDetailsPage() {
               </Badge>
             </div>
           </div>
-          <p className="text-xs text-muted-500 mt-4 p-3 bg-cream-50 rounded-lg">
+          <p className="text-xs text-muted-500 mt-4 p-3 bg-surface-50 rounded-lg">
             Bank details are verified by our team. Changes may require
             re-verification.
           </p>
@@ -152,54 +152,54 @@ export default function VendorBankDetailsPage() {
       ) : (
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="bg-white rounded-xl border border-blush-200 p-6 space-y-4 max-w-lg"
+          className="bg-white rounded-xl border border-accent-200 p-6 space-y-4 max-w-lg"
         >
-          <h2 className="text-lg font-semibold text-charcoal-900">
+          <h2 className="text-lg font-semibold text-text-900">
             {bank ? "Edit" : "Add"} Bank Account
           </h2>
           <div>
-            <label className="block text-sm font-medium text-charcoal-700 mb-1">
+            <label className="block text-sm font-medium text-text-700 mb-1">
               Bank Name *
             </label>
             <input
               {...register("bankName", { required: true })}
-              className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm focus:ring-2 focus:ring-rose-500"
+              className="w-full px-3 py-2 border border-accent-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-charcoal-700 mb-1">
+            <label className="block text-sm font-medium text-text-700 mb-1">
               Branch
             </label>
             <input
               {...register("branchName")}
-              className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm focus:ring-2 focus:ring-rose-500"
+              className="w-full px-3 py-2 border border-accent-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-charcoal-700 mb-1">
+            <label className="block text-sm font-medium text-text-700 mb-1">
               Account Holder Name *
             </label>
             <input
               {...register("accountHolderName", { required: true })}
-              className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm focus:ring-2 focus:ring-rose-500"
+              className="w-full px-3 py-2 border border-accent-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-charcoal-700 mb-1">
+            <label className="block text-sm font-medium text-text-700 mb-1">
               Account Number *
             </label>
             <input
               {...register("accountNumber", { required: true })}
-              className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm focus:ring-2 focus:ring-rose-500"
+              className="w-full px-3 py-2 border border-accent-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-charcoal-700 mb-1">
+            <label className="block text-sm font-medium text-text-700 mb-1">
               Account Type
             </label>
             <select
               {...register("accountType")}
-              className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm focus:ring-2 focus:ring-rose-500"
+              className="w-full px-3 py-2 border border-accent-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500"
             >
               <option value="Savings">Savings</option>
               <option value="Current">Current</option>
@@ -209,16 +209,16 @@ export default function VendorBankDetailsPage() {
             <input
               type="checkbox"
               {...register("isPrimary")}
-              className="w-4 h-4 rounded text-rose-600"
+              className="w-4 h-4 rounded text-primary-600"
             />
-            <span className="text-sm text-charcoal-700">Set as primary</span>
+            <span className="text-sm text-text-700">Set as primary</span>
           </label>
           <div className="flex gap-3 pt-2">
             {bank && (
               <button
                 type="button"
                 onClick={() => setIsEditing(false)}
-                className="flex-1 px-4 py-2.5 border border-blush-200 rounded-lg text-sm font-medium"
+                className="flex-1 px-4 py-2.5 border border-accent-200 rounded-lg text-sm font-medium"
               >
                 Cancel
               </button>
@@ -226,12 +226,12 @@ export default function VendorBankDetailsPage() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="flex-1 px-4 py-2.5 bg-rose-600 text-white rounded-lg text-sm font-medium hover:bg-rose-700 disabled:opacity-50"
+              className="flex-1 px-4 py-2.5 bg-primary-600 text-white rounded-lg text-sm font-medium hover:bg-primary-700 disabled:opacity-50"
             >
               {isSubmitting ? "Saving..." : "Save"}
             </button>
           </div>
-          <p className="text-xs text-muted-500 p-3 bg-cream-50 rounded-lg">
+          <p className="text-xs text-muted-500 p-3 bg-surface-50 rounded-lg">
             Bank details are verified by our team. Changes may require
             re-verification.
           </p>
@@ -256,7 +256,7 @@ export default function VendorBankDetailsPage() {
             className="fixed inset-0 z-50 flex items-center justify-center p-4"
           >
             <div
-              className="absolute inset-0 bg-charcoal-900/50"
+              className="absolute inset-0 bg-text-900/50"
               onClick={() => setDeletingId(null)}
             />
             <motion.div
@@ -266,7 +266,7 @@ export default function VendorBankDetailsPage() {
               className="relative bg-white rounded-xl shadow-xl max-w-sm w-full p-6 text-center"
             >
               <AlertTriangle className="w-12 h-12 text-red-500 mx-auto mb-4" />
-              <h3 className="text-lg font-semibold text-charcoal-900 mb-2">
+              <h3 className="text-lg font-semibold text-text-900 mb-2">
                 Remove Bank Account?
               </h3>
               <p className="text-sm text-muted-600 mb-6">
@@ -276,7 +276,7 @@ export default function VendorBankDetailsPage() {
                 <button
                   type="button"
                   onClick={() => setDeletingId(null)}
-                  className="flex-1 px-4 py-2.5 border border-blush-200 rounded-lg text-sm font-medium"
+                  className="flex-1 px-4 py-2.5 border border-accent-200 rounded-lg text-sm font-medium"
                 >
                   Cancel
                 </button>

@@ -48,17 +48,17 @@ export default function AdminOrdersPage() {
       animate={{ opacity: 1, y: 0 }}
       className="space-y-6"
     >
-      <h1 className="text-2xl font-bold text-charcoal-900">Orders</h1>
+      <h1 className="text-2xl font-bold text-text-900">Orders</h1>
 
       <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
-        <div className="flex gap-1 bg-white rounded-lg border border-blush-200 p-1 overflow-x-auto">
+        <div className="flex gap-1 bg-white rounded-lg border border-accent-200 p-1 overflow-x-auto">
           {statusTabs.map((tab) => (
             <button
               key={tab.key}
               type="button"
               onClick={() => { setActiveTab(tab.key); setPage(1); }}
               className={`px-3 py-1.5 text-xs font-medium rounded-md whitespace-nowrap transition-colors ${
-                activeTab === tab.key ? "bg-rose-600 text-white" : "text-muted-600 hover:text-charcoal-700"
+                activeTab === tab.key ? "bg-primary-600 text-white" : "text-muted-600 hover:text-text-700"
               }`}
             >
               {tab.label}
@@ -72,7 +72,7 @@ export default function AdminOrdersPage() {
             placeholder="Search order #..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 border border-blush-200 rounded-lg text-sm focus:ring-2 focus:ring-rose-500"
+            className="w-full pl-10 pr-4 py-2 border border-accent-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500"
           />
         </div>
       </div>
@@ -102,7 +102,7 @@ export default function AdminOrdersPage() {
             {
               header: "Action",
               accessor: (row: any) => (
-                <Link href={`/admin/orders/${row.id}`} className="text-sm font-medium text-rose-600 hover:text-rose-700">
+                <Link href={`/admin/orders/${row.id}`} className="text-sm font-medium text-primary-600 hover:text-primary-700">
                   View
                 </Link>
               ),

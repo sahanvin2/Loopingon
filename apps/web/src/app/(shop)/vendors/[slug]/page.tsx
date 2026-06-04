@@ -55,7 +55,7 @@ async function VendorContent({ slug }: { slug: string }) {
 
   return (
     <>
-      <div className="bg-cream-50 py-6">
+      <div className="bg-surface-50 py-6">
         <div className="mx-auto max-w-7xl px-4">
           <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Artisans", href: "/vendors" }, { label: vendor.storeName }]} />
         </div>
@@ -63,15 +63,15 @@ async function VendorContent({ slug }: { slug: string }) {
 
       <VendorStorefrontHeader vendor={vendor} />
 
-      <div className="bg-cream-50 py-12">
+      <div className="bg-surface-50 py-12">
         <div className="mx-auto max-w-7xl px-4">
           <section className="mb-12">
-            <h2 className="mb-6 font-serif text-2xl font-bold text-charcoal-900">Products</h2>
+            <h2 className="mb-6 font-serif text-2xl font-bold text-text-900">Products</h2>
             <ProductGrid products={Array.isArray(products) ? products as any[] : []} />
           </section>
 
           <section className="mb-12 rounded-xl bg-white p-6 shadow-soft-sm">
-            <h2 className="font-serif text-2xl font-bold text-charcoal-900">About the Artisan</h2>
+            <h2 className="font-serif text-2xl font-bold text-text-900">About the Artisan</h2>
             <VendorStory
               story={vendor.craftDescription || vendor.storeDescription || ""}
               image={vendor.storeBanner || vendor.storeLogo || undefined}
@@ -79,7 +79,7 @@ async function VendorContent({ slug }: { slug: string }) {
           </section>
 
           <section className="rounded-xl bg-white p-6 shadow-soft-sm">
-            <h2 className="font-serif text-2xl font-bold text-charcoal-900">Reviews</h2>
+            <h2 className="font-serif text-2xl font-bold text-text-900">Reviews</h2>
             <ProductReviews
               reviews={safeReviews as any[]}
               averageRating={averageRating}

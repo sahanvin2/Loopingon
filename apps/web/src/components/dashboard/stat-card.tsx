@@ -23,17 +23,17 @@ const variantStyles: Record<StatVariant, { iconBg: string; iconColor: string; bo
   default: {
     iconBg: "bg-muted-100",
     iconColor: "text-muted-600",
-    border: "border-blush-200",
+    border: "border-accent-200",
   },
   rose: {
-    iconBg: "bg-rose-100",
-    iconColor: "text-rose-600",
-    border: "border-rose-200",
+    iconBg: "bg-primary-100",
+    iconColor: "text-primary-600",
+    border: "border-primary-200",
   },
   blush: {
-    iconBg: "bg-blush-100",
-    iconColor: "text-blush-600",
-    border: "border-blush-200",
+    iconBg: "bg-accent-100",
+    iconColor: "text-accent-600",
+    border: "border-accent-200",
   },
   amber: {
     iconBg: "bg-amber-100",
@@ -75,7 +75,7 @@ export function StatCard({
       </div>
 
       <div className="flex items-end justify-between">
-        <span className="text-2xl font-bold text-charcoal-900">{value}</span>
+        <span className="text-2xl font-bold text-text-900">{value}</span>
 
         {trend && (
           <span

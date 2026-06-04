@@ -7,12 +7,12 @@ export const metadata: Metadata = {
 
 export default function TermsOfServicePage() {
   return (
-    <div className="bg-cream-50 py-16">
+    <div className="bg-surface-50 py-16">
       <div className="mx-auto max-w-3xl px-4">
-        <h1 className="font-serif text-4xl font-bold text-charcoal-900">Terms of Service</h1>
+        <h1 className="font-serif text-4xl font-bold text-text-900">Terms of Service</h1>
         <p className="mt-2 text-sm text-muted-500">Last updated: June 2026</p>
 
-        <div className="mt-10 space-y-8 text-sm leading-relaxed text-muted-700 [&_h2]:font-serif [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-charcoal-900 [&_h2]:mt-8 [&_h3]:font-semibold [&_h3]:text-charcoal-800 [&_h3]:mt-6 [&_p]:mt-3 [&_ul]:mt-3 [&_ul]:list-disc [&_ul]:pl-6 [&_li]:mt-1">
+        <div className="mt-10 space-y-8 text-sm leading-relaxed text-muted-700 [&_h2]:font-serif [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-text-900 [&_h2]:mt-8 [&_h3]:font-semibold [&_h3]:text-text-800 [&_h3]:mt-6 [&_p]:mt-3 [&_ul]:mt-3 [&_ul]:list-disc [&_ul]:pl-6 [&_li]:mt-1">
           <section>
             <h2>1. Acceptance of Terms</h2>
             <p>By accessing or using Loopingon (&quot;the Platform&quot;, &quot;we&quot;, &quot;our&quot;), you agree to be bound by these Terms of Service (&quot;Terms&quot;). If you do not agree, do not use the Platform. These Terms constitute a legally binding agreement between you and Loopingon (Pvt) Ltd, a company registered in Sri Lanka.</p>
@@ -67,12 +67,12 @@ export default function TermsOfServicePage() {
 
           <section>
             <h2>6. Disputes & Returns</h2>
-            <p>Buyers may request returns within 7 days of delivery. Disputes are first mediated between buyer and vendor through our messaging system. If unresolved, Loopingon will review evidence from both parties and make a binding decision. See our <a href="/return-policy" className="text-rose-600 hover:underline">Return Policy</a> for full details.</p>
+            <p>Buyers may request returns within 7 days of delivery. Disputes are first mediated between buyer and vendor through our messaging system. If unresolved, Loopingon will review evidence from both parties and make a binding decision. See our <a href="/return-policy" className="text-primary-600 hover:underline">Return Policy</a> for full details.</p>
           </section>
 
           <section>
             <h2>7. Intellectual Property</h2>
-            <p>Vendors retain all rights to their product photos, descriptions, and brand assets. By listing on Loopingon, vendors grant us a limited license to display, market, and promote their products on the Platform and in marketing materials. See our <a href="/intellectual-property" className="text-rose-600 hover:underline">IP Policy</a>.</p>
+            <p>Vendors retain all rights to their product photos, descriptions, and brand assets. By listing on Loopingon, vendors grant us a limited license to display, market, and promote their products on the Platform and in marketing materials. See our <a href="/intellectual-property" className="text-primary-600 hover:underline">IP Policy</a>.</p>
           </section>
 
           <section>

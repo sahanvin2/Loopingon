@@ -135,11 +135,11 @@ export function getStatusColor(status: string): string {
     suspended: "bg-red-100 text-red-800",
     banned: "bg-red-100 text-red-800",
     refunded: "bg-purple-100 text-purple-800",
-    draft: "bg-charcoal-100 text-charcoal-700",
-    out_of_stock: "bg-charcoal-100 text-charcoal-700",
-    discontinued: "bg-charcoal-100 text-charcoal-700",
+    draft: "bg-text-100 text-text-700",
+    out_of_stock: "bg-text-100 text-text-700",
+    discontinued: "bg-text-100 text-text-700",
   };
-  return statusColors[status] || "bg-charcoal-100 text-charcoal-700";
+  return statusColors[status] || "bg-text-100 text-text-700";
 }
 
 export function getInitialsColor(name: string): string {

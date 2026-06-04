@@ -14,7 +14,7 @@ interface VendorStoryProps {
 export function VendorStory({ story, image, videoUrl, className }: VendorStoryProps) {
   return (
     <section className={cn("py-8", className)}>
-      <h2 className="font-serif text-2xl text-charcoal-900 mb-6">Our Story</h2>
+      <h2 className="font-serif text-2xl text-text-900 mb-6">Our Story</h2>
 
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
         <div className="lg:col-span-3">
@@ -38,7 +38,7 @@ export function VendorStory({ story, image, videoUrl, className }: VendorStoryPr
           )}
 
           {videoUrl && (
-            <div className="relative aspect-video rounded-lg overflow-hidden bg-charcoal-900">
+            <div className="relative aspect-video rounded-lg overflow-hidden bg-text-900">
               <iframe
                 src={videoUrl}
                 title="Artisan story video"

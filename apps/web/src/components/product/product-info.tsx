@@ -18,7 +18,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
       {product.vendor && (
         <Link
           href={`/artisans/${product.vendor.storeSlug}`}
-          className="inline-flex items-center gap-2 text-sm text-charcoal-500 hover:text-rose-700 font-medium tracking-widest uppercase transition-colors"
+          className="inline-flex items-center gap-2 text-sm text-text-500 hover:text-primary-700 font-medium tracking-widest uppercase transition-colors"
         >
           {product.vendor.storeName}
           <VendorBadge />
@@ -26,7 +26,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
       )}
 
       {/* Title */}
-      <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-charcoal-900 leading-[1.1] tracking-tight">
+      <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-text-900 leading-[1.1] tracking-tight">
         {product.title}
       </h1>
 
@@ -38,10 +38,10 @@ export function ProductInfo({ product }: ProductInfoProps) {
           showValue
           reviewCount={product.reviewCount}
         />
-        <span className="text-blush-300">|</span>
+        <span className="text-accent-300">|</span>
         <Link
           href="#reviews"
-          className="text-sm text-charcoal-600 hover:text-charcoal-900 transition-colors"
+          className="text-sm text-text-600 hover:text-text-900 transition-colors"
         >
           Read Reviews
         </Link>
@@ -49,23 +49,23 @@ export function ProductInfo({ product }: ProductInfoProps) {
 
       {/* Short Description */}
       {product.shortDescription && (
-        <p className="text-charcoal-600 leading-relaxed text-base pt-2">
+        <p className="text-text-600 leading-relaxed text-base pt-2">
           {product.shortDescription}
         </p>
       )}
 
       {/* Detailed specs or attributes */}
       <div className="pt-4">
-        <ul className="space-y-3 text-sm text-charcoal-700 font-medium">
+        <ul className="space-y-3 text-sm text-text-700 font-medium">
           {product.isHandmade && (
             <li className="flex items-center gap-3">
-              <span className="w-1.5 h-1.5 rounded-full bg-charcoal-900"></span>
+              <span className="w-1.5 h-1.5 rounded-full bg-text-900"></span>
               Authentic Handmade Quality
             </li>
           )}
           {product.isEcoFriendly && (
             <li className="flex items-center gap-3">
-              <span className="w-1.5 h-1.5 rounded-full bg-charcoal-900"></span>
+              <span className="w-1.5 h-1.5 rounded-full bg-text-900"></span>
               Eco-Friendly Materials
             </li>
           )}

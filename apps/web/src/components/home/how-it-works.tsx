@@ -40,13 +40,13 @@ const itemVariants = {
 
 export function HowItWorks() {
   return (
-    <section className="py-20 px-4 bg-cream-50">
+    <section className="py-20 px-4 bg-surface-50">
       <div className="max-w-6xl mx-auto">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="font-serif text-3xl text-charcoal-900 text-center mb-4"
+          className="font-serif text-3xl text-text-900 text-center mb-4"
         >
           How It Works
         </motion.h2>
@@ -71,20 +71,20 @@ export function HowItWorks() {
               viewport={{ once: true, margin: "-50px" }}
               className="relative text-center px-4"
             >
-              <span className="text-xs font-bold text-rose-600 uppercase tracking-widest mb-4 block">
+              <span className="text-xs font-bold text-primary-600 uppercase tracking-widest mb-4 block">
                 Step {step.number}
               </span>
 
               <div
                 className={cn(
-                  "w-20 h-20 rounded-full bg-rose-600 flex items-center justify-center",
+                  "w-20 h-20 rounded-full bg-primary-600 flex items-center justify-center",
                   "mx-auto mb-6 shadow-rose",
                 )}
               >
                 <step.icon className="w-9 h-9 text-white" />
               </div>
 
-              <h3 className="font-serif text-lg text-charcoal-900 mb-3">{step.title}</h3>
+              <h3 className="font-serif text-lg text-text-900 mb-3">{step.title}</h3>
               <p className="text-muted-600 text-sm leading-relaxed">
                 {step.description}
               </p>

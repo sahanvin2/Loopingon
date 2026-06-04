@@ -59,36 +59,36 @@ export default function VendorSettingsPage() {
       animate={{ opacity: 1, y: 0 }}
       className="space-y-6"
     >
-      <h1 className="text-2xl font-bold text-charcoal-900">Store Settings</h1>
+      <h1 className="text-2xl font-bold text-text-900">Store Settings</h1>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-        <div className="bg-white rounded-xl border border-blush-200 p-6 space-y-4 max-w-lg">
-          <h2 className="text-lg font-semibold text-charcoal-900">
+        <div className="bg-white rounded-xl border border-accent-200 p-6 space-y-4 max-w-lg">
+          <h2 className="text-lg font-semibold text-text-900">
             General
           </h2>
           <div>
-            <label className="block text-sm font-medium text-charcoal-700 mb-1">
+            <label className="block text-sm font-medium text-text-700 mb-1">
               Store Name *
             </label>
             <input
               {...register("storeName")}
-              className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm focus:ring-2 focus:ring-rose-500"
+              className="w-full px-3 py-2 border border-accent-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-charcoal-700 mb-1">
+            <label className="block text-sm font-medium text-text-700 mb-1">
               Store Description
             </label>
             <textarea
               {...register("storeDescription")}
               rows={4}
-              className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm focus:ring-2 focus:ring-rose-500"
+              className="w-full px-3 py-2 border border-accent-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500"
             />
           </div>
         </div>
 
-        <div className="bg-white rounded-xl border border-blush-200 p-6 space-y-4 max-w-lg">
-          <h2 className="text-lg font-semibold text-charcoal-900">
+        <div className="bg-white rounded-xl border border-accent-200 p-6 space-y-4 max-w-lg">
+          <h2 className="text-lg font-semibold text-text-900">
             Social Media Links
           </h2>
           {[
@@ -99,34 +99,34 @@ export default function VendorSettingsPage() {
             { key: "websiteUrl", label: "Website", placeholder: "https://..." },
           ].map((field) => (
             <div key={field.key}>
-              <label className="block text-sm font-medium text-charcoal-700 mb-1">
+              <label className="block text-sm font-medium text-text-700 mb-1">
                 {field.label}
               </label>
               <input
                 {...register(field.key as any)}
                 placeholder={field.placeholder}
-                className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm focus:ring-2 focus:ring-rose-500"
+                className="w-full px-3 py-2 border border-accent-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500"
               />
             </div>
           ))}
         </div>
 
-        <div className="bg-white rounded-xl border border-blush-200 p-6 space-y-4 max-w-lg">
-          <h2 className="text-lg font-semibold text-charcoal-900">
+        <div className="bg-white rounded-xl border border-accent-200 p-6 space-y-4 max-w-lg">
+          <h2 className="text-lg font-semibold text-text-900">
             Vacation Mode
           </h2>
           <label className="flex items-center justify-between">
-            <span className="text-sm text-charcoal-700">Enable vacation mode</span>
+            <span className="text-sm text-text-700">Enable vacation mode</span>
             <input
               type="checkbox"
               {...register("vacationMode")}
-              className="w-4 h-4 rounded text-rose-600 focus:ring-rose-500"
+              className="w-4 h-4 rounded text-primary-600 focus:ring-primary-500"
             />
           </label>
         </div>
 
-        <div className="bg-white rounded-xl border border-blush-200 p-6 space-y-4 max-w-lg">
-          <h2 className="text-lg font-semibold text-charcoal-900">
+        <div className="bg-white rounded-xl border border-accent-200 p-6 space-y-4 max-w-lg">
+          <h2 className="text-lg font-semibold text-text-900">
             Notification Preferences
           </h2>
           {[
@@ -135,11 +135,11 @@ export default function VendorSettingsPage() {
             "Email for messages",
           ].map((label) => (
             <label key={label} className="flex items-center justify-between">
-              <span className="text-sm text-charcoal-700">{label}</span>
+              <span className="text-sm text-text-700">{label}</span>
               <input
                 type="checkbox"
                 defaultChecked
-                className="w-4 h-4 rounded text-rose-600 focus:ring-rose-500"
+                className="w-4 h-4 rounded text-primary-600 focus:ring-primary-500"
               />
             </label>
           ))}
@@ -148,7 +148,7 @@ export default function VendorSettingsPage() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="inline-flex items-center gap-2 px-6 py-3 bg-rose-600 text-white rounded-lg font-medium hover:bg-rose-700 disabled:opacity-50"
+          className="inline-flex items-center gap-2 px-6 py-3 bg-primary-600 text-white rounded-lg font-medium hover:bg-primary-700 disabled:opacity-50"
         >
           <Save className="w-4 h-4" />
           {isSubmitting ? "Saving..." : "Save Changes"}

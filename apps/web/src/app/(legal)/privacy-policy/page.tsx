@@ -7,13 +7,13 @@ export const metadata: Metadata = {
 
 export default function PrivacyPolicyPage() {
   return (
-    <div className="bg-cream-50 py-16">
+    <div className="bg-surface-50 py-16">
       <div className="mx-auto max-w-3xl px-4">
-        <h1 className="font-serif text-4xl font-bold text-charcoal-900">Privacy Policy</h1>
+        <h1 className="font-serif text-4xl font-bold text-text-900">Privacy Policy</h1>
         <p className="mt-2 text-sm text-muted-500">Last updated: June 2026</p>
 
-        <div className="mt-8 rounded-xl bg-cream-50 border border-blush-200 p-6">
-          <h2 className="text-sm font-semibold text-blush-800 uppercase tracking-wide">Plain Language Summary</h2>
+        <div className="mt-8 rounded-xl bg-surface-50 border border-accent-200 p-6">
+          <h2 className="text-sm font-semibold text-accent-800 uppercase tracking-wide">Plain Language Summary</h2>
           <ul className="mt-3 space-y-2 text-sm text-muted-700">
             <li>We collect only the information needed to provide our marketplace services (name, email, shipping address, payment info).</li>
             <li>Your payment information is processed by PCI-compliant third parties — we never store full card numbers.</li>
@@ -23,7 +23,7 @@ export default function PrivacyPolicyPage() {
           </ul>
         </div>
 
-        <div className="mt-10 space-y-8 text-sm leading-relaxed text-muted-700 [&_h2]:font-serif [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-charcoal-900 [&_h2]:mt-8 [&_h3]:font-semibold [&_h3]:text-charcoal-800 [&_h3]:mt-6 [&_p]:mt-3 [&_ul]:mt-3 [&_ul]:list-disc [&_ul]:pl-6 [&_li]:mt-1">
+        <div className="mt-10 space-y-8 text-sm leading-relaxed text-muted-700 [&_h2]:font-serif [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-text-900 [&_h2]:mt-8 [&_h3]:font-semibold [&_h3]:text-text-800 [&_h3]:mt-6 [&_p]:mt-3 [&_ul]:mt-3 [&_ul]:list-disc [&_ul]:pl-6 [&_li]:mt-1">
           <section>
             <h2>1. Information We Collect</h2>
             <h3>1.1 Account Information</h3>
@@ -62,7 +62,7 @@ export default function PrivacyPolicyPage() {
 
           <section>
             <h2>4. Cookies & Tracking</h2>
-            <p>We use essential cookies to keep you logged in and remember your cart. We also use analytics cookies (Google Analytics) and marketing pixels (Facebook Pixel) with your consent. See our <a href="/cookie-policy" className="text-rose-600 hover:underline">Cookie Policy</a> for details.</p>
+            <p>We use essential cookies to keep you logged in and remember your cart. We also use analytics cookies (Google Analytics) and marketing pixels (Facebook Pixel) with your consent. See our <a href="/cookie-policy" className="text-primary-600 hover:underline">Cookie Policy</a> for details.</p>
           </section>
 
           <section>

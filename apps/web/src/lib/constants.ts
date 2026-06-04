@@ -332,7 +332,7 @@ export const PRODUCT_STATUS_MAP: Record<
   string,
   { label: string; color: string }
 > = {
-  DRAFT: { label: "Draft", color: "bg-charcoal-100 text-charcoal-700" },
+  DRAFT: { label: "Draft", color: "bg-text-100 text-text-700" },
   PENDING_REVIEW: {
     label: "Pending Review",
     color: "bg-gold-100 text-gold-800",
@@ -345,7 +345,7 @@ export const PRODUCT_STATUS_MAP: Record<
   },
   DISCONTINUED: {
     label: "Discontinued",
-    color: "bg-charcoal-100 text-charcoal-700",
+    color: "bg-text-100 text-text-700",
   },
   FLAGGED: { label: "Flagged", color: "bg-red-100 text-red-800" },
 };
@@ -357,7 +357,7 @@ export const COMPETITION_STATUS_MAP: Record<
   UPCOMING: { label: "Upcoming", color: "bg-blue-100 text-blue-800" },
   ACTIVE: { label: "Active", color: "bg-teal-100 text-teal-800" },
   JUDGING: { label: "Judging", color: "bg-purple-100 text-purple-800" },
-  COMPLETED: { label: "Completed", color: "bg-charcoal-100 text-charcoal-700" },
+  COMPLETED: { label: "Completed", color: "bg-text-100 text-text-700" },
   CANCELLED: { label: "Cancelled", color: "bg-red-100 text-red-800" },
 };
 

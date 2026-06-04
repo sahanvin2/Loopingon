@@ -51,7 +51,7 @@ export default function SellOnLoopingonPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden bg-charcoal-900">
+      <section className="relative overflow-hidden bg-text-900">
         <div className="absolute inset-0">
           <Image src="/images/sell/artisan-working.jpg" alt="Sri Lankan artisan at work" fill className="object-cover opacity-40" priority sizes="100vw" />
         </div>
@@ -60,13 +60,13 @@ export default function SellOnLoopingonPage() {
             <h1 className="font-serif text-4xl font-bold text-white md:text-5xl lg:text-6xl">
               Turn Your Craft Into Income
             </h1>
-            <p className="mt-6 text-lg text-cream-200">
+            <p className="mt-6 text-lg text-surface-200">
               Join 4,500+ Sri Lankan artisans already selling on Loopingon. Keep 80% of your
               earnings, reach customers worldwide, and grow your craft business.
             </p>
             <Link
               href="/sign-up/vendor"
-              className="mt-8 inline-flex items-center gap-2 rounded-lg bg-blush-400 px-8 py-3.5 text-sm font-bold text-charcoal-900 shadow-soft transition-all hover:bg-blush-500"
+              className="mt-8 inline-flex items-center gap-2 rounded-lg bg-accent-400 px-8 py-3.5 text-sm font-bold text-text-900 shadow-soft transition-all hover:bg-accent-500"
             >
               Apply Now
               <svg className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clipRule="evenodd" /></svg>
@@ -76,18 +76,18 @@ export default function SellOnLoopingonPage() {
       </section>
 
       {/* Benefits */}
-      <section className="bg-cream-50 py-20">
+      <section className="bg-surface-50 py-20">
         <div className="mx-auto max-w-6xl px-4">
-          <h2 className="text-center font-serif text-3xl font-bold text-charcoal-900 md:text-4xl">
+          <h2 className="text-center font-serif text-3xl font-bold text-text-900 md:text-4xl">
             Why Sell on Loopingon?
           </h2>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {benefits.map((b) => (
               <div key={b.title} className="rounded-xl bg-white p-6 shadow-soft-sm transition-shadow hover:shadow-soft">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-rose-50">
-                  <b.icon className="h-6 w-6 text-rose-600" />
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary-50">
+                  <b.icon className="h-6 w-6 text-primary-600" />
                 </div>
-                <h3 className="font-serif text-lg font-semibold text-charcoal-800">{b.title}</h3>
+                <h3 className="font-serif text-lg font-semibold text-text-800">{b.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-600">{b.description}</p>
               </div>
             ))}
@@ -100,7 +100,7 @@ export default function SellOnLoopingonPage() {
         <div className="mx-auto max-w-6xl px-4">
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <div>
-              <h2 className="font-serif text-3xl font-bold text-charcoal-900">Transparent Commission</h2>
+              <h2 className="font-serif text-3xl font-bold text-text-900">Transparent Commission</h2>
               <p className="mt-4 text-lg text-muted-600">No hidden fees. No surprises. Just a simple, fair model.</p>
               <div className="mt-8 space-y-4">
                 <div className="flex items-center gap-4 rounded-xl border border-muted-200 bg-muted-50 p-4">
@@ -112,13 +112,13 @@ export default function SellOnLoopingonPage() {
                     <p className="text-sm text-muted-600">Goes directly to you</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-4 rounded-xl border border-charcoal-200 bg-charcoal-50 p-4">
-                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-charcoal-100">
-                    <Lock className="h-7 w-7 text-charcoal-500" />
+                <div className="flex items-center gap-4 rounded-xl border border-text-200 bg-text-50 p-4">
+                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-text-100">
+                    <Lock className="h-7 w-7 text-text-500" />
                   </div>
                   <div>
-                    <p className="text-2xl font-bold text-charcoal-700">20%</p>
-                    <p className="text-sm text-charcoal-500">Platform commission (marketing, payment, support)</p>
+                    <p className="text-2xl font-bold text-text-700">20%</p>
+                    <p className="text-sm text-text-500">Platform commission (marketing, payment, support)</p>
                   </div>
                 </div>
               </div>
@@ -136,9 +136,9 @@ export default function SellOnLoopingonPage() {
                 ))}
               </div>
             </div>
-            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-gradient-to-br from-rose-600 to-blush-500 p-10 text-white">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-gradient-to-br from-primary-600 to-accent-500 p-10 text-white">
               <div className="relative z-10">
-                <p className="text-lg font-medium text-cream-200">For example</p>
+                <p className="text-lg font-medium text-surface-200">For example</p>
                 <div className="mt-6 space-y-4">
                   <div className="flex justify-between border-b border-white/20 pb-3">
                     <span>Product sold for</span>
@@ -146,7 +146,7 @@ export default function SellOnLoopingonPage() {
                   </div>
                   <div className="flex justify-between border-b border-white/20 pb-3">
                     <span>Loopingon commission (20%)</span>
-                    <span className="font-bold text-blush-300">- රු 2,000</span>
+                    <span className="font-bold text-accent-300">- රු 2,000</span>
                   </div>
                   <div className="flex justify-between pt-2 text-xl">
                     <span className="font-bold">You receive</span>
@@ -155,16 +155,16 @@ export default function SellOnLoopingonPage() {
                 </div>
               </div>
               <div className="absolute -bottom-10 -right-10 h-48 w-48 rounded-full bg-white/10" />
-              <div className="absolute -left-6 -top-6 h-24 w-24 rounded-full bg-blush-400/20" />
+              <div className="absolute -left-6 -top-6 h-24 w-24 rounded-full bg-accent-400/20" />
             </div>
           </div>
         </div>
       </section>
 
       {/* Success Stories */}
-      <section className="bg-cream-50 py-20">
+      <section className="bg-surface-50 py-20">
         <div className="mx-auto max-w-6xl px-4">
-          <h2 className="text-center font-serif text-3xl font-bold text-charcoal-900">Artisan Success Stories</h2>
+          <h2 className="text-center font-serif text-3xl font-bold text-text-900">Artisan Success Stories</h2>
           <div className="mt-12 grid gap-8 md:grid-cols-3">
             {successStories.map((s) => (
               <div key={s.name} className="overflow-hidden rounded-xl bg-white shadow-soft-sm">
@@ -173,10 +173,10 @@ export default function SellOnLoopingonPage() {
                 </div>
                 <div className="p-6">
                   <div className="mb-2 inline-block rounded-full bg-muted-50 px-3 py-1 text-xs font-medium text-muted-700">{s.craft}</div>
-                  <h3 className="font-serif text-xl font-bold text-charcoal-900">{s.name}</h3>
+                  <h3 className="font-serif text-xl font-bold text-text-900">{s.name}</h3>
                   <p className="mt-3 text-sm leading-relaxed text-muted-600">{s.story}</p>
-                  <div className="mt-4 flex gap-4 border-t border-charcoal-100 pt-4 text-sm">
-                    <span className="font-semibold text-rose-600">{s.earnings}</span>
+                  <div className="mt-4 flex gap-4 border-t border-text-100 pt-4 text-sm">
+                    <span className="font-semibold text-primary-600">{s.earnings}</span>
                     <span className="text-muted-500">{s.orders}</span>
                   </div>
                 </div>
@@ -187,23 +187,23 @@ export default function SellOnLoopingonPage() {
       </section>
 
       {/* CTA */}
-      <section className="bg-rose-600 py-20">
+      <section className="bg-primary-600 py-20">
         <div className="mx-auto max-w-3xl px-4 text-center">
           <h2 className="font-serif text-3xl font-bold text-white md:text-4xl">Ready to Start Selling?</h2>
-          <p className="mt-4 text-lg text-rose-200">
+          <p className="mt-4 text-lg text-primary-200">
             Join thousands of Sri Lankan artisans who have found their global audience on Loopingon.
           </p>
           <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <Link
               href="/sign-up/vendor"
-              className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-white px-8 py-3.5 text-sm font-bold text-rose-600 shadow-soft transition-all hover:bg-cream-50 sm:w-auto"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-white px-8 py-3.5 text-sm font-bold text-primary-600 shadow-soft transition-all hover:bg-surface-50 sm:w-auto"
             >
               Apply Now
               <svg className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clipRule="evenodd" /></svg>
             </Link>
             <Link
               href="/contact"
-              className="inline-flex w-full items-center justify-center rounded-lg border border-rose-400 px-8 py-3.5 text-sm font-semibold text-white transition-all hover:bg-rose-500 sm:w-auto"
+              className="inline-flex w-full items-center justify-center rounded-lg border border-primary-400 px-8 py-3.5 text-sm font-semibold text-white transition-all hover:bg-primary-500 sm:w-auto"
             >
               Talk to Us
             </Link>

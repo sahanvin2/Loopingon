@@ -60,7 +60,7 @@ export function EmptyState({
         </div>
       )}
 
-      <h3 className="font-serif text-xl text-charcoal-900 mb-2">{title}</h3>
+      <h3 className="font-serif text-xl text-text-900 mb-2">{title}</h3>
       {description && <p className="text-muted-600 max-w-sm mb-8">{description}</p>}
 
       {(action || secondaryAction) && (
@@ -71,9 +71,9 @@ export function EmptyState({
                 href={action.href}
                 className={cn(
                   "inline-flex items-center justify-center px-6 py-2.5 rounded-lg",
-                  "bg-rose-600 text-white font-medium text-sm",
-                  "hover:bg-rose-700 transition-colors",
-                  "focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2",
+                  "bg-primary-600 text-white font-medium text-sm",
+                  "hover:bg-primary-700 transition-colors",
+                  "focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2",
                 )}
               >
                 {action.label}
@@ -84,9 +84,9 @@ export function EmptyState({
                 onClick={action.onClick}
                 className={cn(
                   "inline-flex items-center justify-center px-6 py-2.5 rounded-lg",
-                  "bg-rose-600 text-white font-medium text-sm",
-                  "hover:bg-rose-700 transition-colors",
-                  "focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2",
+                  "bg-primary-600 text-white font-medium text-sm",
+                  "hover:bg-primary-700 transition-colors",
+                  "focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2",
                 )}
               >
                 {action.label}
@@ -98,8 +98,8 @@ export function EmptyState({
                 href={secondaryAction.href}
                 className={cn(
                   "inline-flex items-center justify-center px-6 py-2.5 rounded-lg",
-                  "border border-muted-300 text-charcoal-700 font-medium text-sm",
-                  "hover:bg-blush-50 transition-colors",
+                  "border border-muted-300 text-text-700 font-medium text-sm",
+                  "hover:bg-accent-50 transition-colors",
                   "focus:outline-none focus:ring-2 focus:ring-muted-400 focus:ring-offset-2",
                 )}
               >
@@ -111,8 +111,8 @@ export function EmptyState({
                 onClick={secondaryAction.onClick}
                 className={cn(
                   "inline-flex items-center justify-center px-6 py-2.5 rounded-lg",
-                  "border border-muted-300 text-charcoal-700 font-medium text-sm",
-                  "hover:bg-blush-50 transition-colors",
+                  "border border-muted-300 text-text-700 font-medium text-sm",
+                  "hover:bg-accent-50 transition-colors",
                   "focus:outline-none focus:ring-2 focus:ring-muted-400 focus:ring-offset-2",
                 )}
               >

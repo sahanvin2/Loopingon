@@ -65,7 +65,7 @@ export default function AdminDashboardPage() {
   return (
     <motion.div variants={container} initial="hidden" animate="show" className="space-y-6">
       <motion.div variants={item}>
-        <h1 className="text-2xl font-bold text-charcoal-900">
+        <h1 className="text-2xl font-bold text-text-900">
           Admin Dashboard
         </h1>
         <p className="text-muted-600 mt-1">Platform overview and KPIs</p>

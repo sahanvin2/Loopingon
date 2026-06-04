@@ -71,7 +71,7 @@ export function Modal({
       {isOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <motion.div
-            className="absolute inset-0 bg-charcoal-900/50 backdrop-blur-sm"
+            className="absolute inset-0 bg-text-900/50 backdrop-blur-sm"
             variants={overlayVariants}
             initial="hidden"
             animate="visible"
@@ -83,7 +83,7 @@ export function Modal({
           <motion.div
             className={cn(
               "relative w-full bg-white rounded-xl shadow-lg",
-              "border border-blush-200",
+              "border border-accent-200",
               sizeStyles[size],
               className,
             )}
@@ -109,7 +109,7 @@ export function Modal({
                 {title && (
                   <h2
                     id="modal-title"
-                    className="font-serif text-xl text-charcoal-900"
+                    className="font-serif text-xl text-text-900"
                   >
                     {title}
                   </h2>
@@ -130,9 +130,9 @@ export function Modal({
               onClick={onClose}
               className={cn(
                 "absolute top-4 right-4 p-1.5 rounded-lg",
-                "text-muted-500 hover:text-charcoal-700",
+                "text-muted-500 hover:text-text-700",
                 "hover:bg-muted-100 transition-colors",
-                "focus:outline-none focus:ring-2 focus:ring-rose-500",
+                "focus:outline-none focus:ring-2 focus:ring-primary-500",
               )}
               aria-label="Close modal"
             >

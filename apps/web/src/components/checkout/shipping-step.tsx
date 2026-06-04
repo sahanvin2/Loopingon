@@ -41,15 +41,15 @@ export function ShippingStep({ onNext, addresses = [], className }: ShippingStep
   return (
     <div className={cn("space-y-8", className)}>
       <div>
-        <h2 className="font-serif text-xl text-charcoal-900 mb-1">
+        <h2 className="font-serif text-xl text-text-900 mb-1">
           Shipping Address
         </h2>
         <p className="text-sm text-muted-500 mb-4">
           Select a delivery address
         </p>
 
-        <div className="p-4 rounded-lg border border-blush-300 bg-cream-50">
-          <p className="text-charcoal-700 font-medium">
+        <div className="p-4 rounded-lg border border-accent-300 bg-surface-50">
+          <p className="text-text-700 font-medium">
             Add a new delivery address
           </p>
           <p className="text-sm text-muted-500 mt-1">
@@ -59,69 +59,69 @@ export function ShippingStep({ onNext, addresses = [], className }: ShippingStep
           <div className="mt-4 space-y-3">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
-                <label className="block text-xs font-medium text-charcoal-700 mb-1">
+                <label className="block text-xs font-medium text-text-700 mb-1">
                   Full Name
                 </label>
                 <input
                   type="text"
                   placeholder="Full name"
                   className={cn(
-                    "w-full px-3 py-2 rounded-lg border border-blush-300 text-sm",
-                    "focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent",
+                    "w-full px-3 py-2 rounded-lg border border-accent-300 text-sm",
+                    "focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent",
                   )}
                 />
               </div>
               <div>
-                <label className="block text-xs font-medium text-charcoal-700 mb-1">
+                <label className="block text-xs font-medium text-text-700 mb-1">
                   Phone
                 </label>
                 <input
                   type="tel"
                   placeholder="+94 XXX XXX XXXX"
                   className={cn(
-                    "w-full px-3 py-2 rounded-lg border border-blush-300 text-sm",
-                    "focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent",
+                    "w-full px-3 py-2 rounded-lg border border-accent-300 text-sm",
+                    "focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent",
                   )}
                 />
               </div>
             </div>
             <div>
-              <label className="block text-xs font-medium text-charcoal-700 mb-1">
+              <label className="block text-xs font-medium text-text-700 mb-1">
                 Address Line 1
               </label>
               <input
                 type="text"
                 placeholder="Street address"
                 className={cn(
-                  "w-full px-3 py-2 rounded-lg border border-blush-300 text-sm",
-                  "focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent",
+                  "w-full px-3 py-2 rounded-lg border border-accent-300 text-sm",
+                  "focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent",
                 )}
               />
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
-                <label className="block text-xs font-medium text-charcoal-700 mb-1">
+                <label className="block text-xs font-medium text-text-700 mb-1">
                   City
                 </label>
                 <input
                   type="text"
                   placeholder="City"
                   className={cn(
-                    "w-full px-3 py-2 rounded-lg border border-blush-300 text-sm",
-                    "focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent",
+                    "w-full px-3 py-2 rounded-lg border border-accent-300 text-sm",
+                    "focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent",
                   )}
                 />
               </div>
               <div>
-                <label className="block text-xs font-medium text-charcoal-700 mb-1">
+                <label className="block text-xs font-medium text-text-700 mb-1">
                   Postal Code
                 </label>
                 <input
                   type="text"
                   placeholder="Postal code"
                   className={cn(
-                    "w-full px-3 py-2 rounded-lg border border-blush-300 text-sm",
-                    "focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent",
+                    "w-full px-3 py-2 rounded-lg border border-accent-300 text-sm",
+                    "focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent",
                   )}
                 />
               </div>
@@ -131,7 +131,7 @@ export function ShippingStep({ onNext, addresses = [], className }: ShippingStep
       </div>
 
       <div>
-        <h2 className="font-serif text-xl text-charcoal-900 mb-4">
+        <h2 className="font-serif text-xl text-text-900 mb-4">
           Shipping Method
         </h2>
         <div className="space-y-3">
@@ -143,30 +143,30 @@ export function ShippingStep({ onNext, addresses = [], className }: ShippingStep
               className={cn(
                 "w-full flex items-center gap-4 p-4 rounded-lg border text-left transition-colors",
                 selectedMethod === method.id
-                  ? "border-rose-500 bg-rose-50"
-                  : "border-blush-300 hover:border-muted-400",
+                  ? "border-primary-500 bg-primary-50"
+                  : "border-accent-300 hover:border-muted-400",
               )}
             >
               <div
                 className={cn(
                   "w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0",
                   selectedMethod === method.id
-                    ? "border-rose-600"
+                    ? "border-primary-600"
                     : "border-muted-300",
                 )}
               >
                 {selectedMethod === method.id && (
-                  <div className="w-2.5 h-2.5 rounded-full bg-rose-600" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-primary-600" />
                 )}
               </div>
               <Truck className="w-5 h-5 text-muted-500 shrink-0" />
               <div className="flex-1">
-                <p className="text-sm font-medium text-charcoal-700">
+                <p className="text-sm font-medium text-text-700">
                   {method.label}
                 </p>
                 <p className="text-xs text-muted-500">{method.description}</p>
               </div>
-              <span className="text-sm font-medium text-charcoal-700">
+              <span className="text-sm font-medium text-text-700">
                 {method.price}
               </span>
             </button>
@@ -179,7 +179,7 @@ export function ShippingStep({ onNext, addresses = [], className }: ShippingStep
         onClick={onNext}
         className={cn(
           "w-full py-3.5 rounded-lg text-base font-medium transition-colors",
-          "bg-rose-600 text-white hover:bg-rose-700",
+          "bg-primary-600 text-white hover:bg-primary-700",
           "shadow-rose",
         )}
       >

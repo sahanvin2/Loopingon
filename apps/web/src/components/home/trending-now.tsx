@@ -63,7 +63,7 @@ export function TrendingNow() {
         viewport={{ once: true }}
         className="flex items-center justify-between mb-10"
       >
-        <h2 className="font-serif text-3xl text-charcoal-900">
+        <h2 className="font-serif text-3xl text-text-900">
           What&apos;s Trending in Sri Lanka
         </h2>
 
@@ -74,7 +74,7 @@ export function TrendingNow() {
             disabled={!canScrollLeft}
             className={cn(
               "w-10 h-10 rounded-full flex items-center justify-center",
-              "border border-cream-300 text-muted-600",
+              "border border-surface-300 text-muted-600",
               "hover:bg-muted-100 transition-colors",
               "disabled:opacity-40 disabled:cursor-not-allowed",
             )}
@@ -88,7 +88,7 @@ export function TrendingNow() {
             disabled={!canScrollRight}
             className={cn(
               "w-10 h-10 rounded-full flex items-center justify-center",
-              "border border-cream-300 text-muted-600",
+              "border border-surface-300 text-muted-600",
               "hover:bg-muted-100 transition-colors",
               "disabled:opacity-40 disabled:cursor-not-allowed",
             )}

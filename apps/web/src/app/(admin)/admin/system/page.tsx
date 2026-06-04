@@ -38,13 +38,13 @@ export default function AdminSystemPage() {
 
   return (
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
-      <h1 className="text-2xl font-bold text-charcoal-900">System Health</h1>
+      <h1 className="text-2xl font-bold text-text-900">System Health</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="bg-white rounded-xl border border-blush-200 p-6">
+        <div className="bg-white rounded-xl border border-accent-200 p-6">
           <div className="flex items-center gap-3 mb-4">
             <Server className="w-5 h-5 text-muted-600" />
-            <h2 className="font-semibold text-charcoal-900">Server</h2>
+            <h2 className="font-semibold text-text-900">Server</h2>
           </div>
           <dl className="space-y-2 text-sm">
             <div className="flex justify-between">
@@ -62,10 +62,10 @@ export default function AdminSystemPage() {
           </dl>
         </div>
 
-        <div className="bg-white rounded-xl border border-blush-200 p-6">
+        <div className="bg-white rounded-xl border border-accent-200 p-6">
           <div className="flex items-center gap-3 mb-4">
-            <Database className="w-5 h-5 text-blush-600" />
-            <h2 className="font-semibold text-charcoal-900">Database</h2>
+            <Database className="w-5 h-5 text-accent-600" />
+            <h2 className="font-semibold text-text-900">Database</h2>
           </div>
           <dl className="space-y-2 text-sm">
             <div className="flex justify-between">
@@ -83,10 +83,10 @@ export default function AdminSystemPage() {
           </dl>
         </div>
 
-        <div className="bg-white rounded-xl border border-blush-200 p-6">
+        <div className="bg-white rounded-xl border border-accent-200 p-6">
           <div className="flex items-center gap-3 mb-4">
-            <Activity className="w-5 h-5 text-rose-600" />
-            <h2 className="font-semibold text-charcoal-900">Queues</h2>
+            <Activity className="w-5 h-5 text-primary-600" />
+            <h2 className="font-semibold text-text-900">Queues</h2>
           </div>
           {health?.queueStatus && Object.entries(health.queueStatus).map(([name, status]) => (
             <div key={name} className="flex justify-between text-sm mb-1">
@@ -100,8 +100,8 @@ export default function AdminSystemPage() {
         </div>
       </div>
 
-      <div className="bg-white rounded-xl border border-blush-200 p-6">
-        <h2 className="text-lg font-semibold text-charcoal-900 mb-4">Cache Management</h2>
+      <div className="bg-white rounded-xl border border-accent-200 p-6">
+        <h2 className="text-lg font-semibold text-text-900 mb-4">Cache Management</h2>
         <div className="flex flex-wrap gap-3">
           {["Redis Cache", "API Cache", "CDN Cache", "Template Cache"].map((cache) => (
             <button
@@ -109,7 +109,7 @@ export default function AdminSystemPage() {
               type="button"
               onClick={() => clearCacheMutation.mutate(cache)}
               disabled={clearCacheMutation.isPending}
-              className="px-4 py-2 bg-white border border-blush-200 rounded-lg text-sm font-medium hover:bg-red-50 hover:border-red-200 hover:text-red-600 disabled:opacity-50 flex items-center gap-2"
+              className="px-4 py-2 bg-white border border-accent-200 rounded-lg text-sm font-medium hover:bg-red-50 hover:border-red-200 hover:text-red-600 disabled:opacity-50 flex items-center gap-2"
             >
               <Trash2 className="w-3.5 h-3.5" />
               Clear {cache}
@@ -118,9 +118,9 @@ export default function AdminSystemPage() {
         </div>
       </div>
 
-      <div className="bg-white rounded-xl border border-blush-200 p-6">
-        <h2 className="text-lg font-semibold text-charcoal-900 mb-2">Version</h2>
-        <p className="text-sm font-mono text-charcoal-700">{health?.version || "—"}</p>
+      <div className="bg-white rounded-xl border border-accent-200 p-6">
+        <h2 className="text-lg font-semibold text-text-900 mb-2">Version</h2>
+        <p className="text-sm font-mono text-text-700">{health?.version || "—"}</p>
       </div>
     </motion.div>
   );

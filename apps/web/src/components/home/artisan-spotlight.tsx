@@ -54,7 +54,7 @@ const fadeInSection = {
 
 export function ArtisanSpotlight() {
   return (
-    <section className="py-16 px-4 bg-cream-50 relative overflow-hidden">
+    <section className="py-16 px-4 bg-surface-50 relative overflow-hidden">
       <div
         className="absolute inset-0 opacity-[0.03]"
         style={{
@@ -64,7 +64,7 @@ export function ArtisanSpotlight() {
       />
 
       <div className="max-w-8xl mx-auto relative">
-        <h2 className="font-serif text-3xl text-charcoal-900 text-center mb-12">
+        <h2 className="font-serif text-3xl text-text-900 text-center mb-12">
           Meet Our Artisans
         </h2>
 
@@ -100,7 +100,7 @@ export function ArtisanSpotlight() {
                 <Badge variant="blush" size="sm" className="mb-3">
                   {artisan.craft}
                 </Badge>
-                <h3 className="font-serif text-2xl text-charcoal-900 mb-1">
+                <h3 className="font-serif text-2xl text-text-900 mb-1">
                   Meet {artisan.name}
                 </h3>
                 <p className="text-muted-600 text-sm mb-4">
@@ -117,7 +117,7 @@ export function ArtisanSpotlight() {
                   {artisan.products.map((product) => (
                     <div
                       key={product.name}
-                      className="bg-white rounded-lg border border-blush-200 overflow-hidden shadow-sm"
+                      className="bg-white rounded-lg border border-accent-200 overflow-hidden shadow-sm"
                     >
                       <div className="relative aspect-square">
                         <Image
@@ -129,7 +129,7 @@ export function ArtisanSpotlight() {
                         />
                       </div>
                       <div className="p-2">
-                        <p className="text-xs text-charcoal-700 font-medium truncate">
+                        <p className="text-xs text-text-700 font-medium truncate">
                           {product.name}
                         </p>
                         <PriceDisplay
@@ -146,8 +146,8 @@ export function ArtisanSpotlight() {
                   href={`/artisans/${artisan.name.toLowerCase().replace(/\s+/g, "-")}`}
                   className={cn(
                     "inline-flex items-center px-6 py-2.5 rounded-lg",
-                    "bg-rose-600 text-white text-sm font-medium",
-                    "hover:bg-rose-700 transition-colors",
+                    "bg-primary-600 text-white text-sm font-medium",
+                    "hover:bg-primary-700 transition-colors",
                   )}
                 >
                   Visit Store

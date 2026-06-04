@@ -38,7 +38,7 @@ export function TopBanner() {
   if (isDismissed) return null;
 
   return (
-    <div className="relative h-12 bg-rose-600 overflow-hidden">
+    <div className="relative h-12 bg-primary-600 overflow-hidden">
       <div className="max-w-8xl mx-auto h-full flex items-center justify-center px-12">
         <AnimatePresence mode="wait">
           <motion.p
@@ -60,7 +60,7 @@ export function TopBanner() {
             key={i}
             className={cn(
               "w-1.5 h-1.5 rounded-full transition-colors",
-              i === currentIndex ? "bg-cream-50" : "bg-rose-400",
+              i === currentIndex ? "bg-surface-50" : "bg-primary-400",
             )}
           />
         ))}
@@ -71,7 +71,7 @@ export function TopBanner() {
         onClick={dismiss}
         className={cn(
           "absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded",
-          "text-cream-200 hover:text-white hover:bg-rose-700/30 transition-colors",
+          "text-surface-200 hover:text-white hover:bg-primary-700/30 transition-colors",
         )}
         aria-label="Dismiss banner"
       >

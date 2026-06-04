@@ -59,8 +59,8 @@ export function ProductGrid({
             onClick={onRetry}
             className={cn(
               "inline-flex items-center gap-2 px-4 py-2 rounded-lg",
-              "bg-rose-600 text-white text-sm font-medium",
-              "hover:bg-rose-700 transition-colors",
+              "bg-primary-600 text-white text-sm font-medium",
+              "hover:bg-primary-700 transition-colors",
             )}
           >
             <RefreshCw className="w-4 h-4" /> Retry

@@ -64,7 +64,7 @@ export function Testimonials() {
 
   return (
     <section className="py-16 px-4 max-w-8xl mx-auto">
-      <h2 className="font-serif text-3xl text-charcoal-900 text-center mb-12">
+      <h2 className="font-serif text-3xl text-text-900 text-center mb-12">
         What Our Customers Say
       </h2>
 
@@ -79,11 +79,11 @@ export function Testimonials() {
               <div
                 key={t.name}
                 className={cn(
-                  "flex-shrink-0 bg-white rounded-lg border border-blush-200 shadow-sm p-6",
+                  "flex-shrink-0 bg-white rounded-lg border border-accent-200 shadow-sm p-6",
                   "w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]",
                 )}
               >
-                <Quote className="w-8 h-8 text-rose-200 mb-4" />
+                <Quote className="w-8 h-8 text-primary-200 mb-4" />
 
                 <p className="text-muted-600 italic mb-6 line-clamp-5">
                   &ldquo;{t.text}&rdquo;
@@ -98,7 +98,7 @@ export function Testimonials() {
                     />
                   </div>
                   <div>
-                    <p className="text-charcoal-700 font-medium text-sm">
+                    <p className="text-text-700 font-medium text-sm">
                       {t.name}
                     </p>
                     <p className="text-muted-500 text-xs">{t.city}</p>
@@ -122,7 +122,7 @@ export function Testimonials() {
           disabled={current === 0}
           className={cn(
             "absolute -left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full",
-            "bg-white border border-cream-300 shadow-sm text-muted-600",
+            "bg-white border border-surface-300 shadow-sm text-muted-600",
             "hidden lg:flex items-center justify-center transition-colors",
             "hover:bg-muted-50 disabled:opacity-40 disabled:cursor-not-allowed",
           )}
@@ -137,7 +137,7 @@ export function Testimonials() {
           disabled={current >= maxIndex}
           className={cn(
             "absolute -right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full",
-            "bg-white border border-cream-300 shadow-sm text-muted-600",
+            "bg-white border border-surface-300 shadow-sm text-muted-600",
             "hidden lg:flex items-center justify-center transition-colors",
             "hover:bg-muted-50 disabled:opacity-40 disabled:cursor-not-allowed",
           )}
@@ -155,7 +155,7 @@ export function Testimonials() {
               className={cn(
                 "w-2 h-2 rounded-full transition-all duration-300",
                 i === current
-                  ? "bg-rose-600 w-6"
+                  ? "bg-primary-600 w-6"
                   : "bg-muted-300 hover:bg-muted-400",
               )}
               aria-label={`Go to testimonial group ${i + 1}`}

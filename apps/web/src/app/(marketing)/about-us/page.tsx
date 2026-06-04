@@ -55,19 +55,19 @@ export default function AboutUsPage() {
           priority
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-charcoal-900/60 to-charcoal-900/80" />
+        <div className="absolute inset-0 bg-gradient-to-b from-text-900/60 to-text-900/80" />
         <div className="absolute inset-0 flex flex-col items-center justify-center px-4 text-center">
           <h1 className="font-serif text-4xl font-bold text-white md:text-5xl lg:text-6xl">
             Our Story
           </h1>
-          <p className="mt-4 max-w-2xl text-lg text-cream-200">
+          <p className="mt-4 max-w-2xl text-lg text-surface-200">
             Connecting the timeless artistry of Sri Lanka with the world
           </p>
         </div>
       </section>
 
       {/* Story */}
-      <section className="bg-cream-50 py-20">
+      <section className="bg-surface-50 py-20">
         <div className="mx-auto max-w-5xl px-4">
           <div className="mx-auto max-w-3xl space-y-6 text-center">
             <p className="text-lg leading-relaxed text-muted-700">
@@ -97,22 +97,22 @@ export default function AboutUsPage() {
       <section className="bg-white py-20">
         <div className="mx-auto max-w-5xl px-4">
           <div className="grid gap-8 md:grid-cols-2">
-            <div className="rounded-2xl bg-cream-50 p-8 md:p-10">
-              <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-rose-100">
-                <ShieldCheck className="h-6 w-6 text-rose-600" />
+            <div className="rounded-2xl bg-surface-50 p-8 md:p-10">
+              <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-primary-100">
+                <ShieldCheck className="h-6 w-6 text-primary-600" />
               </div>
-              <h2 className="font-serif text-2xl font-bold text-charcoal-900">Our Mission</h2>
+              <h2 className="font-serif text-2xl font-bold text-text-900">Our Mission</h2>
               <p className="mt-4 leading-relaxed text-muted-700">
                 To empower Sri Lankan artisans by providing them with a global digital marketplace,
                 fair compensation, and the tools they need to preserve and share their cultural
                 heritage with the world.
               </p>
             </div>
-            <div className="rounded-2xl bg-cream-50 p-8 md:p-10">
+            <div className="rounded-2xl bg-surface-50 p-8 md:p-10">
               <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-muted-100">
                 <Factory className="h-6 w-6 text-muted-600" />
               </div>
-              <h2 className="font-serif text-2xl font-bold text-charcoal-900">Our Vision</h2>
+              <h2 className="font-serif text-2xl font-bold text-text-900">Our Vision</h2>
               <p className="mt-4 leading-relaxed text-muted-700">
                 A world where traditional craft communities thrive economically, cultural heritage is
                 celebrated globally, and every artisan has the opportunity to build a sustainable
@@ -124,18 +124,18 @@ export default function AboutUsPage() {
       </section>
 
       {/* Why Loopingon */}
-      <section className="bg-cream-50 py-20">
+      <section className="bg-surface-50 py-20">
         <div className="mx-auto max-w-6xl px-4">
-          <h2 className="text-center font-serif text-3xl font-bold text-charcoal-900 md:text-4xl">
+          <h2 className="text-center font-serif text-3xl font-bold text-text-900 md:text-4xl">
             Why Loopingon?
           </h2>
           <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {values.map((v) => (
               <div key={v.title} className="rounded-xl bg-white p-6 text-center shadow-soft-sm transition-shadow hover:shadow-soft">
-                <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-rose-50">
-                  <v.icon className="h-7 w-7 text-rose-600" />
+                <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-primary-50">
+                  <v.icon className="h-7 w-7 text-primary-600" />
                 </div>
-                <h3 className="font-serif text-lg font-semibold text-charcoal-800">{v.title}</h3>
+                <h3 className="font-serif text-lg font-semibold text-text-800">{v.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-600">{v.description}</p>
               </div>
             ))}
@@ -144,14 +144,14 @@ export default function AboutUsPage() {
       </section>
 
       {/* Stats */}
-      <section className="bg-rose-600 py-16">
+      <section className="bg-primary-600 py-16">
         <div className="mx-auto max-w-6xl px-4">
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {stats.map((stat) => (
               <div key={stat.label} className="text-center">
-                <stat.icon className="mx-auto mb-3 h-8 w-8 text-rose-200" />
+                <stat.icon className="mx-auto mb-3 h-8 w-8 text-primary-200" />
                 <p className="font-serif text-4xl font-bold text-white">{stat.value}</p>
-                <p className="mt-1 text-sm font-medium uppercase tracking-wide text-rose-200">{stat.label}</p>
+                <p className="mt-1 text-sm font-medium uppercase tracking-wide text-primary-200">{stat.label}</p>
               </div>
             ))}
           </div>
@@ -159,9 +159,9 @@ export default function AboutUsPage() {
       </section>
 
       {/* CTA */}
-      <section className="bg-cream-50 py-20">
+      <section className="bg-surface-50 py-20">
         <div className="mx-auto max-w-3xl px-4 text-center">
-          <h2 className="font-serif text-3xl font-bold text-charcoal-900 md:text-4xl">
+          <h2 className="font-serif text-3xl font-bold text-text-900 md:text-4xl">
             Join Our Community
           </h2>
           <p className="mt-4 text-lg text-muted-600">
@@ -171,13 +171,13 @@ export default function AboutUsPage() {
           <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <Link
               href="/sign-up/vendor"
-              className="inline-flex w-full items-center justify-center rounded-lg bg-rose-600 px-8 py-3.5 text-sm font-semibold text-white shadow-soft transition-all hover:bg-rose-700 sm:w-auto"
+              className="inline-flex w-full items-center justify-center rounded-lg bg-primary-600 px-8 py-3.5 text-sm font-semibold text-white shadow-soft transition-all hover:bg-primary-700 sm:w-auto"
             >
               Start Selling
             </Link>
             <Link
               href="/products"
-              className="inline-flex w-full items-center justify-center rounded-lg border border-charcoal-300 px-8 py-3.5 text-sm font-semibold text-charcoal-700 transition-all hover:bg-charcoal-50 sm:w-auto"
+              className="inline-flex w-full items-center justify-center rounded-lg border border-text-300 px-8 py-3.5 text-sm font-semibold text-text-700 transition-all hover:bg-text-50 sm:w-auto"
             >
               Start Shopping
             </Link>

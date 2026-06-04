@@ -56,16 +56,16 @@ export default function TwoFactorPage() {
   }, [code, handleVerify]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-cream-50 px-4 py-12">
+    <div className="flex min-h-screen items-center justify-center bg-surface-50 px-4 py-12">
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="w-full max-w-md">
         <div className="rounded-2xl bg-white p-8 shadow-soft-sm md:p-10">
-          <div className="mb-6 text-center"><Link href="/" className="font-serif text-2xl font-bold text-rose-600">Loopingon</Link></div>
+          <div className="mb-6 text-center"><Link href="/" className="font-serif text-2xl font-bold text-primary-600">Loopingon</Link></div>
 
-          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-cream-50">
-            <Lock className="h-8 w-8 text-rose-600" />
+          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-surface-50">
+            <Lock className="h-8 w-8 text-primary-600" />
           </div>
 
-          <h1 className="text-center font-serif text-3xl font-bold text-charcoal-900">Two-Factor Authentication</h1>
+          <h1 className="text-center font-serif text-3xl font-bold text-text-900">Two-Factor Authentication</h1>
           <p className="mt-2 text-center text-sm text-muted-500">Enter the 6-digit code from your authenticator app.</p>
 
           {error && (
@@ -86,7 +86,7 @@ export default function TwoFactorPage() {
                 onChange={(e) => handleChange(i, e.target.value)}
                 onKeyDown={(e) => handleKeyDown(i, e)}
                 onPaste={i === 0 ? handlePaste : undefined}
-                className={cn("h-14 w-12 rounded-lg border text-center font-serif text-xl font-bold text-charcoal-900 focus:border-rose-500 focus:ring-2 focus:ring-rose-500/20 focus:outline-none", digit ? "border-rose-400" : "border-charcoal-200")}
+                className={cn("h-14 w-12 rounded-lg border text-center font-serif text-xl font-bold text-text-900 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 focus:outline-none", digit ? "border-primary-400" : "border-text-200")}
               />
             ))}
           </div>
@@ -94,14 +94,14 @@ export default function TwoFactorPage() {
           <button
             onClick={handleVerify}
             disabled={isLoading || code.some((c) => !c)}
-            className="mt-6 flex h-12 w-full items-center justify-center rounded-lg bg-rose-600 text-sm font-semibold text-white shadow-soft transition-all hover:bg-rose-700 disabled:cursor-not-allowed disabled:opacity-60"
+            className="mt-6 flex h-12 w-full items-center justify-center rounded-lg bg-primary-600 text-sm font-semibold text-white shadow-soft transition-all hover:bg-primary-700 disabled:cursor-not-allowed disabled:opacity-60"
           >
             {isLoading ? <span className="h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent" /> : "Verify"}
           </button>
 
           <div className="mt-6 text-center space-y-2">
-            <p><button className="text-sm font-medium text-charcoal-600 hover:text-charcoal-800">Use backup code instead</button></p>
-            <p><Link href="/sign-in" className="inline-flex items-center gap-1 text-sm text-muted-500 hover:text-charcoal-600"><ArrowLeft className="h-3 w-3" /> Back to Sign In</Link></p>
+            <p><button className="text-sm font-medium text-text-600 hover:text-text-800">Use backup code instead</button></p>
+            <p><Link href="/sign-in" className="inline-flex items-center gap-1 text-sm text-muted-500 hover:text-text-600"><ArrowLeft className="h-3 w-3" /> Back to Sign In</Link></p>
           </div>
         </div>
       </motion.div>

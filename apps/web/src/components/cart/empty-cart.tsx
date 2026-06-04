@@ -18,11 +18,11 @@ export function EmptyCart() {
       animate={{ opacity: 1, y: 0 }}
       className="flex flex-col items-center justify-center py-20 px-6 text-center"
     >
-      <div className="w-24 h-24 rounded-full bg-rose-100 flex items-center justify-center mb-6">
-        <ShoppingBag className="w-12 h-12 text-rose-400" />
+      <div className="w-24 h-24 rounded-full bg-primary-100 flex items-center justify-center mb-6">
+        <ShoppingBag className="w-12 h-12 text-primary-400" />
       </div>
 
-      <h2 className="font-serif text-2xl text-charcoal-900 mb-2">Your Cart is Empty</h2>
+      <h2 className="font-serif text-2xl text-text-900 mb-2">Your Cart is Empty</h2>
       <p className="text-muted-600 max-w-sm mb-8">
         Looks like you haven&apos;t added any handmade treasures to your cart
         yet. Discover unique Sri Lankan crafts waiting for you.
@@ -33,8 +33,8 @@ export function EmptyCart() {
           href="/products"
           className={cn(
             "inline-flex items-center justify-center px-8 py-3 rounded-lg",
-            "bg-rose-600 text-white font-medium",
-            "hover:bg-rose-700 transition-colors",
+            "bg-primary-600 text-white font-medium",
+            "hover:bg-primary-700 transition-colors",
             "shadow-rose",
           )}
         >
@@ -46,8 +46,8 @@ export function EmptyCart() {
             onClick={() => openModal("signin")}
             className={cn(
               "inline-flex items-center justify-center gap-2 px-8 py-3 rounded-lg",
-              "border border-blush-300 text-charcoal-700 font-medium",
-              "hover:bg-blush-50 transition-colors",
+              "border border-accent-300 text-text-700 font-medium",
+              "hover:bg-accent-50 transition-colors",
             )}
           >
             <LogIn className="w-4 h-4" />

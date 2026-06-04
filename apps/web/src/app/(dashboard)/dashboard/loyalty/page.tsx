@@ -14,8 +14,8 @@ import type { LoyaltyAccount, LoyaltyTransaction, ApiResponse, PaginatedResponse
 
 const tierInfo: Record<string, { next: string; min: number; color: string; icon: string }> = {
   Bronze: { next: "Silver", min: 500, color: "bg-amber-100 text-amber-700", icon: "🥉" },
-  Silver: { next: "blush", min: 2000, color: "bg-charcoal-100 text-charcoal-700", icon: "🥈" },
-  Gold: { next: "Platinum", min: 5000, color: "bg-blush-100 text-blush-700", icon: "🥇" },
+  Silver: { next: "blush", min: 2000, color: "bg-text-100 text-text-700", icon: "🥈" },
+  Gold: { next: "Platinum", min: 5000, color: "bg-accent-100 text-accent-700", icon: "🥇" },
   Platinum: { next: "", min: 10000, color: "bg-purple-100 text-purple-700", icon: "💎" },
 };
 
@@ -77,7 +77,7 @@ export default function LoyaltyPage() {
       animate={{ opacity: 1, y: 0 }}
       className="space-y-6"
     >
-      <h1 className="text-2xl font-bold text-charcoal-900">Loyalty Points</h1>
+      <h1 className="text-2xl font-bold text-text-900">Loyalty Points</h1>
 
       {isLoading ? (
         <LoadingSkeleton variant="card" count={3} />
@@ -88,13 +88,13 @@ export default function LoyaltyPage() {
         />
       ) : (
         <>
-          <div className="bg-white rounded-xl border border-blush-200 p-6">
+          <div className="bg-white rounded-xl border border-accent-200 p-6">
             <div className="flex items-center justify-between mb-4">
               <div>
                 <p className="text-sm text-muted-500">Available Points</p>
                 <div className="flex items-center gap-2">
-                  <Gem className="w-5 h-5 text-blush-500" />
-                  <span className="text-3xl font-bold text-charcoal-900">
+                  <Gem className="w-5 h-5 text-accent-500" />
+                  <span className="text-3xl font-bold text-text-900">
                     {currentPoints.toLocaleString()}
                   </span>
                 </div>
@@ -118,9 +118,9 @@ export default function LoyaltyPage() {
                     {pointsToNext.toLocaleString()} points needed
                   </span>
                 </div>
-                <div className="w-full h-2 bg-cream-200 rounded-full overflow-hidden">
+                <div className="w-full h-2 bg-surface-200 rounded-full overflow-hidden">
                   <div
-                    className="h-full bg-gradient-to-r from-blush-400 to-rose-500 rounded-full transition-all"
+                    className="h-full bg-gradient-to-r from-accent-400 to-primary-500 rounded-full transition-all"
                     style={{ width: `${tierProgress}%` }}
                   />
                 </div>
@@ -129,8 +129,8 @@ export default function LoyaltyPage() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <div className="bg-white rounded-xl border border-blush-200 p-6">
-              <h2 className="text-lg font-semibold text-charcoal-900 mb-4">
+            <div className="bg-white rounded-xl border border-accent-200 p-6">
+              <h2 className="text-lg font-semibold text-text-900 mb-4">
                 Points History
               </h2>
               {transactions.length === 0 ? (
@@ -141,7 +141,7 @@ export default function LoyaltyPage() {
                 <div className="overflow-x-auto">
                   <table className="w-full">
                     <thead>
-                      <tr className="border-b border-blush-200 text-left">
+                      <tr className="border-b border-accent-200 text-left">
                         <th className="px-3 py-3 text-xs font-semibold text-muted-500 uppercase">
                           Date
                         </th>
@@ -153,13 +153,13 @@ export default function LoyaltyPage() {
                         </th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-cream-50">
+                    <tbody className="divide-y divide-surface-50">
                       {transactions.map((tx) => (
                         <tr key={tx.id}>
                           <td className="px-3 py-3 text-xs text-muted-500 whitespace-nowrap">
                             {formatDate(tx.createdAt)}
                           </td>
-                          <td className="px-3 py-3 text-sm text-charcoal-700">
+                          <td className="px-3 py-3 text-sm text-text-700">
                             {tx.description}
                           </td>
                           <td className="px-3 py-3 text-sm font-medium text-right whitespace-nowrap">
@@ -183,15 +183,15 @@ export default function LoyaltyPage() {
             </div>
 
             <div className="space-y-6">
-              <div className="bg-white rounded-xl border border-blush-200 p-6">
-                <h2 className="text-lg font-semibold text-charcoal-900 mb-3">
+              <div className="bg-white rounded-xl border border-accent-200 p-6">
+                <h2 className="text-lg font-semibold text-text-900 mb-3">
                   How to Earn Points
                 </h2>
                 <ul className="space-y-2">
                   {earnRules.map((rule, i) => (
                     <li
                       key={i}
-                      className="flex items-start gap-2 text-sm text-charcoal-700"
+                      className="flex items-start gap-2 text-sm text-text-700"
                     >
                       <span className="w-5 h-5 rounded-full bg-muted-100 text-muted-600 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">
                         {i + 1}
@@ -202,18 +202,18 @@ export default function LoyaltyPage() {
                 </ul>
               </div>
 
-              <div className="bg-white rounded-xl border border-blush-200 p-6">
-                <h2 className="text-lg font-semibold text-charcoal-900 mb-4">
+              <div className="bg-white rounded-xl border border-accent-200 p-6">
+                <h2 className="text-lg font-semibold text-text-900 mb-4">
                   Redeem Points
                 </h2>
                 <div className="space-y-3">
                   {redeemOptions.map((opt, i) => (
                     <div
                       key={i}
-                      className="flex items-center justify-between p-3 bg-cream-50 rounded-lg"
+                      className="flex items-center justify-between p-3 bg-surface-50 rounded-lg"
                     >
                       <div>
-                        <p className="text-sm font-medium text-charcoal-900">
+                        <p className="text-sm font-medium text-text-900">
                           {opt.label}
                         </p>
                         <p className="text-xs text-muted-500">
@@ -229,7 +229,7 @@ export default function LoyaltyPage() {
                         disabled={
                           currentPoints < opt.points || redeemMutation.isPending
                         }
-                        className="px-4 py-2 bg-rose-600 text-white rounded-lg text-sm font-medium hover:bg-rose-700 transition-colors disabled:opacity-50 whitespace-nowrap"
+                        className="px-4 py-2 bg-primary-600 text-white rounded-lg text-sm font-medium hover:bg-primary-700 transition-colors disabled:opacity-50 whitespace-nowrap"
                       >
                         {redeemMutation.isPending
                           ? "Redeeming..."

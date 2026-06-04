@@ -27,8 +27,8 @@ export function RecentlyViewed() {
   if (!isLoading && products.length === 0) return null;
 
   return (
-    <section className="py-16 px-4 max-w-8xl mx-auto border-t border-blush-200 mt-12">
-      <h2 className="font-serif text-2xl text-charcoal-900 mb-8">
+    <section className="py-16 px-4 max-w-8xl mx-auto border-t border-accent-200 mt-12">
+      <h2 className="font-serif text-2xl text-text-900 mb-8">
         Recently viewed & more
       </h2>
 

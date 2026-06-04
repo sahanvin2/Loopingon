@@ -62,10 +62,10 @@ async function ProductsContent({ searchParams }: ProductsPageProps) {
 
   return (
     <>
-      <div className="bg-cream-50 py-8">
+      <div className="bg-surface-50 py-8">
         <div className="mx-auto max-w-7xl px-4">
           <Breadcrumb items={breadcrumbs} />
-          <h1 className="mt-4 font-serif text-3xl font-bold text-charcoal-900 md:text-4xl">
+          <h1 className="mt-4 font-serif text-3xl font-bold text-text-900 md:text-4xl">
             Explore Handmade Treasures
           </h1>
           <p className="mt-2 text-muted-500">

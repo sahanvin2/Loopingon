@@ -75,7 +75,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <div className="bg-cream-50 py-6">
+      <div className="bg-surface-50 py-6">
         <div className="mx-auto max-w-7xl px-4">
           <Breadcrumb items={breadcrumbs} />
         </div>

@@ -42,7 +42,7 @@ export function OrderCard({ order, className }: OrderCardProps) {
     <motion.div
       whileHover={{ y: -1 }}
       className={cn(
-        "bg-white rounded-lg border border-blush-200 shadow-sm overflow-hidden",
+        "bg-white rounded-lg border border-accent-200 shadow-sm overflow-hidden",
         "hover:shadow-soft transition-shadow",
         className,
       )}
@@ -50,7 +50,7 @@ export function OrderCard({ order, className }: OrderCardProps) {
       <div className="p-4">
         <div className="flex items-center justify-between mb-3">
           <div>
-            <p className="text-sm font-medium text-charcoal-900">
+            <p className="text-sm font-medium text-text-900">
               Order #{order.orderNumber}
             </p>
             <p className="text-xs text-muted-500 mt-0.5">
@@ -97,13 +97,13 @@ export function OrderCard({ order, className }: OrderCardProps) {
         </div>
 
         <div className="flex items-center justify-between">
-          <span className="font-semibold text-charcoal-900">
+          <span className="font-semibold text-text-900">
             {formatPrice(total)}
           </span>
           <Link
             href={`/dashboard/orders/${order.id}`}
             className={cn(
-              "text-sm font-medium text-rose-600 hover:text-rose-700",
+              "text-sm font-medium text-primary-600 hover:text-primary-700",
               "hover:underline transition-colors",
             )}
           >

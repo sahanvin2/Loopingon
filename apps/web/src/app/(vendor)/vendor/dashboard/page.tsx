@@ -83,7 +83,7 @@ export default function VendorDashboardOverview() {
   return (
     <motion.div variants={container} initial="hidden" animate="show" className="space-y-6">
       <motion.div variants={item}>
-        <h1 className="text-2xl font-bold text-charcoal-900">
+        <h1 className="text-2xl font-bold text-text-900">
           Good {greeting}, {firstName}!
         </h1>
         <p className="text-muted-600 mt-1">
@@ -183,7 +183,7 @@ export default function VendorDashboardOverview() {
               <Link
                 key={action.label}
                 href={action.href}
-                className="flex items-center gap-3 w-full p-3 rounded-lg text-sm font-medium text-charcoal-700 hover:bg-rose-50 hover:text-rose-600 transition-colors"
+                className="flex items-center gap-3 w-full p-3 rounded-lg text-sm font-medium text-text-700 hover:bg-primary-50 hover:text-primary-600 transition-colors"
               >
                 <action.icon className="w-4 h-4" />
                 {action.label}
@@ -195,12 +195,12 @@ export default function VendorDashboardOverview() {
 
       <motion.div variants={item}>
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-semibold text-charcoal-900">
+          <h2 className="text-lg font-semibold text-text-900">
             Recent Orders
           </h2>
           <Link
             href="/vendor/orders"
-            className="text-sm font-medium text-rose-600 hover:text-rose-700"
+            className="text-sm font-medium text-primary-600 hover:text-primary-700"
           >
             View All
           </Link>
@@ -212,10 +212,10 @@ export default function VendorDashboardOverview() {
             description="Orders will appear here when customers start buying your products."
           />
         ) : (
-          <div className="bg-white rounded-lg border border-blush-200 overflow-hidden">
+          <div className="bg-white rounded-lg border border-accent-200 overflow-hidden">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-blush-200 bg-cream-50">
+                <tr className="border-b border-accent-200 bg-surface-50">
                   <th className="px-4 py-3 text-left text-xs font-semibold text-muted-500 uppercase">
                     Order #
                   </th>
@@ -233,19 +233,19 @@ export default function VendorDashboardOverview() {
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-cream-50">
+              <tbody className="divide-y divide-surface-50">
                 {recentOrders.map((order: any) => (
-                  <tr key={order.id} className="hover:bg-cream-50/50">
-                    <td className="px-4 py-3 text-sm font-mono text-charcoal-900">
+                  <tr key={order.id} className="hover:bg-surface-50/50">
+                    <td className="px-4 py-3 text-sm font-mono text-text-900">
                       {order.orderNumber}
                     </td>
-                    <td className="px-4 py-3 text-sm text-charcoal-700">
+                    <td className="px-4 py-3 text-sm text-text-700">
                       {order.customer?.fullName || "—"}
                     </td>
-                    <td className="px-4 py-3 text-sm text-charcoal-700">
+                    <td className="px-4 py-3 text-sm text-text-700">
                       {order.items?.length || 0}
                     </td>
-                    <td className="px-4 py-3 text-sm font-medium text-charcoal-900">
+                    <td className="px-4 py-3 text-sm font-medium text-text-900">
                       {formatPrice(Number(order.totalAmount || 0))}
                     </td>
                     <td className="px-4 py-3">

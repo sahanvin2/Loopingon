@@ -52,11 +52,11 @@ export default function OrdersPage() {
       className="space-y-6"
     >
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <h1 className="text-2xl font-bold text-charcoal-900">My Orders</h1>
+        <h1 className="text-2xl font-bold text-text-900">My Orders</h1>
       </div>
 
       <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
-        <div className="flex gap-1 bg-white rounded-lg border border-blush-200 p-1">
+        <div className="flex gap-1 bg-white rounded-lg border border-accent-200 p-1">
           {tabs.map((tab) => (
             <button
               key={tab.key}
@@ -68,8 +68,8 @@ export default function OrdersPage() {
               className={cn(
                 "px-4 py-2 text-sm font-medium rounded-md transition-colors",
                 activeTab === tab.key
-                  ? "bg-rose-600 text-white"
-                  : "text-muted-600 hover:text-charcoal-700",
+                  ? "bg-primary-600 text-white"
+                  : "text-muted-600 hover:text-text-700",
               )}
             >
               {tab.label}
@@ -84,7 +84,7 @@ export default function OrdersPage() {
             placeholder="Search orders..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 border border-blush-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent"
+            className="w-full pl-10 pr-4 py-2 border border-accent-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
           />
         </div>
       </div>
@@ -112,11 +112,11 @@ export default function OrdersPage() {
           {orders.map((order) => (
             <div
               key={order.id}
-              className="bg-white rounded-lg border border-blush-200 p-4 hover:shadow-soft transition-shadow"
+              className="bg-white rounded-lg border border-accent-200 p-4 hover:shadow-soft transition-shadow"
             >
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                 <div>
-                  <span className="text-sm font-mono font-semibold text-charcoal-900">
+                  <span className="text-sm font-mono font-semibold text-text-900">
                     {order.orderNumber}
                   </span>
                   <span className="text-xs text-muted-500 ml-2">
@@ -142,7 +142,7 @@ export default function OrdersPage() {
                   {order.items.slice(0, 3).map((item, i) => (
                     <div
                       key={item.id}
-                      className="w-10 h-10 rounded-md border border-blush-200 overflow-hidden bg-cream-50"
+                      className="w-10 h-10 rounded-md border border-accent-200 overflow-hidden bg-surface-50"
                       style={{ marginLeft: i > 0 ? -12 : 0 }}
                     >
                       {item.productImage ? (
@@ -165,7 +165,7 @@ export default function OrdersPage() {
               )}
 
               <div className="flex items-center justify-between mt-3">
-                <span className="text-sm font-semibold text-charcoal-900">
+                <span className="text-sm font-semibold text-text-900">
                   {Number(order.totalAmount).toLocaleString("en-LK", {
                     style: "currency",
                     currency: "LKR",
@@ -173,7 +173,7 @@ export default function OrdersPage() {
                 </span>
                 <Link
                   href={`/dashboard/orders/${order.id}`}
-                  className="flex items-center gap-1 text-sm font-medium text-rose-600 hover:text-rose-700 transition-colors"
+                  className="flex items-center gap-1 text-sm font-medium text-primary-600 hover:text-primary-700 transition-colors"
                 >
                   View Details
                   <ChevronRight className="w-3.5 h-3.5" />

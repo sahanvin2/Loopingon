@@ -67,7 +67,7 @@ export function NewsletterSignup({
         {isVisible && (
           <>
             <motion.div
-              className="fixed inset-0 z-50 bg-charcoal-900/40 backdrop-blur-sm"
+              className="fixed inset-0 z-50 bg-text-900/40 backdrop-blur-sm"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -77,7 +77,7 @@ export function NewsletterSignup({
             <motion.div
               className={cn(
                 "fixed bottom-6 right-6 z-50 w-96 max-w-[calc(100vw-2rem)]",
-                "bg-white rounded-xl shadow-soft-lg border border-blush-200 p-6",
+                "bg-white rounded-xl shadow-soft-lg border border-accent-200 p-6",
               )}
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -86,17 +86,17 @@ export function NewsletterSignup({
               <button
                 type="button"
                 onClick={dismiss}
-                className="absolute top-3 right-3 p-1 rounded text-muted-500 hover:text-charcoal-700"
+                className="absolute top-3 right-3 p-1 rounded text-muted-500 hover:text-text-700"
                 aria-label="Close"
               >
                 <X className="w-4 h-4" />
               </button>
 
               <div className="text-center mb-5">
-                <div className="w-12 h-12 rounded-full bg-rose-100 flex items-center justify-center mx-auto mb-3">
-                  <Mail className="w-6 h-6 text-rose-600" />
+                <div className="w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center mx-auto mb-3">
+                  <Mail className="w-6 h-6 text-primary-600" />
                 </div>
-                <h3 className="font-serif text-lg text-charcoal-900 mb-1">
+                <h3 className="font-serif text-lg text-text-900 mb-1">
                   Stay Inspired
                 </h3>
                 <p className="text-sm text-muted-600">
@@ -111,8 +111,8 @@ export function NewsletterSignup({
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Your email address"
                   className={cn(
-                    "w-full px-5 py-3 rounded-full border border-blush-200 text-sm mb-3 shadow-inner-soft",
-                    "focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent",
+                    "w-full px-5 py-3 rounded-full border border-accent-200 text-sm mb-3 shadow-inner-soft",
+                    "focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent",
                   )}
                   aria-label="Email address"
                   disabled={status === "loading" || status === "success"}
@@ -122,7 +122,7 @@ export function NewsletterSignup({
                   disabled={status === "loading" || status === "success"}
                   className={cn(
                     "w-full py-3 rounded-full text-sm font-medium text-white shadow-sm",
-                    "bg-rose-500 hover:bg-rose-600 transition-colors",
+                    "bg-primary-500 hover:bg-primary-600 transition-colors",
                     "disabled:opacity-60 disabled:cursor-not-allowed",
                   )}
                 >
@@ -162,10 +162,10 @@ export function NewsletterSignup({
   return (
     <div className={cn(className)}>
       <div className="text-center mb-6">
-        <div className="w-12 h-12 rounded-full bg-rose-100 flex items-center justify-center mx-auto mb-3">
-          <Mail className="w-6 h-6 text-rose-600" />
+        <div className="w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center mx-auto mb-3">
+          <Mail className="w-6 h-6 text-primary-600" />
         </div>
-        <h3 className="font-serif text-2xl text-charcoal-900 mb-2">
+        <h3 className="font-serif text-2xl text-text-900 mb-2">
           Stay Inspired
         </h3>
         <p className="text-sm text-muted-600 max-w-md mx-auto">
@@ -183,8 +183,8 @@ export function NewsletterSignup({
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Your email address"
           className={cn(
-            "flex-1 px-5 py-3 rounded-full border border-blush-200 text-sm shadow-inner-soft",
-            "focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent",
+            "flex-1 px-5 py-3 rounded-full border border-accent-200 text-sm shadow-inner-soft",
+            "focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent",
           )}
           aria-label="Email address"
           disabled={status === "loading" || status === "success"}
@@ -194,7 +194,7 @@ export function NewsletterSignup({
           disabled={status === "loading" || status === "success"}
           className={cn(
             "px-8 py-3 rounded-full text-sm font-medium text-white shadow-sm",
-            "bg-rose-500 hover:bg-rose-600 transition-colors",
+            "bg-primary-500 hover:bg-primary-600 transition-colors",
             "disabled:opacity-60 disabled:cursor-not-allowed",
           )}
         >

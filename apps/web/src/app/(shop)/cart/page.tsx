@@ -19,7 +19,7 @@ export default function CartPage() {
 
   if (items.length === 0) {
     return (
-      <div className="min-h-screen bg-cream-50 py-16">
+      <div className="min-h-screen bg-surface-50 py-16">
         <div className="mx-auto max-w-2xl px-4">
           <EmptyCart />
         </div>
@@ -28,14 +28,14 @@ export default function CartPage() {
   }
 
   return (
-    <div className="min-h-screen bg-cream-50 py-8 md:py-12">
+    <div className="min-h-screen bg-surface-50 py-8 md:py-12">
       <div className="mx-auto max-w-7xl px-4">
         <div className="mb-6 flex items-center justify-between">
           <div>
-            <h1 className="font-serif text-3xl font-bold text-charcoal-900">Shopping Cart</h1>
+            <h1 className="font-serif text-3xl font-bold text-text-900">Shopping Cart</h1>
             <p className="mt-1 text-sm text-muted-500">{itemCount} item{itemCount !== 1 ? "s" : ""}</p>
           </div>
-          <Link href="/products" className="inline-flex items-center gap-1 text-sm font-medium text-rose-600 hover:text-rose-700">
+          <Link href="/products" className="inline-flex items-center gap-1 text-sm font-medium text-primary-600 hover:text-primary-700">
             <ArrowLeft className="h-4 w-4" /> Continue Shopping
           </Link>
         </div>

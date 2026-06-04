@@ -53,7 +53,7 @@ export default function InventoryPage() {
       animate={{ opacity: 1, y: 0 }}
       className="space-y-6"
     >
-      <h1 className="text-2xl font-bold text-charcoal-900">
+      <h1 className="text-2xl font-bold text-text-900">
         Inventory Management
       </h1>
 
@@ -65,15 +65,15 @@ export default function InventoryPage() {
             placeholder="Search products..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 border border-blush-200 rounded-lg text-sm focus:ring-2 focus:ring-rose-500"
+            className="w-full pl-10 pr-4 py-2 border border-accent-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500"
           />
         </div>
-        <label className="flex items-center gap-2 text-sm text-charcoal-700">
+        <label className="flex items-center gap-2 text-sm text-text-700">
           <input
             type="checkbox"
             checked={showLowStock}
             onChange={(e) => setShowLowStock(e.target.checked)}
-            className="w-4 h-4 rounded text-rose-600"
+            className="w-4 h-4 rounded text-primary-600"
           />
           Show low stock only
         </label>
@@ -89,11 +89,11 @@ export default function InventoryPage() {
           description="No products match your filters."
         />
       ) : (
-        <div className="bg-white rounded-lg border border-blush-200 overflow-hidden">
+        <div className="bg-white rounded-lg border border-accent-200 overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-blush-200 bg-cream-50">
+                <tr className="border-b border-accent-200 bg-surface-50">
                   <th className="px-4 py-3 text-left text-xs font-semibold text-muted-500 uppercase">
                     Product
                   </th>
@@ -114,16 +114,16 @@ export default function InventoryPage() {
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-cream-50">
+              <tbody className="divide-y divide-surface-50">
                 {products.map((product) => {
                   const status = stockStatus(product.quantity);
                   const isEditing = editingStock === product.id;
 
                   return (
-                    <tr key={product.id} className="hover:bg-cream-50/50">
+                    <tr key={product.id} className="hover:bg-surface-50/50">
                       <td className="px-4 py-3">
                         <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 rounded-md border border-blush-200 overflow-hidden bg-cream-50">
+                          <div className="w-10 h-10 rounded-md border border-accent-200 overflow-hidden bg-surface-50">
                             {product.images?.[0]?.url ? (
                               <img
                                 src={product.images[0].url}
@@ -131,10 +131,10 @@ export default function InventoryPage() {
                                 className="w-full h-full object-cover"
                               />
                             ) : (
-                              <div className="w-full h-full bg-cream-50" />
+                              <div className="w-full h-full bg-surface-50" />
                             )}
                           </div>
-                          <span className="text-sm text-charcoal-900 font-medium">
+                          <span className="text-sm text-text-900 font-medium">
                             {product.title}
                           </span>
                         </div>
@@ -153,10 +153,10 @@ export default function InventoryPage() {
                                 [product.id]: parseInt(e.target.value) || 0,
                               })
                             }
-                            className="w-20 px-2 py-1 border border-blush-200 rounded text-sm text-right"
+                            className="w-20 px-2 py-1 border border-accent-200 rounded text-sm text-right"
                           />
                         ) : (
-                          <span className="text-sm font-medium text-charcoal-900">
+                          <span className="text-sm font-medium text-text-900">
                             {product.quantity}
                           </span>
                         )}
@@ -192,7 +192,7 @@ export default function InventoryPage() {
                             <button
                               type="button"
                               onClick={() => setEditingStock(null)}
-                              className="p-1.5 text-muted-500 hover:bg-cream-50 rounded"
+                              className="p-1.5 text-muted-500 hover:bg-surface-50 rounded"
                             >
                               ✕
                             </button>
@@ -201,7 +201,7 @@ export default function InventoryPage() {
                           <button
                             type="button"
                             onClick={() => setEditingStock(product.id)}
-                            className="p-1.5 text-muted-500 hover:text-rose-600 hover:bg-rose-50 rounded"
+                            className="p-1.5 text-muted-500 hover:text-primary-600 hover:bg-primary-50 rounded"
                           >
                             <Edit3 className="w-4 h-4" />
                           </button>

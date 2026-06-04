@@ -109,7 +109,7 @@ export function ChatbotWidget() {
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
             className={cn(
               "fixed bottom-6 right-6 z-50 w-[380px] max-w-[calc(100vw-2rem)]",
-              "bg-white rounded-xl shadow-soft-lg border border-blush-200",
+              "bg-white rounded-xl shadow-soft-lg border border-accent-200",
               "flex flex-col overflow-hidden",
             )}
             style={{ height: "520px", maxHeight: "calc(100vh - 80px)" }}
@@ -130,7 +130,7 @@ export function ChatbotWidget() {
               </button>
             </div>
 
-            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-cream-50">
+            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-surface-50">
               {messages.map((msg) => (
                 <div
                   key={msg.id}
@@ -143,8 +143,8 @@ export function ChatbotWidget() {
                     className={cn(
                       "max-w-[85%] px-4 py-2.5 rounded-2xl text-sm",
                       msg.role === "user"
-                        ? "bg-rose-600 text-white rounded-br-md"
-                        : "bg-white text-charcoal-700 rounded-bl-md shadow-sm border border-blush-200",
+                        ? "bg-primary-600 text-white rounded-br-md"
+                        : "bg-white text-text-700 rounded-bl-md shadow-sm border border-accent-200",
                     )}
                   >
                     {msg.content}
@@ -154,7 +154,7 @@ export function ChatbotWidget() {
 
               {isTyping && (
                 <div className="flex justify-start">
-                  <div className="bg-white rounded-2xl rounded-bl-md shadow-sm border border-blush-200 px-4 py-3">
+                  <div className="bg-white rounded-2xl rounded-bl-md shadow-sm border border-accent-200 px-4 py-3">
                     <div className="flex items-center gap-1">
                       {[0, 1, 2].map((i) => (
                         <motion.div
@@ -176,7 +176,7 @@ export function ChatbotWidget() {
               <div ref={messagesEndRef} />
             </div>
 
-            <div className="p-3 border-t border-blush-200 bg-white">
+            <div className="p-3 border-t border-accent-200 bg-white">
               <div className="flex items-center gap-2">
                 <input
                   type="text"
@@ -187,7 +187,7 @@ export function ChatbotWidget() {
                   }}
                   placeholder="Type your question..."
                   className={cn(
-                    "flex-1 px-4 py-2.5 rounded-full border border-blush-300 text-sm",
+                    "flex-1 px-4 py-2.5 rounded-full border border-accent-300 text-sm",
                     "focus:outline-none focus:ring-2 focus:ring-muted-500 focus:border-transparent",
                     "placeholder:text-muted-400",
                   )}

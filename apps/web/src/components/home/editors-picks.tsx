@@ -25,11 +25,11 @@ export function EditorsPicks() {
   const products = data?.products || [];
 
   return (
-    <section className="py-20 px-4 bg-rose-50/50 border-y border-blush-200">
+    <section className="py-20 px-4 bg-primary-50/50 border-y border-accent-200">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
           <Badge variant="rose" className="mb-4">Etsy's Pick</Badge>
-          <h2 className="font-serif text-3xl md:text-4xl text-charcoal-800 mb-4">
+          <h2 className="font-serif text-3xl md:text-4xl text-text-800 mb-4">
             Editors' Picks
           </h2>
           <p className="text-muted-500 max-w-xl mx-auto">

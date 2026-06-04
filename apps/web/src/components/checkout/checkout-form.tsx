@@ -35,7 +35,7 @@ export function CheckoutForm({ className }: CheckoutFormProps) {
                   i < currentIndex
                     ? "bg-muted-600 text-white"
                     : i === currentIndex
-                      ? "bg-rose-600 text-white"
+                      ? "bg-primary-600 text-white"
                       : "bg-muted-200 text-muted-500",
                 )}
               >
@@ -44,7 +44,7 @@ export function CheckoutForm({ className }: CheckoutFormProps) {
               <span
                 className={cn(
                   "text-sm font-medium hidden sm:inline",
-                  i <= currentIndex ? "text-charcoal-900" : "text-muted-400",
+                  i <= currentIndex ? "text-text-900" : "text-muted-400",
                 )}
               >
                 {step.label}
@@ -100,7 +100,7 @@ export function CheckoutForm({ className }: CheckoutFormProps) {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            <h2 className="font-serif text-3xl text-charcoal-900 mb-3">
+            <h2 className="font-serif text-3xl text-text-900 mb-3">
               Order Confirmed!
             </h2>
             <p className="text-muted-600 max-w-md mx-auto mb-8">
@@ -111,7 +111,7 @@ export function CheckoutForm({ className }: CheckoutFormProps) {
               href="/dashboard/orders"
               className={cn(
                 "inline-flex items-center px-8 py-3 rounded-lg",
-                "bg-rose-600 text-white font-medium hover:bg-rose-700 transition-colors",
+                "bg-primary-600 text-white font-medium hover:bg-primary-700 transition-colors",
               )}
             >
               View Order

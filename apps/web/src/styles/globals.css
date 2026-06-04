@@ -3,44 +3,44 @@
 @tailwind utilities;
 
 :root {
-  --color-rose: 176 86 110;
-  --color-blush: 245 210 220;
-  --color-cream: 255 248 243;
-  --color-charcoal: 30 25 28;
-  --color-muted: 130 115 120;
+  --color-primary: 124 58 237;
+  --color-accent: 147 51 234;
+  --color-surface: 249 250 251;
+  --color-text: 17 24 39;
+  --color-muted: 107 114 128;
 
-  --color-rose-50: 255 245 248;
-  --color-rose-100: 255 235 240;
-  --color-rose-200: 255 210 220;
-  --color-rose-300: 245 170 185;
-  --color-rose-400: 225 125 150;
-  --color-rose-500: 200 100 130;
-  --color-rose-600: 176 86 110;
-  --color-rose-700: 140 65 88;
-  --color-rose-800: 108 48 68;
-  --color-rose-900: 80 35 50;
+  --color-primary-50: 245 243 255;
+  --color-primary-100: 237 233 254;
+  --color-primary-200: 221 214 254;
+  --color-primary-300: 196 181 253;
+  --color-primary-400: 167 139 250;
+  --color-primary-500: 139 92 246;
+  --color-primary-600: 124 58 237;
+  --color-primary-700: 109 40 217;
+  --color-primary-800: 91 33 182;
+  --color-primary-900: 76 29 149;
 
-  --color-blush-50: 255 252 250;
-  --color-blush-100: 255 245 240;
-  --color-blush-200: 250 230 220;
-  --color-blush-300: 245 210 200;
-  --color-blush-400: 235 185 175;
-  --color-blush-500: 220 155 145;
-  --color-blush-600: 195 130 120;
-  --color-blush-700: 160 100 95;
-  --color-blush-800: 125 78 72;
-  --color-blush-900: 95 58 55;
+  --color-accent-50: 250 245 255;
+  --color-accent-100: 243 232 255;
+  --color-accent-200: 233 213 255;
+  --color-accent-300: 216 180 254;
+  --color-accent-400: 192 132 252;
+  --color-accent-500: 168 85 247;
+  --color-accent-600: 147 51 234;
+  --color-accent-700: 126 34 206;
+  --color-accent-800: 107 33 168;
+  --color-accent-900: 88 28 135;
 
-  --color-cream-50: 255 255 255;
-  --color-cream-100: 253 250 245;
-  --color-cream-200: 250 240 230;
-  --color-cream-300: 245 228 215;
-  --color-cream-400: 238 215 198;
-  --color-cream-500: 228 198 178;
-  --color-cream-600: 210 180 158;
-  --color-cream-700: 185 152 130;
-  --color-cream-800: 148 120 102;
-  --color-cream-900: 115 95 80;
+  --color-surface-50: 255 255 255;
+  --color-surface-100: 249 250 251;
+  --color-surface-200: 243 244 246;
+  --color-surface-300: 229 231 235;
+  --color-surface-400: 209 213 219;
+  --color-surface-500: 156 163 175;
+  --color-surface-600: 75 85 99;
+  --color-surface-700: 55 65 81;
+  --color-surface-800: 31 41 55;
+  --color-surface-900: 17 24 39;
 
   --font-serif: "Cormorant Garamond", "Playfair Display", Georgia, serif;
   --font-sans: "Inter", system-ui, sans-serif;
@@ -54,7 +54,9 @@
   }
 
   body {
-    @apply bg-cream-50 text-charcoal-900 font-sans antialiased;
+    background-color: theme("colors.surface.50");
+    color: theme("colors.text.900");
+    @apply font-sans antialiased;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
 
@@ -92,37 +94,39 @@
   }
 
   * {
-    @apply border-blush-200;
+    border-color: theme("colors.surface.300");
   }
 
   ::selection {
-    @apply bg-rose-200 text-rose-900;
+    background-color: theme("colors.primary.200");
+    color: theme("colors.primary.900");
   }
 
   :focus-visible {
-    @apply outline-2 outline-offset-2 outline-rose-500;
+    outline: 2px solid theme("colors.primary.500");
+    outline-offset: 2px;
   }
 }
 
 @layer components {
   .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-rose-500 via-rose-400 to-blush-500;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-600 via-primary-500 to-accent-500;
   }
 
   .gradient-text-gold {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-rose-500 to-blush-600;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-accent-600;
   }
 
   .pattern-dots {
-    background-image: radial-gradient(rgba(176, 86, 110, 0.12) 1px, transparent 1px);
+    background-image: radial-gradient(rgba(124, 58, 237, 0.12) 1px, transparent 1px);
     background-size: 20px 20px;
   }
 
   .pattern-lines {
     background-image: repeating-linear-gradient(
       45deg,
-      rgba(220, 155, 145, 0.08) 0px,
-      rgba(220, 155, 145, 0.08) 1px,
+      rgba(167, 139, 250, 0.08) 0px,
+      rgba(167, 139, 250, 0.08) 1px,
       transparent 1px,
       transparent 12px
     );
@@ -141,28 +145,28 @@
   }
 
   .soft-card {
-    @apply bg-white border border-blush-200 rounded-2xl transition-all duration-200 ease-out;
+    @apply bg-white border border-surface-300 rounded-2xl transition-all duration-200 ease-out;
   }
 
   .soft-card:hover {
     @apply -translate-y-1 shadow-lg;
-    box-shadow: 0 20px 40px -20px rgba(176, 86, 110, 0.25);
+    box-shadow: 0 20px 40px -20px rgba(124, 58, 237, 0.25);
   }
 
   .btn-primary {
-    @apply bg-rose-500 text-white font-medium rounded-full px-6 py-3 transition-all duration-200 hover:bg-rose-600 active:bg-rose-700 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm hover:shadow-md hover:-translate-y-0.5;
+    @apply bg-primary-600 text-white font-medium rounded-full px-6 py-3 transition-all duration-200 hover:bg-primary-700 active:bg-primary-800 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm hover:shadow-md hover:-translate-y-0.5;
   }
 
   .btn-secondary {
-    @apply border-2 border-rose-500 text-rose-500 font-medium rounded-full px-6 py-3 transition-all duration-200 hover:bg-rose-50 active:bg-rose-100 disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply border-2 border-primary-600 text-primary-600 font-medium rounded-full px-6 py-3 transition-all duration-200 hover:bg-primary-50 active:bg-primary-100 disabled:opacity-50 disabled:cursor-not-allowed;
   }
 
   .btn-ghost {
-    @apply text-muted-500 font-medium rounded-full px-4 py-2 transition-all duration-200 hover:bg-blush-100 hover:text-charcoal-900;
+    @apply text-muted-500 font-medium rounded-full px-4 py-2 transition-all duration-200 hover:bg-surface-100 hover:text-text-900;
   }
 
   .input-field {
-    @apply w-full px-4 py-3 bg-white border border-blush-200 rounded-full text-charcoal-900 placeholder:text-muted-400 transition-all duration-200 focus:border-rose-500 focus:ring-2 focus:ring-rose-500/20 focus:outline-none;
+    @apply w-full px-4 py-3 bg-white border border-surface-300 rounded-full text-text-900 placeholder:text-muted-400 transition-all duration-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 focus:outline-none;
   }
 
   .input-error {
@@ -170,23 +174,23 @@
   }
 
   .label-text {
-    @apply block text-sm font-medium text-charcoal-700 mb-1.5;
+    @apply block text-sm font-medium text-text-700 mb-1.5;
   }
 
   .badge {
     @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
   }
 
-  .badge-rose {
-    @apply badge bg-rose-100 text-rose-800;
+  .badge-primary {
+    @apply badge bg-primary-100 text-primary-800;
   }
 
-  .badge-blush {
-    @apply badge bg-blush-100 text-blush-800;
+  .badge-accent {
+    @apply badge bg-accent-100 text-accent-800;
   }
 
   .skeleton {
-    @apply animate-pulse bg-blush-100 rounded;
+    @apply animate-pulse bg-surface-200 rounded;
   }
 }
 
@@ -206,7 +210,7 @@
 
   .scrollbar-thin {
     scrollbar-width: thin;
-    scrollbar-color: rgba(130, 115, 120, 0.2) transparent;
+    scrollbar-color: rgba(107, 114, 128, 0.2) transparent;
   }
 
   .scrollbar-thin::-webkit-scrollbar {
@@ -218,7 +222,7 @@
   }
 
   .scrollbar-thin::-webkit-scrollbar-thumb {
-    background-color: rgba(130, 115, 120, 0.2);
+    background-color: rgba(107, 114, 128, 0.2);
     border-radius: 9999px;
   }
 }

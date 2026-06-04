@@ -28,21 +28,21 @@ export default function AdminAnalyticsPage() {
   return (
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-charcoal-900">Analytics</h1>
+        <h1 className="text-2xl font-bold text-text-900">Analytics</h1>
         <div className="flex items-center gap-2">
-          <div className="flex gap-1 bg-white rounded-lg border border-blush-200 p-1">
+          <div className="flex gap-1 bg-white rounded-lg border border-accent-200 p-1">
             {["7d", "30d", "90d", "1y"].map((range) => (
               <button
                 key={range}
                 type="button"
                 onClick={() => setDateRange(range)}
-                className={`px-3 py-1.5 text-xs font-medium rounded-md ${dateRange === range ? "bg-rose-600 text-white" : "text-muted-600"}`}
+                className={`px-3 py-1.5 text-xs font-medium rounded-md ${dateRange === range ? "bg-primary-600 text-white" : "text-muted-600"}`}
               >
                 {range}
               </button>
             ))}
           </div>
-          <button className="px-4 py-2 bg-white border border-blush-200 rounded-lg text-sm font-medium flex items-center gap-2">
+          <button className="px-4 py-2 bg-white border border-accent-200 rounded-lg text-sm font-medium flex items-center gap-2">
             <Download className="w-4 h-4" /> Export
           </button>
         </div>

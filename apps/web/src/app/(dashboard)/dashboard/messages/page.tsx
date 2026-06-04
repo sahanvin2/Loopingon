@@ -103,10 +103,10 @@ export default function MessagesPage() {
       animate={{ opacity: 1, y: 0 }}
       className="h-[calc(100vh-10rem)]"
     >
-      <div className="flex h-full bg-white rounded-xl border border-blush-200 overflow-hidden">
-        <div className="w-full md:w-80 lg:w-96 border-r border-blush-200 flex flex-col">
-          <div className="p-4 border-b border-blush-100">
-            <h1 className="text-lg font-semibold text-charcoal-900 mb-3">
+      <div className="flex h-full bg-white rounded-xl border border-accent-200 overflow-hidden">
+        <div className="w-full md:w-80 lg:w-96 border-r border-accent-200 flex flex-col">
+          <div className="p-4 border-b border-accent-100">
+            <h1 className="text-lg font-semibold text-text-900 mb-3">
               Messages
             </h1>
             <div className="relative">
@@ -116,7 +116,7 @@ export default function MessagesPage() {
                 placeholder="Search conversations..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-blush-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-rose-500"
+                className="w-full pl-10 pr-4 py-2 border border-accent-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
               />
             </div>
           </div>
@@ -142,8 +142,8 @@ export default function MessagesPage() {
                     type="button"
                     onClick={() => setSelectedThreadId(thread.id)}
                     className={cn(
-                      "w-full text-left p-4 hover:bg-cream-50 transition-colors border-b border-blush-100",
-                      selectedThreadId === thread.id && "bg-rose-50",
+                      "w-full text-left p-4 hover:bg-surface-50 transition-colors border-b border-accent-100",
+                      selectedThreadId === thread.id && "bg-primary-50",
                     )}
                   >
                     <div className="flex items-center gap-3">
@@ -157,7 +157,7 @@ export default function MessagesPage() {
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center justify-between">
-                          <span className="text-sm font-medium text-charcoal-900">
+                          <span className="text-sm font-medium text-text-900">
                             {otherParticipant?.fullName || "Unknown"}
                           </span>
                           {thread.lastMessageAt && (
@@ -187,7 +187,7 @@ export default function MessagesPage() {
             </div>
           ) : (
             <>
-              <div className="p-4 border-b border-blush-100 bg-cream-50">
+              <div className="p-4 border-b border-accent-100 bg-surface-50">
                 <div className="flex items-center gap-3">
                   <div
                     className={cn(
@@ -204,7 +204,7 @@ export default function MessagesPage() {
                     )}
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-charcoal-900">
+                    <p className="text-sm font-medium text-text-900">
                       {selectedThread?.participants?.find((p) => p.id !== user?.id)
                         ?.fullName || "Unknown"}
                     </p>
@@ -235,8 +235,8 @@ export default function MessagesPage() {
                           className={cn(
                             "max-w-[75%] rounded-2xl px-4 py-2.5",
                             isSent
-                              ? "bg-rose-600 text-white rounded-br-md"
-                              : "bg-cream-50 text-charcoal-900 rounded-bl-md",
+                              ? "bg-primary-600 text-white rounded-br-md"
+                              : "bg-surface-50 text-text-900 rounded-bl-md",
                           )}
                         >
                           <p className="text-sm whitespace-pre-wrap">
@@ -255,7 +255,7 @@ export default function MessagesPage() {
                               ))}
                             </div>
                           )}
-                          <p className={cn("text-xs mt-1", isSent ? "text-rose-100" : "text-muted-500")}>
+                          <p className={cn("text-xs mt-1", isSent ? "text-primary-100" : "text-muted-500")}>
                             {formatRelativeTime(msg.createdAt)}
                           </p>
                         </div>
@@ -268,11 +268,11 @@ export default function MessagesPage() {
 
               <form
                 onSubmit={handleSend}
-                className="p-4 border-t border-blush-100 flex items-center gap-2"
+                className="p-4 border-t border-accent-100 flex items-center gap-2"
               >
                 <button
                   type="button"
-                  className="p-2 rounded-lg text-muted-500 hover:text-rose-600 hover:bg-cream-50 transition-colors"
+                  className="p-2 rounded-lg text-muted-500 hover:text-primary-600 hover:bg-surface-50 transition-colors"
                   aria-label="Attach file"
                 >
                   <Paperclip className="w-4 h-4" />
@@ -282,12 +282,12 @@ export default function MessagesPage() {
                   value={newMessage}
                   onChange={(e) => setNewMessage(e.target.value)}
                   placeholder="Type a message..."
-                  className="flex-1 px-4 py-2 border border-blush-200 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-rose-500"
+                  className="flex-1 px-4 py-2 border border-accent-200 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
                 />
                 <button
                   type="submit"
                   disabled={!newMessage.trim() || sendMutation.isPending}
-                  className="p-2 rounded-full bg-rose-600 text-white hover:bg-rose-700 transition-colors disabled:opacity-50"
+                  className="p-2 rounded-full bg-primary-600 text-white hover:bg-primary-700 transition-colors disabled:opacity-50"
                   aria-label="Send message"
                 >
                   {sendMutation.isPending ? (
@@ -303,15 +303,15 @@ export default function MessagesPage() {
 
         {selectedThread && (
           <div className="md:hidden fixed inset-0 z-50 bg-white flex flex-col">
-            <div className="p-4 border-b border-blush-100 flex items-center gap-3">
+            <div className="p-4 border-b border-accent-100 flex items-center gap-3">
               <button
                 type="button"
                 onClick={() => setSelectedThreadId(null)}
-                className="text-sm text-rose-600 font-medium"
+                className="text-sm text-primary-600 font-medium"
               >
                 Back
               </button>
-              <span className="text-sm font-medium text-charcoal-900">
+              <span className="text-sm font-medium text-text-900">
                 {selectedThread?.participants?.find((p) => p.id !== user?.id)
                   ?.fullName || "Unknown"}
               </span>
@@ -333,12 +333,12 @@ export default function MessagesPage() {
                         className={cn(
                           "max-w-[75%] rounded-2xl px-4 py-2.5",
                           isSent
-                            ? "bg-rose-600 text-white rounded-br-md"
-                            : "bg-cream-50 text-charcoal-900 rounded-bl-md",
+                            ? "bg-primary-600 text-white rounded-br-md"
+                            : "bg-surface-50 text-text-900 rounded-bl-md",
                         )}
                       >
                         <p className="text-sm whitespace-pre-wrap">{msg.content}</p>
-                        <p className={cn("text-xs mt-1", isSent ? "text-rose-100" : "text-muted-500")}>
+                        <p className={cn("text-xs mt-1", isSent ? "text-primary-100" : "text-muted-500")}>
                           {formatRelativeTime(msg.createdAt)}
                         </p>
                       </div>
@@ -350,19 +350,19 @@ export default function MessagesPage() {
             </div>
             <form
               onSubmit={handleSend}
-              className="p-4 border-t border-blush-100 flex items-center gap-2"
+              className="p-4 border-t border-accent-100 flex items-center gap-2"
             >
               <input
                 type="text"
                 value={newMessage}
                 onChange={(e) => setNewMessage(e.target.value)}
                 placeholder="Type a message..."
-                className="flex-1 px-4 py-2 border border-blush-200 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-rose-500"
+                className="flex-1 px-4 py-2 border border-accent-200 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
               />
               <button
                 type="submit"
                 disabled={!newMessage.trim() || sendMutation.isPending}
-                className="p-2 rounded-full bg-rose-600 text-white hover:bg-rose-700 disabled:opacity-50"
+                className="p-2 rounded-full bg-primary-600 text-white hover:bg-primary-700 disabled:opacity-50"
               >
                 <Send className="w-4 h-4" />
               </button>

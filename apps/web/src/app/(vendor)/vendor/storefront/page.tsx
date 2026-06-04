@@ -64,20 +64,20 @@ export default function VendorStorefrontPage() {
       animate={{ opacity: 1, y: 0 }}
       className="space-y-6"
     >
-      <h1 className="text-2xl font-bold text-charcoal-900">Storefront</h1>
+      <h1 className="text-2xl font-bold text-text-900">Storefront</h1>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-        <div className="bg-white rounded-xl border border-blush-200 p-6 space-y-4">
-          <h2 className="text-lg font-semibold text-charcoal-900">Theme</h2>
+        <div className="bg-white rounded-xl border border-accent-200 p-6 space-y-4">
+          <h2 className="text-lg font-semibold text-text-900">Theme</h2>
           <div>
-            <label className="block text-sm font-medium text-charcoal-700 mb-1">
+            <label className="block text-sm font-medium text-text-700 mb-1">
               Theme Color
             </label>
             <div className="flex items-center gap-3">
               <input
                 type="color"
                 {...register("themeColor")}
-                className="w-10 h-10 rounded border border-blush-200 cursor-pointer"
+                className="w-10 h-10 rounded border border-accent-200 cursor-pointer"
               />
               <span className="text-sm text-muted-600 font-mono">
                 {watch("themeColor")}
@@ -86,8 +86,8 @@ export default function VendorStorefrontPage() {
           </div>
         </div>
 
-        <div className="bg-white rounded-xl border border-blush-200 p-6 space-y-4">
-          <h2 className="text-lg font-semibold text-charcoal-900">
+        <div className="bg-white rounded-xl border border-accent-200 p-6 space-y-4">
+          <h2 className="text-lg font-semibold text-text-900">
             Store Banner
           </h2>
           <p className="text-xs text-muted-500">
@@ -96,15 +96,15 @@ export default function VendorStorefrontPage() {
           <FileUpload maxFiles={1} accept="image/*" />
         </div>
 
-        <div className="bg-white rounded-xl border border-blush-200 p-6 space-y-4">
-          <h2 className="text-lg font-semibold text-charcoal-900">
+        <div className="bg-white rounded-xl border border-accent-200 p-6 space-y-4">
+          <h2 className="text-lg font-semibold text-text-900">
             Store Logo
           </h2>
           <FileUpload maxFiles={1} accept="image/*" />
         </div>
 
-        <div className="bg-white rounded-xl border border-blush-200 p-6 space-y-4">
-          <h2 className="text-lg font-semibold text-charcoal-900">
+        <div className="bg-white rounded-xl border border-accent-200 p-6 space-y-4">
+          <h2 className="text-lg font-semibold text-text-900">
             About Section
           </h2>
           <RichEditor
@@ -113,8 +113,8 @@ export default function VendorStorefrontPage() {
           />
         </div>
 
-        <div className="bg-white rounded-xl border border-blush-200 p-6 space-y-4">
-          <h2 className="text-lg font-semibold text-charcoal-900">
+        <div className="bg-white rounded-xl border border-accent-200 p-6 space-y-4">
+          <h2 className="text-lg font-semibold text-text-900">
             Story Section
           </h2>
           <RichEditor
@@ -126,7 +126,7 @@ export default function VendorStorefrontPage() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="inline-flex items-center gap-2 px-6 py-3 bg-rose-600 text-white rounded-lg font-medium hover:bg-rose-700 disabled:opacity-50"
+          className="inline-flex items-center gap-2 px-6 py-3 bg-primary-600 text-white rounded-lg font-medium hover:bg-primary-700 disabled:opacity-50"
         >
           <Save className="w-4 h-4" />
           {isSubmitting ? "Saving..." : "Save Changes"}

@@ -70,7 +70,7 @@ export default function ReferralsPage() {
       animate={{ opacity: 1, y: 0 }}
       className="space-y-6"
     >
-      <h1 className="text-2xl font-bold text-charcoal-900">Referrals</h1>
+      <h1 className="text-2xl font-bold text-text-900">Referrals</h1>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <StatCard
@@ -100,7 +100,7 @@ export default function ReferralsPage() {
       </div>
 
       {referralCode && (
-        <div className="bg-gradient-to-r from-blush-400 to-blush-500 rounded-xl p-6 text-white">
+        <div className="bg-gradient-to-r from-accent-400 to-accent-500 rounded-xl p-6 text-white">
           <h2 className="text-lg font-semibold mb-2">Your Referral Code</h2>
           <div className="flex items-center gap-3">
             <code className="px-4 py-2 bg-white/20 rounded-lg text-2xl font-mono font-bold tracking-wider">
@@ -119,7 +119,7 @@ export default function ReferralsPage() {
               )}
             </button>
           </div>
-          <p className="text-sm text-blush-100 mt-2 break-all">
+          <p className="text-sm text-accent-100 mt-2 break-all">
             {shareUrl}
           </p>
           <div className="flex flex-wrap items-center gap-2 mt-4">
@@ -158,8 +158,8 @@ export default function ReferralsPage() {
         </div>
       )}
 
-      <div className="bg-white rounded-xl border border-blush-200 p-6">
-        <h2 className="text-lg font-semibold text-charcoal-900 mb-4">
+      <div className="bg-white rounded-xl border border-accent-200 p-6">
+        <h2 className="text-lg font-semibold text-text-900 mb-4">
           Referral History
         </h2>
         {isLoading ? (
@@ -173,7 +173,7 @@ export default function ReferralsPage() {
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-blush-200 text-left">
+                <tr className="border-b border-accent-200 text-left">
                   <th className="px-4 py-3 text-xs font-semibold text-muted-500 uppercase">
                     Name
                   </th>
@@ -188,10 +188,10 @@ export default function ReferralsPage() {
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-cream-50">
+              <tbody className="divide-y divide-surface-50">
                 {referrals.map((ref) => (
                   <tr key={ref.id}>
-                    <td className="px-4 py-3 text-sm text-charcoal-700">
+                    <td className="px-4 py-3 text-sm text-text-700">
                       {ref.referredUserId || "—"}
                     </td>
                     <td className="px-4 py-3 text-xs text-muted-500">
@@ -207,7 +207,7 @@ export default function ReferralsPage() {
                         {ref.status === "COMPLETED" ? "Completed" : "Pending"}
                       </Badge>
                     </td>
-                    <td className="px-4 py-3 text-sm font-medium text-charcoal-900">
+                    <td className="px-4 py-3 text-sm font-medium text-text-900">
                       {ref.rewardAmount
                         ? formatPrice(Number(ref.rewardAmount))
                         : "—"}
@@ -220,13 +220,13 @@ export default function ReferralsPage() {
         )}
       </div>
 
-      <div className="bg-white rounded-xl border border-blush-200 overflow-hidden">
+      <div className="bg-white rounded-xl border border-accent-200 overflow-hidden">
         <button
           type="button"
           onClick={() => setHowItWorksOpen(!howItWorksOpen)}
           className="w-full flex items-center justify-between p-5 text-left"
         >
-          <h2 className="text-lg font-semibold text-charcoal-900">
+          <h2 className="text-lg font-semibold text-text-900">
             How It Works
           </h2>
           {howItWorksOpen ? (
@@ -242,11 +242,11 @@ export default function ReferralsPage() {
             className="px-5 pb-5 space-y-4"
           >
             <div className="flex items-start gap-4">
-              <div className="w-8 h-8 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center font-bold text-sm flex-shrink-0">
+              <div className="w-8 h-8 rounded-full bg-primary-100 text-primary-600 flex items-center justify-center font-bold text-sm flex-shrink-0">
                 1
               </div>
               <div>
-                <h4 className="font-medium text-charcoal-900">Share Your Code</h4>
+                <h4 className="font-medium text-text-900">Share Your Code</h4>
                 <p className="text-sm text-muted-600">
                   Share your unique referral code with friends via WhatsApp,
                   Facebook, or by copying the link directly.
@@ -254,11 +254,11 @@ export default function ReferralsPage() {
               </div>
             </div>
             <div className="flex items-start gap-4">
-              <div className="w-8 h-8 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center font-bold text-sm flex-shrink-0">
+              <div className="w-8 h-8 rounded-full bg-primary-100 text-primary-600 flex items-center justify-center font-bold text-sm flex-shrink-0">
                 2
               </div>
               <div>
-                <h4 className="font-medium text-charcoal-900">
+                <h4 className="font-medium text-text-900">
                   Friends Sign Up & Shop
                 </h4>
                 <p className="text-sm text-muted-600">
@@ -268,11 +268,11 @@ export default function ReferralsPage() {
               </div>
             </div>
             <div className="flex items-start gap-4">
-              <div className="w-8 h-8 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center font-bold text-sm flex-shrink-0">
+              <div className="w-8 h-8 rounded-full bg-primary-100 text-primary-600 flex items-center justify-center font-bold text-sm flex-shrink-0">
                 3
               </div>
               <div>
-                <h4 className="font-medium text-charcoal-900">Earn Rewards</h4>
+                <h4 className="font-medium text-text-900">Earn Rewards</h4>
                 <p className="text-sm text-muted-600">
                   You earn loyalty points or cash rewards for every successful
                   referral. The more you share, the more you earn!

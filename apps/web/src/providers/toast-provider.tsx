@@ -27,9 +27,9 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
             description: "text-xs text-muted-700",
             success: "!bg-muted-50 !border-muted-200 !text-muted-900",
             error: "!bg-red-50 !border-red-200 !text-red-900",
-            warning: "!bg-blush-50 !border-blush-200 !text-blush-900",
+            warning: "!bg-accent-50 !border-accent-200 !text-accent-900",
             info: "!bg-blue-50 !border-blue-200 !text-blue-900",
-            closeButton: "!text-charcoal-500 hover:!text-charcoal-800",
+            closeButton: "!text-text-500 hover:!text-text-800",
           },
         }}
         icons={{

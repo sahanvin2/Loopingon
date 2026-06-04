@@ -20,7 +20,7 @@ export function VendorCard({ vendor, className }: VendorCardProps) {
     <motion.div
       whileHover={{ y: -2, scale: 1.02 }}
       className={cn(
-        "bg-white rounded-lg border border-blush-300 shadow-sm overflow-hidden",
+        "bg-white rounded-lg border border-accent-300 shadow-sm overflow-hidden",
         "hover:shadow-md transition-shadow duration-300",
         className,
       )}
@@ -29,7 +29,7 @@ export function VendorCard({ vendor, className }: VendorCardProps) {
         href={`/vendors/${vendor.storeSlug}`}
         className="block p-6 text-center"
       >
-        <div className="w-20 h-20 mx-auto rounded-full border-2 border-blush-200 overflow-hidden bg-muted-100 mb-4">
+        <div className="w-20 h-20 mx-auto rounded-full border-2 border-accent-200 overflow-hidden bg-muted-100 mb-4">
           {vendor.storeLogo ? (
             <Image
               src={getImageUrl(vendor.storeLogo)}
@@ -39,13 +39,13 @@ export function VendorCard({ vendor, className }: VendorCardProps) {
               className="w-full h-full object-cover"
             />
           ) : (
-            <div className="w-full h-full flex items-center justify-center text-2xl font-serif text-rose-600">
+            <div className="w-full h-full flex items-center justify-center text-2xl font-serif text-primary-600">
               {vendor.storeName.charAt(0)}
             </div>
           )}
         </div>
 
-        <h3 className="font-serif text-lg text-charcoal-900 mb-1">
+        <h3 className="font-serif text-lg text-text-900 mb-1">
           {vendor.storeName}
         </h3>
 
@@ -86,7 +86,7 @@ export function VendorCard({ vendor, className }: VendorCardProps) {
         <span
           className={cn(
             "inline-flex items-center px-5 py-2 rounded-lg text-sm font-medium transition-colors",
-            "bg-rose-600 text-white hover:bg-rose-700",
+            "bg-primary-600 text-white hover:bg-primary-700",
           )}
         >
           View Store

@@ -72,15 +72,15 @@ export default function VendorShippingPage() {
       animate={{ opacity: 1, y: 0 }}
       className="space-y-6"
     >
-      <h1 className="text-2xl font-bold text-charcoal-900">Shipping Settings</h1>
+      <h1 className="text-2xl font-bold text-text-900">Shipping Settings</h1>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 max-w-lg">
-        <div className="bg-white rounded-xl border border-blush-200 p-6 space-y-4">
-          <h2 className="text-lg font-semibold text-charcoal-900">
+        <div className="bg-white rounded-xl border border-accent-200 p-6 space-y-4">
+          <h2 className="text-lg font-semibold text-text-900">
             Processing Time
           </h2>
           <div>
-            <label className="block text-sm font-medium text-charcoal-700 mb-1">
+            <label className="block text-sm font-medium text-text-700 mb-1">
               Default processing time (days)
             </label>
             <input
@@ -88,68 +88,68 @@ export default function VendorShippingPage() {
               min={0}
               max={30}
               {...register("processingTime", { valueAsNumber: true })}
-              className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm focus:ring-2 focus:ring-rose-500"
+              className="w-full px-3 py-2 border border-accent-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500"
             />
           </div>
         </div>
 
-        <div className="bg-white rounded-xl border border-blush-200 p-6 space-y-4">
-          <h2 className="text-lg font-semibold text-charcoal-900">
+        <div className="bg-white rounded-xl border border-accent-200 p-6 space-y-4">
+          <h2 className="text-lg font-semibold text-text-900">
             Domestic Shipping
           </h2>
           <div>
-            <label className="block text-sm font-medium text-charcoal-700 mb-1">
+            <label className="block text-sm font-medium text-text-700 mb-1">
               Rate (LKR)
             </label>
             <input
               type="number"
               step="0.01"
               {...register("domesticRate")}
-              className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm focus:ring-2 focus:ring-rose-500"
+              className="w-full px-3 py-2 border border-accent-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500"
             />
           </div>
           <label className="flex items-center justify-between">
-            <span className="text-sm text-charcoal-700">Free Shipping</span>
+            <span className="text-sm text-text-700">Free Shipping</span>
             <input
               type="checkbox"
               {...register("freeShippingEnabled")}
-              className="w-4 h-4 rounded text-rose-600 focus:ring-rose-500"
+              className="w-4 h-4 rounded text-primary-600 focus:ring-primary-500"
             />
           </label>
           <div>
-            <label className="block text-sm font-medium text-charcoal-700 mb-1">
+            <label className="block text-sm font-medium text-text-700 mb-1">
               Minimum order for free shipping
             </label>
             <input
               type="number"
               step="0.01"
               {...register("freeShippingMinOrder")}
-              className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm focus:ring-2 focus:ring-rose-500"
+              className="w-full px-3 py-2 border border-accent-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500"
             />
           </div>
         </div>
 
-        <div className="bg-white rounded-xl border border-blush-200 p-6 space-y-4">
-          <h2 className="text-lg font-semibold text-charcoal-900">
+        <div className="bg-white rounded-xl border border-accent-200 p-6 space-y-4">
+          <h2 className="text-lg font-semibold text-text-900">
             International Shipping
           </h2>
           <label className="flex items-center justify-between">
-            <span className="text-sm text-charcoal-700">Enabled</span>
+            <span className="text-sm text-text-700">Enabled</span>
             <input
               type="checkbox"
               {...register("internationalEnabled")}
-              className="w-4 h-4 rounded text-rose-600 focus:ring-rose-500"
+              className="w-4 h-4 rounded text-primary-600 focus:ring-primary-500"
             />
           </label>
           <div>
-            <label className="block text-sm font-medium text-charcoal-700 mb-1">
+            <label className="block text-sm font-medium text-text-700 mb-1">
               Rate (USD)
             </label>
             <input
               type="number"
               step="0.01"
               {...register("internationalRate")}
-              className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm focus:ring-2 focus:ring-rose-500"
+              className="w-full px-3 py-2 border border-accent-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500"
             />
           </div>
         </div>
@@ -157,7 +157,7 @@ export default function VendorShippingPage() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="inline-flex items-center gap-2 px-6 py-3 bg-rose-600 text-white rounded-lg font-medium hover:bg-rose-700 disabled:opacity-50"
+          className="inline-flex items-center gap-2 px-6 py-3 bg-primary-600 text-white rounded-lg font-medium hover:bg-primary-700 disabled:opacity-50"
         >
           <Save className="w-4 h-4" />
           {isSubmitting ? "Saving..." : "Save Changes"}

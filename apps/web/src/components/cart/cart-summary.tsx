@@ -50,25 +50,25 @@ export function CartSummary({
   return (
     <div
       className={cn(
-        "bg-white rounded-lg border border-blush-200 shadow-sm p-6",
+        "bg-white rounded-lg border border-accent-200 shadow-sm p-6",
         className,
       )}
     >
-      <h3 className="font-serif text-lg text-charcoal-900 mb-6">Order Summary</h3>
+      <h3 className="font-serif text-lg text-text-900 mb-6">Order Summary</h3>
 
       <div className="space-y-3">
         <div className="flex justify-between text-sm">
           <span className="text-muted-600">
             Subtotal ({itemCount} item{itemCount !== 1 ? "s" : ""})
           </span>
-          <span className="text-charcoal-700 font-medium">
+          <span className="text-text-700 font-medium">
             {formatPrice(subtotal)}
           </span>
         </div>
 
         <div className="flex justify-between text-sm">
           <span className="text-muted-600">Shipping</span>
-          <span className="text-charcoal-700 font-medium">
+          <span className="text-text-700 font-medium">
             {shippingCost === 0
               ? "Calculated at checkout"
               : formatPrice(shippingCost)}
@@ -76,7 +76,7 @@ export function CartSummary({
         </div>
 
         {onApplyCoupon && (
-          <div className="pt-3 border-t border-blush-200">
+          <div className="pt-3 border-t border-accent-200">
             <div className="flex gap-2">
               <div className="relative flex-1">
                 <input
@@ -89,12 +89,12 @@ export function CartSummary({
                   placeholder="Coupon code"
                   className={cn(
                     "w-full px-3 py-2 rounded-lg text-sm border",
-                    "focus:outline-none focus:ring-2 focus:ring-rose-500",
+                    "focus:outline-none focus:ring-2 focus:ring-primary-500",
                     couponState === "success"
                       ? "border-muted-500"
                       : couponState === "error"
                         ? "border-red-500"
-                        : "border-blush-300",
+                        : "border-accent-300",
                   )}
                   aria-label="Coupon code"
                 />
@@ -111,8 +111,8 @@ export function CartSummary({
                 disabled={couponState === "loading" || !couponCode.trim()}
                 className={cn(
                   "px-4 py-2 rounded-lg text-sm font-medium transition-colors",
-                  "border border-rose-500 text-rose-600",
-                  "hover:bg-rose-50",
+                  "border border-primary-500 text-primary-600",
+                  "hover:bg-primary-50",
                   "disabled:opacity-60 disabled:cursor-not-allowed",
                 )}
               >
@@ -136,19 +136,19 @@ export function CartSummary({
           </div>
         )}
 
-        <div className="pt-3 border-t border-blush-200">
+        <div className="pt-3 border-t border-accent-200">
           <div className="flex justify-between text-sm">
             <span className="text-muted-600">Tax</span>
-            <span className="text-charcoal-700 font-medium">
+            <span className="text-text-700 font-medium">
               Included
             </span>
           </div>
         </div>
 
-        <div className="pt-3 border-t border-charcoal-200">
+        <div className="pt-3 border-t border-text-200">
           <div className="flex justify-between">
-            <span className="text-base font-semibold text-charcoal-900">Total</span>
-            <span className="text-xl font-bold text-rose-600">
+            <span className="text-base font-semibold text-text-900">Total</span>
+            <span className="text-xl font-bold text-primary-600">
               {formatPrice(total)}
             </span>
           </div>
@@ -160,7 +160,7 @@ export function CartSummary({
         onClick={onCheckout}
         className={cn(
           "mt-6 w-full py-3.5 rounded-lg text-base font-medium transition-colors",
-          "bg-rose-600 text-white hover:bg-rose-700",
+          "bg-primary-600 text-white hover:bg-primary-700",
           "shadow-rose",
         )}
       >
@@ -182,7 +182,7 @@ export function CartSummary({
         {["Visa", "Mastercard", "Amex", "PayHere"].map((method) => (
           <span
             key={method}
-            className="text-xs text-muted-400 font-medium bg-cream-50 px-2 py-1 rounded"
+            className="text-xs text-muted-400 font-medium bg-surface-50 px-2 py-1 rounded"
           >
             {method}
           </span>

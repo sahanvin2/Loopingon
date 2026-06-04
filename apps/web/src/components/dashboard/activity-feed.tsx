@@ -42,7 +42,7 @@ export function ActivityFeed({
           className="flex gap-3 relative pb-4 last:pb-0"
         >
           {index < displayItems.length - 1 && (
-            <div className="absolute left-[19px] top-10 w-px h-[calc(100%+0.25rem)] bg-cream-200" />
+            <div className="absolute left-[19px] top-10 w-px h-[calc(100%+0.25rem)] bg-surface-200" />
           )}
 
           <div
@@ -55,7 +55,7 @@ export function ActivityFeed({
           </div>
 
           <div className="flex-1 min-w-0 pt-1">
-            <p className="text-sm text-charcoal-700">
+            <p className="text-sm text-text-700">
               <span className="font-medium">{item.title}</span>
               {" "}{item.description}
             </p>
@@ -67,7 +67,7 @@ export function ActivityFeed({
                 <button
                   type="button"
                   onClick={item.action.onClick}
-                  className="text-xs font-medium text-rose-600 hover:text-rose-700 transition-colors"
+                  className="text-xs font-medium text-primary-600 hover:text-primary-700 transition-colors"
                 >
                   {item.action.label}
                 </button>

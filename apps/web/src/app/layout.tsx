@@ -145,12 +145,12 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-title" content="Loopingon" />
         <meta name="application-name" content="Loopingon" />
       </head>
-      <body className="min-h-screen bg-cream-50 font-sans text-charcoal-900 antialiased">
+      <body className="min-h-screen bg-surface-50 font-sans text-text-900 antialiased">
         <Providers>
           <div className="relative flex min-h-screen flex-col">
             <a
               href="#main-content"
-              className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-rose-600 focus:px-4 focus:py-3 focus:text-sm focus:font-medium focus:text-white focus:shadow-soft-lg focus:outline-none"
+              className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-primary-600 focus:px-4 focus:py-3 focus:text-sm focus:font-medium focus:text-white focus:shadow-soft-lg focus:outline-none"
             >
               Skip to main content
             </a>
@@ -175,7 +175,7 @@ export default function RootLayout({
               {/* AI Chatbot FAB */}
               <button
                 aria-label="Open chat assistant"
-                className="group flex h-14 w-14 items-center justify-center rounded-full bg-rose-500 text-white shadow-rose transition-all duration-300 hover:scale-110 hover:bg-rose-600 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:ring-offset-2"
+                className="group flex h-14 w-14 items-center justify-center rounded-full bg-primary-500 text-white shadow-rose transition-all duration-300 hover:scale-110 hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -193,7 +193,7 @@ export default function RootLayout({
                   <path d="M8 13h6" />
                 </svg>
                 <span className="sr-only">Open AI Chat Assistant</span>
-                <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-blush-400 text-[10px] font-bold text-charcoal-900">
+                <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-accent-400 text-[10px] font-bold text-text-900">
                   AI
                 </span>
               </button>

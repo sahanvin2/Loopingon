@@ -28,7 +28,7 @@ export function Breadcrumb({ items, className, homeHref = "/" }: BreadcrumbProps
         <li className="flex items-center">
           <Link
             href={homeHref}
-            className="text-muted-500 hover:text-rose-600 transition-colors flex items-center gap-1"
+            className="text-muted-500 hover:text-primary-600 transition-colors flex items-center gap-1"
             aria-label="Home"
           >
             <Home className="w-3.5 h-3.5" />
@@ -43,7 +43,7 @@ export function Breadcrumb({ items, className, homeHref = "/" }: BreadcrumbProps
               {item.href && !isLast ? (
                 <Link
                   href={item.href}
-                  className="text-muted-500 hover:text-rose-600 transition-colors truncate max-w-[200px]"
+                  className="text-muted-500 hover:text-primary-600 transition-colors truncate max-w-[200px]"
                 >
                   {item.label}
                 </Link>
@@ -52,7 +52,7 @@ export function Breadcrumb({ items, className, homeHref = "/" }: BreadcrumbProps
                   className={cn(
                     "truncate max-w-[200px]",
                     isLast
-                      ? "font-semibold text-charcoal-900"
+                      ? "font-semibold text-text-900"
                       : "text-muted-500",
                   )}
                   aria-current={isLast ? "page" : undefined}

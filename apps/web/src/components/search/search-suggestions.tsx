@@ -43,7 +43,7 @@ export function SearchSuggestions({
     <div
       className={cn(
         "absolute top-full mt-2 w-full bg-white rounded-lg shadow-soft-md",
-        "border border-blush-200 overflow-hidden z-50",
+        "border border-accent-200 overflow-hidden z-50",
         className,
       )}
     >
@@ -53,8 +53,8 @@ export function SearchSuggestions({
           onClick={onSelect}
           className={cn(
             "flex items-center gap-3 px-4 py-2.5 text-sm",
-            "hover:bg-rose-50 text-rose-600 font-medium",
-            "border-b border-blush-100",
+            "hover:bg-primary-50 text-primary-600 font-medium",
+            "border-b border-accent-100",
           )}
         >
           <Search className="w-4 h-4" />
@@ -63,7 +63,7 @@ export function SearchSuggestions({
       )}
 
       {suggestions.length === 0 && query && (
-        <div className="px-4 py-2.5 border-b border-blush-100">
+        <div className="px-4 py-2.5 border-b border-accent-100">
           <div className="flex items-center gap-2 text-xs text-muted-500 mb-2">
             <TrendingUp className="w-3.5 h-3.5" /> Trending Searches
           </div>
@@ -78,7 +78,7 @@ export function SearchSuggestions({
             onClick={onSelect}
             className={cn(
               "flex items-center gap-3 px-4 py-2.5 text-sm transition-colors",
-              "hover:bg-blush-50 text-charcoal-700",
+              "hover:bg-accent-50 text-text-700",
             )}
           >
             {suggestion.thumbnail ? (

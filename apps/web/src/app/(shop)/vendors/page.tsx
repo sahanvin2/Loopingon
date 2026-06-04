@@ -46,10 +46,10 @@ async function VendorsContent({ searchParams }: VendorsPageProps) {
 
   return (
     <>
-      <section className="bg-cream-50 py-12">
+      <section className="bg-surface-50 py-12">
         <div className="mx-auto max-w-7xl px-4">
           <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Artisans" }]} />
-          <h1 className="mt-4 font-serif text-3xl font-bold text-charcoal-900 md:text-4xl">Discover Sri Lankan Artisans</h1>
+          <h1 className="mt-4 font-serif text-3xl font-bold text-text-900 md:text-4xl">Discover Sri Lankan Artisans</h1>
           <p className="mt-2 text-muted-500">{total} artisans across Sri Lanka</p>
         </div>
       </section>
@@ -57,7 +57,7 @@ async function VendorsContent({ searchParams }: VendorsPageProps) {
       {featuredVendors.length > 0 && (
         <section className="bg-white py-10">
           <div className="mx-auto max-w-7xl px-4">
-            <h2 className="font-serif text-2xl font-bold text-charcoal-900">Featured Artisans</h2>
+            <h2 className="font-serif text-2xl font-bold text-text-900">Featured Artisans</h2>
             <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {featuredVendors.slice(0, 6).map((v) => (
                 <VendorCard key={v.id} vendor={v} />
@@ -67,9 +67,9 @@ async function VendorsContent({ searchParams }: VendorsPageProps) {
         </section>
       )}
 
-      <section className="bg-cream-50 py-10">
+      <section className="bg-surface-50 py-10">
         <div className="mx-auto max-w-7xl px-4">
-          <h2 className="font-serif text-2xl font-bold text-charcoal-900">All Artisans</h2>
+          <h2 className="font-serif text-2xl font-bold text-text-900">All Artisans</h2>
           <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {vendors.length > 0 ? (
               vendors.map((v) => <VendorCard key={v.id} vendor={v} />)

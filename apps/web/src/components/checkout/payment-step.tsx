@@ -48,15 +48,15 @@ export function PaymentStep({ onBack, onPlaceOrder, className }: PaymentStepProp
           onClick={() => setIsExpanded(!isExpanded)}
           className={cn(
             "w-full flex items-center justify-between p-4 rounded-lg",
-            "bg-cream-50 border border-blush-200 text-left",
-            "hover:bg-cream-50 transition-colors",
+            "bg-surface-50 border border-accent-200 text-left",
+            "hover:bg-surface-50 transition-colors",
           )}
         >
-          <span className="font-medium text-charcoal-700">
+          <span className="font-medium text-text-700">
             Order Summary ({orderItems.length} items)
           </span>
           <div className="flex items-center gap-3">
-            <span className="text-sm text-rose-600 font-semibold">
+            <span className="text-sm text-primary-600 font-semibold">
               {formatPrice(total)}
             </span>
             {isExpanded ? (
@@ -68,11 +68,11 @@ export function PaymentStep({ onBack, onPlaceOrder, className }: PaymentStepProp
         </button>
 
         {isExpanded && (
-          <div className="mt-2 border border-blush-200 rounded-lg overflow-hidden">
+          <div className="mt-2 border border-accent-200 rounded-lg overflow-hidden">
             {orderItems.map((item, i) => (
               <div
                 key={i}
-                className="flex items-center gap-4 p-3 border-b border-blush-200 last:border-b-0"
+                className="flex items-center gap-4 p-3 border-b border-accent-200 last:border-b-0"
               >
                 <div className="w-12 h-12 rounded-md bg-muted-100 overflow-hidden shrink-0">
                   <img
@@ -82,10 +82,10 @@ export function PaymentStep({ onBack, onPlaceOrder, className }: PaymentStepProp
                   />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm text-charcoal-700 truncate">{item.name}</p>
+                  <p className="text-sm text-text-700 truncate">{item.name}</p>
                   <p className="text-xs text-muted-500">Qty: {item.qty}</p>
                 </div>
-                <span className="text-sm font-medium text-charcoal-700">
+                <span className="text-sm font-medium text-text-700">
                   {formatPrice(item.price * item.qty)}
                 </span>
               </div>
@@ -98,7 +98,7 @@ export function PaymentStep({ onBack, onPlaceOrder, className }: PaymentStepProp
         <button
           type="button"
           onClick={() => setIsGift(!isGift)}
-          className="flex items-center gap-2 text-sm text-muted-600 hover:text-rose-600 transition-colors"
+          className="flex items-center gap-2 text-sm text-muted-600 hover:text-primary-600 transition-colors"
         >
           <Gift className="w-4 h-4" />
           {isGift ? "Remove gift options" : "Add a gift message"}
@@ -112,8 +112,8 @@ export function PaymentStep({ onBack, onPlaceOrder, className }: PaymentStepProp
               placeholder="Write your gift message..."
               rows={2}
               className={cn(
-                "w-full px-3 py-2 rounded-lg border border-blush-300 text-sm",
-                "focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent",
+                "w-full px-3 py-2 rounded-lg border border-accent-300 text-sm",
+                "focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent",
                 "resize-none",
               )}
             />
@@ -122,7 +122,7 @@ export function PaymentStep({ onBack, onPlaceOrder, className }: PaymentStepProp
       </div>
 
       <div>
-        <h2 className="font-serif text-xl text-charcoal-900 mb-4">Payment Method</h2>
+        <h2 className="font-serif text-xl text-text-900 mb-4">Payment Method</h2>
         <div className="space-y-3">
           {paymentMethods.map((method) => (
             <button
@@ -132,20 +132,20 @@ export function PaymentStep({ onBack, onPlaceOrder, className }: PaymentStepProp
               className={cn(
                 "w-full flex items-center gap-4 p-4 rounded-lg border text-left transition-colors",
                 selectedPayment === method.id
-                  ? "border-rose-500 bg-rose-50"
-                  : "border-blush-300 hover:border-muted-400",
+                  ? "border-primary-500 bg-primary-50"
+                  : "border-accent-300 hover:border-muted-400",
               )}
             >
               <div
                 className={cn(
                   "w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0",
                   selectedPayment === method.id
-                    ? "border-rose-600"
+                    ? "border-primary-600"
                     : "border-muted-300",
                 )}
               >
                 {selectedPayment === method.id && (
-                  <div className="w-2.5 h-2.5 rounded-full bg-rose-600" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-primary-600" />
                 )}
               </div>
               <span
@@ -159,7 +159,7 @@ export function PaymentStep({ onBack, onPlaceOrder, className }: PaymentStepProp
                 {method.icon}
               </span>
               <div>
-                <p className="text-sm font-medium text-charcoal-700">
+                <p className="text-sm font-medium text-text-700">
                   {method.label}
                 </p>
                 <p className="text-xs text-muted-500">{method.description}</p>
@@ -169,18 +169,18 @@ export function PaymentStep({ onBack, onPlaceOrder, className }: PaymentStepProp
         </div>
       </div>
 
-      <div className="bg-cream-50 rounded-lg p-4 border border-blush-200">
+      <div className="bg-surface-50 rounded-lg p-4 border border-accent-200">
         <div className="flex justify-between text-sm mb-2">
           <span className="text-muted-600">Subtotal</span>
-          <span className="text-charcoal-700">{formatPrice(subtotal)}</span>
+          <span className="text-text-700">{formatPrice(subtotal)}</span>
         </div>
         <div className="flex justify-between text-sm mb-2">
           <span className="text-muted-600">Shipping</span>
-          <span className="text-charcoal-700">{formatPrice(shipping)}</span>
+          <span className="text-text-700">{formatPrice(shipping)}</span>
         </div>
-        <div className="flex justify-between font-semibold pt-2 border-t border-blush-200">
-          <span className="text-charcoal-900">Total</span>
-          <span className="text-rose-600 text-lg">{formatPrice(total)}</span>
+        <div className="flex justify-between font-semibold pt-2 border-t border-accent-200">
+          <span className="text-text-900">Total</span>
+          <span className="text-primary-600 text-lg">{formatPrice(total)}</span>
         </div>
       </div>
 
@@ -190,8 +190,8 @@ export function PaymentStep({ onBack, onPlaceOrder, className }: PaymentStepProp
           onClick={onBack}
           className={cn(
             "flex items-center justify-center gap-2 py-3 px-6 rounded-lg",
-            "border border-blush-300 text-charcoal-700 font-medium transition-colors",
-            "hover:bg-blush-50",
+            "border border-accent-300 text-text-700 font-medium transition-colors",
+            "hover:bg-accent-50",
           )}
         >
           <ChevronLeft className="w-4 h-4" />
@@ -202,7 +202,7 @@ export function PaymentStep({ onBack, onPlaceOrder, className }: PaymentStepProp
           onClick={onPlaceOrder}
           className={cn(
             "flex-1 py-3.5 rounded-lg text-base font-medium transition-colors",
-            "bg-rose-600 text-white hover:bg-rose-700",
+            "bg-primary-600 text-white hover:bg-primary-700",
             "shadow-rose",
           )}
         >

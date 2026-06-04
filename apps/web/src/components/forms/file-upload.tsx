@@ -123,8 +123,8 @@ export function FileUpload({
         className={cn(
           "relative border-2 border-dashed rounded-xl p-8 text-center transition-colors cursor-pointer",
           isDragOver
-            ? "border-rose-500 bg-rose-50"
-            : "border-muted-300 hover:border-rose-400 hover:bg-rose-50/50",
+            ? "border-primary-500 bg-primary-50"
+            : "border-muted-300 hover:border-primary-400 hover:bg-primary-50/50",
           uploadedFiles.length >= maxFiles && "pointer-events-none opacity-50",
         )}
       >
@@ -138,11 +138,11 @@ export function FileUpload({
           aria-label="Upload files"
         />
         <div className="flex flex-col items-center gap-3">
-          <div className="w-14 h-14 rounded-full bg-rose-100 flex items-center justify-center">
-            <Upload className="w-6 h-6 text-rose-600" />
+          <div className="w-14 h-14 rounded-full bg-primary-100 flex items-center justify-center">
+            <Upload className="w-6 h-6 text-primary-600" />
           </div>
           <div>
-            <p className="text-charcoal-700 font-medium">
+            <p className="text-text-700 font-medium">
               Drag & drop or click to upload
             </p>
             <p className="text-sm text-muted-500 mt-1">
@@ -171,7 +171,7 @@ export function FileUpload({
                   "flex items-center gap-3 p-3 rounded-lg border",
                   uploadedFile.error
                     ? "border-red-200 bg-red-50"
-                    : "border-blush-200 bg-white",
+                    : "border-accent-200 bg-white",
                 )}
               >
                 {preview && uploadedFile.preview ? (
@@ -187,7 +187,7 @@ export function FileUpload({
                 )}
 
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-charcoal-700 truncate">
+                  <p className="text-sm font-medium text-text-700 truncate">
                     {uploadedFile.file.name}
                   </p>
                   <p className="text-xs text-muted-500">
@@ -201,7 +201,7 @@ export function FileUpload({
                   ) : (
                     <div className="mt-1.5 h-1 rounded-full bg-muted-200 overflow-hidden">
                       <motion.div
-                        className="h-full bg-rose-500 rounded-full"
+                        className="h-full bg-primary-500 rounded-full"
                         initial={{ width: 0 }}
                         animate={{ width: `${uploadedFile.progress}%` }}
                         transition={{ duration: 0.2 }}

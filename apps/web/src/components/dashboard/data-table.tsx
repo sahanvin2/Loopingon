@@ -97,14 +97,14 @@ export function DataTable<T extends Record<string, unknown>>({
     if (sortColumn !== columnAccessor)
       return <ChevronsUpDown className="w-3.5 h-3.5 text-muted-400" />;
     if (sortDirection === "asc")
-      return <ChevronUp className="w-3.5 h-3.5 text-rose-600" />;
-    return <ChevronDown className="w-3.5 h-3.5 text-rose-600" />;
+      return <ChevronUp className="w-3.5 h-3.5 text-primary-600" />;
+    return <ChevronDown className="w-3.5 h-3.5 text-primary-600" />;
   };
 
   if (isLoading) {
     return (
-      <div className={cn("bg-white rounded-lg border border-blush-200 overflow-hidden", className)}>
-        <div className="divide-y divide-cream-200">
+      <div className={cn("bg-white rounded-lg border border-accent-200 overflow-hidden", className)}>
+        <div className="divide-y divide-surface-200">
           {Array.from({ length: 5 }).map((_, i) => (
             <div key={i} className="flex items-center gap-4 p-4">
               <div className="h-4 w-4 rounded bg-muted-200 animate-pulse" />
@@ -121,21 +121,21 @@ export function DataTable<T extends Record<string, unknown>>({
   return (
     <div
       className={cn(
-        "bg-white rounded-lg border border-blush-200 overflow-hidden",
+        "bg-white rounded-lg border border-accent-200 overflow-hidden",
         className,
       )}
     >
       <div className="overflow-x-auto">
         <table className="w-full">
           <thead>
-            <tr className="border-b border-blush-200 bg-cream-50">
+            <tr className="border-b border-accent-200 bg-surface-50">
               {showSelection && (
                 <th className="w-10 px-4 py-3">
                   <input
                     type="checkbox"
                     checked={data.length > 0 && selectedRows.size === data.length}
                     onChange={handleSelectAll}
-                    className="w-4 h-4 rounded border-blush-300 text-rose-600 focus:ring-rose-500"
+                    className="w-4 h-4 rounded border-accent-300 text-primary-600 focus:ring-primary-500"
                     aria-label="Select all rows"
                   />
                 </th>
@@ -154,7 +154,7 @@ export function DataTable<T extends Record<string, unknown>>({
                       <button
                         type="button"
                         onClick={() => handleSort(accessorStr)}
-                        className="inline-flex items-center gap-1 hover:text-charcoal-700 transition-colors"
+                        className="inline-flex items-center gap-1 hover:text-text-700 transition-colors"
                       >
                         {col.header}
                         {renderSortIcon(accessorStr)}
@@ -167,7 +167,7 @@ export function DataTable<T extends Record<string, unknown>>({
               })}
             </tr>
           </thead>
-          <tbody className="divide-y divide-cream-50">
+          <tbody className="divide-y divide-surface-50">
             {sortedData.length === 0 ? (
               <tr>
                 <td
@@ -186,9 +186,9 @@ export function DataTable<T extends Record<string, unknown>>({
                     onClick={() => onRowClick?.(row)}
                     className={cn(
                       "transition-colors",
-                      rowIndex % 2 === 0 ? "bg-white" : "bg-cream-50/50",
-                      onRowClick && "cursor-pointer hover:bg-rose-50",
-                      selectedRows.has(rowId) && "bg-rose-50",
+                      rowIndex % 2 === 0 ? "bg-white" : "bg-surface-50/50",
+                      onRowClick && "cursor-pointer hover:bg-primary-50",
+                      selectedRows.has(rowId) && "bg-primary-50",
                     )}
                   >
                     {showSelection && (
@@ -197,7 +197,7 @@ export function DataTable<T extends Record<string, unknown>>({
                           type="checkbox"
                           checked={selectedRows.has(rowId)}
                           onChange={() => handleSelectRow(rowId)}
-                          className="w-4 h-4 rounded border-blush-300 text-rose-600 focus:ring-rose-500"
+                          className="w-4 h-4 rounded border-accent-300 text-primary-600 focus:ring-primary-500"
                           aria-label={`Select row ${rowId}`}
                         />
                       </td>
@@ -206,7 +206,7 @@ export function DataTable<T extends Record<string, unknown>>({
                       <td
                         key={colIndex}
                         className={cn(
-                          "px-4 py-3 text-sm text-charcoal-700",
+                          "px-4 py-3 text-sm text-text-700",
                           col.className,
                         )}
                       >

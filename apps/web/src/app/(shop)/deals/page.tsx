@@ -40,10 +40,10 @@ async function DealsContent({ searchParams }: DealsPageProps) {
 
   return (
     <>
-      <section className="bg-cream-50 py-12">
+      <section className="bg-surface-50 py-12">
         <div className="mx-auto max-w-7xl px-4">
           <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Deals" }]} />
-          <h1 className="mt-4 font-serif text-3xl font-bold text-charcoal-900 md:text-4xl">Today&lsquo;s Deals</h1>
+          <h1 className="mt-4 font-serif text-3xl font-bold text-text-900 md:text-4xl">Today&lsquo;s Deals</h1>
           <p className="mt-2 text-muted-500">Limited-time offers on authentic Sri Lankan handmade crafts</p>
           <div className="mt-6 flex flex-wrap gap-2">
             {tabs.map((tab) => {
@@ -53,7 +53,7 @@ async function DealsContent({ searchParams }: DealsPageProps) {
                   key={tab.value}
                   href={`/deals?filter=${tab.value}`}
                   className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
-                    isActive ? "bg-rose-600 text-white" : "bg-white text-charcoal-600 hover:bg-rose-50"
+                    isActive ? "bg-primary-600 text-white" : "bg-white text-text-600 hover:bg-primary-50"
                   }`}
                 >
                   {tab.label}

@@ -62,7 +62,7 @@ export function RelatedProducts({ productId, categoryId }: RelatedProductsProps)
   return (
     <section className="py-8">
       <div className="flex items-center justify-between mb-6">
-        <h2 className="font-serif text-2xl text-charcoal-900">
+        <h2 className="font-serif text-2xl text-text-900">
           You May Also Like
         </h2>
 
@@ -73,7 +73,7 @@ export function RelatedProducts({ productId, categoryId }: RelatedProductsProps)
             disabled={!canScrollLeft}
             className={cn(
               "w-9 h-9 rounded-full flex items-center justify-center",
-              "border border-blush-300 text-muted-600 hover:bg-muted-100",
+              "border border-accent-300 text-muted-600 hover:bg-muted-100",
               "disabled:opacity-40 disabled:cursor-not-allowed transition-colors",
             )}
             aria-label="Scroll left"
@@ -86,7 +86,7 @@ export function RelatedProducts({ productId, categoryId }: RelatedProductsProps)
             disabled={!canScrollRight}
             className={cn(
               "w-9 h-9 rounded-full flex items-center justify-center",
-              "border border-blush-300 text-muted-600 hover:bg-muted-100",
+              "border border-accent-300 text-muted-600 hover:bg-muted-100",
               "disabled:opacity-40 disabled:cursor-not-allowed transition-colors",
             )}
             aria-label="Scroll right"

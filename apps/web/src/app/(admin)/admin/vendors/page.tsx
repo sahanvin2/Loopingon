@@ -59,7 +59,7 @@ export default function AdminVendorsPage() {
       animate={{ opacity: 1, y: 0 }}
       className="space-y-6"
     >
-      <h1 className="text-2xl font-bold text-charcoal-900">
+      <h1 className="text-2xl font-bold text-text-900">
         Vendor Management
       </h1>
 
@@ -71,7 +71,7 @@ export default function AdminVendorsPage() {
             placeholder="Search vendors..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 border border-blush-200 rounded-lg text-sm focus:ring-2 focus:ring-rose-500"
+            className="w-full pl-10 pr-4 py-2 border border-accent-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500"
           />
         </div>
         <select
@@ -80,7 +80,7 @@ export default function AdminVendorsPage() {
             setStatus(e.target.value);
             setPage(1);
           }}
-          className="px-3 py-2 border border-blush-200 rounded-lg text-sm focus:ring-2 focus:ring-rose-500"
+          className="px-3 py-2 border border-accent-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500"
         >
           {statusFilters.map((f) => (
             <option key={f.key} value={f.key}>
@@ -125,7 +125,7 @@ export default function AdminVendorsPage() {
                     )}
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-charcoal-900">
+                    <p className="text-sm font-medium text-text-900">
                       {row.storeName}
                     </p>
                     <p className="text-xs text-muted-500">
@@ -172,7 +172,7 @@ export default function AdminVendorsPage() {
               header: "Rating",
               accessor: (row: Vendor) => (
                 <div className="flex items-center gap-1">
-                  <span className="text-sm text-blush-600">
+                  <span className="text-sm text-accent-600">
                     {(row.rating || 0).toFixed(1)}
                   </span>
                 </div>
@@ -188,7 +188,7 @@ export default function AdminVendorsPage() {
                 <div className="flex items-center gap-1">
                   <Link
                     href={`/admin/vendors/${row.id}`}
-                    className="px-2 py-1 text-xs font-medium text-rose-600 hover:bg-rose-50 rounded"
+                    className="px-2 py-1 text-xs font-medium text-primary-600 hover:bg-primary-50 rounded"
                   >
                     View
                   </Link>

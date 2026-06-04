@@ -34,14 +34,14 @@ function ratingBreakdown(reviews: Review[]) {
 
 function ReviewCard({ review }: { review: Review }) {
   return (
-    <div className="py-6 border-b border-blush-200 last:border-b-0">
+    <div className="py-6 border-b border-accent-200 last:border-b-0">
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-muted-200 flex items-center justify-center text-charcoal-600 font-medium text-sm">
+          <div className="w-10 h-10 rounded-full bg-muted-200 flex items-center justify-center text-text-600 font-medium text-sm">
             {review.customer?.fullName?.charAt(0) || "U"}
           </div>
           <div>
-            <p className="text-charcoal-700 font-medium text-sm">
+            <p className="text-text-700 font-medium text-sm">
               {review.customer?.fullName || "Anonymous"}
             </p>
             <p className="text-xs text-muted-500">
@@ -59,7 +59,7 @@ function ReviewCard({ review }: { review: Review }) {
       <RatingStars rating={review.rating} size="sm" />
 
       {review.title && (
-        <h4 className="font-medium text-charcoal-900 mt-2">{review.title}</h4>
+        <h4 className="font-medium text-text-900 mt-2">{review.title}</h4>
       )}
       {review.content && (
         <p className="text-muted-600 mt-1 text-sm leading-relaxed">
@@ -87,14 +87,14 @@ function ReviewCard({ review }: { review: Review }) {
       <div className="flex items-center gap-4 mt-3">
         <button
           type="button"
-          className="inline-flex items-center gap-1.5 text-xs text-muted-500 hover:text-charcoal-700 transition-colors"
+          className="inline-flex items-center gap-1.5 text-xs text-muted-500 hover:text-text-700 transition-colors"
         >
           <ThumbsUp className="w-3.5 h-3.5" />
           Helpful ({review.helpfulCount})
         </button>
         <button
           type="button"
-          className="inline-flex items-center gap-1.5 text-xs text-muted-500 hover:text-charcoal-700 transition-colors"
+          className="inline-flex items-center gap-1.5 text-xs text-muted-500 hover:text-text-700 transition-colors"
         >
           <Flag className="w-3.5 h-3.5" />
           Report
@@ -102,7 +102,7 @@ function ReviewCard({ review }: { review: Review }) {
       </div>
 
       {review.vendorReply && (
-        <div className="mt-3 ml-6 p-4 bg-cream-50 rounded-lg border border-blush-200">
+        <div className="mt-3 ml-6 p-4 bg-surface-50 rounded-lg border border-accent-200">
           <div className="flex items-center gap-2 mb-1">
             <MessageSquare className="w-3.5 h-3.5 text-muted-600" />
             <span className="text-xs font-medium text-muted-600">
@@ -133,7 +133,7 @@ export function ProductReviews({
 
   return (
     <section id="reviews" className="py-8">
-      <h2 className="font-serif text-2xl text-charcoal-900 mb-8">
+      <h2 className="font-serif text-2xl text-text-900 mb-8">
         Customer Reviews
       </h2>
 
@@ -146,7 +146,7 @@ export function ProductReviews({
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-1">
             <div className="flex items-center gap-4 mb-4">
-              <span className="text-5xl font-bold text-charcoal-900">
+              <span className="text-5xl font-bold text-text-900">
                 {averageRating.toFixed(1)}
               </span>
               <div>
@@ -161,11 +161,11 @@ export function ProductReviews({
               {breakdown.map((bar) => (
                 <div key={bar.stars} className="flex items-center gap-2">
                   <span className="text-xs text-muted-600 w-8">
-                    {bar.stars} <Star className="w-3 h-3 inline fill-blush-500 text-blush-500" />
+                    {bar.stars} <Star className="w-3 h-3 inline fill-accent-500 text-accent-500" />
                   </span>
                   <div className="flex-1 h-2 rounded-full bg-muted-200 overflow-hidden">
                     <motion.div
-                      className="h-full bg-blush-500 rounded-full"
+                      className="h-full bg-accent-500 rounded-full"
                       initial={{ width: 0 }}
                       whileInView={{ width: `${bar.percentage}%` }}
                       viewport={{ once: true }}
@@ -188,8 +188,8 @@ export function ProductReviews({
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
                   className={cn(
-                    "text-sm border border-blush-300 rounded-lg px-3 py-1.5 bg-white",
-                    "text-charcoal-700 focus:outline-none focus:ring-2 focus:ring-rose-500",
+                    "text-sm border border-accent-300 rounded-lg px-3 py-1.5 bg-white",
+                    "text-text-700 focus:outline-none focus:ring-2 focus:ring-primary-500",
                   )}
                 >
                   <option value="recent">Most Recent</option>

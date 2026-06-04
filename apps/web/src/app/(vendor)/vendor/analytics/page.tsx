@@ -61,8 +61,8 @@ export default function VendorAnalyticsPage() {
       className="space-y-6"
     >
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <h1 className="text-2xl font-bold text-charcoal-900">Analytics</h1>
-        <div className="flex items-center gap-1 bg-white rounded-lg border border-blush-200 p-1">
+        <h1 className="text-2xl font-bold text-text-900">Analytics</h1>
+        <div className="flex items-center gap-1 bg-white rounded-lg border border-accent-200 p-1">
           {[
             { key: "7d", label: "7d" },
             { key: "30d", label: "30d" },
@@ -75,8 +75,8 @@ export default function VendorAnalyticsPage() {
               onClick={() => setDateRange(range.key)}
               className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors ${
                 dateRange === range.key
-                  ? "bg-rose-600 text-white"
-                  : "text-muted-600 hover:text-charcoal-700"
+                  ? "bg-primary-600 text-white"
+                  : "text-muted-600 hover:text-text-700"
               }`}
             >
               {range.label}
@@ -200,14 +200,14 @@ export default function VendorAnalyticsPage() {
       <div className="flex gap-3">
         <button
           type="button"
-          className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-blush-200 rounded-lg text-sm font-medium hover:bg-cream-50"
+          className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-accent-200 rounded-lg text-sm font-medium hover:bg-surface-50"
         >
           <Download className="w-4 h-4" />
           Export CSV
         </button>
         <button
           type="button"
-          className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-blush-200 rounded-lg text-sm font-medium hover:bg-cream-50"
+          className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-accent-200 rounded-lg text-sm font-medium hover:bg-surface-50"
         >
           <Download className="w-4 h-4" />
           Export PDF

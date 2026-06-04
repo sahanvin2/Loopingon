@@ -37,8 +37,8 @@ const item = {
 
 const tierColors: Record<string, string> = {
   Bronze: "bg-amber-100 text-amber-700",
-  Silver: "bg-charcoal-100 text-charcoal-700",
-  Gold: "bg-blush-100 text-blush-700",
+  Silver: "bg-text-100 text-text-700",
+  Gold: "bg-accent-100 text-accent-700",
   Platinum: "bg-purple-100 text-purple-700",
 };
 
@@ -109,7 +109,7 @@ export default function DashboardOverviewPage() {
     <motion.div variants={container} initial="hidden" animate="show" className="space-y-8">
       <motion.div variants={item} className="flex items-center gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-charcoal-900">
+          <h1 className="text-2xl font-bold text-text-900">
             Welcome back, {firstName}!
           </h1>
           <p className="text-muted-600 mt-1">Here&apos;s what&apos;s happening with your account.</p>
@@ -166,12 +166,12 @@ export default function DashboardOverviewPage() {
 
       <motion.div variants={item}>
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-semibold text-charcoal-900">
+          <h2 className="text-lg font-semibold text-text-900">
             Recent Orders
           </h2>
           <Link
             href="/dashboard/orders"
-            className="flex items-center gap-1 text-sm font-medium text-rose-600 hover:text-rose-700"
+            className="flex items-center gap-1 text-sm font-medium text-primary-600 hover:text-primary-700"
           >
             View All Orders
             <ChevronRight className="w-4 h-4" />
@@ -198,7 +198,7 @@ export default function DashboardOverviewPage() {
       {recommendedData?.data && recommendedData.data.length > 0 && (
         <motion.div variants={item}>
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold text-charcoal-900">
+            <h2 className="text-lg font-semibold text-text-900">
               Recommended for You
             </h2>
           </div>
@@ -215,12 +215,12 @@ export default function DashboardOverviewPage() {
       {competitionsData?.data && competitionsData.data.length > 0 && (
         <motion.div variants={item}>
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold text-charcoal-900">
+            <h2 className="text-lg font-semibold text-text-900">
               Active Competitions
             </h2>
             <Link
               href="/competitions"
-              className="flex items-center gap-1 text-sm font-medium text-rose-600 hover:text-rose-700"
+              className="flex items-center gap-1 text-sm font-medium text-primary-600 hover:text-primary-700"
             >
               View All
               <ChevronRight className="w-4 h-4" />
@@ -231,9 +231,9 @@ export default function DashboardOverviewPage() {
               <Link
                 key={comp.id}
                 href={`/competitions/${comp.slug}`}
-                className="block bg-white rounded-lg border border-blush-200 p-5 hover:shadow-soft transition-shadow"
+                className="block bg-white rounded-lg border border-accent-200 p-5 hover:shadow-soft transition-shadow"
               >
-                <h3 className="font-semibold text-charcoal-900">{comp.title}</h3>
+                <h3 className="font-semibold text-text-900">{comp.title}</h3>
                 <p className="text-sm text-muted-600 mt-1 line-clamp-2">
                   {comp.prizeDescription}
                 </p>
@@ -249,12 +249,12 @@ export default function DashboardOverviewPage() {
       {referralCodeData?.data?.code && (
         <motion.div
           variants={item}
-          className="bg-gradient-to-r from-rose-500 to-rose-600 rounded-xl p-6 text-white"
+          className="bg-gradient-to-r from-primary-500 to-primary-600 rounded-xl p-6 text-white"
         >
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div>
               <h3 className="text-lg font-semibold">Share & Earn Rewards</h3>
-              <p className="text-sm text-rose-100 mt-1">
+              <p className="text-sm text-primary-100 mt-1">
                 Refer friends and earn rewards when they make their first purchase
               </p>
               <div className="flex items-center gap-3 mt-3">
@@ -270,7 +270,7 @@ export default function DashboardOverviewPage() {
                   <Copy className="w-4 h-4" />
                 </button>
               </div>
-              <p className="text-sm text-rose-100 mt-2">
+              <p className="text-sm text-primary-100 mt-2">
                 Total Earnings: {formatPrice(Number(referrals.totalEarnings))}
               </p>
             </div>
@@ -301,7 +301,7 @@ export default function DashboardOverviewPage() {
       )}
 
       <motion.div variants={item}>
-        <h2 className="text-lg font-semibold text-charcoal-900 mb-4">
+        <h2 className="text-lg font-semibold text-text-900 mb-4">
           Quick Links
         </h2>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
@@ -309,12 +309,12 @@ export default function DashboardOverviewPage() {
             <Link
               key={link.label}
               href={link.href}
-              className="flex flex-col items-center gap-3 p-4 bg-white rounded-lg border border-blush-200 hover:border-rose-200 hover:shadow-soft transition-all group"
+              className="flex flex-col items-center gap-3 p-4 bg-white rounded-lg border border-accent-200 hover:border-primary-200 hover:shadow-soft transition-all group"
             >
               <div className="w-12 h-12 rounded-full bg-muted-100 text-muted-600 flex items-center justify-center">
                 <link.icon className="w-5 h-5" />
               </div>
-              <span className="text-sm font-medium text-charcoal-700 group-hover:text-rose-600">
+              <span className="text-sm font-medium text-text-700 group-hover:text-primary-600">
                 {link.label}
               </span>
             </Link>

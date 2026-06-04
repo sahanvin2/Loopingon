@@ -53,13 +53,13 @@ export function FeaturedProducts() {
         variants={fadeInUp}
         className="flex items-center justify-between mb-10"
       >
-        <h2 className="font-serif text-3xl text-charcoal-900">
+        <h2 className="font-serif text-3xl text-text-900">
           Handpicked Treasures
         </h2>
         <Link
           href="/products?sort=featured"
           className={cn(
-            "inline-flex items-center gap-1.5 text-sm font-medium text-rose-600 hover:text-rose-700",
+            "inline-flex items-center gap-1.5 text-sm font-medium text-primary-600 hover:text-primary-700",
             "hover:underline transition-colors",
           )}
         >
@@ -77,8 +77,8 @@ export function FeaturedProducts() {
             onClick={() => refetch()}
             className={cn(
               "inline-flex items-center gap-2 px-4 py-2 rounded-lg",
-              "bg-rose-600 text-white text-sm font-medium",
-              "hover:bg-rose-700 transition-colors",
+              "bg-primary-600 text-white text-sm font-medium",
+              "hover:bg-primary-700 transition-colors",
             )}
           >
             <RefreshCw className="w-4 h-4" /> Retry

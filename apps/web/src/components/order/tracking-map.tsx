@@ -21,7 +21,7 @@ export function TrackingMap({
     <div className={cn("", className)}>
       <div
         className={cn(
-          "relative rounded-lg overflow-hidden bg-cream-50 border border-blush-200",
+          "relative rounded-lg overflow-hidden bg-surface-50 border border-accent-200",
           "flex flex-col items-center justify-center",
           "min-h-[280px]",
         )}
@@ -40,7 +40,7 @@ export function TrackingMap({
             <div className="w-16 h-16 rounded-full bg-muted-100 flex items-center justify-center mx-auto mb-4">
               <MapPin className="w-7 h-7 text-muted-400" />
             </div>
-            <h4 className="font-serif text-lg text-charcoal-900 mb-2">
+            <h4 className="font-serif text-lg text-text-900 mb-2">
               Tracking Coming Soon
             </h4>
             <p className="text-sm text-muted-500 max-w-xs mx-auto">
@@ -54,7 +54,7 @@ export function TrackingMap({
               <Truck className="w-7 h-7 text-muted-600" />
             </div>
             <p className="text-sm text-muted-500 mb-1">Via {courierName || "Courier"}</p>
-            <h4 className="font-mono text-lg text-charcoal-900 font-bold tracking-wider mb-1">
+            <h4 className="font-mono text-lg text-text-900 font-bold tracking-wider mb-1">
               {trackingNumber}
             </h4>
             {trackingUrl && (
@@ -64,7 +64,7 @@ export function TrackingMap({
                 rel="noopener noreferrer"
                 className={cn(
                   "inline-flex items-center gap-1.5 text-sm font-medium",
-                  "text-rose-600 hover:text-rose-700 transition-colors",
+                  "text-primary-600 hover:text-primary-700 transition-colors",
                   "mt-3",
                 )}
               >

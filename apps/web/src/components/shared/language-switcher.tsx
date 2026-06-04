@@ -57,8 +57,8 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
         onClick={() => setIsOpen(!isOpen)}
         className={cn(
           "flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-sm",
-          "text-charcoal-700 hover:bg-muted-100 transition-colors",
-          "focus:outline-none focus:ring-2 focus:ring-rose-500",
+          "text-text-700 hover:bg-muted-100 transition-colors",
+          "focus:outline-none focus:ring-2 focus:ring-primary-500",
         )}
         aria-expanded={isOpen}
         aria-haspopup="listbox"
@@ -84,7 +84,7 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
             transition={{ duration: 0.15 }}
             className={cn(
               "absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-soft-md",
-              "border border-blush-200 overflow-hidden z-50",
+              "border border-accent-200 overflow-hidden z-50",
             )}
             role="listbox"
             aria-label="Choose language"
@@ -96,10 +96,10 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
                 onClick={() => handleSelect(lang)}
                 className={cn(
                   "flex items-center gap-2.5 w-full px-3 py-2.5 text-sm transition-colors",
-                  "hover:bg-rose-50",
+                  "hover:bg-primary-50",
                   selected.code === lang.code
-                    ? "bg-rose-50 text-rose-700 font-medium"
-                    : "text-charcoal-700",
+                    ? "bg-primary-50 text-primary-700 font-medium"
+                    : "text-text-700",
                 )}
                 role="option"
                 aria-selected={selected.code === lang.code}
@@ -107,7 +107,7 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
                 <span className="text-base">{lang.flag}</span>
                 <span>{lang.nativeLabel}</span>
                 {selected.code === lang.code && (
-                  <span className="ml-auto w-2 h-2 rounded-full bg-rose-500" />
+                  <span className="ml-auto w-2 h-2 rounded-full bg-primary-500" />
                 )}
               </button>
             ))}

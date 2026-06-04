@@ -35,7 +35,7 @@ export function ProductCard({ product, className, showQuickView = true }: Produc
     <motion.div
       whileHover={{ y: -2 }}
       className={cn(
-        "group bg-white rounded-lg border border-blush-300 overflow-hidden shadow-sm",
+        "group bg-white rounded-lg border border-accent-300 overflow-hidden shadow-sm",
         "hover:shadow-md transition-shadow duration-300",
         className,
       )}
@@ -64,11 +64,11 @@ export function ProductCard({ product, className, showQuickView = true }: Produc
         </div>
 
         {showQuickView && (
-          <div className="absolute inset-0 bg-charcoal-900/0 group-hover:bg-charcoal-900/20 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+          <div className="absolute inset-0 bg-text-900/0 group-hover:bg-text-900/20 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
             <span
               className={cn(
                 "inline-flex items-center gap-1.5 px-4 py-2 rounded-lg",
-                "bg-white/90 backdrop-blur-sm text-charcoal-700 text-sm font-medium",
+                "bg-white/90 backdrop-blur-sm text-text-700 text-sm font-medium",
                 "shadow-sm",
               )}
             >
@@ -96,8 +96,8 @@ export function ProductCard({ product, className, showQuickView = true }: Produc
           className={cn(
             "w-4 h-4 transition-colors",
             isWishlisted
-              ? "fill-rose-500 text-rose-500"
-              : "text-muted-500 hover:text-rose-500",
+              ? "fill-primary-500 text-primary-500"
+              : "text-muted-500 hover:text-primary-500",
           )}
         />
       </button>
@@ -106,14 +106,14 @@ export function ProductCard({ product, className, showQuickView = true }: Produc
         {product.vendor && (
           <Link
             href={`/vendors/${product.vendor.storeSlug}`}
-            className="text-xs uppercase tracking-wider text-muted-500 hover:text-rose-600 transition-colors"
+            className="text-xs uppercase tracking-wider text-muted-500 hover:text-primary-600 transition-colors"
           >
             {product.vendor.storeName}
           </Link>
         )}
 
         <Link href={`/products/${product.slug}`} className="block mt-1">
-          <h3 className="font-medium text-charcoal-900 line-clamp-2 text-sm leading-snug group-hover:text-rose-600 transition-colors">
+          <h3 className="font-medium text-text-900 line-clamp-2 text-sm leading-snug group-hover:text-primary-600 transition-colors">
             {product.title}
           </h3>
         </Link>
@@ -143,8 +143,8 @@ export function ProductCard({ product, className, showQuickView = true }: Produc
           disabled={addToCart.isPending}
           className={cn(
             "mt-3 w-full py-2 rounded-lg text-sm font-medium",
-            "bg-rose-600 text-white",
-            "hover:bg-rose-700 transition-colors",
+            "bg-primary-600 text-white",
+            "hover:bg-primary-700 transition-colors",
             "disabled:opacity-60 disabled:cursor-not-allowed",
           )}
         >

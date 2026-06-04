@@ -98,10 +98,10 @@ export default function SettingsPage() {
       animate={{ opacity: 1, y: 0 }}
       className="space-y-6"
     >
-      <h1 className="text-2xl font-bold text-charcoal-900">Account Settings</h1>
+      <h1 className="text-2xl font-bold text-text-900">Account Settings</h1>
 
-      <div className="bg-white rounded-xl border border-blush-200 overflow-hidden">
-        <div className="flex border-b border-blush-200 overflow-x-auto">
+      <div className="bg-white rounded-xl border border-accent-200 overflow-hidden">
+        <div className="flex border-b border-accent-200 overflow-x-auto">
           {settingsTabs.map((tab) => (
             <button
               key={tab.key}
@@ -110,8 +110,8 @@ export default function SettingsPage() {
               className={cn(
                 "flex items-center gap-2 px-5 py-3 text-sm font-medium whitespace-nowrap border-b-2 transition-colors",
                 activeTab === tab.key
-                  ? "border-rose-600 text-rose-600"
-                  : "border-transparent text-muted-600 hover:text-charcoal-700",
+                  ? "border-primary-600 text-primary-600"
+                  : "border-transparent text-muted-600 hover:text-text-700",
               )}
             >
               <tab.icon className="w-4 h-4" />
@@ -133,24 +133,24 @@ export default function SettingsPage() {
                   </div>
                   <button
                     type="button"
-                    className="absolute bottom-0 right-0 w-7 h-7 bg-rose-600 text-white rounded-full flex items-center justify-center hover:bg-rose-700 transition-colors"
+                    className="absolute bottom-0 right-0 w-7 h-7 bg-primary-600 text-white rounded-full flex items-center justify-center hover:bg-primary-700 transition-colors"
                   >
                     <Camera className="w-3.5 h-3.5" />
                   </button>
                 </div>
                 <div>
-                  <p className="font-medium text-charcoal-900">{user?.fullName}</p>
+                  <p className="font-medium text-text-900">{user?.fullName}</p>
                   <p className="text-sm text-muted-500">{user?.email}</p>
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-charcoal-700 mb-1">
+                <label className="block text-sm font-medium text-text-700 mb-1">
                   Full Name *
                 </label>
                 <input
                   {...registerProfile("fullName")}
-                  className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm focus:ring-2 focus:ring-rose-500"
+                  className="w-full px-3 py-2 border border-accent-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500"
                 />
                 {profileErrors.fullName && (
                   <p className="text-xs text-red-600 mt-1">{profileErrors.fullName.message}</p>
@@ -158,24 +158,24 @@ export default function SettingsPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-charcoal-700 mb-1">
+                <label className="block text-sm font-medium text-text-700 mb-1">
                   Email
                 </label>
                 <input
                   value={user?.email || ""}
                   readOnly
-                  className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm bg-cream-50 text-muted-500 cursor-not-allowed"
+                  className="w-full px-3 py-2 border border-accent-200 rounded-lg text-sm bg-surface-50 text-muted-500 cursor-not-allowed"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-charcoal-700 mb-1">
+                <label className="block text-sm font-medium text-text-700 mb-1">
                   Phone
                 </label>
                 <input
                   {...registerProfile("phone")}
                   placeholder="+94XXXXXXXXX"
-                  className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm focus:ring-2 focus:ring-rose-500"
+                  className="w-full px-3 py-2 border border-accent-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500"
                 />
                 {profileErrors.phone && (
                   <p className="text-xs text-red-600 mt-1">{profileErrors.phone.message}</p>
@@ -184,12 +184,12 @@ export default function SettingsPage() {
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-charcoal-700 mb-1">
+                  <label className="block text-sm font-medium text-text-700 mb-1">
                     Language
                   </label>
                   <select
                     {...registerProfile("preferredLanguage")}
-                    className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm focus:ring-2 focus:ring-rose-500"
+                    className="w-full px-3 py-2 border border-accent-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500"
                   >
                     <option value="en">English</option>
                     <option value="si">සිංහල</option>
@@ -197,12 +197,12 @@ export default function SettingsPage() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-charcoal-700 mb-1">
+                  <label className="block text-sm font-medium text-text-700 mb-1">
                     Currency
                   </label>
                   <select
                     {...registerProfile("currency")}
-                    className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm focus:ring-2 focus:ring-rose-500"
+                    className="w-full px-3 py-2 border border-accent-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500"
                   >
                     <option value="LKR">LKR</option>
                     <option value="USD">USD</option>
@@ -213,7 +213,7 @@ export default function SettingsPage() {
               <button
                 type="submit"
                 disabled={isProfileSubmitting}
-                className="px-6 py-2.5 bg-rose-600 text-white rounded-lg text-sm font-medium hover:bg-rose-700 transition-colors disabled:opacity-50"
+                className="px-6 py-2.5 bg-primary-600 text-white rounded-lg text-sm font-medium hover:bg-primary-700 transition-colors disabled:opacity-50"
               >
                 {isProfileSubmitting ? "Saving..." : "Save Changes"}
               </button>
@@ -226,17 +226,17 @@ export default function SettingsPage() {
                 onSubmit={handlePasswordSubmit(onPasswordSubmit)}
                 className="space-y-4"
               >
-                <h3 className="font-semibold text-charcoal-900">
+                <h3 className="font-semibold text-text-900">
                   Change Password
                 </h3>
                 <div>
-                  <label className="block text-sm font-medium text-charcoal-700 mb-1">
+                  <label className="block text-sm font-medium text-text-700 mb-1">
                     Current Password *
                   </label>
                   <input
                     type="password"
                     {...registerPassword("currentPassword")}
-                    className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm focus:ring-2 focus:ring-rose-500"
+                    className="w-full px-3 py-2 border border-accent-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500"
                   />
                   {passwordErrors.currentPassword && (
                     <p className="text-xs text-red-600 mt-1">
@@ -245,13 +245,13 @@ export default function SettingsPage() {
                   )}
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-charcoal-700 mb-1">
+                  <label className="block text-sm font-medium text-text-700 mb-1">
                     New Password *
                   </label>
                   <input
                     type="password"
                     {...registerPassword("newPassword")}
-                    className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm focus:ring-2 focus:ring-rose-500"
+                    className="w-full px-3 py-2 border border-accent-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500"
                   />
                   {passwordErrors.newPassword && (
                     <p className="text-xs text-red-600 mt-1">
@@ -260,13 +260,13 @@ export default function SettingsPage() {
                   )}
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-charcoal-700 mb-1">
+                  <label className="block text-sm font-medium text-text-700 mb-1">
                     Confirm New Password *
                   </label>
                   <input
                     type="password"
                     {...registerPassword("confirmNewPassword")}
-                    className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm focus:ring-2 focus:ring-rose-500"
+                    className="w-full px-3 py-2 border border-accent-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500"
                   />
                   {passwordErrors.confirmNewPassword && (
                     <p className="text-xs text-red-600 mt-1">
@@ -277,7 +277,7 @@ export default function SettingsPage() {
                 <button
                   type="submit"
                   disabled={isPasswordSubmitting}
-                  className="px-6 py-2.5 bg-rose-600 text-white rounded-lg text-sm font-medium hover:bg-rose-700 disabled:opacity-50"
+                  className="px-6 py-2.5 bg-primary-600 text-white rounded-lg text-sm font-medium hover:bg-primary-700 disabled:opacity-50"
                 >
                   {isPasswordSubmitting
                     ? "Changing..."
@@ -285,8 +285,8 @@ export default function SettingsPage() {
                 </button>
               </form>
 
-              <div className="border-t border-blush-200 pt-6">
-                <h3 className="font-semibold text-charcoal-900 mb-2">
+              <div className="border-t border-accent-200 pt-6">
+                <h3 className="font-semibold text-text-900 mb-2">
                   Two-Factor Authentication
                 </h3>
                 <p className="text-sm text-muted-600 mb-3">
@@ -295,9 +295,9 @@ export default function SettingsPage() {
                 <div className="flex items-center gap-3">
                   <label className="relative inline-flex items-center cursor-pointer">
                     <input type="checkbox" className="sr-only peer" />
-                    <div className="w-10 h-5 bg-cream-300 rounded-full peer peer-checked:bg-muted-500 peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all" />
+                    <div className="w-10 h-5 bg-surface-300 rounded-full peer peer-checked:bg-muted-500 peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all" />
                   </label>
-                  <span className="text-sm text-charcoal-700">
+                  <span className="text-sm text-text-700">
                     {user?.twoFactorEnabled ? "Enabled" : "Disabled"}
                   </span>
                 </div>
@@ -308,7 +308,7 @@ export default function SettingsPage() {
           {activeTab === "notifications" && (
             <div className="space-y-6 max-w-lg">
               <div>
-                <h3 className="font-semibold text-charcoal-900 mb-4">
+                <h3 className="font-semibold text-text-900 mb-4">
                   Email Notifications
                 </h3>
                 <div className="space-y-3">
@@ -324,28 +324,28 @@ export default function SettingsPage() {
                       key={label}
                       className="flex items-center justify-between"
                     >
-                      <span className="text-sm text-charcoal-700">{label}</span>
+                      <span className="text-sm text-text-700">{label}</span>
                       <input
                         type="checkbox"
                         defaultChecked
-                        className="w-4 h-4 rounded text-rose-600 focus:ring-rose-500"
+                        className="w-4 h-4 rounded text-primary-600 focus:ring-primary-500"
                       />
                     </label>
                   ))}
                 </div>
               </div>
-              <div className="border-t border-blush-200 pt-6">
-                <h3 className="font-semibold text-charcoal-900 mb-4">
+              <div className="border-t border-accent-200 pt-6">
+                <h3 className="font-semibold text-text-900 mb-4">
                   Push Notifications
                 </h3>
                 <label className="flex items-center justify-between">
-                  <span className="text-sm text-charcoal-700">
+                  <span className="text-sm text-text-700">
                     Push notifications
                   </span>
                   <input
                     type="checkbox"
                     defaultChecked
-                    className="w-4 h-4 rounded text-rose-600 focus:ring-rose-500"
+                    className="w-4 h-4 rounded text-primary-600 focus:ring-primary-500"
                   />
                 </label>
               </div>
@@ -355,7 +355,7 @@ export default function SettingsPage() {
           {activeTab === "privacy" && (
             <div className="space-y-6 max-w-lg">
               <label className="flex items-center justify-between">
-                <span className="text-sm text-charcoal-700">
+                <span className="text-sm text-text-700">
                   Marketing communications
                 </span>
                 <input
@@ -363,14 +363,14 @@ export default function SettingsPage() {
                   defaultChecked={
                     user?.customerProfile?.marketingOptIn ?? true
                   }
-                  className="w-4 h-4 rounded text-rose-600 focus:ring-rose-500"
+                  className="w-4 h-4 rounded text-primary-600 focus:ring-primary-500"
                 />
               </label>
 
-              <div className="border-t border-blush-200 pt-6 space-y-3">
+              <div className="border-t border-accent-200 pt-6 space-y-3">
                 <button
                   type="button"
-                  className="w-full px-5 py-3 bg-white border border-blush-200 rounded-lg text-sm font-medium text-charcoal-700 hover:bg-cream-50 transition-colors"
+                  className="w-full px-5 py-3 bg-white border border-accent-200 rounded-lg text-sm font-medium text-text-700 hover:bg-surface-50 transition-colors"
                 >
                   <div className="flex items-center gap-2">
                     <Globe className="w-4 h-4" />
@@ -394,10 +394,10 @@ export default function SettingsPage() {
       </div>
 
       {showDeleteModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-charcoal-900/50">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-text-900/50">
           <div className="bg-white rounded-xl shadow-xl max-w-sm w-full p-6 text-center">
             <AlertTriangle className="w-12 h-12 text-red-500 mx-auto mb-4" />
-            <h3 className="text-lg font-semibold text-charcoal-900 mb-2">
+            <h3 className="text-lg font-semibold text-text-900 mb-2">
               Delete Account?
             </h3>
             <p className="text-sm text-muted-600 mb-4">
@@ -409,13 +409,13 @@ export default function SettingsPage() {
               value={deletePassword}
               onChange={(e) => setDeletePassword(e.target.value)}
               placeholder="Enter your password"
-              className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm mb-4 focus:ring-2 focus:ring-red-500"
+              className="w-full px-3 py-2 border border-accent-200 rounded-lg text-sm mb-4 focus:ring-2 focus:ring-red-500"
             />
             <div className="flex gap-3">
               <button
                 type="button"
                 onClick={() => setShowDeleteModal(false)}
-                className="flex-1 px-4 py-2.5 border border-blush-200 rounded-lg text-sm font-medium text-charcoal-700"
+                className="flex-1 px-4 py-2.5 border border-accent-200 rounded-lg text-sm font-medium text-text-700"
               >
                 Cancel
               </button>

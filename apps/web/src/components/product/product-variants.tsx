@@ -23,7 +23,7 @@ export function ProductVariants({
 
   return (
     <div className={cn("space-y-3", className)}>
-      <label className="block text-sm font-medium text-charcoal-700">
+      <label className="block text-sm font-medium text-text-700">
         Variant
       </label>
       <div className="flex flex-wrap gap-2">
@@ -36,8 +36,8 @@ export function ProductVariants({
             className={cn(
               "px-4 py-2 rounded-lg text-sm font-medium border transition-colors",
               selectedVariantId === variant.id
-                ? "border-rose-500 bg-rose-50 text-rose-700"
-                : "border-blush-300 text-charcoal-700 hover:border-muted-400",
+                ? "border-primary-500 bg-primary-50 text-primary-700"
+                : "border-accent-300 text-text-700 hover:border-muted-400",
               variant.quantity === 0 &&
                 "opacity-40 cursor-not-allowed line-through",
             )}

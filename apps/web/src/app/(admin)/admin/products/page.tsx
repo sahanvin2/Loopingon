@@ -57,7 +57,7 @@ export default function AdminProductsPage() {
       animate={{ opacity: 1, y: 0 }}
       className="space-y-6"
     >
-      <h1 className="text-2xl font-bold text-charcoal-900">
+      <h1 className="text-2xl font-bold text-text-900">
         Product Moderation
       </h1>
 
@@ -69,13 +69,13 @@ export default function AdminProductsPage() {
             placeholder="Search products..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 border border-blush-200 rounded-lg text-sm focus:ring-2 focus:ring-rose-500"
+            className="w-full pl-10 pr-4 py-2 border border-accent-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500"
           />
         </div>
         <select
           value={status}
           onChange={(e) => { setStatus(e.target.value); setPage(1); }}
-          className="px-3 py-2 border border-blush-200 rounded-lg text-sm"
+          className="px-3 py-2 border border-accent-200 rounded-lg text-sm"
         >
           {statusFilters.map((f) => (
             <option key={f.key} value={f.key}>{f.label}</option>
@@ -109,11 +109,11 @@ export default function AdminProductsPage() {
             {
               header: "Image",
               accessor: (row: Product) => (
-                <div className="w-12 h-12 rounded-md border overflow-hidden bg-cream-50">
+                <div className="w-12 h-12 rounded-md border overflow-hidden bg-surface-50">
                   {row.images?.[0]?.url ? (
                     <img src={row.images[0].url} alt={row.title} className="w-full h-full object-cover" />
                   ) : (
-                    <div className="w-full h-full bg-cream-50" />
+                    <div className="w-full h-full bg-surface-50" />
                   )}
                 </div>
               ),
@@ -123,7 +123,7 @@ export default function AdminProductsPage() {
               header: "Title",
               accessor: (row: Product) => (
                 <div>
-                  <p className="text-sm font-medium text-charcoal-900">{row.title}</p>
+                  <p className="text-sm font-medium text-text-900">{row.title}</p>
                   <p className="text-xs text-muted-500">{row.vendor?.storeName}</p>
                 </div>
               ),

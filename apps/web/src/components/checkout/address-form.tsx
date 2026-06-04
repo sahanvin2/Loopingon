@@ -74,7 +74,7 @@ export function AddressForm({
   return (
     <form onSubmit={handleSubmit} className={cn("space-y-4", className)}>
       <div>
-        <label className="block text-sm font-medium text-charcoal-700 mb-1">
+        <label className="block text-sm font-medium text-text-700 mb-1">
           Full Name <span className="text-red-500">*</span>
         </label>
         <input
@@ -83,8 +83,8 @@ export function AddressForm({
           onChange={(e) => updateField("fullName", e.target.value)}
           className={cn(
             "w-full px-3 py-2.5 rounded-lg border text-sm",
-            errors.fullName ? "border-red-500" : "border-blush-300",
-            "focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent",
+            errors.fullName ? "border-red-500" : "border-accent-300",
+            "focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent",
           )}
           placeholder="Full name"
         />
@@ -92,7 +92,7 @@ export function AddressForm({
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-charcoal-700 mb-1">
+        <label className="block text-sm font-medium text-text-700 mb-1">
           Phone <span className="text-red-500">*</span>
         </label>
         <input
@@ -101,8 +101,8 @@ export function AddressForm({
           onChange={(e) => updateField("phone", e.target.value)}
           className={cn(
             "w-full px-3 py-2.5 rounded-lg border text-sm",
-            errors.phone ? "border-red-500" : "border-blush-300",
-            "focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent",
+            errors.phone ? "border-red-500" : "border-accent-300",
+            "focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent",
           )}
           placeholder="+94 XXX XXX XXXX"
         />
@@ -110,7 +110,7 @@ export function AddressForm({
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-charcoal-700 mb-1">
+        <label className="block text-sm font-medium text-text-700 mb-1">
           Address Line 1 <span className="text-red-500">*</span>
         </label>
         <input
@@ -119,8 +119,8 @@ export function AddressForm({
           onChange={(e) => updateField("addressLine1", e.target.value)}
           className={cn(
             "w-full px-3 py-2.5 rounded-lg border text-sm",
-            errors.addressLine1 ? "border-red-500" : "border-blush-300",
-            "focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent",
+            errors.addressLine1 ? "border-red-500" : "border-accent-300",
+            "focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent",
           )}
           placeholder="Street address, house number"
         />
@@ -128,7 +128,7 @@ export function AddressForm({
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-charcoal-700 mb-1">
+        <label className="block text-sm font-medium text-text-700 mb-1">
           Address Line 2
         </label>
         <input
@@ -136,8 +136,8 @@ export function AddressForm({
           value={form.addressLine2}
           onChange={(e) => updateField("addressLine2", e.target.value)}
           className={cn(
-            "w-full px-3 py-2.5 rounded-lg border border-blush-300 text-sm",
-            "focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent",
+            "w-full px-3 py-2.5 rounded-lg border border-accent-300 text-sm",
+            "focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent",
           )}
           placeholder="Apartment, landmark (optional)"
         />
@@ -145,7 +145,7 @@ export function AddressForm({
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-charcoal-700 mb-1">
+          <label className="block text-sm font-medium text-text-700 mb-1">
             City <span className="text-red-500">*</span>
           </label>
           <input
@@ -154,8 +154,8 @@ export function AddressForm({
             onChange={(e) => updateField("city", e.target.value)}
             className={cn(
               "w-full px-3 py-2.5 rounded-lg border text-sm",
-              errors.city ? "border-red-500" : "border-blush-300",
-              "focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent",
+              errors.city ? "border-red-500" : "border-accent-300",
+              "focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent",
             )}
             placeholder="City"
           />
@@ -163,7 +163,7 @@ export function AddressForm({
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-charcoal-700 mb-1">
+          <label className="block text-sm font-medium text-text-700 mb-1">
             District <span className="text-red-500">*</span>
           </label>
           <select
@@ -171,8 +171,8 @@ export function AddressForm({
             onChange={(e) => updateField("district", e.target.value)}
             className={cn(
               "w-full px-3 py-2.5 rounded-lg border text-sm bg-white",
-              errors.district ? "border-red-500" : "border-blush-300",
-              "focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent",
+              errors.district ? "border-red-500" : "border-accent-300",
+              "focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent",
             )}
           >
             <option value="">Select district</option>
@@ -187,7 +187,7 @@ export function AddressForm({
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-charcoal-700 mb-1">
+        <label className="block text-sm font-medium text-text-700 mb-1">
           Postal Code
         </label>
         <input
@@ -195,15 +195,15 @@ export function AddressForm({
           value={form.postalCode}
           onChange={(e) => updateField("postalCode", e.target.value)}
           className={cn(
-            "w-full px-3 py-2.5 rounded-lg border border-blush-300 text-sm",
-            "focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent",
+            "w-full px-3 py-2.5 rounded-lg border border-accent-300 text-sm",
+            "focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent",
           )}
           placeholder="Postal code"
         />
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-charcoal-700 mb-1">
+        <label className="block text-sm font-medium text-text-700 mb-1">
           Delivery Notes
         </label>
         <textarea
@@ -211,8 +211,8 @@ export function AddressForm({
           onChange={(e) => updateField("deliveryNotes", e.target.value)}
           rows={2}
           className={cn(
-            "w-full px-3 py-2.5 rounded-lg border border-blush-300 text-sm resize-none",
-            "focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent",
+            "w-full px-3 py-2.5 rounded-lg border border-accent-300 text-sm resize-none",
+            "focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent",
           )}
           placeholder="Instructions for delivery (optional)"
         />
@@ -223,9 +223,9 @@ export function AddressForm({
           type="checkbox"
           checked={form.saveAddress}
           onChange={(e) => updateField("saveAddress", e.target.checked)}
-          className="w-4 h-4 rounded border-blush-300 text-rose-600 focus:ring-rose-500"
+          className="w-4 h-4 rounded border-accent-300 text-primary-600 focus:ring-primary-500"
         />
-        <span className="text-sm text-charcoal-700">Save this address for future orders</span>
+        <span className="text-sm text-text-700">Save this address for future orders</span>
       </label>
 
       <div className="flex gap-3 pt-2">
@@ -233,7 +233,7 @@ export function AddressForm({
           type="submit"
           className={cn(
             "flex-1 py-2.5 rounded-lg text-sm font-medium transition-colors",
-            "bg-rose-600 text-white hover:bg-rose-700",
+            "bg-primary-600 text-white hover:bg-primary-700",
           )}
         >
           Save Address
@@ -244,7 +244,7 @@ export function AddressForm({
             onClick={onCancel}
             className={cn(
               "px-6 py-2.5 rounded-lg text-sm font-medium transition-colors",
-              "border border-blush-300 text-charcoal-700 hover:bg-blush-50",
+              "border border-accent-300 text-text-700 hover:bg-accent-50",
             )}
           >
             Cancel

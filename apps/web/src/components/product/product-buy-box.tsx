@@ -50,7 +50,7 @@ export function ProductBuyBox({ product }: ProductBuyBoxProps) {
   };
 
   return (
-    <div className="space-y-6 pt-6 mt-6 border-t border-blush-200">
+    <div className="space-y-6 pt-6 mt-6 border-t border-accent-200">
       {/* Price Section */}
       <div>
         {discount > 0 ? (
@@ -66,7 +66,7 @@ export function ProductBuyBox({ product }: ProductBuyBoxProps) {
             </span>
           </div>
         ) : (
-          <span className="text-3xl sm:text-4xl font-semibold text-charcoal-900 tracking-tight">
+          <span className="text-3xl sm:text-4xl font-semibold text-text-900 tracking-tight">
             {formatPrice(price)}
           </span>
         )}
@@ -79,21 +79,21 @@ export function ProductBuyBox({ product }: ProductBuyBoxProps) {
 
       {/* Quantity Selector */}
       <div className="flex flex-col gap-2">
-        <label className="text-xs tracking-wider uppercase font-medium text-charcoal-500">Quantity</label>
-        <div className="flex items-center w-fit border border-charcoal-200 rounded-none overflow-hidden">
+        <label className="text-xs tracking-wider uppercase font-medium text-text-500">Quantity</label>
+        <div className="flex items-center w-fit border border-text-200 rounded-none overflow-hidden">
           <button
             type="button"
             onClick={() => setQuantity((q) => Math.max(1, q - 1))}
             disabled={quantity <= 1}
             className={cn(
-              "p-3 bg-white text-charcoal-600 hover:bg-blush-50 hover:text-charcoal-900 transition-colors",
+              "p-3 bg-white text-text-600 hover:bg-accent-50 hover:text-text-900 transition-colors",
               "disabled:opacity-50 disabled:cursor-not-allowed",
             )}
             aria-label="Decrease quantity"
           >
             <Minus className="w-4 h-4" />
           </button>
-          <span className="w-12 text-center bg-white text-charcoal-900 font-medium text-sm select-none border-x border-charcoal-200 py-3">
+          <span className="w-12 text-center bg-white text-text-900 font-medium text-sm select-none border-x border-text-200 py-3">
             {quantity}
           </span>
           <button
@@ -101,7 +101,7 @@ export function ProductBuyBox({ product }: ProductBuyBoxProps) {
             onClick={() => setQuantity((q) => q + 1)}
             disabled={quantity >= product.quantity && !product.madeToOrder}
             className={cn(
-              "p-3 bg-white text-charcoal-600 hover:bg-blush-50 hover:text-charcoal-900 transition-colors",
+              "p-3 bg-white text-text-600 hover:bg-accent-50 hover:text-text-900 transition-colors",
               "disabled:opacity-50 disabled:cursor-not-allowed",
             )}
             aria-label="Increase quantity"
@@ -118,8 +118,8 @@ export function ProductBuyBox({ product }: ProductBuyBoxProps) {
           onClick={handleAddToCart}
           disabled={addToCart.isPending || product.quantity === 0}
           className={cn(
-            "w-full py-4 bg-charcoal-900 text-white text-sm tracking-[0.1em] uppercase font-medium",
-            "transition-all duration-300 hover:bg-rose-700",
+            "w-full py-4 bg-text-900 text-white text-sm tracking-[0.1em] uppercase font-medium",
+            "transition-all duration-300 hover:bg-primary-700",
             "disabled:opacity-50 disabled:cursor-not-allowed",
           )}
         >
@@ -135,8 +135,8 @@ export function ProductBuyBox({ product }: ProductBuyBoxProps) {
           onClick={handleBuyNow}
           disabled={product.quantity === 0}
           className={cn(
-            "w-full py-4 border border-charcoal-900 text-charcoal-900 text-sm tracking-[0.1em] uppercase font-medium",
-            "transition-all duration-300 hover:bg-blush-50",
+            "w-full py-4 border border-text-900 text-text-900 text-sm tracking-[0.1em] uppercase font-medium",
+            "transition-all duration-300 hover:bg-accent-50",
             "disabled:opacity-50 disabled:cursor-not-allowed",
           )}
         >
@@ -152,8 +152,8 @@ export function ProductBuyBox({ product }: ProductBuyBoxProps) {
           className={cn(
             "w-full py-3 text-xs tracking-wider uppercase font-medium transition-colors flex items-center justify-center gap-2",
             isWishlisted
-              ? "text-rose-600"
-              : "text-charcoal-600 hover:text-rose-600",
+              ? "text-primary-600"
+              : "text-text-600 hover:text-primary-600",
           )}
         >
           <Heart
@@ -167,12 +167,12 @@ export function ProductBuyBox({ product }: ProductBuyBoxProps) {
       </div>
 
       {/* Shipping Info */}
-      <div className="space-y-4 pt-6 mt-6 border-t border-blush-200">
-        <div className="flex items-start gap-4 text-sm text-charcoal-600">
-          <Truck className="w-5 h-5 text-charcoal-400 shrink-0" />
+      <div className="space-y-4 pt-6 mt-6 border-t border-accent-200">
+        <div className="flex items-start gap-4 text-sm text-text-600">
+          <Truck className="w-5 h-5 text-text-400 shrink-0" />
           <span className="leading-relaxed">
             {product.freeShippingDomestic ? (
-              <span className="font-medium text-charcoal-900">Complimentary domestic delivery</span>
+              <span className="font-medium text-text-900">Complimentary domestic delivery</span>
             ) : (
               "Shipping calculated at checkout"
             )}
@@ -180,12 +180,12 @@ export function ProductBuyBox({ product }: ProductBuyBoxProps) {
             <span className="text-muted-500">Est. 5-7 business days</span>
           </span>
         </div>
-        <div className="flex items-start gap-4 text-sm text-charcoal-600">
-          <RotateCcw className="w-5 h-5 text-charcoal-400 shrink-0" />
+        <div className="flex items-start gap-4 text-sm text-text-600">
+          <RotateCcw className="w-5 h-5 text-text-400 shrink-0" />
           <span className="leading-relaxed">Easy Returns & Replacements</span>
         </div>
-        <div className="flex items-start gap-4 text-sm text-charcoal-600">
-          <Shield className="w-5 h-5 text-charcoal-400 shrink-0" />
+        <div className="flex items-start gap-4 text-sm text-text-600">
+          <Shield className="w-5 h-5 text-text-400 shrink-0" />
           <span className="leading-relaxed">Secure transaction guarantee</span>
         </div>
       </div>

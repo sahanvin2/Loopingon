@@ -33,16 +33,16 @@ export default function VendorLayout({
 
   if (isLoading || !isAuthenticated) {
     return (
-      <div className="min-h-screen bg-cream-50 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-rose-600" />
+      <div className="min-h-screen bg-surface-50 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600" />
       </div>
     );
   }
 
   if (user?.role !== "VENDOR") {
     return (
-      <div className="min-h-screen bg-cream-50 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-rose-600" />
+      <div className="min-h-screen bg-surface-50 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600" />
       </div>
     );
   }
@@ -53,7 +53,7 @@ export default function VendorLayout({
   const vendorStatus = user?.vendor?.status === "VERIFIED" ? "Verified" : "Pending";
 
   return (
-    <div className="min-h-screen bg-cream-50 flex">
+    <div className="min-h-screen bg-surface-50 flex">
       <Sidebar variant="vendor" className="hidden md:flex" />
 
       <AnimatePresence>
@@ -65,7 +65,7 @@ export default function VendorLayout({
             className="fixed inset-0 z-50 md:hidden"
           >
             <div
-              className="absolute inset-0 bg-charcoal-900/50"
+              className="absolute inset-0 bg-text-900/50"
               onClick={() => setMobileMenuOpen(false)}
             />
             <motion.div
@@ -82,18 +82,18 @@ export default function VendorLayout({
       </AnimatePresence>
 
       <div className="flex-1 flex flex-col min-w-0">
-        <header className="sticky top-0 z-30 bg-white/80 backdrop-blur-md border-b border-blush-200">
+        <header className="sticky top-0 z-30 bg-white/80 backdrop-blur-md border-b border-accent-200">
           <div className="flex items-center justify-between px-6 py-3">
             <button
               type="button"
               onClick={() => setMobileMenuOpen(true)}
-              className="md:hidden p-2 rounded-lg text-muted-600 hover:bg-cream-50"
+              className="md:hidden p-2 rounded-lg text-muted-600 hover:bg-surface-50"
             >
               <Menu className="w-5 h-5" />
             </button>
 
             <div className="flex items-center gap-3 hidden md:flex">
-              <h1 className="text-lg font-semibold text-charcoal-900">
+              <h1 className="text-lg font-semibold text-text-900">
                 {user?.vendor?.storeName || "My Store"}
               </h1>
               <Badge
@@ -108,7 +108,7 @@ export default function VendorLayout({
               <button
                 type="button"
                 onClick={() => setUserMenuOpen(!userMenuOpen)}
-                className="flex items-center gap-2 p-1 rounded-lg hover:bg-cream-50 transition-colors"
+                className="flex items-center gap-2 p-1 rounded-lg hover:bg-surface-50 transition-colors"
               >
                 <div
                   className={cn(
@@ -118,7 +118,7 @@ export default function VendorLayout({
                 >
                   {initials}
                 </div>
-                <span className="text-sm text-charcoal-700 hidden sm:block">
+                <span className="text-sm text-text-700 hidden sm:block">
                   {firstName}
                 </span>
                 <ChevronDown className="w-3.5 h-3.5 text-muted-500 hidden sm:block" />
@@ -130,10 +130,10 @@ export default function VendorLayout({
                     initial={{ opacity: 0, y: 8, scale: 0.95 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 8, scale: 0.95 }}
-                    className="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-blush-200 py-1 z-50"
+                    className="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-accent-200 py-1 z-50"
                   >
-                    <div className="px-4 py-3 border-b border-blush-100">
-                      <p className="text-sm font-medium text-charcoal-900">
+                    <div className="px-4 py-3 border-b border-accent-100">
+                      <p className="text-sm font-medium text-text-900">
                         {user?.fullName}
                       </p>
                       <p className="text-xs text-muted-500">

@@ -7,12 +7,12 @@ export const metadata: Metadata = {
 
 export default function CookiePolicyPage() {
   return (
-    <div className="bg-cream-50 py-16">
+    <div className="bg-surface-50 py-16">
       <div className="mx-auto max-w-3xl px-4">
-        <h1 className="font-serif text-4xl font-bold text-charcoal-900">Cookie Policy</h1>
+        <h1 className="font-serif text-4xl font-bold text-text-900">Cookie Policy</h1>
         <p className="mt-2 text-sm text-muted-500">Last updated: June 2026</p>
 
-        <div className="mt-10 space-y-8 text-sm leading-relaxed text-muted-700 [&_h2]:font-serif [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-charcoal-900 [&_h3]:font-semibold [&_h3]:text-charcoal-800 [&_p]:mt-3 [&_ul]:mt-3 [&_ul]:list-disc [&_ul]:pl-6 [&_table]:w-full [&_table]:mt-4 [&_th]:border [&_th]:border-charcoal-200 [&_th]:px-4 [&_th]:py-2 [&_th]:bg-cream-50 [&_th]:text-left [&_td]:border [&_td]:border-charcoal-200 [&_td]:px-4 [&_td]:py-2">
+        <div className="mt-10 space-y-8 text-sm leading-relaxed text-muted-700 [&_h2]:font-serif [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-text-900 [&_h3]:font-semibold [&_h3]:text-text-800 [&_p]:mt-3 [&_ul]:mt-3 [&_ul]:list-disc [&_ul]:pl-6 [&_table]:w-full [&_table]:mt-4 [&_th]:border [&_th]:border-text-200 [&_th]:px-4 [&_th]:py-2 [&_th]:bg-surface-50 [&_th]:text-left [&_td]:border [&_td]:border-text-200 [&_td]:px-4 [&_td]:py-2">
           <section>
             <h2>What Are Cookies?</h2>
             <p>Cookies are small text files placed on your device when you visit a website. They help websites remember your preferences, keep you logged in, and understand how you use the site. Cookies may be &quot;session cookies&quot; (deleted when you close your browser) or &quot;persistent cookies&quot; (remain until they expire or you delete them).</p>
@@ -34,7 +34,7 @@ export default function CookiePolicyPage() {
           <section>
             <h2>Third-Party Cookies</h2>
             <h3>Google Analytics</h3>
-            <p>We use Google Analytics to understand how visitors interact with our website. Google Analytics uses cookies to collect anonymous usage data. You can opt out at <a href="https://tools.google.com/dlpage/gaoptout" className="text-rose-600 hover:underline" target="_blank" rel="noopener noreferrer">tools.google.com/dlpage/gaoptout</a>.</p>
+            <p>We use Google Analytics to understand how visitors interact with our website. Google Analytics uses cookies to collect anonymous usage data. You can opt out at <a href="https://tools.google.com/dlpage/gaoptout" className="text-primary-600 hover:underline" target="_blank" rel="noopener noreferrer">tools.google.com/dlpage/gaoptout</a>.</p>
             <h3>Facebook Pixel</h3>
             <p>We use Facebook Pixel to measure the effectiveness of our advertising and to show relevant ads to people who have visited our site. You can manage your Facebook ad preferences in your Facebook account settings.</p>
             <h3>Stripe</h3>
@@ -58,7 +58,7 @@ export default function CookiePolicyPage() {
               <li><strong>Safari:</strong> Preferences → Privacy → Cookies and website data</li>
               <li><strong>Edge:</strong> Settings → Cookies and site permissions → Manage and delete cookies</li>
             </ul>
-            <p className="mt-3 rounded-lg bg-blush-50 border border-blush-200 p-4"><strong>Note:</strong> Blocking all cookies may prevent some features from working correctly, including the shopping cart, checkout, and account login.</p>
+            <p className="mt-3 rounded-lg bg-accent-50 border border-accent-200 p-4"><strong>Note:</strong> Blocking all cookies may prevent some features from working correctly, including the shopping cart, checkout, and account login.</p>
           </section>
 
           <section>

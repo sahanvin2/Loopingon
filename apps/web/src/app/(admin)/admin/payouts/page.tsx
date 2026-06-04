@@ -31,14 +31,14 @@ export default function AdminPayoutsPage() {
 
   return (
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
-      <h1 className="text-2xl font-bold text-charcoal-900">Payout Management</h1>
+      <h1 className="text-2xl font-bold text-text-900">Payout Management</h1>
 
       <div className="bg-muted-50 border border-muted-200 rounded-lg p-5 flex items-center justify-between">
         <div>
           <p className="text-sm text-muted-700">Total Pending Payouts</p>
           <p className="text-3xl font-bold text-muted-800">{formatPrice(pendingTotal)}</p>
         </div>
-        <button type="button" onClick={() => processAllMutation.mutate()} disabled={processAllMutation.isPending} className="px-5 py-2.5 bg-rose-600 text-white rounded-lg text-sm font-medium hover:bg-rose-700 disabled:opacity-50">
+        <button type="button" onClick={() => processAllMutation.mutate()} disabled={processAllMutation.isPending} className="px-5 py-2.5 bg-primary-600 text-white rounded-lg text-sm font-medium hover:bg-primary-700 disabled:opacity-50">
           {processAllMutation.isPending ? "Processing..." : "Process All Payouts"}
         </button>
       </div>
@@ -48,10 +48,10 @@ export default function AdminPayoutsPage() {
       ) : payouts.length === 0 ? (
         <EmptyState title="No payouts found" />
       ) : (
-        <div className="bg-white rounded-lg border border-blush-200 overflow-x-auto">
+        <div className="bg-white rounded-lg border border-accent-200 overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-blush-200 bg-cream-50">
+              <tr className="border-b border-accent-200 bg-surface-50">
                 <th className="px-4 py-3 text-left text-xs font-semibold text-muted-500 uppercase">Period</th>
                 <th className="px-4 py-3 text-left text-xs font-semibold text-muted-500 uppercase">Vendor</th>
                 <th className="px-4 py-3 text-right text-xs font-semibold text-muted-500 uppercase">Orders</th>
@@ -62,7 +62,7 @@ export default function AdminPayoutsPage() {
                 <th className="px-4 py-3 text-left text-xs font-semibold text-muted-500 uppercase">Action</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-cream-50">
+            <tbody className="divide-y divide-surface-50">
               {payouts.map((p) => (
                 <tr key={p.id}>
                   <td className="px-4 py-3 text-xs">{formatDate(p.periodStart)} - {formatDate(p.periodEnd)}</td>
@@ -76,7 +76,7 @@ export default function AdminPayoutsPage() {
                   </td>
                   <td className="px-4 py-3">
                     {p.status === "PENDING" && (
-                      <button type="button" className="text-xs font-medium text-rose-600 hover:text-rose-700">Process</button>
+                      <button type="button" className="text-xs font-medium text-primary-600 hover:text-primary-700">Process</button>
                     )}
                   </td>
                 </tr>

@@ -34,13 +34,13 @@ export default function AdminPaymentsPage() {
   return (
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-charcoal-900">Payments</h1>
+        <h1 className="text-2xl font-bold text-text-900">Payments</h1>
         <div className="flex items-center gap-3">
           <div className="relative max-w-xs">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-400" />
-            <input type="text" placeholder="Search transaction..." value={search} onChange={(e) => setSearch(e.target.value)} className="w-full pl-10 pr-4 py-2 border border-blush-200 rounded-lg text-sm focus:ring-2 focus:ring-rose-500" />
+            <input type="text" placeholder="Search transaction..." value={search} onChange={(e) => setSearch(e.target.value)} className="w-full pl-10 pr-4 py-2 border border-accent-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500" />
           </div>
-          <button className="px-4 py-2 bg-white border border-blush-200 rounded-lg text-sm font-medium flex items-center gap-2">
+          <button className="px-4 py-2 bg-white border border-accent-200 rounded-lg text-sm font-medium flex items-center gap-2">
             <Download className="w-4 h-4" /> Export
           </button>
         </div>

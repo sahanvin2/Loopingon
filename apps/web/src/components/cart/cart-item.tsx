@@ -35,7 +35,7 @@ export function CartItem({ item }: CartItemProps) {
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: 20 }}
       className={cn(
-        "flex gap-4 p-4 bg-white rounded-lg border border-blush-200",
+        "flex gap-4 p-4 bg-white rounded-lg border border-accent-200",
         "hover:shadow-sm transition-shadow",
       )}
     >
@@ -56,7 +56,7 @@ export function CartItem({ item }: CartItemProps) {
           <div>
             <Link
               href={`/products/${product.slug}`}
-              className="font-medium text-charcoal-900 hover:text-rose-600 transition-colors line-clamp-2"
+              className="font-medium text-text-900 hover:text-primary-600 transition-colors line-clamp-2"
             >
               {product.title}
             </Link>
@@ -66,7 +66,7 @@ export function CartItem({ item }: CartItemProps) {
               </p>
             )}
           </div>
-          <span className="font-semibold text-rose-600 whitespace-nowrap">
+          <span className="font-semibold text-primary-600 whitespace-nowrap">
             {formatPrice(subtotal)}
           </span>
         </div>
@@ -76,7 +76,7 @@ export function CartItem({ item }: CartItemProps) {
         )}
 
         <div className="flex items-center justify-between mt-3">
-          <div className="flex items-center border border-blush-300 rounded-lg">
+          <div className="flex items-center border border-accent-300 rounded-lg">
             <button
               type="button"
               onClick={() =>
@@ -86,12 +86,12 @@ export function CartItem({ item }: CartItemProps) {
                 })
               }
               disabled={updateCartItem.isPending}
-              className="p-1.5 text-muted-600 hover:text-charcoal-700 disabled:opacity-40"
+              className="p-1.5 text-muted-600 hover:text-text-700 disabled:opacity-40"
               aria-label="Decrease quantity"
             >
               <Minus className="w-3.5 h-3.5" />
             </button>
-            <span className="w-8 text-center text-sm text-charcoal-700 font-medium">
+            <span className="w-8 text-center text-sm text-text-700 font-medium">
               {item.quantity}
             </span>
             <button
@@ -103,7 +103,7 @@ export function CartItem({ item }: CartItemProps) {
                 })
               }
               disabled={updateCartItem.isPending}
-              className="p-1.5 text-muted-600 hover:text-charcoal-700 disabled:opacity-40"
+              className="p-1.5 text-muted-600 hover:text-text-700 disabled:opacity-40"
               aria-label="Increase quantity"
             >
               <Plus className="w-3.5 h-3.5" />
@@ -113,7 +113,7 @@ export function CartItem({ item }: CartItemProps) {
           <div className="flex items-center gap-3">
             <button
               type="button"
-              className="text-xs text-muted-500 hover:text-rose-600 transition-colors flex items-center gap-1"
+              className="text-xs text-muted-500 hover:text-primary-600 transition-colors flex items-center gap-1"
               aria-label="Save for later"
             >
               <Heart className="w-3.5 h-3.5" /> Save

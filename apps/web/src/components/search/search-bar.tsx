@@ -75,7 +75,7 @@ export function SearchBar({
         className={cn(
           "flex items-center rounded-full border bg-white transition-all duration-300",
           isFocused || expanded
-            ? "w-full ring-2 ring-rose-500 border-transparent"
+            ? "w-full ring-2 ring-primary-500 border-transparent"
             : "border-muted-300 w-full max-w-md",
         )}
       >
@@ -95,7 +95,7 @@ export function SearchBar({
           placeholder="Search handmade treasures..."
           className={cn(
             "w-full pl-10 pr-12 py-2.5 rounded-full text-sm bg-transparent",
-            "text-charcoal-700 placeholder:text-muted-400",
+            "text-text-700 placeholder:text-muted-400",
             "focus:outline-none",
           )}
           aria-label="Search products"
@@ -105,7 +105,7 @@ export function SearchBar({
           <button
             type="button"
             onClick={handleClear}
-            className="absolute right-14 top-1/2 -translate-y-1/2 p-1 text-muted-400 hover:text-charcoal-600"
+            className="absolute right-14 top-1/2 -translate-y-1/2 p-1 text-muted-400 hover:text-text-600"
             aria-label="Clear search"
           >
             <X className="w-3.5 h-3.5" />

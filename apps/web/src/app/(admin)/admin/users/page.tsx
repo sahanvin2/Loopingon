@@ -46,7 +46,7 @@ export default function AdminUsersPage() {
       className="space-y-6"
     >
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-charcoal-900">
+        <h1 className="text-2xl font-bold text-text-900">
           User Management
         </h1>
         <div className="relative max-w-xs">
@@ -56,7 +56,7 @@ export default function AdminUsersPage() {
             placeholder="Search users..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 border border-blush-200 rounded-lg text-sm focus:ring-2 focus:ring-rose-500"
+            className="w-full pl-10 pr-4 py-2 border border-accent-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500"
           />
         </div>
       </div>
@@ -76,7 +76,7 @@ export default function AdminUsersPage() {
                     {(row.fullName?.charAt(0) || "?").toUpperCase()}
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-charcoal-900">
+                    <p className="text-sm font-medium text-text-900">
                       {row.fullName}
                     </p>
                     <p className="text-xs text-muted-500">{row.email}</p>
@@ -132,7 +132,7 @@ export default function AdminUsersPage() {
                 <div className="flex items-center gap-1">
                   <Link
                     href={`/admin/users/${row.id}`}
-                    className="px-2 py-1 text-xs font-medium text-rose-600 hover:bg-rose-50 rounded"
+                    className="px-2 py-1 text-xs font-medium text-primary-600 hover:bg-primary-50 rounded"
                   >
                     View
                   </Link>

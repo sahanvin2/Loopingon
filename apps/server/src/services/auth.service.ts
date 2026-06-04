@@ -66,7 +66,7 @@ export async function signup(data: {
 
   const tokenPayload: TokenPayload = { sub: user.id, email: user.email, role: user.role };
   const accessToken = signAccessToken(tokenPayload);
-  const refreshToken = signRefreshToken(tokenPayload, generateTokenFamily());
+  const refreshToken = signRefreshToken(tokenPayload);
 
   await prisma.refreshToken.create({
     data: {

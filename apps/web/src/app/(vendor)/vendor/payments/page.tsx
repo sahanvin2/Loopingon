@@ -45,7 +45,7 @@ export default function VendorPaymentsPage() {
       animate={{ opacity: 1, y: 0 }}
       className="space-y-6"
     >
-      <h1 className="text-2xl font-bold text-charcoal-900">
+      <h1 className="text-2xl font-bold text-text-900">
         Payments & Payouts
       </h1>
 
@@ -71,8 +71,8 @@ export default function VendorPaymentsPage() {
         </div>
       </div>
 
-      <div className="bg-white rounded-xl border border-blush-200 p-6">
-        <h2 className="text-lg font-semibold text-charcoal-900 mb-4">
+      <div className="bg-white rounded-xl border border-accent-200 p-6">
+        <h2 className="text-lg font-semibold text-text-900 mb-4">
           Payout History
         </h2>
 
@@ -87,7 +87,7 @@ export default function VendorPaymentsPage() {
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-blush-200">
+                <tr className="border-b border-accent-200">
                   <th className="px-4 py-3 text-left text-xs font-semibold text-muted-500 uppercase">
                     Period
                   </th>
@@ -114,18 +114,18 @@ export default function VendorPaymentsPage() {
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-cream-50">
+              <tbody className="divide-y divide-surface-50">
                 {payouts.map((payout) => {
                   const statusInfo = payoutStatusColors[payout.status] || payoutStatusColors.PENDING;
                   return (
                     <tr key={payout.id}>
-                      <td className="px-4 py-3 text-xs text-charcoal-700">
+                      <td className="px-4 py-3 text-xs text-text-700">
                         {formatDate(payout.periodStart)} - {formatDate(payout.periodEnd)}
                       </td>
-                      <td className="px-4 py-3 text-sm text-charcoal-700 text-right">
+                      <td className="px-4 py-3 text-sm text-text-700 text-right">
                         {payout.totalOrders}
                       </td>
-                      <td className="px-4 py-3 text-sm text-charcoal-700 text-right">
+                      <td className="px-4 py-3 text-sm text-text-700 text-right">
                         {formatPrice(Number(payout.totalRevenue))}
                       </td>
                       <td className="px-4 py-3 text-sm text-red-600 text-right">
@@ -147,7 +147,7 @@ export default function VendorPaymentsPage() {
                       <td className="px-4 py-3">
                         <button
                           type="button"
-                          className="p-1.5 text-muted-500 hover:text-rose-600 rounded"
+                          className="p-1.5 text-muted-500 hover:text-primary-600 rounded"
                           aria-label="Download report"
                         >
                           <Download className="w-4 h-4" />

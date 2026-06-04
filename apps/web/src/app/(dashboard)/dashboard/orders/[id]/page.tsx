@@ -94,16 +94,16 @@ export default function OrderDetailPage() {
     >
       <Link
         href="/dashboard/orders"
-        className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-600 hover:text-charcoal-700 transition-colors"
+        className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-600 hover:text-text-700 transition-colors"
       >
         <ArrowLeft className="w-4 h-4" />
         Back to My Orders
       </Link>
 
-      <div className="bg-white rounded-xl border border-blush-200 p-6">
+      <div className="bg-white rounded-xl border border-accent-200 p-6">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-6">
           <div>
-            <h1 className="text-xl font-mono font-bold text-charcoal-900">
+            <h1 className="text-xl font-mono font-bold text-text-900">
               {order.orderNumber}
             </h1>
             <p className="text-sm text-muted-500 mt-1">
@@ -133,8 +133,8 @@ export default function OrderDetailPage() {
       </div>
 
       {order.trackingNumber && (
-        <div className="bg-white rounded-xl border border-blush-200 p-6">
-          <h2 className="text-lg font-semibold text-charcoal-900 mb-4">Tracking</h2>
+        <div className="bg-white rounded-xl border border-accent-200 p-6">
+          <h2 className="text-lg font-semibold text-text-900 mb-4">Tracking</h2>
           <div className="flex flex-col sm:flex-row items-start justify-between gap-4">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-muted-100 text-muted-600 flex items-center justify-center">
@@ -145,13 +145,13 @@ export default function OrderDetailPage() {
               <div>
                 <p className="text-sm text-muted-600">Tracking Number</p>
                 <div className="flex items-center gap-2">
-                  <span className="font-mono font-semibold text-charcoal-900">
+                  <span className="font-mono font-semibold text-text-900">
                     {order.trackingNumber}
                   </span>
                   <button
                     type="button"
                     onClick={() => handleCopy(order.trackingNumber!)}
-                    className="p-1 rounded hover:bg-cream-50 transition-colors"
+                    className="p-1 rounded hover:bg-surface-50 transition-colors"
                     aria-label="Copy tracking number"
                   >
                     <Copy className="w-3.5 h-3.5 text-muted-500" />
@@ -173,9 +173,9 @@ export default function OrderDetailPage() {
           </div>
 
           {order.estimatedDelivery && (
-            <div className="flex items-center gap-2 mt-4 p-3 bg-cream-50 rounded-lg">
-              <Clock className="w-4 h-4 text-rose-600" />
-              <span className="text-sm text-charcoal-700">
+            <div className="flex items-center gap-2 mt-4 p-3 bg-surface-50 rounded-lg">
+              <Clock className="w-4 h-4 text-primary-600" />
+              <span className="text-sm text-text-700">
                 Estimated Delivery:{" "}
                 <strong>{formatDate(order.estimatedDelivery)}</strong>
               </span>
@@ -184,14 +184,14 @@ export default function OrderDetailPage() {
         </div>
       )}
 
-      <div className="bg-white rounded-xl border border-blush-200 p-6">
-        <h2 className="text-lg font-semibold text-charcoal-900 mb-4">
+      <div className="bg-white rounded-xl border border-accent-200 p-6">
+        <h2 className="text-lg font-semibold text-text-900 mb-4">
           Order Items
         </h2>
-        <div className="divide-y divide-cream-50">
+        <div className="divide-y divide-surface-50">
           {order.items?.map((item) => (
             <div key={item.id} className="py-3 flex items-center gap-4">
-              <div className="w-12 h-12 rounded-md border border-blush-200 overflow-hidden bg-cream-50 flex-shrink-0">
+              <div className="w-12 h-12 rounded-md border border-accent-200 overflow-hidden bg-surface-50 flex-shrink-0">
                 {item.productImage ? (
                   <img
                     src={item.productImage}
@@ -199,18 +199,18 @@ export default function OrderDetailPage() {
                     className="w-full h-full object-cover"
                   />
                 ) : (
-                  <div className="w-full h-full bg-cream-50" />
+                  <div className="w-full h-full bg-surface-50" />
                 )}
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-charcoal-900 truncate">
+                <p className="text-sm font-medium text-text-900 truncate">
                   {item.productTitle}
                 </p>
                 <p className="text-xs text-muted-500">
                   Qty: {item.quantity} x {formatPrice(Number(item.price))}
                 </p>
               </div>
-              <span className="text-sm font-semibold text-charcoal-900">
+              <span className="text-sm font-semibold text-text-900">
                 {formatPrice(Number(item.totalPrice))}
               </span>
             </div>
@@ -219,11 +219,11 @@ export default function OrderDetailPage() {
       </div>
 
       {order.shippingAddress && (
-        <div className="bg-white rounded-xl border border-blush-200 p-6">
-          <h2 className="text-lg font-semibold text-charcoal-900 mb-4">
+        <div className="bg-white rounded-xl border border-accent-200 p-6">
+          <h2 className="text-lg font-semibold text-text-900 mb-4">
             Shipping Address
           </h2>
-          <div className="space-y-1 text-sm text-charcoal-700">
+          <div className="space-y-1 text-sm text-text-700">
             <p className="font-medium">{order.shippingAddress.fullName}</p>
             <p>{order.shippingAddress.addressLine1}</p>
             {order.shippingAddress.addressLine2 && (
@@ -240,26 +240,26 @@ export default function OrderDetailPage() {
         </div>
       )}
 
-      <div className="bg-white rounded-xl border border-blush-200 p-6">
-        <h2 className="text-lg font-semibold text-charcoal-900 mb-4">
+      <div className="bg-white rounded-xl border border-accent-200 p-6">
+        <h2 className="text-lg font-semibold text-text-900 mb-4">
           Payment Info
         </h2>
         <div className="grid grid-cols-2 gap-4 text-sm">
           <div>
             <p className="text-muted-500">Amount</p>
-            <p className="font-semibold text-charcoal-900">
+            <p className="font-semibold text-text-900">
               {formatPrice(Number(order.totalAmount))}
             </p>
           </div>
           <div>
             <p className="text-muted-500">Method</p>
-            <p className="font-semibold text-charcoal-900">
+            <p className="font-semibold text-text-900">
               {order.paymentMethod || "N/A"}
             </p>
           </div>
           <div>
             <p className="text-muted-500">Transaction ID</p>
-            <p className="font-mono text-xs text-charcoal-700 truncate">
+            <p className="font-mono text-xs text-text-700 truncate">
               {order.paymentId || "N/A"}
             </p>
           </div>
@@ -280,7 +280,7 @@ export default function OrderDetailPage() {
       <div className="flex flex-wrap gap-3">
         <Link
           href={`/dashboard/messages?order=${order.id}`}
-          className="inline-flex items-center gap-2 px-5 py-2.5 bg-white border border-blush-200 rounded-lg text-sm font-medium text-charcoal-700 hover:bg-cream-50 transition-colors"
+          className="inline-flex items-center gap-2 px-5 py-2.5 bg-white border border-accent-200 rounded-lg text-sm font-medium text-text-700 hover:bg-surface-50 transition-colors"
         >
           Contact Vendor
         </Link>
@@ -303,7 +303,7 @@ export default function OrderDetailPage() {
         {isEligibleForReturn && (
           <Link
             href={`/dashboard/orders/${order.id}/return`}
-            className="inline-flex items-center gap-2 px-5 py-2.5 bg-rose-600 text-white rounded-lg text-sm font-medium hover:bg-rose-700 transition-colors"
+            className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary-600 text-white rounded-lg text-sm font-medium hover:bg-primary-700 transition-colors"
           >
             Request Return
           </Link>
@@ -312,7 +312,7 @@ export default function OrderDetailPage() {
         {isEligibleForReturn && !order.items?.some((i) => false) && (
           <Link
             href={`/products/${order.items?.[0]?.productId || ""}#review`}
-            className="inline-flex items-center gap-2 px-5 py-2.5 bg-blush-100 border border-blush-200 rounded-lg text-sm font-medium text-blush-700 hover:bg-blush-200 transition-colors"
+            className="inline-flex items-center gap-2 px-5 py-2.5 bg-accent-100 border border-accent-200 rounded-lg text-sm font-medium text-accent-700 hover:bg-accent-200 transition-colors"
           >
             Write a Review
           </Link>
@@ -320,8 +320,8 @@ export default function OrderDetailPage() {
       </div>
 
       {order.statusHistory && order.statusHistory.length > 0 && (
-        <div className="bg-white rounded-xl border border-blush-200 p-6">
-          <h2 className="text-lg font-semibold text-charcoal-900 mb-4">
+        <div className="bg-white rounded-xl border border-accent-200 p-6">
+          <h2 className="text-lg font-semibold text-text-900 mb-4">
             Order Timeline
           </h2>
           <div className="space-y-4">
@@ -332,16 +332,16 @@ export default function OrderDetailPage() {
                     className={cn(
                       "w-2.5 h-2.5 rounded-full border-2",
                       i === 0
-                        ? "bg-rose-600 border-rose-600"
-                        : "bg-cream-50 border-blush-300",
+                        ? "bg-primary-600 border-primary-600"
+                        : "bg-surface-50 border-accent-300",
                     )}
                   />
                   {i < order.statusHistory!.length - 1 && (
-                    <div className="flex-1 w-0.5 bg-cream-200" />
+                    <div className="flex-1 w-0.5 bg-surface-200" />
                   )}
                 </div>
                 <div className="pb-4">
-                  <p className="text-sm font-medium text-charcoal-900">
+                  <p className="text-sm font-medium text-text-900">
                     {ORDER_STATUS_MAP[entry.status]?.label || entry.status}
                   </p>
                   {entry.note && (

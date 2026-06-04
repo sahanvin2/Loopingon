@@ -66,12 +66,12 @@ export default function VendorProductsPage() {
       className="space-y-6"
     >
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <h1 className="text-2xl font-bold text-charcoal-900">
+        <h1 className="text-2xl font-bold text-text-900">
           My Products ({meta?.total || 0})
         </h1>
         <Link
           href="/vendor/products/new"
-          className="inline-flex items-center gap-2 px-5 py-2.5 bg-rose-600 text-white rounded-lg text-sm font-medium hover:bg-rose-700 transition-colors"
+          className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary-600 text-white rounded-lg text-sm font-medium hover:bg-primary-700 transition-colors"
         >
           <Plus className="w-4 h-4" />
           Add Product
@@ -86,7 +86,7 @@ export default function VendorProductsPage() {
             placeholder="Search products..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 border border-blush-200 rounded-lg text-sm focus:ring-2 focus:ring-rose-500"
+            className="w-full pl-10 pr-4 py-2 border border-accent-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500"
           />
         </div>
         <select
@@ -95,7 +95,7 @@ export default function VendorProductsPage() {
             setStatusFilter(e.target.value);
             setPage(1);
           }}
-          className="px-3 py-2 border border-blush-200 rounded-lg text-sm focus:ring-2 focus:ring-rose-500"
+          className="px-3 py-2 border border-accent-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500"
         >
           {statusFilters.map((f) => (
             <option key={f.key} value={f.key}>
@@ -106,8 +106,8 @@ export default function VendorProductsPage() {
       </div>
 
       {selectedRows.size > 0 && (
-        <div className="flex items-center gap-2 p-3 bg-rose-50 border border-rose-200 rounded-lg">
-          <span className="text-sm font-medium text-rose-700">
+        <div className="flex items-center gap-2 p-3 bg-primary-50 border border-primary-200 rounded-lg">
+          <span className="text-sm font-medium text-primary-700">
             {selectedRows.size} selected
           </span>
           <button
@@ -118,7 +118,7 @@ export default function VendorProductsPage() {
           </button>
           <button
             type="button"
-            className="px-3 py-1 text-xs font-medium text-charcoal-600 bg-white hover:bg-cream-50 rounded-md border border-blush-200"
+            className="px-3 py-1 text-xs font-medium text-text-600 bg-white hover:bg-surface-50 rounded-md border border-accent-200"
           >
             Bulk Apply Discount
           </button>
@@ -145,7 +145,7 @@ export default function VendorProductsPage() {
             {
               header: "Image",
               accessor: (row: Product) => (
-                <div className="w-12 h-12 rounded-md border border-blush-200 overflow-hidden bg-cream-50">
+                <div className="w-12 h-12 rounded-md border border-accent-200 overflow-hidden bg-surface-50">
                   {row.images?.[0]?.url ? (
                     <img
                       src={row.images[0].url}
@@ -153,7 +153,7 @@ export default function VendorProductsPage() {
                       className="w-full h-full object-cover"
                     />
                   ) : (
-                    <div className="w-full h-full bg-cream-50" />
+                    <div className="w-full h-full bg-surface-50" />
                   )}
                 </div>
               ),
@@ -163,7 +163,7 @@ export default function VendorProductsPage() {
               header: "Title",
               accessor: (row: Product) => (
                 <div>
-                  <p className="font-medium text-charcoal-900 text-sm">
+                  <p className="font-medium text-text-900 text-sm">
                     {row.title}
                   </p>
                   {row.sku && (
@@ -221,7 +221,7 @@ export default function VendorProductsPage() {
             {
               header: "Rating",
               accessor: (row: Product) => (
-                <span className="text-sm text-blush-600">
+                <span className="text-sm text-accent-600">
                   {(row.averageRating || 0).toFixed(1)}
                 </span>
               ),
@@ -232,7 +232,7 @@ export default function VendorProductsPage() {
                 <div className="flex items-center gap-1">
                   <Link
                     href={`/vendor/products/${row.id}/edit`}
-                    className="px-3 py-1 text-xs font-medium text-rose-600 hover:bg-rose-50 rounded-md"
+                    className="px-3 py-1 text-xs font-medium text-primary-600 hover:bg-primary-50 rounded-md"
                   >
                     Edit
                   </Link>
@@ -264,10 +264,10 @@ export default function VendorProductsPage() {
       )}
 
       {deleteConfirm && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-charcoal-900/50">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-text-900/50">
           <div className="bg-white rounded-xl shadow-xl max-w-sm w-full p-6 text-center">
             <AlertTriangle className="w-12 h-12 text-red-500 mx-auto mb-4" />
-            <h3 className="text-lg font-semibold text-charcoal-900 mb-2">
+            <h3 className="text-lg font-semibold text-text-900 mb-2">
               Delete Product?
             </h3>
             <p className="text-sm text-muted-600 mb-6">
@@ -277,7 +277,7 @@ export default function VendorProductsPage() {
               <button
                 type="button"
                 onClick={() => setDeleteConfirm(null)}
-                className="flex-1 px-4 py-2.5 border border-blush-200 rounded-lg text-sm font-medium text-charcoal-700"
+                className="flex-1 px-4 py-2.5 border border-accent-200 rounded-lg text-sm font-medium text-text-700"
               >
                 Cancel
               </button>

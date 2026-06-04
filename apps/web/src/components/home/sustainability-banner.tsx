@@ -24,7 +24,7 @@ const stats = [
 
 export function SustainabilityBanner() {
   return (
-    <section className="py-24 px-4 relative overflow-hidden bg-gradient-to-br from-rose-900 via-rose-800 to-charcoal-800">
+    <section className="py-24 px-4 relative overflow-hidden bg-gradient-to-br from-primary-900 via-primary-800 to-text-800">
       <div
         className="absolute inset-0 opacity-[0.04]"
         style={{
@@ -34,8 +34,8 @@ export function SustainabilityBanner() {
         }}
       />
 
-      <div className="absolute top-0 right-0 w-96 h-96 bg-rose-400/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-blush-400/10 rounded-full blur-3xl" />
+      <div className="absolute top-0 right-0 w-96 h-96 bg-primary-400/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent-400/10 rounded-full blur-3xl" />
 
       <div className="max-w-6xl mx-auto relative text-center">
         <motion.h2
@@ -67,13 +67,13 @@ export function SustainabilityBanner() {
               transition={{ delay: 0.2 + i * 0.1 }}
               className="flex flex-col items-center"
             >
-              <div className="w-16 h-16 rounded-full bg-rose-500/20 backdrop-blur-sm flex items-center justify-center mb-4 ring-1 ring-rose-400/30">
-                <stat.icon className="w-7 h-7 text-rose-300" />
+              <div className="w-16 h-16 rounded-full bg-primary-500/20 backdrop-blur-sm flex items-center justify-center mb-4 ring-1 ring-primary-400/30">
+                <stat.icon className="w-7 h-7 text-primary-300" />
               </div>
               <span className="font-serif text-4xl text-white font-bold mb-1">
                 {stat.value}
               </span>
-              <span className="text-rose-200/80 text-sm font-medium tracking-wide uppercase mt-2">{stat.label}</span>
+              <span className="text-primary-200/80 text-sm font-medium tracking-wide uppercase mt-2">{stat.label}</span>
             </motion.div>
           ))}
         </div>

@@ -63,7 +63,7 @@ export function MobileNav() {
       {isMobileMenuOpen && (
         <>
           <motion.div
-            className="fixed inset-0 z-40 bg-charcoal-900/50 backdrop-blur-sm lg:hidden"
+            className="fixed inset-0 z-40 bg-text-900/50 backdrop-blur-sm lg:hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -84,18 +84,18 @@ export function MobileNav() {
             aria-label="Mobile navigation"
             aria-modal="true"
           >
-            <div className="flex items-center justify-between px-5 py-4 border-b border-blush-200">
+            <div className="flex items-center justify-between px-5 py-4 border-b border-accent-200">
               <Link
                 href="/"
                 onClick={closeMobileMenu}
-                className="font-serif text-xl text-rose-600 font-bold"
+                className="font-serif text-xl text-primary-600 font-bold"
               >
                 Loopingon
               </Link>
               <button
                 type="button"
                 onClick={closeMobileMenu}
-                className="p-1.5 rounded-lg text-muted-500 hover:text-charcoal-700 hover:bg-muted-100"
+                className="p-1.5 rounded-lg text-muted-500 hover:text-text-700 hover:bg-muted-100"
                 aria-label="Close menu"
               >
                 <X className="w-5 h-5" />
@@ -113,7 +113,7 @@ export function MobileNav() {
                           onClick={() => setCategoriesOpen(!categoriesOpen)}
                           className={cn(
                             "flex items-center gap-3 w-full px-3 py-2.5 rounded-lg",
-                            "text-charcoal-700 hover:bg-blush-50 transition-colors text-sm font-medium",
+                            "text-text-700 hover:bg-accent-50 transition-colors text-sm font-medium",
                           )}
                         >
                           <section.icon className="w-5 h-5 text-muted-500" />
@@ -131,14 +131,14 @@ export function MobileNav() {
                               initial={{ opacity: 0, height: 0 }}
                               animate={{ opacity: 1, height: "auto" }}
                               exit={{ opacity: 0, height: 0 }}
-                              className="overflow-hidden ml-9 border-l-2 border-rose-200 pl-3 mt-1"
+                              className="overflow-hidden ml-9 border-l-2 border-primary-200 pl-3 mt-1"
                             >
                               {categories.map((cat) => (
                                 <Link
                                   key={cat.label}
                                   href={cat.href}
                                   onClick={closeMobileMenu}
-                                  className="block py-2 text-sm text-muted-600 hover:text-rose-600 transition-colors"
+                                  className="block py-2 text-sm text-muted-600 hover:text-primary-600 transition-colors"
                                 >
                                   {cat.label}
                                 </Link>
@@ -153,7 +153,7 @@ export function MobileNav() {
                         onClick={closeMobileMenu}
                         className={cn(
                           "flex items-center gap-3 px-3 py-2.5 rounded-lg",
-                          "text-charcoal-700 hover:bg-blush-50 transition-colors text-sm font-medium",
+                          "text-text-700 hover:bg-accent-50 transition-colors text-sm font-medium",
                         )}
                       >
                         <section.icon className="w-5 h-5 text-muted-500" />
@@ -166,7 +166,7 @@ export function MobileNav() {
 
               {isAuthenticated && (
                 <>
-                  <div className="mt-6 pt-6 border-t border-blush-200">
+                  <div className="mt-6 pt-6 border-t border-accent-200">
                     <p className="px-3 text-xs font-semibold text-muted-500 uppercase tracking-wider mb-2">
                       My Account
                     </p>
@@ -178,7 +178,7 @@ export function MobileNav() {
                             onClick={closeMobileMenu}
                             className={cn(
                               "flex items-center gap-3 px-3 py-2.5 rounded-lg",
-                              "text-charcoal-700 hover:bg-blush-50 transition-colors text-sm font-medium",
+                              "text-text-700 hover:bg-accent-50 transition-colors text-sm font-medium",
                             )}
                           >
                             <link.icon className="w-5 h-5 text-muted-500" />
@@ -197,7 +197,7 @@ export function MobileNav() {
                     onClick={() => { closeMobileMenu(); openModal("signin"); }}
                     className={cn(
                       "flex items-center justify-center gap-2 w-full py-2.5 rounded-lg",
-                      "bg-rose-600 text-white text-sm font-medium hover:bg-rose-700",
+                      "bg-primary-600 text-white text-sm font-medium hover:bg-primary-700",
                     )}
                   >
                     <LogIn className="w-4 h-4" />
@@ -207,7 +207,7 @@ export function MobileNav() {
               )}
             </nav>
 
-            <div className="sticky bottom-0 bg-white border-t border-blush-200 px-4 py-3 flex items-center gap-3">
+            <div className="sticky bottom-0 bg-white border-t border-accent-200 px-4 py-3 flex items-center gap-3">
               <LanguageSwitcher />
               <CurrencySwitcher />
             </div>

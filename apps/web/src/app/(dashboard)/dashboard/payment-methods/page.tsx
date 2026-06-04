@@ -53,7 +53,7 @@ export default function PaymentMethodsPage() {
       className="space-y-6"
     >
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-charcoal-900">
+        <h1 className="text-2xl font-bold text-text-900">
           Payment Methods
         </h1>
       </div>
@@ -70,14 +70,14 @@ export default function PaymentMethodsPage() {
           {cards.map((card) => (
             <div
               key={card.id}
-              className="bg-white rounded-lg border border-blush-200 p-5 flex items-center justify-between"
+              className="bg-white rounded-lg border border-accent-200 p-5 flex items-center justify-between"
             >
               <div className="flex items-center gap-4">
-                <div className="w-12 h-8 rounded bg-gradient-to-r from-charcoal-700 to-charcoal-900 flex items-center justify-center text-white text-xs font-bold">
+                <div className="w-12 h-8 rounded bg-gradient-to-r from-text-700 to-text-900 flex items-center justify-center text-white text-xs font-bold">
                   {cardIcons[card.cardType?.toLowerCase()] || card.cardType}
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-charcoal-900">
+                  <p className="text-sm font-medium text-text-900">
                     •••• {card.lastFour}
                   </p>
                   <p className="text-xs text-muted-500">
@@ -113,7 +113,7 @@ export default function PaymentMethodsPage() {
           <button
             type="button"
             onClick={() => setShowAddCard(true)}
-            className="w-full flex items-center justify-center gap-2 p-4 border-2 border-dashed border-blush-300 rounded-lg hover:border-rose-300 hover:bg-rose-50/30 transition-all"
+            className="w-full flex items-center justify-center gap-2 p-4 border-2 border-dashed border-accent-300 rounded-lg hover:border-primary-300 hover:bg-primary-50/30 transition-all"
           >
             <Plus className="w-5 h-5 text-muted-500" />
             <span className="text-sm font-medium text-muted-600">
@@ -121,7 +121,7 @@ export default function PaymentMethodsPage() {
             </span>
           </button>
 
-          <div className="p-4 bg-cream-50 rounded-lg">
+          <div className="p-4 bg-surface-50 rounded-lg">
             <p className="text-xs text-muted-500 text-center">
               Cards are tokenized securely via PayHere. We never store your full
               card details.
@@ -139,7 +139,7 @@ export default function PaymentMethodsPage() {
             className="fixed inset-0 z-50 flex items-center justify-center p-4"
           >
             <div
-              className="absolute inset-0 bg-charcoal-900/50"
+              className="absolute inset-0 bg-text-900/50"
               onClick={() => setShowAddCard(false)}
             />
             <motion.div
@@ -148,7 +148,7 @@ export default function PaymentMethodsPage() {
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               className="relative bg-white rounded-xl shadow-xl max-w-md w-full p-6"
             >
-              <h2 className="text-lg font-semibold text-charcoal-900 mb-4">
+              <h2 className="text-lg font-semibold text-text-900 mb-4">
                 Add New Card
               </h2>
               <p className="text-sm text-muted-500 mb-6 text-center py-8">
@@ -158,7 +158,7 @@ export default function PaymentMethodsPage() {
               <button
                 type="button"
                 onClick={() => setShowAddCard(false)}
-                className="w-full px-4 py-2.5 border border-blush-200 rounded-lg text-sm font-medium text-charcoal-700 hover:bg-cream-50 transition-colors"
+                className="w-full px-4 py-2.5 border border-accent-200 rounded-lg text-sm font-medium text-text-700 hover:bg-surface-50 transition-colors"
               >
                 Cancel
               </button>
@@ -176,7 +176,7 @@ export default function PaymentMethodsPage() {
             className="fixed inset-0 z-50 flex items-center justify-center p-4"
           >
             <div
-              className="absolute inset-0 bg-charcoal-900/50"
+              className="absolute inset-0 bg-text-900/50"
               onClick={() => setDeletingId(null)}
             />
             <motion.div
@@ -186,7 +186,7 @@ export default function PaymentMethodsPage() {
               className="relative bg-white rounded-xl shadow-xl max-w-sm w-full p-6 text-center"
             >
               <AlertTriangle className="w-12 h-12 text-red-500 mx-auto mb-4" />
-              <h3 className="text-lg font-semibold text-charcoal-900 mb-2">
+              <h3 className="text-lg font-semibold text-text-900 mb-2">
                 Remove Card?
               </h3>
               <p className="text-sm text-muted-600 mb-6">
@@ -196,7 +196,7 @@ export default function PaymentMethodsPage() {
                 <button
                   type="button"
                   onClick={() => setDeletingId(null)}
-                  className="flex-1 px-4 py-2.5 border border-blush-200 rounded-lg text-sm font-medium text-charcoal-700 hover:bg-cream-50"
+                  className="flex-1 px-4 py-2.5 border border-accent-200 rounded-lg text-sm font-medium text-text-700 hover:bg-surface-50"
                 >
                   Cancel
                 </button>

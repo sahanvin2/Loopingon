@@ -117,7 +117,7 @@ export default function AddressesPage() {
       className="space-y-6"
     >
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-charcoal-900">My Addresses</h1>
+        <h1 className="text-2xl font-bold text-text-900">My Addresses</h1>
       </div>
 
       {isLoading ? (
@@ -134,7 +134,7 @@ export default function AddressesPage() {
               <motion.div
                 key={addr.id}
                 layout
-                className="bg-white rounded-lg border border-blush-200 p-5 hover:shadow-soft transition-shadow"
+                className="bg-white rounded-lg border border-accent-200 p-5 hover:shadow-soft transition-shadow"
               >
                 <div className="flex items-start justify-between mb-3">
                   <div className="flex items-center gap-2">
@@ -145,7 +145,7 @@ export default function AddressesPage() {
                     ) : (
                       <MapPin className="w-4 h-4 text-muted-600" />
                     )}
-                    <span className="text-sm font-medium text-charcoal-900">
+                    <span className="text-sm font-medium text-text-900">
                       {addr.label || "Address"}
                     </span>
                     {addr.isDefault && (
@@ -158,7 +158,7 @@ export default function AddressesPage() {
                     <button
                       type="button"
                       onClick={() => openEdit(addr)}
-                      className="p-1.5 rounded-md text-muted-500 hover:text-rose-600 hover:bg-rose-50 transition-colors"
+                      className="p-1.5 rounded-md text-muted-500 hover:text-primary-600 hover:bg-primary-50 transition-colors"
                       aria-label="Edit address"
                     >
                       <Pencil className="w-4 h-4" />
@@ -174,7 +174,7 @@ export default function AddressesPage() {
                   </div>
                 </div>
 
-                <div className="space-y-1 text-sm text-charcoal-700">
+                <div className="space-y-1 text-sm text-text-700">
                   <p className="font-medium">{addr.fullName}</p>
                   <p>{addr.addressLine1}</p>
                   {addr.addressLine2 && <p>{addr.addressLine2}</p>}
@@ -192,9 +192,9 @@ export default function AddressesPage() {
             <button
               type="button"
               onClick={openAdd}
-              className="flex flex-col items-center justify-center gap-3 p-8 border-2 border-dashed border-blush-300 rounded-lg hover:border-rose-300 hover:bg-rose-50/30 transition-all min-h-[200px]"
+              className="flex flex-col items-center justify-center gap-3 p-8 border-2 border-dashed border-accent-300 rounded-lg hover:border-primary-300 hover:bg-primary-50/30 transition-all min-h-[200px]"
             >
-              <div className="w-12 h-12 rounded-full bg-cream-200 flex items-center justify-center text-muted-500">
+              <div className="w-12 h-12 rounded-full bg-surface-200 flex items-center justify-center text-muted-500">
                 <Plus className="w-6 h-6" />
               </div>
               <span className="text-sm font-medium text-muted-600">
@@ -223,7 +223,7 @@ export default function AddressesPage() {
             className="fixed inset-0 z-50 flex items-center justify-center p-4"
           >
             <div
-              className="absolute inset-0 bg-charcoal-900/50"
+              className="absolute inset-0 bg-text-900/50"
               onClick={closeModal}
             />
             <motion.div
@@ -232,86 +232,86 @@ export default function AddressesPage() {
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               className="relative bg-white rounded-xl shadow-xl max-w-md w-full max-h-[90vh] overflow-y-auto p-6"
             >
-              <h2 className="text-lg font-semibold text-charcoal-900 mb-4">
+              <h2 className="text-lg font-semibold text-text-900 mb-4">
                 {editingAddress ? "Edit Address" : "Add New Address"}
               </h2>
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-charcoal-700 mb-1">
+                  <label className="block text-sm font-medium text-text-700 mb-1">
                     Label
                   </label>
                   <input
                     {...register("label")}
                     placeholder="e.g., Home, Office"
-                    className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-rose-500"
+                    className="w-full px-3 py-2 border border-accent-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-charcoal-700 mb-1">
+                  <label className="block text-sm font-medium text-text-700 mb-1">
                     Full Name *
                   </label>
                   <input
                     {...register("fullName")}
-                    className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-rose-500"
+                    className="w-full px-3 py-2 border border-accent-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
                   />
                   {errors.fullName && (
                     <p className="text-xs text-red-600 mt-1">{errors.fullName.message}</p>
                   )}
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-charcoal-700 mb-1">
+                  <label className="block text-sm font-medium text-text-700 mb-1">
                     Phone *
                   </label>
                   <input
                     {...register("phone")}
                     placeholder="+94XXXXXXXXX"
-                    className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-rose-500"
+                    className="w-full px-3 py-2 border border-accent-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
                   />
                   {errors.phone && (
                     <p className="text-xs text-red-600 mt-1">{errors.phone.message}</p>
                   )}
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-charcoal-700 mb-1">
+                  <label className="block text-sm font-medium text-text-700 mb-1">
                     Address Line 1 *
                   </label>
                   <input
                     {...register("addressLine1")}
-                    className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-rose-500"
+                    className="w-full px-3 py-2 border border-accent-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
                   />
                   {errors.addressLine1 && (
                     <p className="text-xs text-red-600 mt-1">{errors.addressLine1.message}</p>
                   )}
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-charcoal-700 mb-1">
+                  <label className="block text-sm font-medium text-text-700 mb-1">
                     Address Line 2
                   </label>
                   <input
                     {...register("addressLine2")}
-                    className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-rose-500"
+                    className="w-full px-3 py-2 border border-accent-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
                   />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-charcoal-700 mb-1">
+                    <label className="block text-sm font-medium text-text-700 mb-1">
                       City *
                     </label>
                     <input
                       {...register("city")}
-                      className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-rose-500"
+                      className="w-full px-3 py-2 border border-accent-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
                     />
                     {errors.city && (
                       <p className="text-xs text-red-600 mt-1">{errors.city.message}</p>
                     )}
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-charcoal-700 mb-1">
+                    <label className="block text-sm font-medium text-text-700 mb-1">
                       District *
                     </label>
                     <input
                       {...register("district")}
-                      className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-rose-500"
+                      className="w-full px-3 py-2 border border-accent-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
                     />
                     {errors.district && (
                       <p className="text-xs text-red-600 mt-1">{errors.district.message}</p>
@@ -322,22 +322,22 @@ export default function AddressesPage() {
                   <input
                     {...register("isDefault")}
                     type="checkbox"
-                    className="w-4 h-4 rounded border-blush-300 text-rose-600 focus:ring-rose-500"
+                    className="w-4 h-4 rounded border-accent-300 text-primary-600 focus:ring-primary-500"
                   />
-                  <span className="text-sm text-charcoal-700">Set as default address</span>
+                  <span className="text-sm text-text-700">Set as default address</span>
                 </label>
                 <div className="flex gap-3 pt-2">
                   <button
                     type="button"
                     onClick={closeModal}
-                    className="flex-1 px-4 py-2.5 border border-blush-200 rounded-lg text-sm font-medium text-charcoal-700 hover:bg-cream-50 transition-colors"
+                    className="flex-1 px-4 py-2.5 border border-accent-200 rounded-lg text-sm font-medium text-text-700 hover:bg-surface-50 transition-colors"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="flex-1 px-4 py-2.5 bg-rose-600 text-white rounded-lg text-sm font-medium hover:bg-rose-700 transition-colors disabled:opacity-50"
+                    className="flex-1 px-4 py-2.5 bg-primary-600 text-white rounded-lg text-sm font-medium hover:bg-primary-700 transition-colors disabled:opacity-50"
                   >
                     {isSubmitting ? "Saving..." : editingAddress ? "Update" : "Save"}
                   </button>
@@ -357,7 +357,7 @@ export default function AddressesPage() {
             className="fixed inset-0 z-50 flex items-center justify-center p-4"
           >
             <div
-              className="absolute inset-0 bg-charcoal-900/50"
+              className="absolute inset-0 bg-text-900/50"
               onClick={() => setDeletingId(null)}
             />
             <motion.div
@@ -367,7 +367,7 @@ export default function AddressesPage() {
               className="relative bg-white rounded-xl shadow-xl max-w-sm w-full p-6 text-center"
             >
               <AlertTriangle className="w-12 h-12 text-red-500 mx-auto mb-4" />
-              <h3 className="text-lg font-semibold text-charcoal-900 mb-2">
+              <h3 className="text-lg font-semibold text-text-900 mb-2">
                 Delete Address?
               </h3>
               <p className="text-sm text-muted-600 mb-6">
@@ -377,7 +377,7 @@ export default function AddressesPage() {
                 <button
                   type="button"
                   onClick={() => setDeletingId(null)}
-                  className="flex-1 px-4 py-2.5 border border-blush-200 rounded-lg text-sm font-medium text-charcoal-700 hover:bg-cream-50 transition-colors"
+                  className="flex-1 px-4 py-2.5 border border-accent-200 rounded-lg text-sm font-medium text-text-700 hover:bg-surface-50 transition-colors"
                 >
                   Cancel
                 </button>

@@ -85,16 +85,16 @@ export default function VendorOrderDetailPage() {
     >
       <Link
         href="/vendor/orders"
-        className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-600 hover:text-charcoal-700"
+        className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-600 hover:text-text-700"
       >
         <ArrowLeft className="w-4 h-4" />
         Back to Orders
       </Link>
 
-      <div className="bg-white rounded-xl border border-blush-200 p-6">
+      <div className="bg-white rounded-xl border border-accent-200 p-6">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-6">
           <div>
-            <h1 className="text-xl font-mono font-bold text-charcoal-900">
+            <h1 className="text-xl font-mono font-bold text-text-900">
               {order.orderNumber}
             </h1>
             <p className="text-sm text-muted-500 mt-1">
@@ -126,7 +126,7 @@ export default function VendorOrderDetailPage() {
                 updateStatusMutation.mutate({ status: "READY_TO_SHIP" })
               }
               disabled={updateStatusMutation.isPending}
-              className="px-4 py-2 bg-blush-500 text-white rounded-lg text-sm font-medium hover:bg-blush-600 disabled:opacity-50"
+              className="px-4 py-2 bg-accent-500 text-white rounded-lg text-sm font-medium hover:bg-accent-600 disabled:opacity-50"
             >
               Mark as Ready to Ship
             </button>
@@ -157,11 +157,11 @@ export default function VendorOrderDetailPage() {
       </div>
 
       {order.shippingAddress && (
-        <div className="bg-white rounded-xl border border-blush-200 p-6">
-          <h2 className="text-lg font-semibold text-charcoal-900 mb-3">
+        <div className="bg-white rounded-xl border border-accent-200 p-6">
+          <h2 className="text-lg font-semibold text-text-900 mb-3">
             Customer Info
           </h2>
-          <div className="space-y-1 text-sm text-charcoal-700">
+          <div className="space-y-1 text-sm text-text-700">
             <p className="font-medium">{order.shippingAddress.fullName}</p>
             <p>{order.shippingAddress.addressLine1}</p>
             <p>{order.shippingAddress.city}, {order.shippingAddress.district}</p>
@@ -170,13 +170,13 @@ export default function VendorOrderDetailPage() {
         </div>
       )}
 
-      <div className="bg-white rounded-xl border border-blush-200 p-6">
-        <h2 className="text-lg font-semibold text-charcoal-900 mb-4">
+      <div className="bg-white rounded-xl border border-accent-200 p-6">
+        <h2 className="text-lg font-semibold text-text-900 mb-4">
           Order Items
         </h2>
         <table className="w-full">
           <thead>
-            <tr className="border-b border-blush-200">
+            <tr className="border-b border-accent-200">
               <th className="px-3 py-3 text-left text-xs font-semibold text-muted-500 uppercase">
                 Item
               </th>
@@ -191,19 +191,19 @@ export default function VendorOrderDetailPage() {
               </th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-cream-50">
+          <tbody className="divide-y divide-surface-50">
             {order.items?.map((item) => (
               <tr key={item.id}>
-                <td className="px-3 py-3 text-sm text-charcoal-700">
+                <td className="px-3 py-3 text-sm text-text-700">
                   {item.productTitle}
                 </td>
-                <td className="px-3 py-3 text-sm text-charcoal-700 text-right">
+                <td className="px-3 py-3 text-sm text-text-700 text-right">
                   {item.quantity}
                 </td>
-                <td className="px-3 py-3 text-sm text-charcoal-700 text-right">
+                <td className="px-3 py-3 text-sm text-text-700 text-right">
                   {formatPrice(Number(item.price))}
                 </td>
-                <td className="px-3 py-3 text-sm font-medium text-charcoal-900 text-right">
+                <td className="px-3 py-3 text-sm font-medium text-text-900 text-right">
                   {formatPrice(Number(item.totalPrice))}
                 </td>
               </tr>
@@ -212,14 +212,14 @@ export default function VendorOrderDetailPage() {
         </table>
       </div>
 
-      <div className="bg-white rounded-xl border border-blush-200 p-6">
-        <h2 className="text-lg font-semibold text-charcoal-900 mb-4">
+      <div className="bg-white rounded-xl border border-accent-200 p-6">
+        <h2 className="text-lg font-semibold text-text-900 mb-4">
           Earnings Breakdown
         </h2>
         <div className="space-y-2 text-sm">
           <div className="flex justify-between">
             <span className="text-muted-500">Order Total</span>
-            <span className="font-medium text-charcoal-900">
+            <span className="font-medium text-text-900">
               {formatPrice(Number(order.totalAmount || 0))}
             </span>
           </div>
@@ -231,8 +231,8 @@ export default function VendorOrderDetailPage() {
               -{formatPrice(Number(order.commissionAmount || 0))}
             </span>
           </div>
-          <div className="flex justify-between border-t border-blush-200 pt-2">
-            <span className="font-semibold text-charcoal-900">
+          <div className="flex justify-between border-t border-accent-200 pt-2">
+            <span className="font-semibold text-text-900">
               Your Earnings
             </span>
             <span className="font-semibold text-muted-600">
@@ -244,7 +244,7 @@ export default function VendorOrderDetailPage() {
 
       <Link
         href={`/vendor/messages?order=${order.id}`}
-        className="inline-flex items-center gap-2 px-5 py-2.5 bg-white border border-blush-200 rounded-lg text-sm font-medium text-charcoal-700 hover:bg-cream-50"
+        className="inline-flex items-center gap-2 px-5 py-2.5 bg-white border border-accent-200 rounded-lg text-sm font-medium text-text-700 hover:bg-surface-50"
       >
         <MessageSquare className="w-4 h-4" />
         Message Customer
@@ -259,7 +259,7 @@ export default function VendorOrderDetailPage() {
             className="fixed inset-0 z-50 flex items-center justify-center p-4"
           >
             <div
-              className="absolute inset-0 bg-charcoal-900/50"
+              className="absolute inset-0 bg-text-900/50"
               onClick={() => setShowTrackingModal(false)}
             />
             <motion.div
@@ -268,12 +268,12 @@ export default function VendorOrderDetailPage() {
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               className="relative bg-white rounded-xl shadow-xl max-w-md w-full p-6"
             >
-              <h2 className="text-lg font-semibold text-charcoal-900 mb-4">
+              <h2 className="text-lg font-semibold text-text-900 mb-4">
                 Add Tracking Information
               </h2>
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-charcoal-700 mb-1">
+                  <label className="block text-sm font-medium text-text-700 mb-1">
                     Courier
                   </label>
                   <select
@@ -281,7 +281,7 @@ export default function VendorOrderDetailPage() {
                     onChange={(e) =>
                       setTrackingForm({ ...trackingForm, courierName: e.target.value })
                     }
-                    className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm"
+                    className="w-full px-3 py-2 border border-accent-200 rounded-lg text-sm"
                   >
                     <option value="">Select courier</option>
                     <option value="Domex">Domex</option>
@@ -293,7 +293,7 @@ export default function VendorOrderDetailPage() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-charcoal-700 mb-1">
+                  <label className="block text-sm font-medium text-text-700 mb-1">
                     Tracking Number *
                   </label>
                   <input
@@ -302,11 +302,11 @@ export default function VendorOrderDetailPage() {
                     onChange={(e) =>
                       setTrackingForm({ ...trackingForm, trackingNumber: e.target.value })
                     }
-                    className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm"
+                    className="w-full px-3 py-2 border border-accent-200 rounded-lg text-sm"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-charcoal-700 mb-1">
+                  <label className="block text-sm font-medium text-text-700 mb-1">
                     Tracking URL
                   </label>
                   <input
@@ -315,7 +315,7 @@ export default function VendorOrderDetailPage() {
                     onChange={(e) =>
                       setTrackingForm({ ...trackingForm, trackingUrl: e.target.value })
                     }
-                    className="w-full px-3 py-2 border border-blush-200 rounded-lg text-sm"
+                    className="w-full px-3 py-2 border border-accent-200 rounded-lg text-sm"
                   />
                 </div>
               </div>
@@ -323,7 +323,7 @@ export default function VendorOrderDetailPage() {
                 <button
                   type="button"
                   onClick={() => setShowTrackingModal(false)}
-                  className="flex-1 px-4 py-2.5 border border-blush-200 rounded-lg text-sm font-medium"
+                  className="flex-1 px-4 py-2.5 border border-accent-200 rounded-lg text-sm font-medium"
                 >
                   Cancel
                 </button>
@@ -331,7 +331,7 @@ export default function VendorOrderDetailPage() {
                   type="button"
                   onClick={() => addTrackingMutation.mutate(trackingForm)}
                   disabled={!trackingForm.trackingNumber || addTrackingMutation.isPending}
-                  className="flex-1 px-4 py-2.5 bg-rose-600 text-white rounded-lg text-sm font-medium hover:bg-rose-700 disabled:opacity-50"
+                  className="flex-1 px-4 py-2.5 bg-primary-600 text-white rounded-lg text-sm font-medium hover:bg-primary-700 disabled:opacity-50"
                 >
                   {addTrackingMutation.isPending ? "Saving..." : "Save"}
                 </button>

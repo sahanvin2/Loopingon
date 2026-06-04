@@ -55,7 +55,7 @@ function ToolbarButton({
       className={cn(
         "p-1.5 rounded text-muted-600 hover:bg-muted-100 transition-colors",
         "disabled:opacity-40 disabled:cursor-not-allowed",
-        isActive && "bg-rose-100 text-rose-700",
+        isActive && "bg-primary-100 text-primary-700",
       )}
       aria-label={label}
       title={label}
@@ -82,7 +82,7 @@ export function RichEditor({
       LinkExtension.configure({
         openOnClick: false,
         HTMLAttributes: {
-          class: "text-rose-600 underline hover:text-rose-700",
+          class: "text-primary-600 underline hover:text-primary-700",
         },
       }),
       ImageExtension.configure({
@@ -103,7 +103,7 @@ export function RichEditor({
       attributes: {
         class: cn(
           "prose prose-sm max-w-none focus:outline-none min-h-[200px] px-4 py-3",
-          "text-charcoal-700",
+          "text-text-700",
         ),
       },
     },
@@ -128,12 +128,12 @@ export function RichEditor({
   return (
     <div
       className={cn(
-        "border border-blush-300 rounded-lg overflow-hidden bg-white",
-        "focus-within:ring-2 focus-within:ring-rose-500 focus-within:border-transparent",
+        "border border-accent-300 rounded-lg overflow-hidden bg-white",
+        "focus-within:ring-2 focus-within:ring-primary-500 focus-within:border-transparent",
         className,
       )}
     >
-      <div className="flex items-center gap-0.5 px-2 py-1.5 border-b border-blush-200 bg-cream-50 flex-wrap">
+      <div className="flex items-center gap-0.5 px-2 py-1.5 border-b border-accent-200 bg-surface-50 flex-wrap">
         <ToolbarButton
           onClick={() => editor.chain().focus().toggleBold().run()}
           isActive={editor.isActive("bold")}
@@ -159,7 +159,7 @@ export function RichEditor({
           icon={Strikethrough}
         />
 
-        <div className="w-px h-5 bg-cream-300 mx-1" />
+        <div className="w-px h-5 bg-surface-300 mx-1" />
 
         <ToolbarButton
           onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
@@ -174,7 +174,7 @@ export function RichEditor({
           icon={Heading2}
         />
 
-        <div className="w-px h-5 bg-cream-300 mx-1" />
+        <div className="w-px h-5 bg-surface-300 mx-1" />
 
         <ToolbarButton
           onClick={() => editor.chain().focus().toggleBulletList().run()}
@@ -201,7 +201,7 @@ export function RichEditor({
           icon={Code}
         />
 
-        <div className="w-px h-5 bg-cream-300 mx-1" />
+        <div className="w-px h-5 bg-surface-300 mx-1" />
 
         <ToolbarButton onClick={addLink} label="Add Link" icon={LinkIcon} />
         <ToolbarButton onClick={addImage} label="Add Image" icon={ImageIcon} />
@@ -213,7 +213,7 @@ export function RichEditor({
 
         <div className="flex-1" />
 
-        <div className="w-px h-5 bg-cream-300 mx-1" />
+        <div className="w-px h-5 bg-surface-300 mx-1" />
 
         <ToolbarButton
           onClick={() => editor.chain().focus().undo().run()}

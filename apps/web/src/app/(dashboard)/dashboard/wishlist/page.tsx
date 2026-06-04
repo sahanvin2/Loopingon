@@ -84,14 +84,14 @@ export default function WishlistPage() {
       className="space-y-6"
     >
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <h1 className="text-2xl font-bold text-charcoal-900">
+        <h1 className="text-2xl font-bold text-text-900">
           My Wishlist ({items.length} {items.length === 1 ? "item" : "items"})
         </h1>
         <div className="flex items-center gap-3">
           <button
             type="button"
             onClick={handleShare}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-blush-200 rounded-lg text-sm font-medium text-charcoal-700 hover:bg-cream-50 transition-colors"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-accent-200 rounded-lg text-sm font-medium text-text-700 hover:bg-surface-50 transition-colors"
           >
             <Share2 className="w-4 h-4" />
             Share Wishlist
@@ -102,7 +102,7 @@ export default function WishlistPage() {
               setIsPublic(!isPublic);
               toggleVisibilityMutation.mutate(!isPublic);
             }}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-blush-200 rounded-lg text-sm font-medium text-charcoal-700 hover:bg-cream-50 transition-colors"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-accent-200 rounded-lg text-sm font-medium text-text-700 hover:bg-surface-50 transition-colors"
           >
             {isPublic ? (
               <>
@@ -132,7 +132,7 @@ export default function WishlistPage() {
             <button
               type="button"
               onClick={handleAddAllToCart}
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-rose-600 text-white rounded-lg text-sm font-medium hover:bg-rose-700 transition-colors"
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary-600 text-white rounded-lg text-sm font-medium hover:bg-primary-700 transition-colors"
             >
               <ShoppingCart className="w-4 h-4" />
               Add All to Cart ({items.length})

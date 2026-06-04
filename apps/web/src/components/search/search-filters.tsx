@@ -45,11 +45,11 @@ function AccordionSection({
   const [isOpen, setIsOpen] = useState(defaultOpen);
 
   return (
-    <div className="border-b border-blush-200 last:border-b-0">
+    <div className="border-b border-accent-200 last:border-b-0">
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center justify-between w-full py-3 text-sm font-medium text-charcoal-700"
+        className="flex items-center justify-between w-full py-3 text-sm font-medium text-text-700"
       >
         {title}
         {isOpen ? (
@@ -107,15 +107,15 @@ export function SearchFilters({
   };
 
   return (
-    <div className={cn("bg-white rounded-lg border border-blush-200", className)}>
-      <div className="flex items-center justify-between px-4 py-3 border-b border-blush-200">
+    <div className={cn("bg-white rounded-lg border border-accent-200", className)}>
+      <div className="flex items-center justify-between px-4 py-3 border-b border-accent-200">
         <div className="flex items-center gap-2">
           <Filter className="w-4 h-4 text-muted-600" />
-          <span className="text-sm font-medium text-charcoal-700">
+          <span className="text-sm font-medium text-text-700">
             Filters
           </span>
           {activeCount > 0 && (
-            <span className="w-5 h-5 rounded-full bg-rose-100 text-rose-700 text-xs flex items-center justify-center font-medium">
+            <span className="w-5 h-5 rounded-full bg-primary-100 text-primary-700 text-xs flex items-center justify-center font-medium">
               {activeCount}
             </span>
           )}
@@ -124,14 +124,14 @@ export function SearchFilters({
           <button
             type="button"
             onClick={onClearAll}
-            className="text-xs text-rose-600 hover:text-rose-700 font-medium"
+            className="text-xs text-primary-600 hover:text-primary-700 font-medium"
           >
             Clear All
           </button>
         )}
       </div>
 
-      <div className="max-h-[60vh] overflow-y-auto divide-y divide-cream-200">
+      <div className="max-h-[60vh] overflow-y-auto divide-y divide-surface-200">
         <AccordionSection title="Craft Type">
           <div className="space-y-1.5 max-h-48 overflow-y-auto">
             {CRAFT_TYPES.slice(0, 15).map((craft) => (
@@ -142,7 +142,7 @@ export function SearchFilters({
                   onChange={() =>
                     onChange("craftType", filters.craftType === craft.value ? undefined : craft.value)
                   }
-                  className="w-3.5 h-3.5 rounded border-blush-300 text-rose-600"
+                  className="w-3.5 h-3.5 rounded border-accent-300 text-primary-600"
                 />
                 <span className="text-muted-600">{craft.label}</span>
               </label>
@@ -163,8 +163,8 @@ export function SearchFilters({
                   onChange("minPrice", v);
                 }}
                 className={cn(
-                  "w-1/2 px-3 py-1.5 rounded-lg border border-blush-300 text-sm",
-                  "focus:outline-none focus:ring-2 focus:ring-rose-500",
+                  "w-1/2 px-3 py-1.5 rounded-lg border border-accent-300 text-sm",
+                  "focus:outline-none focus:ring-2 focus:ring-primary-500",
                 )}
               />
               <span className="text-muted-400">-</span>
@@ -178,8 +178,8 @@ export function SearchFilters({
                   onChange("maxPrice", v);
                 }}
                 className={cn(
-                  "w-1/2 px-3 py-1.5 rounded-lg border border-blush-300 text-sm",
-                  "focus:outline-none focus:ring-2 focus:ring-rose-500",
+                  "w-1/2 px-3 py-1.5 rounded-lg border border-accent-300 text-sm",
+                  "focus:outline-none focus:ring-2 focus:ring-primary-500",
                 )}
               />
             </div>
@@ -191,7 +191,7 @@ export function SearchFilters({
                   onClick={() => setPriceRange(preset.min, preset.max)}
                   className={cn(
                     "px-2.5 py-1 rounded-full text-xs border transition-colors",
-                    "border-blush-300 text-muted-600 hover:border-rose-400 hover:text-rose-600",
+                    "border-accent-300 text-muted-600 hover:border-primary-400 hover:text-primary-600",
                   )}
                 >
                   {preset.label}
@@ -211,7 +211,7 @@ export function SearchFilters({
                   onChange={() =>
                     onChange("rating", filters.rating === rating ? undefined : rating)
                   }
-                  className="w-3.5 h-3.5 rounded border-blush-300 text-rose-600"
+                  className="w-3.5 h-3.5 rounded border-accent-300 text-primary-600"
                 />
                 <span className="text-muted-600">
                   {rating}+ Stars
@@ -234,7 +234,7 @@ export function SearchFilters({
                       filters.district === district ? undefined : district,
                     )
                   }
-                  className="w-3.5 h-3.5 rounded border-blush-300 text-rose-600"
+                  className="w-3.5 h-3.5 rounded border-accent-300 text-primary-600"
                 />
                 <span className="text-muted-600">{district}</span>
               </label>
@@ -255,7 +255,7 @@ export function SearchFilters({
                       filters.shipping === option.value ? undefined : option.value,
                     )
                   }
-                  className="w-3.5 h-3.5 rounded border-blush-300 text-rose-600"
+                  className="w-3.5 h-3.5 rounded border-accent-300 text-primary-600"
                 />
                 <span className="text-muted-600">{option.label}</span>
               </label>
@@ -282,7 +282,7 @@ export function SearchFilters({
                         : [...arr, feature.value];
                       onChange("features", next.length > 0 ? next : undefined);
                     }}
-                    className="w-3.5 h-3.5 rounded border-blush-300 text-rose-600"
+                    className="w-3.5 h-3.5 rounded border-accent-300 text-primary-600"
                   />
                   <span className="text-muted-600">{feature.label}</span>
                 </label>
@@ -297,7 +297,7 @@ export function SearchFilters({
               type="checkbox"
               checked={!!filters.onSale}
               onChange={() => onChange("onSale", !filters.onSale ? true : undefined)}
-              className="w-3.5 h-3.5 rounded border-blush-300 text-rose-600"
+              className="w-3.5 h-3.5 rounded border-accent-300 text-primary-600"
             />
             <span className="text-muted-600">Show only sale items</span>
           </label>

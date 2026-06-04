@@ -57,8 +57,8 @@ export function ProductImages({ images, videos = [] }: ProductImagesProps) {
               className={cn(
                 "relative w-16 h-16 lg:w-20 lg:h-20 rounded-md overflow-hidden shrink-0 border-2 transition-all",
                 index === activeIndex
-                  ? "border-rose-500 shadow-sm"
-                  : "border-transparent opacity-70 hover:opacity-100 hover:border-blush-300",
+                  ? "border-primary-500 shadow-sm"
+                  : "border-transparent opacity-70 hover:opacity-100 hover:border-accent-300",
               )}
               aria-label={`View image ${index + 1}`}
             >
@@ -78,7 +78,7 @@ export function ProductImages({ images, videos = [] }: ProductImagesProps) {
               type="button"
               className={cn(
                 "relative w-16 h-16 lg:w-20 lg:h-20 rounded-md overflow-hidden shrink-0 border-2 border-transparent",
-                "opacity-70 hover:opacity-100 hover:border-blush-300",
+                "opacity-70 hover:opacity-100 hover:border-accent-300",
               )}
               aria-label={`Watch video ${index + 1}`}
             >
@@ -89,7 +89,7 @@ export function ProductImages({ images, videos = [] }: ProductImagesProps) {
                 className="object-cover"
                 sizes="80px"
               />
-              <div className="absolute inset-0 bg-charcoal-900/30 flex items-center justify-center">
+              <div className="absolute inset-0 bg-text-900/30 flex items-center justify-center">
                 <Play className="w-5 h-5 lg:w-6 lg:h-6 text-white fill-white" />
               </div>
             </button>
@@ -100,7 +100,7 @@ export function ProductImages({ images, videos = [] }: ProductImagesProps) {
       {/* Main Image */}
       <div className="flex-1 w-full min-w-0">
         <div
-          className="relative aspect-square md:aspect-[4/5] lg:aspect-[4/4] rounded-xl overflow-hidden bg-white border border-blush-200 cursor-zoom-in group"
+          className="relative aspect-square md:aspect-[4/5] lg:aspect-[4/4] rounded-xl overflow-hidden bg-white border border-accent-200 cursor-zoom-in group"
           onMouseEnter={() => setIsZooming(true)}
           onMouseLeave={() => setIsZooming(false)}
           onMouseMove={handleMouseMove}
@@ -134,7 +134,7 @@ export function ProductImages({ images, videos = [] }: ProductImagesProps) {
               <span
                 className={cn(
                   "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full",
-                  "bg-charcoal-900/60 backdrop-blur-sm text-white text-xs font-medium",
+                  "bg-text-900/60 backdrop-blur-sm text-white text-xs font-medium",
                 )}
               >
                 <Play className="w-3 h-3 fill-current" />
@@ -151,13 +151,13 @@ export function ProductImages({ images, videos = [] }: ProductImagesProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-charcoal-900/95 flex items-center justify-center"
+            className="fixed inset-0 z-50 bg-text-900/95 flex items-center justify-center"
             onClick={() => setLightboxOpen(false)}
           >
             <button
               type="button"
               onClick={() => setLightboxOpen(false)}
-              className="absolute top-4 right-4 p-2 rounded-lg bg-charcoal-800 text-white hover:bg-charcoal-700 transition-colors z-10"
+              className="absolute top-4 right-4 p-2 rounded-lg bg-text-800 text-white hover:bg-text-700 transition-colors z-10"
               aria-label="Close lightbox"
             >
               <X className="w-6 h-6" />
@@ -171,7 +171,7 @@ export function ProductImages({ images, videos = [] }: ProductImagesProps) {
               }}
               className={cn(
                 "absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-lg",
-                "bg-charcoal-800 text-white hover:bg-charcoal-700 transition-colors z-10",
+                "bg-text-800 text-white hover:bg-text-700 transition-colors z-10",
               )}
               aria-label="Previous image"
             >
@@ -186,7 +186,7 @@ export function ProductImages({ images, videos = [] }: ProductImagesProps) {
               }}
               className={cn(
                 "absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-lg",
-                "bg-charcoal-800 text-white hover:bg-charcoal-700 transition-colors z-10",
+                "bg-text-800 text-white hover:bg-text-700 transition-colors z-10",
               )}
               aria-label="Next image"
             >
@@ -221,7 +221,7 @@ export function ProductImages({ images, videos = [] }: ProductImagesProps) {
                   className={cn(
                     "w-14 h-14 rounded-md overflow-hidden border-2 transition-colors",
                     index === lightboxIndex
-                      ? "border-rose-500"
+                      ? "border-primary-500"
                       : "border-transparent opacity-60 hover:opacity-100",
                   )}
                   aria-label={`View image ${index + 1}`}

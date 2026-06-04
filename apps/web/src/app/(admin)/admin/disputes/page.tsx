@@ -34,16 +34,16 @@ export default function AdminDisputesPage() {
 
   return (
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
-      <h1 className="text-2xl font-bold text-charcoal-900">Disputes</h1>
+      <h1 className="text-2xl font-bold text-text-900">Disputes</h1>
 
-      <div className="flex gap-1 bg-white rounded-lg border border-blush-200 p-1 w-fit">
+      <div className="flex gap-1 bg-white rounded-lg border border-accent-200 p-1 w-fit">
         {["PENDING", "UNDER_REVIEW", "RESOLVED"].map((status) => (
           <button
             key={status}
             type="button"
             onClick={() => setStatusFilter(status)}
             className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
-              statusFilter === status ? "bg-rose-600 text-white" : "text-muted-600 hover:text-charcoal-700"
+              statusFilter === status ? "bg-primary-600 text-white" : "text-muted-600 hover:text-text-700"
             }`}
           >
             {status.replace("_", " ")}
@@ -58,9 +58,9 @@ export default function AdminDisputesPage() {
       ) : (
         <div className="space-y-3">
           {disputes.map((dispute) => (
-            <div key={dispute.id} className="bg-white rounded-lg border border-blush-200 p-5 flex items-center justify-between">
+            <div key={dispute.id} className="bg-white rounded-lg border border-accent-200 p-5 flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-charcoal-900">
+                <p className="text-sm font-medium text-text-900">
                   {dispute.reason}
                 </p>
                 <p className="text-xs text-muted-500 mt-1">
