@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -11,7 +11,7 @@ const faqSections = [
     icon: "📦",
     questions: [
       { q: "How do I place an order?", a: "Browse products, add items to your cart, then proceed to checkout. You'll need to provide your shipping address and select a payment method. Once confirmed, the artisan will begin preparing your order." },
-      { q: "What payment methods are accepted?", a: "We accept Visa, Mastercard, American Express, local Sri Lankan bank transfers, PayPal, and Stripe for international payments. All payments are processed securely through our escrow system." },
+      { q: "What payment methods are accepted?", a: "We accept Visa, Mastercard, and local Sri Lankan bank transfers. All payments are processed securely through PayHere, Sri Lanka's trusted payment gateway." },
       { q: "Is my payment secure?", a: "Yes. All payments are processed through PCI-DSS compliant payment gateways with SSL encryption. Funds are held in escrow and only released to the vendor after you confirm receipt." },
       { q: "Can I cancel my order?", a: "Orders can be cancelled within 2 hours of placement if the artisan hasn't started production. Custom and made-to-order items cannot be cancelled once production begins." },
       { q: "How do I track my order?", a: "Once your order ships, you'll receive a tracking number via email. You can also view order status in your account dashboard under 'My Orders'." },
@@ -23,7 +23,7 @@ const faqSections = [
     questions: [
       { q: "How long does shipping take?", a: "Domestic (Sri Lanka): 2-5 business days. International: 7-21 business days depending on destination. Express shipping is available for select destinations." },
       { q: "Do you ship internationally?", a: "Yes! We ship to over 35 countries worldwide. International shipping costs are calculated at checkout based on destination, weight, and dimensions." },
-      { q: "Is free shipping available?", a: "Free domestic shipping is available on orders over Rs. 5,000. Some vendors also offer free shipping on specific products. Look for the 'Free Shipping' badge." },
+      { q: "Is free shipping available?", a: "Free domestic shipping is available on orders over Rs. 10,000. Some vendors also offer free shipping on specific products. Look for the 'Free Shipping' badge." },
       { q: "What about customs and duties?", a: "International orders may be subject to customs duties and import taxes. These charges are the buyer's responsibility. Check your country's import regulations before ordering." },
     ],
   },
@@ -47,12 +47,12 @@ const faqSections = [
     ],
   },
   {
-    title: "Selling on Loopingon",
+    title: "Selling on Kandyam",
     icon: "🏪",
     questions: [
-      { q: "How do I become a vendor?", a: "Visit 'Sell on Loopingon' and complete the vendor application. You'll need to provide craft details, identification documents, and workshop photos. Approval typically takes 3-5 business days." },
-      { q: "What is the commission structure?", a: "Loopingon takes a 20% commission on each sale. You keep 80%. There are no listing fees, monthly charges, or hidden costs." },
-      { q: "How do payouts work?", a: "Payouts are processed every two weeks directly to your Sri Lankan bank account. You can track all earnings and upcoming payouts from your vendor dashboard." },
+      { q: "How do I become a vendor?", a: "Visit 'Sell on Kandyam' and complete the vendor application. You'll need to provide craft details, identification documents, and workshop photos. Approval typically takes 3-5 business days." },
+      { q: "What is the commission structure?", a: "Kandyam takes a 20% commission on each sale. You keep 80%. There are no listing fees, monthly charges, or hidden costs." },
+      { q: "How do payouts work?", a: "Payouts are processed once your balance reaches Rs. 10,000 — this threshold helps reduce transaction fees and bank charges. Funds are transferred to your Sri Lankan bank account within 5 working days. Track all earnings and upcoming payouts from your vendor dashboard." },
       { q: "Can I sell internationally?", a: "Yes! Your products are automatically available to customers worldwide. We handle international marketing, pricing conversion, and logistics support." },
       { q: "What support do vendors get?", a: "Vendors get dedicated WhatsApp support, free marketing and promotion, product photography tips, and access to vendor training webinars." },
     ],
@@ -71,8 +71,8 @@ const faqSections = [
     icon: "🔒",
     questions: [
       { q: "How is my personal data protected?", a: "We use industry-standard encryption (SSL/TLS) for all data transmission. Personal data is stored securely and never sold to third parties. See our Privacy Policy for full details." },
-      { q: "Is my payment information stored?", a: "No. We do not store full credit card numbers. Payment processing is handled by PCI-DSS compliant third-party processors (Stripe, PayPal, bank gateways)." },
-      { q: "How do I report a security concern?", a: "Email security@loopingon.com with details. We take security reports seriously and will respond within 24 hours. Please do not publicly disclose security issues." },
+      { q: "Is my payment information stored?", a: "No. We do not store full credit card numbers. Payment processing is handled by PCI-DSS compliant payment processors (PayHere, bank gateways)." },
+      { q: "How do I report a security concern?", a: "Email security@kandyam.com with details. We take security reports seriously and will respond within 24 hours. Please do not publicly disclose security issues." },
     ],
   },
 ];

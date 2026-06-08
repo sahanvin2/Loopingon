@@ -2,7 +2,7 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: "Loopingon Privacy Policy: How we collect, use, and protect your personal information. GDPR compliant. Transparent data practices for our Sri Lankan craft marketplace.",
+  description: "Kandyam Privacy Policy: How we collect, use, and protect your personal information. GDPR compliant. Transparent data practices for our Sri Lankan craft marketplace.",
 };
 
 export default function PrivacyPolicyPage() {
@@ -29,7 +29,7 @@ export default function PrivacyPolicyPage() {
             <h3>1.1 Account Information</h3>
             <p>When you create an account, we collect your full name, email address, phone number (optional), and a hashed password. If you sign up via Google or Facebook, we receive your name and email from those providers.</p>
             <h3>1.2 Order Information</h3>
-            <p>When you place an order, we collect your shipping address, billing address, phone number, and order details. Payment information is processed securely by our payment partners (Stripe, PayPal, local bank gateways) — we never store your full credit card number.</p>
+            <p>When you place an order, we collect your shipping address, billing address, phone number, and order details. Payment information is processed securely by our payment partners (PayHere, local bank gateways) — we never store your full credit card number.</p>
             <h3>1.3 Vendor Information</h3>
             <p>For vendor applications, we collect business registration details, National ID, craft descriptions, workshop photos, and bank account information for payouts. These documents are stored securely and only accessible to our verification team.</p>
             <h3>1.4 Automatically Collected Information</h3>
@@ -53,7 +53,7 @@ export default function PrivacyPolicyPage() {
             <p>We share your information only in these limited circumstances:</p>
             <ul>
               <li><strong>With vendors:</strong> When you place an order, the vendor receives your shipping address and phone number to fulfill your order.</li>
-              <li><strong>With payment processors:</strong> Stripe, PayPal, and Sri Lankan bank gateways process your payments.</li>
+              <li><strong>With payment processors:</strong> PayHere and Sri Lankan bank gateways process your payments.</li>
               <li><strong>With shipping carriers:</strong> Domestic and international courier services receive your shipping address and phone number.</li>
               <li><strong>With service providers:</strong> Cloud hosting (AWS), email delivery (SendGrid), analytics (Google Analytics).</li>
               <li><strong>Legal compliance:</strong> If required by law, court order, or to protect our rights and safety.</li>
@@ -82,7 +82,7 @@ export default function PrivacyPolicyPage() {
               <li>Withdraw consent at any time</li>
               <li>Lodge a complaint with a supervisory authority</li>
             </ul>
-            <p>To exercise these rights, email privacy@loopingon.com.</p>
+            <p>To exercise these rights, email privacy@kandyam.com.</p>
           </section>
 
           <section>
@@ -92,12 +92,12 @@ export default function PrivacyPolicyPage() {
 
           <section>
             <h2>8. Children&apos;s Privacy</h2>
-            <p>Loopingon is not intended for children under 13. We do not knowingly collect data from children under 13. If you believe a child has provided us with personal data, please contact us immediately.</p>
+            <p>Kandyam is not intended for children under 13. We do not knowingly collect data from children under 13. If you believe a child has provided us with personal data, please contact us immediately.</p>
           </section>
 
           <section>
             <h2>9. International Transfers</h2>
-            <p>Your data is stored on servers in Sri Lanka and Singapore. If you&apos;re accessing Loopingon from outside Sri Lanka, your data may be transferred across borders. We ensure appropriate safeguards (Standard Contractual Clauses) are in place for international transfers.</p>
+            <p>Your data is stored on servers in Sri Lanka and Singapore. If you&apos;re accessing Kandyam from outside Sri Lanka, your data may be transferred across borders. We ensure appropriate safeguards (Standard Contractual Clauses) are in place for international transfers.</p>
           </section>
 
           <section>
@@ -108,9 +108,9 @@ export default function PrivacyPolicyPage() {
           <section>
             <h2>11. Contact Us</h2>
             <p>
-              Loopingon (Pvt) Ltd<br />
+              Kandyam (Pvt) Ltd<br />
               42 Galle Road, Colombo 03, Sri Lanka<br />
-              Email: privacy@loopingon.com<br />
+              Email: privacy@kandyam.com<br />
               Phone: +94 11 234 5678
             </p>
           </section>

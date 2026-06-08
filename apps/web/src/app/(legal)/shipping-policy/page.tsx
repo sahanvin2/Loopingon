@@ -2,7 +2,7 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Shipping Policy",
-  description: "Loopingon shipping policy. Domestic and international shipping times, costs, tracking, free shipping conditions, and customs information for Sri Lankan handmade crafts.",
+  description: "Kandyam shipping policy. Domestic and international shipping times, costs, tracking, free shipping conditions, and customs information for Sri Lankan handmade crafts.",
 };
 
 export default function ShippingPolicyPage() {
@@ -15,7 +15,7 @@ export default function ShippingPolicyPage() {
         <div className="mt-10 space-y-8 text-sm leading-relaxed text-muted-700 [&_h2]:font-serif [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-text-900 [&_h3]:font-semibold [&_h3]:text-text-800 [&_p]:mt-3 [&_ul]:mt-3 [&_ul]:list-disc [&_ul]:pl-6">
           <section>
             <h2>Processing Time</h2>
-            <p>All products on Loopingon are handmade, which means each item is crafted with care. After you place an order, the artisan needs time to prepare, package, and hand over your item to the courier.</p>
+            <p>All products on Kandyam are handmade, which means each item is crafted with care. After you place an order, the artisan needs time to prepare, package, and hand over your item to the courier.</p>
             <ul>
               <li>Ready-to-ship items: 1-3 business days processing</li>
               <li>Made-to-order items: 3-10 business days processing (as noted on product page)</li>
@@ -25,25 +25,25 @@ export default function ShippingPolicyPage() {
 
           <section>
             <h2>Domestic Shipping (Sri Lanka)</h2>
+            <p>We primarily use Sri Lanka Post for all domestic deliveries, offering reliable service to every corner of the island. For urgent deliveries, an express courier option is available.</p>
             <div className="mt-4 overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead>
                   <tr className="bg-surface-50">
-                    <th className="border border-text-200 px-4 py-2 font-semibold text-text-800">Destination</th>
-                    <th className="border border-text-200 px-4 py-2 font-semibold text-text-800">Time</th>
                     <th className="border border-text-200 px-4 py-2 font-semibold text-text-800">Method</th>
+                    <th className="border border-text-200 px-4 py-2 font-semibold text-text-800">Coverage</th>
+                    <th className="border border-text-200 px-4 py-2 font-semibold text-text-800">Time</th>
                     <th className="border border-text-200 px-4 py-2 font-semibold text-text-800">Cost</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr><td className="border border-text-200 px-4 py-2">Colombo & Suburbs</td><td className="border border-text-200 px-4 py-2">1-2 days</td><td className="border border-text-200 px-4 py-2">Courier / Same-day</td><td className="border border-text-200 px-4 py-2">Rs. 250-500</td></tr>
-                  <tr><td className="border border-text-200 px-4 py-2">Western Province</td><td className="border border-text-200 px-4 py-2">2-3 days</td><td className="border border-text-200 px-4 py-2">Courier</td><td className="border border-text-200 px-4 py-2">Rs. 350-600</td></tr>
-                  <tr><td className="border border-text-200 px-4 py-2">Southern Province</td><td className="border border-text-200 px-4 py-2">3-4 days</td><td className="border border-text-200 px-4 py-2">Courier / SL Post</td><td className="border border-text-200 px-4 py-2">Rs. 400-700</td></tr>
-                  <tr><td className="border border-text-200 px-4 py-2">Central Province</td><td className="border border-text-200 px-4 py-2">3-5 days</td><td className="border border-text-200 px-4 py-2">Courier</td><td className="border border-text-200 px-4 py-2">Rs. 400-700</td></tr>
-                  <tr><td className="border border-text-200 px-4 py-2">Northern & Eastern</td><td className="border border-text-200 px-4 py-2">4-6 days</td><td className="border border-text-200 px-4 py-2">Courier / SL Post</td><td className="border border-text-200 px-4 py-2">Rs. 500-800</td></tr>
+                  <tr><td className="border border-text-200 px-4 py-2 font-medium">SL Post</td><td className="border border-text-200 px-4 py-2">All Sri Lanka</td><td className="border border-text-200 px-4 py-2">1-3 business days</td><td className="border border-text-200 px-4 py-2">Rs. 250 (up to 1kg)</td></tr>
+                  <tr><td className="border border-text-200 px-4 py-2 font-medium">Express Courier</td><td className="border border-text-200 px-4 py-2">Island-wide</td><td className="border border-text-200 px-4 py-2">Next business day</td><td className="border border-text-200 px-4 py-2">Up to Rs. 600</td></tr>
+                  <tr><td className="border border-text-200 px-4 py-2 font-medium">Free Delivery</td><td className="border border-text-200 px-4 py-2">All Sri Lanka</td><td className="border border-text-200 px-4 py-2">1-3 business days</td><td className="border border-text-200 px-4 py-2">Free (orders over Rs. 5,000)</td></tr>
                 </tbody>
               </table>
             </div>
+            <p className="mt-4 text-xs text-muted-500">Shipping costs may vary based on product weight and dimensions. Additional weight above 1kg is charged at Rs. 50 per kg for SL Post.</p>
           </section>
 
           <section>
@@ -71,13 +71,13 @@ export default function ShippingPolicyPage() {
 
           <section>
             <h2>Customs, Duties & Taxes</h2>
-            <p>International orders may be subject to customs duties, import taxes, and handling fees imposed by the destination country. These charges are the buyer&apos;s responsibility. Loopingon is not responsible for delays caused by customs clearance. Please check your country&apos;s import regulations and duty thresholds before ordering.</p>
+            <p>International orders may be subject to customs duties, import taxes, and handling fees imposed by the destination country. These charges are the buyer&apos;s responsibility. Kandyam is not responsible for delays caused by customs clearance. Please check your country&apos;s import regulations and duty thresholds before ordering.</p>
             <p className="mt-3">We declare the actual purchase value on customs forms as required by law. We cannot mark items as &quot;gifts&quot; or undervalue them.</p>
           </section>
 
           <section>
             <h2>Delayed or Lost Packages</h2>
-            <p>If your package hasn&apos;t arrived within the estimated timeframe, first check the tracking information. If the tracking shows no movement for 7+ days, contact us at support@loopingon.com. We will investigate with the courier and arrange a replacement or refund if the package is confirmed lost.</p>
+            <p>If your package hasn&apos;t arrived within the estimated timeframe, first check the tracking information. If the tracking shows no movement for 7+ days, contact us at support@kandyam.com. We will investigate with the courier and arrange a replacement or refund if the package is confirmed lost.</p>
           </section>
         </div>
       </div>

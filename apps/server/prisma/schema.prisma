@@ -1030,12 +1030,16 @@ model CouponUsage {
 // ==================== REFERRALS ====================
 
 model ReferralCode {
-  id          String     @id @default(uuid())
-  userId      String     @unique
-  code        String     @unique
-  totalReferrals Int     @default(0)
-  totalEarnings Decimal  @default(0) @db.Decimal(10, 2)
-  createdAt   DateTime   @default(now())
+  id              String     @id @default(uuid())
+  userId          String     @unique
+  code            String     @unique
+  totalReferrals  Int        @default(0)
+  totalEarnings   Decimal    @default(0) @db.Decimal(10, 2)
+  status          String     @default("active")
+  joinedAt        DateTime?
+  acceptedTermsAt DateTime?
+  bankDetails     Json?
+  createdAt       DateTime   @default(now())
 
   user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
   referrals   Referral[]
@@ -1068,10 +1072,11 @@ model Referral {
 model LoyaltyAccount {
   id              String              @id @default(uuid())
   userId          String              @unique
-  totalPoints     Int                 @default(0)
-  availablePoints Int                 @default(0)
-  tier            String              @default("bronze")
-  lifetimePoints  Int                 @default(0)
+  totalSpent      Decimal             @default(0) @db.Decimal(12, 2)
+  tier            String              @default("none")
+  rewardBalance   Decimal             @default(0) @db.Decimal(10, 2)
+  claimedAt       DateTime?
+  claimedTier     String?
   createdAt       DateTime            @default(now())
   updatedAt       DateTime            @updatedAt
 
@@ -1084,8 +1089,9 @@ model LoyaltyAccount {
 model LoyaltyTransaction {
   id          String   @id @default(uuid())
   accountId   String
-  points      Int
+  amount      Decimal? @db.Decimal(10, 2)
   type        String
+  tier        String?
   reference   String?
   description String
   expiresAt   DateTime?

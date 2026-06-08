@@ -21,8 +21,8 @@ export async function generateMetadata({ params }: VendorPageProps): Promise<Met
     const res = await get<ApiResponse<{ vendor: Vendor; products: unknown[]; reviews: unknown[] }>>(`/vendors/storefront/${slug}`);
     const vendor = res.data.vendor;
     return {
-      title: `${vendor.storeName} - Artisan on Loopingon`,
-      description: vendor.storeDescription?.substring(0, 160) || `Shop handmade crafts from ${vendor.storeName} on Loopingon.`,
+      title: `${vendor.storeName} - Artisan on Kandyam`,
+      description: vendor.storeDescription?.substring(0, 160) || `Shop handmade crafts from ${vendor.storeName} on Kandyam.`,
     };
   } catch {
     return { title: "Vendor Storefront" };

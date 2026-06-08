@@ -2,7 +2,7 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Community Guidelines",
-  description: "Loopingon Community Guidelines: Standards for buyers, sellers, and visitors. Prohibited items, behavior standards, review authenticity, and enforcement.",
+  description: "Kandyam Community Guidelines: Standards for buyers, sellers, and visitors. Prohibited items, behavior standards, review authenticity, and enforcement.",
 };
 
 export default function CommunityGuidelinesPage() {
@@ -13,13 +13,13 @@ export default function CommunityGuidelinesPage() {
         <p className="mt-2 text-sm text-muted-500">Last updated: June 2026</p>
 
         <div className="mt-6 rounded-xl bg-accent-50 border border-accent-200 p-6">
-          <p className="text-sm text-accent-800">Our community is built on trust, respect, and a shared passion for handmade crafts. These guidelines help ensure Loopingon remains a safe, fair, and inspiring marketplace for everyone.</p>
+          <p className="text-sm text-accent-800">Our community is built on trust, respect, and a shared passion for handmade crafts. These guidelines help ensure Kandyam remains a safe, fair, and inspiring marketplace for everyone.</p>
         </div>
 
         <div className="mt-10 space-y-8 text-sm leading-relaxed text-muted-700 [&_h2]:font-serif [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-text-900 [&_h3]:font-semibold [&_h3]:text-text-800 [&_p]:mt-3 [&_ul]:mt-3 [&_ul]:list-disc [&_ul]:pl-6">
           <section>
             <h2>Prohibited Items</h2>
-            <p>The following items are strictly prohibited on Loopingon:</p>
+            <p>The following items are strictly prohibited on Kandyam:</p>
             <ul>
               <li>Mass-produced or factory-made items misrepresented as handmade</li>
               <li>Counterfeit, replica, or unauthorized copies of branded goods</li>
@@ -118,7 +118,7 @@ export default function CommunityGuidelinesPage() {
             <p>If you see content or behavior that violates these guidelines, please report it:</p>
             <ul>
               <li>Use the &quot;Report&quot; button on product pages, reviews, or user profiles</li>
-              <li>Email community@loopingon.com with details and evidence</li>
+              <li>Email community@kandyam.com with details and evidence</li>
               <li>Contact our support team via live chat</li>
             </ul>
             <p>We review all reports and take appropriate action. Your report is confidential — we never share reporter information with the reported party.</p>

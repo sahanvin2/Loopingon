@@ -59,7 +59,7 @@ export default function TwoFactorPage() {
     <div className="flex min-h-screen items-center justify-center bg-surface-50 px-4 py-12">
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="w-full max-w-md">
         <div className="rounded-2xl bg-white p-8 shadow-soft-sm md:p-10">
-          <div className="mb-6 text-center"><Link href="/" className="font-serif text-2xl font-bold text-primary-600">Loopingon</Link></div>
+          <div className="mb-6 text-center"><Link href="/" className="font-serif text-2xl font-bold text-primary-600">Kandyam</Link></div>
 
           <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-surface-50">
             <Lock className="h-8 w-8 text-primary-600" />

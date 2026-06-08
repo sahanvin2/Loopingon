@@ -70,7 +70,7 @@ export default function SignInPage() {
               L
             </Link>
             <h1 className="font-serif text-3xl font-bold text-text-900 tracking-tight">Welcome back</h1>
-            <p className="mt-1.5 text-sm text-muted-500">Sign in to continue to Loopingon</p>
+            <p className="mt-1.5 text-sm text-muted-500">Sign in to continue to Kandyam</p>
           </div>
 
           {error && (

@@ -2,13 +2,13 @@
 
 import React, { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X } from "lucide-react";
+import { X, Truck, Heart, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const messages = [
-  "Free Delivery on Orders Over Rs. 5,000",
-  "New Artisans Join Weekly",
-  "Shop Handmade with Love",
+  { text: "Free shipping on orders over Rs. 5,000", icon: Truck },
+  { text: "Support Sri Lankan Creators", icon: Heart },
+  { text: "Handmade with love, delivered with care.", icon: Sparkles },
 ];
 
 const STORAGE_KEY = "top-banner-dismissed";
@@ -38,31 +38,34 @@ export function TopBanner() {
   if (isDismissed) return null;
 
   return (
-    <div className="relative h-12 bg-primary-600 overflow-hidden">
-      <div className="max-w-8xl mx-auto h-full flex items-center justify-center px-12">
+    <div className="relative bg-accent-500 overflow-hidden text-white">
+      {/* Mobile Slider */}
+      <div className="md:hidden h-10 flex items-center justify-center px-8">
         <AnimatePresence mode="wait">
-          <motion.p
+          <motion.div
             key={currentIndex}
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
+            exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.3 }}
-            className="text-white text-sm font-medium text-center"
+            className="flex items-center gap-2 text-xs font-medium"
           >
-            {messages[currentIndex]}
-          </motion.p>
+            {React.createElement(messages[currentIndex].icon, { className: "w-3 h-3" })}
+            <span>{messages[currentIndex].text}</span>
+          </motion.div>
         </AnimatePresence>
       </div>
 
-      <div className="absolute bottom-1 left-1/2 -translate-x-1/2 flex gap-1.5">
-        {messages.map((_, i) => (
-          <div
-            key={i}
-            className={cn(
-              "w-1.5 h-1.5 rounded-full transition-colors",
-              i === currentIndex ? "bg-surface-50" : "bg-primary-400",
-            )}
-          />
+      {/* Desktop Static List */}
+      <div className="hidden md:flex max-w-7xl mx-auto h-10 items-center justify-center px-12 gap-8 text-sm font-medium">
+        {messages.map((msg, idx) => (
+          <React.Fragment key={idx}>
+            <div className="flex items-center gap-2">
+              <msg.icon className="w-4 h-4" />
+              <span>{msg.text}</span>
+            </div>
+            {idx < messages.length - 1 && <span className="text-white/40">|</span>}
+          </React.Fragment>
         ))}
       </div>
 
@@ -70,8 +73,8 @@ export function TopBanner() {
         type="button"
         onClick={dismiss}
         className={cn(
-          "absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded",
-          "text-surface-200 hover:text-white hover:bg-primary-700/30 transition-colors",
+          "absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded",
+          "text-white/80 hover:text-white hover:bg-white/10 transition-colors",
         )}
         aria-label="Dismiss banner"
       >

@@ -37,7 +37,14 @@ async function getAccessToken(): Promise<string | null> {
       }
     }
   } catch {
-    return null;
+    // fallback below
+  }
+
+  try {
+    const legacy = localStorage.getItem("accessToken");
+    if (legacy) return legacy;
+  } catch {
+    // ignore
   }
 
   return null;

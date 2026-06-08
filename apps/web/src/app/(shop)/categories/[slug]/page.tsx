@@ -95,7 +95,7 @@ async function CategoryContent({ slug }: { slug: string }) {
           </p>
           <p className="mt-4 leading-relaxed text-muted-700">
             Every piece tells a story of skill, patience, and cultural heritage. When you purchase
-            {category.name.toLowerCase()} from Loopingon, you&apos;re not just buying a product — you&apos;re
+            {category.name.toLowerCase()} from Kandyam, you&apos;re not just buying a product — you&apos;re
             supporting a living tradition and the families who keep it alive.
           </p>
           <div className="mt-6 space-y-2 border-t border-text-200 pt-6">

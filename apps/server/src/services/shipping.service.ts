@@ -20,6 +20,8 @@ export async function calculateShipping(
 ) {
   let totalWeight = 0;
   let freeShippingAll = true;
+  const destination = address.country || "LK";
+  const subtotal = 0;
 
   for (const item of items) {
     const product = await prisma.product.findUnique({ where: { id: item.productId } });
@@ -32,44 +34,84 @@ export async function calculateShipping(
     }
   }
 
-  const destination = address.country || "LK";
+  // SL Post base rate: Rs. 250 for up to 1kg
+  // Additional weight: Rs. 50 per kg above 1kg
+  // Express (next day): Rs. 600 flat rate
+  // Free: orders over Rs. 5,000
 
-  if (freeShippingAll && destination === "LK") {
+  const weightKg = Math.ceil(Math.max(totalWeight, 1));
+  const slPostCost = 250 + (weightKg > 1 ? (weightKg - 1) * 50 : 0);
+  const expressCost = 600;
+
+  if (subtotal >= 5000 && destination === "LK") {
     return {
-      rates: [],
+      rates: [
+        {
+          id: "sl-post",
+          name: "SL Post Delivery",
+          courierName: "Sri Lanka Post",
+          cost: 0,
+          estimatedDays: 3,
+          freeShippingMinAmount: 5000,
+        },
+        {
+          id: "express",
+          name: "Express One-Day",
+          courierName: "Express Courier",
+          cost: 0,
+          estimatedDays: 1,
+          freeShippingMinAmount: 5000,
+        },
+      ],
       selected: {
         method: "FREE",
         cost: 0,
-        estimatedDays: 5,
-        name: "Free Shipping",
+        estimatedDays: 3,
+        name: "Free Delivery",
+        courierName: "Sri Lanka Post",
       },
       totalWeight,
       destination,
     };
   }
 
+  const rates = [];
+
+  // SL Post rates (always available domestically)
+  if (destination === "LK") {
+    rates.push({
+      id: "sl-post",
+      name: "SL Post Delivery",
+      courierName: "Sri Lanka Post",
+      cost: slPostCost,
+      estimatedDays: 3,
+      freeShippingMinAmount: 5000,
+    });
+  }
+
+  // Query dynamic shipping rates from DB
   const shippingRates = await prisma.shippingRate.findMany({
     where: { isActive: true },
     orderBy: { domesticRate: "asc" },
   });
 
-  const rates = shippingRates.map((rate) => {
+  for (const rate of shippingRates) {
     const cost = destination === "LK" ? Number(rate.domesticRate) : Number(rate.internationalRate);
     const weightMultiplier = totalWeight > 1 ? Math.ceil(totalWeight) : 1;
 
-    return {
+    rates.push({
       id: rate.id,
       name: rate.name,
       courierName: rate.courierName,
       cost: cost * weightMultiplier,
       estimatedDays: rate.estimatedDays,
       freeShippingMinAmount: rate.freeShippingMinAmount ? Number(rate.freeShippingMinAmount) : null,
-    };
-  });
+    });
+  }
 
   return {
     rates,
-    selected: rates.length > 0 ? { ...rates[0], method: "STANDARD" } : null,
+    selected: rates.length > 0 ? { ...rates[0], method: "SL_POST" } : null,
     totalWeight,
     destination,
   };

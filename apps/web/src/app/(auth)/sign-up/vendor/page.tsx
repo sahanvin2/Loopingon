@@ -193,7 +193,7 @@ export default function SignUpVendorPage() {
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="w-full max-w-2xl">
         <div className="rounded-2xl bg-white p-8 shadow-soft-sm md:p-10">
           <div className="mb-6 text-center">
-            <Link href="/" className="font-serif text-2xl font-bold text-primary-600">Loopingon</Link>
+            <Link href="/" className="font-serif text-2xl font-bold text-primary-600">Kandyam</Link>
             <p className="mt-1 text-sm text-muted-500">Vendor Application</p>
           </div>
 

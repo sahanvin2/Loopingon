@@ -1,9 +1,9 @@
-export const SITE_NAME = "Loopingon";
+export const SITE_NAME = "Kandyam";
 export const SITE_TAGLINE = "Sri Lanka's premier marketplace for handmade artisanal crafts";
 export const SITE_DESCRIPTION =
-  "Loopingon connects skilled Sri Lankan artisans with customers worldwide. " +
+  "Kandyam connects skilled Sri Lankan artisans with customers worldwide. " +
   "Discover unique handcrafted treasures made with traditional techniques and authentic materials.";
-export const SITE_URL = "https://loopingon.com";
+export const SITE_URL = "https://kandyam.com";
 
 export const NAV_LINKS = [
   { label: "Home", href: "/" },
@@ -20,7 +20,7 @@ export const FOOTER_LINKS = {
     { label: "New Arrivals", href: "/shop?sort=newest" },
     { label: "Best Sellers", href: "/shop?sort=bestsellers" },
     { label: "On Sale", href: "/shop?filter=sale" },
-    { label: "Gift Cards", href: "/gift-cards" },
+    { label: "Gifts", href: "/gift" },
   ],
   categories: [
     { label: "Clay & Pottery", href: "/categories/clay-pottery" },
@@ -405,16 +405,16 @@ export const REVIEW_RATING_LABELS: Record<number, string> = {
 };
 
 export const SOCIAL_LINKS = {
-  facebook: "https://facebook.com/loopingon",
-  instagram: "https://instagram.com/loopingon",
-  twitter: "https://twitter.com/loopingon",
-  youtube: "https://youtube.com/@loopingon",
-  tiktok: "https://tiktok.com/@loopingon",
-  pinterest: "https://pinterest.com/loopingon",
+  facebook: "https://facebook.com/kandyam",
+  instagram: "https://instagram.com/kandyam",
+  twitter: "https://twitter.com/kandyam",
+  youtube: "https://youtube.com/@kandyam",
+  tiktok: "https://tiktok.com/@kandyam",
+  pinterest: "https://pinterest.com/kandyam",
 } as const;
 
 export const CONTACT_INFO = {
-  email: "hello@loopingon.com",
+  email: "hello@kandyam.com",
   phone: "+94 11 234 5678",
   whatsapp: "+94 77 123 4567",
   address: {

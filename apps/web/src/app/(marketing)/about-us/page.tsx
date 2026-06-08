@@ -5,10 +5,10 @@ import { Factory, Users, Globe, Leaf, Heart, ShieldCheck, Package, TrendingUp } 
 export const metadata = {
   title: "About Us",
   description:
-    "Learn about Loopingon's mission to connect Sri Lankan artisans with the world. Discover our story, values, and the impact we're making in the artisan community.",
+    "Learn about Kandyam's mission to connect Sri Lankan artisans with the world. Discover our story, values, and the impact we're making in the artisan community.",
   openGraph: {
-    title: "About Loopingon - Connecting Sri Lankan Artisans to the World",
-    description: "Discover how Loopingon empowers Sri Lankan artisans through a global marketplace.",
+    title: "About Kandyam - Connecting Sri Lankan Artisans to the World",
+    description: "Discover how Kandyam empowers Sri Lankan artisans through a global marketplace.",
   },
 };
 
@@ -23,7 +23,7 @@ const values = [
   {
     icon: Heart,
     title: "Authentic Craftsmanship",
-    description: "Every product on Loopingon is handmade by skilled artisans using traditional techniques passed down through generations.",
+    description: "Every product on Kandyam is handmade by skilled artisans using traditional techniques passed down through generations.",
   },
   {
     icon: Users,
@@ -71,20 +71,20 @@ export default function AboutUsPage() {
         <div className="mx-auto max-w-5xl px-4">
           <div className="mx-auto max-w-3xl space-y-6 text-center">
             <p className="text-lg leading-relaxed text-muted-700">
-              Loopingon was born from a simple observation: Sri Lanka is home to some of the
+              Kandyam was born from a simple observation: Sri Lanka is home to some of the
               world&apos;s most extraordinary craftsmanship, yet most artisans lacked access to
               global markets. Living in remote villages, their mastery of batik, wood carving,
               pottery, brass work, and countless other traditions remained hidden treasures.
             </p>
             <p className="text-lg leading-relaxed text-muted-700">
-              Founded in 2020 by a team of passionate Sri Lankans, Loopingon set out to bridge this
+              Founded in 2020 by a team of passionate Sri Lankans, Kandyam set out to bridge this
               gap. We built a platform that handles everything — from digital storefronts and
               secure payments to international logistics — so artisans can focus on what they do
               best: creating beautiful, authentic crafts.
             </p>
             <p className="text-lg leading-relaxed text-muted-700">
               Today, over 4,500 artisans from all 25 districts of Sri Lanka showcase their work on
-              Loopingon. From the batik workshops of Galle to the wood carving studios of Moratuwa,
+              Kandyam. From the batik workshops of Galle to the wood carving studios of Moratuwa,
               every product tells a story of tradition, skill, and dedication. Our mission remains
               unchanged: to preserve Sri Lankan craft heritage while creating sustainable livelihoods
               for the talented people behind every creation.
@@ -123,11 +123,11 @@ export default function AboutUsPage() {
         </div>
       </section>
 
-      {/* Why Loopingon */}
+      {/* Why Kandyam */}
       <section className="bg-surface-50 py-20">
         <div className="mx-auto max-w-6xl px-4">
           <h2 className="text-center font-serif text-3xl font-bold text-text-900 md:text-4xl">
-            Why Loopingon?
+            Why Kandyam?
           </h2>
           <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {values.map((v) => (
@@ -166,7 +166,7 @@ export default function AboutUsPage() {
           </h2>
           <p className="mt-4 text-lg text-muted-600">
             Whether you&apos;re an artisan ready to share your craft or a customer seeking
-            unique treasures, Loopingon welcomes you.
+            unique treasures, Kandyam welcomes you.
           </p>
           <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <Link

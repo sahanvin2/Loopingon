@@ -83,7 +83,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
         <div className="mt-10 border-t border-text-200 pt-6">
           <div className="flex items-center justify-between">
-            <ShareButtons url={`https://loopingon.com/blog/${post.slug}`} title={post.title} />
+            <ShareButtons url={`https://kandyam.com/blog/${post.slug}`} title={post.title} />
             <Link href="/blog" className="text-sm font-medium text-primary-600 hover:underline">
               ← Back to all posts
             </Link>

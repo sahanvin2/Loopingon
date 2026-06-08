@@ -1,13 +1,13 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import Link from "next/link";
 import { Globe, Gift, Store, Megaphone, Shield, MessageCircle, Lock, TrendingUp, DollarSign } from "lucide-react";
 
 export const metadata = {
-  title: "Sell on Loopingon - Turn Your Craft Into Income",
-  description: "Join 4,500+ Sri Lankan artisans selling handmade crafts on Loopingon. 80% profit to you, global customer reach, free store setup, and dedicated support.",
+  title: "Sell on Kandyam - Turn Your Craft Into Income",
+  description: "Join 4,500+ Sri Lankan artisans selling handmade crafts on Kandyam. 80% profit to you, global customer reach, free store setup, and dedicated support.",
   openGraph: {
-    title: "Sell on Loopingon - Turn Your Craft Into Income",
-    description: "Join 4,500+ Sri Lankan artisans selling handmade crafts on Loopingon. Keep 80% of your earnings.",
+    title: "Sell on Kandyam - Turn Your Craft Into Income",
+    description: "Join 4,500+ Sri Lankan artisans selling handmade crafts on Kandyam. Keep 80% of your earnings.",
   },
 };
 
@@ -25,7 +25,7 @@ const successStories = [
     name: "Sunil Perera",
     craft: "Wood Carving - Moratuwa",
     image: "/images/artisans/artisan-1.jpg",
-    story: "Before Loopingon, I sold only at local fairs. Now my hand-carved ebony elephants are in homes in Australia, Canada, and Germany. My income has tripled.",
+    story: "Before Kandyam, I sold only at local fairs. Now my hand-carved ebony elephants are in homes in Australia, Canada, and Germany. My income has tripled.",
     earnings: "රු 2.4M+ earned",
     orders: "320+ orders",
   },
@@ -33,7 +33,7 @@ const successStories = [
     name: "Kumudini Jayawardena",
     craft: "Batik Artist - Galle",
     image: "/images/artisans/artisan-2.jpg",
-    story: "Loopingon gave me the confidence to quit my day job and pursue batik full-time. The platform handles everything so I can focus on what I love.",
+    story: "Kandyam gave me the confidence to quit my day job and pursue batik full-time. The platform handles everything so I can focus on what I love.",
     earnings: "රු 1.8M+ earned",
     orders: "250+ orders",
   },
@@ -41,13 +41,13 @@ const successStories = [
     name: "Mohamed Rizwan",
     craft: "Brass Work - Kandy",
     image: "/images/artisans/artisan-3.jpg",
-    story: "My family has been doing brass work for four generations. Through Loopingon, our traditional oil lamps now light homes across the world.",
+    story: "My family has been doing brass work for four generations. Through Kandyam, our traditional oil lamps now light homes across the world.",
     earnings: "රු 3.1M+ earned",
     orders: "400+ orders",
   },
 ];
 
-export default function SellOnLoopingonPage() {
+export default function SellOnKandyamPage() {
   return (
     <>
       {/* Hero */}
@@ -61,7 +61,7 @@ export default function SellOnLoopingonPage() {
               Turn Your Craft Into Income
             </h1>
             <p className="mt-6 text-lg text-surface-200">
-              Join 4,500+ Sri Lankan artisans already selling on Loopingon. Keep 80% of your
+              Join 4,500+ Sri Lankan artisans already selling on Kandyam. Keep 80% of your
               earnings, reach customers worldwide, and grow your craft business.
             </p>
             <Link
@@ -79,7 +79,7 @@ export default function SellOnLoopingonPage() {
       <section className="bg-surface-50 py-20">
         <div className="mx-auto max-w-6xl px-4">
           <h2 className="text-center font-serif text-3xl font-bold text-text-900 md:text-4xl">
-            Why Sell on Loopingon?
+            Why Sell on Kandyam?
           </h2>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {benefits.map((b) => (
@@ -126,7 +126,7 @@ export default function SellOnLoopingonPage() {
                 {[
                   "No listing fees — list unlimited products for free",
                   "No monthly subscription or hidden charges",
-                  "Fortnightly payouts directly to your bank account",
+                  "Payouts within 5 working days once your balance hits Rs. 10,000 (sell ~Rs. 12,500 to qualify)",
                   "Full transparency: track every transaction in real-time",
                 ].map((item) => (
                   <div key={item} className="flex items-start gap-2">
@@ -142,10 +142,10 @@ export default function SellOnLoopingonPage() {
                 <div className="mt-6 space-y-4">
                   <div className="flex justify-between border-b border-white/20 pb-3">
                     <span>Product sold for</span>
-                    <span className="font-bold">රු 10,000</span>
+                    <span className="font-bold">රු 10,000</span><span className="text-sm text-muted-500"> (after 20% platform fee)</span>
                   </div>
                   <div className="flex justify-between border-b border-white/20 pb-3">
-                    <span>Loopingon commission (20%)</span>
+                    <span>Kandyam commission (20%)</span>
                     <span className="font-bold text-accent-300">- රු 2,000</span>
                   </div>
                   <div className="flex justify-between pt-2 text-xl">
@@ -191,7 +191,7 @@ export default function SellOnLoopingonPage() {
         <div className="mx-auto max-w-3xl px-4 text-center">
           <h2 className="font-serif text-3xl font-bold text-white md:text-4xl">Ready to Start Selling?</h2>
           <p className="mt-4 text-lg text-primary-200">
-            Join thousands of Sri Lankan artisans who have found their global audience on Loopingon.
+            Join thousands of Sri Lankan artisans who have found their global audience on Kandyam.
           </p>
           <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <Link

@@ -7,7 +7,7 @@ import { successResponse, paginatedResponse } from "../utils/response.js";
 const router = Router();
 
 router.get(
-  "/balance",
+  "/",
   authenticate,
   async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -16,11 +16,11 @@ router.get(
     } catch (err) {
       next(err);
     }
-  }
+  },
 );
 
 router.get(
-  "/history",
+  "/transactions",
   authenticate,
   async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -38,20 +38,33 @@ router.get(
     } catch (err) {
       next(err);
     }
-  }
+  },
 );
 
 router.post(
-  "/redeem",
+  "/claim",
   authenticate,
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const result = await loyaltyService.redeemPoints(req.user!.id, req.body.rewardId);
+      const result = await loyaltyService.claimReward(req.user!.id);
       successResponse(res, result);
     } catch (err) {
       next(err);
     }
-  }
+  },
+);
+
+router.get(
+  "/discount",
+  authenticate,
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const discount = await loyaltyService.getEligibleDiscount(req.user!.id);
+      successResponse(res, discount);
+    } catch (err) {
+      next(err);
+    }
+  },
 );
 
 export default router;

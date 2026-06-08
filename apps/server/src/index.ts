@@ -19,7 +19,7 @@ async function main() {
   const app = createApp();
 
   const server = app.listen(PORT, HOST, () => {
-    logger.info(`Loopingon server running on http://${HOST}:${PORT}`);
+    logger.info(`Kandyam server running on http://${HOST}:${PORT}`);
   });
 
   const shutdown = async (signal: string) => {

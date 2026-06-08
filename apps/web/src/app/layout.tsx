@@ -3,7 +3,11 @@ import { Cormorant_Garamond, Inter } from "next/font/google";
 import { Providers } from "@/providers";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import { MobileNav } from "@/components/layout/mobile-nav";
 import { AuthModal } from "@/components/shared/auth-modal";
+import { CookieConsent } from "@/components/shared/cookie-consent";
+import { PwaProvider } from "@/components/shared/pwa-provider";
+import { PageTracker } from "@/components/shared/page-tracker";
 import "@/styles/globals.css";
 
 const cormorantGaramond = Cormorant_Garamond({
@@ -31,11 +35,11 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: "Loopingon - Sri Lanka's Handmade Craft Marketplace",
-    template: "%s | Loopingon",
+    default: "Kandyam - Sri Lanka's Handmade Craft Marketplace",
+    template: "%s | Kandyam",
   },
   description:
-    "Loopingon connects skilled Sri Lankan artisans with customers worldwide. " +
+    "Kandyam connects skilled Sri Lankan artisans with customers worldwide. " +
     "Discover unique handcrafted treasures made with traditional techniques and authentic materials.",
   keywords: [
     "Sri Lanka",
@@ -52,12 +56,12 @@ export const metadata: Metadata = {
     "fair trade",
     "ethical shopping",
     "Sri Lankan artisans",
-    "loopingon",
+    "kandyam",
   ],
-  authors: [{ name: "Loopingon", url: "https://loopingon.com" }],
-  creator: "Loopingon",
-  publisher: "Loopingon",
-  metadataBase: new URL("https://loopingon.com"),
+  authors: [{ name: "Kandyam", url: "https://kandyam.com" }],
+  creator: "Kandyam",
+  publisher: "Kandyam",
+  metadataBase: new URL("https://kandyam.com"),
   alternates: {
     canonical: "/",
     languages: {
@@ -69,29 +73,29 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_LK",
-    siteName: "Loopingon",
-    title: "Loopingon - Sri Lanka's Handmade Craft Marketplace",
+    siteName: "Kandyam",
+    title: "Kandyam - Sri Lanka's Handmade Craft Marketplace",
     description:
       "Discover unique handcrafted treasures made by skilled Sri Lankan artisans. " +
       "Shop pottery, wood carving, textiles, jewelry, and more.",
-    url: "https://loopingon.com",
+    url: "https://kandyam.com",
     images: [
       {
-        url: "https://cdn.loopingon.com/og-image.jpg",
+        url: "https://cdn.kandyam.com/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Loopingon - Handmade Crafts from Sri Lanka",
+        alt: "Kandyam - Handmade Crafts from Sri Lanka",
         type: "image/jpeg",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Loopingon - Sri Lanka's Handmade Craft Marketplace",
+    title: "Kandyam - Sri Lanka's Handmade Craft Marketplace",
     description:
       "Discover unique handcrafted treasures made by skilled Sri Lankan artisans.",
-    images: ["https://cdn.loopingon.com/og-image.jpg"],
-    creator: "@loopingon",
+    images: ["https://cdn.kandyam.com/og-image.jpg"],
+    creator: "@kandyam",
   },
   robots: {
     index: true,
@@ -142,11 +146,13 @@ export default function RootLayout({
           href="/favicon-16x16.png"
         />
         <link rel="manifest" href="/site.webmanifest" />
-        <meta name="apple-mobile-web-app-title" content="Loopingon" />
-        <meta name="application-name" content="Loopingon" />
+        <meta name="apple-mobile-web-app-title" content="Kandyam" />
+        <meta name="application-name" content="Kandyam" />
       </head>
       <body className="min-h-screen bg-surface-50 font-sans text-text-900 antialiased">
         <Providers>
+          <PwaProvider />
+          <PageTracker />
           <div className="relative flex min-h-screen flex-col">
             <a
               href="#main-content"
@@ -157,6 +163,9 @@ export default function RootLayout({
 
             {/* Header */}
             <Header />
+
+            {/* Mobile Navigation Drawer */}
+            <MobileNav />
 
             <main id="main-content" className="flex-1">
               {children}
@@ -169,36 +178,6 @@ export default function RootLayout({
           {/* Auth Modal */}
           <AuthModal />
 
-          {/* Floating action buttons */}
-          <div className="pointer-events-none fixed inset-0 z-50">
-            <div className="pointer-events-auto absolute bottom-6 right-6 flex flex-col items-end gap-3">
-              {/* AI Chatbot FAB */}
-              <button
-                aria-label="Open chat assistant"
-                className="group flex h-14 w-14 items-center justify-center rounded-full bg-primary-500 text-white shadow-rose transition-all duration-300 hover:scale-110 hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="h-6 w-6"
-                  aria-hidden="true"
-                >
-                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-                  <path d="M8 9h8" />
-                  <path d="M8 13h6" />
-                </svg>
-                <span className="sr-only">Open AI Chat Assistant</span>
-                <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-accent-400 text-[10px] font-bold text-text-900">
-                  AI
-                </span>
-              </button>
-            </div>
-          </div>
         </Providers>
       </body>
     </html>

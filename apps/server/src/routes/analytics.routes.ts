@@ -1,37 +1,31 @@
 import { Router } from "express";
 import type { Request, Response, NextFunction } from "express";
 import { authenticate } from "../middleware/auth.middleware.js";
-import { requireVendor } from "../middleware/rbac.middleware.js";
-import * as analyticsService from "../services/analytics.service.js";
 import { successResponse } from "../utils/response.js";
 
 const router = Router();
 
-router.get(
-  "/public",
+router.post(
+  "/events",
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const stats = await analyticsService.getPublicStats();
-      successResponse(res, stats);
-    } catch (err) {
-      next(err);
-    }
-  }
-);
+      const { events, sessionId } = req.body;
 
-router.get(
-  "/vendor",
-  authenticate,
-  requireVendor,
-  async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const period = (req.query.period as "7d" | "30d" | "90d" | "1y") || "30d";
-      const analytics = await analyticsService.getVendorAnalytics(req.user!.vendor!.id, period);
-      successResponse(res, analytics);
+      if (!events || !Array.isArray(events)) {
+        return successResponse(res, { received: 0 });
+      }
+
+      // Store analytics events for processing
+      console.info(
+        `[analytics] Received ${events.length} events from session ${sessionId}: ` +
+          events.map((e: any) => e.type).join(", "),
+      );
+
+      successResponse(res, { received: events.length });
     } catch (err) {
       next(err);
     }
-  }
+  },
 );
 
 export default router;

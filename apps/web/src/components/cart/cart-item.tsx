@@ -18,7 +18,21 @@ export function CartItem({ item }: CartItemProps) {
   const removeCartItem = useRemoveCartItem();
 
   const product = item.product;
-  if (!product) return null;
+  if (!product) {
+    return (
+      <div className="flex items-center justify-between p-4 bg-red-50 border border-red-200 rounded-lg">
+        <span className="text-sm text-red-600 font-medium">This item is no longer available.</span>
+        <button
+          type="button"
+          onClick={() => removeCartItem.mutate(item.id)}
+          disabled={removeCartItem.isPending}
+          className="text-sm text-red-700 hover:text-red-800 underline transition-colors disabled:opacity-50"
+        >
+          Remove from cart
+        </button>
+      </div>
+    );
+  }
 
   const primaryImage = product.images?.find((img) => img.isPrimary) || product.images?.[0];
   const imageUrl = getImageUrl(primaryImage?.thumbnail || primaryImage?.url);

@@ -58,4 +58,20 @@ router.post(
   }
 );
 
+router.post(
+  "/apply",
+  authenticate,
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const result = await referralService.applyReferral(req.user!.id, {
+        acceptedTerms: req.body.acceptedTerms,
+        bankDetails: req.body.bankDetails,
+      });
+      successResponse(res, result);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
 export default router;

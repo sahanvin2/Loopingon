@@ -1,8 +1,8 @@
-import { Metadata } from "next";
+﻿import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Terms of Service",
-  description: "Loopingon Terms of Service: Rules and guidelines for buying and selling handmade crafts on our platform. Protect your rights as a buyer or artisan.",
+  description: "Kandyam Terms of Service: Rules and guidelines for buying and selling handmade crafts on our platform. Protect your rights as a buyer or artisan.",
 };
 
 export default function TermsOfServicePage() {
@@ -15,7 +15,7 @@ export default function TermsOfServicePage() {
         <div className="mt-10 space-y-8 text-sm leading-relaxed text-muted-700 [&_h2]:font-serif [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-text-900 [&_h2]:mt-8 [&_h3]:font-semibold [&_h3]:text-text-800 [&_h3]:mt-6 [&_p]:mt-3 [&_ul]:mt-3 [&_ul]:list-disc [&_ul]:pl-6 [&_li]:mt-1">
           <section>
             <h2>1. Acceptance of Terms</h2>
-            <p>By accessing or using Loopingon (&quot;the Platform&quot;, &quot;we&quot;, &quot;our&quot;), you agree to be bound by these Terms of Service (&quot;Terms&quot;). If you do not agree, do not use the Platform. These Terms constitute a legally binding agreement between you and Loopingon (Pvt) Ltd, a company registered in Sri Lanka.</p>
+            <p>By accessing or using Kandyam (&quot;the Platform&quot;, &quot;we&quot;, &quot;our&quot;), you agree to be bound by these Terms of Service (&quot;Terms&quot;). If you do not agree, do not use the Platform. These Terms constitute a legally binding agreement between you and Kandyam (Pvt) Ltd, a company registered in Sri Lanka.</p>
           </section>
 
           <section>
@@ -43,7 +43,7 @@ export default function TermsOfServicePage() {
           <section>
             <h2>4. Selling Terms</h2>
             <h3>4.1 Eligibility</h3>
-            <p>To sell on Loopingon, you must complete the vendor application process, including identity verification and craft documentation. We reserve the right to reject any application.</p>
+            <p>To sell on Kandyam, you must complete the vendor application process, including identity verification and craft documentation. We reserve the right to reject any application.</p>
             <h3>4.2 Product Requirements</h3>
             <ul>
               <li>All products must be handmade or handcrafted, primarily by you or your team.</li>
@@ -58,21 +58,21 @@ export default function TermsOfServicePage() {
           <section>
             <h2>5. Payments & Fees</h2>
             <h3>5.1 Platform Commission</h3>
-            <p>Loopingon charges a 20% commission on each completed sale (including shipping fees). This is the only fee — there are no listing fees, subscription fees, or hidden charges.</p>
+            <p>Kandyam charges a 20% commission on each completed sale (including shipping fees). This is the only fee — there are no listing fees, subscription fees, or hidden charges.</p>
             <h3>5.2 Payouts</h3>
-            <p>Vendor payouts are processed fortnightly to registered Sri Lankan bank accounts. Payout amounts are the sale price minus the 20% commission. Payouts may be delayed for orders with open disputes.</p>
+            <p>Vendor payouts are processed once your balance reaches Rs. 10,000 to registered Sri Lankan bank accounts. This equates to approximately Rs. 12,500 in sales (20% platform commission applied). The minimum threshold helps reduce per-transaction bank charges and government taxes. Payouts are processed within 5 working days of the threshold being met.</p>
             <h3>5.3 Refunds</h3>
             <p>In case of refunds, the platform commission is also refunded proportionally. Refunds are processed to the buyer&apos;s original payment method within 3-5 business days.</p>
           </section>
 
           <section>
             <h2>6. Disputes & Returns</h2>
-            <p>Buyers may request returns within 7 days of delivery. Disputes are first mediated between buyer and vendor through our messaging system. If unresolved, Loopingon will review evidence from both parties and make a binding decision. See our <a href="/return-policy" className="text-primary-600 hover:underline">Return Policy</a> for full details.</p>
+            <p>Buyers may request returns within 7 days of delivery. Disputes are first mediated between buyer and vendor through our messaging system. If unresolved, Kandyam will review evidence from both parties and make a binding decision. See our <a href="/return-policy" className="text-primary-600 hover:underline">Return Policy</a> for full details.</p>
           </section>
 
           <section>
             <h2>7. Intellectual Property</h2>
-            <p>Vendors retain all rights to their product photos, descriptions, and brand assets. By listing on Loopingon, vendors grant us a limited license to display, market, and promote their products on the Platform and in marketing materials. See our <a href="/intellectual-property" className="text-primary-600 hover:underline">IP Policy</a>.</p>
+            <p>Vendors retain all rights to their product photos, descriptions, and brand assets. By listing on Kandyam, vendors grant us a limited license to display, market, and promote their products on the Platform and in marketing materials. See our <a href="/intellectual-property" className="text-primary-600 hover:underline">IP Policy</a>.</p>
           </section>
 
           <section>
@@ -105,9 +105,9 @@ export default function TermsOfServicePage() {
           <section>
             <h2>12. Contact</h2>
             <p>
-              Loopingon (Pvt) Ltd<br />
+              Kandyam (Pvt) Ltd<br />
               42 Galle Road, Colombo 03, Sri Lanka<br />
-              Email: legal@loopingon.com
+              Email: legal@kandyam.com
             </p>
           </section>
         </div>

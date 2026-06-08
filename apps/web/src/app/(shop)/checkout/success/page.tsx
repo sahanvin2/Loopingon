@@ -161,7 +161,7 @@ export default function CheckoutSuccessPage() {
 
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }} className="mt-10 rounded-2xl bg-accent-50 p-6 text-center">
           <h2 className="font-serif text-lg font-bold text-accent-800">Share the Love</h2>
-          <p className="mt-1 text-sm text-accent-600">Tell your friends about Loopingon and earn rewards!</p>
+          <p className="mt-1 text-sm text-accent-600">Tell your friends about Kandyam and earn rewards!</p>
           <div className="mt-4 flex justify-center gap-3">
             <button className="rounded-lg bg-[#1877F2] p-2 text-white hover:bg-[#166FE5]"><Facebook className="h-5 w-5" /></button>
             <button className="rounded-lg bg-[#1DA1F2] p-2 text-white hover:bg-[#1a8cd8]"><Twitter className="h-5 w-5" /></button>

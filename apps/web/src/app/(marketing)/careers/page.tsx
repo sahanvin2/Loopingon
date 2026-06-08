@@ -5,7 +5,7 @@ import { MapPin, Clock, Briefcase, Mail, Heart, Users, Globe, Lightbulb } from "
 
 export const metadata: Metadata = {
   title: "Careers - Join Our Mission",
-  description: "Join the Loopingon team and help connect Sri Lankan artisans with the world. Explore open positions in Colombo, Sri Lanka.",
+  description: "Join the Kandyam team and help connect Sri Lankan artisans with the world. Explore open positions in Colombo, Sri Lanka.",
 };
 
 const values = [
@@ -17,7 +17,7 @@ const values = [
 
 const positions = [
   { title: "Senior Full-Stack Engineer", department: "Engineering", location: "Colombo, Sri Lanka", type: "Full-time", description: "Build and scale our marketplace platform using Next.js, Node.js, and PostgreSQL. Work on features that directly impact thousands of artisans." },
-  { title: "Community Manager", department: "Operations", location: "Colombo, Sri Lanka", type: "Full-time", description: "Engage with our artisan community, organize events, manage social media, and be the voice of Loopingon to our vendor base." },
+  { title: "Community Manager", department: "Operations", location: "Colombo, Sri Lanka", type: "Full-time", description: "Engage with our artisan community, organize events, manage social media, and be the voice of Kandyam to our vendor base." },
   { title: "Content Writer (English & Sinhala)", department: "Marketing", location: "Colombo, Sri Lanka", type: "Full-time", description: "Create compelling content about Sri Lankan crafts, artisan stories, and cultural heritage. Bilingual proficiency in English and Sinhala required." },
   { title: "Customer Support Specialist", department: "Support", location: "Colombo, Sri Lanka", type: "Full-time", description: "Provide exceptional support to buyers and vendors via chat, email, and WhatsApp. Resolve issues and ensure a great marketplace experience." },
 ];
@@ -27,7 +27,7 @@ export default function CareersPage() {
     <>
       <section className="relative overflow-hidden bg-text-900">
         <div className="absolute inset-0">
-          <Image src="/images/careers/team-sri-lanka.jpg" alt="Loopingon team" fill className="object-cover opacity-30" priority sizes="100vw" />
+          <Image src="/images/careers/team-sri-lanka.jpg" alt="Kandyam team" fill className="object-cover opacity-30" priority sizes="100vw" />
         </div>
         <div className="relative mx-auto max-w-4xl px-4 py-24 text-center md:py-32">
           <h1 className="font-serif text-4xl font-bold text-white md:text-5xl">Join Our Mission</h1>
@@ -83,8 +83,8 @@ export default function CareersPage() {
             <p className="mt-2 text-muted-600">
               We&apos;re always looking for talented people. Send your CV and tell us how you can contribute.
             </p>
-            <a href="mailto:careers@loopingon.com" className="mt-4 inline-block rounded-lg bg-primary-600 px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-primary-700">
-              careers@loopingon.com
+            <a href="mailto:careers@kandyam.com" className="mt-4 inline-block rounded-lg bg-primary-600 px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-primary-700">
+              careers@kandyam.com
             </a>
           </div>
         </div>

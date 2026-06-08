@@ -38,11 +38,10 @@ export function useLogin() {
       return response.data;
     },
     onSuccess: (data) => {
+      const { setAccessToken, setRefreshToken } = useAuthStore.getState();
       setUser(data.user);
-      if (typeof window !== "undefined") {
-        localStorage.setItem("accessToken", data.accessToken);
-        localStorage.setItem("refreshToken", data.refreshToken);
-      }
+      setAccessToken(data.accessToken);
+      setRefreshToken(data.refreshToken);
       queryClient.invalidateQueries({ queryKey: ["auth"] });
     },
   });
@@ -58,11 +57,10 @@ export function useSignup() {
       return response.data;
     },
     onSuccess: (data) => {
+      const { setAccessToken, setRefreshToken } = useAuthStore.getState();
       setUser(data.user);
-      if (typeof window !== "undefined") {
-        localStorage.setItem("accessToken", data.accessToken);
-        localStorage.setItem("refreshToken", data.refreshToken);
-      }
+      setAccessToken(data.accessToken);
+      setRefreshToken(data.refreshToken);
       queryClient.invalidateQueries({ queryKey: ["auth"] });
     },
   });
@@ -110,18 +108,13 @@ export function useRefreshToken() {
       return response.data;
     },
     onSuccess: (data) => {
+      const { setAccessToken, setRefreshToken } = useAuthStore.getState();
       setUser(data.user);
-      if (typeof window !== "undefined") {
-        localStorage.setItem("accessToken", data.accessToken);
-        localStorage.setItem("refreshToken", data.refreshToken);
-      }
+      setAccessToken(data.accessToken);
+      setRefreshToken(data.refreshToken);
     },
     onError: () => {
       logout();
-      if (typeof window !== "undefined") {
-        localStorage.removeItem("accessToken");
-        localStorage.removeItem("refreshToken");
-      }
     },
   });
 }

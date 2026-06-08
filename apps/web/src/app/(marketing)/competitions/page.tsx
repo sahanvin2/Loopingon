@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Craft Competitions - Showcase Your Skills",
-  description: "Join Loopingon craft competitions. Submit your best handmade work, compete with fellow artisans, and win prizes. Current, upcoming, and past competitions.",
+  description: "Join Kandyam craft competitions. Submit your best handmade work, compete with fellow artisans, and win prizes. Current, upcoming, and past competitions.",
 };
 
 const statusStyles: Record<string, string> = {
@@ -137,7 +137,7 @@ export default function CompetitionsPage() {
       <section className="bg-surface-50 py-16">
         <div className="mx-auto max-w-2xl px-4 text-center">
           <h2 className="font-serif text-2xl font-bold text-text-900">Want to compete?</h2>
-          <p className="mt-3 text-muted-600">Sign up as a vendor on Loopingon to participate in competitions and showcase your best work.</p>
+          <p className="mt-3 text-muted-600">Sign up as a vendor on Kandyam to participate in competitions and showcase your best work.</p>
           <Link href="/sign-up/vendor" className="mt-6 inline-flex items-center rounded-lg bg-primary-600 px-8 py-3 text-sm font-semibold text-white shadow-soft transition-all hover:bg-primary-700">
             Become a Vendor
           </Link>

@@ -1,13 +1,52 @@
 {
-  "name": "Loopingon",
-  "short_name": "Loopingon",
-  "description": "Sri Lanka's Handmade Craft Marketplace",
+  "name": "Kandyam - Sri Lanka's Handmade Craft Marketplace",
+  "short_name": "Kandyam",
+  "description": "Discover unique handcrafted treasures made by skilled Sri Lankan artisans. Shop pottery, wood carving, textiles, jewelry and more.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#FDF8F0",
   "theme_color": "#D35400",
+  "orientation": "any",
+  "scope": "/",
+  "lang": "en-LK",
+  "categories": ["shopping", "lifestyle", "art"],
   "icons": [
     { "src": "/favicon-16x16.png", "sizes": "16x16", "type": "image/png" },
-    { "src": "/favicon-32x32.png", "sizes": "32x32", "type": "image/png" }
+    { "src": "/favicon-32x32.png", "sizes": "32x32", "type": "image/png" },
+    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "/icons/icon-192x192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/icons/icon-512x512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ],
+  "screenshots": [
+    {
+      "src": "/images/screenshot-home.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Home screen of Kandyam"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Shop Products",
+      "short_name": "Shop",
+      "description": "Browse handmade products",
+      "url": "/products",
+      "icons": [{ "src": "/favicon-32x32.png", "sizes": "32x32" }]
+    },
+    {
+      "name": "My Cart",
+      "short_name": "Cart",
+      "description": "View your shopping cart",
+      "url": "/cart",
+      "icons": [{ "src": "/favicon-32x32.png", "sizes": "32x32" }]
+    },
+    {
+      "name": "Gift Cards",
+      "short_name": "Gifts",
+      "description": "Send a gift card",
+      "url": "/gift",
+      "icons": [{ "src": "/favicon-32x32.png", "sizes": "32x32" }]
+    }
   ]
 }

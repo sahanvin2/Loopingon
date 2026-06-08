@@ -127,7 +127,7 @@ export default function ReferralsPage() {
               type="button"
               onClick={() => {
                 window.open(
-                  `https://wa.me/?text=Join%20Loopingon,%20Sri%20Lanka's%20handcrafted%20marketplace!%20Use%20my%20code%20${referralCode.code}%20to%20get%20started.%20${shareUrl}`,
+                  `https://wa.me/?text=Join%20Kandyam,%20Sri%20Lanka's%20handcrafted%20marketplace!%20Use%20my%20code%20${referralCode.code}%20to%20get%20started.%20${shareUrl}`,
                   "_blank",
                 );
               }}

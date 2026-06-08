@@ -72,10 +72,10 @@ export default function Error({
         <div className="mt-10 text-xs text-muted-400">
           <p>If this issue persists, please reach out to us:</p>
           <a
-            href="mailto:support@loopingon.com"
+            href="mailto:support@kandyam.com"
             className="text-primary-600 hover:underline"
           >
-            support@loopingon.com
+            support@kandyam.com
           </a>
           {" "}&middot;{" "}
           <span>+94 11 234 5678</span>

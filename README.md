@@ -1,4 +1,4 @@
-# Loopingon - Where Sri Lankan Craft Meets the World
+# Kandyam - Where Sri Lankan Craft Meets the World
 
 A premium multi-vendor marketplace connecting Sri Lankan artisans, handloom weavers, handicraft makers, and cottage industry producers with local and global buyers.
 
@@ -60,7 +60,7 @@ Key environment variables:
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `DATABASE_URL` | `postgresql://loopingon:loopingon_dev@localhost:5433/loopingon` | PostgreSQL connection |
+| `DATABASE_URL` | `postgresql://kandyam:kandyam_dev@localhost:5433/kandyam` | PostgreSQL connection |
 | `REDIS_URL` | `redis://localhost:6379` | Redis connection |
 | `JWT_ACCESS_SECRET` / `JWT_REFRESH_SECRET` | dev secrets | JWT signing keys |
 | `SMTP_HOST` / `SMTP_PORT` / `SMTP_USER` / `SMTP_PASS` | (blank) | Email service (optional) |
@@ -100,7 +100,7 @@ npm run db:seed   # Seed with sample data
 
 > **Note**: If you see an error about `uuid_ossp` extension not found, run:
 > ```bash
-> docker exec loopingon-postgres psql -U loopingon -d loopingon -c 'CREATE EXTENSION IF NOT EXISTS "uuid-ossp";'
+> docker exec kandyam-postgres psql -U kandyam -d kandyam -c 'CREATE EXTENSION IF NOT EXISTS "uuid-ossp";'
 > ```
 
 ### 6. Run the project
@@ -125,7 +125,7 @@ cd apps/web && npm run dev       # Next.js on port 3000
 
 ## Admin Credentials
 
-Email: `admin@loopingon.com`  
+Email: `admin@kandyam.com`  
 Password: `Admin@123456`
 
 ## Available Scripts
@@ -151,7 +151,7 @@ Password: `Admin@123456`
 ## Project Structure
 
 ```
-loopingon/
+kandyam/
 ├── apps/
 │   ├── server/                 # Express.js Backend (Port 4000)
 │   │   ├── src/
@@ -225,7 +225,7 @@ loopingon/
 If you have a local PostgreSQL installation on port 5432, it will conflict with Docker. Update `apps/server/.env` to use port 5433:
 
 ```
-DATABASE_URL=postgresql://loopingon:loopingon_dev@localhost:5433/loopingon
+DATABASE_URL=postgresql://kandyam:kandyam_dev@localhost:5433/kandyam
 ```
 
 Then change the Docker port mapping. Or stop the local PostgreSQL service.
@@ -235,7 +235,7 @@ Then change the Docker port mapping. Or stop the local PostgreSQL service.
 PostgreSQL 16 uses `uuid-ossp` (with hyphens) as the extension name, while older versions used `uuid_ossp`. If Prisma fails with this error, create the extension manually:
 
 ```bash
-docker exec loopingon-postgres psql -U loopingon -d loopingon -c 'CREATE EXTENSION IF NOT EXISTS "uuid-ossp";'
+docker exec kandyam-postgres psql -U kandyam -d kandyam -c 'CREATE EXTENSION IF NOT EXISTS "uuid-ossp";'
 ```
 
 ### Connection authentication
@@ -243,8 +243,8 @@ docker exec loopingon-postgres psql -U loopingon -d loopingon -c 'CREATE EXTENSI
 If you see "Authentication failed" errors, the Docker container's `pg_hba.conf` may need the final line changed from `scram-sha-256` to `trust` for local development:
 
 ```bash
-docker exec loopingon-postgres sed -i 's/scram-sha-256/trust/' /var/lib/postgresql/data/pg_hba.conf
-docker exec loopingon-postgres psql -U loopingon -c 'SELECT pg_reload_conf();'
+docker exec kandyam-postgres sed -i 's/scram-sha-256/trust/' /var/lib/postgresql/data/pg_hba.conf
+docker exec kandyam-postgres psql -U kandyam -c 'SELECT pg_reload_conf();'
 ```
 
 ### Prisma seed command

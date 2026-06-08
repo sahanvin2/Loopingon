@@ -56,6 +56,49 @@ export async function getReferralEarnings(userId: string) {
   };
 }
 
+export async function applyReferral(
+  userId: string,
+  data: { acceptedTerms: boolean; bankDetails: { bankName: string; accountHolderName: string; accountNumber: string; branch: string } },
+) {
+  let referralCode = await prisma.referralCode.findUnique({ where: { userId } });
+
+  if (!referralCode) {
+    let code = generateReferralCode();
+    let existing = await prisma.referralCode.findUnique({ where: { code } });
+    while (existing) {
+      code = generateReferralCode();
+      existing = await prisma.referralCode.findUnique({ where: { code } });
+    }
+
+    referralCode = await prisma.referralCode.create({
+      data: {
+        userId,
+        code,
+        status: "active",
+        joinedAt: new Date(),
+        acceptedTermsAt: new Date(),
+        bankDetails: data.bankDetails as any,
+      },
+    });
+  } else {
+    referralCode = await prisma.referralCode.update({
+      where: { userId },
+      data: {
+        status: "active",
+        joinedAt: referralCode.joinedAt || new Date(),
+        acceptedTermsAt: referralCode.acceptedTermsAt || new Date(),
+        bankDetails: data.bankDetails as any,
+      },
+    });
+  }
+
+  return {
+    code: referralCode.code,
+    status: referralCode.status,
+    referralLink: `${process.env.FRONTEND_URL || "http://localhost:3000"}/sign-up?ref=${referralCode.code}`,
+  };
+}
+
 export async function processReferral(newUserId: string, referralCode: string) {
   const existingReferral = await prisma.referral.findUnique({ where: { referredUserId: newUserId } });
   if (existingReferral) return;

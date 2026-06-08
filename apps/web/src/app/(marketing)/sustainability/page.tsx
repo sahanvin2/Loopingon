@@ -11,7 +11,7 @@ import { LoadingSkeleton } from "@/components/shared/loading-skeleton";
 
 export const metadata: Metadata = {
   title: "Sustainability - Our Commitment to the Planet",
-  description: "Learn about Loopingon's sustainability initiatives: eco-friendly packaging, tree planting program, carbon-neutral shipping, and artisan education.",
+  description: "Learn about Kandyam's sustainability initiatives: eco-friendly packaging, tree planting program, carbon-neutral shipping, and artisan education.",
 };
 
 const stats = [
@@ -21,7 +21,7 @@ const stats = [
 ];
 
 const initiatives = [
-  { icon: Package, title: "Plastic-Free Packaging", description: "All Loopingon shipments use biodegradable, recycled, or reusable packaging materials. We've eliminated single-use plastics from our entire supply chain." },
+  { icon: Package, title: "Plastic-Free Packaging", description: "All Kandyam shipments use biodegradable, recycled, or reusable packaging materials. We've eliminated single-use plastics from our entire supply chain." },
   { icon: Trees, title: "Tree Planting Program", description: "For every 100 orders, we plant a tree in Sri Lanka's central highlands. Working with local reforestation partners, we've planted over 15,000 trees since 2021." },
   { icon: Ship, title: "Carbon-Neutral Shipping", description: "We offset 100% of carbon emissions from international shipping through certified carbon offset programs. Every international order is climate-neutral." },
   { icon: GraduationCap, title: "Artisan Education", description: "We provide free workshops to our artisans on sustainable material sourcing, waste reduction, and eco-friendly production methods." },
@@ -57,7 +57,7 @@ export default function SustainabilityPage() {
           <h1 className="font-serif text-4xl font-bold text-white md:text-5xl">Our Commitment</h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-surface-200">
             Handmade is inherently sustainable. We&apos;re building on that foundation to ensure
-            every aspect of Loopingon leaves a positive impact on our planet.
+            every aspect of Kandyam leaves a positive impact on our planet.
           </p>
         </div>
       </section>

@@ -2,7 +2,7 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Return & Refund Policy",
-  description: "Loopingon's 7-day return policy. Learn about return conditions, the return process, refund timelines, damaged items policy, and exchange options.",
+  description: "Kandyam's 7-day return policy. Learn about return conditions, the return process, refund timelines, damaged items policy, and exchange options.",
 };
 
 export default function ReturnPolicyPage() {
@@ -68,7 +68,7 @@ export default function ReturnPolicyPage() {
 
           <section>
             <h2>Damaged or Defective Items</h2>
-            <p>If your item arrives damaged, take clear photos of the damaged item and packaging immediately upon delivery. Contact us within 48 hours via the order page or support@loopingon.com. We will arrange a full refund or replacement (including all shipping costs) at no cost to you.</p>
+            <p>If your item arrives damaged, take clear photos of the damaged item and packaging immediately upon delivery. Contact us within 48 hours via the order page or support@kandyam.com. We will arrange a full refund or replacement (including all shipping costs) at no cost to you.</p>
           </section>
 
           <section>
@@ -78,7 +78,7 @@ export default function ReturnPolicyPage() {
 
           <section>
             <h2>Disputes</h2>
-            <p>If you and the vendor cannot agree on a return resolution, Loopingon will mediate. Our decision is binding. Escrow funds will not be released to the vendor until the dispute is resolved.</p>
+            <p>If you and the vendor cannot agree on a return resolution, Kandyam will mediate. Our decision is binding. Escrow funds will not be released to the vendor until the dispute is resolved.</p>
           </section>
         </div>
       </div>

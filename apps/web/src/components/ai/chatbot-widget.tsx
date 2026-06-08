@@ -15,7 +15,7 @@ const initialMessages: ChatMessage[] = [
   {
     id: "0",
     role: "assistant",
-    content: "Ayubowan! 👋 I'm your Loopingon assistant. How can I help you today?",
+    content: "Ayubowan! 👋 I'm your Kandyam assistant. How can I help you today?",
   },
 ];
 
@@ -23,7 +23,7 @@ const faqResponses: Record<string, string> = {
   shipping: "We offer free domestic shipping on orders over Rs. 5,000. Standard shipping takes 5-7 business days, and express shipping takes 2-3 business days. International shipping is available to most countries.",
   return: "We have an easy 7-day return policy. If you're not satisfied with your purchase, you can return it within 7 days for a full refund. Items must be in original condition.",
   payment: "We accept Visa, Mastercard, American Express, PayHere, and Payable. All payments are securely processed with buyer protection.",
-  artisan: "Loopingon features over 4,500 verified Sri Lankan artisans. Each artisan is verified through our thorough review process to ensure authentic, quality handmade products.",
+  artisan: "Kandyam features over 4,500 verified Sri Lankan artisans. Each artisan is verified through our thorough review process to ensure authentic, quality handmade products.",
   commission: "Our platform commission is 20% for vendors. This covers payment processing, buyer protection, marketing, and platform maintenance.",
   competition: "We run monthly craft competitions with amazing prizes. You can submit your best work to compete with artisans across Sri Lanka. Winners receive cash prizes and featured exposure.",
 };
@@ -117,7 +117,7 @@ export function ChatbotWidget() {
             <div className="flex items-center gap-3 px-4 py-3 bg-muted-600 text-white">
               <Sparkles className="w-5 h-5" />
               <div className="flex-1">
-                <h3 className="text-sm font-semibold">Loopingon Assistant</h3>
+                <h3 className="text-sm font-semibold">Kandyam Assistant</h3>
                 <p className="text-xs text-muted-100">We typically reply instantly</p>
               </div>
               <button

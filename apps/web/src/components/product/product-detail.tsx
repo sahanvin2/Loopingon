@@ -2,7 +2,9 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { cn } from "@/lib/utils";
+import Link from "next/link";
+import Image from "next/image";
+import { cn, getImageUrl } from "@/lib/utils";
 import type { Product } from "@/types";
 import { ProductImages } from "@/components/product/product-images";
 import { ProductInfo } from "@/components/product/product-info";
@@ -11,20 +13,44 @@ import { ProductReviews } from "@/components/product/product-reviews";
 import { RelatedProducts } from "@/components/product/related-products";
 import { ProductBreadcrumb } from "@/components/product/product-breadcrumb";
 import { VendorBadge } from "@/components/vendor/vendor-badge";
-import Image from "next/image";
 import { RatingStars } from "@/components/shared/rating-stars";
-import Link from "next/link";
-import { getImageUrl } from "@/lib/utils";
+import {
+  Ruler,
+  Scale,
+  Package,
+  Clock,
+  Leaf,
+  ShieldCheck,
+  Award,
+  Sparkles,
+  Factory,
+  MessageCircle,
+  ChevronDown,
+  ChevronUp,
+  Truck,
+  RotateCcw,
+} from "lucide-react";
 
 interface ProductDetailProps {
   product: Product;
 }
 
+const COMMON_FAQS = [
+  { q: "Is this product genuinely handmade?", a: "Yes. Every product on Kandyam is verified as authentically handmade by Sri Lankan artisans. Each piece is crafted individually using traditional techniques passed down through generations." },
+  { q: "Can I request a custom size or color?", a: "Many of our artisans accept custom orders. Use the 'Chat with Seller' button to ask the artisan directly about customizations. Custom orders may take additional processing time." },
+  { q: "How do I care for this handcrafted item?", a: "Handcrafted items need gentle care. Avoid harsh chemicals and prolonged direct sunlight. Specific care instructions vary by material — feel free to message the seller for details about this specific piece." },
+  { q: "What if the item arrives damaged?", a: "We've got you covered. Take photos of the damage within 48 hours of delivery and contact our support. We'll arrange a replacement or full refund at no cost to you." },
+];
+
 export function ProductDetail({ product }: ProductDetailProps) {
   const images = product.images || [];
   const videos = product.videos || [];
   const reviews = product.reviews || [];
+  const variants = product.variants || [];
   const primaryCategory = product.categories?.[0]?.category;
+  const [faqOpen, setFaqOpen] = React.useState<number | null>(null);
+
+  const hasSpecs = product.materials?.length > 0 || product.dimensions || product.weight || product.craftType || product.processingTime;
 
   return (
     <motion.div
@@ -37,6 +63,23 @@ export function ProductDetail({ product }: ProductDetailProps) {
         categoryName={primaryCategory?.name}
         categorySlug={primaryCategory?.slug}
       />
+
+      {/* Discount Banner */}
+      {product.compareAtPrice && parseFloat(product.compareAtPrice) > parseFloat(product.price) && (
+        <div className="mb-4 p-3 bg-gradient-to-r from-rose-50 to-amber-50 border border-rose-200 rounded-xl flex items-center gap-3">
+          <div className="w-10 h-10 rounded-full bg-rose-500 text-white flex items-center justify-center shrink-0">
+            <Sparkles className="w-5 h-5" />
+          </div>
+          <div>
+            <p className="text-sm font-bold text-rose-700">
+              Special Offer — Save {Math.round((1 - parseFloat(product.price) / parseFloat(product.compareAtPrice)) * 100)}%
+            </p>
+            <p className="text-xs text-rose-600">
+              Limited time discount. Buy now at the best price.
+            </p>
+          </div>
+        </div>
+      )}
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
         {/* Left Column: Images */}
@@ -52,23 +95,209 @@ export function ProductDetail({ product }: ProductDetailProps) {
       </div>
 
       <div className="mt-12 pt-12 border-t border-accent-200">
+        {/* Product Specs */}
+        {hasSpecs && (
+          <section className="mb-12">
+            <h2 className="font-serif text-2xl text-text-900 mb-6">Product Details & Specs</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {product.craftType && (
+                <div className="flex items-center gap-3 p-4 bg-surface-50 rounded-xl border border-accent-100">
+                  <div className="w-10 h-10 rounded-lg bg-primary-50 text-primary-500 flex items-center justify-center shrink-0">
+                    <Factory className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-muted-500 uppercase tracking-wide">Craft Type</p>
+                    <p className="text-sm font-semibold text-text-900">{product.craftType}</p>
+                  </div>
+                </div>
+              )}
+              {product.materials && product.materials.length > 0 && (
+                <div className="flex items-center gap-3 p-4 bg-surface-50 rounded-xl border border-accent-100">
+                  <div className="w-10 h-10 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
+                    <Leaf className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-muted-500 uppercase tracking-wide">Materials</p>
+                    <p className="text-sm font-semibold text-text-900">{product.materials.join(", ")}</p>
+                  </div>
+                </div>
+              )}
+              {product.dimensions && (
+                <div className="flex items-center gap-3 p-4 bg-surface-50 rounded-xl border border-accent-100">
+                  <div className="w-10 h-10 rounded-lg bg-muted-50 text-muted-600 flex items-center justify-center shrink-0">
+                    <Ruler className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-muted-500 uppercase tracking-wide">Dimensions</p>
+                    <p className="text-sm font-semibold text-text-900">
+                      {Object.entries(product.dimensions).map(([k, v]) => `${k}: ${v}`).join(", ")}
+                    </p>
+                  </div>
+                </div>
+              )}
+              {product.weight != null && (
+                <div className="flex items-center gap-3 p-4 bg-surface-50 rounded-xl border border-accent-100">
+                  <div className="w-10 h-10 rounded-lg bg-teal-50 text-teal-600 flex items-center justify-center shrink-0">
+                    <Scale className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-muted-500 uppercase tracking-wide">Weight</p>
+                    <p className="text-sm font-semibold text-text-900">{product.weight} kg</p>
+                  </div>
+                </div>
+              )}
+              {product.processingTime != null && (
+                <div className="flex items-center gap-3 p-4 bg-surface-50 rounded-xl border border-accent-100">
+                  <div className="w-10 h-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+                    <Clock className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-muted-500 uppercase tracking-wide">Processing Time</p>
+                    <p className="text-sm font-semibold text-text-900">{product.processingTime} business days</p>
+                  </div>
+                </div>
+              )}
+              {product.madeToOrder && (
+                <div className="flex items-center gap-3 p-4 bg-surface-50 rounded-xl border border-accent-100">
+                  <div className="w-10 h-10 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
+                    <Package className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-muted-500 uppercase tracking-wide">Made To</p>
+                    <p className="text-sm font-semibold text-text-900">Order</p>
+                  </div>
+                </div>
+              )}
+            </div>
+          </section>
+        )}
+
+        {/* Tags Banner */}
+        {(product.isHandmade || product.isEcoFriendly || product.isFairTrade || product.isCustomizable) && (
+          <section className="mb-12 flex flex-wrap gap-3">
+            {product.isHandmade && (
+              <span className="inline-flex items-center gap-1.5 px-4 py-2 bg-amber-50 border border-amber-200 rounded-full text-xs font-semibold text-amber-800">
+                <Award className="w-3.5 h-3.5" /> Authentic Handmade
+              </span>
+            )}
+            {product.isEcoFriendly && (
+              <span className="inline-flex items-center gap-1.5 px-4 py-2 bg-green-50 border border-green-200 rounded-full text-xs font-semibold text-green-800">
+                <Leaf className="w-3.5 h-3.5" /> Eco-Friendly
+              </span>
+            )}
+            {product.isFairTrade && (
+              <span className="inline-flex items-center gap-1.5 px-4 py-2 bg-blue-50 border border-blue-200 rounded-full text-xs font-semibold text-blue-800">
+                <ShieldCheck className="w-3.5 h-3.5" /> Fair Trade
+              </span>
+            )}
+            {product.isCustomizable && (
+              <span className="inline-flex items-center gap-1.5 px-4 py-2 bg-purple-50 border border-purple-200 rounded-full text-xs font-semibold text-purple-800">
+                <Sparkles className="w-3.5 h-3.5" /> Customizable
+              </span>
+            )}
+          </section>
+        )}
+
+        {/* Description */}
         {product.description && (
           <section className="mb-12">
-            <h2 className="font-serif text-2xl text-text-900 mb-6">
-              Description
-            </h2>
+            <h2 className="font-serif text-2xl text-text-900 mb-6">Description</h2>
             <div
-              className="prose prose-sm max-w-none text-muted-600 leading-relaxed"
+              className="prose prose-sm max-w-none text-muted-600 leading-relaxed space-y-4"
               dangerouslySetInnerHTML={{ __html: product.description }}
             />
           </section>
         )}
 
+        {/* Shipping & Returns Info */}
+        <section className="mb-12 bg-gradient-to-r from-teal-50 to-blue-50 rounded-2xl p-6 border border-teal-100">
+          <h2 className="font-serif text-xl text-text-900 mb-4">Shipping & Returns</h2>
+          <div className="space-y-4">
+            <div className="flex items-start gap-3">
+              <div className="w-8 h-8 rounded-lg bg-white text-teal-600 flex items-center justify-center shrink-0 mt-0.5">
+                <Truck className="w-4 h-4" />
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-text-900">
+                  {product.freeShippingDomestic ? "Free SL Post Delivery" : "SL Post — Rs. 250"}
+                </p>
+                <p className="text-xs text-muted-600">
+                  1-3 business days island-wide. Express delivery available at checkout for Rs. 600 (next day).
+                </p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <div className="w-8 h-8 rounded-lg bg-white text-blue-600 flex items-center justify-center shrink-0 mt-0.5">
+                <RotateCcw className="w-4 h-4" />
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-text-900">Easy Returns</p>
+                <p className="text-xs text-muted-600">
+                  7-day return policy. Items must be unused and in original packaging. Full refund or exchange.
+                </p>
+              </div>
+            </div>
+            <Link href="/shipping-policy" className="text-xs text-primary-600 hover:underline font-medium">
+              View full shipping & returns policy →
+            </Link>
+          </div>
+        </section>
+
+        {/* Chat with Seller */}
+        {product.vendor && (
+          <section className="mb-12 text-center p-8 bg-surface-50 rounded-2xl border border-accent-200">
+            <div className="w-16 h-16 rounded-full bg-primary-100 text-primary-500 flex items-center justify-center mx-auto mb-4">
+              <MessageCircle className="w-7 h-7" />
+            </div>
+            <h2 className="font-serif text-xl text-text-900 mb-2">Have a Question?</h2>
+            <p className="text-sm text-muted-600 mb-5 max-w-sm mx-auto">
+              Chat directly with {product.vendor.storeName} about this product. Ask about customizations, materials, or delivery.
+            </p>
+            <Link
+              href={`/dashboard/messages?vendor=${product.vendorId}`}
+              className="inline-flex items-center gap-2 px-6 py-3 bg-primary-600 text-white rounded-xl font-semibold hover:bg-primary-700 transition-colors shadow-md"
+            >
+              <MessageCircle className="w-4 h-4" />
+              Chat with Seller
+            </Link>
+          </section>
+        )}
+
+        {/* FAQ */}
+        <section className="mb-12">
+          <h2 className="font-serif text-2xl text-text-900 mb-6">Frequently Asked Questions</h2>
+          <div className="space-y-3">
+            {COMMON_FAQS.map((faq, idx) => (
+              <div
+                key={idx}
+                className="bg-white rounded-xl border border-accent-200 overflow-hidden"
+              >
+                <button
+                  type="button"
+                  onClick={() => setFaqOpen(faqOpen === idx ? null : idx)}
+                  className="w-full flex items-center justify-between p-5 text-left hover:bg-surface-50 transition-colors"
+                >
+                  <span className="text-sm font-semibold text-text-900 pr-4">{faq.q}</span>
+                  {faqOpen === idx ? (
+                    <ChevronUp className="w-4 h-4 text-muted-400 shrink-0" />
+                  ) : (
+                    <ChevronDown className="w-4 h-4 text-muted-400 shrink-0" />
+                  )}
+                </button>
+                {faqOpen === idx && (
+                  <div className="px-5 pb-5 text-sm text-muted-600 leading-relaxed">
+                    {faq.a}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Vendor / Artisan Info */}
         {product.vendor && (
           <section className="mb-12 bg-surface-50 rounded-xl p-6 border border-accent-200">
-            <h2 className="font-serif text-2xl text-text-900 mb-6">
-              About the Artisan
-            </h2>
+            <h2 className="font-serif text-2xl text-text-900 mb-6">About the Artisan</h2>
             <div className="flex flex-col sm:flex-row items-start gap-6">
               <div className="w-20 h-20 rounded-full border-2 border-accent-200 bg-white overflow-hidden shrink-0">
                 {product.vendor.storeLogo ? (
@@ -87,9 +316,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
               </div>
               <div>
                 <div className="flex items-center gap-2 mb-1">
-                  <h3 className="font-serif text-lg text-text-900">
-                    {product.vendor.storeName}
-                  </h3>
+                  <h3 className="font-serif text-lg text-text-900">{product.vendor.storeName}</h3>
                   <VendorBadge />
                 </div>
                 <p className="text-sm text-muted-500 mb-2">
@@ -97,15 +324,10 @@ export function ProductDetail({ product }: ProductDetailProps) {
                   &nbsp;&middot;&nbsp;
                   {product.vendor.yearsOfExperience}+ years experience
                 </p>
-                <p className="text-sm text-muted-600 line-clamp-3 mb-3">
-                  {product.vendor.storeDescription}
-                </p>
+                <p className="text-sm text-muted-600 line-clamp-3 mb-3">{product.vendor.storeDescription}</p>
                 <Link
                   href={`/vendors/${product.vendor.storeSlug}`}
-                  className={cn(
-                    "text-sm font-medium text-primary-600 hover:text-primary-700",
-                    "hover:underline",
-                  )}
+                  className={cn("text-sm font-medium text-primary-600 hover:text-primary-700", "hover:underline")}
                 >
                   Visit Store &rarr;
                 </Link>
@@ -114,13 +336,11 @@ export function ProductDetail({ product }: ProductDetailProps) {
           </section>
         )}
 
-        <ProductReviews
-          reviews={reviews}
-          averageRating={product.averageRating}
-          reviewCount={product.reviewCount}
-        />
+        {/* Reviews */}
+        <ProductReviews reviews={reviews} averageRating={product.averageRating} reviewCount={product.reviewCount} />
 
-        <RelatedProducts productId={product.id} />
+        {/* Related Products */}
+        <RelatedProducts productId={product.id} categoryId={primaryCategory?.id} />
       </div>
     </motion.div>
   );

@@ -206,6 +206,44 @@ export async function createOrder(
     },
   });
 
+  // Update vendor daily analytics
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  await prisma.vendorAnalytics.upsert({
+    where: {
+      vendorId_date: {
+        vendorId: data.vendorId,
+        date: today,
+      },
+    },
+    create: {
+      vendorId: data.vendorId,
+      date: today,
+      revenue: totalAmount,
+      commission: commissionAmount,
+      orders: 1,
+      views: 0,
+      conversionRate: 0,
+    },
+    update: {
+      revenue: { increment: totalAmount },
+      commission: { increment: commissionAmount },
+      orders: { increment: 1 },
+    },
+  });
+
+  // Send notification to vendor
+  await prisma.notification.create({
+    data: {
+      userId: data.vendorId,
+      type: "NEW_MESSAGE",
+      channel: "IN_APP",
+      title: "New Order Received! 🎉",
+      body: `You received a new order #${order.orderNumber} worth ${totalAmount.toLocaleString()} LKR. View your dashboard to process it.`,
+      data: { orderId: order.id, orderNumber: order.orderNumber, amount: totalAmount },
+    },
+  });
+
   return order;
 }
 
@@ -316,6 +354,29 @@ export async function cancelOrder(orderId: string, userId: string, reason: strin
       where: { id: orderId },
       data: { paymentStatus: "REFUNDED" },
     });
+
+    // Reverse pending payout amount
+    await prisma.vendor.update({
+      where: { id: order.vendorId },
+      data: { pendingPayoutAmount: { decrement: Number(order.vendorPayoutAmount || 0) } },
+    });
+
+    // Reverse referral commission if any
+    const referral = await prisma.referral.findUnique({
+      where: { referredUserId: order.customerId },
+    });
+    if (referral && referral.rewardAmount) {
+      await prisma.$transaction([
+        prisma.referral.update({
+          where: { referredUserId: order.customerId },
+          data: { status: "reversed", rewardAmount: 0 },
+        }),
+        prisma.referralCode.update({
+          where: { userId: referral.referrerId },
+          data: { totalEarnings: { decrement: Number(referral.rewardAmount) } },
+        }),
+      ]);
+    }
   }
 
   return updated;

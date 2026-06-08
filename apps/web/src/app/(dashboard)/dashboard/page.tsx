@@ -278,7 +278,7 @@ export default function DashboardOverviewPage() {
               <button
                 type="button"
                 onClick={() => {
-                  const url = `https://wa.me/?text=Join%20Loopingon%20using%20my%20referral%20code:%20${referralCodeData.data.code}`;
+                  const url = `https://wa.me/?text=Join%20Kandyam%20using%20my%20referral%20code:%20${referralCodeData.data.code}`;
                   window.open(url, "_blank");
                 }}
                 className="px-4 py-2 bg-white/20 rounded-lg text-sm font-medium hover:bg-white/30 transition-colors"
@@ -288,7 +288,7 @@ export default function DashboardOverviewPage() {
               <button
                 type="button"
                 onClick={() => {
-                  const url = `https://www.facebook.com/sharer/sharer.php?u=https://loopingon.com`;
+                  const url = `https://www.facebook.com/sharer/sharer.php?u=https://kandyam.com`;
                   window.open(url, "_blank");
                 }}
                 className="px-4 py-2 bg-white/20 rounded-lg text-sm font-medium hover:bg-white/30 transition-colors"

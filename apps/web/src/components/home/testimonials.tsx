@@ -37,7 +37,7 @@ const testimonials = [
     city: "Berlin",
     avatar: "/images/testimonials/michael.jpg",
     rating: 5,
-    text: "The brass elephant statue I ordered is magnificent. It's clear that generations of skill went into this piece. Loopingon made it easy to buy authentic Sri Lankan crafts from overseas.",
+    text: "The brass elephant statue I ordered is magnificent. It's clear that generations of skill went into this piece. Kandyam made it easy to buy authentic Sri Lankan crafts from overseas.",
     product: "Brass Elephant Statue",
   },
   {
@@ -45,7 +45,7 @@ const testimonials = [
     city: "Galle",
     avatar: "/images/testimonials/dilani.jpg",
     rating: 5,
-    text: "Every purchase from Loopingon makes me feel connected to my heritage. The coir products I ordered were exactly like the ones my grandmother used to make. Thank you for preserving these crafts.",
+    text: "Every purchase from Kandyam makes me feel connected to my heritage. The coir products I ordered were exactly like the ones my grandmother used to make. Thank you for preserving these crafts.",
     product: "Handwoven Coir Mat",
   },
 ];

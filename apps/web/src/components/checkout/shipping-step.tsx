@@ -13,21 +13,21 @@ interface ShippingStepProps {
 
 const shippingMethods = [
   {
-    id: "STANDARD",
-    label: "Standard Shipping",
-    description: "5-7 business days",
-    price: "Rs. 350",
+    id: "SL_POST",
+    label: "SL Post Delivery",
+    description: "1-3 business days • Sri Lanka-wide",
+    price: "Rs. 250",
   },
   {
     id: "EXPRESS",
-    label: "Express Shipping",
-    description: "2-3 business days",
-    price: "Rs. 750",
+    label: "Express One-Day Delivery",
+    description: "Next business day delivery",
+    price: "from Rs. 600",
   },
   {
     id: "FREE",
-    label: "Free Shipping",
-    description: "5-7 business days • Orders over Rs. 5,000",
+    label: "Free Delivery",
+    description: "1-3 business days • Orders over Rs. 5,000",
     price: "Free",
   },
 ];
@@ -36,7 +36,7 @@ export function ShippingStep({ onNext, addresses = [], className }: ShippingStep
   const [selectedAddress, setSelectedAddress] = React.useState<string | null>(
     addresses[0]?.id || null,
   );
-  const [selectedMethod, setSelectedMethod] = React.useState("STANDARD");
+  const [selectedMethod, setSelectedMethod] = React.useState("SL_POST");
 
   return (
     <div className={cn("space-y-8", className)}>

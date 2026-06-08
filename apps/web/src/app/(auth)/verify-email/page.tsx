@@ -34,7 +34,7 @@ export default function VerifyEmailPage() {
     <div className="flex min-h-screen items-center justify-center bg-surface-50 px-4 py-12">
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="w-full max-w-md">
         <div className="rounded-2xl bg-white p-8 shadow-soft-sm text-center">
-          <div className="mb-6"><Link href="/" className="font-serif text-2xl font-bold text-primary-600">Loopingon</Link></div>
+          <div className="mb-6"><Link href="/" className="font-serif text-2xl font-bold text-primary-600">Kandyam</Link></div>
 
           {status === "loading" && (
             <>

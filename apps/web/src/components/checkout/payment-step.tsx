@@ -13,15 +13,27 @@ interface PaymentStepProps {
 const paymentMethods = [
   {
     id: "payhere",
-    label: "PayHere",
-    description: "Credit/Debit cards, mobile wallets, and bank transfers",
-    icon: "PH",
+    label: "Credit / Debit Cards (PayHere)",
+    description: "Visa, Mastercard, Amex, Discover",
+    icon: "💳",
+  },
+  {
+    id: "koko",
+    label: "Koko - Buy Now, Pay Later",
+    description: "Split your payment into 3 interest-free installments",
+    icon: "K",
+  },
+  {
+    id: "mintpay",
+    label: "Mintpay",
+    description: "Pay in 3 installments, 0% interest",
+    icon: "M",
   },
   {
     id: "payable",
-    label: "Payable",
+    label: "Bank Transfer (Payable)",
     description: "Secure online payments with Sri Lankan bank accounts",
-    icon: "PA",
+    icon: "🏦",
   },
 ];
 
@@ -42,57 +54,7 @@ export function PaymentStep({ onBack, onPlaceOrder, className }: PaymentStepProp
 
   return (
     <div className={cn("space-y-8", className)}>
-      <div>
-        <button
-          type="button"
-          onClick={() => setIsExpanded(!isExpanded)}
-          className={cn(
-            "w-full flex items-center justify-between p-4 rounded-lg",
-            "bg-surface-50 border border-accent-200 text-left",
-            "hover:bg-surface-50 transition-colors",
-          )}
-        >
-          <span className="font-medium text-text-700">
-            Order Summary ({orderItems.length} items)
-          </span>
-          <div className="flex items-center gap-3">
-            <span className="text-sm text-primary-600 font-semibold">
-              {formatPrice(total)}
-            </span>
-            {isExpanded ? (
-              <ChevronUp className="w-4 h-4 text-muted-500" />
-            ) : (
-              <ChevronDown className="w-4 h-4 text-muted-500" />
-            )}
-          </div>
-        </button>
-
-        {isExpanded && (
-          <div className="mt-2 border border-accent-200 rounded-lg overflow-hidden">
-            {orderItems.map((item, i) => (
-              <div
-                key={i}
-                className="flex items-center gap-4 p-3 border-b border-accent-200 last:border-b-0"
-              >
-                <div className="w-12 h-12 rounded-md bg-muted-100 overflow-hidden shrink-0">
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm text-text-700 truncate">{item.name}</p>
-                  <p className="text-xs text-muted-500">Qty: {item.qty}</p>
-                </div>
-                <span className="text-sm font-medium text-text-700">
-                  {formatPrice(item.price * item.qty)}
-                </span>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
+      {/* Order Summary Removed (Now in right column) */}
 
       <div>
         <button
@@ -101,7 +63,7 @@ export function PaymentStep({ onBack, onPlaceOrder, className }: PaymentStepProp
           className="flex items-center gap-2 text-sm text-muted-600 hover:text-primary-600 transition-colors"
         >
           <Gift className="w-4 h-4" />
-          {isGift ? "Remove gift options" : "Add a gift message"}
+          {isGift ? "Remove gift options" : "Send as a gift (Add a message)"}
         </button>
 
         {isGift && (
@@ -169,20 +131,28 @@ export function PaymentStep({ onBack, onPlaceOrder, className }: PaymentStepProp
         </div>
       </div>
 
-      <div className="bg-surface-50 rounded-lg p-4 border border-accent-200">
-        <div className="flex justify-between text-sm mb-2">
-          <span className="text-muted-600">Subtotal</span>
-          <span className="text-text-700">{formatPrice(subtotal)}</span>
-        </div>
-        <div className="flex justify-between text-sm mb-2">
-          <span className="text-muted-600">Shipping</span>
-          <span className="text-text-700">{formatPrice(shipping)}</span>
-        </div>
-        <div className="flex justify-between font-semibold pt-2 border-t border-accent-200">
-          <span className="text-text-900">Total</span>
-          <span className="text-primary-600 text-lg">{formatPrice(total)}</span>
+      <div className="pt-4 border-t border-accent-200">
+        <h4 className="font-serif text-sm font-bold text-navy-900 mb-3 text-center sm:text-left">Secure Payments</h4>
+        <div className="flex items-center flex-wrap gap-2 justify-center sm:justify-start">
+          {[
+            { name: "Visa", url: "https://img.icons8.com/color/48/visa.png" },
+            { name: "Mastercard", url: "https://img.icons8.com/color/48/mastercard.png" },
+            { name: "PayPal", url: "https://img.icons8.com/color/48/paypal.png" },
+            { name: "Apple Pay", url: "https://img.icons8.com/color/48/apple-pay.png" },
+            { name: "Google Pay", url: "https://img.icons8.com/color/48/google-pay-india.png" }
+          ].map((method) => (
+            <div key={method.name} className="bg-white rounded-md p-1 px-2 border border-surface-200 shadow-sm">
+              <img
+                src={method.url}
+                alt={method.name}
+                className="h-5 w-auto object-contain"
+              />
+            </div>
+          ))}
         </div>
       </div>
+
+      {/* Subtotal removed */}
 
       <div className="flex flex-col sm:flex-row gap-3">
         <button

@@ -72,7 +72,7 @@ export function AuthModal() {
                 {mode === "signin" ? "Welcome Back" : "Create Your Account"}
               </h2>
               <p className="mt-1 text-sm text-muted-500">
-                {mode === "signin" ? "Sign in to your Loopingon account" : "Join Loopingon and discover unique Sri Lankan crafts"}
+                {mode === "signin" ? "Sign in to your Kandyam account" : "Join Kandyam and discover unique Sri Lankan crafts"}
               </p>
             </div>
 

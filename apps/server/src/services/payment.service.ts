@@ -93,6 +93,52 @@ export async function handlePayHereNotify(data: Record<string, string>) {
         },
       }),
     ]);
+
+    // Process referral commission if this user was referred
+    const referral = await prisma.referral.findUnique({
+      where: { referredUserId: order.customerId },
+    });
+    if (referral) {
+      const referralCommission = Math.round(Number(order.subtotal) * 0.05 * 100) / 100;
+      await prisma.$transaction([
+        prisma.referral.update({
+          where: { referredUserId: order.customerId },
+          data: {
+            rewardAmount: referralCommission,
+            status: "completed",
+            completedAt: new Date(),
+          },
+        }),
+        prisma.referralCode.update({
+          where: { userId: referral.referrerId },
+          data: { totalEarnings: { increment: referralCommission } },
+        }),
+      ]);
+    }
+
+    // Send payment confirmation notification to customer
+    await prisma.notification.create({
+      data: {
+        userId: order.customerId,
+        type: "PAYMENT_RECEIVED",
+        channel: "IN_APP",
+        title: "Payment Confirmed ✅",
+        body: `Your payment of ${Number(order.totalAmount).toLocaleString()} LKR for order #${order.orderNumber} has been confirmed. Your order is now being processed.`,
+        data: { orderId: order.id, orderNumber: order.orderNumber },
+      },
+    });
+
+    // Sync loyalty account with spending
+    const profile = await prisma.customerProfile.findUnique({
+      where: { userId: order.customerId },
+    });
+    if (profile) {
+      await prisma.loyaltyAccount.upsert({
+        where: { userId: order.customerId },
+        create: { userId: order.customerId, totalSpent: profile.totalSpent },
+        update: { totalSpent: profile.totalSpent },
+      });
+    }
   } else if (status_code === "0") {
     await prisma.$transaction([
       prisma.order.update({
@@ -145,6 +191,38 @@ export async function handlePayableNotify(data: Record<string, unknown>) {
         },
       }),
     ]);
+
+    const referral = await prisma.referral.findUnique({
+      where: { referredUserId: order.customerId },
+    });
+    if (referral) {
+      const referralCommission = Math.round(Number(order.subtotal) * 0.05 * 100) / 100;
+      await prisma.$transaction([
+        prisma.referral.update({
+          where: { referredUserId: order.customerId },
+          data: {
+            rewardAmount: referralCommission,
+            status: "completed",
+            completedAt: new Date(),
+          },
+        }),
+        prisma.referralCode.update({
+          where: { userId: referral.referrerId },
+          data: { totalEarnings: { increment: referralCommission } },
+        }),
+      ]);
+    }
+
+    await prisma.notification.create({
+      data: {
+        userId: order.customerId,
+        type: "PAYMENT_RECEIVED",
+        channel: "IN_APP",
+        title: "Payment Confirmed ✅",
+        body: `Your payment of ${Number(order.totalAmount).toLocaleString()} LKR for order #${order.orderNumber} has been confirmed. Your order is now being processed.`,
+        data: { orderId: order.id, orderNumber: order.orderNumber },
+      },
+    });
   } else if (status === "failed") {
     await prisma.$transaction([
       prisma.order.update({

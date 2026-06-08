@@ -31,7 +31,7 @@ export default function Loading() {
 
         <div className="text-center">
           <p className="text-lg font-serif font-semibold text-text-800">
-            Loopingon
+            Kandyam
           </p>
           <p className="mt-1 text-sm text-muted-500">
             Loading your handmade treasures...

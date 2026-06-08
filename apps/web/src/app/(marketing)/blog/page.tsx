@@ -10,7 +10,7 @@ import { LoadingSkeleton } from "@/components/shared/loading-skeleton";
 
 export const metadata: Metadata = {
   title: "Blog - Stories of Sri Lankan Craft & Culture",
-  description: "Read stories about Sri Lankan crafts, artisan profiles, craft techniques, cultural heritage, and the Loopingon community.",
+  description: "Read stories about Sri Lankan crafts, artisan profiles, craft techniques, cultural heritage, and the Kandyam community.",
 };
 
 interface BlogPageProps {

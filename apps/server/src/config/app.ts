@@ -1,14 +1,14 @@
-export const APP_CONFIG = {
-  platformName: "Loopingon",
+﻿export const APP_CONFIG = {
+  platformName: "Kandyam",
   defaultCommissionRate: 20,
-  payoutSchedule: "biweekly" as const,
+  payoutSchedule: "threshold" as const,
   supportedCurrencies: ["LKR"] as string[],
   defaultCurrency: "LKR" as const,
-  minWithdrawalAmount: 500,
+  minWithdrawalAmount: 10000,
   maxProductImages: 10,
   maxImageSizeBytes: 10 * 1024 * 1024,
   allowedImageMimeTypes: ["image/jpeg", "image/png", "image/webp", "image/avif"],
-  orderPrefix: "LOOP",
+  orderPrefix: "KANDY",
   defaultPageSize: 20,
   maxPageSize: 100,
 } as const;

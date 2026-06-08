@@ -57,7 +57,7 @@ export function HowItWorks() {
           className="text-muted-600 text-center max-w-xl mx-auto mb-16"
         >
           From discovering unique crafts to receiving them at your door, here&apos;s
-          how Loopingon connects you with Sri Lanka&apos;s finest artisans.
+          how Kandyam connects you with Sri Lanka&apos;s finest artisans.
         </motion.p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">

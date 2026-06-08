@@ -172,7 +172,7 @@ export default function ContactPage() {
                     <Mail className="mt-0.5 h-5 w-5 shrink-0 text-primary-600" />
                     <div>
                       <p className="text-sm font-medium text-text-800">Email</p>
-                      <a href="mailto:hello@loopingon.com" className="text-sm text-muted-600 hover:text-primary-600">hello@loopingon.com</a>
+                      <a href="mailto:hello@kandyam.com" className="text-sm text-muted-600 hover:text-primary-600">hello@kandyam.com</a>
                     </div>
                   </div>
                   <div className="flex gap-3">

@@ -8,16 +8,19 @@ import {
   ChevronDown,
   ShoppingBag,
   Grid3X3,
-  Store,
   Info,
   Newspaper,
-  Trophy,
   HelpCircle,
   LayoutDashboard,
   Package,
   Heart,
   MessageSquare,
   LogIn,
+  Users,
+  Gift,
+  Share2,
+  Search,
+  Store,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useAuthStore } from "@/stores/auth-store";
@@ -28,22 +31,38 @@ import { CurrencySwitcher } from "@/components/shared/currency-switcher";
 const navSections = [
   { icon: ShoppingBag, label: "Shop", href: "/products" },
   { icon: Grid3X3, label: "Categories", href: "/categories" },
-  { icon: Store, label: "Sell on Loopingon", href: "/sign-up/vendor" },
+  { icon: Users, label: "Makers", href: "/makers" },
+  { icon: Gift, label: "Gifts", href: "/gift" },
   { icon: Info, label: "About", href: "/about-us" },
   { icon: Newspaper, label: "Blog", href: "/blog" },
-  { icon: Trophy, label: "Competitions", href: "/competitions" },
+  { icon: Share2, label: "Referral Program", href: "/referral" },
   { icon: HelpCircle, label: "Help", href: "/help-center" },
 ];
 
 const categories = [
-  { label: "Handloom & Textiles", href: "/categories/handloom-textiles" },
-  { label: "Wood Carving & Masks", href: "/categories/wood-carving-masks" },
-  { label: "Pottery & Ceramics", href: "/categories/pottery-ceramics" },
-  { label: "Jewelry & Brassware", href: "/categories/jewelry-brassware" },
-  { label: "Batik & Dyeing", href: "/categories/batik-dyeing" },
-  { label: "Lacquerware", href: "/categories/lacquerware" },
-  { label: "Coir & Reed Products", href: "/categories/coir-reed" },
-  { label: "Leather Crafts", href: "/categories/leather-crafts" },
+  {
+    label: "Home Decor",
+    href: "/products?category=home-decor",
+    subcategories: [
+      { label: "Wall Art", href: "/products?category=home-decor&subcategory=wall-art" },
+      { label: "Vases & Pots", href: "/products?category=home-decor&subcategory=vases" },
+      { label: "Rugs", href: "/products?category=home-decor&subcategory=rugs" },
+    ]
+  },
+  {
+    label: "Jewelry",
+    href: "/products?category=jewelry",
+    subcategories: [
+      { label: "Necklaces", href: "/products?category=jewelry&subcategory=necklaces" },
+      { label: "Earrings", href: "/products?category=jewelry&subcategory=earrings" },
+      { label: "Bracelets", href: "/products?category=jewelry&subcategory=bracelets" },
+    ]
+  },
+  { label: "Bags & Accessories", href: "/products?category=bags" },
+  { label: "Candles", href: "/products?category=candles" },
+  { label: "Wood Crafts", href: "/products?category=wood" },
+  { label: "Pottery & Ceramics", href: "/products?category=pottery" },
+  { label: "Handloom Apparel", href: "/products?category=handloom" },
 ];
 
 const accountLinks = [
@@ -57,6 +76,15 @@ export function MobileNav() {
   const { isAuthenticated } = useAuthStore();
   const { isMobileMenuOpen, closeMobileMenu, openModal } = useUIStore();
   const [categoriesOpen, setCategoriesOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      closeMobileMenu();
+      window.location.href = `/products?q=${encodeURIComponent(searchQuery.trim())}`;
+    }
+  };
 
   return (
     <AnimatePresence>
@@ -90,7 +118,7 @@ export function MobileNav() {
                 onClick={closeMobileMenu}
                 className="font-serif text-xl text-primary-600 font-bold"
               >
-                Loopingon
+                Kandyam
               </Link>
               <button
                 type="button"
@@ -100,6 +128,22 @@ export function MobileNav() {
               >
                 <X className="w-5 h-5" />
               </button>
+            </div>
+
+            {/* Mobile Search */}
+            <div className="px-4 py-3 border-b border-accent-100">
+              <form onSubmit={handleSearch}>
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-400" />
+                  <input
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="Search handcrafted items..."
+                    className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-accent-200 bg-surface-50 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+                  />
+                </div>
+              </form>
             </div>
 
             <nav className="px-3 py-4">
@@ -134,14 +178,29 @@ export function MobileNav() {
                               className="overflow-hidden ml-9 border-l-2 border-primary-200 pl-3 mt-1"
                             >
                               {categories.map((cat) => (
-                                <Link
-                                  key={cat.label}
-                                  href={cat.href}
-                                  onClick={closeMobileMenu}
-                                  className="block py-2 text-sm text-muted-600 hover:text-primary-600 transition-colors"
-                                >
-                                  {cat.label}
-                                </Link>
+                                <div key={cat.label}>
+                                  <Link
+                                    href={cat.href}
+                                    onClick={closeMobileMenu}
+                                    className="block py-2 text-sm font-medium text-muted-700 hover:text-primary-600 transition-colors"
+                                  >
+                                    {cat.label}
+                                  </Link>
+                                  {cat.subcategories && (
+                                    <div className="pl-4 pb-1 border-l border-accent-200 ml-1">
+                                      {cat.subcategories.map(sub => (
+                                        <Link
+                                          key={sub.label}
+                                          href={sub.href}
+                                          onClick={closeMobileMenu}
+                                          className="block py-1.5 text-xs text-muted-500 hover:text-primary-600 transition-colors"
+                                        >
+                                          {sub.label}
+                                        </Link>
+                                      ))}
+                                    </div>
+                                  )}
+                                </div>
                               ))}
                             </motion.div>
                           )}

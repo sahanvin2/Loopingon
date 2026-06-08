@@ -178,14 +178,20 @@ export function CartSummary({
         </div>
       </div>
 
-      <div className="mt-4 flex items-center justify-center gap-3">
-        {["Visa", "Mastercard", "Amex", "PayHere"].map((method) => (
-          <span
-            key={method}
-            className="text-xs text-muted-400 font-medium bg-surface-50 px-2 py-1 rounded"
-          >
-            {method}
-          </span>
+      <div className="mt-4 flex items-center flex-wrap gap-2 justify-center">
+        {[
+          { name: "Visa", url: "https://img.icons8.com/color/48/visa.png" },
+          { name: "Mastercard", url: "https://img.icons8.com/color/48/mastercard.png" },
+          { name: "PayPal", url: "https://img.icons8.com/color/48/paypal.png" },
+          { name: "Apple Pay", url: "https://img.icons8.com/color/48/apple-pay.png" }
+        ].map((method) => (
+          <div key={method.name} className="bg-white rounded-md p-1 px-2 border border-surface-200 shadow-sm">
+            <img
+              src={method.url}
+              alt={method.name}
+              className="h-5 w-auto object-contain"
+            />
+          </div>
         ))}
       </div>
     </div>

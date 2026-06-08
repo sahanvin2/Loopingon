@@ -63,6 +63,15 @@ export default function SignUpCustomerPage() {
     setError("");
     try {
       await signup.mutateAsync(data);
+
+      const params = new URLSearchParams(window.location.search);
+      const refCode = params.get("ref");
+      if (refCode) {
+        try {
+          await post("/referrals/process", { referralCode: refCode });
+        } catch {}
+      }
+
       router.push("/verify-email");
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Failed to create account");
@@ -96,7 +105,7 @@ export default function SignUpCustomerPage() {
               L
             </Link>
             <h1 className="font-serif text-3xl font-bold text-text-900 tracking-tight">Create your account</h1>
-            <p className="mt-1.5 text-sm text-muted-500">Join Loopingon and discover unique Sri Lankan crafts</p>
+            <p className="mt-1.5 text-sm text-muted-500">Join Kandyam and discover unique Sri Lankan crafts</p>
           </div>
 
           {error && (
