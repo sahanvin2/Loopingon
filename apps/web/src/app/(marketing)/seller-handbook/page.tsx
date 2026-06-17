@@ -9,46 +9,58 @@ export const metadata: Metadata = {
 
 const guides = [
   {
+    id: "photography",
     icon: <Camera className="h-6 w-6" />,
     title: "Product Photography",
     description: "Learn how to take professional-quality photos using just your smartphone. Lighting, angles, and staging tips.",
-    href: "#photography"
+    href: "#photography",
+    content: "Good photography is the most important factor in online sales. Ensure you have ample natural light, use a clean and uncluttered background, and provide multiple angles of your product. If selling lifestyle goods, include a shot of the product in use so buyers can visualize scale and function. Avoid using heavy filters that distort the actual color."
   },
   {
+    id: "seo",
     icon: <Search className="h-6 w-6" />,
     title: "Search Engine Optimization",
     description: "Master Kandyam search. Learn how to write compelling titles and use tags to get found by more buyers.",
-    href: "#seo"
+    href: "#seo",
+    content: "When naming your products, use clear and descriptive titles that include what the item is, the material, and the color. Avoid 'cute' names that a buyer would never type into a search bar. Utilize all available tags, and ensure your product descriptions are detailed, answering any potential questions the buyer might have before they need to ask."
   },
   {
+    id: "shipping",
     icon: <Package className="h-6 w-6" />,
     title: "Shipping & Fulfillment",
     description: "Best practices for packaging securely, choosing the right couriers, and managing international shipments.",
-    href: "#shipping"
+    href: "#shipping",
+    content: "Always package your items securely with bubble wrap or eco-friendly alternatives. Include a handwritten thank-you note to add a personal touch. When shipping internationally, ensure all customs declarations are accurate to avoid delays. Update the tracking number on Kandyam immediately after dispatch."
   },
   {
+    id: "marketing",
     icon: <TrendingUp className="h-6 w-6" />,
     title: "Marketing Your Shop",
     description: "How to use social media, email newsletters, and Kandyam Ads to drive consistent traffic to your listings.",
-    href: "#marketing"
+    href: "#marketing",
+    content: "Leverage Instagram and TikTok to show behind-the-scenes videos of how you create your products. Link your Kandyam store in your bio. Engage with potential customers by responding to comments and running small giveaways to increase your follower base. On Kandyam, ensure you participate in platform-wide sales events."
   },
   {
+    id: "safety",
     icon: <ShieldCheck className="h-6 w-6" />,
     title: "Trust & Safety",
     description: "Understanding our policies, handling disputes professionally, and protecting your seller account.",
-    href: "#safety"
+    href: "#safety",
+    content: "Always communicate with buyers through the Kandyam platform to ensure a record of conversation. If a dispute arises, remain professional and focus on finding a solution. Familiarize yourself with Kandyam's Seller Policies (updated June 2026) to ensure your store remains in good standing."
   },
   {
+    id: "management",
     icon: <BookOpen className="h-6 w-6" />,
     title: "Shop Management",
     description: "Tips on managing inventory, pricing strategies, and providing world-class customer service.",
-    href: "#management"
+    href: "#management",
+    content: "Check your dashboard daily for new orders and messages. Keep your inventory numbers accurate to avoid selling items you don't have. Price your items to cover materials, labor, shipping supplies, and the 20% platform commission, while remaining competitive in the market."
   }
 ];
 
 export default function SellerHandbookPage() {
   return (
-    <div className="bg-surface-50">
+    <div className="bg-surface-50 pb-20">
       {/* Hero Section */}
       <section className="bg-white py-20 border-b border-surface-200">
         <div className="mx-auto max-w-4xl px-4 text-center">
@@ -84,8 +96,27 @@ export default function SellerHandbookPage() {
         </div>
       </section>
 
+      {/* Detailed Content Sections */}
+      <section className="mx-auto max-w-4xl px-4 pb-20">
+        <div className="space-y-16">
+          {guides.map((guide) => (
+            <div key={guide.id} id={guide.id} className="scroll-mt-24 rounded-2xl bg-white p-8 md:p-10 shadow-soft-sm">
+              <div className="flex items-center gap-4 mb-6">
+                <div className="inline-flex rounded-xl bg-primary-50 p-3 text-primary-600">
+                  {guide.icon}
+                </div>
+                <h2 className="font-serif text-2xl font-bold text-text-900">{guide.title}</h2>
+              </div>
+              <p className="text-muted-700 leading-relaxed text-lg">
+                {guide.content}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* Newsletter */}
-      <section className="py-20 bg-primary-900 text-white">
+      <section className="py-20 bg-primary-900 text-white rounded-3xl mx-4 lg:mx-auto lg:max-w-7xl">
         <div className="mx-auto max-w-3xl px-4 text-center">
           <h2 className="font-serif text-3xl font-bold md:text-4xl">Get Seller Tips in Your Inbox</h2>
           <p className="mt-4 text-primary-100">

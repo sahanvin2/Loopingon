@@ -50,20 +50,19 @@ async function ProductsContent({ searchParams }: ProductsPageProps) {
   let products: Product[] = [];
   let total = 0;
   let totalPages = 1;
+  let hasError = false;
 
-  // We intentionally do not swallow errors here so that Next.js doesn't statically cache 0 products
-  // Instead of catch {}, we let the error boundary handle it, but we can catch it and just set empty array 
-  // IF we also use cache: "no-store" in the fetch to prevent permanent caching of the failure.
-  // We handle cache via api-client or just let the fetch fail.
   try {
-    const res = await get<PaginatedResponse<Product>>("/products", queryParams);
+    const res = await get<PaginatedResponse<Product>>("/products", { 
+      ...queryParams,
+      cache: "no-store", // Prevents Next.js from caching a failed or empty response permanently
+    } as any);
     products = res.data;
     total = res.meta.total;
     totalPages = res.meta.totalPages;
   } catch (error) {
     console.error("Failed to fetch products:", error);
-    // Since Next.js caches successful pages, throwing here ensures this empty state 
-    // isn't cached permanently if the API goes down briefly during build/runtime.
+    hasError = true;
   }
 
   const breadcrumbs = [{ label: "Home", href: "/" }, { label: "Products" }];
@@ -77,7 +76,7 @@ async function ProductsContent({ searchParams }: ProductsPageProps) {
             Explore Premium Products
           </h1>
           <p className="mt-2 text-muted-500">
-            Showing {products.length} of {total} products
+            {hasError ? "Unable to load products at this time." : `Showing ${products.length} of ${total} products`}
           </p>
         </div>
       </div>

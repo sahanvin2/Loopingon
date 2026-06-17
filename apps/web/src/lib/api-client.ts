@@ -61,7 +61,13 @@ async function request<T>(
     ...fetchOptions
   } = options;
 
-  const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000/api/v1";
+  let baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000/api/v1";
+  
+  // Fix for Node 18+ SSR IPv6 localhost resolution issue
+  if (typeof window === "undefined" && baseUrl.includes("localhost")) {
+    baseUrl = baseUrl.replace("localhost", "127.0.0.1");
+  }
+
   const url = `${baseUrl}${endpoint}${params ? buildQueryString(params) : ""}`;
 
   const headers: Record<string, string> = {

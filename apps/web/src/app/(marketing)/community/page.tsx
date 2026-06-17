@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function CommunityPage() {
   return (
-    <div className="bg-white">
+    <>
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-primary-900 py-24 text-white">
         <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent" />
@@ -38,7 +38,7 @@ export default function CommunityPage() {
       </section>
 
       {/* Features */}
-      <section className="py-24">
+      <section className="bg-white py-24">
         <div className="mx-auto max-w-7xl px-4">
           <div className="grid gap-12 md:grid-cols-3">
             <div className="rounded-2xl border border-surface-200 bg-surface-50 p-8 text-center transition-shadow hover:shadow-soft-xl">
@@ -81,13 +81,13 @@ export default function CommunityPage() {
           </blockquote>
           <div className="mt-8">
             <div className="font-bold text-text-900">Sarah Jenkins</div>
-            <div className="text-muted-500">Top Rated Seller since 2024</div>
+            <div className="text-muted-500">Top Rated Seller since June 2026</div>
           </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="py-24">
+      <section className="bg-white py-24">
         <div className="mx-auto max-w-4xl px-4 text-center">
           <h2 className="font-serif text-3xl font-bold text-text-900 md:text-5xl">Ready to start your journey?</h2>
           <p className="mt-6 text-lg text-muted-600">
@@ -101,6 +101,6 @@ export default function CommunityPage() {
           </Link>
         </div>
       </section>
-    </div>
+    </>
   );
 }
