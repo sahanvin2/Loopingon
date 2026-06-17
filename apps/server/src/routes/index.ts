@@ -24,6 +24,7 @@ import analyticsRoutes from "./analytics.routes.js";
 import adminRoutes from "./admin.routes.js";
 import aiRoutes from "./ai.routes.js";
 import healthRoutes from "./health.routes.js";
+import exportRoutes from "./export.routes.js";
 
 const router = Router();
 
@@ -52,5 +53,6 @@ router.use("/analytics", analyticsRoutes);
 router.use("/admin", adminRoutes);
 router.use("/ai", aiRoutes);
 router.use("/health", healthRoutes);
+router.use("/export", exportRoutes);
 
 export default router;

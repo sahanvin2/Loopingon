@@ -177,6 +177,7 @@ export default function RootLayout({
 
           {/* Auth Modal */}
           <AuthModal />
+          <CookieConsent />
 
         </Providers>
       </body>

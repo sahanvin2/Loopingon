@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { Star, ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -19,8 +18,8 @@ export function CustomerReviewsBanner() {
 
         {/* Review 1 */}
         <div className="flex items-center gap-4 flex-1 md:pr-10 md:border-r border-white/10">
-          <div className="w-20 h-20 rounded-full overflow-hidden shrink-0 border-2 border-white/20 relative">
-            <Image src="/images/categories/pottery.jpg" alt="Reviewer" fill className="object-cover" />
+          <div className="w-20 h-20 rounded-full overflow-hidden shrink-0 border-2 border-white/20 bg-primary-500/30 flex items-center justify-center">
+            <span className="text-white font-bold text-lg">TD</span>
           </div>
           <div>
             <div className="flex items-center gap-1 mb-1">
@@ -43,8 +42,8 @@ export function CustomerReviewsBanner() {
 
         {/* Review 2 */}
         <div className="flex items-center gap-4 flex-1 md:pl-10 md:border-l border-white/10">
-          <div className="w-20 h-20 rounded-full overflow-hidden shrink-0 border-2 border-white/20 relative">
-            <Image src="/images/categories/wood-carving.jpg" alt="Reviewer" fill className="object-cover" />
+          <div className="w-20 h-20 rounded-full overflow-hidden shrink-0 border-2 border-white/20 bg-accent-500/30 flex items-center justify-center">
+            <span className="text-white font-bold text-lg">KM</span>
           </div>
           <div>
             <div className="flex items-center gap-1 mb-1">

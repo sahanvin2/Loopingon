@@ -19,8 +19,10 @@ import { Badge } from "@/components/shared/badge";
 import { EmptyState } from "@/components/shared/empty-state";
 import { LoadingSkeleton } from "@/components/shared/loading-skeleton";
 import { useAuthStore } from "@/stores/auth-store";
-import { get, del } from "@/lib/api-client";
+import { get, del, patch } from "@/lib/api-client";
 import { cn, formatPrice } from "@/lib/utils";
+import { useAddToCart } from "@/hooks/use-cart";
+import { toast } from "sonner";
 import type { Wishlist, WishlistItem, ApiResponse } from "@/types";
 
 export default function WishlistPage() {
@@ -39,9 +41,11 @@ export default function WishlistPage() {
     },
   });
 
+  const addToCartMutation = useAddToCart();
+
   const toggleVisibilityMutation = useMutation({
     mutationFn: (isPublic: boolean) =>
-      get(`/wishlist/toggle-visibility`, { isPublic }),
+      patch(`/wishlist/toggle-visibility`, { isPublic }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["wishlist"] });
     },
@@ -53,10 +57,27 @@ export default function WishlistPage() {
   const handleShare = () => {
     const url = `${window.location.origin}/wishlist/${wishlist?.id}`;
     navigator.clipboard.writeText(url);
+    toast.success("Wishlist link copied!");
   };
 
   const handleAddAllToCart = () => {
-    // Bulk add to cart logic here
+    items.forEach((item) => {
+      if (item.product) {
+        addToCartMutation.mutate({
+          productId: item.product.id,
+          quantity: 1,
+        });
+      }
+    });
+  };
+
+  const handleAddToCart = (item: WishlistItem) => {
+    if (item.product) {
+      addToCartMutation.mutate({
+        productId: item.productId,
+        quantity: 1,
+      });
+    }
   };
 
   if (isLoading) {
@@ -163,6 +184,8 @@ export default function WishlistPage() {
                     </button>
                     <button
                       type="button"
+                      onClick={() => handleAddToCart(item)}
+                      disabled={addToCartMutation.isPending}
                       className="flex items-center gap-1 px-3 py-1.5 text-xs font-medium text-muted-600 bg-muted-50 hover:bg-muted-100 rounded-md transition-colors"
                     >
                       <ShoppingCart className="w-3.5 h-3.5" />

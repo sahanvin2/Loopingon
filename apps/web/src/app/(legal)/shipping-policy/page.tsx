@@ -37,7 +37,7 @@ export default function ShippingPolicyPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr><td className="border border-text-200 px-4 py-2 font-medium">SL Post</td><td className="border border-text-200 px-4 py-2">All Sri Lanka</td><td className="border border-text-200 px-4 py-2">1-3 business days</td><td className="border border-text-200 px-4 py-2">Rs. 250 (up to 1kg)</td></tr>
+                  <tr><td className="border border-text-200 px-4 py-2 font-medium">SL Post</td><td className="border border-text-200 px-4 py-2">All Sri Lanka</td><td className="border border-text-200 px-4 py-2">1-3 business days</td><td className="border border-text-200 px-4 py-2">Dynamic (calculated at checkout based on item)</td></tr>
                   <tr><td className="border border-text-200 px-4 py-2 font-medium">Express Courier</td><td className="border border-text-200 px-4 py-2">Island-wide</td><td className="border border-text-200 px-4 py-2">Next business day</td><td className="border border-text-200 px-4 py-2">Up to Rs. 600</td></tr>
                   <tr><td className="border border-text-200 px-4 py-2 font-medium">Free Delivery</td><td className="border border-text-200 px-4 py-2">All Sri Lanka</td><td className="border border-text-200 px-4 py-2">1-3 business days</td><td className="border border-text-200 px-4 py-2">Free (orders over Rs. 5,000)</td></tr>
                 </tbody>

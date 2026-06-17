@@ -65,7 +65,7 @@ async function main() {
 
   const adminId = uuidv4();
   const supportId = uuidv4();
-  const adminHash = await argon2.hash("Admin@123456");
+  const adminHash = await argon2.hash("@20040301Sa");
 
   // ===== USERS =====
   console.log("Creating users...");
@@ -74,7 +74,7 @@ async function main() {
     data: [
       {
         id: adminId,
-        email: "admin@loopingon.com",
+        email: "sahannawarathne2004@gmail.com",
         passwordHash: adminHash,
         fullName: "System Admin",
         firstName: "System",
@@ -474,26 +474,23 @@ async function main() {
   console.log("Creating categories...");
 
   const categoryData = [
-    { name: "Handloom & Textiles", slug: "handloom-textiles", description: "Handwoven textiles, sarees, sarongs, and fabric by the yard crafted on traditional pit looms", icon: "🧵", level: 0, sortOrder: 1, isFeatured: true, metaTitle: "Handloom & Textiles - Authentic Sri Lankan Handwoven Fabrics", metaDescription: "Discover exquisite handwoven textiles from Sri Lanka. Traditional handloom sarees, sarongs, cotton fabrics, and silk textiles crafted by master weavers.", seoKeywords: ["handloom", "textiles", "saree", "sarong", "handwoven", "cotton fabric", "silk", "Sri Lankan weaving"] },
-    { name: "Wood Carving & Masks", slug: "wood-carving-masks", description: "Intricate wood carvings, traditional masks, figurines, and furniture from master woodworkers", icon: "🪵", level: 0, sortOrder: 2, isFeatured: true, metaTitle: "Wood Carving & Traditional Masks - Sri Lankan Woodcraft", metaDescription: "Explore masterfully carved wooden masks, figurines, furniture, and decorative panels from Sri Lanka's finest woodcarvers.", seoKeywords: ["wood carving", "masks", "Ambalangoda masks", "Kandyan carving", "wooden furniture", "figurines"] },
-    { name: "Pottery & Ceramics", slug: "pottery-ceramics", description: "Hand-thrown terracotta pottery, ceramic tableware, cookware, and decorative vessels", icon: "🏺", level: 0, sortOrder: 3, isFeatured: true, metaTitle: "Pottery & Ceramics - Handmade Terracotta and Ceramic Ware", metaDescription: "Shop handmade pottery and ceramics from Sri Lankan artisans. Terracotta cookware, decorative vases, ceramic tableware, and traditional clay pots.", seoKeywords: ["pottery", "ceramics", "terracotta", "clay pots", "cookware", "vases", "tableware"] },
-    { name: "Jewelry & Brassware", slug: "jewelry-brassware", description: "Traditional and contemporary jewelry, brass oil lamps, temple items, and metalwork", icon: "💍", level: 0, sortOrder: 4, isFeatured: true, metaTitle: "Jewelry & Brassware - Sri Lankan Gems and Metalwork", metaDescription: "Discover Sri Lankan gemstone jewelry, traditional brass oil lamps, temple items, and exquisite metalwork handcrafted by master artisans.", seoKeywords: ["jewelry", "brassware", "oil lamps", "gemstones", "sapphire", "moonstone", "gold", "silver"] },
-    { name: "Batik & Dyeing", slug: "batik-dyeing", description: "Vibrant batik fabrics, wax-resist dyed clothing, wall hangings, and accessories", icon: "🎨", level: 0, sortOrder: 5, isFeatured: false, metaTitle: "Batik & Dyeing - Sri Lankan Wax-Resist Textile Art", metaDescription: "Explore vibrant batik fabrics, clothing, and wall art from Sri Lanka. Traditional wax-resist dyeing techniques creating stunning patterns.", seoKeywords: ["batik", "wax resist", "dyed fabric", "batik clothing", "wall hanging", "textile art"] },
-    { name: "Lacquerware", slug: "lacquerware", description: "Traditional lacquer work on wood - bowls, boxes, walking sticks, and decorative items", icon: "🪔", level: 0, sortOrder: 6, isFeatured: false, metaTitle: "Lacquerware - Traditional Sri Lankan Lacquer Craft", metaDescription: "Handcrafted lacquerware from Sri Lanka. Traditional lacquer bowls, boxes, walking sticks, and decorative items made using centuries-old techniques.", seoKeywords: ["lacquerware", "lacquer work", "wooden bowls", "decorative boxes", "walking sticks"] },
-    { name: "Coir & Reed Products", slug: "coir-reed-products", description: "Eco-friendly coir products, reed mats, baskets, brushes, and sustainable fiber crafts", icon: "🧹", level: 0, sortOrder: 7, isFeatured: false, metaTitle: "Coir & Reed Products - Sustainable Sri Lankan Fiber Crafts", metaDescription: "Eco-friendly coir and reed products from Sri Lanka. Coconut fiber brushes, mats, baskets, and sustainable home goods.", seoKeywords: ["coir", "coconut fiber", "reed", "baskets", "mats", "brushes", "sustainable", "eco-friendly"] },
-    { name: "Leather Crafts", slug: "leather-crafts", description: "Handcrafted leather goods - bags, wallets, footwear, and accessories made from ethically sourced leather", icon: "👝", level: 0, sortOrder: 8, isFeatured: false, metaTitle: "Leather Crafts - Handcrafted Sri Lankan Leather Goods", metaDescription: "Premium handcrafted leather goods from Sri Lanka. Bags, wallets, footwear, and accessories made with traditional techniques.", seoKeywords: ["leather", "leather bags", "wallets", "footwear", "leather accessories", "handmade leather"] },
-    { name: "Traditional Drums & Instruments", slug: "traditional-drums-instruments", description: "Handcrafted traditional drums (Geta Beraya, Yak Beraya, Rabana), flutes, and musical instruments", icon: "🥁", level: 0, sortOrder: 9, isFeatured: false, metaTitle: "Traditional Drums & Musical Instruments - Sri Lankan Craft", metaDescription: "Authentic Sri Lankan traditional drums and musical instruments. Geta Beraya, Yak Beraya, Rabana, flutes handcrafted by master makers.", seoKeywords: ["drums", "Geta Beraya", "Yak Beraya", "Rabana", "flute", "musical instruments", "traditional"] },
-    { name: "Spices & Herbal Products", slug: "spices-herbal", description: "Pure Ceylon spices, Ayurvedic herbal products, essential oils, and traditional wellness items", icon: "🌿", level: 0, sortOrder: 10, isFeatured: false, metaTitle: "Spices & Herbal Products - Pure Ceylon Spices", metaDescription: "Pure Ceylon spices and Ayurvedic herbal products from Sri Lanka. Cinnamon, pepper, cardamom, essential oils, and traditional remedies.", seoKeywords: ["spices", "Ceylon cinnamon", "pepper", "cardamom", "ayurvedic", "herbal", "essential oils"] },
-    { name: "Home & Living Decor", slug: "home-living-decor", description: "Handcrafted home decor, cushions, throws, rugs, candles, and artisanal household items", icon: "🏠", level: 0, sortOrder: 11, isFeatured: false, metaTitle: "Home & Living Decor - Sri Lankan Handcrafted Home Goods", metaDescription: "Beautiful handcrafted home decor from Sri Lanka. Cushions, throws, rugs, candles, and artisanal items for your living space.", seoKeywords: ["home decor", "cushions", "throws", "rugs", "candles", "home goods", "interior"] },
-    { name: "Paintings & Art", slug: "paintings-art", description: "Original Sri Lankan paintings, temple art reproductions, contemporary art, and murals", icon: "🖼️", level: 0, sortOrder: 12, isFeatured: false, metaTitle: "Paintings & Art - Sri Lankan Fine Art and Temple Art", metaDescription: "Original Sri Lankan paintings, temple art, and contemporary artworks from talented Sri Lankan artists.", seoKeywords: ["paintings", "art", "temple art", "murals", "contemporary art", "Sri Lankan art", "canvas"] },
-    { name: "Rattan & Cane Furniture", slug: "rattan-cane-furniture", description: "Handwoven rattan and cane furniture, chairs, tables, baskets, and home accessories", icon: "🪑", level: 0, sortOrder: 13, isFeatured: false, metaTitle: "Rattan & Cane Furniture - Sri Lankan Woven Furniture", metaDescription: "Beautiful handwoven rattan and cane furniture from Sri Lanka. Chairs, tables, baskets, and home accessories.", seoKeywords: ["rattan", "cane", "furniture", "chairs", "tables", "baskets", "woven furniture"] },
-    { name: "Traditional Toys & Games", slug: "traditional-toys-games", description: "Handcrafted wooden toys, traditional board games (Olinda Keliya, Pancha Keliya), and children's items", icon: "🎎", level: 0, sortOrder: 14, isFeatured: false, metaTitle: "Traditional Toys & Games - Sri Lankan Handcrafted Toys", metaDescription: "Traditional Sri Lankan handcrafted wooden toys and board games. Olinda Keliya, Pancha Keliya, and eco-friendly children's toys.", seoKeywords: ["toys", "wooden toys", "traditional games", "Olinda Keliya", "Pancha Keliya", "children"] },
-    { name: "Festival & Ceremonial Items", slug: "festival-ceremonial", description: "Items for Sri Lankan festivals, weddings, ceremonies, and religious occasions", icon: "🎊", level: 0, sortOrder: 15, isFeatured: false, metaTitle: "Festival & Ceremonial Items - Sri Lankan Traditional Items", metaDescription: "Traditional items for Sri Lankan festivals, weddings, and ceremonies. Oil lamps, decorations, ceremonial items, and festive crafts.", seoKeywords: ["festival", "ceremonial", "wedding", "oil lamps", "decorations", "religious", "traditional"] },
-    { name: "Beeralu Lace", slug: "beeralu-lace", description: "Intricate handcrafted Beeralu bobbin lace from the southern coast - tablecloths, doilies, garments", icon: "🧶", level: 0, sortOrder: 16, isFeatured: false, metaTitle: "Beeralu Lace - Sri Lankan Bobbin Lace Craft", metaDescription: "Exquisite Beeralu bobbin lace from Sri Lanka's southern coast. Handcrafted tablecloths, doilies, garments, and lace accessories.", seoKeywords: ["beeralu", "bobbin lace", "lace", "doilies", "tablecloths", "lace garments"] },
-    { name: "Palm Leaf Crafts", slug: "palm-leaf-crafts", description: "Woven palm leaf products, fans, baskets, decorative items, and traditional thatching", icon: "🌴", level: 0, sortOrder: 17, isFeatured: false, metaTitle: "Palm Leaf Crafts - Sri Lankan Woven Palm Products", metaDescription: "Traditional palm leaf crafts from Sri Lanka. Handwoven fans, baskets, decorative items, and sustainable palm products.", seoKeywords: ["palm leaf", "woven palm", "fans", "baskets", "thatch", "sustainable"] },
-    { name: "Brass & Bell Metal", slug: "brass-bell-metal", description: "Traditional bell metal and brass items - cooking vessels, temple bells, sculptures", icon: "🔔", level: 0, sortOrder: 18, isFeatured: false, metaTitle: "Brass & Bell Metal - Traditional Sri Lankan Metal Craft", metaDescription: "Traditional brass and bell metal items from Sri Lanka. Cooking vessels, temple bells, oil lamps, sculptures, and ceremonial items.", seoKeywords: ["brass", "bell metal", "cooking vessels", "temple bells", "sculptures", "oil lamps"] },
-    { name: "Moonstone & Gem Crafts", slug: "moonstone-gem-crafts", description: "Sri Lankan moonstone, sapphire, ruby, garnet, and cat's eye jewelry and decorative pieces", icon: "💎", level: 0, sortOrder: 19, isFeatured: false, metaTitle: "Moonstone & Gem Crafts - Sri Lankan Gemstone Jewelry", metaDescription: "Stunning Sri Lankan gemstone jewelry. Moonstone, blue sapphire, ruby, garnet, and cat's eye pieces from Galle and Ratnapura.", seoKeywords: ["moonstone", "sapphire", "ruby", "garnet", "gemstones", "gem cutting", "jewelry"] },
-    { name: "Kitchen & Culinary Crafts", slug: "kitchen-culinary", description: "Traditional kitchen tools, coconut scrapers, grinding stones, clay pots, and culinary implements", icon: "🍳", level: 0, sortOrder: 20, isFeatured: false, metaTitle: "Kitchen & Culinary Crafts - Traditional Sri Lankan Kitchen Tools", metaDescription: "Traditional Sri Lankan kitchen tools and culinary crafts. Coconut scrapers, grinding stones, clay cooking pots, and artisan kitchenware.", seoKeywords: ["kitchen tools", "coconut scraper", "grinding stone", "clay pot", "culinary", "cooking"] },
+    { name: "Accessories", slug: "accessories", description: "Handbags, hats, sunglasses, and personal accessories.", level: 0, sortOrder: 1, isFeatured: true },
+    { name: "Art & Collectibles", slug: "art-collectibles", description: "Fine art, prints, and rare collectibles.", level: 0, sortOrder: 2, isFeatured: true },
+    { name: "Bags & Purses", slug: "bags-purses", description: "Totes, backpacks, and stylish purses.", level: 0, sortOrder: 3, isFeatured: false },
+    { name: "Bath & Beauty", slug: "bath-beauty", description: "Skincare, soaps, and beauty essentials.", level: 0, sortOrder: 4, isFeatured: false },
+    { name: "Books, Movies & Music", slug: "books-movies-music", description: "Media, literature, and entertainment.", level: 0, sortOrder: 5, isFeatured: false },
+    { name: "Clothing", slug: "clothing", description: "Fashion, apparel, and wearables.", level: 0, sortOrder: 6, isFeatured: true },
+    { name: "Craft Supplies & Tools", slug: "craft-supplies-tools", description: "Materials and tools for makers.", level: 0, sortOrder: 7, isFeatured: false },
+    { name: "Electronics & Accessories", slug: "electronics-accessories", description: "Gadgets, tech, and digital accessories.", level: 0, sortOrder: 8, isFeatured: true },
+    { name: "Gifts", slug: "gifts", description: "Perfect gifts for any occasion.", level: 0, sortOrder: 9, isFeatured: true },
+    { name: "Home & Living", slug: "home-living", description: "Decor, furniture, and home essentials.", level: 0, sortOrder: 10, isFeatured: true },
+    { name: "Jewelry", slug: "jewelry", description: "Necklaces, rings, and fine jewelry.", level: 0, sortOrder: 11, isFeatured: true },
+    { name: "Kids & Baby", slug: "kids-baby", description: "Clothing, toys, and essentials for children.", level: 0, sortOrder: 12, isFeatured: false },
+    { name: "Paper & Party Supplies", slug: "paper-party-supplies", description: "Stationery, cards, and party decor.", level: 0, sortOrder: 13, isFeatured: false },
+    { name: "Pet Supplies", slug: "pet-supplies", description: "Accessories and essentials for pets.", level: 0, sortOrder: 14, isFeatured: false },
+    { name: "Shoes", slug: "shoes", description: "Footwear for all occasions.", level: 0, sortOrder: 15, isFeatured: false },
+    { name: "Toys & Games", slug: "toys-games", description: "Fun and games for all ages.", level: 0, sortOrder: 16, isFeatured: false },
+    { name: "Weddings", slug: "weddings", description: "Bridal, decor, and wedding essentials.", level: 0, sortOrder: 17, isFeatured: false }
   ];
 
   for (const cat of categoryData) {
@@ -503,29 +500,7 @@ async function main() {
   const categories = await prisma.category.findMany();
 
   function getCatSlug(name: string): string {
-    const map: Record<string, string> = {
-      "Handloom & Textiles": "handloom-textiles",
-      "Wood Carving & Masks": "wood-carving-masks",
-      "Pottery & Ceramics": "pottery-ceramics",
-      "Jewelry & Brassware": "jewelry-brassware",
-      "Batik & Dyeing": "batik-dyeing",
-      "Lacquerware": "lacquerware",
-      "Coir & Reed Products": "coir-reed-products",
-      "Leather Crafts": "leather-crafts",
-      "Traditional Drums & Instruments": "traditional-drums-instruments",
-      "Spices & Herbal Products": "spices-herbal",
-      "Home & Living Decor": "home-living-decor",
-      "Paintings & Art": "paintings-art",
-      "Rattan & Cane Furniture": "rattan-cane-furniture",
-      "Traditional Toys & Games": "traditional-toys-games",
-      "Festival & Ceremonial Items": "festival-ceremonial",
-      "Beeralu Lace": "beeralu-lace",
-      "Palm Leaf Crafts": "palm-leaf-crafts",
-      "Brass & Bell Metal": "brass-bell-metal",
-      "Moonstone & Gem Crafts": "moonstone-gem-crafts",
-      "Kitchen & Culinary Crafts": "kitchen-culinary",
-    };
-    return map[name] || name.toLowerCase().replace(/\s+/g, "-");
+    return name.toLowerCase().replace(/\s+/g, "-").replace(/&/g, "").replace(/--/g, "-");
   }
 
   // ===== PRODUCTS =====
@@ -1504,7 +1479,7 @@ async function main() {
   for (const product of productData) {
     const created = await prisma.product.create({ data: product });
 
-    const categorySlug = getCatSlug("Handloom & Textiles");
+    const categorySlug = "clothing";
     const category = categories.find((c) => c.slug === categorySlug);
     if (category) {
       await prisma.productCategory.create({
@@ -1519,53 +1494,53 @@ async function main() {
   const catMap = new Map(categories.map((c) => [c.slug, c.id]));
 
   const productCategoryMap: Record<string, string[]> = {
-    // Hemachandra products -> Handloom & Textiles
-    "HHL-DUM-SAR-001": ["handloom-textiles"],
-    "HHL-KAN-WALL-002": ["handloom-textiles", "home-living-decor"],
-    "HHL-COT-SAR-003": ["handloom-textiles"],
-    "HHL-MED-CUSH-004": ["handloom-textiles", "home-living-decor"],
-    "HHL-LOT-RUN-005": ["handloom-textiles", "home-living-decor"],
-    "HHL-BBY-SWD-006": ["handloom-textiles"],
-    "HHL-BCH-WRP-007": ["handloom-textiles"],
-    "HHL-KRT-FAB-008": ["handloom-textiles"],
-    "HHL-WED-SAR-009": ["handloom-textiles", "festival-ceremonial"],
-    "HHL-CUS-SET-010": ["handloom-textiles", "home-living-decor"],
+    // Hemachandra products
+    "HHL-DUM-SAR-001": ["clothing"],
+    "HHL-KAN-WALL-002": ["home-living"],
+    "HHL-COT-SAR-003": ["clothing"],
+    "HHL-MED-CUSH-004": ["home-living"],
+    "HHL-LOT-RUN-005": ["home-living"],
+    "HHL-BBY-SWD-006": ["kids-baby"],
+    "HHL-BCH-WRP-007": ["clothing"],
+    "HHL-KRT-FAB-008": ["craft-supplies-tools"],
+    "HHL-WED-SAR-009": ["weddings"],
+    "HHL-CUS-SET-010": ["home-living"],
 
-    // Gunawardena products -> Wood Carving
-    "GWC-AMB-NAGA-011": ["wood-carving-masks", "home-living-decor"],
-    "GWC-KAN-MOON-012": ["wood-carving-masks", "home-living-decor"],
-    "GWC-TEA-ELE-013": ["wood-carving-masks", "home-living-decor"],
-    "GWC-EBO-LOT-014": ["wood-carving-masks", "jewelry-brassware"],
-    "GWC-EMB-DNC-015": ["wood-carving-masks", "home-living-decor"],
-    "GWC-GAR-YAK-016": ["wood-carving-masks", "festival-ceremonial"],
-    "GWC-MAH-BUD-017": ["wood-carving-masks", "home-living-decor"],
-    "GWC-JAC-SPI-018": ["wood-carving-masks", "kitchen-culinary"],
-    "GWC-TEA-BKE-019": ["wood-carving-masks", "home-living-decor"],
-    "GWC-KOL-PAN-020": ["wood-carving-masks", "traditional-toys-games"],
+    // Gunawardena products
+    "GWC-AMB-NAGA-011": ["art-collectibles"],
+    "GWC-KAN-MOON-012": ["art-collectibles"],
+    "GWC-TEA-ELE-013": ["art-collectibles"],
+    "GWC-EBO-LOT-014": ["art-collectibles"],
+    "GWC-EMB-DNC-015": ["art-collectibles"],
+    "GWC-GAR-YAK-016": ["art-collectibles"],
+    "GWC-MAH-BUD-017": ["home-living"],
+    "GWC-JAC-SPI-018": ["home-living"],
+    "GWC-TEA-BKE-019": ["home-living"],
+    "GWC-KOL-PAN-020": ["toys-games"],
 
-    // Kulatunga products -> Pottery
-    "KPS-CLY-CUR-021": ["pottery-ceramics", "kitchen-culinary"],
-    "KPS-TER-JUG-022": ["pottery-ceramics", "kitchen-culinary"],
-    "KPS-GLZ-DIN-023": ["pottery-ceramics", "kitchen-culinary"],
-    "KPS-TER-PLN-024": ["pottery-ceramics", "home-living-decor"],
-    "KPS-OIL-PAH-025": ["pottery-ceramics", "festival-ceremonial"],
-    "KPS-CLY-TEA-026": ["pottery-ceramics", "kitchen-culinary"],
-    "KPS-TER-SNG-027": ["pottery-ceramics", "home-living-decor"],
-    "KPS-ART-MUG-028": ["pottery-ceramics", "kitchen-culinary"],
-    "KPS-TER-TAN-029": ["pottery-ceramics", "kitchen-culinary"],
-    "KPS-BON-POT-030": ["pottery-ceramics", "home-living-decor"],
+    // Kulatunga products
+    "KPS-CLY-CUR-021": ["home-living"],
+    "KPS-TER-JUG-022": ["home-living"],
+    "KPS-GLZ-DIN-023": ["home-living"],
+    "KPS-TER-PLN-024": ["home-living"],
+    "KPS-OIL-PAH-025": ["home-living"],
+    "KPS-CLY-TEA-026": ["home-living"],
+    "KPS-TER-SNG-027": ["home-living"],
+    "KPS-ART-MUG-028": ["home-living"],
+    "KPS-TER-TAN-029": ["home-living"],
+    "KPS-BON-POT-030": ["home-living"],
 
-    // Rajapakse products -> Jewelry
-    "RBG-BRS-LMP-031": ["jewelry-brassware", "festival-ceremonial"],
-    "RBG-SAP-PEN-032": ["jewelry-brassware", "moonstone-gem-crafts"],
-    "RBG-BRS-TRY-033": ["jewelry-brassware", "festival-ceremonial"],
-    "RBG-MNS-RNG-034": ["jewelry-brassware", "moonstone-gem-crafts"],
-    "RBG-BRS-BEL-035": ["jewelry-brassware", "festival-ceremonial"],
-    "RBG-GAR-EAR-036": ["jewelry-brassware", "moonstone-gem-crafts"],
-    "RBG-BRS-WAL-037": ["jewelry-brassware", "home-living-decor"],
-    "RBG-STR-CUF-038": ["jewelry-brassware", "moonstone-gem-crafts"],
-    "RBG-BRS-DOR-039": ["jewelry-brassware", "home-living-decor"],
-    "RBG-PRL-NEC-040": ["jewelry-brassware", "moonstone-gem-crafts"],
+    // Rajapakse products
+    "RBG-BRS-LMP-031": ["home-living"],
+    "RBG-SAP-PEN-032": ["jewelry"],
+    "RBG-BRS-TRY-033": ["home-living"],
+    "RBG-MNS-RNG-034": ["jewelry"],
+    "RBG-BRS-BEL-035": ["home-living"],
+    "RBG-GAR-EAR-036": ["jewelry"],
+    "RBG-BRS-WAL-037": ["home-living"],
+    "RBG-STR-CUF-038": ["jewelry"],
+    "RBG-BRS-DOR-039": ["home-living"],
+    "RBG-PRL-NEC-040": ["jewelry"],
   };
 
   for (const product of allProducts) {

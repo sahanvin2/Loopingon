@@ -21,12 +21,15 @@ const shippingAddressSchema = z.object({
 
 export const createOrderSchema = z.object({
   items: z.array(orderItemSchema).min(1, "At least one item is required").max(50, "Maximum 50 items per order"),
-  shippingAddressId: z.string().uuid("Invalid shipping address ID"),
+  shippingAddressId: z.string().uuid("Invalid shipping address ID").optional(),
+  shippingAddress: shippingAddressSchema.optional(),
   shippingMethod: z.string().min(1, "Shipping method is required").max(100),
+  paymentMethod: z.string().min(1, "Payment method is required").max(100).optional(),
   couponCode: z.string().max(50).optional().nullable(),
   customerNotes: z.string().max(500).optional().nullable(),
   isGift: z.boolean().optional(),
   giftMessage: z.string().max(300).optional().nullable(),
+  giftWrap: z.boolean().optional(),
   useWalletBalance: z.boolean().optional(),
 });
 

@@ -1,7 +1,9 @@
 import { Prisma } from "@prisma/client";
 import { prisma } from "../config/database.js";
 import { AppError } from "../middleware/errorHandler.middleware.js";
+import { logger } from "../middleware/errorHandler.middleware.js";
 import { getPaginationParams, buildPaginationResult } from "../utils/pagination.js";
+import { addShippingUpdateJob } from "../workers/email.worker.js";
 
 export async function applyVendor(
   userId: string,
@@ -114,7 +116,7 @@ export async function getStorefrontBySlug(slug: string) {
       storefrontSettings: true,
       products: {
         where: { status: "PUBLISHED", deletedAt: null },
-        take: 8,
+        take: 100,
         orderBy: { createdAt: "desc" },
         include: { images: { take: 1, orderBy: { sortOrder: "asc" } } },
       },
@@ -626,6 +628,29 @@ export async function updateOrderStatus(
         shippedAt: new Date(),
       },
     });
+  }
+
+  // Send shipping update email to customer
+  try {
+    const orderWithCustomer = await prisma.order.findUnique({
+      where: { id: orderId },
+      include: { customer: { select: { email: true, fullName: true } } },
+    });
+
+    if (orderWithCustomer?.customer) {
+      await addShippingUpdateJob(
+        orderWithCustomer.customer.email,
+        orderWithCustomer.orderNumber,
+        trackingInfo?.trackingNumber || "",
+        status,
+        orderWithCustomer.customer.fullName,
+        trackingInfo?.trackingUrl,
+        trackingInfo?.courierName,
+        status === "DELIVERED" ? "Delivered" : undefined
+      );
+    }
+  } catch (err) {
+    logger.warn("Failed to queue shipping update email", err);
   }
 
   return updatedOrder;

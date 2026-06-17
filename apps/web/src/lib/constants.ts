@@ -42,7 +42,7 @@ export const FOOTER_LINKS = {
     { label: "Shipping Info", href: "/shipping" },
     { label: "Returns & Refunds", href: "/returns" },
     { label: "Order Tracking", href: "/orders/track" },
-    { label: "FAQs", href: "/faqs" },
+    { label: "FAQs", href: "/faq" },
   ],
   sell: [
     { label: "Start Selling", href: "/vendor/register" },

@@ -1,5 +1,7 @@
 import { prisma } from "../config/database.js";
 import { AppError } from "../middleware/errorHandler.middleware.js";
+import { addCartUpdateJob } from "../workers/email.worker.js";
+import { logger } from "../middleware/errorHandler.middleware.js";
 
 export async function getCart(userId: string) {
   let cart = await prisma.cart.findUnique({
@@ -47,6 +49,7 @@ export async function addToCart(
 ) {
   const product = await prisma.product.findUnique({
     where: { id: productId, deletedAt: null },
+    include: { images: { take: 1, orderBy: { sortOrder: "asc" } } },
   });
 
   if (!product) throw new AppError("Product not found", 404, "PRODUCT_NOT_FOUND");
@@ -92,6 +95,30 @@ export async function addToCart(
     });
   }
 
+  // Send cart update email
+  try {
+    const [user, cartItems] = await Promise.all([
+      prisma.user.findUnique({ where: { id: userId }, select: { email: true, fullName: true } }),
+      prisma.cartItem.findMany({ where: { cartId: cart.id }, include: { product: { select: { price: true } } } }),
+    ]);
+
+    if (user) {
+      const cartTotal = cartItems.reduce((sum, ci) => sum + Number(ci.price) * ci.quantity, 0);
+      await addCartUpdateJob(
+        user.email,
+        product.title,
+        quantity,
+        Number(price),
+        cartItems.length,
+        cartTotal,
+        user.fullName,
+        product.images?.[0]?.url || undefined
+      );
+    }
+  } catch (err) {
+    logger.warn("Failed to queue cart update email", err);
+  }
+
   return item;
 }
 
@@ -123,10 +150,10 @@ export async function updateCartItem(itemId: string, userId: string, quantity: n
 
 export async function removeCartItem(itemId: string, userId: string) {
   const cart = await prisma.cart.findUnique({ where: { userId } });
-  if (!cart) throw new AppError("Cart not found", 404, "CART_NOT_FOUND");
+  if (!cart) return;
 
   const item = await prisma.cartItem.findFirst({ where: { id: itemId, cartId: cart.id } });
-  if (!item) throw new AppError("Cart item not found", 404, "CART_ITEM_NOT_FOUND");
+  if (!item) return;
 
   await prisma.cartItem.delete({ where: { id: itemId } });
 }

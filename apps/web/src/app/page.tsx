@@ -5,25 +5,22 @@ import { CategoryGrid } from "@/components/home/category-grid";
 import { TrendingThisWeek } from "@/components/home/trending-this-week";
 import { ProductSection } from "@/components/home/product-section";
 import { PromoBanners } from "@/components/home/promo-banners";
-import { ShopByRegion } from "@/components/home/shop-by-region";
-import { SriLankanHeritage } from "@/components/home/sri-lankan-heritage";
-import { FeaturedCreators } from "@/components/home/featured-creators";
 import { CustomerReviewsBanner } from "@/components/home/customer-reviews-banner";
 import { AIGiftFinder } from "@/components/home/ai-gift-finder";
 import { BottomCtaSection } from "@/components/home/bottom-cta-section";
 import { LoadingSkeleton } from "@/components/shared/loading-skeleton";
 
 export const metadata = {
-  title: "Kandyam - Sri Lanka's Handmade Craft Marketplace",
+  title: "Kandyam - Global Marketplace for Unique Finds",
   description:
-    "Kandyam connects skilled Sri Lankan artisans with customers worldwide. Discover unique handcrafted treasures made with traditional techniques and authentic materials.",
+    "Kandyam connects you with independent sellers worldwide. Discover extraordinary items, from fashion and electronics to home decor and unique gifts.",
   openGraph: {
-    title: "Kandyam - Sri Lanka's Handmade Craft Marketplace",
+    title: "Kandyam - Global Marketplace",
     description:
-      "Discover unique handcrafted treasures made by skilled Sri Lankan artisans.",
+      "Discover extraordinary items from independent sellers worldwide.",
     type: "website",
     url: "https://kandyam.com",
-    images: [{ url: "https://cdn.kandyam.com/og-image.jpg", width: 1200, height: 630 }],
+    images: [{ url: "https://f005.backblazeb2.com/file/movia-prod/categories/6a34e1b2-8ff3-4e97-9176-ad4c2ed38617_thumb.webp", width: 1200, height: 630 }],
   },
 };
 
@@ -85,12 +82,6 @@ export default function HomePage() {
           limit={5}
         />
       </Suspense>
-
-      <ShopByRegion />
-      
-      <SriLankanHeritage />
-      
-      <FeaturedCreators />
       
       <CustomerReviewsBanner />
       

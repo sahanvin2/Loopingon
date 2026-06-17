@@ -11,7 +11,7 @@ const testimonials = [
   {
     name: "Priya Fernando",
     city: "Colombo",
-    avatar: "/images/testimonials/priya.jpg",
+    initials: "PF",
     rating: 5,
     text: "I ordered a handloom saree for my sister's wedding and it was absolutely stunning. The quality, the colors, and the craftsmanship were beyond my expectations. Knowing it was made by a local artisan made it even more special.",
     product: "Handloom Silk Saree",
@@ -19,7 +19,7 @@ const testimonials = [
   {
     name: "James Anderson",
     city: "Melbourne",
-    avatar: "/images/testimonials/james.jpg",
+    initials: "JA",
     rating: 5,
     text: "As someone who collects art from around the world, the Sri Lankan mask I received is one of my favorite pieces. The detail is incredible. Shipping to Australia was fast and the packaging was excellent.",
     product: "Traditional Raksha Mask",
@@ -27,7 +27,7 @@ const testimonials = [
   {
     name: "Samantha Perera",
     city: "Kandy",
-    avatar: "/images/testimonials/samantha.jpg",
+    initials: "SP",
     rating: 4,
     text: "I love that I can find genuine Sri Lankan crafts all in one place. The batik wall hanging I received was even more beautiful than the photos. The artisan even included a handwritten note!",
     product: "Batik Wall Hanging",
@@ -35,7 +35,7 @@ const testimonials = [
   {
     name: "Michael Becker",
     city: "Berlin",
-    avatar: "/images/testimonials/michael.jpg",
+    initials: "MB",
     rating: 5,
     text: "The brass elephant statue I ordered is magnificent. It's clear that generations of skill went into this piece. Kandyam made it easy to buy authentic Sri Lankan crafts from overseas.",
     product: "Brass Elephant Statue",
@@ -43,7 +43,7 @@ const testimonials = [
   {
     name: "Dilani Weerasinghe",
     city: "Galle",
-    avatar: "/images/testimonials/dilani.jpg",
+    initials: "DW",
     rating: 5,
     text: "Every purchase from Kandyam makes me feel connected to my heritage. The coir products I ordered were exactly like the ones my grandmother used to make. Thank you for preserving these crafts.",
     product: "Handwoven Coir Mat",
@@ -90,12 +90,8 @@ export function Testimonials() {
                 </p>
 
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="w-12 h-12 rounded-full bg-muted-200 overflow-hidden shrink-0">
-                    <img
-                      src={t.avatar}
-                      alt={t.name}
-                      className="w-full h-full object-cover"
-                    />
+                  <div className="w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center shrink-0 text-primary-600 font-semibold text-sm">
+                    {t.initials}
                   </div>
                   <div>
                     <p className="text-text-700 font-medium text-sm">

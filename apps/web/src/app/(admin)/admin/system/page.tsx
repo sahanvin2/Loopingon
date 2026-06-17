@@ -3,7 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { Trash2, Server, Database, Activity } from "lucide-react";
+import { Trash2, Server, Database, Activity, FileSpreadsheet } from "lucide-react";
 import { get, post } from "@/lib/api-client";
 import { LoadingSkeleton } from "@/components/shared/loading-skeleton";
 import type { ApiResponse } from "@/types";
@@ -98,6 +98,40 @@ export default function AdminSystemPage() {
             </div>
           ))}
         </div>
+      </div>
+
+      <div className="bg-white rounded-xl border border-accent-200 p-6">
+        <h2 className="text-lg font-semibold text-text-900 mb-4">Master Data Export</h2>
+        <p className="text-sm text-text-500 mb-4">Download a complete Excel report containing all users, orders, and products in the system.</p>
+        <button
+          type="button"
+          onClick={async () => {
+            try {
+              const sessionStr = localStorage.getItem("auth-storage");
+              const token = sessionStr ? JSON.parse(sessionStr)?.state?.token : null;
+              const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/export/master`, {
+                headers: {
+                  Authorization: `Bearer ${token}`
+                }
+              });
+              if (!res.ok) throw new Error("Failed to export");
+              const blob = await res.blob();
+              const url = window.URL.createObjectURL(blob);
+              const a = document.createElement("a");
+              a.href = url;
+              a.download = "kandyam-master-export.xlsx";
+              a.click();
+              window.URL.revokeObjectURL(url);
+            } catch (err) {
+              console.error(err);
+              alert("Failed to generate report");
+            }
+          }}
+          className="px-4 py-2 bg-primary-600 text-white rounded-lg text-sm font-medium hover:bg-primary-700 flex items-center gap-2"
+        >
+          <FileSpreadsheet className="w-4 h-4" />
+          Generate Master Excel Report
+        </button>
       </div>
 
       <div className="bg-white rounded-xl border border-accent-200 p-6">

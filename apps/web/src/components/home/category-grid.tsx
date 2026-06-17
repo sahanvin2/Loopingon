@@ -2,33 +2,19 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
-import { cn } from "@/lib/utils";
-import { 
-  Home, 
-  Gem, 
-  Briefcase, 
-  Flame, 
-  Hammer, 
-  Palette, 
-  Coffee, 
-  Brush, 
-  Shirt,
-  ArrowRight,
-  MoreHorizontal
-} from "lucide-react";
+import { ArrowRight, MoreHorizontal } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { get } from "@/lib/api-client";
+import { getImageUrl } from "@/lib/utils";
 
-const categoryItems = [
-  { name: "Wood Crafts", slug: "wood-crafts", icon: Hammer, color: "text-amber-700", border: "border-amber-200" },
-  { name: "Batik", slug: "batik", icon: Palette, color: "text-blue-600", border: "border-blue-200" },
-  { name: "Hand Loom", slug: "hand-loom", icon: Shirt, color: "text-indigo-500", border: "border-indigo-200" },
-  { name: "Jewelry", slug: "jewelry", icon: Gem, color: "text-teal-600", border: "border-teal-200" },
-  { name: "Pottery", slug: "pottery", icon: Coffee, color: "text-red-500", border: "border-red-200" },
-  { name: "Home Decor", slug: "home-decor", icon: Home, color: "text-rose-600", border: "border-rose-200" },
-  { name: "Paintings", slug: "paintings", icon: Brush, color: "text-purple-600", border: "border-purple-200" },
-  { name: "Leather", slug: "leather-products", icon: Briefcase, color: "text-stone-700", border: "border-stone-200" },
-  { name: "More", slug: "categories", icon: MoreHorizontal, color: "text-primary-500", border: "border-primary-200" },
-];
+interface ApiCategory {
+  id: string;
+  name: string;
+  slug: string;
+  productCount: number;
+}
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -44,6 +30,29 @@ const itemVariants = {
 };
 
 export function CategoryGrid() {
+  const { data, isLoading } = useQuery({
+    queryKey: ["categories", "featured"],
+    queryFn: () => get<{ data: ApiCategory[] }>("/categories", { limit: 20 }),
+    staleTime: 5 * 60 * 1000,
+  });
+
+  const categories = data?.data || [];
+
+  if (isLoading) {
+    return (
+      <section className="py-12 px-4 max-w-8xl mx-auto">
+        <h2 className="font-serif text-2xl md:text-3xl text-text-900 font-medium mb-8">Shop by Category</h2>
+        <div className="flex gap-4 overflow-x-auto">
+          {Array.from({ length: 8 }).map((_, i) => (
+            <div key={i} className="w-24 h-24 rounded-full bg-surface-200 animate-pulse shrink-0" />
+          ))}
+        </div>
+      </section>
+    );
+  }
+
+  if (categories.length === 0) return null;
+
   return (
     <section className="py-12 px-4 max-w-8xl mx-auto">
       <div className="flex items-center justify-between mb-8">
@@ -60,24 +69,15 @@ export function CategoryGrid() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-50px" }}
-        className="flex flex-nowrap overflow-x-auto overflow-y-visible py-4 px-2 -mx-2 gap-4 sm:gap-6 md:gap-8 scrollbar-hide snap-x"
+        className="flex flex-wrap justify-center gap-3 sm:gap-4 md:gap-5"
       >
-        {categoryItems.map((category) => (
-          <motion.div key={category.slug} variants={itemVariants} className="snap-start shrink-0">
+        {categories.map((category) => (
+          <motion.div key={category.slug} variants={itemVariants}>
             <Link
-              href={category.slug === "categories" ? "/categories" : `/categories/${category.slug}`}
-              className="flex flex-col items-center gap-3 group focus:outline-none"
+              href={`/categories/${category.slug}`}
+              className="inline-flex items-center justify-center px-6 py-3 rounded-full border border-surface-200 bg-white hover:bg-surface-50 hover:border-primary-300 hover:shadow-soft-sm hover:-translate-y-0.5 transition-all duration-300 text-sm font-medium text-text-700 hover:text-primary-600 focus:outline-none"
             >
-              <div className={cn(
-                "w-20 h-20 sm:w-24 sm:h-24 rounded-full flex items-center justify-center border bg-white transition-all duration-300",
-                "group-hover:shadow-soft-md group-hover:-translate-y-2 group-hover:scale-[1.02]",
-                category.border
-              )}>
-                <category.icon className={cn("w-8 h-8 sm:w-10 sm:h-10 transition-transform duration-300 group-hover:scale-110", category.color)} strokeWidth={1.5} />
-              </div>
-              <span className="text-sm font-medium text-text-700 group-hover:text-primary-600 transition-colors text-center w-20 sm:w-24">
-                {category.name}
-              </span>
+              {category.name}
             </Link>
           </motion.div>
         ))}

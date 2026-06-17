@@ -4,6 +4,7 @@ import { authenticate, optionalAuth } from "../middleware/auth.middleware.js";
 import { requireRole, requireVendor, requireVendorProductOwnership } from "../middleware/rbac.middleware.js";
 import { validate } from "../middleware/validator.middleware.js";
 import { uploadSingle, uploadMultiple } from "../middleware/upload.middleware.js";
+import { uploadMultiple as uploadMultipleToStorage } from "../services/media.service.js";
 import * as vendorService from "../services/vendor.service.js";
 import { successResponse, paginatedResponse, createdResponse, noContentResponse } from "../utils/response.js";
 
@@ -225,11 +226,17 @@ router.post(
   uploadMultiple("images", 10),
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const files = (req.files as Express.Multer.File[] || []).map((f) => ({
-        url: `/uploads/products/${f.filename}`,
-        thumbnail: `/uploads/products/thumb_${f.filename}`,
-        medium: `/uploads/products/med_${f.filename}`,
-        large: `/uploads/products/lg_${f.filename}`,
+      const uploadedFiles = req.files as Express.Multer.File[] || [];
+      if (uploadedFiles.length === 0) {
+        throw new Error("No files uploaded");
+      }
+
+      const uploadResults = await uploadMultipleToStorage(uploadedFiles, `products/${req.params.productId}`);
+      const files = uploadResults.map((result) => ({
+        url: result.original,
+        thumbnail: result.thumb,
+        medium: result.medium,
+        large: result.large,
         alt: req.body.alt,
       }));
       const images = await vendorService.addProductImage(req.params.productId, req.user!.vendor!.id, files);

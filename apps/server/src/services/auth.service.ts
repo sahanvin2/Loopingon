@@ -14,7 +14,12 @@ import {
 } from "../utils/jwt.js";
 import { generateOTP } from "../utils/otp.js";
 import { generateTOTPSecret, generateBackupCodes, verifyTOTP } from "../utils/totp.js";
-import { sendEmail } from "../utils/email.js";
+import { logger } from "../middleware/errorHandler.middleware.js";
+import {
+  addVerificationEmailJob,
+  addPasswordResetEmailJob,
+  addWelcomeEmailJob,
+} from "../workers/email.worker.js";
 
 export async function signup(data: {
   email: string;
@@ -55,13 +60,10 @@ export async function signup(data: {
 
   const updatedToken = signEmailVerificationToken(user.id, data.email);
   try {
-    await sendEmail(
-      data.email,
-      "Verify your email - Loopingon",
-      `<p>Welcome! Click <a href="${process.env.FRONTEND_URL || 'http://localhost:3000'}/verify-email?token=${updatedToken}">here</a> to verify your email.</p>`
-    );
-  } catch {
-    console.log("Email sending skipped (SMTP not configured)");
+    await addVerificationEmailJob(data.email, updatedToken, data.fullName);
+    await addWelcomeEmailJob(data.email, data.fullName);
+  } catch (err) {
+    logger.warn("Failed to queue verification or welcome email", err);
   }
 
   const tokenPayload: TokenPayload = { sub: user.id, email: user.email, role: user.role };
@@ -205,11 +207,11 @@ export async function forgotPassword(email: string) {
   if (!user) return;
 
   const token = signResetToken(user.id);
-  await sendEmail(
-    email,
-    "Reset your password - Loopingon",
-    `<p>Click <a href="${process.env.FRONTEND_URL}/reset-password?token=${token}">here</a> to reset your password. This link expires in 1 hour.</p>`
-  );
+  try {
+    await addPasswordResetEmailJob(email, token, user.fullName);
+  } catch (err) {
+    logger.warn("Failed to queue password reset email", err);
+  }
 }
 
 export async function resetPassword(token: string, newPassword: string) {
@@ -266,6 +268,11 @@ export async function googleAuth(profile: { id: string; email: string; name: str
           customerProfile: { create: {} },
         },
       });
+      try {
+        await addWelcomeEmailJob(user.email, user.fullName);
+      } catch (err) {
+        logger.warn("Failed to queue welcome email", err);
+      }
     }
   }
 
@@ -286,6 +293,9 @@ export async function googleAuth(profile: { id: string; email: string; name: str
   const { passwordHash: _, ...userWithoutPassword } = user;
   return { user: userWithoutPassword, accessToken, refreshToken: refreshTokenValue };
 }
+
+
+
 
 export async function facebookAuth(profile: { id: string; email: string; name: string; picture?: string }) {
   let user = await prisma.user.findUnique({ where: { facebookId: profile.id } });
@@ -309,6 +319,11 @@ export async function facebookAuth(profile: { id: string; email: string; name: s
           customerProfile: { create: {} },
         },
       });
+      try {
+        await addWelcomeEmailJob(user.email, user.fullName);
+      } catch (err) {
+        logger.warn("Failed to queue welcome email", err);
+      }
     }
   }
 

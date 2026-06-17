@@ -98,6 +98,9 @@ async function request<T>(
       const data = await response.json();
 
       if (!response.ok) {
+        if (response.status === 401 && typeof window !== "undefined") {
+          window.dispatchEvent(new CustomEvent("auth:unauthorized"));
+        }
         throw new ApiError(
           data.message || data.error || `Request failed with status ${response.status}`,
           response.status,
@@ -110,6 +113,9 @@ async function request<T>(
     }
 
     if (!response.ok) {
+      if (response.status === 401 && typeof window !== "undefined") {
+        window.dispatchEvent(new CustomEvent("auth:unauthorized"));
+      }
       throw new ApiError(
         `Request failed with status ${response.status}`,
         response.status,

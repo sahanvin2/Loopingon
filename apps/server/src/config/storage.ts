@@ -4,18 +4,23 @@ import { v4 as uuidv4 } from "uuid";
 import path from "path";
 import { logger } from "../middleware/errorHandler.middleware.js";
 
+const STORAGE_ENDPOINT = process.env.STORAGE_ENDPOINT || "https://s3.us-east-005.backblazeb2.com";
+const STORAGE_REGION = process.env.STORAGE_REGION || "us-east-005";
+const STORAGE_ACCESS_KEY = process.env.STORAGE_ACCESS_KEY || "";
+const STORAGE_SECRET_KEY = process.env.STORAGE_SECRET_KEY || "";
+
 const s3Client = new S3Client({
-  region: process.env.STORAGE_REGION || "sfo3",
-  endpoint: process.env.STORAGE_ENDPOINT || "https://sfo3.digitaloceanspaces.com",
+  region: STORAGE_REGION,
+  endpoint: STORAGE_ENDPOINT,
   credentials: {
-    accessKeyId: process.env.STORAGE_ACCESS_KEY || "",
-    secretAccessKey: process.env.STORAGE_SECRET_KEY || "",
+    accessKeyId: STORAGE_ACCESS_KEY,
+    secretAccessKey: STORAGE_SECRET_KEY,
   },
-  forcePathStyle: false,
+  forcePathStyle: true,
 });
 
-const BUCKET_NAME = process.env.STORAGE_BUCKET || "loopingon-uploads";
-const CDN_URL = process.env.STORAGE_CDN_URL || `https://${BUCKET_NAME}.sfo3.digitaloceanspaces.com`;
+const BUCKET_NAME = process.env.STORAGE_BUCKET || "movia-prod";
+const CDN_URL = process.env.STORAGE_CDN_URL || process.env.CDN_URL || `https://f005.backblazeb2.com/file/${BUCKET_NAME}`;
 
 export interface UploadResult {
   key: string;
@@ -44,17 +49,14 @@ export async function uploadFile(params: UploadFileParams): Promise<UploadResult
     Key: key,
     Body: params.buffer,
     ContentType: params.mimetype,
-    ACL: params.isPublic !== false ? "public-read" : "private",
     CacheControl: "public, max-age=31536000, immutable",
   });
 
   await s3Client.send(command);
 
-  const url = `https://${BUCKET_NAME}.${process.env.STORAGE_REGION || "sfo3"}.digitaloceanspaces.com/${key}`;
-
   return {
     key,
-    url,
+    url: `${CDN_URL}/${key}`,
     cdnUrl: `${CDN_URL}/${key}`,
     size: params.buffer.length,
     mimeType: params.mimetype,
@@ -108,5 +110,5 @@ export async function getPublicUrl(key: string): Promise<string> {
 }
 
 export function isValidStorageConfigured(): boolean {
-  return !!(process.env.STORAGE_ACCESS_KEY && process.env.STORAGE_SECRET_KEY && BUCKET_NAME);
+  return !!(STORAGE_ACCESS_KEY && STORAGE_SECRET_KEY && BUCKET_NAME);
 }

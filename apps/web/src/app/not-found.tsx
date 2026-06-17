@@ -63,7 +63,7 @@ export default function NotFound() {
             Looks like we wandered off the path.
           </h2>
           <p className="mx-auto mb-10 max-w-lg text-muted-500 text-lg leading-relaxed">
-            The artisanal treasure you're looking for seems to be hiding. Let's get you back to discovering unique handcrafted pieces.
+            The item you're looking for seems to be hiding. Let's get you back to discovering great products.
           </p>
         </motion.div>
 
@@ -77,7 +77,7 @@ export default function NotFound() {
             <Search className="pointer-events-none absolute left-5 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-400 transition-colors group-focus-within:text-primary-500" />
             <input
               type="text"
-              placeholder="Search for handmade crafts..."
+              placeholder="Search for products..."
               className="w-full rounded-full border-2 border-accent-200 bg-white py-4 pl-14 pr-6 text-sm text-text-800 placeholder:text-muted-400 shadow-sm transition-all focus:border-primary-500 focus:ring-4 focus:ring-primary-500/10 focus:outline-none"
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
@@ -124,10 +124,10 @@ export default function NotFound() {
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             {[
-              { label: "Wood Carving", href: "/categories/wood-carving" },
-              { label: "Pottery & Clay", href: "/categories/clay-pottery" },
-              { label: "Handloom", href: "/categories/textiles-batik" },
-              { label: "Brass Jewelry", href: "/categories/jewelry" },
+              { label: "Home & Living", href: "/categories/home-living" },
+              { label: "Clothing", href: "/categories/clothing" },
+              { label: "Jewelry", href: "/categories/jewelry" },
+              { label: "Gifts", href: "/categories/gifts" },
             ].map((link) => (
               <Link
                 key={link.href}

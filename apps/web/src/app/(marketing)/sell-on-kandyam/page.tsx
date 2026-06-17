@@ -1,50 +1,27 @@
-﻿import Image from "next/image";
+import Image from "next/image";
 import Link from "next/link";
 import { Globe, Gift, Store, Megaphone, Shield, MessageCircle, Lock, TrendingUp, DollarSign } from "lucide-react";
 
 export const metadata = {
-  title: "Sell on Kandyam - Turn Your Craft Into Income",
-  description: "Join 4,500+ Sri Lankan artisans selling handmade crafts on Kandyam. 80% profit to you, global customer reach, free store setup, and dedicated support.",
+  title: "Sell on Kandyam - Turn Your Passion Into Income",
+  description: "Join thousands of sellers on Kandyam. 80% profit to you, global customer reach, free store setup, and dedicated support.",
   openGraph: {
-    title: "Sell on Kandyam - Turn Your Craft Into Income",
-    description: "Join 4,500+ Sri Lankan artisans selling handmade crafts on Kandyam. Keep 80% of your earnings.",
+    title: "Sell on Kandyam - Turn Your Passion Into Income",
+    description: "Join thousands of sellers on Kandyam. Keep 80% of your earnings.",
   },
 };
 
 const benefits = [
   { icon: DollarSign, title: "80% Profit to You", description: "Keep the vast majority of your earnings. Only a 20% commission — no hidden fees, listing charges, or monthly subscriptions." },
-  { icon: Globe, title: "Global Customer Reach", description: "Your crafts reach customers in 35+ countries. We handle international marketing, SEO, and translation so you can focus on creating." },
-  { icon: Store, title: "Free Store Setup", description: "Create your storefront at zero cost. Customize your banner, add your story, showcase your workshop — all included." },
+  { icon: Globe, title: "Global Customer Reach", description: "Your products reach customers everywhere. We handle marketing, SEO, and visibility so you can focus on your business." },
+  { icon: Store, title: "Free Store Setup", description: "Create your storefront at zero cost. Customize your banner, add your story, and showcase your products — all included." },
   { icon: Megaphone, title: "Marketing & Promotion", description: "Your products appear in our featured sections, email campaigns, and social media promotions. We invest in driving traffic to your store." },
   { icon: Shield, title: "Secure Fortnight Payouts", description: "Get paid directly to your Sri Lankan bank account every two weeks. Transparent earnings dashboard with full transaction history." },
   { icon: MessageCircle, title: "Dedicated WhatsApp Support", description: "Have questions? Reach our vendor support team directly via WhatsApp. Fast, personal help when you need it." },
 ];
 
-const successStories = [
-  {
-    name: "Sunil Perera",
-    craft: "Wood Carving - Moratuwa",
-    image: "/images/artisans/artisan-1.jpg",
-    story: "Before Kandyam, I sold only at local fairs. Now my hand-carved ebony elephants are in homes in Australia, Canada, and Germany. My income has tripled.",
-    earnings: "රු 2.4M+ earned",
-    orders: "320+ orders",
-  },
-  {
-    name: "Kumudini Jayawardena",
-    craft: "Batik Artist - Galle",
-    image: "/images/artisans/artisan-2.jpg",
-    story: "Kandyam gave me the confidence to quit my day job and pursue batik full-time. The platform handles everything so I can focus on what I love.",
-    earnings: "රු 1.8M+ earned",
-    orders: "250+ orders",
-  },
-  {
-    name: "Mohamed Rizwan",
-    craft: "Brass Work - Kandy",
-    image: "/images/artisans/artisan-3.jpg",
-    story: "My family has been doing brass work for four generations. Through Kandyam, our traditional oil lamps now light homes across the world.",
-    earnings: "රු 3.1M+ earned",
-    orders: "400+ orders",
-  },
+const successStories: any[] = [
+  // Empty for now until real sellers are added
 ];
 
 export default function SellOnKandyamPage() {
@@ -52,17 +29,15 @@ export default function SellOnKandyamPage() {
     <>
       {/* Hero */}
       <section className="relative overflow-hidden bg-text-900">
-        <div className="absolute inset-0">
-          <Image src="/images/sell/artisan-working.jpg" alt="Sri Lankan artisan at work" fill className="object-cover opacity-40" priority sizes="100vw" />
-        </div>
+        <div className="absolute inset-0 bg-gradient-to-br from-primary-900 to-navy-900 opacity-90" />
         <div className="relative mx-auto max-w-6xl px-4 py-24 md:py-32">
           <div className="max-w-2xl">
             <h1 className="font-serif text-4xl font-bold text-white md:text-5xl lg:text-6xl">
-              Turn Your Craft Into Income
+              Turn Your Passion Into Income
             </h1>
             <p className="mt-6 text-lg text-surface-200">
-              Join 4,500+ Sri Lankan artisans already selling on Kandyam. Keep 80% of your
-              earnings, reach customers worldwide, and grow your craft business.
+              Join thousands of sellers already on Kandyam. Keep 80% of your
+              earnings, reach customers globally, and grow your business today.
             </p>
             <Link
               href="/sign-up/vendor"
@@ -162,36 +137,38 @@ export default function SellOnKandyamPage() {
       </section>
 
       {/* Success Stories */}
-      <section className="bg-surface-50 py-20">
-        <div className="mx-auto max-w-6xl px-4">
-          <h2 className="text-center font-serif text-3xl font-bold text-text-900">Artisan Success Stories</h2>
-          <div className="mt-12 grid gap-8 md:grid-cols-3">
-            {successStories.map((s) => (
-              <div key={s.name} className="overflow-hidden rounded-xl bg-white shadow-soft-sm">
-                <div className="relative aspect-[4/3] bg-muted-200">
-                  <Image src={s.image} alt={s.name} fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
-                </div>
-                <div className="p-6">
-                  <div className="mb-2 inline-block rounded-full bg-muted-50 px-3 py-1 text-xs font-medium text-muted-700">{s.craft}</div>
-                  <h3 className="font-serif text-xl font-bold text-text-900">{s.name}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-muted-600">{s.story}</p>
-                  <div className="mt-4 flex gap-4 border-t border-text-100 pt-4 text-sm">
-                    <span className="font-semibold text-primary-600">{s.earnings}</span>
-                    <span className="text-muted-500">{s.orders}</span>
+      {successStories.length > 0 && (
+        <section className="bg-surface-50 py-20">
+          <div className="mx-auto max-w-6xl px-4">
+            <h2 className="text-center font-serif text-3xl font-bold text-text-900">Seller Success Stories</h2>
+            <div className="mt-12 grid gap-8 md:grid-cols-3">
+              {successStories.map((s) => (
+                <div key={s.name} className="overflow-hidden rounded-xl bg-white shadow-soft-sm">
+                  <div className="relative aspect-[4/3] bg-muted-200">
+                    <Image src={s.image} alt={s.name} fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
+                  </div>
+                  <div className="p-6">
+                    <div className="mb-2 inline-block rounded-full bg-muted-50 px-3 py-1 text-xs font-medium text-muted-700">{s.craft}</div>
+                    <h3 className="font-serif text-xl font-bold text-text-900">{s.name}</h3>
+                    <p className="mt-3 text-sm leading-relaxed text-muted-600">{s.story}</p>
+                    <div className="mt-4 flex gap-4 border-t border-text-100 pt-4 text-sm">
+                      <span className="font-semibold text-primary-600">{s.earnings}</span>
+                      <span className="text-muted-500">{s.orders}</span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* CTA */}
       <section className="bg-primary-600 py-20">
         <div className="mx-auto max-w-3xl px-4 text-center">
           <h2 className="font-serif text-3xl font-bold text-white md:text-4xl">Ready to Start Selling?</h2>
           <p className="mt-4 text-lg text-primary-200">
-            Join thousands of Sri Lankan artisans who have found their global audience on Kandyam.
+            Join thousands of sellers who have found their audience on Kandyam.
           </p>
           <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <Link

@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { ArrowRight, Clock, Gift } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -71,14 +70,8 @@ export function PromoBanners() {
             </Link>
           </div>
           <div className="absolute right-0 bottom-0 w-1/2 h-full opacity-80 pointer-events-none">
-            {/* Placeholder for pottery image */}
             <div className="absolute -bottom-10 -right-10 w-64 h-64 bg-accent-200 rounded-full blur-2xl"></div>
-            <Image
-              src="/images/categories/pottery.jpg"
-              alt="Custom Pottery"
-              fill
-              className="object-cover object-left rounded-l-full shadow-[-10px_0_30px_rgba(0,0,0,0.1)]"
-            />
+            <div className="absolute inset-0 bg-gradient-to-l from-accent-300 via-accent-200 to-transparent opacity-50 rounded-l-full" />
           </div>
         </div>
 
@@ -128,12 +121,7 @@ export function PromoBanners() {
             </Link>
           </div>
           <div className="absolute -right-8 bottom-0 w-3/5 h-[80%] pointer-events-none">
-            <Image
-              src="/images/categories/wood-carving.jpg"
-              alt="Gift box"
-              fill
-              className="object-contain object-bottom"
-            />
+            <div className="w-full h-full bg-gradient-to-tl from-surface-300 via-surface-200 to-transparent opacity-40 rounded-tl-3xl" />
           </div>
         </div>
       </div>

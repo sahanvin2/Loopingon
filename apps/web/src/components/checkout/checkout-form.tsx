@@ -1,8 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { useCartStore } from "@/stores/cart-store";
+import { useAuthStore } from "@/stores/auth-store";
+import { post } from "@/lib/api-client";
+import { toast } from "sonner";
 import { ShippingStep } from "@/components/checkout/shipping-step";
 import { PaymentStep } from "@/components/checkout/payment-step";
 
@@ -14,12 +19,109 @@ const steps: { key: CheckoutStep; label: string }[] = [
   { key: "confirmation", label: "Confirmation" },
 ];
 
+interface ShippingFormData {
+  fullName: string;
+  phone: string;
+  addressLine1: string;
+  addressLine2: string;
+  city: string;
+  district: string;
+  postalCode: string;
+  country: string;
+}
+
+interface GiftFormData {
+  isGift: boolean;
+  giftMessage: string;
+  giftWrap: boolean;
+}
+
 interface CheckoutFormProps {
   className?: string;
 }
 
 export function CheckoutForm({ className }: CheckoutFormProps) {
+  const router = useRouter();
+  const { items, subtotal, clearCart } = useCartStore();
+  const { user } = useAuthStore();
   const [currentStep, setCurrentStep] = useState<CheckoutStep>("shipping");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [orderId, setOrderId] = useState<string | null>(null);
+  const [selectedMethod, setSelectedMethod] = useState("SL_POST");
+  const [selectedPayment, setSelectedPayment] = useState("payhere");
+  const [orderError, setOrderError] = useState<string | null>(null);
+
+  const [shippingData, setShippingData] = useState<ShippingFormData>({
+    fullName: user?.fullName || "",
+    phone: user?.phone || "",
+    addressLine1: "",
+    addressLine2: "",
+    city: "",
+    district: "",
+    postalCode: "",
+    country: "Sri Lanka",
+  });
+
+  const [giftData, setGiftData] = useState<GiftFormData>({
+    isGift: false,
+    giftMessage: "",
+    giftWrap: false,
+  });
+
+  const handleShippingNext = useCallback((data: ShippingFormData, method: string) => {
+    setShippingData(data);
+    setSelectedMethod(method);
+    setCurrentStep("payment");
+  }, []);
+
+  const handlePlaceOrder = useCallback(async () => {
+    if (isSubmitting) return;
+    setIsSubmitting(true);
+    setOrderError(null);
+
+    try {
+      const vendorId = items[0]?.product?.vendorId || "";
+      const orderItems = items.map((item) => ({
+        productId: item.productId,
+        variantId: item.variantId || undefined,
+        quantity: item.quantity,
+      }));
+
+      const res = await post<{ data: { id: string; orderNumber: string } }>("/orders", {
+        vendorId,
+        items: orderItems,
+        shippingAddressId: "", // will be handled by backend if needed
+        shippingAddress: {
+          fullName: shippingData.fullName,
+          phone: shippingData.phone,
+          addressLine1: shippingData.addressLine1,
+          addressLine2: shippingData.addressLine2,
+          city: shippingData.city,
+          district: shippingData.district,
+          postalCode: shippingData.postalCode,
+          country: shippingData.country,
+        },
+        shippingMethod: selectedMethod,
+        paymentMethod: selectedPayment,
+        customerNotes: giftData.isGift ? `Gift: ${giftData.giftMessage}` : undefined,
+        isGift: giftData.isGift,
+        giftMessage: giftData.giftMessage || undefined,
+        giftWrap: giftData.giftWrap || undefined,
+        couponCode: undefined,
+      });
+
+      setOrderId(res.data.id);
+      clearCart();
+      setCurrentStep("confirmation");
+      toast.success("Order placed successfully!");
+    } catch (err: any) {
+      const message = err?.message || "Failed to place order. Please try again.";
+      setOrderError(message);
+      toast.error(message);
+    } finally {
+      setIsSubmitting(false);
+    }
+  }, [items, shippingData, selectedMethod, selectedPayment, giftData, clearCart, isSubmitting]);
 
   const currentIndex = steps.findIndex((s) => s.key === currentStep);
 
@@ -33,7 +135,7 @@ export function CheckoutForm({ className }: CheckoutFormProps) {
                 className={cn(
                   "w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-colors",
                   i < currentIndex
-                    ? "bg-muted-600 text-white"
+                    ? "bg-green-500 text-white"
                     : i === currentIndex
                       ? "bg-primary-600 text-white"
                       : "bg-muted-200 text-muted-500",
@@ -54,7 +156,7 @@ export function CheckoutForm({ className }: CheckoutFormProps) {
               <div
                 className={cn(
                   "w-12 sm:w-24 h-0.5 mx-2 transition-colors",
-                  i < currentIndex ? "bg-muted-600" : "bg-muted-200",
+                  i < currentIndex ? "bg-green-500" : "bg-muted-200",
                 )}
               />
             )}
@@ -70,7 +172,11 @@ export function CheckoutForm({ className }: CheckoutFormProps) {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
           >
-            <ShippingStep onNext={() => setCurrentStep("payment")} />
+            <ShippingStep
+              initialData={shippingData}
+              onNext={handleShippingNext}
+              selectedMethod={selectedMethod}
+            />
           </motion.div>
         )}
 
@@ -83,7 +189,13 @@ export function CheckoutForm({ className }: CheckoutFormProps) {
           >
             <PaymentStep
               onBack={() => setCurrentStep("shipping")}
-              onPlaceOrder={() => setCurrentStep("confirmation")}
+              onPlaceOrder={handlePlaceOrder}
+              selectedPayment={selectedPayment}
+              onPaymentChange={setSelectedPayment}
+              giftData={giftData}
+              onGiftChange={setGiftData}
+              orderError={orderError}
+              isSubmitting={isSubmitting}
             />
           </motion.div>
         )}
@@ -95,27 +207,38 @@ export function CheckoutForm({ className }: CheckoutFormProps) {
             animate={{ opacity: 1, scale: 1 }}
             className="text-center py-16"
           >
-            <div className="w-20 h-20 rounded-full bg-muted-100 flex items-center justify-center mx-auto mb-6">
-              <svg className="w-10 h-10 text-muted-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <div className="w-20 h-20 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-6">
+              <svg className="w-10 h-10 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            <h2 className="font-serif text-3xl text-text-900 mb-3">
-              Order Confirmed!
-            </h2>
+            <h2 className="font-serif text-3xl text-text-900 mb-3">Order Confirmed!</h2>
+            {orderId && (
+              <p className="text-sm text-muted-500 mb-2">Order #{orderId.slice(0, 8).toUpperCase()}</p>
+            )}
             <p className="text-muted-600 max-w-md mx-auto mb-8">
-              Thank you for your order! You&apos;ll receive a confirmation email
-              shortly. Your handcrafted treasures are being prepared.
+              Thank you for your order! You&apos;ll receive a confirmation email shortly. Your handcrafted treasures are being prepared.
             </p>
-            <a
-              href="/dashboard/orders"
-              className={cn(
-                "inline-flex items-center px-8 py-3 rounded-lg",
-                "bg-primary-600 text-white font-medium hover:bg-primary-700 transition-colors",
-              )}
-            >
-              View Order
-            </a>
+            <div className="flex items-center justify-center gap-4">
+              <a
+                href="/dashboard/orders"
+                className={cn(
+                  "inline-flex items-center px-8 py-3 rounded-lg",
+                  "bg-primary-600 text-white font-medium hover:bg-primary-700 transition-colors",
+                )}
+              >
+                View Order
+              </a>
+              <a
+                href="/products"
+                className={cn(
+                  "inline-flex items-center px-8 py-3 rounded-lg",
+                  "border border-accent-300 text-text-700 font-medium hover:bg-accent-50 transition-colors",
+                )}
+              >
+                Continue Shopping
+              </a>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

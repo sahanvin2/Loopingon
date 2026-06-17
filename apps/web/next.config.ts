@@ -5,15 +5,19 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
+        hostname: "*.b-cdn.net",
+      },
+      {
+        protocol: "https",
+        hostname: "*.backblazeb2.com",
+      },
+      {
+        protocol: "https",
         hostname: "*.digitaloceanspaces.com",
       },
       {
         protocol: "https",
-        hostname: "*.cdn.loopingon.com",
-      },
-      {
-        protocol: "https",
-        hostname: "cdn.loopingon.com",
+        hostname: "images.unsplash.com",
       },
     ],
   },

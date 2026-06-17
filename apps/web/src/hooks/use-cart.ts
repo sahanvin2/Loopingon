@@ -76,7 +76,7 @@ export function useAddToCart() {
       if (context?.previousItems) {
         useCartStore.setState({ items: context.previousItems });
       }
-      toast.error("Failed to add item to cart");
+      toast.error(err instanceof Error ? err.message : "Failed to add item to cart");
     },
     onSuccess: () => {
       if (isAuthenticated) {
@@ -114,11 +114,11 @@ export function useUpdateCartItem() {
       updateQuantity(itemId, quantity);
       return { previousItems };
     },
-    onError: (_err, _vars, context) => {
+    onError: (err, _vars, context) => {
       if (context?.previousItems) {
         useCartStore.setState({ items: context.previousItems });
       }
-      toast.error("Failed to update cart");
+      toast.error(err instanceof Error ? err.message : "Failed to update cart");
     },
     onSuccess: () => {
       if (isAuthenticated) {
@@ -146,11 +146,11 @@ export function useRemoveCartItem() {
       removeItem(itemId);
       return { previousItems };
     },
-    onError: (_err, _vars, context) => {
+    onError: (err, _vars, context) => {
       if (context?.previousItems) {
         useCartStore.setState({ items: context.previousItems });
       }
-      toast.error("Failed to remove item");
+      toast.error(err instanceof Error ? err.message : "Failed to remove item");
     },
     onSuccess: () => {
       if (isAuthenticated) {

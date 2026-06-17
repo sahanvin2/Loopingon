@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Printer } from "lucide-react";
 import { Badge } from "@/components/shared/badge";
 import { EmptyState } from "@/components/shared/empty-state";
 import { LoadingSkeleton } from "@/components/shared/loading-skeleton";
@@ -29,9 +29,17 @@ export default function AdminOrderDetailPage() {
 
   return (
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-6 max-w-4xl mx-auto">
-      <Link href="/admin/orders" className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-600 hover:text-text-700">
-        <ArrowLeft className="w-4 h-4" /> Back to Orders
-      </Link>
+      <div className="flex items-center justify-between">
+        <Link href="/admin/orders" className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-600 hover:text-text-700">
+          <ArrowLeft className="w-4 h-4" /> Back to Orders
+        </Link>
+        <Link 
+          href={`/admin/orders/${order.id}/invoice`} 
+          className="inline-flex items-center gap-2 px-3 py-1.5 bg-white border border-accent-200 rounded-lg text-sm font-medium hover:bg-surface-50 transition-colors shadow-sm"
+        >
+          <Printer className="w-4 h-4" /> Print Invoice
+        </Link>
+      </div>
 
       <div className="bg-white rounded-xl border border-accent-200 p-6">
         <div className="flex justify-between mb-6">

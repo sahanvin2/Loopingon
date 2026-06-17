@@ -1,13 +1,18 @@
 import nodemailer from "nodemailer";
 import { logger } from "../middleware/errorHandler.middleware.js";
 
+const SMTP_HOST = process.env.SMTP_HOST || "smtp-relay.brevo.com";
+const SMTP_PORT = parseInt(process.env.SMTP_PORT || "587", 10);
+const SMTP_USER = process.env.SMTP_USER || "";
+const SMTP_PASS = process.env.SMTP_PASS || "";
+
 const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST || "smtp.mailtrap.io",
-  port: parseInt(process.env.SMTP_PORT || "587", 10),
+  host: SMTP_HOST,
+  port: SMTP_PORT,
   secure: process.env.SMTP_SECURE === "true",
   auth: {
-    user: process.env.SMTP_USER || "",
-    pass: process.env.SMTP_PASS || "",
+    user: SMTP_USER,
+    pass: SMTP_PASS,
   },
 });
 
@@ -25,8 +30,13 @@ export interface SendEmailParams {
 }
 
 export async function sendEmail(params: SendEmailParams): Promise<boolean> {
+  if (!SMTP_USER || !SMTP_PASS) {
+    logger.warn("SMTP not configured — skipping email send");
+    return false;
+  }
+
   try {
-    const from = params.from || process.env.SMTP_FROM || "noreply@loopingon.com";
+    const from = params.from || process.env.SMTP_FROM || process.env.EMAIL_FROM || "no-reply@movia.club";
 
     const info = await transporter.sendMail({
       from,
@@ -50,10 +60,10 @@ export async function sendVerificationEmail(email: string, token: string): Promi
 
   return sendEmail({
     to: email,
-    subject: "Verify your email - Loopingon",
+    subject: "Verify your email - Movia",
     html: `
       <div style="max-width:600px;margin:0 auto;padding:20px;font-family:Arial,sans-serif;">
-        <h1 style="color:#333;">Welcome to Loopingon!</h1>
+        <h1 style="color:#333;">Welcome to Movia!</h1>
         <p>Please verify your email address by clicking the link below:</p>
         <a href="${verifyUrl}" style="display:inline-block;padding:12px 24px;background:#4F46E5;color:#fff;text-decoration:none;border-radius:6px;">Verify Email</a>
         <p style="margin-top:20px;color:#666;">This link expires in 24 hours.</p>
@@ -67,7 +77,7 @@ export async function sendPasswordResetEmail(email: string, token: string): Prom
 
   return sendEmail({
     to: email,
-    subject: "Reset your password - Loopingon",
+    subject: "Reset your password - Movia",
     html: `
       <div style="max-width:600px;margin:0 auto;padding:20px;font-family:Arial,sans-serif;">
         <h1 style="color:#333;">Password Reset Request</h1>

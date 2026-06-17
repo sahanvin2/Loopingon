@@ -140,9 +140,9 @@ export default function DashboardOverviewPage() {
               <Badge
                 variant={tier === "blush" || tier === "Platinum" ? "blush" : "gray"}
                 size="sm"
-                className={tierColors[loyalty?.tier || "Bronze"]}
+                className={tierColors[typeof tier === 'string' ? tier : (tier as any)?.label || "Bronze"]}
               >
-                {tier}
+                {typeof tier === 'string' ? tier : (tier as any)?.label || "Bronze"}
               </Badge>
             </div>
           }

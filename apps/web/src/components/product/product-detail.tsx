@@ -9,6 +9,7 @@ import type { Product } from "@/types";
 import { ProductImages } from "@/components/product/product-images";
 import { ProductInfo } from "@/components/product/product-info";
 import { ProductBuyBox } from "@/components/product/product-buy-box";
+import { LoyaltyProgressBar } from "@/components/loyalty/loyalty-progress-bar";
 import { ProductReviews } from "@/components/product/product-reviews";
 import { RelatedProducts } from "@/components/product/related-products";
 import { ProductBreadcrumb } from "@/components/product/product-breadcrumb";
@@ -57,6 +58,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3 }}
+      className="pb-24 lg:pb-0 relative"
     >
       <ProductBreadcrumb
         productTitle={product.title}
@@ -88,8 +90,9 @@ export function ProductDetail({ product }: ProductDetailProps) {
         </div>
 
         {/* Right Column: Info & Checkout */}
-        <div className="w-full lg:sticky lg:top-24 space-y-8">
+        <div className="w-full lg:sticky lg:top-24 space-y-6">
           <ProductInfo product={product} />
+          <LoyaltyProgressBar />
           <ProductBuyBox product={product} />
         </div>
       </div>
@@ -219,7 +222,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
               </div>
               <div>
                 <p className="text-sm font-semibold text-text-900">
-                  {product.freeShippingDomestic ? "Free SL Post Delivery" : "SL Post — Rs. 250"}
+                  {product.freeShippingDomestic ? "Free SL Post Delivery" : `SL Post — Rs. ${product.shippingPrice ? Number(product.shippingPrice).toLocaleString() : "400"}`}
                 </p>
                 <p className="text-xs text-muted-600">
                   1-3 business days island-wide. Express delivery available at checkout for Rs. 600 (next day).
@@ -337,10 +340,29 @@ export function ProductDetail({ product }: ProductDetailProps) {
         )}
 
         {/* Reviews */}
-        <ProductReviews reviews={reviews} averageRating={product.averageRating} reviewCount={product.reviewCount} />
+        <ProductReviews productId={product.id} reviews={reviews} averageRating={product.averageRating} reviewCount={product.reviewCount} />
 
         {/* Related Products */}
         <RelatedProducts productId={product.id} categoryId={primaryCategory?.id} />
+      </div>
+
+      {/* Mobile Sticky Add to Cart Bar */}
+      <div className="fixed bottom-0 left-0 right-0 z-40 bg-white/80 backdrop-blur-md border-t border-accent-200 p-4 lg:hidden shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
+        <div className="flex items-center justify-between gap-4 max-w-7xl mx-auto">
+          <div className="flex flex-col">
+            <span className="text-xs text-muted-500 line-clamp-1">{product.title}</span>
+            <span className="font-bold text-text-900">{parseFloat(product.price).toLocaleString('en-LK', { style: 'currency', currency: 'LKR', minimumFractionDigits: 0 })}</span>
+          </div>
+          <button
+            type="button"
+            className="px-6 py-3 bg-text-900 text-white text-sm uppercase tracking-widest font-bold rounded-xl whitespace-nowrap active:scale-95 transition-transform"
+            onClick={() => {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+          >
+            Buy Now
+          </button>
+        </div>
       </div>
     </motion.div>
   );

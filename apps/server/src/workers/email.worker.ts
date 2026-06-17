@@ -47,15 +47,45 @@ interface WelcomeEmailJob {
   data: { email: string; name?: string };
 }
 
+interface CartUpdateJob {
+  type: "sendCartUpdate";
+  data: {
+    email: string;
+    name?: string;
+    productName: string;
+    productImage?: string;
+    quantity: number;
+    price: number;
+    cartItemCount: number;
+    cartTotal: number;
+  };
+}
+
+interface AbandonedCartReminderJob {
+  type: "sendAbandonedCartReminder";
+  data: {
+    email: string;
+    name?: string;
+    cartItemCount: number;
+    cartTotal: number;
+    firstItemName: string;
+    firstItemImage?: string;
+    hoursAbandoned: number;
+  };
+}
+
 type EmailJobData =
   | VerificationEmailJob
   | PasswordResetEmailJob
   | OrderConfirmationJob
   | ShippingUpdateJob
-  | WelcomeEmailJob;
+  | WelcomeEmailJob
+  | CartUpdateJob
+  | AbandonedCartReminderJob;
 
 const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:3000";
-const PLATFORM_NAME = process.env.PLATFORM_NAME || "Loopingon";
+const PLATFORM_NAME = process.env.PLATFORM_NAME || "Movia";
+const EMAIL_FROM = process.env.SMTP_FROM || process.env.EMAIL_FROM || "Movia <no-reply@movia.club>";
 
 function emailTemplate(title: string, content: string): string {
   return `
@@ -88,7 +118,7 @@ function emailTemplate(title: string, content: string): string {
                 <tr>
                   <td style="color:#6c757d;font-size:12px;line-height:1.6;">
                     <p style="margin:0 0 8px 0;">This email was sent by ${PLATFORM_NAME}.</p>
-                    <p style="margin:0 0 8px 0;">Need help? Contact us at <a href="mailto:support@loopingon.com" style="color:#4F46E5;text-decoration:none;">support@loopingon.com</a></p>
+                    <p style="margin:0 0 8px 0;">Need help? Contact us at <a href="mailto:no-reply@movia.club" style="color:#4F46E5;text-decoration:none;">no-reply@movia.club</a></p>
                     <p style="margin:0;color:#adb5bd;">&copy; ${new Date().getFullYear()} ${PLATFORM_NAME}. All rights reserved.</p>
                   </td>
                   <td align="right">
@@ -343,6 +373,108 @@ function buildWelcomeHtml(name: string | undefined): string {
   );
 }
 
+function buildCartUpdateHtml(
+  name: string | undefined,
+  productName: string,
+  productImage: string | undefined,
+  quantity: number,
+  price: number,
+  cartItemCount: number,
+  cartTotal: number
+): string {
+  const greeting = name ? `Hello ${name},` : "Hello,";
+
+  return emailTemplate(
+    "Item Added to Cart",
+    `
+    <h2 style="color:#1a1a2e;font-size:22px;margin:0 0 16px 0;">Item Added to Your Cart</h2>
+    <p style="color:#495057;font-size:16px;line-height:1.7;margin:0 0 24px 0;">${greeting}</p>
+
+    <div style="background-color:#f8f9fa;border:1px solid #e9ecef;border-radius:8px;padding:20px 24px;margin:0 0 24px 0;">
+      <table width="100%" cellpadding="0" cellspacing="0">
+        ${productImage ? `<tr><td colspan="2" style="padding:0 0 16px 0;"><img src="${productImage}" alt="${productName}" style="border-radius:8px;max-width:200px;height:auto;" /></td></tr>` : ""}
+        <tr>
+          <td style="padding:6px 0;width:80px;color:#6c757d;font-size:14px;font-weight:600;">Product:</td>
+          <td style="padding:6px 0;color:#495057;font-size:14px;font-weight:600;">${productName}</td>
+        </tr>
+        <tr>
+          <td style="padding:6px 0;color:#6c757d;font-size:14px;font-weight:600;">Quantity:</td>
+          <td style="padding:6px 0;color:#495057;font-size:14px;">${quantity}</td>
+        </tr>
+        <tr>
+          <td style="padding:6px 0;color:#6c757d;font-size:14px;font-weight:600;">Price:</td>
+          <td style="padding:6px 0;color:#495057;font-size:14px;">LKR ${price.toLocaleString("en-LK", { minimumFractionDigits: 2 })}</td>
+        </tr>
+      </table>
+    </div>
+
+    <p style="color:#495057;font-size:16px;line-height:1.7;margin:0 0 8px 0;">You now have <strong>${cartItemCount} item${cartItemCount !== 1 ? "s" : ""}</strong> in your cart with a total of <strong>LKR ${cartTotal.toLocaleString("en-LK", { minimumFractionDigits: 2 })}</strong>.</p>
+
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin:24px 0;">
+      <tr>
+        <td align="center">
+          <a href="${FRONTEND_URL}/cart" style="display:inline-block;background:linear-gradient(135deg,#4F46E5,#7C3AED);color:#ffffff;text-decoration:none;padding:14px 40px;border-radius:8px;font-size:16px;font-weight:600;letter-spacing:0.3px;">View Your Cart</a>
+        </td>
+      </tr>
+    </table>
+
+    <div style="background-color:#fff3cd;border:1px solid #ffc107;border-radius:8px;padding:16px 20px;margin:0 0 8px 0;">
+      <p style="color:#856404;font-size:14px;line-height:1.6;margin:0;">Items in your cart are not reserved. Complete your purchase soon to avoid missing out!</p>
+    </div>
+    `
+  );
+}
+
+function buildAbandonedCartReminderHtml(
+  name: string | undefined,
+  cartItemCount: number,
+  cartTotal: number,
+  firstItemName: string,
+  firstItemImage: string | undefined,
+  hoursAbandoned: number
+): string {
+  const greeting = name ? `Hello ${name},` : "Hello,";
+  
+  let timeText = "recently";
+  if (hoursAbandoned === 1) timeText = "about an hour ago";
+  else if (hoursAbandoned === 12) timeText = "earlier today";
+  else if (hoursAbandoned === 24) timeText = "yesterday";
+  else if (hoursAbandoned === 72) timeText = "a few days ago";
+  else if (hoursAbandoned === 168) timeText = "a week ago";
+
+  return emailTemplate(
+    "You left something behind...",
+    `
+    <h2 style="color:#1a1a2e;font-size:22px;margin:0 0 16px 0;">Did you forget something?</h2>
+    <p style="color:#495057;font-size:16px;line-height:1.7;margin:0 0 24px 0;">${greeting}</p>
+
+    <p style="color:#495057;font-size:16px;line-height:1.7;margin:0 0 24px 0;">We noticed you left <strong>${cartItemCount} item${cartItemCount !== 1 ? "s" : ""}</strong> in your cart ${timeText}. They are still waiting for you, but they might sell out soon!</p>
+
+    <div style="background-color:#f8f9fa;border:1px solid #e9ecef;border-radius:8px;padding:20px 24px;margin:0 0 24px 0;">
+      <table width="100%" cellpadding="0" cellspacing="0">
+        ${firstItemImage ? `<tr><td colspan="2" style="padding:0 0 16px 0;"><img src="${firstItemImage}" alt="${firstItemName}" style="border-radius:8px;max-width:150px;height:auto;" /></td></tr>` : ""}
+        <tr>
+          <td style="padding:6px 0;width:100px;color:#6c757d;font-size:14px;font-weight:600;">Including:</td>
+          <td style="padding:6px 0;color:#495057;font-size:14px;font-weight:600;">${firstItemName} ${cartItemCount > 1 ? `and ${cartItemCount - 1} more` : ""}</td>
+        </tr>
+        <tr>
+          <td style="padding:6px 0;color:#6c757d;font-size:14px;font-weight:600;">Cart Total:</td>
+          <td style="padding:6px 0;color:#495057;font-size:14px;">LKR ${cartTotal.toLocaleString("en-LK", { minimumFractionDigits: 2 })}</td>
+        </tr>
+      </table>
+    </div>
+
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin:24px 0;">
+      <tr>
+        <td align="center">
+          <a href="${FRONTEND_URL}/cart" style="display:inline-block;background:linear-gradient(135deg,#4F46E5,#7C3AED);color:#ffffff;text-decoration:none;padding:14px 40px;border-radius:8px;font-size:16px;font-weight:600;letter-spacing:0.3px;">Complete Your Order</a>
+        </td>
+      </tr>
+    </table>
+    `
+  );
+}
+
 let emailQueue: Queue<EmailJobData> | null = null;
 
 export function getEmailQueue(): Queue<EmailJobData> {
@@ -432,6 +564,45 @@ const emailWorker = new Worker<EmailJobData>(
         break;
       }
 
+      case "sendCartUpdate": {
+        const html = buildCartUpdateHtml(
+          data.name,
+          data.productName,
+          data.productImage,
+          data.quantity,
+          data.price,
+          data.cartItemCount,
+          data.cartTotal
+        );
+        await sendEmail({
+          to: data.email,
+          subject: `${data.productName} added to your cart - ${PLATFORM_NAME}`,
+          html,
+        });
+        break;
+      }
+
+      case "sendAbandonedCartReminder": {
+        const html = buildAbandonedCartReminderHtml(
+          data.name,
+          data.cartItemCount,
+          data.cartTotal,
+          data.firstItemName,
+          data.firstItemImage,
+          data.hoursAbandoned
+        );
+        let subject = "Did you forget something?";
+        if (data.hoursAbandoned >= 24) subject = "Your cart is missing you!";
+        if (data.hoursAbandoned >= 168) subject = "Final reminder: Your cart items may sell out soon";
+        
+        await sendEmail({
+          to: data.email,
+          subject: `${subject} - ${PLATFORM_NAME}`,
+          html,
+        });
+        break;
+      }
+
       default:
         logger.warn(`Unknown email job type: ${(job.data as any).type}`);
     }
@@ -503,6 +674,37 @@ export async function addWelcomeEmailJob(email: string, name?: string) {
     type: "sendWelcomeEmail",
     data: { email, name },
   } as WelcomeEmailJob);
+}
+
+export async function addCartUpdateJob(
+  email: string,
+  productName: string,
+  quantity: number,
+  price: number,
+  cartItemCount: number,
+  cartTotal: number,
+  name?: string,
+  productImage?: string
+) {
+  return getEmailQueue().add("cart-update", {
+    type: "sendCartUpdate",
+    data: { email, name, productName, productImage, quantity, price, cartItemCount, cartTotal },
+  } as CartUpdateJob);
+}
+
+export async function addAbandonedCartReminderJob(
+  email: string,
+  cartItemCount: number,
+  cartTotal: number,
+  firstItemName: string,
+  hoursAbandoned: number,
+  name?: string,
+  firstItemImage?: string
+) {
+  return getEmailQueue().add("abandoned-cart-reminder", {
+    type: "sendAbandonedCartReminder",
+    data: { email, name, cartItemCount, cartTotal, firstItemName, firstItemImage, hoursAbandoned },
+  } as AbandonedCartReminderJob);
 }
 
 export { emailWorker };

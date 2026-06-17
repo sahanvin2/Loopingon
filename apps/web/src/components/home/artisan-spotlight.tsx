@@ -5,43 +5,30 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Badge } from "@/components/shared/badge";
-import { RatingStars } from "@/components/shared/rating-stars";
 import { PriceDisplay } from "@/components/shared/price-display";
-import { cn } from "@/lib/utils";
+import { useQuery } from "@tanstack/react-query";
+import { get } from "@/lib/api-client";
+import { getImageUrl } from "@/lib/utils";
 
-const artisans = [
-  {
-    name: "Sunil Perera",
-    craft: "Wood Carving & Masks",
-    location: "Ambalangoda",
-    since: 1985,
-    image: "/images/artisans/sunil.jpg",
-    excerpt: [
-      "Sunil is a third-generation mask carver from Ambalangoda, the heart of Sri Lanka's traditional mask-making heritage. He learned the craft from his grandfather at age 12, mastering the intricate techniques passed down through generations.",
-      "Each of his masks tells a story from Sri Lankan folklore — from the Kolam dance masks to the Raksha demon masks used in traditional healing rituals. Sunil's work has been exhibited in galleries across Colombo, London, and Melbourne.",
-    ],
-    products: [
-      { name: "Raksha Mask", price: 8500, originalPrice: 10000, image: "/images/products/mask1.jpg" },
-      { name: "Kolam Mask", price: 6500, image: "/images/products/mask2.jpg" },
-      { name: "Wall Panel", price: 12000, originalPrice: 15000, image: "/images/products/mask3.jpg" },
-    ],
-  },
-  {
-    name: "Nayana Wickramasinghe",
-    craft: "Batik & Dyeing",
-    location: "Kandy",
-    since: 1998,
-    image: "/images/artisans/nayana.jpg",
-    excerpt: [
-      "Nayana runs a small batik studio in the hills of Kandy, where she and her team of six women create stunning batik sarongs, wall hangings, and fashion pieces. Her designs blend traditional Sri Lankan motifs with contemporary aesthetics.",
-      "Nayana's work is particularly known for its vibrant color palette inspired by Kandy's botanical gardens and the Perahera festival. She sources all her dyes from natural ingredients — indigo, turmeric, and madder root.",
-    ],
-    products: [
-      { name: "Batik Sarong", price: 4500, image: "/images/products/batik1.jpg" },
-      { name: "Wall Hanging", price: 7800, originalPrice: 9500, image: "/images/products/batik2.jpg" },
-    ],
-  },
-];
+interface ApiVendor {
+  id: string;
+  storeName: string;
+  storeSlug: string;
+  storeDescription: string;
+  storeLogo: string | null;
+  craftType: string[];
+  workshopCity: string | null;
+  products?: ApiProduct[];
+}
+
+interface ApiProduct {
+  id: string;
+  title: string;
+  slug: string;
+  price: number;
+  compareAtPrice: number | null;
+  images: Array<{ url: string | null }>;
+}
 
 const fadeInSection = {
   hidden: { opacity: 0, y: 30 },
@@ -53,6 +40,16 @@ const fadeInSection = {
 };
 
 export function ArtisanSpotlight() {
+  const { data, isLoading } = useQuery({
+    queryKey: ["vendors", "spotlight"],
+    queryFn: () => get<{ data: ApiVendor[] }>("/vendors", { limit: 2 }),
+    staleTime: 5 * 60 * 1000,
+  });
+
+  const artisans = data?.data || [];
+
+  if (isLoading || artisans.length === 0) return null;
+
   return (
     <section className="py-16 px-4 bg-surface-50 relative overflow-hidden">
       <div
@@ -71,84 +68,49 @@ export function ArtisanSpotlight() {
         <div className="space-y-20">
           {artisans.map((artisan, index) => (
             <motion.div
-              key={artisan.name}
+              key={artisan.id}
               variants={fadeInSection}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-80px" }}
-              className={cn(
-                "grid grid-cols-1 lg:grid-cols-2 gap-10 items-center",
-                index % 2 !== 0 && "lg:direction-rtl",
-              )}
+              className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center"
             >
-              <div
-                className={cn(
-                  "relative aspect-[4/5] rounded-lg overflow-hidden",
-                  index % 2 !== 0 && "lg:order-2",
+              <div className="relative aspect-[4/5] rounded-lg overflow-hidden bg-gradient-to-br from-primary-100 to-accent-100">
+                {artisan.storeLogo ? (
+                  <Image
+                    src={getImageUrl(artisan.storeLogo)}
+                    alt={artisan.storeName}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center">
+                    <span className="text-6xl font-serif text-primary-300">{artisan.storeName[0]}</span>
+                  </div>
                 )}
-              >
-                <Image
-                  src={artisan.image}
-                  alt={artisan.name}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
               </div>
 
-              <div className={index % 2 !== 0 ? "lg:order-1" : ""}>
+              <div>
                 <Badge variant="blush" size="sm" className="mb-3">
-                  {artisan.craft}
+                  {artisan.craftType?.[0] || "Artisan"}
                 </Badge>
                 <h3 className="font-serif text-2xl text-text-900 mb-1">
-                  Meet {artisan.name}
+                  {artisan.storeName}
                 </h3>
-                <p className="text-muted-600 text-sm mb-4">
-                  {artisan.location} &middot; Crafting since {artisan.since}
+                {artisan.workshopCity && (
+                  <p className="text-muted-600 text-sm mb-4">
+                    {artisan.workshopCity} &middot; Sri Lanka
+                  </p>
+                )}
+
+                <p className="text-muted-600 mb-8 line-clamp-4">
+                  {artisan.storeDescription || `Discover authentic handcrafted products from ${artisan.storeName}. Each piece is made with traditional techniques passed down through generations.`}
                 </p>
 
-                <div className="space-y-3 text-muted-600 mb-8">
-                  {artisan.excerpt.map((para, i) => (
-                    <p key={i}>{para}</p>
-                  ))}
-                </div>
-
-                <div className="grid grid-cols-3 gap-3 mb-8">
-                  {artisan.products.map((product) => (
-                    <div
-                      key={product.name}
-                      className="bg-white rounded-lg border border-accent-200 overflow-hidden shadow-sm"
-                    >
-                      <div className="relative aspect-square">
-                        <Image
-                          src={product.image}
-                          alt={product.name}
-                          fill
-                          className="object-cover"
-                          sizes="33vw"
-                        />
-                      </div>
-                      <div className="p-2">
-                        <p className="text-xs text-text-700 font-medium truncate">
-                          {product.name}
-                        </p>
-                        <PriceDisplay
-                          price={product.price}
-                          originalPrice={product.originalPrice}
-                          size="sm"
-                        />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
                 <Link
-                  href={`/artisans/${artisan.name.toLowerCase().replace(/\s+/g, "-")}`}
-                  className={cn(
-                    "inline-flex items-center px-6 py-2.5 rounded-lg",
-                    "bg-primary-600 text-white text-sm font-medium",
-                    "hover:bg-primary-700 transition-colors",
-                  )}
+                  href={`/makers/${artisan.storeSlug}`}
+                  className="inline-flex items-center px-6 py-2.5 rounded-lg bg-primary-600 text-white text-sm font-medium hover:bg-primary-700 transition-colors"
                 >
                   Visit Store
                 </Link>

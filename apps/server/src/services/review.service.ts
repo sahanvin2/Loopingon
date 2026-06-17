@@ -1,26 +1,40 @@
 import { prisma } from "../config/database.js";
 import { AppError } from "../middleware/errorHandler.middleware.js";
 
+import { randomUUID } from "crypto";
+
 export async function createReview(
   userId: string,
   productId: string,
-  orderId: string,
-  rating: number,
+  orderId?: string,
+  rating: number = 5,
   title?: string,
   content?: string,
   images?: string[]
 ) {
-  const order = await prisma.order.findFirst({
-    where: { id: orderId, customerId: userId },
-  });
+  let isVerified = false;
+  let finalOrderId = orderId;
 
-  if (!order) throw new AppError("Order not found", 404, "ORDER_NOT_FOUND");
-  if (order.status !== "DELIVERED" && order.status !== "COMPLETED") {
-    throw new AppError("Can only review delivered orders", 400, "ORDER_NOT_DELIVERED");
+  if (orderId) {
+    const order = await prisma.order.findFirst({
+      where: { id: orderId, customerId: userId },
+    });
+
+    if (!order) throw new AppError("Order not found", 404, "ORDER_NOT_FOUND");
+    if (order.status !== "DELIVERED" && order.status !== "COMPLETED") {
+      throw new AppError("Can only review delivered orders", 400, "ORDER_NOT_DELIVERED");
+    }
+
+    const existingReview = await prisma.review.findFirst({ where: { orderId } });
+    if (existingReview) throw new AppError("Already reviewed this order", 409, "ALREADY_REVIEWED");
+    
+    isVerified = true;
+  } else {
+    // Check if the user has ALREADY reviewed this product to prevent spam
+    const existingUnverified = await prisma.review.findFirst({ where: { productId, customerId: userId } });
+    if (existingUnverified) throw new AppError("You have already reviewed this product.", 409, "ALREADY_REVIEWED");
+    finalOrderId = `unverified-${randomUUID()}`;
   }
-
-  const existingReview = await prisma.review.findUnique({ where: { orderId } });
-  if (existingReview) throw new AppError("Already reviewed this order", 409, "ALREADY_REVIEWED");
 
   const product = await prisma.product.findUnique({ where: { id: productId } });
   if (!product) throw new AppError("Product not found", 404, "PRODUCT_NOT_FOUND");
@@ -28,14 +42,14 @@ export async function createReview(
   const review = await prisma.review.create({
     data: {
       productId,
-      orderId,
+      orderId: finalOrderId as string,
       customerId: userId,
       vendorId: product.vendorId,
       rating,
       title: title || null,
       content: content || null,
       images: images || [],
-      isVerified: true,
+      isVerified,
     },
   });
 

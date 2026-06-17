@@ -18,7 +18,7 @@ export function useCurrentUser() {
   return useQuery({
     queryKey: ["auth", "me"],
     queryFn: async () => {
-      const response = await get<ApiResponse<User>>("/auth/me");
+      const response = await get<ApiResponse<User>>("/users/profile");
       setUser(response.data);
       return response.data;
     },
@@ -72,7 +72,9 @@ export function useLogout() {
 
   return useMutation({
     mutationFn: async () => {
-      return post<ApiResponse<null>>("/auth/logout");
+      return post<ApiResponse<null>>("/auth/signout", {
+        refreshToken: typeof window !== "undefined" ? localStorage.getItem("refreshToken") : "",
+      });
     },
     onSuccess: () => {
       logout();
@@ -102,7 +104,7 @@ export function useRefreshToken() {
         ? localStorage.getItem("refreshToken")
         : null;
       if (!refreshToken) throw new Error("No refresh token");
-      const response = await post<ApiResponse<AuthResponse>>("/auth/refresh", {
+      const response = await post<ApiResponse<AuthResponse>>("/auth/refresh-token", {
         refreshToken,
       });
       return response.data;

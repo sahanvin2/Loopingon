@@ -71,13 +71,18 @@ export default function GiftPage() {
   const [giftWrap, setGiftWrap] = useState(false);
   const [fromName, setFromName] = useState("");
 
-  const shippingCost = useMemo(() => {
-    if (items.length === 0) return 0;
-    return subtotal >= 5000 ? 0 : 250;
-  }, [subtotal, items.length]);
+  const getShippingCost = useMemo(() => {
+    return items.reduce((acc, item) => {
+      const p = item.product;
+      if (!p) return acc;
+      if (p.freeShippingDomestic) return acc;
+      const cost = p.shippingPrice ? Number(p.shippingPrice) : 400;
+      return acc + (cost * item.quantity);
+    }, 0);
+  }, [items]);
 
   const giftWrapCost = giftWrap ? items.length * 150 : 0;
-  const total = subtotal + shippingCost + giftWrapCost;
+  const total = subtotal + getShippingCost + giftWrapCost;
 
   const isRecipientValid = recipient.name.trim().length >= 2 && recipient.phone.trim().length >= 9;
   const isAddressValid =
@@ -600,8 +605,8 @@ export default function GiftPage() {
                   </div>
                   <div className="flex justify-between">
                     <span className="text-text-500">Shipping</span>
-                    <span className={cn("font-medium", shippingCost === 0 && "text-primary-600")}>
-                      {shippingCost === 0 ? "FREE" : formatPrice(shippingCost)}
+                    <span className={cn("font-medium", getShippingCost === 0 && "text-primary-600")}>
+                      {getShippingCost === 0 ? "FREE" : formatPrice(getShippingCost)}
                     </span>
                   </div>
                   {giftWrap && (
@@ -616,7 +621,7 @@ export default function GiftPage() {
                   </div>
                 </div>
 
-                {shippingCost === 0 && (
+                {getShippingCost === 0 && (
                   <div className="bg-primary-50 border border-primary-200 rounded-xl p-3 text-xs text-primary-700 mb-4 flex items-center gap-2">
                     <Check className="w-4 h-4 shrink-0" />
                     Free SL Post delivery on orders over Rs. 5,000

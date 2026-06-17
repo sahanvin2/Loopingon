@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import Image from "next/image";
-import { Loader2, CheckCircle2, AlertCircle } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { post } from "@/lib/api-client";
 
 export function BottomCtaSection() {
   const [email, setEmail] = useState("");
@@ -14,7 +14,7 @@ export function BottomCtaSection() {
     if (!email.trim()) return;
     setStatus("loading");
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      await post("/newsletter/subscribe", { email });
       setStatus("success");
       setEmail("");
     } catch {
@@ -28,6 +28,9 @@ export function BottomCtaSection() {
         
         {/* Newsletter Box */}
         <div className="bg-surface-100 rounded-[2rem] p-8 md:p-12 border border-surface-300 relative overflow-hidden flex flex-col justify-center min-h-[300px]">
+          <div className="absolute right-0 bottom-0 w-1/2 h-full opacity-10 pointer-events-none">
+            <div className="w-full h-full rounded-full bg-primary-300 blur-3xl absolute -bottom-20 -right-20" />
+          </div>
           <div className="relative z-10 max-w-md">
             <h3 className="font-serif text-3xl text-navy-900 mb-2">Stay in the loop</h3>
             <p className="text-sm text-text-600 mb-6">
@@ -55,10 +58,7 @@ export function BottomCtaSection() {
               </button>
             </form>
             {status === "success" && <p className="mt-2 text-sm text-green-600">Thanks for subscribing!</p>}
-          </div>
-          
-          <div className="absolute right-0 bottom-0 w-1/2 h-full opacity-60 pointer-events-none">
-             <Image src="/images/categories/pottery.jpg" alt="Decoration" fill className="object-cover object-left mask-image-gradient" />
+            {status === "error" && <p className="mt-2 text-sm text-red-500">Something went wrong. Please try again.</p>}
           </div>
         </div>
 
@@ -71,7 +71,6 @@ export function BottomCtaSection() {
             </p>
             <div className="flex items-center gap-3">
               <button className="bg-navy-900 text-white rounded-lg px-3 py-2 flex items-center gap-2 hover:bg-navy-800 transition-colors">
-                {/* SVG Apple Icon */}
                 <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm3.89 13.91c-.34 1.05-1.4 3.02-3.1 3.02-1.63 0-2.12-.99-3.95-.99-1.8 0-2.39.96-3.92.96-1.74 0-3.04-2.22-3.52-3.66-1.2-3.62-.21-7.23 2.1-8.58 1.09-.64 2.29-.68 3.01-.68 1.55 0 2.45.89 3.51.89 1.13 0 2.29-1 3.86-1 .4 0 2.28.16 3.32 1.66-2.82 1.48-2.33 5.48.69 6.38zM14.6 7.23c-.76.92-1.86 1.44-2.89 1.34-.17-1.12.35-2.26 1.04-3.07.72-.85 1.88-1.46 2.89-1.34.19 1.12-.34 2.19-1.04 3.07z"/>
                 </svg>
@@ -81,7 +80,6 @@ export function BottomCtaSection() {
                 </div>
               </button>
               <button className="bg-navy-900 text-white rounded-lg px-3 py-2 flex items-center gap-2 hover:bg-navy-800 transition-colors">
-                {/* SVG Play Icon */}
                 <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
                    <path d="M3 2v20l18-10L3 2zm2 3.83L15.22 12 5 18.17V5.83z"/>
                 </svg>
@@ -93,13 +91,16 @@ export function BottomCtaSection() {
             </div>
           </div>
           
-          {/* Phone mockups decorative */}
           <div className="absolute right-0 bottom-0 w-1/2 h-[90%] pointer-events-none hidden sm:block">
             <div className="absolute bottom-0 right-10 w-40 h-64 bg-white rounded-t-3xl border-8 border-navy-900 shadow-xl overflow-hidden transform rotate-6 z-10">
-               <Image src="/images/categories/handloom.jpg" alt="App screen" fill className="object-cover" />
+               <div className="w-full h-full bg-gradient-to-br from-surface-200 to-surface-100 flex items-center justify-center">
+                 <span className="text-2xl">🛍️</span>
+               </div>
             </div>
             <div className="absolute bottom-0 right-28 w-40 h-56 bg-surface-100 rounded-t-3xl border-8 border-navy-900 shadow-xl overflow-hidden transform -rotate-6">
-               <Image src="/images/categories/jewelry.jpg" alt="App screen" fill className="object-cover" />
+               <div className="w-full h-full bg-gradient-to-br from-primary-100 to-primary-50 flex items-center justify-center">
+                 <span className="text-2xl">✨</span>
+               </div>
             </div>
           </div>
         </div>

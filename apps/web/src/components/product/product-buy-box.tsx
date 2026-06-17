@@ -61,16 +61,15 @@ export function ProductBuyBox({ product }: ProductBuyBoxProps) {
       productId: product.id,
       variantId: selectedVariant?.id ?? undefined,
       quantity,
+    }, {
+      onSuccess: () => {
+        router.push("/checkout");
+      }
     });
   };
 
   const handleSendAsGift = () => {
-    addToCart.mutate({
-      productId: product.id,
-      variantId: selectedVariant?.id ?? undefined,
-      quantity,
-    });
-    router.push(`/gift?product=${product.id}&price=${price}&title=${encodeURIComponent(product.title)}`);
+    router.push(`/gift?product=${product.id}&variant=${selectedVariant?.id || ""}&qty=${quantity}&price=${price}&title=${encodeURIComponent(product.title)}`);
   };
 
   return (
@@ -214,19 +213,20 @@ export function ProductBuyBox({ product }: ProductBuyBoxProps) {
           type="button"
           onClick={handleAddToCart}
           disabled={addToCart.isPending || product.quantity === 0}
-          className={cn("w-full py-4 bg-text-900 text-white text-sm tracking-[0.1em] uppercase font-medium",
-            "transition-all duration-300 hover:bg-primary-700",
-            "disabled:opacity-50 disabled:cursor-not-allowed")}
+          className={cn("relative w-full py-4 overflow-hidden rounded-xl bg-text-900 text-white text-sm tracking-[0.1em] uppercase font-semibold",
+            "transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.2)] hover:-translate-y-0.5",
+            "disabled:opacity-50 disabled:cursor-not-allowed group")}
         >
-          {addToCart.isPending ? "Adding..." : product.quantity === 0 ? "Out of Stock" : "Add to Bag"}
+          <div className="absolute inset-0 bg-white/20 translate-y-[100%] group-hover:translate-y-[0%] transition-transform duration-300 ease-out" />
+          <span className="relative z-10">{addToCart.isPending ? "Adding..." : product.quantity === 0 ? "Out of Stock" : "Add to Bag"}</span>
         </button>
 
         <button
           type="button"
           onClick={handleBuyNow}
           disabled={product.quantity === 0}
-          className={cn("w-full py-4 border border-text-900 text-text-900 text-sm tracking-[0.1em] uppercase font-medium",
-            "transition-all duration-300 hover:bg-accent-50",
+          className={cn("w-full py-4 rounded-xl border border-text-900 text-text-900 text-sm tracking-[0.1em] uppercase font-semibold",
+            "transition-all duration-300 hover:bg-text-900 hover:text-white hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:-translate-y-0.5",
             "disabled:opacity-50 disabled:cursor-not-allowed")}
         >
           Buy Now
@@ -236,8 +236,8 @@ export function ProductBuyBox({ product }: ProductBuyBoxProps) {
           type="button"
           onClick={handleSendAsGift}
           disabled={product.quantity === 0}
-          className={cn("w-full py-4 bg-gradient-to-r from-rose-500 to-accent-500 text-white text-sm tracking-[0.1em] uppercase font-medium",
-            "transition-all duration-300 hover:from-rose-600 hover:to-accent-600 shadow-soft-md hover:shadow-soft-lg flex items-center justify-center gap-2",
+          className={cn("w-full py-4 rounded-xl bg-gradient-to-r from-rose-500 via-purple-500 to-indigo-500 text-white text-sm tracking-[0.1em] uppercase font-semibold",
+            "transition-all duration-500 hover:from-rose-600 hover:via-purple-600 hover:to-indigo-600 shadow-soft-md hover:shadow-[0_8px_30px_rgba(168,85,247,0.4)] hover:-translate-y-0.5 flex items-center justify-center gap-2",
             "disabled:opacity-50 disabled:cursor-not-allowed")}
         >
           <Gift className="w-4 h-4" />
@@ -266,8 +266,8 @@ export function ProductBuyBox({ product }: ProductBuyBoxProps) {
         <div className="flex items-start gap-3 text-sm text-text-600">
           <Truck className="w-4 h-4 text-text-400 shrink-0 mt-0.5" />
           <div>
-            <p className="font-medium text-text-900 text-xs">
-              {product.freeShippingDomestic ? "Free SL Post Delivery" : "SL Post — Rs. 250"}
+            <p className="text-sm text-text-700">
+              {product.freeShippingDomestic ? "Free SL Post Delivery" : `SL Post — Rs. ${product.shippingPrice ? Number(product.shippingPrice).toLocaleString() : "400"}`}
             </p>
             <p className="text-xs text-muted-500">1-3 business days • Express available at checkout</p>
           </div>

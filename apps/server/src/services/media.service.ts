@@ -3,17 +3,23 @@ import sharp from "sharp";
 import { v4 as uuidv4 } from "uuid";
 import { AppError } from "../middleware/errorHandler.middleware.js";
 
+const STORAGE_ENDPOINT = process.env.STORAGE_ENDPOINT || "https://s3.us-east-005.backblazeb2.com";
+const STORAGE_REGION = process.env.STORAGE_REGION || "us-east-005";
+const STORAGE_ACCESS_KEY = process.env.STORAGE_ACCESS_KEY || "";
+const STORAGE_SECRET_KEY = process.env.STORAGE_SECRET_KEY || "";
+
 const s3Client = new S3Client({
-  endpoint: process.env.SPACES_ENDPOINT || "https://sfo3.digitaloceanspaces.com",
-  region: process.env.SPACES_REGION || "us-east-1",
+  endpoint: STORAGE_ENDPOINT,
+  region: STORAGE_REGION,
   credentials: {
-    accessKeyId: process.env.SPACES_ACCESS_KEY || "",
-    secretAccessKey: process.env.SPACES_SECRET_KEY || "",
+    accessKeyId: STORAGE_ACCESS_KEY,
+    secretAccessKey: STORAGE_SECRET_KEY,
   },
+  forcePathStyle: true,
 });
 
-const BUCKET = process.env.SPACES_BUCKET || "loopingon";
-const CDN_URL = process.env.CDN_URL || `https://${BUCKET}.sfo3.digitaloceanspaces.com`;
+const BUCKET = process.env.STORAGE_BUCKET || "movia-prod";
+const CDN_URL = process.env.STORAGE_CDN_URL || process.env.CDN_URL || `https://f005.backblazeb2.com/file/${BUCKET}`;
 
 export async function uploadSingle(
   file: Express.Multer.File,
@@ -37,7 +43,7 @@ export async function uploadSingle(
     if (size.width || size.height) {
       buffer = await sharp(file.buffer)
         .resize(size.width, size.height, { fit: "cover", withoutEnlargement: true })
-        .webp({ quality: 80 })
+        .webp({ quality: 70 })
         .toBuffer();
     }
 
@@ -50,7 +56,7 @@ export async function uploadSingle(
           Key: key,
           Body: buffer,
           ContentType: "image/webp",
-          ACL: "public-read",
+          CacheControl: "public, max-age=31536000, immutable",
         })
       );
     } catch (error) {
@@ -91,6 +97,6 @@ export async function deleteMedia(key: string) {
 export async function optimizeImage(file: Express.Multer.File): Promise<Buffer> {
   return sharp(file.buffer)
     .resize(1200, null, { fit: "inside", withoutEnlargement: true })
-    .webp({ quality: 80 })
+    .webp({ quality: 70 })
     .toBuffer();
 }

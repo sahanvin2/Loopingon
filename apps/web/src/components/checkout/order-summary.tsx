@@ -8,8 +8,15 @@ import { formatPrice } from "@/lib/utils";
 export function OrderSummary() {
   const { items, subtotal } = useCartStore();
 
-  const shipping = subtotal >= 5000 ? 0 : 250;
-  const expressShipping = 600;
+  const shipping = items.reduce((acc, item) => {
+    const p = item.product;
+    if (!p) return acc;
+    if (p.freeShippingDomestic) return acc;
+    const cost = p.shippingPrice ? Number(p.shippingPrice) : 400; // default to 400 if not specified as user requested
+    return acc + (cost * item.quantity);
+  }, 0);
+
+  const expressShipping = shipping + 300; // Just an example if they choose express
   const total = subtotal + shipping;
 
   return (

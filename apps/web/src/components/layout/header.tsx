@@ -29,29 +29,23 @@ import { useLogout } from "@/hooks/use-auth";
 import { SearchBar } from "@/components/search/search-bar";
 
 const PRODUCT_CATEGORIES = [
-  {
-    label: "Home Decor",
-    href: "/products?category=home-decor",
-    subcategories: [
-      { label: "Wall Art", href: "/products?category=home-decor&subcategory=wall-art" },
-      { label: "Vases & Pots", href: "/products?category=home-decor&subcategory=vases" },
-      { label: "Rugs", href: "/products?category=home-decor&subcategory=rugs" },
-    ]
-  },
-  {
-    label: "Jewelry",
-    href: "/products?category=jewelry",
-    subcategories: [
-      { label: "Necklaces", href: "/products?category=jewelry&subcategory=necklaces" },
-      { label: "Earrings", href: "/products?category=jewelry&subcategory=earrings" },
-      { label: "Bracelets", href: "/products?category=jewelry&subcategory=bracelets" },
-    ]
-  },
-  { label: "Bags & Accessories", href: "/products?category=bags" },
-  { label: "Candles", href: "/products?category=candles" },
-  { label: "Wood Crafts", href: "/products?category=wood" },
-  { label: "Pottery & Ceramics", href: "/products?category=pottery" },
-  { label: "Handloom Apparel", href: "/products?category=handloom" },
+  { label: "Accessories", href: "/categories/accessories" },
+  { label: "Art & Collectibles", href: "/categories/art-collectibles" },
+  { label: "Bags & Purses", href: "/categories/bags-purses" },
+  { label: "Bath & Beauty", href: "/categories/bath-beauty" },
+  { label: "Books, Movies & Music", href: "/categories/books-movies-music" },
+  { label: "Clothing", href: "/categories/clothing" },
+  { label: "Craft Supplies & Tools", href: "/categories/craft-supplies-tools" },
+  { label: "Electronics & Accessories", href: "/categories/electronics-accessories" },
+  { label: "Gifts", href: "/categories/gifts" },
+  { label: "Home & Living", href: "/categories/home-living" },
+  { label: "Jewelry", href: "/categories/jewelry" },
+  { label: "Kids & Baby", href: "/categories/kids-baby" },
+  { label: "Paper & Party Supplies", href: "/categories/paper-party-supplies" },
+  { label: "Pet Supplies", href: "/categories/pet-supplies" },
+  { label: "Shoes", href: "/categories/shoes" },
+  { label: "Toys & Games", href: "/categories/toys-games" },
+  { label: "Weddings", href: "/categories/weddings" },
 ];
 
 export function Header() {
@@ -106,7 +100,7 @@ export function Header() {
         {/* Logo */}
         <Link
           href="/"
-          className="flex items-center gap-2 shrink-0 group"
+          className="flex items-center gap-2 group focus:outline-none"
           aria-label="Kandyam home"
         >
           <span className="grid h-8 w-8 place-items-center text-primary-500 group-hover:scale-105 transition-transform">
@@ -116,7 +110,7 @@ export function Header() {
              </svg>
           </span>
           <span className="font-serif text-2xl tracking-tight text-navy-900 hidden sm:block font-bold">
-            kandyam
+             Kandyam
           </span>
         </Link>
 
@@ -161,32 +155,17 @@ export function Header() {
                           initial={{ opacity: 0, y: 10 }}
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: 10 }}
-                          className="absolute top-full left-0 mt-4 w-64 bg-white rounded-2xl shadow-soft-xl border border-surface-200 overflow-hidden py-2 max-h-[70vh] overflow-y-auto scrollbar-thin"
+                          className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-[800px] bg-white rounded-2xl shadow-soft-xl border border-surface-200 overflow-hidden p-6 max-h-[70vh] overflow-y-auto scrollbar-thin grid grid-cols-3 gap-y-2 gap-x-6"
                         >
                           {PRODUCT_CATEGORIES.map((cat) => (
-                            <div key={cat.label}>
-                              <Link 
-                                href={cat.href}
-                                onClick={() => setCategoriesOpen(false)}
-                                className="block px-4 py-2.5 text-sm font-medium text-text-700 hover:bg-surface-50 hover:text-primary-600 transition-colors"
-                              >
-                                {cat.label}
-                              </Link>
-                              {cat.subcategories && (
-                                <div className="pb-1 bg-surface-50/50">
-                                  {cat.subcategories.map(sub => (
-                                    <Link
-                                      key={sub.label}
-                                      href={sub.href}
-                                      onClick={() => setCategoriesOpen(false)}
-                                      className="block px-8 py-1.5 text-xs text-text-500 hover:text-primary-600 transition-colors relative before:content-[''] before:absolute before:left-4 before:top-1/2 before:w-2 before:h-px before:bg-accent-300"
-                                    >
-                                      {sub.label}
-                                    </Link>
-                                  ))}
-                                </div>
-                              )}
-                            </div>
+                            <Link 
+                              key={cat.label}
+                              href={cat.href}
+                              onClick={() => setCategoriesOpen(false)}
+                              className="block px-4 py-2 text-sm font-medium text-text-700 hover:bg-surface-50 hover:text-primary-600 rounded-lg transition-colors"
+                            >
+                              {cat.label}
+                            </Link>
                           ))}
                         </motion.div>
                       )}

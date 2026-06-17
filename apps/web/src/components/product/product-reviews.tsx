@@ -13,11 +13,13 @@ import { cn, formatDate, formatRelativeTime } from "@/lib/utils";
 import type { Review } from "@/types";
 import { RatingStars } from "@/components/shared/rating-stars";
 import { EmptyState } from "@/components/shared/empty-state";
+import { ProductReviewForm } from "@/components/product/product-review-form";
 
 interface ProductReviewsProps {
   reviews: Review[];
   averageRating: number;
   reviewCount: number;
+  productId?: string;
 }
 
 function ratingBreakdown(reviews: Review[]) {
@@ -67,7 +69,7 @@ function ReviewCard({ review }: { review: Review }) {
         </p>
       )}
 
-      {review.images.length > 0 && (
+      {review.images && review.images.length > 0 && (
         <div className="flex gap-2 mt-3">
           {review.images.map((img, i) => (
             <div
@@ -90,7 +92,7 @@ function ReviewCard({ review }: { review: Review }) {
           className="inline-flex items-center gap-1.5 text-xs text-muted-500 hover:text-text-700 transition-colors"
         >
           <ThumbsUp className="w-3.5 h-3.5" />
-          Helpful ({review.helpfulCount})
+          Helpful ({review.helpfulCount || 0})
         </button>
         <button
           type="button"
@@ -120,6 +122,7 @@ export function ProductReviews({
   reviews,
   averageRating,
   reviewCount,
+  productId,
 }: ProductReviewsProps) {
   const [sortBy, setSortBy] = useState("recent");
 
@@ -136,6 +139,8 @@ export function ProductReviews({
       <h2 className="font-serif text-2xl text-text-900 mb-8">
         Customer Reviews
       </h2>
+      
+      {productId && <ProductReviewForm productId={productId} />}
 
       {reviews.length === 0 ? (
         <EmptyState

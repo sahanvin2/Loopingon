@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { WifiOff, ArrowRight } from "lucide-react";
+import { TryAgainButton } from "./try-again-button";
 
 export const metadata: Metadata = {
   title: "You're Offline",
@@ -21,13 +22,7 @@ export default function OfflinePage() {
           saved, and you can browse previously viewed items offline.
         </p>
         <div className="space-y-3">
-          <button
-            type="button"
-            onClick={() => window.location.reload()}
-            className="inline-flex items-center gap-2 px-6 py-3 bg-primary-600 text-white rounded-xl font-semibold hover:bg-primary-700 transition-colors shadow-md"
-          >
-            Try Again
-          </button>
+          <TryAgainButton />
           <p className="text-xs text-muted-500">
             or{" "}
             <Link href="/" className="text-primary-600 underline">

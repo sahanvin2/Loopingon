@@ -4,13 +4,26 @@ import { prisma } from "../config/database.js";
 import { AppError } from "../middleware/errorHandler.middleware.js";
 import { getPaginationParams, buildPaginationResult } from "../utils/pagination.js";
 import { generateOrderNumber } from "../utils/slug.js";
+import { addOrderConfirmationJob } from "../workers/email.worker.js";
+import { logger } from "../middleware/errorHandler.middleware.js";
 
 export async function createOrder(
   userId: string,
   data: {
-    vendorId: string;
+    vendorId?: string;
     items: Array<{ productId: string; variantId?: string; quantity: number }>;
-    shippingAddressId: string;
+    shippingAddressId?: string;
+    shippingAddress?: {
+      fullName: string;
+      phone: string;
+      addressLine1: string;
+      addressLine2?: string;
+      city: string;
+      state?: string;
+      district?: string;
+      postalCode: string;
+      country: string;
+    };
     shippingMethod?: string;
     couponCode?: string;
     customerNotes?: string;
@@ -20,15 +33,47 @@ export async function createOrder(
     giftWrap?: boolean;
   }
 ) {
-  const [user, shippingAddress] = await Promise.all([
+  const [user] = await Promise.all([
     prisma.user.findUnique({ where: { id: userId, deletedAt: null } }),
-    prisma.address.findFirst({ where: { id: data.shippingAddressId, userId, deletedAt: null } }),
   ]);
 
   if (!user) throw new AppError("User not found", 404, "USER_NOT_FOUND");
+
+  // Resolve shipping address - either use existing or create new
+  let shippingAddressId = data.shippingAddressId;
+  if (!shippingAddressId && data.shippingAddress) {
+    const addr = data.shippingAddress;
+    const newAddress = await prisma.address.create({
+      data: {
+        userId,
+        fullName: addr.fullName,
+        phone: addr.phone,
+        addressLine1: addr.addressLine1,
+        addressLine2: addr.addressLine2 || "",
+        city: addr.city,
+        district: addr.district || addr.state || addr.city,
+        postalCode: addr.postalCode,
+        country: addr.country || "Sri Lanka",
+        isDefault: false,
+      },
+    });
+    shippingAddressId = newAddress.id;
+  }
+
+  if (!shippingAddressId) throw new AppError("Shipping address is required", 400, "ADDRESS_REQUIRED");
+
+  const shippingAddress = await prisma.address.findFirst({ where: { id: shippingAddressId, userId } });
   if (!shippingAddress) throw new AppError("Shipping address not found", 404, "ADDRESS_NOT_FOUND");
 
-  const vendor = await prisma.vendor.findUnique({ where: { id: data.vendorId } });
+  // Resolve vendor - from first item's product
+  const firstItem = data.items[0];
+  const firstProduct = await prisma.product.findUnique({ where: { id: firstItem.productId } });
+  if (!firstProduct) throw new AppError("Product not found", 404, "PRODUCT_NOT_FOUND");
+  const vendorId = data.vendorId || firstProduct.vendorId;
+
+  if (!vendorId) throw new AppError("Vendor not found for this product", 400, "VENDOR_NOT_FOUND");
+
+  const vendor = await prisma.vendor.findUnique({ where: { id: vendorId } });
   if (!vendor || vendor.status !== "VERIFIED") throw new AppError("Vendor not available", 400, "VENDOR_UNAVAILABLE");
 
   const orderItems: Array<{
@@ -43,6 +88,7 @@ export async function createOrder(
   }> = [];
 
   let subtotal = 0;
+  let calculatedShippingCost = 0;
 
   for (const item of data.items) {
     const product = await prisma.product.findUnique({
@@ -70,6 +116,11 @@ export async function createOrder(
     const totalPrice = price * item.quantity;
     subtotal += totalPrice;
 
+    // Add shipping cost for this product (multiplied by quantity or just once? Usually once per item unit, or base + per unit. Let's do per unit for now or just flat per product. The user said 250-600 mostly 400. Let's do flat per product * quantity to be safe, or just item.quantity * (product.shippingPrice || 400))
+    // The user said "it can 250 to 600 rs based on the company... mostly 400 rs"
+    const productShipping = product.freeShippingDomestic ? 0 : (product.shippingPrice ? Number(product.shippingPrice) : 400);
+    calculatedShippingCost += productShipping * item.quantity;
+
     orderItems.push({
       productId: product.id,
       variantId: item.variantId || null,
@@ -78,7 +129,7 @@ export async function createOrder(
       price,
       quantity: item.quantity,
       totalPrice,
-      vendorId: data.vendorId,
+      vendorId: vendorId,
     });
   }
 
@@ -113,7 +164,7 @@ export async function createOrder(
     }
   }
 
-  const shippingCost = data.shippingMethod === "FREE" ? 0 : 0;
+  const shippingCost = data.shippingMethod === "FREE" ? 0 : calculatedShippingCost;
   const taxAmount = Math.round(subtotal * 0.08 * 100) / 100;
   const totalAmount = subtotal + shippingCost + taxAmount - discountAmount;
 
@@ -125,7 +176,7 @@ export async function createOrder(
     data: {
       orderNumber: generateOrderNumber(),
       customerId: userId,
-      vendorId: data.vendorId,
+      vendorId: vendorId,
       status: "PENDING_PAYMENT",
       subtotal,
       shippingCost,
@@ -137,7 +188,7 @@ export async function createOrder(
       commissionAmount,
       vendorPayoutAmount,
       shippingMethod: (data.shippingMethod as any) || "STANDARD",
-      shippingAddressId: data.shippingAddressId,
+      shippingAddressId: shippingAddressId,
       customerNotes: data.customerNotes,
       giftMessage: data.giftMessage,
       isGift: data.isGift || false,
@@ -189,7 +240,7 @@ export async function createOrder(
   }
 
   await prisma.vendor.update({
-    where: { id: data.vendorId },
+    where: { id: vendorId },
     data: {
       totalOrders: { increment: 1 },
       pendingPayoutAmount: { increment: vendorPayoutAmount },
@@ -212,12 +263,12 @@ export async function createOrder(
   await prisma.vendorAnalytics.upsert({
     where: {
       vendorId_date: {
-        vendorId: data.vendorId,
+        vendorId: vendorId,
         date: today,
       },
     },
     create: {
-      vendorId: data.vendorId,
+      vendorId: vendorId,
       date: today,
       revenue: totalAmount,
       commission: commissionAmount,
@@ -235,7 +286,7 @@ export async function createOrder(
   // Send notification to vendor
   await prisma.notification.create({
     data: {
-      userId: data.vendorId,
+      userId: vendor.userId,
       type: "NEW_MESSAGE",
       channel: "IN_APP",
       title: "New Order Received! 🎉",
@@ -243,6 +294,25 @@ export async function createOrder(
       data: { orderId: order.id, orderNumber: order.orderNumber, amount: totalAmount },
     },
   });
+
+  // Send order confirmation email
+  try {
+    await addOrderConfirmationJob(
+      user.email,
+      order.orderNumber,
+      orderItems.map((item) => ({
+        name: item.productTitle,
+        quantity: item.quantity,
+        price: item.price,
+      })),
+      totalAmount,
+      user.fullName,
+      `${shippingAddress.addressLine1}${shippingAddress.addressLine2 ? ", " + shippingAddress.addressLine2 : ""}, ${shippingAddress.city}, ${shippingAddress.district}`,
+      "3-5 business days"
+    );
+  } catch (err) {
+    logger.warn("Failed to queue order confirmation email", err);
+  }
 
   return order;
 }

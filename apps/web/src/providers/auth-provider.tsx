@@ -4,6 +4,7 @@ import { createContext, useContext, useEffect } from "react";
 import { useAuthStore } from "@/stores/auth-store";
 import { useCurrentUser } from "@/hooks/use-auth";
 import type { User } from "@/types";
+import { useUIStore } from "@/stores/ui-store";
 
 interface AuthContextValue {
   user: User | null;
@@ -38,6 +39,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       useAuthStore.getState().setLoading(false);
     }
   }, [isAuthenticated]);
+
+  useEffect(() => {
+    const handleUnauthorized = () => {
+      useAuthStore.getState().logout();
+      useUIStore.getState().openModal("signin");
+    };
+
+    window.addEventListener("auth:unauthorized", handleUnauthorized);
+    return () => window.removeEventListener("auth:unauthorized", handleUnauthorized);
+  }, []);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

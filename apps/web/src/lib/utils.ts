@@ -182,15 +182,18 @@ export function parseSearchParams(searchParams: URLSearchParams): Record<string,
   return params;
 }
 
+const PLACEHOLDER_PRODUCT = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect fill='%23f3f4f6' width='300' height='300'/%3E%3Ctext fill='%239ca3af' x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='14'%3ENo Image%3C/text%3E%3C/svg%3E";
+const PLACEHOLDER_AVATAR = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect fill='%23e5e7eb' width='100' height='100' rx='50'/%3E%3Ctext fill='%239ca3af' x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='28'%3E?%3C/text%3E%3C/svg%3E";
+
 export function getImageUrl(path: string | null | undefined): string {
-  if (!path) return "/images/placeholder-product.jpg";
+  if (!path) return PLACEHOLDER_PRODUCT;
   if (path.startsWith("http")) return path;
   if (path.startsWith("/")) return path;
   return `${process.env.NEXT_PUBLIC_CDN_URL || ""}/${path}`;
 }
 
 export function getAvatarUrl(path: string | null | undefined): string {
-  if (!path) return "/images/placeholder-avatar.svg";
+  if (!path) return PLACEHOLDER_AVATAR;
   if (path.startsWith("http")) return path;
   if (path.startsWith("/")) return path;
   return `${process.env.NEXT_PUBLIC_CDN_URL || ""}/${path}`;

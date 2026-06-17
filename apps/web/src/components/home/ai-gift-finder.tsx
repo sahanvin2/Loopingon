@@ -1,8 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
-import Image from "next/image";
-import { Sparkles, ArrowRight, Bot } from "lucide-react";
+import React from "react";
+import { Sparkles, Bot } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
@@ -46,16 +45,16 @@ export function AIGiftFinder() {
               {/* Fake UI cards floating */}
               <div className="relative w-full h-full">
                 <div className="absolute top-10 right-10 bg-white p-4 rounded-2xl shadow-soft-xl border border-surface-200 rotate-6 transform transition-transform hover:rotate-0 hover:scale-105 z-20">
-                  <div className="w-32 h-32 relative rounded-xl overflow-hidden mb-3">
-                     <Image src="/images/categories/pottery.jpg" alt="Gift idea" fill className="object-cover" />
+                  <div className="w-32 h-32 relative rounded-xl overflow-hidden mb-3 bg-gradient-to-br from-amber-400 to-orange-500">
+                    <div className="w-full h-full flex items-center justify-center text-white text-4xl">🏺</div>
                   </div>
                   <div className="h-2 w-20 bg-surface-200 rounded-full mb-2"></div>
                   <div className="h-2 w-12 bg-primary-200 rounded-full"></div>
                 </div>
-                
+
                 <div className="absolute bottom-10 left-10 bg-white p-4 rounded-2xl shadow-soft-xl border border-surface-200 -rotate-6 transform transition-transform hover:rotate-0 hover:scale-105 z-10">
-                  <div className="w-28 h-28 relative rounded-xl overflow-hidden mb-3">
-                     <Image src="/images/categories/jewelry.jpg" alt="Gift idea" fill className="object-cover" />
+                  <div className="w-28 h-28 relative rounded-xl overflow-hidden mb-3 bg-gradient-to-br from-purple-400 to-indigo-500">
+                    <div className="w-full h-full flex items-center justify-center text-white text-3xl">💎</div>
                   </div>
                   <div className="h-2 w-16 bg-surface-200 rounded-full mb-2"></div>
                   <div className="h-2 w-10 bg-accent-200 rounded-full"></div>

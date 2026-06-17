@@ -5,6 +5,7 @@ import { createApp } from "./app.js";
 import { prisma } from "./config/database.js";
 import { connectRedis, disconnectRedis } from "./config/redis.js";
 import { logger } from "./middleware/errorHandler.middleware.js";
+import { setupCartCron } from "./workers/cart.worker.js";
 
 const PORT = parseInt(process.env.PORT || "4000", 10);
 const HOST = process.env.HOST || "0.0.0.0";
@@ -15,6 +16,12 @@ async function main() {
 
   await connectRedis();
   logger.info("Redis connected");
+
+  try {
+    await setupCartCron();
+  } catch (err) {
+    logger.error("Failed to setup cart cron job", err);
+  }
 
   const app = createApp();
 

@@ -18,8 +18,8 @@ interface VendorPageProps {
 export async function generateMetadata({ params }: VendorPageProps): Promise<Metadata> {
   const { slug } = await params;
   try {
-    const res = await get<ApiResponse<{ vendor: Vendor; products: unknown[]; reviews: unknown[] }>>(`/vendors/storefront/${slug}`);
-    const vendor = res.data.vendor;
+    const res = await get<ApiResponse<Vendor & { products: unknown[] }>>(`/vendors/storefront/${slug}`);
+    const vendor = res.data;
     return {
       title: `${vendor.storeName} - Artisan on Kandyam`,
       description: vendor.storeDescription?.substring(0, 160) || `Shop handmade crafts from ${vendor.storeName} on Kandyam.`,
@@ -35,10 +35,10 @@ async function VendorContent({ slug }: { slug: string }) {
   let reviews: unknown[] = [];
 
   try {
-    const res = await get<ApiResponse<{ vendor: Vendor; products: unknown[]; reviews: unknown[] }>>(`/vendors/storefront/${slug}`);
-    vendor = res.data.vendor;
-    products = res.data.products;
-    reviews = res.data.reviews;
+    const res = await get<ApiResponse<Vendor & { products: unknown[]; reviews?: unknown[] }>>(`/vendors/storefront/${slug}`);
+    vendor = res.data;
+    products = res.data.products || [];
+    reviews = res.data.reviews || [];
   } catch {
     notFound();
   }
