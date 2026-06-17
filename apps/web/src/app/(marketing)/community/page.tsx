@@ -22,7 +22,7 @@ export default function CommunityPage() {
           </p>
           <div className="mt-10 flex justify-center gap-4">
             <Link
-              href="/signup?role=vendor"
+              href="/sign-up/vendor"
               className="rounded-full bg-white px-8 py-3.5 text-sm font-semibold text-primary-900 transition-transform hover:scale-105"
             >
               Join the Community
