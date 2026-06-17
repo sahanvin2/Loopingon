@@ -26,12 +26,15 @@ export async function uploadSingle(
   folder: string
 ): Promise<{ original: string; thumb: string; medium: string; large: string }> {
   const ext = "webp";
-  const baseKey = `${folder}/${uuidv4()}`;
+  // If folder is empty, avoid starting with a slash, which B2 hates.
+  const cleanFolder = folder ? folder.replace(/^\/+|\/+$/g, '') : '';
+  const prefix = cleanFolder ? `${cleanFolder}/` : '';
+  const baseKey = `${prefix}${uuidv4()}`;
 
   const sizes = [
     { suffix: "original", width: null, height: null },
-    { suffix: "large", width: 1200, height: null },
-    { suffix: "medium", width: 600, height: null },
+    { suffix: "large", width: 800, height: null }, // Reduced from 1200px to save bandwidth
+    { suffix: "medium", width: 400, height: null }, // Reduced from 600px
     { suffix: "thumb", width: 150, height: 150 },
   ];
 
@@ -43,7 +46,7 @@ export async function uploadSingle(
     if (size.width || size.height) {
       buffer = await sharp(file.buffer)
         .resize(size.width, size.height, { fit: "cover", withoutEnlargement: true })
-        .webp({ quality: 70 })
+        .webp({ quality: 60 }) // Reduced quality from 70 to 60 for better egress savings
         .toBuffer();
     }
 
@@ -96,7 +99,7 @@ export async function deleteMedia(key: string) {
 
 export async function optimizeImage(file: Express.Multer.File): Promise<Buffer> {
   return sharp(file.buffer)
-    .resize(1200, null, { fit: "inside", withoutEnlargement: true })
-    .webp({ quality: 70 })
+    .resize(800, null, { fit: "inside", withoutEnlargement: true })
+    .webp({ quality: 60 })
     .toBuffer();
 }

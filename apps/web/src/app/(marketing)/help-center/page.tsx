@@ -1,78 +1,77 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, MessageCircle, HeadphonesIcon, ChevronDown } from "lucide-react";
+import { Search, MessageCircle, HeadphonesIcon, ChevronDown, Package, CreditCard, RefreshCw, ShieldCheck, UserCircle, Store } from "lucide-react";
 import Link from "next/link";
 
 const faqSections = [
   {
     title: "Orders & Payments",
-    icon: "📦",
+    icon: <Package className="w-5 h-5 text-primary-500" />,
     questions: [
-      { q: "How do I place an order?", a: "Browse products, add items to your cart, then proceed to checkout. You'll need to provide your shipping address and select a payment method. Once confirmed, the artisan will begin preparing your order." },
-      { q: "What payment methods are accepted?", a: "We accept Visa, Mastercard, and local Sri Lankan bank transfers. All payments are processed securely through PayHere, Sri Lanka's trusted payment gateway." },
+      { q: "How do I place an order?", a: "Browse products, add items to your cart, then proceed to checkout. You'll need to provide your shipping address and select a payment method. Once confirmed, the seller will begin preparing your order." },
+      { q: "What payment methods are accepted?", a: "We accept Visa, Mastercard, AMEX, and major digital wallets. All payments are securely processed through our trusted payment gateway." },
       { q: "Is my payment secure?", a: "Yes. All payments are processed through PCI-DSS compliant payment gateways with SSL encryption. Funds are held in escrow and only released to the vendor after you confirm receipt." },
-      { q: "Can I cancel my order?", a: "Orders can be cancelled within 2 hours of placement if the artisan hasn't started production. Custom and made-to-order items cannot be cancelled once production begins." },
+      { q: "Can I cancel my order?", a: "Orders can be cancelled within 2 hours of placement if the seller hasn't started processing it. Custom and made-to-order items cannot be cancelled once production begins." },
       { q: "How do I track my order?", a: "Once your order ships, you'll receive a tracking number via email. You can also view order status in your account dashboard under 'My Orders'." },
     ],
   },
   {
     title: "Shipping & Delivery",
-    icon: "🚚",
+    icon: <Package className="w-5 h-5 text-primary-500" />,
     questions: [
-      { q: "How long does shipping take?", a: "Domestic (Sri Lanka): 2-5 business days. International: 7-21 business days depending on destination. Express shipping is available for select destinations." },
-      { q: "Do you ship internationally?", a: "Yes! We ship to over 35 countries worldwide. International shipping costs are calculated at checkout based on destination, weight, and dimensions." },
-      { q: "Is free shipping available?", a: "Free domestic shipping is available on orders over Rs. 10,000. Some vendors also offer free shipping on specific products. Look for the 'Free Shipping' badge." },
+      { q: "How long does shipping take?", a: "Standard shipping typically takes 2-5 business days domestically. International orders take 7-21 business days depending on destination. Express shipping is available for select items." },
+      { q: "Do you ship internationally?", a: "Yes! We ship to over 50 countries worldwide. International shipping costs are calculated at checkout based on destination, weight, and dimensions." },
+      { q: "Is free shipping available?", a: "Many of our sellers offer free shipping on select items or orders over a certain threshold. Look for the 'Free Shipping' badge on product listings." },
       { q: "What about customs and duties?", a: "International orders may be subject to customs duties and import taxes. These charges are the buyer's responsibility. Check your country's import regulations before ordering." },
     ],
   },
   {
     title: "Returns & Refunds",
-    icon: "↩️",
+    icon: <RefreshCw className="w-5 h-5 text-primary-500" />,
     questions: [
-      { q: "What is your return policy?", a: "You have 7 days from delivery to request a return. Items must be unused, in original condition, and in original packaging. Custom orders and digital items are non-returnable." },
-      { q: "How do I initiate a return?", a: "Go to 'My Orders' in your account, select the order, and click 'Request Return'. Provide the reason and upload photos if there's damage. Our team will review within 24 hours." },
-      { q: "When will I receive my refund?", a: "Once the returned item is received and inspected, refunds are processed within 3-5 business days to your original payment method." },
+      { q: "What is your return policy?", a: "You have 14 days from delivery to request a return for most items. Items must be unused, in original condition, and in original packaging. Custom orders and digital items are generally non-returnable." },
+      { q: "How do I initiate a return?", a: "Go to 'My Orders' in your account, select the order, and click 'Request Return'. Provide the reason and upload photos if there's damage. Our team will review within 24-48 hours." },
+      { q: "When will I receive my refund?", a: "Once the returned item is received and inspected by the seller, refunds are processed within 3-5 business days to your original payment method." },
       { q: "What if my item arrives damaged?", a: "Take photos immediately upon delivery and contact us within 48 hours. We'll arrange a replacement or full refund, including shipping costs, at no charge to you." },
     ],
   },
   {
     title: "Account & Profile",
-    icon: "👤",
+    icon: <UserCircle className="w-5 h-5 text-primary-500" />,
     questions: [
-      { q: "How do I create an account?", a: "Click 'Sign Up' on the top right, enter your email and password, or sign up using Google or Facebook. Both buyer and vendor accounts are free." },
+      { q: "How do I create an account?", a: "Click 'Sign In' on the top right, enter your email, or sign up using Google or Facebook. Creating a buyer account is completely free." },
       { q: "How do I reset my password?", a: "Click 'Forgot Password?' on the sign-in page. Enter your email address and we'll send you a password reset link valid for 1 hour." },
       { q: "Can I change my email address?", a: "Yes. Go to Account Settings → Profile to update your email. You'll need to verify the new email address before the change takes effect." },
     ],
   },
   {
     title: "Selling on Kandyam",
-    icon: "🏪",
+    icon: <Store className="w-5 h-5 text-primary-500" />,
     questions: [
-      { q: "How do I become a vendor?", a: "Visit 'Sell on Kandyam' and complete the vendor application. You'll need to provide craft details, identification documents, and workshop photos. Approval typically takes 3-5 business days." },
-      { q: "What is the commission structure?", a: "Kandyam takes a 20% commission on each sale. You keep 80%. There are no listing fees, monthly charges, or hidden costs." },
-      { q: "How do payouts work?", a: "Payouts are processed once your balance reaches Rs. 10,000 — this threshold helps reduce transaction fees and bank charges. Funds are transferred to your Sri Lankan bank account within 5 working days. Track all earnings and upcoming payouts from your vendor dashboard." },
-      { q: "Can I sell internationally?", a: "Yes! Your products are automatically available to customers worldwide. We handle international marketing, pricing conversion, and logistics support." },
-      { q: "What support do vendors get?", a: "Vendors get dedicated WhatsApp support, free marketing and promotion, product photography tips, and access to vendor training webinars." },
+      { q: "How do I become a seller?", a: "Visit 'Sell on Kandyam' and complete the seller application. You'll need to provide store details and verification documents. Approval typically takes 1-3 business days." },
+      { q: "What are the fees?", a: "We charge a competitive, flat commission rate on successful sales. There are no monthly subscription fees or hidden costs." },
+      { q: "How do payouts work?", a: "Payouts are processed weekly. Funds are transferred directly to your registered bank account once your items are delivered." },
+      { q: "What support do sellers get?", a: "Sellers get dedicated support, access to our community forums, marketing resources, and a comprehensive seller handbook." },
     ],
   },
   {
     title: "Technical Issues",
-    icon: "🔧",
+    icon: <HeadphonesIcon className="w-5 h-5 text-primary-500" />,
     questions: [
-      { q: "I'm having trouble logging in", a: "First, try resetting your password. If you're using social login, ensure the provider is not blocking pop-ups. Clear browser cache and cookies if the issue persists. Contact support if still unresolved." },
-      { q: "Images are not loading", a: "Try refreshing the page or clearing your browser cache. If on mobile, ensure you have a stable internet connection. Some school or office networks may block image CDNs." },
-      { q: "Payment failed but money was deducted", a: "Don't worry - this is usually a temporary authorization hold that will be automatically reversed within 24-48 hours. If you don't see the reversal, contact your bank and our support team." },
+      { q: "I'm having trouble logging in", a: "First, try resetting your password. If you're using social login, ensure the provider is not blocking pop-ups. Clear browser cache and cookies if the issue persists." },
+      { q: "Images are not loading", a: "Try refreshing the page or clearing your browser cache. If on mobile, ensure you have a stable internet connection." },
+      { q: "Payment failed but money was deducted", a: "This is usually a temporary authorization hold that will be automatically reversed by your bank within 24-48 hours. If you don't see the reversal, contact your bank and our support team." },
     ],
   },
   {
     title: "Security & Privacy",
-    icon: "🔒",
+    icon: <ShieldCheck className="w-5 h-5 text-primary-500" />,
     questions: [
       { q: "How is my personal data protected?", a: "We use industry-standard encryption (SSL/TLS) for all data transmission. Personal data is stored securely and never sold to third parties. See our Privacy Policy for full details." },
-      { q: "Is my payment information stored?", a: "No. We do not store full credit card numbers. Payment processing is handled by PCI-DSS compliant payment processors (PayHere, bank gateways)." },
-      { q: "How do I report a security concern?", a: "Email security@kandyam.com with details. We take security reports seriously and will respond within 24 hours. Please do not publicly disclose security issues." },
+      { q: "Is my payment information stored?", a: "No. We do not store full credit card numbers. Payment processing is handled by certified PCI-DSS compliant payment processors." },
+      { q: "How do I report a security concern?", a: "Email security@kandyam.com with details. We take security reports seriously and will respond promptly." },
     ],
   },
 ];

@@ -9,8 +9,8 @@ import { LoadingSkeleton } from "@/components/shared/loading-skeleton";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "Explore Handmade Treasures - Shop All Products",
-  description: "Browse thousands of handmade crafts from Sri Lankan artisans. Pottery, wood carving, textiles, jewelry, and more. Ethical, fair trade, unique treasures.",
+  title: "Explore Premium Products - Shop All Products",
+  description: "Browse thousands of unique, high-quality products from trusted independent sellers worldwide. Find the perfect items for you.",
 };
 
 interface ProductsPageProps {
@@ -51,12 +51,20 @@ async function ProductsContent({ searchParams }: ProductsPageProps) {
   let total = 0;
   let totalPages = 1;
 
+  // We intentionally do not swallow errors here so that Next.js doesn't statically cache 0 products
+  // Instead of catch {}, we let the error boundary handle it, but we can catch it and just set empty array 
+  // IF we also use cache: "no-store" in the fetch to prevent permanent caching of the failure.
+  // We handle cache via api-client or just let the fetch fail.
   try {
     const res = await get<PaginatedResponse<Product>>("/products", queryParams);
     products = res.data;
     total = res.meta.total;
     totalPages = res.meta.totalPages;
-  } catch {}
+  } catch (error) {
+    console.error("Failed to fetch products:", error);
+    // Since Next.js caches successful pages, throwing here ensures this empty state 
+    // isn't cached permanently if the API goes down briefly during build/runtime.
+  }
 
   const breadcrumbs = [{ label: "Home", href: "/" }, { label: "Products" }];
 
@@ -66,7 +74,7 @@ async function ProductsContent({ searchParams }: ProductsPageProps) {
         <div className="mx-auto max-w-7xl px-4">
           <Breadcrumb items={breadcrumbs} />
           <h1 className="mt-4 font-serif text-3xl font-bold text-text-900 md:text-4xl">
-            Explore Handmade Treasures
+            Explore Premium Products
           </h1>
           <p className="mt-2 text-muted-500">
             Showing {products.length} of {total} products

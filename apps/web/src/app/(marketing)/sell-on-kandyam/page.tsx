@@ -16,7 +16,7 @@ const benefits = [
   { icon: Globe, title: "Global Customer Reach", description: "Your products reach customers everywhere. We handle marketing, SEO, and visibility so you can focus on your business." },
   { icon: Store, title: "Free Store Setup", description: "Create your storefront at zero cost. Customize your banner, add your story, and showcase your products — all included." },
   { icon: Megaphone, title: "Marketing & Promotion", description: "Your products appear in our featured sections, email campaigns, and social media promotions. We invest in driving traffic to your store." },
-  { icon: Shield, title: "Secure Fortnight Payouts", description: "Get paid directly to your Sri Lankan bank account every two weeks. Transparent earnings dashboard with full transaction history." },
+  { icon: Shield, title: "Secure Fortnight Payouts", description: "Get paid directly to your registered bank account every two weeks. Transparent earnings dashboard with full transaction history." },
   { icon: MessageCircle, title: "Dedicated WhatsApp Support", description: "Have questions? Reach our vendor support team directly via WhatsApp. Fast, personal help when you need it." },
 ];
 
