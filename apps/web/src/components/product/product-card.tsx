@@ -139,6 +139,16 @@ export function ProductCard({ product, className, showQuickView = true }: Produc
           />
         </div>
 
+        {product.quantity !== undefined && (
+          <div className="mt-1.5">
+            {product.quantity > 0 ? (
+              <span className="text-xs text-green-600 font-medium">{product.quantity} in stock</span>
+            ) : (
+              <span className="text-xs text-red-500 font-medium">Out of Stock</span>
+            )}
+          </div>
+        )}
+
         <button
           type="button"
           onClick={(e) => {
