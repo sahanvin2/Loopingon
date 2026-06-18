@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { Star, Heart, ArrowRight, Clock } from "lucide-react";
+import { Star, Heart, ArrowRight, Clock, Gift } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { get } from "@/lib/api-client";
 import { getImageUrl } from "@/lib/utils";
@@ -82,14 +82,14 @@ export function FlashDeals() {
 
 export function GiftFinder() {
   const recipients = [
-    { label: "Partner", emoji: "💑" },
-    { label: "Friend", emoji: "👯" },
-    { label: "Mother", emoji: "👩‍👧" },
-    { label: "Father", emoji: "👨‍👦" },
-    { label: "Wedding", emoji: "💍" },
-    { label: "Birthday", emoji: "🎂" },
-    { label: "Corporate", emoji: "💼" },
-    { label: "Teacher", emoji: "📚" },
+    { label: "Partner", icon: Gift },
+    { label: "Friend", icon: Gift },
+    { label: "Mother", icon: Gift },
+    { label: "Father", icon: Gift },
+    { label: "Wedding", icon: Gift },
+    { label: "Birthday", icon: Gift },
+    { label: "Corporate", icon: Gift },
+    { label: "Teacher", icon: Gift },
   ];
   const [selected, setSelected] = useState<string | null>(null);
 
@@ -117,7 +117,7 @@ export function GiftFinder() {
                         : "border-surface-300 text-text-600 hover:border-primary-400 hover:text-primary-600 hover:bg-primary-50"
                     }`}
                   >
-                    <span className="mr-1.5">{r.emoji}</span>{r.label}
+                    <r.icon className="w-4 h-4 mr-1.5" />{r.label}
                   </button>
                 ))}
               </div>
@@ -138,7 +138,7 @@ export function GiftFinder() {
                  <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?q=80&w=600&auto=format&fit=crop" alt="Luxury Gift Box" className="w-full h-full object-cover" />
               </div>
               <div className="absolute -top-4 -right-4 w-20 h-20 bg-primary-500 rounded-full flex items-center justify-center text-white shadow-lg">
-                <span className="text-2xl">🎁</span>
+                <Gift className="w-8 h-8" />
               </div>
             </div>
           </div>
@@ -299,40 +299,39 @@ export function ShopByRegion() {
 }
 
 export function HeritageCollection() {
-  const heritageItems = [
-    { name: "Masks", img: "https://images.unsplash.com/photo-1599643477874-c11f7c8fccbd?q=80&w=400&auto=format&fit=crop" },
-    { name: "Wood Carvings", img: "https://images.unsplash.com/photo-1610701596007-11502861dcfa?q=80&w=400&auto=format&fit=crop" },
-    { name: "Brass Crafts", img: "https://images.unsplash.com/photo-1578500494198-246f612d3b3d?q=80&w=400&auto=format&fit=crop" },
-    { name: "Handloom", img: "https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?q=80&w=400&auto=format&fit=crop" },
-    { name: "Batik", img: "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?q=80&w=400&auto=format&fit=crop" },
-    { name: "Lacquer Work", img: "https://images.unsplash.com/photo-1616423640778-28d1b53229bd?q=80&w=400&auto=format&fit=crop" },
+  const topCategories = [
+    { name: "Electronics", slug: "electronics-accessories", desc: "Gadgets & tech" },
+    { name: "Home & Living", slug: "home-living", desc: "Essentials for home" },
+    { name: "Kids & Baby", slug: "kids-baby", desc: "For little ones" },
+    { name: "Bath & Beauty", slug: "bath-beauty", desc: "Personal care" },
+    { name: "Fashion", slug: "clothing", desc: "Style & apparel" },
+    { name: "Sports", slug: "accessories", desc: "Fitness & outdoors" },
   ];
 
   return (
     <section className="py-24 bg-navy-500 relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-[url('https://images.unsplash.com/photo-1599643477874-c11f7c8fccbd?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-5 mix-blend-overlay"></div>
       <div className="absolute inset-0 pattern-dots opacity-[0.03]" />
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-500/5 rounded-full blur-3xl" />
       <div className="container-page mx-auto relative z-10 flex flex-col items-center text-center">
-        <span className="text-luxury-gold uppercase tracking-[0.3em] text-sm font-bold mb-4">Premium Selection</span>
-        <h2 className="text-5xl md:text-6xl font-serif font-bold text-white mb-6 leading-tight">The Heritage<br/>Collection</h2>
-        <p className="text-navy-100 max-w-2xl text-lg mb-12 leading-relaxed">Discover our most exquisite, historically significant crafts. Featuring masterfully carved wooden masks, intricate brasswork, and authentic handloom textiles passed down through generations.</p>
+        <span className="text-luxury-gold uppercase tracking-[0.3em] text-sm font-bold mb-4">Top Categories</span>
+        <h2 className="text-5xl md:text-6xl font-serif font-bold text-white mb-6 leading-tight">Shop by<br/>Category</h2>
+        <p className="text-navy-100 max-w-2xl text-lg mb-12 leading-relaxed">Browse thousands of products across our most popular categories. From electronics and home essentials to fashion and beauty — find exactly what you need.</p>
         
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5 w-full mb-12">
-          {heritageItems.map((item, idx) => (
-            <div key={item.name} className="group relative rounded-xl overflow-hidden aspect-square border-2 border-luxury-gold/20 hover:border-luxury-gold/60 transition-all duration-500 cursor-pointer hover:shadow-[0_0_30px_rgba(212,175,55,0.2)]">
-              <img src={item.img} alt={item.name} className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-              <div className="absolute inset-0 bg-navy-900/50 group-hover:bg-navy-900/30 transition-colors duration-500" />
+          {topCategories.map((item) => (
+            <Link key={item.name} href={`/products?category=${item.slug}`}
+              className="group relative rounded-xl overflow-hidden aspect-square border-2 border-luxury-gold/20 hover:border-luxury-gold/60 transition-all duration-500 cursor-pointer hover:shadow-[0_0_30px_rgba(212,175,55,0.15)]">
+              <div className="absolute inset-0 bg-gradient-to-br from-navy-800 to-navy-900" />
               <div className="absolute inset-0 flex flex-col items-center justify-center p-4">
                 <span className="text-luxury-light font-serif text-lg md:text-xl font-bold group-hover:text-luxury-gold transition-colors duration-300">{item.name}</span>
-                <span className="text-xs text-navy-200 mt-2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">Explore →</span>
+                <span className="text-xs text-navy-200 mt-2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">{item.desc}</span>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 
-        <Link href="/collections/heritage" className="bg-transparent border-2 border-luxury-gold text-luxury-gold hover:bg-luxury-gold hover:text-navy-900 px-10 py-4 rounded-full font-bold uppercase tracking-wider transition-all duration-300 hover:shadow-[0_0_40px_rgba(212,175,55,0.3)] hover:-translate-y-0.5">
-          View Collection <ArrowRight className="inline ml-2 w-4 h-4" />
+        <Link href="/products" className="bg-transparent border-2 border-luxury-gold text-luxury-gold hover:bg-luxury-gold hover:text-navy-900 px-10 py-4 rounded-full font-bold uppercase tracking-wider transition-all duration-300 hover:shadow-[0_0_40px_rgba(212,175,55,0.3)] hover:-translate-y-0.5">
+          Browse All Products <ArrowRight className="inline ml-2 w-4 h-4" />
         </Link>
       </div>
     </section>

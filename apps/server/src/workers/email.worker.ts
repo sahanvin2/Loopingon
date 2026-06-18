@@ -436,41 +436,50 @@ function buildAbandonedCartReminderHtml(
   const greeting = name ? `Hello ${name},` : "Hello,";
   
   let timeText = "recently";
-  if (hoursAbandoned === 1) timeText = "about an hour ago";
-  else if (hoursAbandoned === 12) timeText = "earlier today";
-  else if (hoursAbandoned === 24) timeText = "yesterday";
-  else if (hoursAbandoned === 72) timeText = "a few days ago";
+  if (hoursAbandoned === 1) timeText = "1 hour ago";
+  else if (hoursAbandoned < 24) timeText = `${hoursAbandoned} hours ago`;
+  else if (hoursAbandoned === 24) timeText = "1 day ago";
+  else if (hoursAbandoned < 168) timeText = `${Math.floor(hoursAbandoned / 24)} days ago`;
   else if (hoursAbandoned === 168) timeText = "a week ago";
 
   return emailTemplate(
-    "You left something behind...",
+    "Your cart is waiting...",
     `
-    <h2 style="color:#1a1a2e;font-size:22px;margin:0 0 16px 0;">Did you forget something?</h2>
-    <p style="color:#495057;font-size:16px;line-height:1.7;margin:0 0 24px 0;">${greeting}</p>
+    <div style="text-align:center;margin-bottom:24px;">
+      <span style="font-size:48px;">🛒</span>
+    </div>
+    <h2 style="color:#002C3E;font-size:24px;margin:0 0 12px 0;font-family:Georgia,serif;">You left something behind</h2>
+    <p style="color:#6B7280;font-size:16px;line-height:1.7;margin:0 0 8px 0;">${greeting}</p>
 
-    <p style="color:#495057;font-size:16px;line-height:1.7;margin:0 0 24px 0;">We noticed you left <strong>${cartItemCount} item${cartItemCount !== 1 ? "s" : ""}</strong> in your cart ${timeText}. They are still waiting for you, but they might sell out soon!</p>
+    <p style="color:#1F2937;font-size:16px;line-height:1.7;margin:0 0 24px 0;">You added <strong>${cartItemCount} item${cartItemCount !== 1 ? "s" : ""}</strong> to your cart <strong>${timeText}</strong>. They're still available — but don't wait too long!</p>
 
-    <div style="background-color:#f8f9fa;border:1px solid #e9ecef;border-radius:8px;padding:20px 24px;margin:0 0 24px 0;">
+    <div style="background:linear-gradient(135deg,#F7F8F3,#FFFFFF);border:1px solid #E5E7EB;border-radius:16px;padding:24px;margin:0 0 28px 0;">
       <table width="100%" cellpadding="0" cellspacing="0">
-        ${firstItemImage ? `<tr><td colspan="2" style="padding:0 0 16px 0;"><img src="${firstItemImage}" alt="${firstItemName}" style="border-radius:8px;max-width:150px;height:auto;" /></td></tr>` : ""}
+        ${firstItemImage ? `<tr><td colspan="2" style="padding:0 0 18px 0;text-align:center;"><img src="${firstItemImage}" alt="${firstItemName}" style="border-radius:12px;max-width:200px;height:auto;box-shadow:0 4px 20px rgba(0,0,0,0.08);" /></td></tr>` : ""}
         <tr>
-          <td style="padding:6px 0;width:100px;color:#6c757d;font-size:14px;font-weight:600;">Including:</td>
-          <td style="padding:6px 0;color:#495057;font-size:14px;font-weight:600;">${firstItemName} ${cartItemCount > 1 ? `and ${cartItemCount - 1} more` : ""}</td>
+          <td style="padding:8px 0;width:90px;color:#9CA3AF;font-size:13px;font-weight:600;">Item</td>
+          <td style="padding:8px 0;color:#1F2937;font-size:15px;font-weight:600;">${firstItemName} ${cartItemCount > 1 ? `+ ${cartItemCount - 1} more` : ""}</td>
         </tr>
         <tr>
-          <td style="padding:6px 0;color:#6c757d;font-size:14px;font-weight:600;">Cart Total:</td>
-          <td style="padding:6px 0;color:#495057;font-size:14px;">LKR ${cartTotal.toLocaleString("en-LK", { minimumFractionDigits: 2 })}</td>
+          <td style="padding:8px 0;color:#9CA3AF;font-size:13px;font-weight:600;">Total</td>
+          <td style="padding:8px 0;color:#F7444E;font-size:18px;font-weight:700;">Rs. ${cartTotal.toLocaleString("en-LK", { minimumFractionDigits: 2 })}</td>
+        </tr>
+        <tr>
+          <td style="padding:6px 0;color:#9CA3AF;font-size:12px;">Delivery</td>
+          <td style="padding:6px 0;color:#10B981;font-size:13px;font-weight:500;">Cash on Delivery</td>
         </tr>
       </table>
     </div>
 
-    <table width="100%" cellpadding="0" cellspacing="0" style="margin:24px 0;">
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin:28px 0;">
       <tr>
         <td align="center">
-          <a href="${FRONTEND_URL}/cart" style="display:inline-block;background:linear-gradient(135deg,#4F46E5,#7C3AED);color:#ffffff;text-decoration:none;padding:14px 40px;border-radius:8px;font-size:16px;font-weight:600;letter-spacing:0.3px;">Complete Your Order</a>
+          <a href="${FRONTEND_URL}/cart" style="display:inline-block;background:#F7444E;color:#ffffff;text-decoration:none;padding:16px 48px;border-radius:12px;font-size:16px;font-weight:700;letter-spacing:0.3px;box-shadow:0 4px 14px rgba(247,68,78,0.4);">Return to Cart</a>
         </td>
       </tr>
     </table>
+    
+    <p style="color:#9CA3AF;font-size:12px;text-align:center;margin:16px 0 0 0;">No payment needed — pay cash when your order arrives via Koombiyo.</p>
     `
   );
 }

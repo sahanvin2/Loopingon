@@ -1,11 +1,12 @@
 "use client";
 
 import React, { useState } from "react";
-import { Truck, Package, Loader2 } from "lucide-react";
+import { Truck, Package, Loader2, ShieldCheck, Mail, MapPin, CreditCard, Info } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useCartStore } from "@/stores/cart-store";
 
 interface ShippingFormData {
+  email: string;
   fullName: string;
   phone: string;
   altPhone: string;
@@ -15,6 +16,7 @@ interface ShippingFormData {
   district: string;
   postalCode: string;
   country: string;
+  deliveryInstructions?: string;
 }
 
 interface ShippingStepProps {
@@ -33,13 +35,14 @@ export function ShippingStep({ initialData, onNext, selectedMethod = "KOOMBIYO",
   const isFreeEligible = subtotal >= freeThreshold;
 
   const shippingMethods = [
-    { id: "KOOMBIYO", label: "Koombiyo Standard", description: "1-3 days • Rs. 150/kg (min Rs. 400) • COD", price: isFreeEligible ? 0 : 400, icon: Package },
-    { id: "EXPRESS", label: "Koombiyo Express", description: "Next day • Rs. 650 flat", price: isFreeEligible ? 300 : 650, icon: Truck },
+    { id: "KOOMBIYO", label: "Koombiyo Standard", description: "1-3 business days", price: isFreeEligible ? 0 : 400, icon: Package },
+    { id: "EXPRESS", label: "Koombiyo Express", description: "Next day delivery", price: isFreeEligible ? 300 : 650, icon: Truck },
   ];
 
   const [form, setForm] = useState<ShippingFormData>(initialData || {
-    fullName: "", phone: "", altPhone: "", addressLine1: "", addressLine2: "", city: "", district: "", postalCode: "", country: "Sri Lanka",
+    email: "", fullName: "", phone: "", altPhone: "", addressLine1: "", addressLine2: "", city: "", district: "", postalCode: "", country: "Sri Lanka", deliveryInstructions: ""
   });
+  
   const [method, setMethod] = useState(selectedMethod);
   const [errors, setErrors] = useState<Partial<Record<keyof ShippingFormData, string>>>({});
 
@@ -50,8 +53,9 @@ export function ShippingStep({ initialData, onNext, selectedMethod = "KOOMBIYO",
 
   const validate = (): boolean => {
     const newErrors: Partial<Record<keyof ShippingFormData, string>> = {};
+    if (!form.email.trim() || !/^\S+@\S+\.\S+$/.test(form.email)) newErrors.email = "Valid email is required";
     if (!form.fullName.trim()) newErrors.fullName = "Full name is required";
-    if (!form.phone.trim() || form.phone.length < 10) newErrors.phone = "Valid phone required (min 10 digits)";
+    if (!form.phone.trim() || form.phone.length < 10) newErrors.phone = "Valid phone required";
     if (!form.addressLine1.trim()) newErrors.addressLine1 = "Address is required";
     if (!form.city.trim()) newErrors.city = "City is required";
     if (!form.district.trim()) newErrors.district = "District is required";
@@ -61,146 +65,186 @@ export function ShippingStep({ initialData, onNext, selectedMethod = "KOOMBIYO",
 
   const handleSubmit = () => {
     if (validate()) onNext(form, method);
+    else {
+      // scroll to first error
+      const firstError = document.querySelector('.border-red-400');
+      if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
   };
 
-  const inputClass = (field: keyof ShippingFormData) =>
-    cn(
-      "w-full px-3 py-2 rounded-lg border text-sm",
-      "focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent",
-      "transition-colors",
-      errors[field] ? "border-red-400 bg-red-50" : "border-accent-300",
-    );
-
-  const selectedShip = shippingMethods.find(m => m.id === method);
-  const shipPrice = selectedShip?.price || 0;
+  const InputField = ({ label, field, type = "text", placeholder, colSpan = 1, optional = false }: { label: string, field: keyof ShippingFormData, type?: string, placeholder?: string, colSpan?: number, optional?: boolean }) => (
+    <div className={cn(colSpan === 2 && "sm:col-span-2")}>
+      <label className="block text-[13px] font-semibold text-text-700 mb-1.5 ml-0.5">
+        {label} {optional && <span className="text-muted-400 font-normal">(Optional)</span>}
+      </label>
+      <input
+        type={type}
+        value={form[field] as string}
+        onChange={(e) => handleChange(field, e.target.value)}
+        placeholder={placeholder}
+        className={cn(
+          "w-full px-4 py-3 rounded-xl border bg-surface-50 text-sm shadow-sm transition-all duration-200",
+          "focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 focus:bg-white",
+          errors[field] ? "border-red-400 focus:border-red-500 focus:ring-red-500/20" : "border-surface-300 hover:border-surface-400"
+        )}
+      />
+      {errors[field] && <p className="text-xs text-red-500 mt-1.5 ml-1 font-medium">{errors[field]}</p>}
+    </div>
+  );
 
   return (
-    <div className={cn("space-y-8", className)}>
-      {/* Order Summary Banner */}
-      <div className="bg-surface-50 rounded-xl p-4 border border-accent-200">
-        <div className="flex items-center justify-between">
-          <div>
-            <p className="text-sm font-medium text-text-700">{items.length} item{items.length > 1 ? "s" : ""} in cart</p>
-            <p className="text-xs text-muted-500">Subtotal: Rs. {subtotal.toLocaleString()}</p>
+    <div className={cn("space-y-10", className)}>
+      
+      {/* 1. Contact Information */}
+      <section>
+        <div className="flex items-center gap-2 mb-4">
+          <Mail className="w-5 h-5 text-text-900" />
+          <h2 className="font-serif text-2xl font-bold text-text-900">Contact</h2>
+        </div>
+        <div className="bg-white p-5 md:p-6 rounded-2xl border border-surface-200 shadow-soft-sm space-y-4">
+          <InputField label="Email Address" field="email" type="email" placeholder="you@example.com" />
+          <p className="text-xs text-muted-500 ml-1">We'll use this to send you order updates and receipts.</p>
+        </div>
+      </section>
+
+      {/* 2. Delivery Address */}
+      <section>
+        <div className="flex items-center gap-2 mb-4">
+          <MapPin className="w-5 h-5 text-text-900" />
+          <h2 className="font-serif text-2xl font-bold text-text-900">Delivery</h2>
+        </div>
+        <div className="bg-white p-5 md:p-6 rounded-2xl border border-surface-200 shadow-soft-sm space-y-5">
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+            <InputField label="Full Name" field="fullName" placeholder="First and Last name" colSpan={2} />
+            <InputField label="Phone Number" field="phone" type="tel" placeholder="07X XXX XXXX" />
+            <InputField label="Alternate Phone" field="altPhone" type="tel" placeholder="Optional" optional />
           </div>
-          <div className="text-right">
-            <p className="text-sm text-muted-500">Delivery</p>
-            <p className="text-sm font-bold text-text-700">{shipPrice === 0 ? "FREE" : `Rs. ${shipPrice}`}</p>
+
+          <div className="pt-2 border-t border-surface-100"></div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+            <InputField label="Address Line 1" field="addressLine1" placeholder="House/Apt number, Street name" colSpan={2} />
+            <InputField label="Address Line 2" field="addressLine2" placeholder="Apartment, suite, unit, etc." optional colSpan={2} />
+            <InputField label="City" field="city" placeholder="Colombo" />
+            <InputField label="District" field="district" placeholder="Colombo" />
+            <InputField label="Postal Code" field="postalCode" placeholder="00100" />
+            
+            <div className="sm:col-span-2 mt-2">
+              <label className="block text-[13px] font-semibold text-text-700 mb-1.5 ml-0.5">
+                Delivery Instructions <span className="text-muted-400 font-normal">(Optional)</span>
+              </label>
+              <textarea
+                value={form.deliveryInstructions}
+                onChange={(e) => handleChange("deliveryInstructions", e.target.value)}
+                placeholder="E.g., Leave at the front door, call before arriving..."
+                rows={2}
+                className="w-full px-4 py-3 rounded-xl border border-surface-300 bg-surface-50 text-sm shadow-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 focus:bg-white hover:border-surface-400 resize-none"
+              />
+            </div>
           </div>
         </div>
-        {isFreeEligible && shipPrice === 0 && (
-          <div className="mt-2 text-xs text-green-600 bg-green-50 px-3 py-1 rounded-full inline-block">
-            Free delivery on orders over Rs. 5,000
+      </section>
+
+      {/* 3. Shipping Method */}
+      <section>
+        <div className="flex items-center gap-2 mb-4">
+          <Truck className="w-5 h-5 text-text-900" />
+          <h2 className="font-serif text-2xl font-bold text-text-900">Shipping Method</h2>
+        </div>
+        <div className="bg-white p-5 md:p-6 rounded-2xl border border-surface-200 shadow-soft-sm space-y-3">
+          {shippingMethods.map((m) => {
+            const isSelected = method === m.id;
+            return (
+              <button 
+                key={m.id} 
+                type="button" 
+                onClick={() => setMethod(m.id)}
+                className={cn(
+                  "w-full flex items-center justify-between p-4 rounded-xl border-2 text-left transition-all duration-200",
+                  isSelected 
+                    ? "border-primary-500 bg-primary-50/50 shadow-sm" 
+                    : "border-surface-200 hover:border-surface-300 hover:bg-surface-50"
+                )}
+              >
+                <div className="flex items-center gap-4">
+                  <div className={cn(
+                    "w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 transition-colors", 
+                    isSelected ? "border-primary-600 bg-primary-600" : "border-surface-300 bg-white"
+                  )}>
+                    {isSelected && <div className="w-2 h-2 rounded-full bg-white" />}
+                  </div>
+                  <div className="flex flex-col">
+                    <span className={cn("text-sm font-bold", isSelected ? "text-primary-900" : "text-text-900")}>{m.label}</span>
+                    <span className="text-xs text-muted-500 mt-0.5">{m.description}</span>
+                  </div>
+                </div>
+                <span className={cn("text-sm font-bold", m.price === 0 ? "text-teal-600" : "text-text-900")}>
+                  {m.price === 0 ? "FREE" : `Rs. ${m.price}`}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* 4. Payment */}
+      <section>
+        <div className="flex items-center gap-2 mb-4">
+          <CreditCard className="w-5 h-5 text-text-900" />
+          <h2 className="font-serif text-2xl font-bold text-text-900">Payment</h2>
+        </div>
+        <div className="bg-white p-5 md:p-6 rounded-2xl border border-surface-200 shadow-soft-sm">
+          <div className="bg-green-50 border border-green-200 rounded-xl p-5 relative overflow-hidden">
+            {/* Active highlight border top */}
+            <div className="absolute top-0 left-0 w-full h-1 bg-green-500"></div>
+            
+            <div className="flex items-start gap-4">
+              <div className="w-10 h-10 rounded-full bg-white shadow-sm border border-green-200 flex items-center justify-center shrink-0">
+                <svg className="w-5 h-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div>
+                <p className="text-base font-bold text-text-900 mb-1">Cash on Delivery (COD)</p>
+                <p className="text-sm text-muted-500 leading-relaxed">
+                  Pay with cash when your order is delivered to your doorstep. No online payment required today.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Submission */}
+      <div className="pt-6">
+        {orderError && (
+          <div className="mb-6 p-4 rounded-xl bg-red-50 border border-red-200 flex items-start gap-3">
+            <Info className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
+            <p className="text-sm text-red-700 font-medium">{orderError}</p>
           </div>
         )}
-      </div>
 
-      {/* Shipping Address */}
-      <div>
-        <h2 className="font-serif text-xl text-text-900 mb-1">Delivery Address</h2>
-        <p className="text-sm text-muted-500 mb-4">Where should we deliver your order?</p>
-        <div className="p-4 rounded-lg border border-accent-300 bg-surface-50">
-          <div className="space-y-3">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div>
-                <label className="block text-xs font-medium text-text-700 mb-1">Full Name *</label>
-                <input type="text" value={form.fullName} onChange={(e) => handleChange("fullName", e.target.value)} placeholder="Full name" className={inputClass("fullName")} />
-                {errors.fullName && <p className="text-xs text-red-500 mt-1">{errors.fullName}</p>}
-              </div>
-              <div>
-                <label className="block text-xs font-medium text-text-700 mb-1">Phone *</label>
-                <input type="tel" value={form.phone} onChange={(e) => handleChange("phone", e.target.value)} placeholder="07X XXX XXXX" className={inputClass("phone")} />
-                {errors.phone && <p className="text-xs text-red-500 mt-1">{errors.phone}</p>}
-              </div>
-              <div>
-                <label className="block text-xs font-medium text-text-700 mb-1">Alternate Phone</label>
-                <input type="tel" value={form.altPhone} onChange={(e) => handleChange("altPhone", e.target.value)} placeholder="Alternative number" className="w-full px-3 py-2 rounded-lg border border-accent-300 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500" />
-              </div>
-            </div>
-            <div>
-              <label className="block text-xs font-medium text-text-700 mb-1">Address *</label>
-              <input type="text" value={form.addressLine1} onChange={(e) => handleChange("addressLine1", e.target.value)} placeholder="House number, street name" className={inputClass("addressLine1")} />
-              {errors.addressLine1 && <p className="text-xs text-red-500 mt-1">{errors.addressLine1}</p>}
-            </div>
-            <div>
-              <input type="text" value={form.addressLine2} onChange={(e) => handleChange("addressLine2", e.target.value)} placeholder="Landmark, nearby location (optional)" className="w-full px-3 py-2 rounded-lg border border-accent-300 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500" />
-            </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-              <div>
-                <label className="block text-xs font-medium text-text-700 mb-1">City *</label>
-                <input type="text" value={form.city} onChange={(e) => handleChange("city", e.target.value)} placeholder="City" className={inputClass("city")} />
-                {errors.city && <p className="text-xs text-red-500 mt-1">{errors.city}</p>}
-              </div>
-              <div>
-                <label className="block text-xs font-medium text-text-700 mb-1">District *</label>
-                <input type="text" value={form.district} onChange={(e) => handleChange("district", e.target.value)} placeholder="District" className={inputClass("district")} />
-                {errors.district && <p className="text-xs text-red-500 mt-1">{errors.district}</p>}
-              </div>
-              <div>
-                <label className="block text-xs font-medium text-text-700 mb-1">Postal Code</label>
-                <input type="text" value={form.postalCode} onChange={(e) => handleChange("postalCode", e.target.value)} placeholder="Postal code" className="w-full px-3 py-2 rounded-lg border border-accent-300 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500" />
-              </div>
-            </div>
-          </div>
+        <button 
+          type="button" 
+          onClick={handleSubmit} 
+          disabled={isSubmitting}
+          className={cn(
+            "w-full py-4 sm:py-5 rounded-2xl text-lg font-bold transition-all duration-300 flex items-center justify-center gap-3",
+            "bg-primary-600 text-white hover:bg-primary-700 shadow-[0_8px_30px_rgb(247,68,78,0.2)] hover:shadow-[0_8px_30px_rgb(247,68,78,0.3)] hover:-translate-y-0.5",
+            isSubmitting && "opacity-70 cursor-not-allowed hover:translate-y-0"
+          )}
+        >
+          {isSubmitting ? <Loader2 className="w-6 h-6 animate-spin" /> : null}
+          {isSubmitting ? "Processing Order..." : `Complete Order — Pay on Delivery`}
+        </button>
+
+        <div className="mt-6 flex items-center justify-center gap-2 text-muted-500">
+          <ShieldCheck className="w-4 h-4" />
+          <span className="text-xs font-medium uppercase tracking-wider">Secure Encrypted Checkout</span>
         </div>
       </div>
 
-      {/* Shipping Method */}
-      <div>
-        <h2 className="font-serif text-xl text-text-900 mb-4">Delivery Method</h2>
-        <div className="space-y-3">
-          {shippingMethods.map((m) => (
-            <button key={m.id} type="button" onClick={() => setMethod(m.id)}
-              className={cn(
-                "w-full flex items-center gap-4 p-4 rounded-lg border text-left transition-colors",
-                method === m.id ? "border-primary-500 bg-primary-50" : "border-accent-300 hover:border-muted-400",
-              )}
-            >
-              <div className={cn("w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0", method === m.id ? "border-primary-600" : "border-muted-300")}>
-                {method === m.id && <div className="w-2.5 h-2.5 rounded-full bg-primary-600" />}
-              </div>
-              <m.icon className="w-5 h-5 text-muted-500 shrink-0" />
-              <div className="flex-1">
-                <p className="text-sm font-medium text-text-700">{m.label}</p>
-                <p className="text-xs text-muted-500">{m.description}</p>
-              </div>
-              <span className={cn("text-sm font-medium", m.price === 0 ? "text-green-600" : "text-text-700")}>
-                {m.price === 0 ? "FREE" : `Rs. ${m.price}`}
-              </span>
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Payment Info */}
-      <div className="bg-green-50 border border-green-200 rounded-xl p-4">
-        <div className="flex items-start gap-3">
-          <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center shrink-0 mt-0.5">
-            <svg className="w-4 h-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-          </div>
-          <div>
-            <p className="text-sm font-semibold text-green-800">Cash on Delivery</p>
-            <p className="text-xs text-green-700 mt-0.5">Pay only when you receive your order. No online payment required.</p>
-          </div>
-        </div>
-      </div>
-
-      {orderError && (
-        <div className="p-3 rounded-lg bg-red-50 border border-red-200 text-sm text-red-600">{orderError}</div>
-      )}
-
-      <button type="button" onClick={handleSubmit} disabled={isSubmitting}
-        className={cn(
-          "w-full py-4 rounded-xl text-base font-semibold transition-all flex items-center justify-center gap-2",
-          "bg-primary-600 text-white hover:bg-primary-700 shadow-lg hover:shadow-xl",
-          isSubmitting && "opacity-50 cursor-not-allowed",
-        )}
-      >
-        {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin" /> : null}
-        {isSubmitting ? "Placing Order..." : `Place Order — Pay on Delivery`}
-      </button>
     </div>
   );
 }

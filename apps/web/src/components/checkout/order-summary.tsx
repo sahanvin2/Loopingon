@@ -43,19 +43,19 @@ export function OrderSummary() {
                   {item.quantity}
                 </div>
               </div>
-              <div className="flex-1 min-w-0 flex flex-col justify-center">
-                <h4 className="text-sm font-medium text-text-900 line-clamp-2 leading-tight mb-1">{title}</h4>
-                {variantName && (
-                  <p className="text-xs text-text-500 mb-1 truncate">
-                    {variantName}
-                  </p>
-                )}
-                <div className="flex items-center justify-between mt-1">
-                  <p className="text-xs text-muted-500 font-medium">Qty: {item.quantity}</p>
-                  <p className="text-sm font-semibold text-text-900">
+              <div className="flex-1 min-w-0 flex flex-col justify-center py-1">
+                <div className="flex justify-between items-start gap-3">
+                  <h4 className="text-sm font-medium text-text-900 line-clamp-2 leading-tight">{title}</h4>
+                  <p className="text-sm font-semibold text-text-900 shrink-0 mt-0.5">
                     {formatPrice(parseFloat(item.price))}
                   </p>
                 </div>
+                {variantName && (
+                  <p className="text-xs text-text-500 mt-1 truncate">
+                    {variantName}
+                  </p>
+                )}
+                <p className="text-xs text-muted-500 font-medium mt-1.5">Qty: {item.quantity}</p>
               </div>
             </div>
           );
