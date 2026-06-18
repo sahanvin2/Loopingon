@@ -6,7 +6,7 @@ import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const currencies = [
-  { code: "LKR", symbol: "රු", name: "Sri Lankan Rupee" },
+  { code: "LKR", symbol: "Rs.", name: "Sri Lankan Rupee" },
 ];
 
 interface CurrencyContextType {

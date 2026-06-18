@@ -364,7 +364,7 @@ export const COMPETITION_STATUS_MAP: Record<
 export const PLATFORM_COMMISSION_RATE = 20;
 
 export const CURRENCIES = [
-  { code: "LKR", symbol: "රු", name: "Sri Lankan Rupee" },
+  { code: "LKR", symbol: "Rs.", name: "Sri Lankan Rupee" },
   { code: "EUR", symbol: "€", name: "Euro" },
   { code: "GBP", symbol: "£", name: "British Pound" },
   { code: "AUD", symbol: "A$", name: "Australian Dollar" },

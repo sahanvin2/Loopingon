@@ -18,6 +18,7 @@ const steps: { key: CheckoutStep; label: string }[] = [
 ];
 
 interface ShippingFormData {
+  email: string;
   fullName: string;
   phone: string;
   altPhone: string;
@@ -27,6 +28,7 @@ interface ShippingFormData {
   district: string;
   postalCode: string;
   country: string;
+  deliveryInstructions?: string;
 }
 
 interface GiftFormData {
@@ -50,6 +52,7 @@ export function CheckoutForm({ className }: CheckoutFormProps) {
   const [orderError, setOrderError] = useState<string | null>(null);
 
   const [shippingData, setShippingData] = useState<ShippingFormData>({
+    email: user?.email || "",
     fullName: user?.fullName || "",
     phone: user?.phone || "",
     altPhone: "",
@@ -59,6 +62,7 @@ export function CheckoutForm({ className }: CheckoutFormProps) {
     district: "",
     postalCode: "",
     country: "Sri Lanka",
+    deliveryInstructions: "",
   });
 
   const [giftData, setGiftData] = useState<GiftFormData>({
@@ -85,6 +89,7 @@ export function CheckoutForm({ className }: CheckoutFormProps) {
         vendorId,
         items: orderItems,
         shippingAddress: {
+          email: data.email,
           fullName: data.fullName,
           phone: data.phone,
           altPhone: data.altPhone,
@@ -97,7 +102,7 @@ export function CheckoutForm({ className }: CheckoutFormProps) {
         },
         shippingMethod: method,
         paymentMethod: "COD",
-        customerNotes: giftData.isGift ? `Gift: ${giftData.giftMessage}` : undefined,
+        customerNotes: data.deliveryInstructions ? `Delivery Instructions: ${data.deliveryInstructions}\n\n${giftData.isGift ? `Gift: ${giftData.giftMessage}` : ""}` : (giftData.isGift ? `Gift: ${giftData.giftMessage}` : undefined),
         isGift: giftData.isGift,
         giftMessage: giftData.giftMessage || undefined,
         giftWrap: giftData.giftWrap || undefined,

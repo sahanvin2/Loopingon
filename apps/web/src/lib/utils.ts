@@ -8,7 +8,7 @@ export function cn(...inputs: ClassValue[]) {
 
 export function formatPrice(amount: number, currency: string = "LKR"): string {
   const currencySymbols: Record<string, string> = {
-    LKR: "රු",
+    LKR: "Rs.",
     EUR: "€",
     GBP: "£",
     AUD: "A$",
@@ -27,7 +27,7 @@ export function formatPrice(amount: number, currency: string = "LKR"): string {
 
 export function formatPriceWithoutDecimals(amount: number, currency: string = "LKR"): string {
   const currencySymbols: Record<string, string> = {
-    LKR: "රු",
+    LKR: "Rs.",
     EUR: "€",
     GBP: "£",
     AUD: "A$",

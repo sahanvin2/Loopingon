@@ -31,26 +31,31 @@ export function OrderSummary() {
           
           return (
             <div key={`${item.id}-${item.variantId}`} className="flex gap-4">
-              <div className="relative w-16 h-16 rounded-lg overflow-hidden border border-surface-200 shrink-0">
-                <img
-                  src={image}
-                  alt={title}
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute -top-2 -right-2 w-5 h-5 bg-primary-600 text-white text-[10px] font-bold rounded-full flex items-center justify-center z-10 shadow-sm">
+              <div className="relative w-16 h-16 shrink-0 mt-1">
+                <div className="w-full h-full rounded-lg overflow-hidden border border-surface-200">
+                  <img
+                    src={image}
+                    alt={title}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="absolute -top-2 -right-2 w-5 h-5 bg-primary-500 text-white text-[11px] font-bold rounded-full flex items-center justify-center z-10 shadow-md">
                   {item.quantity}
                 </div>
               </div>
-              <div className="flex-1 min-w-0">
+              <div className="flex-1 min-w-0 flex flex-col justify-center">
                 <h4 className="text-sm font-medium text-text-900 line-clamp-2 leading-tight mb-1">{title}</h4>
                 {variantName && (
                   <p className="text-xs text-text-500 mb-1 truncate">
                     {variantName}
                   </p>
                 )}
-                <p className="text-sm font-semibold text-text-900">
-                  {formatPrice(parseFloat(item.price))}
-                </p>
+                <div className="flex items-center justify-between mt-1">
+                  <p className="text-xs text-muted-500 font-medium">Qty: {item.quantity}</p>
+                  <p className="text-sm font-semibold text-text-900">
+                    {formatPrice(parseFloat(item.price))}
+                  </p>
+                </div>
               </div>
             </div>
           );
