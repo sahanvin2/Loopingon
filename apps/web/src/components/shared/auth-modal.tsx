@@ -68,7 +68,11 @@ export function AuthModal() {
             </button>
 
             <div className="mb-5 text-center">
-              <span className="inline-flex items-center justify-center h-10 w-10 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 text-white font-serif text-lg shadow-[0_8px_20px_-8px_rgba(176,86,110,0.6)] mb-3">L</span>
+              <span className="inline-flex items-center justify-center h-12 w-12 rounded-2xl bg-gradient-to-br from-primary-400 to-primary-600 text-white shadow-[0_8px_24px_-8px_rgba(176,86,110,0.6)] mb-4">
+                <svg viewBox="0 0 24 24" fill="currentColor" className="w-7 h-7">
+                  <path d="M12 2L2 22h20L12 2zm0 4.5l6.5 13.5h-13L12 6.5z" />
+                </svg>
+              </span>
               <h2 className="font-serif text-2xl font-bold text-text-900">
                 {mode === "signin" ? "Welcome Back" : "Create Your Account"}
               </h2>

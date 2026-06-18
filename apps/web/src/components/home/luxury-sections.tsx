@@ -134,9 +134,9 @@ export function GiftFinder() {
           <div className="w-full lg:w-1/2 flex justify-center z-10">
             <div className="relative w-full max-w-sm aspect-square">
               <div className="absolute inset-0 bg-gradient-to-br from-luxury-gold/20 via-accent-500/20 to-primary-500/20 rounded-full blur-2xl" />
-              <div className="relative w-full h-full bg-surface-100 rounded-full border-[6px] border-white shadow-2xl overflow-hidden">
-                 <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?q=80&w=600&auto=format&fit=crop" alt="Luxury Gift Box" className="w-full h-full object-cover" />
-              </div>
+               <div className="relative w-full h-full bg-gradient-to-br from-navy-100 to-surface-200 rounded-full border-[6px] border-white shadow-2xl flex items-center justify-center">
+                 <Gift className="w-16 h-16 text-primary-500" />
+               </div>
               <div className="absolute -top-4 -right-4 w-20 h-20 bg-primary-500 rounded-full flex items-center justify-center text-white shadow-lg">
                 <Gift className="w-8 h-8" />
               </div>
@@ -261,12 +261,12 @@ export function ProductGrids() {
 
 export function ShopByRegion() {
   const regions = [
-    { name: "Kandy", description: "Hill Country Crafts", img: "https://images.unsplash.com/photo-1620608552395-58079633e8dc?q=80&w=400&auto=format&fit=crop" },
-    { name: "Galle", description: "Coastal Sellers", img: "https://images.unsplash.com/photo-1550184658-ff613b5e40e8?q=80&w=400&auto=format&fit=crop" },
-    { name: "Jaffna", description: "Northern Treasures", img: "https://images.unsplash.com/photo-1625736301382-78d10d19e072?q=80&w=400&auto=format&fit=crop" },
-    { name: "Matara", description: "Southern Heritage", img: "https://images.unsplash.com/photo-1588722881267-bc80f1ed7f0f?q=80&w=400&auto=format&fit=crop" },
-    { name: "Anuradhapura", description: "Ancient Capital", img: "https://images.unsplash.com/photo-1626201314959-8669c585e49f?q=80&w=400&auto=format&fit=crop" },
-    { name: "Kurunegala", description: "Central Plains", img: "https://images.unsplash.com/photo-1616086883262-e64e525164bc?q=80&w=400&auto=format&fit=crop" },
+    { name: "Kandy", description: "Hill Country", color: "from-amber-500 to-orange-600" },
+    { name: "Galle", description: "Coastal", color: "from-blue-500 to-cyan-600" },
+    { name: "Jaffna", description: "Northern", color: "from-purple-500 to-indigo-600" },
+    { name: "Matara", description: "Southern", color: "from-teal-500 to-emerald-600" },
+    { name: "Anuradhapura", description: "Heritage", color: "from-red-500 to-rose-600" },
+    { name: "Kurunegala", description: "Central", color: "from-green-500 to-lime-600" },
   ];
 
   return (
@@ -280,10 +280,11 @@ export function ShopByRegion() {
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5">
           {regions.map((r) => (
-            <Link key={r.name} href={`/region/${r.name.toLowerCase()}`} className="group relative rounded-2xl overflow-hidden aspect-[4/5] shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-1">
-              <img src={r.img} alt={r.name} className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-              <div className="absolute inset-0 bg-gradient-to-t from-navy-900/90 via-navy-900/30 to-transparent" />
-              <div className="absolute inset-0 bg-primary-500/0 group-hover:bg-primary-500/10 transition-colors duration-500" />
+            <Link key={r.name} href={`/products?district=${r.name.toLowerCase()}`} className={`group relative rounded-2xl overflow-hidden aspect-[4/5] shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-1 bg-gradient-to-br ${r.color}`}>
+              <div className="absolute inset-0 bg-gradient-to-t from-navy-900/80 via-navy-900/20 to-transparent" />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <span className="text-6xl font-serif font-bold text-white/15 group-hover:text-white/25 transition-colors">{r.name[0]}</span>
+              </div>
               <div className="absolute bottom-5 left-5 right-5 text-white">
                 <span className="font-serif text-xl font-bold block mb-1">{r.name}</span>
                 <span className="text-xs text-navy-100/80 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 flex items-center gap-1">
