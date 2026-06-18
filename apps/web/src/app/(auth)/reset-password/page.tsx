@@ -64,7 +64,11 @@ export default function ResetPasswordPage() {
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="relative w-full max-w-md">
         <div className="rounded-3xl bg-white/80 backdrop-blur-xl p-8 md:p-10 shadow-[0_20px_60px_-20px_rgba(176,86,110,0.3)] border border-white/50">
           <div className="mb-8 text-center">
-            <Link href="/" className="inline-flex items-center justify-center h-12 w-12 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 text-white font-serif text-xl shadow-[0_8px_24px_-8px_rgba(176,86,110,0.6)] mb-4">L</Link>
+            <Link href="/" className="inline-flex items-center justify-center h-14 w-14 rounded-2xl bg-gradient-to-br from-primary-400 to-primary-600 text-white shadow-[0_8px_24px_-8px_rgba(176,86,110,0.6)] hover:scale-105 hover:shadow-[0_12px_28px_-8px_rgba(176,86,110,0.7)] transition-all mb-4">
+              <svg viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8">
+                <path d="M12 2L2 22h20L12 2zm0 4.5l6.5 13.5h-13L12 6.5z" />
+              </svg>
+            </Link>
             <h1 className="font-serif text-3xl font-bold text-text-900 tracking-tight">Reset password</h1>
             <p className="mt-1.5 text-sm text-muted-500">Create a new password for your account</p>
           </div>

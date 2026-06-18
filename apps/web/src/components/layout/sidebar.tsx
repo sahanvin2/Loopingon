@@ -27,6 +27,8 @@ import {
   Percent,
   AlertTriangle,
   Shield,
+  ShieldCheck,
+  RotateCcw,
   Server,
   ClipboardList,
   X,
@@ -136,6 +138,14 @@ const adminItems: SidebarSection[] = [
       { label: "Users", href: "/admin/users", icon: Users },
       { label: "Products", href: "/admin/products", icon: Package },
       { label: "Orders", href: "/admin/orders", icon: ShoppingCart },
+      { label: "Returns & Refunds", href: "/admin/disputes", icon: RotateCcw },
+    ],
+  },
+  {
+    heading: "Staff",
+    items: [
+      { label: "Users & Roles", href: "/admin/users", icon: Users },
+      { label: "Moderators", href: "/admin/users?role=SUPPORT", icon: ShieldCheck },
     ],
   },
   {
