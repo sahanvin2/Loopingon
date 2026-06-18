@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { Pencil, Trash2, Check, X, Loader2 } from "lucide-react";
+import { Pencil, Trash2, Check, X, Loader2, Search } from "lucide-react";
 import { toast } from "sonner";
 import { LoadingSkeleton } from "@/components/shared/loading-skeleton";
 import { EmptyState } from "@/components/shared/empty-state";
@@ -21,24 +21,26 @@ const PRODUCT_STATUS_MAP: Record<string, { label: string; variant: string }> = {
 };
 
 const statusFilters = [
-  { key: "", label: "All" },
-  { key: "PUBLISHED", label: "Published" },
+  { key: "", label: "All Products" },
+  { key: "PUBLISHED", label: "In Stock" },
+  { key: "OUT_OF_STOCK", label: "Out of Stock" },
   { key: "PENDING_REVIEW", label: "Pending Review" },
   { key: "REJECTED", label: "Rejected" },
-  { key: "OUT_OF_STOCK", label: "Out of Stock" },
 ];
 
 export default function AdminProductsPage() {
   const queryClient = useQueryClient();
   const [page, setPage] = useState(1);
   const [status, setStatus] = useState("");
+  const [search, setSearch] = useState("");
+  const [searchInput, setSearchInput] = useState("");
   const [selectedRows, setSelectedRows] = useState<Set<string>>(new Set());
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [editForm, setEditForm] = useState({ title: "", price: "", compareAtPrice: "", quantity: "", description: "" });
 
   const { data, isLoading } = useQuery({
-    queryKey: ["admin", "products", page, status],
-    queryFn: () => get<PaginatedResponse<Product>>("/admin/products", { page, limit: 20, status: status || undefined }),
+    queryKey: ["admin", "products", page, status, search],
+    queryFn: () => get<PaginatedResponse<Product>>("/admin/products", { page, limit: 20, status: status || undefined, search: search || undefined }),
   });
 
   const deleteMutation = useMutation({
@@ -100,6 +102,20 @@ export default function AdminProductsPage() {
           <p className="text-muted-600 mt-1">Manage all products — edit, approve, or delete</p>
         </div>
         <div className="flex items-center gap-3">
+          <form onSubmit={(e) => { e.preventDefault(); setSearch(searchInput); setPage(1); }} className="relative">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-400" />
+            <input
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
+              placeholder="Search name or SKU..."
+              className="w-64 pl-9 pr-3 py-2 rounded-lg border border-accent-200 bg-white text-sm focus:ring-2 focus:ring-primary-500 focus:outline-none"
+            />
+            {search && (
+              <button type="button" onClick={() => { setSearch(""); setSearchInput(""); setPage(1); }} className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-400 hover:text-text-600">
+                <X className="w-3.5 h-3.5" />
+              </button>
+            )}
+          </form>
           <select value={status} onChange={(e) => { setStatus(e.target.value); setPage(1); }}
             className="px-3 py-2 rounded-lg border border-accent-200 bg-white text-sm">
             {statusFilters.map((f) => <option key={f.key} value={f.key}>{f.label}</option>)}
@@ -129,6 +145,7 @@ export default function AdminProductsPage() {
               <tr className="border-b border-accent-100 text-left">
                 <th className="p-4 w-10"><input type="checkbox" onChange={(e) => setSelectedRows(e.target.checked ? new Set(products.map(p => p.id)) : new Set())} /></th>
                 <th className="p-4 text-xs font-semibold text-muted-500 uppercase">Product</th>
+                <th className="p-4 text-xs font-semibold text-muted-500 uppercase">SKU</th>
                 <th className="p-4 text-xs font-semibold text-muted-500 uppercase">Price</th>
                 <th className="p-4 text-xs font-semibold text-muted-500 uppercase">Stock</th>
                 <th className="p-4 text-xs font-semibold text-muted-500 uppercase">Status</th>
@@ -154,6 +171,7 @@ export default function AdminProductsPage() {
                       </div>
                     </div>
                   </td>
+                  <td className="p-4 text-sm font-mono text-muted-600">{product.sku || "-"}</td>
                   <td className="p-4 text-sm font-medium">{formatPrice(Number(product.price))}</td>
                   <td className="p-4 text-sm">{product.quantity ?? 0}</td>
                   <td className="p-4">
