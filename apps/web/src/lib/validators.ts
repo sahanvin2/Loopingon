@@ -17,7 +17,7 @@ const signUpBaseSchema = z.object({
     .regex(/[0-9]/, "Password must contain at least one number")
     .regex(/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~`]/, "Password must contain at least one special character"),
   confirmPassword: z.string(),
-  acceptTerms: z.boolean(),
+  acceptTerms: z.boolean().refine((v) => v === true, "You must accept the terms and conditions"),
 });
 
 export const signUpSchema = signUpBaseSchema.refine(
@@ -33,7 +33,8 @@ export const customerSignUpSchema = signUpBaseSchema
     phone: z
       .string()
       .regex(/^\+94\d{9}$/, "Please enter a valid Sri Lankan phone number (+94XXXXXXXXX)")
-      .optional(),
+      .optional()
+      .or(z.literal("")),
     preferredLanguage: z.enum(["en", "si", "ta"]).optional(),
     newsletterOptIn: z.boolean().optional(),
   })

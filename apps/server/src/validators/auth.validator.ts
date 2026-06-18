@@ -24,7 +24,8 @@ export const signupSchema = z.object({
   phone: z
     .string()
     .regex(/^\+?[0-9]{7,15}$/, "Invalid phone number")
-    .optional(),
+    .optional()
+    .or(z.literal("")),
   acceptTerms: z
     .boolean()
     .refine((v) => v === true, "You must accept the terms and conditions"),

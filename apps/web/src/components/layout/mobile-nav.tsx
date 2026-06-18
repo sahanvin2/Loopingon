@@ -62,7 +62,7 @@ const categories = [
   { label: "Candles", href: "/products?category=candles" },
   { label: "Wood Crafts", href: "/products?category=wood" },
   { label: "Pottery & Ceramics", href: "/products?category=pottery" },
-  { label: "Handloom Apparel", href: "/products?category=handloom" },
+  { label: "Fashion & Apparel", href: "/products?category=clothing" },
 ];
 
 const accountLinks = [

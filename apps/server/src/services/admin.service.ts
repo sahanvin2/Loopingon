@@ -240,6 +240,43 @@ export async function rejectProduct(productId: string, adminId: string, reason: 
   return prisma.product.update({ where: { id: productId }, data: { status: "REJECTED" } });
 }
 
+export async function deleteProduct(productId: string, adminId: string) {
+  const product = await prisma.product.findUnique({ where: { id: productId } });
+  if (!product) throw new AppError("Product not found", 404);
+  await prisma.productImage.deleteMany({ where: { productId } });
+  await prisma.productCategory.deleteMany({ where: { productId } });
+  await prisma.product.delete({ where: { id: productId } });
+  return { message: "Product deleted" };
+}
+
+export async function updateProduct(productId: string, data: any, adminId: string) {
+  const product = await prisma.product.findUnique({ where: { id: productId } });
+  if (!product) throw new AppError("Product not found", 404);
+  return prisma.product.update({
+    where: { id: productId },
+    data: {
+      title: data.title,
+      description: data.description,
+      price: data.price,
+      compareAtPrice: data.compareAtPrice,
+      quantity: data.quantity,
+      sku: data.sku,
+      slug: data.slug,
+      status: data.status,
+      isFeatured: data.isFeatured,
+      shippingPrice: data.shippingPrice,
+      updatedAt: new Date(),
+    },
+  });
+}
+
+export async function bulkDeleteProducts(ids: string[], adminId: string) {
+  await prisma.productImage.deleteMany({ where: { productId: { in: ids } } });
+  await prisma.productCategory.deleteMany({ where: { productId: { in: ids } } });
+  await prisma.product.deleteMany({ where: { id: { in: ids } } });
+  return { message: `${ids.length} products deleted` };
+}
+
 // ============ ORDERS ============
 
 export async function getOrders(

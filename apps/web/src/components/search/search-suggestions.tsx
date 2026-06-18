@@ -30,7 +30,7 @@ export function SearchSuggestions({
   if (!isVisible || (suggestions.length === 0 && !query)) return null;
 
   const trending: Suggestion[] = [
-    { type: "trending", label: "Handloom sarees", href: "/products?q=handloom+sarees" },
+    { type: "trending", label: "Fashion & Apparel", href: "/products?q=clothing" },
     { type: "trending", label: "Sri Lankan masks", href: "/products?q=sri+lankan+masks" },
     { type: "trending", label: "Brass lamps", href: "/products?q=brass+lamps" },
     { type: "trending", label: "Batik wall hangings", href: "/products?q=batik+wall+hangings" },

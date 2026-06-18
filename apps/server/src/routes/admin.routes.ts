@@ -218,6 +218,42 @@ router.post(
   }
 );
 
+router.delete(
+  "/products/:productId",
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      await adminService.deleteProduct(req.params.productId, req.user!.id);
+      successResponse(res, { message: "Product deleted" });
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
+router.patch(
+  "/products/:productId",
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const product = await adminService.updateProduct(req.params.productId, req.body, req.user!.id);
+      successResponse(res, product);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
+router.post(
+  "/products/bulk-delete",
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      await adminService.bulkDeleteProducts(req.body.ids, req.user!.id);
+      successResponse(res, { message: `${req.body.ids.length} products deleted` });
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
 // ==================== ORDERS ====================
 
 router.get(
