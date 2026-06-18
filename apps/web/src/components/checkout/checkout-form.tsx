@@ -9,14 +9,12 @@ import { useAuthStore } from "@/stores/auth-store";
 import { post } from "@/lib/api-client";
 import { toast } from "sonner";
 import { ShippingStep } from "@/components/checkout/shipping-step";
-import { PaymentStep } from "@/components/checkout/payment-step";
 
-type CheckoutStep = "shipping" | "payment" | "confirmation";
+type CheckoutStep = "shipping" | "confirmation";
 
 const steps: { key: CheckoutStep; label: string }[] = [
-  { key: "shipping", label: "Shipping" },
-  { key: "payment", label: "Payment" },
-  { key: "confirmation", label: "Confirmation" },
+  { key: "shipping", label: "Delivery" },
+  { key: "confirmation", label: "Confirmed" },
 ];
 
 interface ShippingFormData {
@@ -47,8 +45,7 @@ export function CheckoutForm({ className }: CheckoutFormProps) {
   const [currentStep, setCurrentStep] = useState<CheckoutStep>("shipping");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [orderId, setOrderId] = useState<string | null>(null);
-  const [selectedMethod, setSelectedMethod] = useState("SL_POST");
-  const [selectedPayment, setSelectedPayment] = useState("payhere");
+  const [selectedMethod, setSelectedMethod] = useState("KOOMBIYO");
   const [orderError, setOrderError] = useState<string | null>(null);
 
   const [shippingData, setShippingData] = useState<ShippingFormData>({
@@ -68,14 +65,9 @@ export function CheckoutForm({ className }: CheckoutFormProps) {
     giftWrap: false,
   });
 
-  const handleShippingNext = useCallback((data: ShippingFormData, method: string) => {
+  const handleShippingNext = useCallback(async (data: ShippingFormData, method: string) => {
     setShippingData(data);
     setSelectedMethod(method);
-    setCurrentStep("payment");
-  }, []);
-
-  const handlePlaceOrder = useCallback(async () => {
-    if (isSubmitting) return;
     setIsSubmitting(true);
     setOrderError(null);
 
@@ -90,19 +82,18 @@ export function CheckoutForm({ className }: CheckoutFormProps) {
       const res = await post<{ data: { id: string; orderNumber: string } }>("/orders", {
         vendorId,
         items: orderItems,
-        shippingAddressId: "", // will be handled by backend if needed
         shippingAddress: {
-          fullName: shippingData.fullName,
-          phone: shippingData.phone,
-          addressLine1: shippingData.addressLine1,
-          addressLine2: shippingData.addressLine2,
-          city: shippingData.city,
-          district: shippingData.district,
-          postalCode: shippingData.postalCode,
-          country: shippingData.country,
+          fullName: data.fullName,
+          phone: data.phone,
+          addressLine1: data.addressLine1,
+          addressLine2: data.addressLine2,
+          city: data.city,
+          district: data.district,
+          postalCode: data.postalCode,
+          country: data.country,
         },
-        shippingMethod: selectedMethod,
-        paymentMethod: selectedPayment,
+        shippingMethod: method,
+        paymentMethod: "COD",
         customerNotes: giftData.isGift ? `Gift: ${giftData.giftMessage}` : undefined,
         isGift: giftData.isGift,
         giftMessage: giftData.giftMessage || undefined,
@@ -113,15 +104,15 @@ export function CheckoutForm({ className }: CheckoutFormProps) {
       setOrderId(res.data.id);
       clearCart();
       setCurrentStep("confirmation");
-      toast.success("Order placed successfully!");
+      toast.success("Order placed! Pay on delivery.");
     } catch (err: any) {
-      const message = err?.message || "Failed to place order. Please try again.";
+      const message = err?.message || "Failed to place order.";
       setOrderError(message);
       toast.error(message);
     } finally {
       setIsSubmitting(false);
     }
-  }, [items, shippingData, selectedMethod, selectedPayment, giftData, clearCart, isSubmitting]);
+  }, [items, giftData, clearCart]);
 
   const currentIndex = steps.findIndex((s) => s.key === currentStep);
 
@@ -176,24 +167,6 @@ export function CheckoutForm({ className }: CheckoutFormProps) {
               initialData={shippingData}
               onNext={handleShippingNext}
               selectedMethod={selectedMethod}
-            />
-          </motion.div>
-        )}
-
-        {currentStep === "payment" && (
-          <motion.div
-            key="payment"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
-          >
-            <PaymentStep
-              onBack={() => setCurrentStep("shipping")}
-              onPlaceOrder={handlePlaceOrder}
-              selectedPayment={selectedPayment}
-              onPaymentChange={setSelectedPayment}
-              giftData={giftData}
-              onGiftChange={setGiftData}
               orderError={orderError}
               isSubmitting={isSubmitting}
             />
@@ -216,8 +189,11 @@ export function CheckoutForm({ className }: CheckoutFormProps) {
             {orderId && (
               <p className="text-sm text-muted-500 mb-2">Order #{orderId.slice(0, 8).toUpperCase()}</p>
             )}
-            <p className="text-muted-600 max-w-md mx-auto mb-8">
-              Thank you for your order! You&apos;ll receive a confirmation email shortly. Your handcrafted treasures are being prepared.
+            <p className="text-muted-600 max-w-md mx-auto mb-2">
+              Your order has been placed successfully.
+            </p>
+            <p className="text-muted-500 max-w-md mx-auto mb-8 text-sm">
+              Pay cash when your order arrives. We will deliver via Koombiyo within 1-3 business days.
             </p>
             <div className="flex items-center justify-center gap-4">
               <a

@@ -20,11 +20,11 @@ export async function getProducts(
     isFeatured?: boolean;
     isHandmade?: boolean;
     isEcoFriendly?: boolean;
+    onSale?: boolean;
   }
 ) {
   const { page: p, limit: l } = getPaginationParams(page, limit);
   const where: Prisma.ProductWhereInput = {
-    status: "PUBLISHED",
     deletedAt: null,
   };
 
@@ -57,6 +57,9 @@ export async function getProducts(
   if (filters?.isEcoFriendly) {
     where.isEcoFriendly = true;
   }
+  if (filters?.onSale) {
+    where.compareAtPrice = { not: null };
+  }
   if (filters?.search) {
     where.OR = [
       { title: { contains: filters.search, mode: "insensitive" } },
@@ -64,25 +67,28 @@ export async function getProducts(
     ];
   }
 
-  let orderBy: Prisma.ProductOrderByWithRelationInput = { createdAt: "desc" };
+  let orderBy: Prisma.ProductOrderByWithRelationInput[] = [
+    { quantity: "desc" },
+    { createdAt: "desc" },
+  ];
   switch (filters?.sortBy) {
     case "price_asc":
-      orderBy = { price: "asc" };
+      orderBy = [{ quantity: "desc" }, { price: "asc" }];
       break;
     case "price_desc":
-      orderBy = { price: "desc" };
+      orderBy = [{ quantity: "desc" }, { price: "desc" }];
       break;
     case "rating":
-      orderBy = { averageRating: "desc" };
+      orderBy = [{ quantity: "desc" }, { averageRating: "desc" }];
       break;
     case "newest":
-      orderBy = { createdAt: "desc" };
+      orderBy = [{ quantity: "desc" }, { createdAt: "desc" }];
       break;
     case "popular":
-      orderBy = { salesCount: "desc" };
+      orderBy = [{ quantity: "desc" }, { salesCount: "desc" }];
       break;
     case "views":
-      orderBy = { viewsCount: "desc" };
+      orderBy = [{ quantity: "desc" }, { viewsCount: "desc" }];
       break;
   }
 

@@ -34,30 +34,30 @@ export async function calculateShipping(
     }
   }
 
-  // SL Post base rate: Rs. 250 for up to 1kg
-  // Additional weight: Rs. 50 per kg above 1kg
-  // Express (next day): Rs. 600 flat rate
+  // Koombiyo base rate: Rs. 350 for up to 2kg
+  // Additional weight: Rs. 50 per kg above 2kg
+  // Express (next day): Rs. 650 flat rate
   // Free: orders over Rs. 5,000
 
   const weightKg = Math.ceil(Math.max(totalWeight, 1));
-  const slPostCost = 250 + (weightKg > 1 ? (weightKg - 1) * 50 : 0);
-  const expressCost = 600;
+  const koombiyoCost = 350 + (weightKg > 2 ? (weightKg - 2) * 50 : 0);
+  const expressCost = 650;
 
   if (subtotal >= 5000 && destination === "LK") {
     return {
       rates: [
         {
-          id: "sl-post",
-          name: "SL Post Delivery",
-          courierName: "Sri Lanka Post",
+          id: "koombiyo",
+          name: "Koombiyo Delivery",
+          courierName: "Koombiyo",
           cost: 0,
           estimatedDays: 3,
           freeShippingMinAmount: 5000,
         },
         {
           id: "express",
-          name: "Express One-Day",
-          courierName: "Express Courier",
+          name: "Koombiyo Express",
+          courierName: "Koombiyo Express",
           cost: 0,
           estimatedDays: 1,
           freeShippingMinAmount: 5000,
@@ -68,7 +68,7 @@ export async function calculateShipping(
         cost: 0,
         estimatedDays: 3,
         name: "Free Delivery",
-        courierName: "Sri Lanka Post",
+        courierName: "Koombiyo",
       },
       totalWeight,
       destination,
@@ -77,13 +77,13 @@ export async function calculateShipping(
 
   const rates = [];
 
-  // SL Post rates (always available domestically)
+  // Koombiyo rates (always available domestically)
   if (destination === "LK") {
     rates.push({
-      id: "sl-post",
-      name: "SL Post Delivery",
-      courierName: "Sri Lanka Post",
-      cost: slPostCost,
+      id: "koombiyo",
+      name: "Koombiyo Delivery",
+      courierName: "Koombiyo",
+      cost: koombiyoCost,
       estimatedDays: 3,
       freeShippingMinAmount: 5000,
     });
@@ -111,7 +111,7 @@ export async function calculateShipping(
 
   return {
     rates,
-    selected: rates.length > 0 ? { ...rates[0], method: "SL_POST" } : null,
+    selected: rates.length > 0 ? { ...rates[0], method: "KOOMBIYO" } : null,
     totalWeight,
     destination,
   };

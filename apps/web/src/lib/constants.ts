@@ -365,7 +365,6 @@ export const PLATFORM_COMMISSION_RATE = 20;
 
 export const CURRENCIES = [
   { code: "LKR", symbol: "රු", name: "Sri Lankan Rupee" },
-  { code: "USD", symbol: "$", name: "US Dollar" },
   { code: "EUR", symbol: "€", name: "Euro" },
   { code: "GBP", symbol: "£", name: "British Pound" },
   { code: "AUD", symbol: "A$", name: "Australian Dollar" },

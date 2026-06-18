@@ -25,7 +25,7 @@ export default function ShippingPolicyPage() {
 
           <section>
             <h2>Domestic Shipping (Sri Lanka)</h2>
-            <p>We primarily use Sri Lanka Post for all domestic deliveries, offering reliable service to every corner of the island. For urgent deliveries, an express courier option is available.</p>
+            <p>We primarily use Koombiyo for all domestic deliveries, offering reliable island-wide service. For urgent deliveries, an express option is available. All orders are Cash on Delivery.</p>
             <div className="mt-4 overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead>

@@ -29,23 +29,23 @@ import { useLogout } from "@/hooks/use-auth";
 import { SearchBar } from "@/components/search/search-bar";
 
 const PRODUCT_CATEGORIES = [
-  { label: "Accessories", href: "/categories/accessories" },
-  { label: "Art & Collectibles", href: "/categories/art-collectibles" },
-  { label: "Bags & Purses", href: "/categories/bags-purses" },
-  { label: "Bath & Beauty", href: "/categories/bath-beauty" },
-  { label: "Books, Movies & Music", href: "/categories/books-movies-music" },
-  { label: "Clothing", href: "/categories/clothing" },
-  { label: "Craft Supplies & Tools", href: "/categories/craft-supplies-tools" },
-  { label: "Electronics & Accessories", href: "/categories/electronics-accessories" },
-  { label: "Gifts", href: "/categories/gifts" },
-  { label: "Home & Living", href: "/categories/home-living" },
-  { label: "Jewelry", href: "/categories/jewelry" },
-  { label: "Kids & Baby", href: "/categories/kids-baby" },
-  { label: "Paper & Party Supplies", href: "/categories/paper-party-supplies" },
-  { label: "Pet Supplies", href: "/categories/pet-supplies" },
-  { label: "Shoes", href: "/categories/shoes" },
-  { label: "Toys & Games", href: "/categories/toys-games" },
-  { label: "Weddings", href: "/categories/weddings" },
+  { label: "Accessories", href: "/products?category=accessories" },
+  { label: "Art & Collectibles", href: "/products?category=art-collectibles" },
+  { label: "Bags & Purses", href: "/products?category=bags-purses" },
+  { label: "Bath & Beauty", href: "/products?category=bath-beauty" },
+  { label: "Books, Movies & Music", href: "/products?category=books-movies-music" },
+  { label: "Clothing", href: "/products?category=clothing" },
+  { label: "Craft Supplies & Tools", href: "/products?category=craft-supplies-tools" },
+  { label: "Electronics & Accessories", href: "/products?category=electronics-accessories" },
+  { label: "Gifts", href: "/products?category=gifts" },
+  { label: "Home & Living", href: "/products?category=home-living" },
+  { label: "Jewelry", href: "/products?category=jewelry" },
+  { label: "Kids & Baby", href: "/products?category=kids-baby" },
+  { label: "Paper & Party Supplies", href: "/products?category=paper-party-supplies" },
+  { label: "Pet Supplies", href: "/products?category=pet-supplies" },
+  { label: "Shoes", href: "/products?category=shoes" },
+  { label: "Toys & Games", href: "/products?category=toys-games" },
+  { label: "Weddings", href: "/products?category=weddings" },
 ];
 
 export function Header() {
@@ -58,8 +58,14 @@ export function Header() {
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [categoriesOpen, setCategoriesOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [showAnnouncement, setShowAnnouncement] = useState(true);
+  const [announcementMounted, setAnnouncementMounted] = useState(false);
   const userMenuRef = useRef<HTMLDivElement>(null);
   const categoriesRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setAnnouncementMounted(true);
+  }, []);
 
   useEffect(() => {
     function onScroll() {
@@ -90,120 +96,143 @@ export function Header() {
   };
 
   return (
-    <header
-      className={cn(
-        "sticky top-0 z-50 border-b border-accent-200 bg-surface-50/85 backdrop-blur-md transition-all duration-300",
-        isScrolled ? "shadow-soft-sm" : "",
-      )}
-    >
-      <div className="max-w-8xl mx-auto flex h-16 items-center gap-4 px-4 sm:gap-6">
-        {/* Logo */}
-        <Link
-          href="/"
-          className="flex items-center gap-2 group focus:outline-none"
-          aria-label="Kandyam home"
-        >
-          <span className="grid h-8 w-8 place-items-center text-primary-500 group-hover:scale-105 transition-transform">
-             {/* Simple Triangle Logo */}
-             <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-               <path d="M12 2L2 22h20L12 2zm0 4.5l6.5 13.5h-13L12 6.5z" />
-             </svg>
-          </span>
-          <span className="font-serif text-2xl tracking-tight text-navy-900 hidden sm:block font-bold">
-             Kandyam
-          </span>
-        </Link>
+    <>
+      <AnimatePresence>
+        {announcementMounted && showAnnouncement && (
+          <motion.div
+            initial={false}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="bg-navy-500 text-white text-xs md:text-sm font-medium relative z-[60] overflow-hidden"
+          >
+            <div className="max-w-8xl mx-auto flex items-center justify-center py-2 px-4">
+              <span className="text-center pr-16">
+                Kandyam: Sri Lanka's Premier Marketplace for Authentic Handmade Crafts.
+              </span>
+              <button 
+                onClick={() => setShowAnnouncement(false)}
+                className="absolute right-4 flex items-center gap-1 text-white/80 hover:text-white transition-colors focus:outline-none p-1 text-xs uppercase tracking-wider"
+                aria-label="Close announcement"
+              >
+                <span>Close</span>
+                <X className="w-3.5 h-3.5" />
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-        {/* Center Content: Nav Links or SearchBar */}
-        <div className="hidden lg:flex items-center justify-center gap-6 mx-auto absolute left-1/2 -translate-x-1/2 w-full max-w-3xl pointer-events-none">
-          <div className="pointer-events-auto flex w-full justify-center">
-            <AnimatePresence mode="wait">
-              {isSearchOpen ? (
-                <motion.div
-                  key="search-bar"
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.15 }}
-                  className="w-full px-4"
-                >
-                  <SearchBar 
-                    className="w-full shadow-soft-md" 
-                    expanded={true} 
-                    onExpand={(exp) => { if (!exp) closeSearch(); }} 
-                  />
-                </motion.div>
-              ) : (
-                <motion.nav
-                  key="nav-links"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.15 }}
-                  className="flex items-center justify-center gap-6"
-                >
-                  <div className="relative" ref={categoriesRef}>
-                    <button 
-                      onClick={() => setCategoriesOpen(!categoriesOpen)}
-                      className="flex items-center gap-1 text-sm font-medium text-navy-900 hover:text-primary-600 transition-colors"
-                    >
-                      Categories <ChevronDown className="w-4 h-4" />
-                    </button>
-                    <AnimatePresence>
-                      {categoriesOpen && (
-                        <motion.div
-                          initial={{ opacity: 0, y: 10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: 10 }}
-                          className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-[800px] bg-white rounded-2xl shadow-soft-xl border border-surface-200 overflow-hidden p-6 max-h-[70vh] overflow-y-auto scrollbar-thin grid grid-cols-3 gap-y-2 gap-x-6"
-                        >
-                          {PRODUCT_CATEGORIES.map((cat) => (
-                            <Link 
-                              key={cat.label}
-                              href={cat.href}
-                              onClick={() => setCategoriesOpen(false)}
-                              className="block px-4 py-2 text-sm font-medium text-text-700 hover:bg-surface-50 hover:text-primary-600 rounded-lg transition-colors"
-                            >
-                              {cat.label}
-                            </Link>
-                          ))}
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                  <Link href="/products" className="text-sm font-medium text-navy-900 hover:text-primary-600 transition-colors">
-                    Shop
-                  </Link>
-                  <Link href="/makers" className="text-sm font-medium text-navy-900 hover:text-primary-600 transition-colors">
-                    Makers
-                  </Link>
-                  <Link href="/gift" className="text-sm font-medium text-navy-900 hover:text-primary-600 transition-colors">
-                    Gifts
-                  </Link>
-                  <Link href="/about-us" className="text-sm font-medium text-navy-900 hover:text-primary-600 transition-colors">
-                    About
-                  </Link>
-                  <Link href="/contact" className="text-sm font-medium text-navy-900 hover:text-primary-600 transition-colors">
-                    Contact
-                  </Link>
-                </motion.nav>
-              )}
-            </AnimatePresence>
-          </div>
-        </div>
+      <header
+        className={cn(
+          "sticky top-0 z-50 border-b border-surface-200 bg-white/90 backdrop-blur-md transition-all duration-300",
+          isScrolled ? "shadow-soft-sm" : "",
+        )}
+      >
+        <div className="max-w-8xl mx-auto flex h-[90px] items-center gap-4 px-4 sm:gap-6">
+          {/* Logo */}
+          <Link
+            href="/"
+            className="flex items-center gap-2 group focus:outline-none"
+            aria-label="Kandyam home"
+          >
+            <span className="grid h-10 w-10 place-items-center text-primary-500 group-hover:scale-105 transition-transform bg-primary-50 rounded-xl">
+               {/* Simple Triangle Logo */}
+               <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+                 <path d="M12 2L2 22h20L12 2zm0 4.5l6.5 13.5h-13L12 6.5z" />
+               </svg>
+            </span>
+            <span className="font-serif text-3xl tracking-tight text-navy-900 hidden sm:block font-bold">
+               Kandyam
+            </span>
+          </Link>
 
-        {/* Right side nav */}
-        <nav className="ml-auto flex items-center gap-0.5 text-sm">
-          {/* Desktop nav links */}
-          <div className="hidden lg:flex items-center gap-3 mr-2">
-            <button
-              onClick={() => isSearchOpen ? closeSearch() : openSearch()}
-              className="grid h-10 w-10 place-items-center rounded-full hover:bg-surface-100 transition-colors"
-              aria-label="Search"
-            >
-               <Search className="h-5 w-5 text-navy-900" />
-            </button>
+          {/* Center Content: Nav Links or SearchBar */}
+          <div className="hidden lg:flex items-center justify-center gap-6 mx-auto absolute left-1/2 -translate-x-1/2 w-full max-w-4xl pointer-events-none">
+            <div className="pointer-events-auto flex w-full justify-center">
+              <AnimatePresence mode="wait">
+                {isSearchOpen ? (
+                  <motion.div
+                    key="search-bar"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 0.15 }}
+                    className="w-full px-4"
+                  >
+                    <SearchBar 
+                      className="w-full shadow-soft-md" 
+                      expanded={true} 
+                      onExpand={(exp) => { if (!exp) closeSearch(); }} 
+                    />
+                  </motion.div>
+                ) : (
+                  <motion.nav
+                    key="nav-links"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.15 }}
+                    className="flex items-center justify-center gap-6"
+                  >
+                    <div className="relative" ref={categoriesRef}>
+                      <button 
+                        onClick={() => setCategoriesOpen(!categoriesOpen)}
+                        className="flex items-center gap-1 text-[15px] font-medium text-text-700 hover:text-primary-600 transition-colors"
+                      >
+                        Categories <ChevronDown className="w-4 h-4" />
+                      </button>
+                      <AnimatePresence>
+                        {categoriesOpen && (
+                          <motion.div
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: 10 }}
+                            className="absolute top-full left-1/2 -translate-x-1/2 mt-6 w-[800px] bg-white rounded-2xl shadow-soft-xl border border-surface-200 overflow-hidden p-6 max-h-[70vh] overflow-y-auto scrollbar-thin grid grid-cols-3 gap-y-2 gap-x-6"
+                          >
+                            {PRODUCT_CATEGORIES.map((cat) => (
+                              <Link 
+                                key={cat.label}
+                                href={cat.href}
+                                onClick={() => setCategoriesOpen(false)}
+                                className="block px-4 py-2 text-sm font-medium text-text-700 hover:bg-surface-50 hover:text-primary-600 rounded-lg transition-colors"
+                              >
+                                {cat.label}
+                              </Link>
+                            ))}
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                    <Link href="/products" className="text-[15px] font-medium text-text-700 hover:text-primary-600 transition-colors">
+                      Shop
+                    </Link>
+                    <Link href="/gift-ideas" className="text-[15px] font-medium text-text-700 hover:text-primary-600 transition-colors">
+                      Gift Ideas
+                    </Link>
+                    <Link href="/custom-orders" className="text-[15px] font-medium text-text-700 hover:text-primary-600 transition-colors">
+                      Custom Orders
+                    </Link>
+                    <Link href="/creators" className="text-[15px] font-medium text-text-700 hover:text-primary-600 transition-colors">
+                      Creators
+                    </Link>
+                  </motion.nav>
+                )}
+              </AnimatePresence>
+            </div>
           </div>
+
+          {/* Right side nav */}
+          <nav className="ml-auto flex items-center gap-1 text-sm">
+            {/* Desktop nav links */}
+            <div className="hidden lg:flex items-center gap-2 mr-2">
+              <button
+                onClick={() => isSearchOpen ? closeSearch() : openSearch()}
+                className="grid h-11 w-11 place-items-center rounded-full hover:bg-surface-100 transition-colors"
+                aria-label="Search"
+              >
+                 <Search className="h-[22px] w-[22px] text-navy-900" />
+              </button>
+            </div>
 
           {/* Wishlist */}
           <button
@@ -362,5 +391,6 @@ export function Header() {
         </nav>
       </div>
     </header>
+    </>
   );
 }

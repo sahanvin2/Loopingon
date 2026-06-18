@@ -2,11 +2,11 @@ import type { Config } from "tailwindcss";
 
 const config: Config = {
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/providers/**/*.{js,ts,jsx,tsx}",
-    "./src/stores/**/*.{js,ts,jsx,tsx}",
+    "src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "src/providers/**/*.{js,ts,jsx,tsx}",
+    "src/stores/**/*.{js,ts,jsx,tsx}",
   ],
   darkMode: "class",
   theme: {
@@ -48,9 +48,15 @@ const config: Config = {
           800: "#001822",
           900: "#00131B",
         },
+        luxury: {
+          bg: "#002C3E",
+          gold: "#D4AF37",
+          light: "#F9E7A1",
+        },
+        main: "#FAFAF8",
         surface: {
-          50: "#F7F8F3", // Background
-          100: "#F1F3EB", // Surface
+          50: "#FAFAF8", // Background main (from spec)
+          100: "#F7F8F3", // Surface / bg-soft
           200: "#E4E8D8",
           300: "#D6DDC2", // Border
           400: "#C6D1AB",
@@ -193,3 +199,4 @@ const config: Config = {
 };
 
 export default config;
+console.log('TAILWIND CONFIG LOADED');

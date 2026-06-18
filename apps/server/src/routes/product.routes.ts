@@ -27,6 +27,7 @@ router.get(
         isFeatured: req.query.isFeatured === "true" || undefined,
         isHandmade: req.query.isHandmade === "true" || undefined,
         isEcoFriendly: req.query.isEcoFriendly === "true" || undefined,
+        onSale: req.query.onSale === "true" || undefined,
       };
       const result = await productService.getProducts(page, limit, filters);
       paginatedResponse(res, result.data, {

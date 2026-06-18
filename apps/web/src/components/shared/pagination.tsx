@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, MoreHorizontal } from "lucide-react";
 import { cn, range } from "@/lib/utils";
@@ -25,13 +26,16 @@ export function Pagination({
   siblingCount = 1,
   className,
 }: PaginationProps) {
+  const searchParams = useSearchParams();
+
   if (totalPages <= 1) return null;
 
   const useLinks = !!baseUrl;
   const buildHref = (page: number) => {
     if (!baseUrl) return "#";
-    const separator = baseUrl.includes("?") ? "&" : "?";
-    return `${baseUrl}${separator}${pageParam}=${page}`;
+    const params = new URLSearchParams(searchParams.toString());
+    params.set(pageParam, String(page));
+    return `${baseUrl}?${params.toString()}`;
   };
 
   const getPageNumbers = (): (number | "dots")[] => {

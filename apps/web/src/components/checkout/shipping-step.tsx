@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Truck } from "lucide-react";
+import { Truck, Package, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useCartStore } from "@/stores/cart-store";
 
@@ -20,24 +20,20 @@ interface ShippingStepProps {
   initialData?: ShippingFormData;
   onNext: (data: ShippingFormData, method: string) => void;
   selectedMethod?: string;
+  orderError?: string | null;
+  isSubmitting?: boolean;
   className?: string;
 }
 
-export function ShippingStep({ initialData, onNext, selectedMethod = "SL_POST", className }: ShippingStepProps) {
+export function ShippingStep({ initialData, onNext, selectedMethod = "KOOMBIYO", orderError, isSubmitting, className }: ShippingStepProps) {
   const { items, subtotal } = useCartStore();
 
-  const standardShippingPrice = items.reduce((acc, item) => {
-    const p = item.product;
-    if (!p) return acc;
-    if (p.freeShippingDomestic) return acc;
-    const cost = p.shippingPrice ? Number(p.shippingPrice) : 400; // default to 400
-    return acc + (cost * item.quantity);
-  }, 0);
+  const freeThreshold = 5000;
+  const isFreeEligible = subtotal >= freeThreshold;
 
   const shippingMethods = [
-    { id: "SL_POST", label: "SL Post Delivery", description: "1-3 business days • Sri Lanka-wide", price: standardShippingPrice },
-    { id: "EXPRESS", label: "Express One-Day Delivery", description: "Next business day delivery", price: standardShippingPrice + 300 },
-    { id: "FREE", label: "Free Delivery", description: "1-3 business days • Orders over Rs. 5,000", price: 0 },
+    { id: "KOOMBIYO", label: "Koombiyo Delivery", description: "1-3 business days • Island-wide • Cash on Delivery", price: isFreeEligible ? 0 : 350, icon: Package },
+    { id: "EXPRESS", label: "Express Delivery", description: "Next business day • Koombiyo Express", price: isFreeEligible ? 300 : 650, icon: Truck },
   ];
 
   const [form, setForm] = useState<ShippingFormData>(initialData || {
@@ -54,11 +50,10 @@ export function ShippingStep({ initialData, onNext, selectedMethod = "SL_POST", 
   const validate = (): boolean => {
     const newErrors: Partial<Record<keyof ShippingFormData, string>> = {};
     if (!form.fullName.trim()) newErrors.fullName = "Full name is required";
-    if (!form.phone.trim()) newErrors.phone = "Phone number is required";
+    if (!form.phone.trim() || form.phone.length < 10) newErrors.phone = "Valid phone number required (min 10 digits)";
     if (!form.addressLine1.trim()) newErrors.addressLine1 = "Address is required";
     if (!form.city.trim()) newErrors.city = "City is required";
     if (!form.district.trim()) newErrors.district = "District is required";
-    if (!form.postalCode.trim()) newErrors.postalCode = "Postal code is required";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -75,12 +70,34 @@ export function ShippingStep({ initialData, onNext, selectedMethod = "SL_POST", 
       errors[field] ? "border-red-400 bg-red-50" : "border-accent-300",
     );
 
+  const selectedShip = shippingMethods.find(m => m.id === method);
+  const shipPrice = selectedShip?.price || 0;
+
   return (
     <div className={cn("space-y-8", className)}>
-      <div>
-        <h2 className="font-serif text-xl text-text-900 mb-1">Shipping Address</h2>
-        <p className="text-sm text-muted-500 mb-4">Enter your delivery address</p>
+      {/* Order Summary Banner */}
+      <div className="bg-surface-50 rounded-xl p-4 border border-accent-200">
+        <div className="flex items-center justify-between">
+          <div>
+            <p className="text-sm font-medium text-text-700">{items.length} item{items.length > 1 ? "s" : ""} in cart</p>
+            <p className="text-xs text-muted-500">Subtotal: Rs. {subtotal.toLocaleString()}</p>
+          </div>
+          <div className="text-right">
+            <p className="text-sm text-muted-500">Delivery</p>
+            <p className="text-sm font-bold text-text-700">{shipPrice === 0 ? "FREE" : `Rs. ${shipPrice}`}</p>
+          </div>
+        </div>
+        {isFreeEligible && shipPrice === 0 && (
+          <div className="mt-2 text-xs text-green-600 bg-green-50 px-3 py-1 rounded-full inline-block">
+            Free delivery unlocked!
+          </div>
+        )}
+      </div>
 
+      {/* Shipping Address */}
+      <div>
+        <h2 className="font-serif text-xl text-text-900 mb-1">Delivery Address</h2>
+        <p className="text-sm text-muted-500 mb-4">Where should we deliver your order?</p>
         <div className="p-4 rounded-lg border border-accent-300 bg-surface-50">
           <div className="space-y-3">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -91,20 +108,19 @@ export function ShippingStep({ initialData, onNext, selectedMethod = "SL_POST", 
               </div>
               <div>
                 <label className="block text-xs font-medium text-text-700 mb-1">Phone *</label>
-                <input type="tel" value={form.phone} onChange={(e) => handleChange("phone", e.target.value)} placeholder="+94 XXX XXX XXXX" className={inputClass("phone")} />
+                <input type="tel" value={form.phone} onChange={(e) => handleChange("phone", e.target.value)} placeholder="07X XXX XXXX" className={inputClass("phone")} />
                 {errors.phone && <p className="text-xs text-red-500 mt-1">{errors.phone}</p>}
               </div>
             </div>
             <div>
-              <label className="block text-xs font-medium text-text-700 mb-1">Address Line 1 *</label>
-              <input type="text" value={form.addressLine1} onChange={(e) => handleChange("addressLine1", e.target.value)} placeholder="Street address, house number" className={inputClass("addressLine1")} />
+              <label className="block text-xs font-medium text-text-700 mb-1">Address *</label>
+              <input type="text" value={form.addressLine1} onChange={(e) => handleChange("addressLine1", e.target.value)} placeholder="House number, street name" className={inputClass("addressLine1")} />
               {errors.addressLine1 && <p className="text-xs text-red-500 mt-1">{errors.addressLine1}</p>}
             </div>
             <div>
-              <label className="block text-xs font-medium text-text-700 mb-1">Address Line 2</label>
-              <input type="text" value={form.addressLine2} onChange={(e) => handleChange("addressLine2", e.target.value)} placeholder="Apartment, suite, etc." className={cn("w-full px-3 py-2 rounded-lg border border-accent-300 text-sm", "focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent")} />
+              <input type="text" value={form.addressLine2} onChange={(e) => handleChange("addressLine2", e.target.value)} placeholder="Landmark, nearby location (optional)" className="w-full px-3 py-2 rounded-lg border border-accent-300 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500" />
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
               <div>
                 <label className="block text-xs font-medium text-text-700 mb-1">City *</label>
                 <input type="text" value={form.city} onChange={(e) => handleChange("city", e.target.value)} placeholder="City" className={inputClass("city")} />
@@ -116,17 +132,17 @@ export function ShippingStep({ initialData, onNext, selectedMethod = "SL_POST", 
                 {errors.district && <p className="text-xs text-red-500 mt-1">{errors.district}</p>}
               </div>
               <div>
-                <label className="block text-xs font-medium text-text-700 mb-1">Postal Code *</label>
-                <input type="text" value={form.postalCode} onChange={(e) => handleChange("postalCode", e.target.value)} placeholder="Postal code" className={inputClass("postalCode")} />
-                {errors.postalCode && <p className="text-xs text-red-500 mt-1">{errors.postalCode}</p>}
+                <label className="block text-xs font-medium text-text-700 mb-1">Postal Code</label>
+                <input type="text" value={form.postalCode} onChange={(e) => handleChange("postalCode", e.target.value)} placeholder="Postal code" className="w-full px-3 py-2 rounded-lg border border-accent-300 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500" />
               </div>
             </div>
           </div>
         </div>
       </div>
 
+      {/* Shipping Method */}
       <div>
-        <h2 className="font-serif text-xl text-text-900 mb-4">Shipping Method</h2>
+        <h2 className="font-serif text-xl text-text-900 mb-4">Delivery Method</h2>
         <div className="space-y-3">
           {shippingMethods.map((m) => (
             <button key={m.id} type="button" onClick={() => setMethod(m.id)}
@@ -138,21 +154,47 @@ export function ShippingStep({ initialData, onNext, selectedMethod = "SL_POST", 
               <div className={cn("w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0", method === m.id ? "border-primary-600" : "border-muted-300")}>
                 {method === m.id && <div className="w-2.5 h-2.5 rounded-full bg-primary-600" />}
               </div>
-              <Truck className="w-5 h-5 text-muted-500 shrink-0" />
+              <m.icon className="w-5 h-5 text-muted-500 shrink-0" />
               <div className="flex-1">
                 <p className="text-sm font-medium text-text-700">{m.label}</p>
                 <p className="text-xs text-muted-500">{m.description}</p>
               </div>
-              <span className="text-sm font-medium text-text-700">{m.price === 0 ? "Free" : `Rs. ${m.price}`}</span>
+              <span className={cn("text-sm font-medium", m.price === 0 ? "text-green-600" : "text-text-700")}>
+                {m.price === 0 ? "FREE" : `Rs. ${m.price}`}
+              </span>
             </button>
           ))}
         </div>
       </div>
 
-      <button type="button" onClick={handleSubmit}
-        className={cn("w-full py-3.5 rounded-lg text-base font-medium transition-colors", "bg-primary-600 text-white hover:bg-primary-700 shadow-rose")}
+      {/* Payment Info */}
+      <div className="bg-green-50 border border-green-200 rounded-xl p-4">
+        <div className="flex items-start gap-3">
+          <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center shrink-0 mt-0.5">
+            <svg className="w-4 h-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <div>
+            <p className="text-sm font-semibold text-green-800">Cash on Delivery</p>
+            <p className="text-xs text-green-700 mt-0.5">Pay only when you receive your order. No online payment required.</p>
+          </div>
+        </div>
+      </div>
+
+      {orderError && (
+        <div className="p-3 rounded-lg bg-red-50 border border-red-200 text-sm text-red-600">{orderError}</div>
+      )}
+
+      <button type="button" onClick={handleSubmit} disabled={isSubmitting}
+        className={cn(
+          "w-full py-4 rounded-xl text-base font-semibold transition-all flex items-center justify-center gap-2",
+          "bg-primary-600 text-white hover:bg-primary-700 shadow-lg hover:shadow-xl",
+          isSubmitting && "opacity-50 cursor-not-allowed",
+        )}
       >
-        Continue to Payment
+        {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin" /> : null}
+        {isSubmitting ? "Placing Order..." : `Place Order — Pay on Delivery`}
       </button>
     </div>
   );

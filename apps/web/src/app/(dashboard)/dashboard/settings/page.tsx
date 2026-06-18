@@ -205,7 +205,6 @@ export default function SettingsPage() {
                     className="w-full px-3 py-2 border border-accent-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500"
                   >
                     <option value="LKR">LKR</option>
-                    <option value="USD">USD</option>
                   </select>
                 </div>
               </div>

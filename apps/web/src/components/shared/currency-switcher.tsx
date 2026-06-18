@@ -7,7 +7,6 @@ import { cn } from "@/lib/utils";
 
 const currencies = [
   { code: "LKR", symbol: "රු", name: "Sri Lankan Rupee" },
-  { code: "USD", symbol: "$", name: "US Dollar" },
 ];
 
 interface CurrencyContextType {

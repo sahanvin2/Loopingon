@@ -143,7 +143,7 @@ export default function VendorShippingPage() {
           </label>
           <div>
             <label className="block text-sm font-medium text-text-700 mb-1">
-              Rate (USD)
+              Rate (LKR)
             </label>
             <input
               type="number"

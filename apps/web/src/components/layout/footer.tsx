@@ -67,8 +67,8 @@ export function Footer() {
   ];
 
   return (
-    <footer className="mt-24 border-t border-surface-200 bg-white">
-      <div className="max-w-7xl mx-auto px-4">
+    <footer className="mt-0 border-t border-surface-200 bg-white">
+      <div className="container-page mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 py-16">
           {/* Brand & Social */}
           <div className="lg:col-span-1">
@@ -77,17 +77,17 @@ export function Footer() {
               className="flex items-center gap-2 shrink-0 group mb-6"
               aria-label="Kandyam home"
             >
-              <span className="grid h-8 w-8 place-items-center text-primary-500 group-hover:scale-105 transition-transform bg-primary-50 rounded-lg">
-                 <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+              <span className="grid h-10 w-10 place-items-center text-primary-500 group-hover:scale-105 transition-transform bg-primary-50 rounded-xl">
+                 <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
                    <path d="M12 2L2 22h20L12 2zm0 4.5l6.5 13.5h-13L12 6.5z" />
                  </svg>
               </span>
-              <span className="font-serif text-2xl tracking-tight text-navy-900 font-bold">
+              <span className="font-serif text-3xl tracking-tight text-navy-900 font-bold">
                 Kandyam
               </span>
             </Link>
             <p className="text-sm text-text-500 mb-8 leading-relaxed">
-              Your global marketplace for unique and creative goods.
+              Your global marketplace for unique, handcrafted, and luxury goods from creators worldwide.
             </p>
             <div className="flex items-center gap-4">
               {socialLinks.map((social) => (
@@ -105,25 +105,51 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Links Grid */}
+          {/* Links Grid: 4 Columns */}
           <div className="lg:col-span-4 grid grid-cols-2 md:grid-cols-4 gap-8">
-            {footerColumns.map((col) => (
-              <div key={col.title}>
-                <h4 className="font-medium text-navy-900 mb-6">{col.title}</h4>
-                <ul className="space-y-4 text-sm text-text-600">
-                  {col.links.map((link) => (
-                    <li key={link.label}>
-                      <Link
-                        href={link.href}
-                        className="hover:text-primary-600 hover:underline underline-offset-4 transition-all"
-                      >
-                        {link.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+            <div>
+              <h4 className="font-serif text-lg font-bold text-navy-900 mb-6">Shop</h4>
+              <ul className="space-y-4 text-sm text-text-600">
+                <li><Link href="/categories/home-decor" className="hover:text-primary-600 hover:underline underline-offset-4">Home Decor</Link></li>
+                <li><Link href="/categories/jewelry" className="hover:text-primary-600 hover:underline underline-offset-4">Jewelry</Link></li>
+                <li><Link href="/categories/fashion" className="hover:text-primary-600 hover:underline underline-offset-4">Fashion</Link></li>
+                <li><Link href="/categories/art" className="hover:text-primary-600 hover:underline underline-offset-4">Art & Collectibles</Link></li>
+                <li><Link href="/categories" className="hover:text-primary-600 hover:underline underline-offset-4">All Categories</Link></li>
+              </ul>
+            </div>
+            
+            <div>
+              <h4 className="font-serif text-lg font-bold text-navy-900 mb-6">Help</h4>
+              <ul className="space-y-4 text-sm text-text-600">
+                <li><Link href="/help-center" className="hover:text-primary-600 hover:underline underline-offset-4">Help Center</Link></li>
+                <li><Link href="/trust" className="hover:text-primary-600 hover:underline underline-offset-4">Trust & Safety</Link></li>
+                <li><Link href="/privacy-settings" className="hover:text-primary-600 hover:underline underline-offset-4">Privacy Settings</Link></li>
+                <li><Link href="/contact" className="hover:text-primary-600 hover:underline underline-offset-4">Contact Us</Link></li>
+                <li><Link href="/returns" className="hover:text-primary-600 hover:underline underline-offset-4">Returns</Link></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="font-serif text-lg font-bold text-navy-900 mb-6">Creators</h4>
+              <ul className="space-y-4 text-sm text-text-600">
+                <li><Link href="/sell" className="hover:text-primary-600 hover:underline underline-offset-4">Start Selling</Link></li>
+                <li><Link href="/handbook" className="hover:text-primary-600 hover:underline underline-offset-4">Creator Handbook</Link></li>
+                <li><Link href="/community" className="hover:text-primary-600 hover:underline underline-offset-4">Community</Link></li>
+                <li><Link href="/seller-policy" className="hover:text-primary-600 hover:underline underline-offset-4">Creator Policies</Link></li>
+                {isSeller && <li><Link href="/vendor/dashboard" className="hover:text-primary-600 hover:underline underline-offset-4">Creator Dashboard</Link></li>}
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="font-serif text-lg font-bold text-navy-900 mb-6">Company</h4>
+              <ul className="space-y-4 text-sm text-text-600">
+                <li><Link href="/about" className="hover:text-primary-600 hover:underline underline-offset-4">About Kandyam</Link></li>
+                <li><Link href="/policies" className="hover:text-primary-600 hover:underline underline-offset-4">Policies</Link></li>
+                <li><Link href="/careers" className="hover:text-primary-600 hover:underline underline-offset-4">Careers</Link></li>
+                <li><Link href="/press" className="hover:text-primary-600 hover:underline underline-offset-4">Press</Link></li>
+                <li><Link href="/impact" className="hover:text-primary-600 hover:underline underline-offset-4">Impact</Link></li>
+              </ul>
+            </div>
           </div>
         </div>
 
@@ -135,10 +161,10 @@ export function Footer() {
             <span>LKR</span>
           </div>
           <p>© {new Date().getFullYear()} Kandyam. All rights reserved.</p>
-          <div className="flex items-center gap-6">
-            <Link href="/terms-of-service" className="hover:text-navy-900 underline underline-offset-4">Terms of Use</Link>
-            <Link href="/privacy-policy" className="hover:text-navy-900 underline underline-offset-4">Privacy</Link>
-            <Link href="/cookie-policy" className="hover:text-navy-900 underline underline-offset-4">Interest-based ads</Link>
+          <div className="flex flex-wrap items-center justify-center gap-6">
+            <Link href="/terms" className="hover:text-navy-900 hover:underline underline-offset-4">Terms of Use</Link>
+            <Link href="/privacy" className="hover:text-navy-900 hover:underline underline-offset-4">Privacy</Link>
+            <Link href="/cookies" className="hover:text-navy-900 hover:underline underline-offset-4">Cookie Policy</Link>
           </div>
         </div>
       </div>

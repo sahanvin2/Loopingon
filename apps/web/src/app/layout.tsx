@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Inter } from "next/font/google";
+import { Playfair_Display, Inter } from "next/font/google";
 import { Providers } from "@/providers";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
@@ -10,9 +10,9 @@ import { PwaProvider } from "@/components/shared/pwa-provider";
 import { PageTracker } from "@/components/shared/page-tracker";
 import "@/styles/globals.css";
 
-const cormorantGaramond = Cormorant_Garamond({
+const playfairDisplay = Playfair_Display({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-playfair-display",
   display: "swap",
 });
@@ -113,6 +113,20 @@ export const metadata: Metadata = {
     yandex: undefined,
   },
   category: "ecommerce",
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180" },
+    ],
+  },
+  manifest: "/site.webmanifest",
+  appleWebApp: {
+    title: "Kandyam",
+    statusBarStyle: "default",
+  },
+  applicationName: "Kandyam",
 };
 
 export default function RootLayout({
@@ -123,32 +137,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${cormorantGaramond.variable} ${inter.variable}`}
+      className={`${playfairDisplay.variable} ${inter.variable}`}
       suppressHydrationWarning
     >
-      <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href="/apple-touch-icon.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href="/favicon-32x32.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href="/favicon-16x16.png"
-        />
-        <link rel="manifest" href="/site.webmanifest" />
-        <meta name="apple-mobile-web-app-title" content="Kandyam" />
-        <meta name="application-name" content="Kandyam" />
-      </head>
       <body className="min-h-screen bg-surface-50 font-sans text-text-900 antialiased">
         <Providers>
           <PwaProvider />
