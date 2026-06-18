@@ -24,7 +24,11 @@ export default function DashboardLayout({
     if (!isLoading && !isAuthenticated) {
       router.replace("/sign-in");
     }
-  }, [isLoading, isAuthenticated, router]);
+    // Safety: redirect admins to admin dashboard
+    if (!isLoading && isAuthenticated && user && (user.role === "ADMIN" || user.role === "SUPER_ADMIN")) {
+      router.replace("/admin/dashboard");
+    }
+  }, [isLoading, isAuthenticated, user, router]);
 
   if (isLoading || !isAuthenticated) {
     return (

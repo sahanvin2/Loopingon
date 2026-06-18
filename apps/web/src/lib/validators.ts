@@ -17,9 +17,7 @@ const signUpBaseSchema = z.object({
     .regex(/[0-9]/, "Password must contain at least one number")
     .regex(/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~`]/, "Password must contain at least one special character"),
   confirmPassword: z.string(),
-  acceptTerms: z.literal(true, {
-    errorMap: () => ({ message: "You must accept the terms and conditions" }),
-  }),
+  acceptTerms: z.boolean(),
 });
 
 export const signUpSchema = signUpBaseSchema.refine(
@@ -82,9 +80,7 @@ export const vendorApplicationSchema = z.object({
   instagramUrl: z.string().url("Please enter a valid URL").optional().or(z.literal("")),
   youtubeUrl: z.string().url("Please enter a valid URL").optional().or(z.literal("")),
   tiktokUrl: z.string().url("Please enter a valid URL").optional().or(z.literal("")),
-  acceptTerms: z.literal(true, {
-    errorMap: () => ({ message: "You must accept the vendor terms and conditions" }),
-  }),
+  acceptTerms: z.boolean(),
 });
 
 export const addressSchema = z.object({

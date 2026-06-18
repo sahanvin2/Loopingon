@@ -29,7 +29,7 @@ export default function SignUpCustomerPage() {
     formState: { errors, isSubmitting },
   } = useForm<CustomerSignUpInput>({
     resolver: zodResolver(customerSignUpSchema),
-    defaultValues: { fullName: "", email: "", phone: "", password: "", confirmPassword: "", acceptTerms: true as unknown as true, newsletterOptIn: false },
+    defaultValues: { fullName: "", email: "", phone: "", password: "", confirmPassword: "", acceptTerms: false, newsletterOptIn: false },
   });
 
   const password = watch("password");

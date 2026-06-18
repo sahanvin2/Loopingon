@@ -31,7 +31,7 @@ type VendorApplicationFormValues = {
   workshopCity: string;
   workshopDistrict: string;
   taxId: string;
-  acceptTerms: true;
+  acceptTerms: boolean;
 };
 
 const steps = ["Account", "Business Details", "Craft Details", "Documents"];
@@ -68,7 +68,7 @@ export default function SignUpVendorPage() {
       storeName: "", storeDescription: "", businessName: "", businessRegistrationNo: "",
       businessType: "individual", craftType: [] as string[], craftDescription: "",
       yearsOfExperience: undefined as number | undefined, employeeCount: undefined as number | undefined,
-      workshopCity: "", workshopDistrict: "", taxId: "", acceptTerms: true as unknown as true,
+      workshopCity: "", workshopDistrict: "", taxId: "", acceptTerms: false,
     },
     mode: "onChange",
   });
