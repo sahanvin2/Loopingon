@@ -52,10 +52,10 @@ export function CreatorsAndSellerPromo() {
           {/* Creators Section */}
           <div className="flex-1 bg-surface-50 rounded-2xl p-8 border border-surface-200 flex flex-col md:flex-row items-center gap-8">
             <div className="md:w-1/3 text-center md:text-left">
-              <h2 className="font-serif text-3xl font-bold text-text-900 mb-3">Meet Our Amazing Creators</h2>
+              <h2 className="font-serif text-3xl font-bold text-text-900 mb-3">Meet Our Amazing Sellers</h2>
               <p className="text-muted-600 mb-6">Discover the stories behind the products you love.</p>
               <Link href="/creators" className="inline-flex items-center text-sm font-semibold text-accent-600 hover:text-accent-700">
-                View all creators <ArrowRight className="ml-1 w-4 h-4" />
+                View all sellers <ArrowRight className="ml-1 w-4 h-4" />
               </Link>
             </div>
             <div className="md:w-2/3 flex flex-wrap justify-center md:justify-end gap-6 sm:gap-8">
@@ -83,7 +83,7 @@ export function CreatorsAndSellerPromo() {
             </div>
             <div className="relative z-10">
               <h2 className="font-serif text-3xl font-bold mb-3">Become a Seller</h2>
-              <p className="text-white/90 mb-8 max-w-[200px]">Join our community of talented creators.</p>
+              <p className="text-white/90 mb-8 max-w-[200px]">Join our community of talented sellers.</p>
               <Link href="/sell-on-kandyam" className="inline-flex items-center justify-center bg-white text-[#78BCC4] px-6 py-3 rounded-full font-bold text-sm hover:bg-surface-50 hover:shadow-soft transition-all hover:-translate-y-0.5">
                 Start Selling <ArrowRight className="ml-1 w-4 h-4" />
               </Link>

@@ -62,7 +62,7 @@ export function ArtisanSpotlight() {
 
       <div className="max-w-8xl mx-auto relative">
         <h2 className="font-serif text-3xl text-text-900 text-center mb-12">
-          Meet Our Artisans
+          Meet Our Sellers
         </h2>
 
         <div className="space-y-20">
@@ -93,7 +93,7 @@ export function ArtisanSpotlight() {
 
               <div>
                 <Badge variant="blush" size="sm" className="mb-3">
-                  {artisan.craftType?.[0] || "Artisan"}
+                  {artisan.craftType?.[0] || "Seller"}
                 </Badge>
                 <h3 className="font-serif text-2xl text-text-900 mb-1">
                   {artisan.storeName}

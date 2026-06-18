@@ -39,12 +39,12 @@ export const metadata: Metadata = {
     template: "%s | Kandyam",
   },
   description:
-    "Kandyam connects skilled Sri Lankan artisans with customers worldwide. " +
+    "Kandyam connects skilled Sri Lankan sellers with customers worldwide. " +
     "Discover unique handcrafted treasures made with traditional techniques and authentic materials.",
   keywords: [
     "Sri Lanka",
     "handmade crafts",
-    "artisan marketplace",
+    "seller marketplace",
     "handicrafts",
     "pottery",
     "wood carving",
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     "traditional crafts",
     "fair trade",
     "ethical shopping",
-    "Sri Lankan artisans",
+    "Sri Lankan sellers",
     "kandyam",
   ],
   authors: [{ name: "Kandyam", url: "https://kandyam.com" }],
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
     siteName: "Kandyam",
     title: "Kandyam - Sri Lanka's Handmade Craft Marketplace",
     description:
-      "Discover unique handcrafted treasures made by skilled Sri Lankan artisans. " +
+      "Discover unique handcrafted treasures made by skilled Sri Lankan sellers. " +
       "Shop pottery, wood carving, textiles, jewelry, and more.",
     url: "https://kandyam.com",
     images: [
@@ -93,7 +93,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Kandyam - Sri Lanka's Handmade Craft Marketplace",
     description:
-      "Discover unique handcrafted treasures made by skilled Sri Lankan artisans.",
+      "Discover unique handcrafted treasures made by skilled Sri Lankan sellers.",
     images: ["https://cdn.kandyam.com/og-image.jpg"],
     creator: "@kandyam",
   },

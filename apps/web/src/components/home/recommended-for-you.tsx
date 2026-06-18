@@ -78,7 +78,7 @@ export function RecommendedForYou() {
                         </button>
                       </div>
                       <div className="p-4 flex flex-col flex-grow">
-                        <span className="text-xs text-text-500 mb-1">{product.vendor?.storeName || "Kandiyam Creator"}</span>
+                        <span className="text-xs text-text-500 mb-1">{product.vendor?.storeName || "Kandiyam Seller"}</span>
                         <Link href={`/products/${product.slug}`} className="font-semibold text-navy-900 hover:text-primary-600 transition-colors line-clamp-1 mb-2">
                           {product.title}
                         </Link>
@@ -88,7 +88,7 @@ export function RecommendedForYou() {
                           <span className="text-xs text-text-400">({product.reviewCount || 0})</span>
                         </div>
                         <div className="mt-auto flex items-center justify-between">
-                          <span className="font-bold text-lg text-navy-900">රු {price.toLocaleString()}</span>
+                          <span className="font-bold text-lg text-navy-900">Rs. {price.toLocaleString()}</span>
                         </div>
                       </div>
                     </div>

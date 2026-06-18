@@ -31,15 +31,15 @@ const FAQ_CATEGORIES = [
     icon: <CreditCard className="w-6 h-6 text-blue-500" />,
     faqs: [
       { q: "Is it safe to pay online?", a: "Yes, absolutely! We use PayHere as our payment gateway, which is highly secure and fully compliant with Central Bank regulations in Sri Lanka." },
-      { q: "Do you offer Cash on Delivery (COD)?", a: "No, currently we only accept online payments via Card, Bank Transfer, or mobile wallets to ensure security for both buyers and artisans." },
-      { q: "Can I use multiple promo codes?", a: "Only one promo code can be applied per order. However, loyalty discounts can sometimes be stacked with specific store promotions depending on the artisan." }
+      { q: "Do you offer Cash on Delivery (COD)?", a: "No, currently we only accept online payments via Card, Bank Transfer, or mobile wallets to ensure security for both buyers and sellers." },
+      { q: "Can I use multiple promo codes?", a: "Only one promo code can be applied per order. However, loyalty discounts can sometimes be stacked with specific store promotions depending on the seller." }
     ]
   },
   {
     title: "Safety & Authenticity",
     icon: <ShieldCheck className="w-6 h-6 text-purple-500" />,
     faqs: [
-      { q: "Are all products genuinely handmade?", a: "Yes! Every single artisan on Kandyan goes through a strict verification process to ensure their products are authentically handmade or crafted locally." },
+      { q: "Are all products genuinely handmade?", a: "Yes! Every single seller on Kandyan goes through a strict verification process to ensure their products are authentically handmade or crafted locally." },
       { q: "How are sellers vetted?", a: "We verify the national identity and business registration of our sellers, and review their production processes before they are allowed to list items on Kandyan." }
     ]
   }
@@ -91,7 +91,7 @@ export default function FAQPage() {
               Contact Support
             </Link>
             <Link href="/dashboard/messages" className="px-8 py-3 bg-primary-800 border border-primary-700 text-white rounded-xl font-bold hover:bg-primary-700 transition-colors">
-              Message an Artisan
+              Message a Seller
             </Link>
           </div>
         </div>

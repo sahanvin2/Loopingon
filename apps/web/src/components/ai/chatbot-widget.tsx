@@ -23,9 +23,9 @@ const faqResponses: Record<string, string> = {
   shipping: "We offer free domestic shipping on orders over Rs. 5,000. Standard shipping takes 5-7 business days, and express shipping takes 2-3 business days. International shipping is available to most countries.",
   return: "We have an easy 7-day return policy. If you're not satisfied with your purchase, you can return it within 7 days for a full refund. Items must be in original condition.",
   payment: "We accept Visa, Mastercard, American Express, PayHere, and Payable. All payments are securely processed with buyer protection.",
-  artisan: "Kandyam features over 4,500 verified Sri Lankan artisans. Each artisan is verified through our thorough review process to ensure authentic, quality handmade products.",
+  artisan: "Kandyam features over 4,500 verified Sri Lankan sellers. Each seller is verified through our thorough review process to ensure authentic, quality handmade products.",
   commission: "Our platform commission is 20% for vendors. This covers payment processing, buyer protection, marketing, and platform maintenance.",
-  competition: "We run monthly craft competitions with amazing prizes. You can submit your best work to compete with artisans across Sri Lanka. Winners receive cash prizes and featured exposure.",
+  competition: "We run monthly craft competitions with amazing prizes. You can submit your best work to compete with sellers across Sri Lanka. Winners receive cash prizes and featured exposure.",
 };
 
 function getBotResponse(query: string): string {
@@ -40,7 +40,7 @@ function getBotResponse(query: string): string {
     return faqResponses.competition;
   if (q.includes("hello") || q.includes("hi") || q.includes("hey"))
     return "Hi there! How can I help you find beautiful Sri Lankan handmade crafts today?";
-  return "I'd love to help! Could you tell me more about what you're looking for? You can ask about shipping, payments, returns, artisans, or our competitions.";
+  return "I'd love to help! Could you tell me more about what you're looking for? You can ask about shipping, payments, returns, sellers, or our competitions.";
 }
 
 export function ChatbotWidget() {

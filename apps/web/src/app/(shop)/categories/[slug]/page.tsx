@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
     const res = await get<ApiResponse<Category>>(`/categories/${slug}`);
     return {
       title: res.data.metaTitle || res.data.name,
-      description: res.data.metaDescription || res.data.description || `Browse ${res.data.name} handmade by Sri Lankan artisans.`,
+      description: res.data.metaDescription || res.data.description || `Browse ${res.data.name} handmade by Sri Lankan sellers.`,
     };
   } catch {
     return { title: "Category" };
@@ -90,7 +90,7 @@ async function CategoryContent({ slug }: { slug: string }) {
           <h2 className="font-serif text-2xl font-bold text-text-900">About Sri Lankan {category.name}</h2>
           <p className="mt-4 leading-relaxed text-muted-700">
             Sri Lankan {category.name.toLowerCase()} represents centuries of artistic tradition passed down through
-            generations. Artisans across the island, from the coastal villages of Galle to the hill country
+            generations. Sellers across the island, from the coastal villages of Galle to the hill country
             of Kandy, continue to practice these time-honored techniques using locally sourced, natural materials.
           </p>
           <p className="mt-4 leading-relaxed text-muted-700">
@@ -100,7 +100,7 @@ async function CategoryContent({ slug }: { slug: string }) {
           </p>
           <div className="mt-6 space-y-2 border-t border-text-200 pt-6">
             <h3 className="font-semibold text-text-800">Frequently Asked Questions</h3>
-            <details className="group"><summary className="cursor-pointer py-1 text-sm font-medium text-text-700 hover:text-primary-600">What materials are used in Sri Lankan {category.name.toLowerCase()}?</summary><p className="pb-2 text-sm text-muted-600">Traditional artisans use locally sourced natural materials including clay, wood, natural fibers, metals, and plant-based dyes.</p></details>
+            <details className="group"><summary className="cursor-pointer py-1 text-sm font-medium text-text-700 hover:text-primary-600">What materials are used in Sri Lankan {category.name.toLowerCase()}?</summary><p className="pb-2 text-sm text-muted-600">Traditional sellers use locally sourced natural materials including clay, wood, natural fibers, metals, and plant-based dyes.</p></details>
             <details className="group"><summary className="cursor-pointer py-1 text-sm font-medium text-text-700 hover:text-primary-600">How long does it take to make each piece?</summary><p className="pb-2 text-sm text-muted-600">Processing times vary from 1-2 days for simpler items to 2-4 weeks for complex, custom pieces.</p></details>
             <details className="group"><summary className="cursor-pointer py-1 text-sm font-medium text-text-700 hover:text-primary-600">Are the colors and patterns authentic?</summary><p className="pb-2 text-sm text-muted-600">Yes. All products use traditional designs and authentic Sri Lankan motifs that reflect our cultural heritage.</p></details>
           </div>

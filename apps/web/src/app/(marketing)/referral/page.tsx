@@ -55,7 +55,7 @@ export default function ReferralPortalPage() {
                 <Gift className="w-8 h-8" />
               </div>
               <h3 className="text-xl font-bold text-navy-900 mb-3">2. They Shop</h3>
-              <p className="text-muted-600">Your friends click your link and discover beautiful handmade goods from Sri Lankan artisans.</p>
+              <p className="text-muted-600">Your friends click your link and discover beautiful handmade goods from Sri Lankan sellers.</p>
             </div>
             <div className="text-center p-6">
               <div className="w-16 h-16 bg-primary-100 text-primary-600 rounded-full flex items-center justify-center mx-auto mb-6">

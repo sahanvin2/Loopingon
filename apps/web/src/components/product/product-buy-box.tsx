@@ -57,6 +57,11 @@ export function ProductBuyBox({ product }: ProductBuyBoxProps) {
   };
 
   const handleBuyNow = () => {
+    if (stock.label === "Out of Stock") return;
+    if (!isAuthenticated) {
+      openModal("signin");
+      return;
+    }
     addToCart.mutate({
       productId: product.id,
       variantId: selectedVariant?.id ?? undefined,
@@ -64,6 +69,9 @@ export function ProductBuyBox({ product }: ProductBuyBoxProps) {
     }, {
       onSuccess: () => {
         router.push("/checkout");
+      },
+      onError: () => {
+        // Auth error already handled by useAddToCart
       }
     });
   };

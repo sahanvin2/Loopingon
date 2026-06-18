@@ -5,20 +5,20 @@ import { MapPin, Clock, Briefcase, Mail, Heart, Users, Globe, Lightbulb } from "
 
 export const metadata: Metadata = {
   title: "Careers - Join Our Mission",
-  description: "Join the Kandyam team and help connect Sri Lankan artisans with the world. Explore open positions in Colombo, Sri Lanka.",
+  description: "Join the Kandyam team and help connect Sri Lankan sellers with the world. Explore open positions in Colombo, Sri Lanka.",
 };
 
 const values = [
-  { icon: Heart, title: "Passion for Impact", description: "We're driven by the mission to transform artisan livelihoods across Sri Lanka." },
-  { icon: Users, title: "Community First", description: "Every decision we make prioritizes our artisan community and their families." },
+  { icon: Heart, title: "Passion for Impact", description: "We're driven by the mission to transform seller livelihoods across Sri Lanka." },
+  { icon: Users, title: "Community First", description: "Every decision we make prioritizes our seller community and their families." },
   { icon: Globe, title: "Think Global", description: "We build for a worldwide audience while staying deeply rooted in Sri Lankan culture." },
   { icon: Lightbulb, title: "Innovation", description: "We combine traditional craft with modern technology to create something extraordinary." },
 ];
 
 const positions = [
-  { title: "Senior Full-Stack Engineer", department: "Engineering", location: "Colombo, Sri Lanka", type: "Full-time", description: "Build and scale our marketplace platform using Next.js, Node.js, and PostgreSQL. Work on features that directly impact thousands of artisans." },
-  { title: "Community Manager", department: "Operations", location: "Colombo, Sri Lanka", type: "Full-time", description: "Engage with our artisan community, organize events, manage social media, and be the voice of Kandyam to our vendor base." },
-  { title: "Content Writer (English & Sinhala)", department: "Marketing", location: "Colombo, Sri Lanka", type: "Full-time", description: "Create compelling content about Sri Lankan crafts, artisan stories, and cultural heritage. Bilingual proficiency in English and Sinhala required." },
+  { title: "Senior Full-Stack Engineer", department: "Engineering", location: "Colombo, Sri Lanka", type: "Full-time", description: "Build and scale our marketplace platform using Next.js, Node.js, and PostgreSQL. Work on features that directly impact thousands of sellers." },
+  { title: "Community Manager", department: "Operations", location: "Colombo, Sri Lanka", type: "Full-time", description: "Engage with our seller community, organize events, manage social media, and be the voice of Kandyam to our vendor base." },
+  { title: "Content Writer (English & Sinhala)", department: "Marketing", location: "Colombo, Sri Lanka", type: "Full-time", description: "Create compelling content about Sri Lankan crafts, seller stories, and cultural heritage. Bilingual proficiency in English and Sinhala required." },
   { title: "Customer Support Specialist", department: "Support", location: "Colombo, Sri Lanka", type: "Full-time", description: "Provide exceptional support to buyers and vendors via chat, email, and WhatsApp. Resolve issues and ensure a great marketplace experience." },
 ];
 
@@ -32,7 +32,7 @@ export default function CareersPage() {
         <div className="relative mx-auto max-w-4xl px-4 py-24 text-center md:py-32">
           <h1 className="font-serif text-4xl font-bold text-white md:text-5xl">Join Our Mission</h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-surface-200">
-            Help us connect Sri Lankan artisans with the world. We&apos;re a team of passionate
+            Help us connect Sri Lankan sellers with the world. We&apos;re a team of passionate
             individuals building the future of ethical, handmade commerce.
           </p>
         </div>

@@ -2,7 +2,7 @@
 
 export const metadata: Metadata = {
   title: "Terms of Service",
-  description: "Kandyam Terms of Service: Rules and guidelines for buying and selling handmade crafts on our platform. Protect your rights as a buyer or artisan.",
+  description: "Kandyam Terms of Service: Rules and guidelines for buying and selling handmade crafts on our platform. Protect your rights as a buyer or seller.",
 };
 
 export default function TermsOfServicePage() {

@@ -132,7 +132,7 @@ export function SearchBar({
           className={cn(
             "w-full pl-10 pr-12 py-2.5 rounded-full text-sm bg-transparent",
             "text-text-700 placeholder:text-muted-400",
-            "focus:outline-none",
+            "focus:outline-none [&::-webkit-search-cancel-button]:appearance-none",
           )}
           aria-label="Search products"
         />
@@ -162,20 +162,28 @@ export function SearchBar({
             {query.length > 0 ? (
               <div className="px-4">
                 <p className="text-xs font-bold text-muted-400 uppercase tracking-wider mb-2 px-2">Suggestions</p>
-                {POPULAR_SEARCHES.filter(s => s.toLowerCase().includes(query.toLowerCase())).map((suggestion) => (
-                  <button
-                    key={suggestion}
-                    type="button"
-                    onClick={() => handleSuggestionClick(suggestion)}
-                    className="w-full flex items-center gap-3 px-3 py-2 text-sm text-text-700 hover:bg-surface-50 hover:text-primary-600 rounded-lg transition-colors text-left"
-                  >
-                    <Search className="w-4 h-4 text-muted-400 shrink-0" />
-                    <span>
-                      <span className="font-semibold">{query}</span>
-                      {suggestion.toLowerCase().split(query.toLowerCase())[1] || suggestion.substring(query.length)}
-                    </span>
-                  </button>
-                ))}
+                {POPULAR_SEARCHES.filter(s => s.toLowerCase().includes(query.toLowerCase())).map((suggestion) => {
+                  const matchIndex = suggestion.toLowerCase().indexOf(query.toLowerCase());
+                  const beforeMatch = suggestion.slice(0, matchIndex);
+                  const matchText = suggestion.slice(matchIndex, matchIndex + query.length);
+                  const afterMatch = suggestion.slice(matchIndex + query.length);
+                  
+                  return (
+                    <button
+                      key={suggestion}
+                      type="button"
+                      onClick={() => handleSuggestionClick(suggestion)}
+                      className="w-full flex items-center gap-3 px-3 py-2.5 text-sm text-text-700 hover:bg-surface-50 hover:text-primary-600 rounded-lg transition-colors text-left"
+                    >
+                      <Search className="w-4 h-4 text-muted-400 shrink-0" />
+                      <span>
+                        {beforeMatch}
+                        <span className="font-semibold text-navy-900">{matchText}</span>
+                        {afterMatch}
+                      </span>
+                    </button>
+                  );
+                })}
               </div>
             ) : (
               <div className="flex flex-col md:flex-row gap-6 px-6">

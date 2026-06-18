@@ -56,7 +56,7 @@ const BENEFITS = [
   {
     icon: Gift,
     title: "Exclusive Rewards",
-    description: "Top referrers get access to exclusive artisan previews, early sale access, and special discounts.",
+    description: "Top referrers get access to exclusive seller previews, early sale access, and special discounts.",
   },
 ];
 

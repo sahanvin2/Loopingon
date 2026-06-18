@@ -11,7 +11,7 @@ import { LoadingSkeleton } from "@/components/shared/loading-skeleton";
 
 export const metadata: Metadata = {
   title: "Sustainability - Our Commitment to the Planet",
-  description: "Learn about Kandyam's sustainability initiatives: eco-friendly packaging, tree planting program, carbon-neutral shipping, and artisan education.",
+  description: "Learn about Kandyam's sustainability initiatives: eco-friendly packaging, tree planting program, carbon-neutral shipping, and seller education.",
 };
 
 const stats = [
@@ -24,12 +24,12 @@ const initiatives = [
   { icon: Package, title: "Plastic-Free Packaging", description: "All Kandyam shipments use biodegradable, recycled, or reusable packaging materials. We've eliminated single-use plastics from our entire supply chain." },
   { icon: Trees, title: "Tree Planting Program", description: "For every 100 orders, we plant a tree in Sri Lanka's central highlands. Working with local reforestation partners, we've planted over 15,000 trees since 2021." },
   { icon: Ship, title: "Carbon-Neutral Shipping", description: "We offset 100% of carbon emissions from international shipping through certified carbon offset programs. Every international order is climate-neutral." },
-  { icon: GraduationCap, title: "Artisan Education", description: "We provide free workshops to our artisans on sustainable material sourcing, waste reduction, and eco-friendly production methods." },
+  { icon: GraduationCap, title: "Seller Education", description: "We provide free workshops to our sellers on sustainable material sourcing, waste reduction, and eco-friendly production methods." },
 ];
 
 const tips = [
   "Choose locally sourced, natural materials whenever possible",
-  "Support artisans who use traditional, low-waste production methods",
+      "Support sellers who use traditional, low-waste production methods",
   "Opt for consolidated shipping to reduce carbon footprint",
   "Look for our 'Eco-Friendly' badge on sustainable products",
   "Buy quality handmade items that last a lifetime, not fast fashion",

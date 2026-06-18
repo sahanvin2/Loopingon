@@ -174,7 +174,7 @@ export function CartSummary({
         </div>
         <div className="flex items-center gap-2 text-xs text-muted-500">
           <Truck className="w-3.5 h-3.5 text-muted-600" />
-          Free shipping on orders over Rs. 5,000
+          Delivery charges calculated at checkout
         </div>
       </div>
 

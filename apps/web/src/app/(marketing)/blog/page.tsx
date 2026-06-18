@@ -10,7 +10,7 @@ import { LoadingSkeleton } from "@/components/shared/loading-skeleton";
 
 export const metadata: Metadata = {
   title: "Blog - Stories of Sri Lankan Craft & Culture",
-  description: "Read stories about Sri Lankan crafts, artisan profiles, craft techniques, cultural heritage, and the Kandyam community.",
+  description: "Read stories about Sri Lankan crafts, seller profiles, craft techniques, cultural heritage, and the Kandyam community.",
 };
 
 interface BlogPageProps {
@@ -42,7 +42,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
             Stories of Craft & Culture
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-center text-lg text-muted-600">
-            Discover the stories behind Sri Lankan crafts, meet the artisans, and explore the
+            Discover the stories behind Sri Lankan crafts, meet the sellers, and explore the
             rich cultural heritage woven into every handmade creation.
           </p>
         </div>

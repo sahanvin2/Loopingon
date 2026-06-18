@@ -6,9 +6,9 @@ import { X, Truck, Heart, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const messages = [
-  { text: "Free shipping on orders over Rs. 5,000", icon: Truck },
-  { text: "Support Sri Lankan Creators", icon: Heart },
-  { text: "Handmade with love, delivered with care.", icon: Sparkles },
+  { text: "Island-wide delivery via Koombiyo", icon: Truck },
+  { text: "Support Sri Lankan Sellers", icon: Heart },
+  { text: "5,000+ products — Cash on Delivery", icon: Sparkles },
 ];
 
 const STORAGE_KEY = "top-banner-dismissed";

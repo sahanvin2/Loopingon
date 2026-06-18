@@ -20,6 +20,7 @@ const steps: { key: CheckoutStep; label: string }[] = [
 interface ShippingFormData {
   fullName: string;
   phone: string;
+  altPhone: string;
   addressLine1: string;
   addressLine2: string;
   city: string;
@@ -51,6 +52,7 @@ export function CheckoutForm({ className }: CheckoutFormProps) {
   const [shippingData, setShippingData] = useState<ShippingFormData>({
     fullName: user?.fullName || "",
     phone: user?.phone || "",
+    altPhone: "",
     addressLine1: "",
     addressLine2: "",
     city: "",
@@ -85,6 +87,7 @@ export function CheckoutForm({ className }: CheckoutFormProps) {
         shippingAddress: {
           fullName: data.fullName,
           phone: data.phone,
+          altPhone: data.altPhone,
           addressLine1: data.addressLine1,
           addressLine2: data.addressLine2,
           city: data.city,

@@ -30,7 +30,7 @@ export default function RegionsPage() {
             Explore by Region
           </h1>
           <p className="text-lg text-text-600 leading-relaxed">
-            Sri Lanka is a tapestry of unique artisanal traditions. Discover the signature crafts from different regions across the island.
+            Sri Lanka is a tapestry of unique local traditions. Discover the signature crafts from different regions across the island.
           </p>
         </div>
 

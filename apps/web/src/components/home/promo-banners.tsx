@@ -17,7 +17,7 @@ export function PromoBanners() {
               Custom made just for you
             </h3>
             <p className="text-sm text-text-700 mb-6">
-              Bring your ideas to life with our talented creators.
+              Bring your ideas to life with our talented sellers.
             </p>
             <Link
               href="/custom-orders"

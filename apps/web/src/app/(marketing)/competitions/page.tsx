@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Craft Competitions - Showcase Your Skills",
-  description: "Join Kandyam craft competitions. Submit your best handmade work, compete with fellow artisans, and win prizes. Current, upcoming, and past competitions.",
+  description: "Join Kandyam craft competitions. Submit your best handmade work, compete with fellow sellers, and win prizes. Current, upcoming, and past competitions.",
 };
 
 const statusStyles: Record<string, string> = {
@@ -120,7 +120,7 @@ export default function CompetitionsPage() {
         <div className="mx-auto max-w-6xl px-4">
           <h1 className="text-center font-serif text-4xl font-bold text-text-900 md:text-5xl">Craft Competitions</h1>
           <p className="mx-auto mt-4 max-w-2xl text-center text-lg text-muted-600">
-            Showcase your skills, compete with fellow artisans, and win exciting prizes.
+            Showcase your skills, compete with fellow sellers, and win exciting prizes.
             Join our monthly craft challenges and let your work shine.
           </p>
         </div>

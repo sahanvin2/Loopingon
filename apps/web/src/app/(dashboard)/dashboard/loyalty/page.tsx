@@ -211,7 +211,7 @@ export default function LoyaltyPage() {
         <Shield className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
         <div className="text-sm text-amber-800">
           <p className="font-semibold mb-1">Gold Tier Redemption Rule</p>
-          <p>Gold tier's Rs. 10,000 reward can only be applied to purchases of Rs. 90,000 or more. This ensures the reward is meaningful for both you and our artisans.</p>
+          <p>Gold tier's Rs. 10,000 reward can only be applied to purchases of Rs. 90,000 or more. This ensures the reward is meaningful for both you and our sellers.</p>
         </div>
       </div>
 

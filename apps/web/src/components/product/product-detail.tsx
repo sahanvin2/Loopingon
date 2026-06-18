@@ -36,12 +36,43 @@ interface ProductDetailProps {
   product: Product;
 }
 
-const COMMON_FAQS = [
-  { q: "Is this product genuinely handmade?", a: "Yes. Every product on Kandyam is verified as authentically handmade by Sri Lankan artisans. Each piece is crafted individually using traditional techniques passed down through generations." },
-  { q: "Can I request a custom size or color?", a: "Many of our artisans accept custom orders. Use the 'Chat with Seller' button to ask the artisan directly about customizations. Custom orders may take additional processing time." },
-  { q: "How do I care for this handcrafted item?", a: "Handcrafted items need gentle care. Avoid harsh chemicals and prolonged direct sunlight. Specific care instructions vary by material — feel free to message the seller for details about this specific piece." },
-  { q: "What if the item arrives damaged?", a: "We've got you covered. Take photos of the damage within 48 hours of delivery and contact our support. We'll arrange a replacement or full refund at no cost to you." },
-];
+const CATEGORY_FAQS: Record<string, { q: string; a: string }[]> = {
+  electronics: [
+    { q: "Is this product covered by warranty?", a: "Most electronics on Kandiyam include a manufacturer warranty. Check the product description for specific warranty details, or message the seller directly." },
+    { q: "Is this compatible with Sri Lankan voltage (230V)?", a: "Yes, all electronics sold on Kandiyam are compatible with Sri Lanka's 230V power standard. Please verify the plug type matches your socket." },
+    { q: "What if the item is defective?", a: "We offer a 7-day return policy for defective electronics. Contact the seller within 48 hours of receiving the item with photos of the defect." },
+  ],
+  "home-living": [
+    { q: "What materials are used in this product?", a: "Our home & living products use quality materials including wood, metal, ceramics, and textiles. The exact materials are listed in the product description above." },
+    { q: "Can I return this if it doesn't match my decor?", a: "Yes, we accept returns within 14 days if the item is unused and in original packaging. Return shipping costs may apply." },
+    { q: "Is assembly required?", a: "Assembly requirements vary by product. Check the product description for details. Most items come partially assembled with clear instructions." },
+  ],
+  "kids-baby": [
+    { q: "Is this product safe for children?", a: "Yes, all kids & baby products on Kandiyam meet safety standards. They are made with non-toxic materials and have no small parts for choking hazards unless age-specified." },
+    { q: "Can I wash or clean this item?", a: "Most kids items are washable. Check the care instructions in the product description for specific washing guidelines." },
+    { q: "What age range is this suitable for?", a: "The recommended age range is specified in the product description. Always supervise young children during use." },
+  ],
+  jewelry: [
+    { q: "Is this real gold/silver?", a: "The material composition is listed in the product description. We have both precious metal jewelry and fashion jewelry — check the materials section for specifics." },
+    { q: "Will this tarnish over time?", a: "Proper care prevents tarnishing. Store in a dry place, avoid contact with water and perfumes. The seller can provide specific care instructions." },
+    { q: "Can I resize this ring/bracelet?", a: "Resizing availability depends on the product. Message the seller to inquire about resizing options and any additional costs." },
+  ],
+  clothing: [
+    { q: "What size should I order?", a: "Refer to the size chart in the product images. Sri Lankan sizes may differ from international standards. When in doubt, message the seller with your measurements." },
+    { q: "Can I return if it doesn't fit?", a: "Yes, size exchanges are accepted within 7 days. The item must be unworn with tags attached. Buyer covers return shipping." },
+    { q: "How do I wash this garment?", a: "Care instructions vary by fabric. Handloom and delicate fabrics require gentle hand washing. Check the product description for specific care guidelines." },
+  ],
+};
+
+function getFAQs(categorySlug: string | undefined): { q: string; a: string }[] {
+  if (!categorySlug) return [];
+  const match = Object.entries(CATEGORY_FAQS).find(([key]) => categorySlug.includes(key));
+  return match ? match[1] : [
+    { q: "Is this product available for immediate delivery?", a: "Check the stock status above. In-stock items ship within 1-2 business days via Koombiyo. Out of stock items may be restocked soon." },
+    { q: "Can I pay with Cash on Delivery?", a: "Yes! All orders on Kandiyam are Cash on Delivery. Pay only when you receive your order at your doorstep." },
+    { q: "How do I contact the seller?", a: "Use the Chat with Seller button on this page to directly message the seller. Most sellers respond within a few hours." },
+  ];
+}
 
 export function ProductDetail({ product }: ProductDetailProps) {
   const images = product.images || [];
@@ -270,7 +301,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
         <section className="mb-12">
           <h2 className="font-serif text-2xl text-text-900 mb-6">Frequently Asked Questions</h2>
           <div className="space-y-3">
-            {COMMON_FAQS.map((faq, idx) => (
+            {getFAQs(primaryCategory?.slug).map((faq, idx) => (
               <div
                 key={idx}
                 className="bg-white rounded-xl border border-accent-200 overflow-hidden"
@@ -297,10 +328,10 @@ export function ProductDetail({ product }: ProductDetailProps) {
           </div>
         </section>
 
-        {/* Vendor / Artisan Info */}
+        {/* Vendor / Seller Info */}
         {product.vendor && (
           <section className="mb-12 bg-surface-50 rounded-xl p-6 border border-accent-200">
-            <h2 className="font-serif text-2xl text-text-900 mb-6">About the Artisan</h2>
+            <h2 className="font-serif text-2xl text-text-900 mb-6">About the Seller</h2>
             <div className="flex flex-col sm:flex-row items-start gap-6">
               <div className="w-20 h-20 rounded-full border-2 border-accent-200 bg-white overflow-hidden shrink-0">
                 {product.vendor.storeLogo ? (

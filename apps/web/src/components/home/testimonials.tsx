@@ -13,7 +13,7 @@ const testimonials = [
     city: "Colombo",
     initials: "PF",
     rating: 5,
-    text: "I ordered a handloom saree for my sister's wedding and it was absolutely stunning. The quality, the colors, and the craftsmanship were beyond my expectations. Knowing it was made by a local artisan made it even more special.",
+    text: "I ordered a handloom saree for my sister's wedding and it was absolutely stunning. The quality, the colors, and the craftsmanship were beyond my expectations. Knowing it was made by a local seller made it even more special.",
     product: "Handloom Silk Saree",
   },
   {
@@ -29,7 +29,7 @@ const testimonials = [
     city: "Kandy",
     initials: "SP",
     rating: 4,
-    text: "I love that I can find genuine Sri Lankan crafts all in one place. The batik wall hanging I received was even more beautiful than the photos. The artisan even included a handwritten note!",
+    text: "I love that I can find genuine Sri Lankan crafts all in one place. The batik wall hanging I received was even more beautiful than the photos. The seller even included a handwritten note!",
     product: "Batik Wall Hanging",
   },
   {

@@ -20,7 +20,7 @@ import { LoadingSkeleton } from "@/components/shared/loading-skeleton";
 
 export const metadata = {
   title: "Kandiyam - Premium Marketplace for Handcrafted Sri Lankan Treasures",
-  description: "Kandiyam connects you with skilled Sri Lankan artisans. Discover unique handcrafted masks, batik, jewelry, wooden carvings, and luxury crafts from creators worldwide.",
+  description: "Kandiyam connects you with skilled Sri Lankan sellers. Discover unique handcrafted masks, batik, jewelry, wooden carvings, and luxury crafts from sellers worldwide.",
 };
 
 export default function HomePage() {
@@ -65,7 +65,7 @@ export default function HomePage() {
       {/* 11. Heritage Collection - Premium */}
       <HeritageCollection />
       
-      {/* 12. Featured Creators */}
+      {/* 12. Featured Sellers */}
       <Suspense fallback={<LoadingSkeleton variant="product-card" count={3} className="py-12" />}>
         <FeaturedCreators />
       </Suspense>

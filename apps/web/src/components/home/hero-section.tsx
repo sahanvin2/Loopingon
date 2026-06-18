@@ -50,7 +50,7 @@ export function HeroSection() {
           <div className="w-full lg:w-[45%] flex flex-col z-10 pt-4 lg:pt-10">
             <h1 className="font-serif text-5xl sm:text-6xl lg:text-[4.5rem] font-bold leading-[1.1] tracking-tight text-text-900">
               Find things you'll love.<br />
-              <span className="text-primary-500">Support creators worldwide.</span>
+              <span className="text-primary-500">Support sellers worldwide.</span>
             </h1>
             
             <p className="mt-6 text-lg text-muted-600 max-w-lg leading-relaxed">

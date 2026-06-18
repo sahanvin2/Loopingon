@@ -5,30 +5,30 @@ import { Factory, Users, Globe, Leaf, Heart, ShieldCheck, Package, TrendingUp } 
 export const metadata = {
   title: "About Us",
   description:
-    "Learn about Kandyam's mission to connect Sri Lankan artisans with the world. Discover our story, values, and the impact we're making in the artisan community.",
+    "Learn about Kandyam's mission to connect Sri Lankan sellers with the world. Discover our story, values, and the impact we're making in the seller community.",
   openGraph: {
-    title: "About Kandyam - Connecting Sri Lankan Artisans to the World",
-    description: "Discover how Kandyam empowers Sri Lankan artisans through a global marketplace.",
+    title: "About Kandyam - Connecting Sri Lankan Sellers to the World",
+    description: "Discover how Kandyam empowers Sri Lankan sellers through a global marketplace.",
   },
 };
 
 const stats = [
-  { label: "Artisans", value: "4,500+", icon: Users },
+  { label: "Sellers", value: "4,500+", icon: Users },
   { label: "Products", value: "50,000+", icon: Package },
   { label: "Countries", value: "35+", icon: Globe },
-  { label: "Revenue to Artisans", value: "රු 450M+", icon: TrendingUp },
+  { label: "Revenue to Sellers", value: "Rs. 450M+", icon: TrendingUp },
 ];
 
 const values = [
   {
     icon: Heart,
     title: "Authentic Craftsmanship",
-    description: "Every product on Kandyam is handmade by skilled artisans using traditional techniques passed down through generations.",
+    description: "Every product on Kandyam is handmade by skilled sellers using traditional techniques passed down through generations.",
   },
   {
     icon: Users,
-    title: "Artisan-First",
-    description: "We put artisans at the heart of everything. With 80% profit going directly to creators, we ensure sustainable livelihoods.",
+    title: "Seller-First",
+    description: "We put sellers at the heart of everything. With 80% profit going directly to creators, we ensure sustainable livelihoods.",
   },
   {
     icon: Globe,
@@ -49,7 +49,7 @@ export default function AboutUsPage() {
       <section className="relative h-[50vh] min-h-[400px] overflow-hidden">
         <Image
           src="/images/about/sri-lanka-artisans.jpg"
-          alt="Sri Lankan artisans at work"
+          alt="Sri Lankan sellers at work"
           fill
           className="object-cover"
           priority
@@ -72,18 +72,18 @@ export default function AboutUsPage() {
           <div className="mx-auto max-w-3xl space-y-6 text-center">
             <p className="text-lg leading-relaxed text-muted-700">
               Kandyam was born from a simple observation: Sri Lanka is home to some of the
-              world&apos;s most extraordinary craftsmanship, yet most artisans lacked access to
+              world&apos;s most extraordinary craftsmanship, yet most sellers lacked access to
               global markets. Living in remote villages, their mastery of batik, wood carving,
               pottery, brass work, and countless other traditions remained hidden treasures.
             </p>
             <p className="text-lg leading-relaxed text-muted-700">
               Founded in 2020 by a team of passionate Sri Lankans, Kandyam set out to bridge this
               gap. We built a platform that handles everything — from digital storefronts and
-              secure payments to international logistics — so artisans can focus on what they do
+              secure payments to international logistics — so sellers can focus on what they do
               best: creating beautiful, authentic crafts.
             </p>
             <p className="text-lg leading-relaxed text-muted-700">
-              Today, over 4,500 artisans from all 25 districts of Sri Lanka showcase their work on
+              Today, over 4,500 sellers from all 25 districts of Sri Lanka showcase their work on
               Kandyam. From the batik workshops of Galle to the wood carving studios of Moratuwa,
               every product tells a story of tradition, skill, and dedication. Our mission remains
               unchanged: to preserve Sri Lankan craft heritage while creating sustainable livelihoods
@@ -103,7 +103,7 @@ export default function AboutUsPage() {
               </div>
               <h2 className="font-serif text-2xl font-bold text-text-900">Our Mission</h2>
               <p className="mt-4 leading-relaxed text-muted-700">
-                To empower Sri Lankan artisans by providing them with a global digital marketplace,
+                To empower Sri Lankan sellers by providing them with a global digital marketplace,
                 fair compensation, and the tools they need to preserve and share their cultural
                 heritage with the world.
               </p>
@@ -115,7 +115,7 @@ export default function AboutUsPage() {
               <h2 className="font-serif text-2xl font-bold text-text-900">Our Vision</h2>
               <p className="mt-4 leading-relaxed text-muted-700">
                 A world where traditional craft communities thrive economically, cultural heritage is
-                celebrated globally, and every artisan has the opportunity to build a sustainable
+                celebrated globally, and every seller has the opportunity to build a sustainable
                 livelihood from their craft.
               </p>
             </div>
@@ -165,7 +165,7 @@ export default function AboutUsPage() {
             Join Our Community
           </h2>
           <p className="mt-4 text-lg text-muted-600">
-            Whether you&apos;re an artisan ready to share your craft or a customer seeking
+            Whether you&apos;re a seller ready to share your craft or a customer seeking
             unique treasures, Kandyam welcomes you.
           </p>
           <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">

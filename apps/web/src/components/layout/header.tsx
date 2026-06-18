@@ -212,9 +212,6 @@ export function Header() {
                     <Link href="/custom-orders" className="text-[15px] font-medium text-text-700 hover:text-primary-600 transition-colors">
                       Custom Orders
                     </Link>
-                    <Link href="/creators" className="text-[15px] font-medium text-text-700 hover:text-primary-600 transition-colors">
-                      Creators
-                    </Link>
                   </motion.nav>
                 )}
               </AnimatePresence>

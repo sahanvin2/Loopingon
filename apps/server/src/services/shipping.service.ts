@@ -34,13 +34,13 @@ export async function calculateShipping(
     }
   }
 
-  // Koombiyo base rate: Rs. 350 for up to 2kg
-  // Additional weight: Rs. 50 per kg above 2kg
-  // Express (next day): Rs. 650 flat rate
+  // Weight-based delivery: Rs. 150 per kg
+  // Koombiyo Standard: Rs. 150/kg (min Rs. 400)
+  // Koombiyo Express: Rs. 650 flat (irrespective of weight)
   // Free: orders over Rs. 5,000
 
   const weightKg = Math.ceil(Math.max(totalWeight, 1));
-  const koombiyoCost = 350 + (weightKg > 2 ? (weightKg - 2) * 50 : 0);
+  const koombiyoCost = Math.max(400, weightKg * 150);
   const expressCost = 650;
 
   if (subtotal >= 5000 && destination === "LK") {

@@ -18,10 +18,10 @@ export function VendorBadge({ className, size = "sm" }: VendorBadgeProps) {
         size === "sm" ? "px-2 py-0.5 text-xs" : "px-2.5 py-1 text-sm",
         className,
       )}
-      title="Verified Artisan"
+      title="Verified Seller"
     >
       <Check className={cn(size === "sm" ? "w-3 h-3" : "w-3.5 h-3.5")} />
-      Verified Artisan
+      Verified Seller
     </span>
   );
 }

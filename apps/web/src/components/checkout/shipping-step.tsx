@@ -8,6 +8,7 @@ import { useCartStore } from "@/stores/cart-store";
 interface ShippingFormData {
   fullName: string;
   phone: string;
+  altPhone: string;
   addressLine1: string;
   addressLine2: string;
   city: string;
@@ -32,12 +33,12 @@ export function ShippingStep({ initialData, onNext, selectedMethod = "KOOMBIYO",
   const isFreeEligible = subtotal >= freeThreshold;
 
   const shippingMethods = [
-    { id: "KOOMBIYO", label: "Koombiyo Delivery", description: "1-3 business days • Island-wide • Cash on Delivery", price: isFreeEligible ? 0 : 350, icon: Package },
-    { id: "EXPRESS", label: "Express Delivery", description: "Next business day • Koombiyo Express", price: isFreeEligible ? 300 : 650, icon: Truck },
+    { id: "KOOMBIYO", label: "Koombiyo Standard", description: "1-3 days • Rs. 150/kg (min Rs. 400) • COD", price: isFreeEligible ? 0 : 400, icon: Package },
+    { id: "EXPRESS", label: "Koombiyo Express", description: "Next day • Rs. 650 flat", price: isFreeEligible ? 300 : 650, icon: Truck },
   ];
 
   const [form, setForm] = useState<ShippingFormData>(initialData || {
-    fullName: "", phone: "", addressLine1: "", addressLine2: "", city: "", district: "", postalCode: "", country: "Sri Lanka",
+    fullName: "", phone: "", altPhone: "", addressLine1: "", addressLine2: "", city: "", district: "", postalCode: "", country: "Sri Lanka",
   });
   const [method, setMethod] = useState(selectedMethod);
   const [errors, setErrors] = useState<Partial<Record<keyof ShippingFormData, string>>>({});
@@ -50,7 +51,7 @@ export function ShippingStep({ initialData, onNext, selectedMethod = "KOOMBIYO",
   const validate = (): boolean => {
     const newErrors: Partial<Record<keyof ShippingFormData, string>> = {};
     if (!form.fullName.trim()) newErrors.fullName = "Full name is required";
-    if (!form.phone.trim() || form.phone.length < 10) newErrors.phone = "Valid phone number required (min 10 digits)";
+    if (!form.phone.trim() || form.phone.length < 10) newErrors.phone = "Valid phone required (min 10 digits)";
     if (!form.addressLine1.trim()) newErrors.addressLine1 = "Address is required";
     if (!form.city.trim()) newErrors.city = "City is required";
     if (!form.district.trim()) newErrors.district = "District is required";
@@ -89,7 +90,7 @@ export function ShippingStep({ initialData, onNext, selectedMethod = "KOOMBIYO",
         </div>
         {isFreeEligible && shipPrice === 0 && (
           <div className="mt-2 text-xs text-green-600 bg-green-50 px-3 py-1 rounded-full inline-block">
-            Free delivery unlocked!
+            Free delivery on orders over Rs. 5,000
           </div>
         )}
       </div>
@@ -110,6 +111,10 @@ export function ShippingStep({ initialData, onNext, selectedMethod = "KOOMBIYO",
                 <label className="block text-xs font-medium text-text-700 mb-1">Phone *</label>
                 <input type="tel" value={form.phone} onChange={(e) => handleChange("phone", e.target.value)} placeholder="07X XXX XXXX" className={inputClass("phone")} />
                 {errors.phone && <p className="text-xs text-red-500 mt-1">{errors.phone}</p>}
+              </div>
+              <div>
+                <label className="block text-xs font-medium text-text-700 mb-1">Alternate Phone</label>
+                <input type="tel" value={form.altPhone} onChange={(e) => handleChange("altPhone", e.target.value)} placeholder="Alternative number" className="w-full px-3 py-2 rounded-lg border border-accent-300 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500" />
               </div>
             </div>
             <div>

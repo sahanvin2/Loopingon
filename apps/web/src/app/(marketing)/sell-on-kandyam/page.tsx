@@ -89,7 +89,7 @@ export default function SellOnKandyamPage() {
         <div className="mx-auto max-w-6xl px-4">
           <div className="text-center max-w-2xl mx-auto mb-16">
             <h2 className="font-serif text-3xl font-bold text-text-900 md:text-4xl">
-              Why Independent Creators Choose Kandyam
+              Why Independent Sellers Choose Kandyam
             </h2>
             <p className="mt-4 text-muted-600">We built our platform from the ground up to support independent sellers. No hidden rules, just tools to help you succeed.</p>
           </div>
@@ -178,15 +178,15 @@ export default function SellOnKandyamPage() {
                 <div className="space-y-6 bg-white/5 p-6 rounded-2xl backdrop-blur-sm border border-white/10">
                   <div className="flex justify-between items-center border-b border-white/20 pb-4">
                     <span className="text-lg">Product Sale Price</span>
-                    <span className="text-xl font-bold">රු 10,000</span>
+                    <span className="text-xl font-bold">Rs. 10,000</span>
                   </div>
                   <div className="flex justify-between items-center border-b border-white/20 pb-4">
                     <span className="text-lg text-primary-200">Kandyam Fee (20%)</span>
-                    <span className="text-xl font-bold text-primary-300">- රු 2,000</span>
+                    <span className="text-xl font-bold text-primary-300">- Rs. 2,000</span>
                   </div>
                   <div className="flex justify-between items-center pt-2">
                     <span className="text-2xl font-bold font-serif">You Receive</span>
-                    <span className="text-3xl font-bold text-accent-300">රු 8,000</span>
+                    <span className="text-3xl font-bold text-accent-300">Rs. 8,000</span>
                   </div>
                 </div>
               </div>
@@ -226,7 +226,7 @@ export default function SellOnKandyamPage() {
         <div className="relative mx-auto max-w-4xl px-4 text-center">
           <h2 className="font-serif text-4xl font-bold md:text-5xl">Ready to open your shop?</h2>
           <p className="mt-6 text-xl text-primary-100 max-w-2xl mx-auto leading-relaxed">
-            Join the premium marketplace for independent creators. Setup is free, and you can start listing products immediately.
+            Join the premium marketplace for independent sellers. Setup is free, and you can start listing products immediately.
           </p>
           <Link
             href="/sign-up/vendor"

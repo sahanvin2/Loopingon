@@ -1,91 +1,80 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Link from "next/link";
 import { Search } from "lucide-react";
-import { SearchBar } from "@/components/search/search-bar";
 
 export function LuxuryHero() {
-  const quickTags = [
-    "Handmade", "Fashion", "Vintage", "Jewelry", 
-    "Art", "Home Decor", "Gifts", "Collectibles"
-  ];
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      window.location.href = `/products?q=${encodeURIComponent(searchQuery.trim())}`;
+    }
+  };
 
   return (
-    <section className="relative w-full bg-accent-50 overflow-hidden" style={{ minHeight: "650px" }}>
-      {/* Background Gradients & Accents */}
-      <div className="absolute inset-0 bg-gradient-to-r from-accent-50 via-white to-accent-100 z-0" />
-      <div className="absolute right-0 top-0 w-1/2 h-full opacity-30 pointer-events-none z-0">
-        <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="w-full h-full text-accent-300 stroke-current stroke-1 fill-none">
-          <path d="M0,100 C30,60 70,40 100,0" />
-          <path d="M20,100 C50,60 90,40 100,20" />
-        </svg>
-      </div>
-
-      <div className="container-wide relative z-10 mx-auto flex flex-col lg:flex-row items-center h-full min-h-[650px]">
-        {/* Left Side: 50% Text */}
-        <div className="w-full lg:w-1/2 pt-20 pb-16 lg:py-0 pr-0 lg:pr-12 flex flex-col justify-center">
-          <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl font-bold text-navy-900 leading-[1.1] mb-6">
-            Discover <br/> Unique Finds
-            <span className="block text-primary-500 mt-2 text-4xl md:text-5xl lg:text-6xl">Made for Every Story.</span>
-          </h1>
+    <section className="w-full bg-[#fdfaf5] py-6 md:py-10 px-4 md:px-8 font-sans">
+      <div className="max-w-[1400px] mx-auto flex flex-col items-center">
+        
+        {/* Single Wide Calm Banner */}
+        <div className="w-full bg-accent-50 rounded-[32px] md:rounded-[40px] overflow-hidden mb-12 flex flex-col md:flex-row items-stretch border border-accent-100 shadow-sm">
           
-          <p className="text-navy-700 text-lg md:text-xl font-sans max-w-xl mb-10 leading-relaxed">
-            Shop handmade, vintage, art, fashion, home decor, collectibles, gifts, and unique products from creators worldwide.
-          </p>
-
-          <div className="w-full max-w-xl mb-8 relative">
-            <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none z-10">
-              <Search className="h-5 w-5 text-text-400" />
-            </div>
-            <input 
-              type="text" 
-              placeholder="Search for anything..." 
-              className="w-full h-14 pl-12 pr-4 rounded-full bg-white text-navy-900 font-medium placeholder:text-text-400 shadow-soft-xl focus:outline-none focus:ring-2 focus:ring-primary-500"
+          {/* Text Side (Calm site colors) */}
+          <div className="w-full md:w-[55%] p-8 md:p-16 flex flex-col justify-center bg-gradient-to-br from-white via-accent-50 to-accent-100 min-h-[300px] md:min-h-[460px]">
+            <h2 className="text-navy-900 font-serif text-[36px] md:text-[52px] leading-[1.15] tracking-tight mb-6">
+              Discover quality finds, <br/>
+              <span className="text-accent-700">for every need.</span>
+            </h2>
+            <p className="text-navy-700 text-lg md:text-xl max-w-md mb-8 leading-relaxed">
+              Find unique, handcrafted pieces that bring calm and timeless beauty to your space.
+            </p>
+            <Link 
+              href="/products" 
+              className="bg-navy-900 text-white rounded-full px-8 py-3.5 font-semibold w-fit hover:bg-navy-800 transition-all text-sm md:text-base shadow-md hover:shadow-lg hover:-translate-y-0.5"
+            >
+              Shop the Collection
+            </Link>
+          </div>
+          
+          {/* Image Side */}
+          <div className="w-full md:w-[45%] h-[300px] md:h-auto relative">
+            <img 
+              src="https://kandyam.b-cdn.net/site/hero-bg.webp" 
+              alt="Calm handcrafted items" 
+              className="absolute inset-0 w-full h-full object-cover"
+              loading="eager"
             />
-            <button className="absolute inset-y-1.5 right-1.5 bg-primary-500 hover:bg-primary-600 text-white px-6 rounded-full font-medium transition-colors">
-              Search
-            </button>
-          </div>
-
-          <div className="flex flex-wrap gap-2">
-            <span className="text-sm font-medium text-navy-600 py-1 mr-2">Quick:</span>
-            {quickTags.map((tag) => (
-              <Link 
-                key={tag} 
-                href={`/search?q=${tag.toLowerCase()}`}
-                className="text-xs font-medium text-navy-700 bg-white hover:bg-accent-500 hover:text-white border border-accent-200 rounded-full px-3 py-1.5 transition-all shadow-sm hover:shadow-md"
-              >
-                {tag}
-              </Link>
-            ))}
           </div>
         </div>
 
-        {/* Right Side: 50% Luxury Visual */}
-        <div className="w-full lg:w-1/2 h-[400px] lg:h-[650px] relative hidden md:block">
-          {/* Luxury composition placeholder - In a real scenario these would be highly curated images */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-h-[500px] max-w-[500px]">
-            {/* Center piece */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-80 rounded-2xl overflow-hidden shadow-soft-xl z-30 border-4 border-white">
-               <img src="https://images.unsplash.com/photo-1610701596007-11502861dcfa?q=80&w=600&auto=format&fit=crop" alt="Sri Lankan Wooden Elephant" className="w-full h-full object-cover" />
-            </div>
-            {/* Top right piece */}
-            <div className="absolute top-[10%] right-[10%] w-40 h-48 rounded-xl overflow-hidden shadow-soft-lg z-20 border-2 border-white opacity-95 hover:scale-105 transition-transform duration-500 hover:z-40">
-               <img src="https://images.unsplash.com/photo-1578500494198-246f612d3b3d?q=80&w=400&auto=format&fit=crop" alt="Luxury Flower Vase" className="w-full h-full object-cover" />
-            </div>
-            {/* Bottom left piece */}
-            <div className="absolute bottom-[10%] left-[10%] w-48 h-48 rounded-full overflow-hidden shadow-soft-lg z-40 border-4 border-white hover:scale-105 transition-transform duration-500">
-               <img src="https://images.unsplash.com/photo-1599643477874-c11f7c8fccbd?q=80&w=400&auto=format&fit=crop" alt="Traditional Masks" className="w-full h-full object-cover" />
-            </div>
-            {/* Top left piece */}
-            <div className="absolute top-[20%] left-[5%] w-32 h-40 rounded-xl overflow-hidden shadow-soft-lg z-10 border-2 border-white opacity-90">
-               <img src="https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?q=80&w=400&auto=format&fit=crop" alt="Luxury Jewelry" className="w-full h-full object-cover" />
-            </div>
-            {/* Bottom right piece */}
-            <div className="absolute bottom-[20%] right-[5%] w-40 h-40 rounded-xl overflow-hidden shadow-soft-lg z-20 border-2 border-white opacity-95">
-               <img src="https://images.unsplash.com/photo-1616423640778-28d1b53229bd?q=80&w=400&auto=format&fit=crop" alt="Rattan Bag" className="w-full h-full object-cover" />
-            </div>
-          </div>
-        </div>
+        {/* Centered Text */}
+        <h1 className="font-serif text-[28px] md:text-[36px] text-[#222222] mb-6 text-center max-w-3xl tracking-tight">
+          Discover extraordinary items from independent sellers
+        </h1>
+
+        {/* Prominent Search Bar */}
+        <form 
+          onSubmit={handleSearch}
+          className="w-full max-w-[850px] relative mb-8"
+        >
+          <input 
+            type="text" 
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search for anything..." 
+            className="w-full h-[64px] pl-6 pr-[80px] rounded-full bg-white text-[#222222] text-[17px] border-[2px] border-primary-500 hover:bg-[#f8f8f8] focus:bg-white focus:outline-none focus:border-primary-600 transition-colors shadow-sm placeholder:text-gray-500"
+          />
+          <button 
+            type="submit"
+            aria-label="Search"
+            className="absolute right-[6px] top-[6px] bottom-[6px] aspect-square bg-primary-500 hover:bg-primary-600 text-white rounded-full flex items-center justify-center transition-transform hover:scale-105 active:scale-95"
+          >
+            <Search className="w-6 h-6" strokeWidth={2.5} />
+          </button>
+        </form>
+
       </div>
     </section>
   );

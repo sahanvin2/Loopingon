@@ -33,10 +33,10 @@ export function FeaturedCreators() {
     <section className="py-12 px-4 max-w-8xl mx-auto">
       <div className="flex items-center justify-between mb-8">
         <h2 className="font-serif text-2xl md:text-3xl text-text-900 font-medium">
-          Featured Creators
+          Featured Sellers
         </h2>
         <Link href="/makers" className="hidden sm:flex items-center text-sm font-medium text-accent-600 hover:text-accent-700 transition-colors">
-          View all creators <ArrowRight className="ml-1 w-4 h-4" />
+          View all sellers <ArrowRight className="ml-1 w-4 h-4" />
         </Link>
       </div>
 
@@ -77,7 +77,7 @@ export function FeaturedCreators() {
                     {creator.storeName}
                   </h3>
                 </Link>
-                <p className="text-xs text-text-500 mb-1">{creator.craftType?.[0] || "Artisan"}</p>
+                <p className="text-xs text-text-500 mb-1">{creator.craftType?.[0] || "Seller"}</p>
                 <div className="flex items-center gap-1 text-xs font-medium text-amber-500">
                   <Star className="w-3.5 h-3.5 fill-current" />
                   <span>{creator.rating.toFixed(1)}</span>

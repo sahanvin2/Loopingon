@@ -10,8 +10,8 @@ export function TrustBar() {
     },
     {
       icon: Truck,
-      title: "Free Shipping",
-      description: "On orders over $50",
+      title: "Loyalty Programme",
+      description: "Earn points & rewards",
     },
     {
       icon: RotateCcw,
@@ -25,8 +25,8 @@ export function TrustBar() {
     },
     {
       icon: HeartHandshake,
-      title: "Support Creators",
-      description: "Empowering local artisans",
+      title: "Support Sellers",
+      description: "Empowering local sellers",
     },
   ];
 

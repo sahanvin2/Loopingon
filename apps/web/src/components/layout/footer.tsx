@@ -87,7 +87,7 @@ export function Footer() {
               </span>
             </Link>
             <p className="text-sm text-text-500 mb-8 leading-relaxed">
-              Your global marketplace for unique, handcrafted, and luxury goods from creators worldwide.
+              Your global marketplace for unique, handcrafted, and luxury goods from sellers worldwide.
             </p>
             <div className="flex items-center gap-4">
               {socialLinks.map((social) => (
@@ -130,13 +130,13 @@ export function Footer() {
             </div>
 
             <div>
-              <h4 className="font-serif text-lg font-bold text-navy-900 mb-6">Creators</h4>
+              <h4 className="font-serif text-lg font-bold text-navy-900 mb-6">Sellers</h4>
               <ul className="space-y-4 text-sm text-text-600">
                 <li><Link href="/sell" className="hover:text-primary-600 hover:underline underline-offset-4">Start Selling</Link></li>
-                <li><Link href="/handbook" className="hover:text-primary-600 hover:underline underline-offset-4">Creator Handbook</Link></li>
+                <li><Link href="/handbook" className="hover:text-primary-600 hover:underline underline-offset-4">Seller Handbook</Link></li>
                 <li><Link href="/community" className="hover:text-primary-600 hover:underline underline-offset-4">Community</Link></li>
-                <li><Link href="/seller-policy" className="hover:text-primary-600 hover:underline underline-offset-4">Creator Policies</Link></li>
-                {isSeller && <li><Link href="/vendor/dashboard" className="hover:text-primary-600 hover:underline underline-offset-4">Creator Dashboard</Link></li>}
+                <li><Link href="/seller-policy" className="hover:text-primary-600 hover:underline underline-offset-4">Seller Policies</Link></li>
+                {isSeller && <li><Link href="/vendor/dashboard" className="hover:text-primary-600 hover:underline underline-offset-4">Seller Dashboard</Link></li>}
               </ul>
             </div>
 

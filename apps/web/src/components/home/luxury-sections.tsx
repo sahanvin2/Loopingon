@@ -51,7 +51,7 @@ export function FlashDeals() {
             Flash Deals <span className="text-primary-400">Up to 50% Off</span>
           </h2>
           <p className="text-navy-100 text-lg max-w-md leading-relaxed">
-            Discover incredible savings on unique handcrafted pieces from our top artisans. Grab them before they're gone!
+            Discover incredible savings on unique handcrafted pieces from our top sellers. Grab them before they're gone!
           </p>
         </div>
         
@@ -195,7 +195,7 @@ export function ProductGrids() {
           )}
         </div>
         <div className="p-4 flex flex-col flex-grow">
-          <span className="text-xs text-text-500 mb-1">{product.vendor?.storeName || product.maker || "Kandiyam Creator"}</span>
+          <span className="text-xs text-text-500 mb-1">{product.vendor?.storeName || product.maker || "Kandiyam Seller"}</span>
           <Link href={`/products/${product.slug || "#"}`} className="font-semibold text-navy-900 hover:text-primary-600 transition-colors line-clamp-1 mb-2">{product.title}</Link>
           <div className="flex items-center gap-1 mb-3">
             <Star className="w-3.5 h-3.5 fill-luxury-gold text-luxury-gold" />
@@ -203,7 +203,7 @@ export function ProductGrids() {
             <span className="text-xs text-text-400">({product.reviewCount || product.reviews || 0})</span>
           </div>
           <div className="mt-auto flex items-center justify-between">
-            <span className="font-bold text-lg text-navy-900">රු {price.toLocaleString()}</span>
+            <span className="font-bold text-lg text-navy-900">Rs. {price.toLocaleString()}</span>
           </div>
         </div>
       </div>
@@ -214,7 +214,7 @@ export function ProductGrids() {
     <section className="py-20 bg-white space-y-28">
       <div className="container-page mx-auto">
         <div className="flex flex-col items-center mb-10">
-          <span className="text-xs font-bold text-primary-500 uppercase tracking-[0.2em] mb-2">Fresh From Artists</span>
+          <span className="text-xs font-bold text-primary-500 uppercase tracking-[0.2em] mb-2">Fresh From Sellers</span>
           <h2 className="text-3xl md:text-4xl font-serif font-bold text-navy-900">New Arrivals</h2>
           <div className="w-16 h-1 bg-primary-500 mt-4 rounded-full"></div>
         </div>
@@ -262,7 +262,7 @@ export function ProductGrids() {
 export function ShopByRegion() {
   const regions = [
     { name: "Kandy", description: "Hill Country Crafts", img: "https://images.unsplash.com/photo-1620608552395-58079633e8dc?q=80&w=400&auto=format&fit=crop" },
-    { name: "Galle", description: "Coastal Artisans", img: "https://images.unsplash.com/photo-1550184658-ff613b5e40e8?q=80&w=400&auto=format&fit=crop" },
+    { name: "Galle", description: "Coastal Sellers", img: "https://images.unsplash.com/photo-1550184658-ff613b5e40e8?q=80&w=400&auto=format&fit=crop" },
     { name: "Jaffna", description: "Northern Treasures", img: "https://images.unsplash.com/photo-1625736301382-78d10d19e072?q=80&w=400&auto=format&fit=crop" },
     { name: "Matara", description: "Southern Heritage", img: "https://images.unsplash.com/photo-1588722881267-bc80f1ed7f0f?q=80&w=400&auto=format&fit=crop" },
     { name: "Anuradhapura", description: "Ancient Capital", img: "https://images.unsplash.com/photo-1626201314959-8669c585e49f?q=80&w=400&auto=format&fit=crop" },
@@ -346,7 +346,7 @@ export function CustomerReviewsDark() {
       name: "Sarah Jenkins",
       location: "London, UK",
       item: "Heritage Mask",
-      text: "The craftsmanship is absolutely stunning. I received my wooden mask perfectly packaged. Kandiyam connects you with true artists! Every detail was hand-carved with such care.",
+      text: "The craftsmanship is absolutely stunning. I received my wooden mask perfectly packaged. Kandiyam connects you with true sellers! Every detail was hand-carved with such care.",
       avatar: "S",
       rating: 5,
     },
@@ -364,7 +364,7 @@ export function CustomerReviewsDark() {
       name: "Maria Fernandez",
       location: "Barcelona, ES",
       item: "Batik Wall Art",
-      text: "I've bought from many artisan marketplaces but Kandiyam stands out. The batik piece I received is now the centerpiece of my living room. Incredible value for real craftsmanship.",
+      text: "I've bought from many seller marketplaces but Kandiyam stands out. The batik piece I received is now the centerpiece of my living room. Incredible value for real craftsmanship.",
       avatar: "M",
       rating: 5,
     },
@@ -425,7 +425,7 @@ export function NewsletterSimple() {
       <div className="container-page mx-auto text-center relative z-10">
         <span className="text-xs font-bold text-primary-200 uppercase tracking-[0.3em] mb-3 block">Stay Connected</span>
         <h2 className="text-3xl md:text-5xl font-serif font-bold text-white mb-4">Get exclusive offers & early access</h2>
-        <p className="text-primary-100 mb-10 max-w-lg mx-auto text-lg leading-relaxed">Subscribe to our newsletter for new collection drops, exclusive artisan stories, and member-only discounts.</p>
+        <p className="text-primary-100 mb-10 max-w-lg mx-auto text-lg leading-relaxed">Subscribe to our newsletter for new collection drops, exclusive seller stories, and member-only discounts.</p>
         <form className="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto" onSubmit={e => e.preventDefault()}>
           <input
             type="email"
@@ -478,7 +478,7 @@ export function MobileAppSection() {
         <div className="w-full lg:w-1/2 text-center lg:text-left">
           <span className="text-xs font-bold text-primary-500 uppercase tracking-[0.3em] mb-3 block">Mobile App</span>
           <h2 className="text-4xl md:text-5xl font-serif font-bold text-navy-900 mb-6 leading-tight">Shop crafts, anywhere.</h2>
-          <p className="text-lg text-text-500 mb-10 max-w-md leading-relaxed">Browse handcrafted treasures on the go. Get instant notifications for flash deals, track your orders, and message artisans directly.</p>
+          <p className="text-lg text-text-500 mb-10 max-w-md leading-relaxed">Browse handcrafted treasures on the go. Get instant notifications for flash deals, track your orders, and message sellers directly.</p>
           <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4">
             <button className="bg-navy-900 text-white px-6 py-4 rounded-2xl flex items-center gap-3 hover:bg-navy-800 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5">
               <svg className="w-7 h-7" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>

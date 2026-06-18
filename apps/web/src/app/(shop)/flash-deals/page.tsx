@@ -76,7 +76,7 @@ export default function FlashDealsPage() {
           <Zap className="w-16 h-16 text-muted-300 mx-auto mb-6" />
           <h2 className="text-2xl font-serif font-bold text-navy-900 mb-4">No Active Flash Deals</h2>
           <p className="text-text-500 max-w-md mx-auto mb-8">
-            Our artisans are currently preparing the next batch of amazing deals. Check back soon or browse our regular catalog in the meantime!
+            Our sellers are currently preparing the next batch of amazing deals. Check back soon or browse our regular catalog in the meantime!
           </p>
           <Link
             href="/products"

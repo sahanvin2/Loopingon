@@ -254,7 +254,7 @@ export function CookieConsent() {
                       <div className="flex-1">
                         <p className="text-sm font-medium text-text-900">Marketing Cookies</p>
                         <p className="text-xs text-text-500 mt-0.5">
-                          Used to show you relevant product recommendations and artisan promotions you might
+                          Used to show you relevant product recommendations and seller promotions you might
                           like.
                         </p>
                       </div>

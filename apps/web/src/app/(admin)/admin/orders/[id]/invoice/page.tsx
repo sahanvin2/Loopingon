@@ -72,7 +72,7 @@ export default function InvoicePage({ params }: { params: Promise<{ id: string }
           <div className="text-right">
             <div className="font-serif text-3xl font-bold tracking-tight text-text-900 mb-2">Kandyam</div>
             <p className="text-sm text-text-600 leading-relaxed">
-              123 Artisan Lane<br />
+              123 Seller Lane<br />
               Colombo 03, Sri Lanka<br />
               hello@kandyam.com<br />
               +94 112 345 678
@@ -178,7 +178,7 @@ export default function InvoicePage({ params }: { params: Promise<{ id: string }
 
         {/* Footer Note */}
         <div className="border-t border-accent-200 pt-8 text-center text-sm text-text-500">
-          <p className="font-medium text-text-900 mb-1">Thank you for supporting Sri Lankan artisans!</p>
+          <p className="font-medium text-text-900 mb-1">Thank you for supporting Sri Lankan sellers!</p>
           <p>For questions concerning this invoice, please contact support@kandyam.com</p>
         </div>
 

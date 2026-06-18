@@ -11,12 +11,12 @@ const steps = [
     icon: Search,
     title: "Discover Unique Crafts",
     description:
-      "Browse thousands of authentic Sri Lankan handmade products crafted by verified artisans from across the island.",
+      "Browse thousands of authentic Sri Lankan handmade products crafted by verified sellers from across the island.",
   },
   {
     number: "02",
     icon: Heart,
-    title: "Support Local Artisans",
+    title: "Support Local Sellers",
     description:
       "Every purchase goes directly to supporting skilled Sri Lankan craftspeople and their communities.",
   },
@@ -57,7 +57,7 @@ export function HowItWorks() {
           className="text-muted-600 text-center max-w-xl mx-auto mb-16"
         >
           From discovering unique crafts to receiving them at your door, here&apos;s
-          how Kandyam connects you with Sri Lanka&apos;s finest artisans.
+          how Kandyam connects you with Sri Lanka&apos;s finest sellers.
         </motion.p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">

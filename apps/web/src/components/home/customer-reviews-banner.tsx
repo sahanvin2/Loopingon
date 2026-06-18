@@ -49,7 +49,7 @@ export function CustomerReviewsBanner() {
             <div className="flex items-center gap-1 mb-1">
               {[1, 2, 3, 4, 5].map(i => <Star key={i} className="w-4 h-4 fill-amber-500 text-amber-500" />)}
             </div>
-            <p className="text-white text-sm font-medium mb-1">"Supporting local artisans is so important. Kandyam makes it so easy!"</p>
+            <p className="text-white text-sm font-medium mb-1">"Supporting local sellers is so important. Kandyam makes it so easy!"</p>
             <p className="text-navy-300 text-xs">— Kasun M.</p>
           </div>
         </div>

@@ -24,7 +24,7 @@ export function AIGiftFinder() {
             </h2>
             
             <p className="text-text-600 mb-8 text-lg">
-              Tell us who it's for, your budget, and the occasion. Our AI will instantly curate the perfect handmade gifts from Sri Lankan artisans.
+              Tell us who it's for, your budget, and the occasion. Our AI will instantly curate the perfect handmade gifts from Sri Lankan sellers.
             </p>
             
             <div className="flex flex-col sm:flex-row items-center gap-4">

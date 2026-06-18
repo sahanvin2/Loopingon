@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: VendorPageProps): Promise<Met
     const res = await get<ApiResponse<Vendor & { products: unknown[] }>>(`/vendors/storefront/${slug}`);
     const vendor = res.data;
     return {
-      title: `${vendor.storeName} - Artisan on Kandyam`,
+      title: `${vendor.storeName} - Seller on Kandyam`,
       description: vendor.storeDescription?.substring(0, 160) || `Shop handmade crafts from ${vendor.storeName} on Kandyam.`,
     };
   } catch {
@@ -57,7 +57,7 @@ async function VendorContent({ slug }: { slug: string }) {
     <>
       <div className="bg-surface-50 py-6">
         <div className="mx-auto max-w-7xl px-4">
-          <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Artisans", href: "/vendors" }, { label: vendor.storeName }]} />
+          <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Sellers", href: "/vendors" }, { label: vendor.storeName }]} />
         </div>
       </div>
 
@@ -71,7 +71,7 @@ async function VendorContent({ slug }: { slug: string }) {
           </section>
 
           <section className="mb-12 rounded-xl bg-white p-6 shadow-soft-sm">
-            <h2 className="font-serif text-2xl font-bold text-text-900">About the Artisan</h2>
+            <h2 className="font-serif text-2xl font-bold text-text-900">About the Seller</h2>
             <VendorStory
               story={vendor.craftDescription || vendor.storeDescription || ""}
               image={vendor.storeBanner || vendor.storeLogo || undefined}

@@ -11,7 +11,7 @@ const trustItems = [
   },
   {
     icon: Truck,
-    title: "Free Shipping",
+    title: "Loyalty Programme",
     subtitle: "On orders over $50",
   },
   {
