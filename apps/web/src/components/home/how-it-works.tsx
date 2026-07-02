@@ -11,7 +11,7 @@ const steps = [
     icon: Search,
     title: "Discover Unique Crafts",
     description:
-      "Browse thousands of authentic Sri Lankan handmade products crafted by verified sellers from across the island.",
+      "Browse thousands of authentic Sri Lankan premium products crafted by verified sellers from across the island.",
   },
   {
     number: "02",

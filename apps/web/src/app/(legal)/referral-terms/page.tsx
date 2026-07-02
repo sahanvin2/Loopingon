@@ -15,7 +15,7 @@ export default function ReferralTermsPage() {
 
           <h2 className="text-2xl font-bold text-navy-900 mt-8 mb-4">1. Program Overview</h2>
           <p className="mb-4 text-text-700">
-            The Kandyam Referral Program allows registered users ("Referrers") to earn promotional rewards by referring friends and followers ("Referees") to purchase handmade goods from Kandyam.lk.
+            The Kandyam Referral Program allows registered users ("Referrers") to earn promotional rewards by referring friends and followers ("Referees") to purchase premium goods from Kandyam.lk.
           </p>
 
           <h2 className="text-2xl font-bold text-navy-900 mt-8 mb-4">2. Earning Commissions</h2>

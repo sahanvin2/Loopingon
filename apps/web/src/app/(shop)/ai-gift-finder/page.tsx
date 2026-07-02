@@ -46,7 +46,7 @@ export default function AIGiftFinderPage() {
           transition={{ delay: 0.3 }}
           className="text-lg text-text-600 mb-10 max-w-lg mx-auto"
         >
-          Our magical AI is currently being trained to find the perfect Sri Lankan handmade gifts for your loved ones. We're putting the finishing touches on it!
+          Our magical AI is currently being trained to find the perfect Sri Lankan gifts for your loved ones. We're putting the finishing touches on it!
         </motion.p>
 
         <motion.div

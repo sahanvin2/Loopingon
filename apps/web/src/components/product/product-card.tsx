@@ -54,7 +54,7 @@ export function ProductCard({ product, className, showQuickView = true }: Produc
 
           <div className="absolute top-2 left-2 flex flex-col gap-1 z-10">
             {product.isHandmade && (
-              <Badge variant="rose" size="sm">Handmade</Badge>
+              <Badge variant="rose" size="sm">premium</Badge>
             )}
             {discount > 0 && (
               <Badge variant="red" size="sm">Sale -{discount}%</Badge>

@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Craft Competitions - Showcase Your Skills",
-  description: "Join Kandyam craft competitions. Submit your best handmade work, compete with fellow sellers, and win prizes. Current, upcoming, and past competitions.",
+  description: "Join Kandyam craft competitions. Submit your best premium work, compete with fellow sellers, and win prizes. Current, upcoming, and past competitions.",
 };
 
 const statusStyles: Record<string, string> = {

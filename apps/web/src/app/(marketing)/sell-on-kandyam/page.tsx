@@ -30,7 +30,7 @@ const steps = [
 const faqs = [
   { q: "Are there any listing fees?", a: "No, listing products on Kandyam is completely free. You can list as many products as you want without ever paying a listing fee." },
   { q: "When do I get paid?", a: "Payments are processed every fortnight (14 days) directly to your bank account, provided your balance exceeds Rs. 10,000." },
-  { q: "What can I sell?", a: "Kandyam is for premium, unique, handmade, or carefully curated boutique items. We do not allow mass-produced drop-shipped goods or counterfeit items." },
+  { q: "What can I sell?", a: "Kandyam is for premium, unique, premium, or carefully curated boutique items. We do not allow mass-produced drop-shipped goods or counterfeit items." },
   { q: "Do I need to handle shipping?", a: "Yes, sellers are responsible for packaging and shipping their own items to the buyer using a reliable courier service with tracking." },
 ];
 

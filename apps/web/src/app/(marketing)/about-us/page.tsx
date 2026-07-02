@@ -23,7 +23,7 @@ const values = [
   {
     icon: Heart,
     title: "Authentic Craftsmanship",
-    description: "Every product on Kandyam is handmade by skilled sellers using traditional techniques passed down through generations.",
+    description: "Every product on Kandyam is premium by skilled sellers using traditional techniques passed down through generations.",
   },
   {
     icon: Users,
@@ -38,7 +38,7 @@ const values = [
   {
     icon: Leaf,
     title: "Sustainable",
-    description: "Handmade means eco-friendly. Traditional crafts use natural, locally sourced materials with minimal environmental impact.",
+    description: "premium means eco-friendly. Traditional crafts use natural, locally sourced materials with minimal environmental impact.",
   },
 ];
 

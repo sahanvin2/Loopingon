@@ -1,5 +1,5 @@
 export const SITE_NAME = "Kandyam";
-export const SITE_TAGLINE = "Sri Lanka's premier marketplace for handmade artisanal crafts";
+export const SITE_TAGLINE = "Sri Lanka's premier marketplace for premium products";
 export const SITE_DESCRIPTION =
   "Kandyam connects skilled Sri Lankan artisans with customers worldwide. " +
   "Discover unique handcrafted treasures made with traditional techniques and authentic materials.";

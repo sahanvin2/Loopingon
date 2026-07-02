@@ -13,7 +13,7 @@ export default function CommunityGuidelinesPage() {
         <p className="mt-2 text-sm text-muted-500">Last updated: June 2026</p>
 
         <div className="mt-6 rounded-xl bg-accent-50 border border-accent-200 p-6">
-          <p className="text-sm text-accent-800">Our community is built on trust, respect, and a shared passion for handmade crafts. These guidelines help ensure Kandyam remains a safe, fair, and inspiring marketplace for everyone.</p>
+          <p className="text-sm text-accent-800">Our community is built on trust, respect, and a shared passion for Premium Products. These guidelines help ensure Kandyam remains a safe, fair, and inspiring marketplace for everyone.</p>
         </div>
 
         <div className="mt-10 space-y-8 text-sm leading-relaxed text-muted-700 [&_h2]:font-serif [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-text-900 [&_h3]:font-semibold [&_h3]:text-text-800 [&_p]:mt-3 [&_ul]:mt-3 [&_ul]:list-disc [&_ul]:pl-6">
@@ -21,7 +21,7 @@ export default function CommunityGuidelinesPage() {
             <h2>Prohibited Items</h2>
             <p>The following items are strictly prohibited on Kandyam:</p>
             <ul>
-              <li>Mass-produced or factory-made items misrepresented as handmade</li>
+              <li>Mass-produced or factory-made items misrepresented as premium</li>
               <li>Counterfeit, replica, or unauthorized copies of branded goods</li>
               <li>Weapons, firearms, ammunition, and weapon accessories</li>
               <li>Illegal drugs, drug paraphernalia, and controlled substances</li>
@@ -47,14 +47,14 @@ export default function CommunityGuidelinesPage() {
             <h3>For Buyers</h3>
             <ul>
               <li>Read product descriptions carefully before purchasing</li>
-              <li>Understand that handmade items may have natural variations — that&apos;s part of their charm</li>
+              <li>Understand that premium items may have natural variations — that&apos;s part of their charm</li>
               <li>Leave honest, constructive reviews based on your actual experience</li>
               <li>Do not attempt to negotiate off-platform transactions to avoid fees</li>
               <li>Pay promptly and communicate clearly with vendors</li>
             </ul>
             <h3>For Vendors</h3>
             <ul>
-              <li>List only your own handmade products with accurate descriptions and photos</li>
+              <li>List only your own premium products with accurate descriptions and photos</li>
               <li>Set fair prices and honor your listed prices</li>
               <li>Ship orders within your stated processing time</li>
               <li>Respond to buyer messages within 24 hours during business days</li>

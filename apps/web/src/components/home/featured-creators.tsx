@@ -99,7 +99,7 @@ export function FeaturedCreators() {
             <div className="relative z-10">
               <h3 className="font-serif text-lg font-medium text-navy-900 mb-1">Become a Seller</h3>
               <p className="text-xs text-navy-600 mb-4 max-w-[150px]">
-                Join Kandyam and start selling your handmade creations today!
+                Join Kandyam and start selling your creations today!
               </p>
               <Link
                 href="/sell-on-kandyam"

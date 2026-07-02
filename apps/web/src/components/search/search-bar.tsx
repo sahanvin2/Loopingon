@@ -128,7 +128,7 @@ export function SearchBar({
             onExpand?.(true);
           }}
           onBlur={() => setIsFocused(false)}
-          placeholder="Search handmade treasures..."
+          placeholder="Search amazing products..."
           className={cn(
             "w-full pl-10 pr-12 py-2.5 rounded-full text-sm bg-transparent",
             "text-text-700 placeholder:text-muted-400",

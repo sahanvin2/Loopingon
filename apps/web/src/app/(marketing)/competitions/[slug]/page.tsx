@@ -151,7 +151,7 @@ export default async function CompetitionDetailPage({ params }: CompetitionDetai
               {isActive && (
                 <div className="rounded-2xl bg-primary-50 p-6">
                   <h3 className="font-serif text-lg font-bold text-primary-800">Enter Competition</h3>
-                  <p className="mt-2 text-sm text-primary-600">Submit your best handmade product for a chance to win.</p>
+                  <p className="mt-2 text-sm text-primary-600">Submit your best premium product for a chance to win.</p>
                   <Link href={`/competitions/${competition.slug}/enter`} className="mt-4 inline-block w-full rounded-lg bg-primary-600 px-4 py-2.5 text-center text-sm font-semibold text-white transition-colors hover:bg-primary-700">
                     Enter Competition
                   </Link>

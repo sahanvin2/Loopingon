@@ -114,7 +114,7 @@ export function Header() {
                 <span className="hidden sm:inline opacity-50">|</span>
                 <span className="flex items-center gap-1.5"><ShieldCheck className="w-3.5 h-3.5" /> Support independent sellers</span>
                 <span className="hidden sm:inline opacity-50">|</span>
-                <span className="flex items-center gap-1.5"><Tag className="w-3.5 h-3.5" /> Handmade, vintage, custom & more</span>
+                <span className="flex items-center gap-1.5"><Tag className="w-3.5 h-3.5" /> Electronics, Fashion, Home & more</span>
               </span>
               <button 
                 onClick={() => setShowAnnouncement(false)}

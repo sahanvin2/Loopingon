@@ -43,7 +43,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-center text-lg text-muted-600">
             Discover the stories behind Sri Lankan crafts, meet the sellers, and explore the
-            rich cultural heritage woven into every handmade creation.
+            rich cultural heritage woven into every premium creation.
           </p>
         </div>
       </section>

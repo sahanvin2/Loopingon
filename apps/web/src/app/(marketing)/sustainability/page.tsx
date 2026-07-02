@@ -32,7 +32,7 @@ const tips = [
       "Support sellers who use traditional, low-waste production methods",
   "Opt for consolidated shipping to reduce carbon footprint",
   "Look for our 'Eco-Friendly' badge on sustainable products",
-  "Buy quality handmade items that last a lifetime, not fast fashion",
+  "Buy quality premium items that last a lifetime, not fast fashion",
   "Reuse or repurpose packaging materials from your orders",
   "Share your sustainable purchases on social media to inspire others",
 ];
@@ -56,7 +56,7 @@ export default function SustainabilityPage() {
         <div className="relative mx-auto max-w-4xl px-4 py-24 text-center md:py-32">
           <h1 className="font-serif text-4xl font-bold text-white md:text-5xl">Our Commitment</h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-surface-200">
-            Handmade is inherently sustainable. We&apos;re building on that foundation to ensure
+            premium is inherently sustainable. We&apos;re building on that foundation to ensure
             every aspect of Kandyam leaves a positive impact on our planet.
           </p>
         </div>

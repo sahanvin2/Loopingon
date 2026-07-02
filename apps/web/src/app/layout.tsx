@@ -35,7 +35,7 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: "Kandyam - Sri Lanka's Handmade Craft Marketplace",
+    default: "Kandyam - Sri Lanka's E-commerce Marketplace",
     template: "%s | Kandyam",
   },
   description:
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     "Discover unique handcrafted treasures made with traditional techniques and authentic materials.",
   keywords: [
     "Sri Lanka",
-    "handmade crafts",
+    "Premium Products",
     "seller marketplace",
     "handicrafts",
     "pottery",
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_LK",
     siteName: "Kandyam",
-    title: "Kandyam - Sri Lanka's Handmade Craft Marketplace",
+    title: "Kandyam - Sri Lanka's E-commerce Marketplace",
     description:
       "Discover unique handcrafted treasures made by skilled Sri Lankan sellers. " +
       "Shop pottery, wood carving, textiles, jewelry, and more.",
@@ -84,14 +84,14 @@ export const metadata: Metadata = {
         url: "https://cdn.kandyam.com/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Kandyam - Handmade Crafts from Sri Lanka",
+        alt: "Kandyam - Premium Products from Sri Lanka",
         type: "image/jpeg",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Kandyam - Sri Lanka's Handmade Craft Marketplace",
+    title: "Kandyam - Sri Lanka's E-commerce Marketplace",
     description:
       "Discover unique handcrafted treasures made by skilled Sri Lankan sellers.",
     images: ["https://cdn.kandyam.com/og-image.jpg"],

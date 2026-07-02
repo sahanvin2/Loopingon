@@ -39,7 +39,7 @@ const FAQ_CATEGORIES = [
     title: "Safety & Authenticity",
     icon: <ShieldCheck className="w-6 h-6 text-purple-500" />,
     faqs: [
-      { q: "Are all products genuinely handmade?", a: "Yes! Every single seller on Kandyan goes through a strict verification process to ensure their products are authentically handmade or crafted locally." },
+      { q: "Are all products genuine?", a: "Yes! Every single seller on Kandyan goes through a strict verification process to ensure their products are authentically premium or crafted locally." },
       { q: "How are sellers vetted?", a: "We verify the national identity and business registration of our sellers, and review their production processes before they are allowed to list items on Kandyan." }
     ]
   }

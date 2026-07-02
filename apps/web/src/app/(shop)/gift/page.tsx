@@ -201,7 +201,7 @@ export default function GiftPage() {
             <span>Send as Gift</span>
           </div>
           <h1 className="text-3xl md:text-4xl font-serif font-bold text-navy-900 mb-3">
-            Send a Gift of Handmade
+            Send a Gift of premium
           </h1>
           <p className="text-text-600 max-w-lg mx-auto">
             Surprise someone special with a handcrafted Sri Lankan treasure. We'll deliver it

@@ -233,7 +233,7 @@ export default function ProductsPage() {
               onChange={(e) => navigate({ isHandmade: e.target.checked ? "1" : "" })}
               className="rounded border-surface-300 text-primary-600 focus:ring-primary-500"
             />
-            Handmade Only
+            premium Only
           </label>
         </div>
       </div>

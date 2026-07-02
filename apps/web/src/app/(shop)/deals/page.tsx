@@ -8,8 +8,8 @@ import { Pagination } from "@/components/shared/pagination";
 import { LoadingSkeleton } from "@/components/shared/loading-skeleton";
 
 export const metadata: Metadata = {
-  title: "Today's Deals - Save on Handmade Crafts",
-  description: "Find the best deals on Sri Lankan handmade crafts. Flash deals, clearance sales, bundle discounts, and more. Limited time offers on artisan products.",
+  title: "Today's Deals - Save on Premium Products",
+  description: "Find the best deals on Sri Lankan Premium Products. Flash deals, clearance sales, bundle discounts, and more. Limited time offers on artisan products.",
 };
 
 interface DealsPageProps {
@@ -44,7 +44,7 @@ async function DealsContent({ searchParams }: DealsPageProps) {
         <div className="mx-auto max-w-7xl px-4">
           <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Deals" }]} />
           <h1 className="mt-4 font-serif text-3xl font-bold text-text-900 md:text-4xl">Today&lsquo;s Deals</h1>
-          <p className="mt-2 text-muted-500">Limited-time offers on authentic Sri Lankan handmade crafts</p>
+          <p className="mt-2 text-muted-500">Limited-time offers on authentic Sri Lankan Premium Products</p>
           <div className="mt-6 flex flex-wrap gap-2">
             {tabs.map((tab) => {
               const isActive = filter === tab.value || (tab.value === "all" && !filter);

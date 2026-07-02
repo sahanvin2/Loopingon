@@ -2,7 +2,7 @@
 
 export const metadata: Metadata = {
   title: "Terms of Service",
-  description: "Kandyam Terms of Service: Rules and guidelines for buying and selling handmade crafts on our platform. Protect your rights as a buyer or seller.",
+  description: "Kandyam Terms of Service: Rules and guidelines for buying and selling Premium Products on our platform. Protect your rights as a buyer or seller.",
 };
 
 export default function TermsOfServicePage() {
@@ -46,7 +46,7 @@ export default function TermsOfServicePage() {
             <p>To sell on Kandyam, you must complete the vendor application process, including identity verification and craft documentation. We reserve the right to reject any application.</p>
             <h3>4.2 Product Requirements</h3>
             <ul>
-              <li>All products must be handmade or handcrafted, primarily by you or your team.</li>
+              <li>All products must be premium or handcrafted, primarily by you or your team.</li>
               <li>Products must be accurately described with truthful images and details.</li>
               <li>Prohibited items include mass-produced goods, counterfeit items, weapons, drugs, and items illegal under Sri Lankan law.</li>
               <li>Vendors must maintain a minimum average rating of 3.0 stars.</li>

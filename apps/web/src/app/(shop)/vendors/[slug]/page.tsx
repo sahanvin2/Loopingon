@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: VendorPageProps): Promise<Met
     const vendor = res.data;
     return {
       title: `${vendor.storeName} - Seller on Kandyam`,
-      description: vendor.storeDescription?.substring(0, 160) || `Shop handmade crafts from ${vendor.storeName} on Kandyam.`,
+      description: vendor.storeDescription?.substring(0, 160) || `Shop Premium Products from ${vendor.storeName} on Kandyam.`,
     };
   } catch {
     return { title: "Vendor Storefront" };

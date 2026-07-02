@@ -34,7 +34,7 @@ export default function Loading() {
             Kandyam
           </p>
           <p className="mt-1 text-sm text-muted-500">
-            Loading your handmade treasures...
+            Loading your amazing products...
           </p>
         </div>
 

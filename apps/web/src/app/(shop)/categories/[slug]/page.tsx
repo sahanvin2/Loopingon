@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
     const res = await get<ApiResponse<Category>>(`/categories/${slug}`);
     return {
       title: res.data.metaTitle || res.data.name,
-      description: res.data.metaDescription || res.data.description || `Browse ${res.data.name} handmade by Sri Lankan sellers.`,
+      description: res.data.metaDescription || res.data.description || `Browse ${res.data.name} sourced by Sri Lankan sellers.`,
     };
   } catch {
     return { title: "Category" };

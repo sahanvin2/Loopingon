@@ -24,7 +24,7 @@ export function EmptyCart() {
 
       <h2 className="font-serif text-2xl text-text-900 mb-2">Your Cart is Empty</h2>
       <p className="text-muted-600 max-w-sm mb-8">
-        Looks like you haven&apos;t added any handmade treasures to your cart
+        Looks like you haven&apos;t added any amazing products to your cart
         yet. Discover unique Sri Lankan crafts waiting for you.
       </p>
 
@@ -38,7 +38,7 @@ export function EmptyCart() {
             "shadow-rose",
           )}
         >
-          Browse Handmade Treasures
+          Browse amazing products
         </Link>
 
         {!isAuthenticated && (

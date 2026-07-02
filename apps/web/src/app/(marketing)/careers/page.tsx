@@ -33,7 +33,7 @@ export default function CareersPage() {
           <h1 className="font-serif text-4xl font-bold text-white md:text-5xl">Join Our Mission</h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-surface-200">
             Help us connect Sri Lankan sellers with the world. We&apos;re a team of passionate
-            individuals building the future of ethical, handmade commerce.
+            individuals building the future of ethical, premium commerce.
           </p>
         </div>
       </section>

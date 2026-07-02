@@ -53,7 +53,7 @@ export function SustainabilityBanner() {
           transition={{ delay: 0.1 }}
           className="text-white/70 text-lg max-w-2xl mx-auto mb-12 leading-relaxed"
         >
-          We believe handmade is inherently sustainable. We work with artisans who
+          We believe premium is inherently sustainable. We work with artisans who
           use natural materials and traditional techniques that have been
           eco-friendly for centuries.
         </motion.p>
