@@ -13,7 +13,7 @@ COPY apps/server/package.json ./apps/server/
 RUN npm install
 COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
-RUN npm run build
+RUN npx turbo run build --filter=@kandyam/web
 
 FROM base AS runner
 WORKDIR /app
