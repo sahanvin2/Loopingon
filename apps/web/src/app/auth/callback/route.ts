@@ -11,12 +11,12 @@ export async function GET(request: Request) {
     const { error } = await supabase.auth.exchangeCodeForSession(code);
     
     if (!error) {
-      return NextResponse.redirect(new URL(next, requestUrl.origin));
+      return NextResponse.redirect(new URL(next, process.env.NEXT_PUBLIC_APP_URL || requestUrl.origin));
     } else {
       console.error('OAuth Code Exchange Error:', error.message);
     }
   }
 
   // Fallback to error or home page if something went wrong
-  return NextResponse.redirect(new URL('/?error=auth', request.url));
+  return NextResponse.redirect(new URL('/?error=auth', process.env.NEXT_PUBLIC_APP_URL || requestUrl.origin));
 }

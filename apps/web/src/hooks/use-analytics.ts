@@ -82,7 +82,7 @@ export function useAnalytics() {
 
       // Use navigator.sendBeacon if possible so it works when tab closes
       const blob = new Blob([JSON.stringify(payload)], { type: "application/json" });
-      navigator.sendBeacon(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000"}/api/v1/analytics/track`, blob);
+      navigator.sendBeacon(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000"}/analytics/track`, blob);
       
       // Clear queues
       interactions.current = [];
