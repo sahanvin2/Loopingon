@@ -26,6 +26,7 @@ import { cn, formatDate } from "@/lib/utils";
 import { supportTicketSchema, type SupportTicketInput } from "@/lib/validators";
 import { FileUpload } from "@/components/forms/file-upload";
 import type { SupportTicket, ApiResponse, PaginatedResponse } from "@/types";
+import { CustomSelect } from "@/components/shared/custom-select";
 
 const commonTopics = [
   { label: "Order Issues", icon: Package },
@@ -234,20 +235,21 @@ export default function SupportPage() {
                   <label className="block text-sm font-medium text-text-700 mb-1">
                     Category *
                   </label>
-                  <select
+                  <CustomSelect
                     {...register("category")}
-                    className="w-full px-3 py-2 border border-accent-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500"
-                  >
-                    <option value="">Select a category</option>
-                    <option value="order">Order</option>
-                    <option value="payment">Payment</option>
-                    <option value="product">Product</option>
-                    <option value="shipping">Shipping</option>
-                    <option value="account">Account</option>
-                    <option value="vendor">Vendor</option>
-                    <option value="technical">Technical</option>
-                    <option value="other">Other</option>
-                  </select>
+                    options={[
+                      { value: "order", label: "Order" },
+                      { value: "payment", label: "Payment" },
+                      { value: "product", label: "Product" },
+                      { value: "shipping", label: "Shipping" },
+                      { value: "account", label: "Account" },
+                      { value: "vendor", label: "Vendor" },
+                      { value: "technical", label: "Technical" },
+                      { value: "other", label: "Other" },
+                    ]}
+                    placeholder="Select a category"
+                    className="border-accent-200 focus:ring-2 focus:ring-primary-500 py-2 px-3"
+                  />
                   {errors.category && (
                     <p className="text-xs text-red-600 mt-1">{errors.category.message}</p>
                   )}

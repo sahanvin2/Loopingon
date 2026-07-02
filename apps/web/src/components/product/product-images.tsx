@@ -44,63 +44,11 @@ export function ProductImages({ images, videos = [] }: ProductImagesProps) {
   };
 
   return (
-    <div className="flex flex-col-reverse lg:flex-row gap-4">
-      {/* Thumbnails */}
-      {(images.length > 1 || hasVideos) && (
-        <div className="flex lg:flex-col gap-3 overflow-x-auto lg:overflow-y-auto pb-2 lg:pb-0 scrollbar-thin lg:w-20 shrink-0 lg:max-h-[600px] items-start">
-          {images.map((image, index) => (
-            <button
-              key={image.id}
-              type="button"
-              onMouseEnter={() => setActiveIndex(index)}
-              onClick={() => setActiveIndex(index)}
-              className={cn(
-                "relative w-16 h-16 lg:w-20 lg:h-20 rounded-md overflow-hidden shrink-0 border-2 transition-all",
-                index === activeIndex
-                  ? "border-primary-500 shadow-sm"
-                  : "border-transparent opacity-70 hover:opacity-100 hover:border-accent-300",
-              )}
-              aria-label={`View image ${index + 1}`}
-            >
-              <Image
-                src={getImageUrl(image.thumbnail || image.url)}
-                alt={image.alt || `Product image ${index + 1}`}
-                fill
-                className="object-cover"
-                sizes="80px"
-              />
-            </button>
-          ))}
-
-          {videos.map((video, index) => (
-            <button
-              key={video.id}
-              type="button"
-              className={cn(
-                "relative w-16 h-16 lg:w-20 lg:h-20 rounded-md overflow-hidden shrink-0 border-2 border-transparent",
-                "opacity-70 hover:opacity-100 hover:border-accent-300",
-              )}
-              aria-label={`Watch video ${index + 1}`}
-            >
-              <Image
-                src={getImageUrl(video.thumbnailUrl)}
-                alt={`Video ${index + 1}`}
-                fill
-                className="object-cover"
-                sizes="80px"
-              />
-              <div className="absolute inset-0 bg-text-900/30 flex items-center justify-center">
-                <Play className="w-5 h-5 lg:w-6 lg:h-6 text-white fill-white" />
-              </div>
-            </button>
-          ))}
-        </div>
-      )}
-
+    <div className="flex flex-col gap-6">
       {/* Main Image */}
-      <div className="flex-1 w-full min-w-0">
+      <div className="w-full min-w-0">
         <div
-          className="relative aspect-square md:aspect-[4/5] lg:aspect-[4/4] rounded-xl overflow-hidden bg-white border border-accent-200 cursor-zoom-in group"
+          className="relative aspect-square md:aspect-[4/5] lg:aspect-square w-full max-w-xl mx-auto rounded-3xl overflow-hidden bg-white border border-accent-100/80 cursor-zoom-in group shadow-soft max-h-[500px]"
           onMouseEnter={() => setIsZooming(true)}
           onMouseLeave={() => setIsZooming(false)}
           onMouseMove={handleMouseMove}
@@ -118,14 +66,14 @@ export function ProductImages({ images, videos = [] }: ProductImagesProps) {
             fill
             className={cn(
               "object-contain transition-transform duration-100 ease-out",
-              isZooming ? "scale-[2.5]" : "scale-100"
+              isZooming ? "scale-[2]" : "scale-100"
             )}
             style={
               isZooming
                 ? { transformOrigin: `${mousePosition.x}% ${mousePosition.y}%` }
                 : { transformOrigin: "center center" }
             }
-            sizes="(max-width: 1024px) 100vw, 50vw"
+            sizes="(max-width: 1024px) 100vw, 500px"
             priority
           />
 
@@ -144,6 +92,58 @@ export function ProductImages({ images, videos = [] }: ProductImagesProps) {
           )}
         </div>
       </div>
+
+      {/* Thumbnails */}
+      {(images.length > 1 || hasVideos) && (
+        <div className="flex flex-row flex-wrap justify-center gap-3 overflow-x-auto pb-2 scrollbar-none items-center w-full">
+          {images.map((image, index) => (
+            <button
+              key={image.id}
+              type="button"
+              onMouseEnter={() => setActiveIndex(index)}
+              onClick={() => setActiveIndex(index)}
+              className={cn(
+                "relative w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden shrink-0 border-2 transition-all",
+                index === activeIndex
+                  ? "border-neutral-900 shadow-sm"
+                  : "border-transparent opacity-70 hover:opacity-100 hover:border-accent-200",
+              )}
+              aria-label={`View image ${index + 1}`}
+            >
+              <Image
+                src={getImageUrl(image.thumbnail || image.url)}
+                alt={image.alt || `Product image ${index + 1}`}
+                fill
+                className="object-cover"
+                sizes="80px"
+              />
+            </button>
+          ))}
+
+          {videos.map((video, index) => (
+            <button
+              key={video.id}
+              type="button"
+              className={cn(
+                "relative w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden shrink-0 border-2 border-transparent",
+                "opacity-70 hover:opacity-100 hover:border-accent-200",
+              )}
+              aria-label={`Watch video ${index + 1}`}
+            >
+              <Image
+                src={getImageUrl(video.thumbnailUrl)}
+                alt={`Video ${index + 1}`}
+                fill
+                className="object-cover"
+                sizes="80px"
+              />
+              <div className="absolute inset-0 bg-text-900/30 flex items-center justify-center">
+                <Play className="w-5 h-5 sm:w-6 sm:h-6 text-white fill-white" />
+              </div>
+            </button>
+          ))}
+        </div>
+      )}
 
       <AnimatePresence>
         {lightboxOpen && (

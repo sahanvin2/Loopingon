@@ -1,53 +1,58 @@
+"use client";
+
 import React from "react";
-import { ShieldCheck, Truck, RotateCcw, HeartHandshake, ShieldAlert } from "lucide-react";
+import { ShieldCheck, Truck, RefreshCcw, HeadphonesIcon, BadgeCheck, Wand2 } from "lucide-react";
+
+const TRUST_ITEMS = [
+  {
+    icon: <ShieldCheck className="w-5 h-5 text-text-700" />,
+    title: "Secure Payments",
+    subtitle: "100% secure checkout",
+  },
+  {
+    icon: <Wand2 className="w-5 h-5 text-text-700" />,
+    title: "Customize Your Order",
+    subtitle: "Made just for you",
+  },
+  {
+    icon: <RefreshCcw className="w-5 h-5 text-[#E63946]" />,
+    title: "Easy Returns",
+    subtitle: "Within 30 days",
+  },
+  {
+    icon: <HeadphonesIcon className="w-5 h-5 text-text-700" />,
+    title: "Support 24/7",
+    subtitle: "We're always here",
+  },
+  {
+    icon: <BadgeCheck className="w-5 h-5 text-text-700" />,
+    title: "Buyer Protection",
+    subtitle: "Shop with confidence",
+  },
+];
 
 export function TrustBar() {
-  const trustItems = [
-    {
-      icon: ShieldCheck,
-      title: "Secure Payments",
-      description: "100% secure processing",
-    },
-    {
-      icon: Truck,
-      title: "Loyalty Programme",
-      description: "Earn points & rewards",
-    },
-    {
-      icon: RotateCcw,
-      title: "Easy Returns",
-      description: "30-day return policy",
-    },
-    {
-      icon: ShieldAlert,
-      title: "Buyer Protection",
-      description: "Full purchase coverage",
-    },
-    {
-      icon: HeartHandshake,
-      title: "Support Sellers",
-      description: "Empowering local sellers",
-    },
-  ];
-
   return (
-    <section className="w-full bg-white border-b border-surface-200 py-6 relative z-20 shadow-sm -mt-2">
-      <div className="container-page mx-auto">
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 md:gap-6">
-          {trustItems.map((item, index) => (
-            <div key={index} className="flex items-center gap-3 md:gap-4 justify-center group">
-              <div className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-surface-50 text-primary-500 group-hover:bg-primary-50 group-hover:text-primary-600 transition-colors">
-                <item.icon className="h-6 w-6" />
+    <section className="w-full bg-[#FCFDFD] py-8 border-b border-surface-100">
+      <div className="max-w-8xl mx-auto px-4 sm:px-6 xl:px-8">
+        <div className="flex flex-wrap items-center justify-center lg:justify-between gap-6 lg:gap-4 bg-white border border-surface-200 rounded-2xl shadow-sm py-6 px-4 md:px-8">
+          {TRUST_ITEMS.map((item, index) => (
+            <React.Fragment key={item.title}>
+              <div className="flex items-center gap-4 min-w-[200px]">
+                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-surface-50 border border-surface-100 flex items-center justify-center">
+                  {item.icon}
+                </div>
+                <div>
+                  <h4 className="text-sm font-bold text-navy-900">{item.title}</h4>
+                  <p className="text-xs text-text-500 font-medium">{item.subtitle}</p>
+                </div>
               </div>
-              <div className="flex flex-col">
-                <span className="text-sm md:text-base font-semibold text-navy-900 leading-tight">
-                  {item.title}
-                </span>
-                <span className="text-xs md:text-sm text-text-500 hidden sm:block mt-0.5">
-                  {item.description}
-                </span>
-              </div>
-            </div>
+              
+              {/* Divider for all but last item, hidden on mobile for better wrapping */}
+              {index < TRUST_ITEMS.length - 1 && (
+                <div className="hidden lg:block w-px h-10 bg-surface-200" />
+              )}
+            </React.Fragment>
           ))}
         </div>
       </div>

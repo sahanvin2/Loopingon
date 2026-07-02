@@ -14,6 +14,7 @@ import type { Review } from "@/types";
 import { RatingStars } from "@/components/shared/rating-stars";
 import { EmptyState } from "@/components/shared/empty-state";
 import { ProductReviewForm } from "@/components/product/product-review-form";
+import { CustomSelect } from "@/components/shared/custom-select";
 
 interface ProductReviewsProps {
   reviews: Review[];
@@ -189,18 +190,17 @@ export function ProductReviews({
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center gap-2">
                 <span className="text-sm text-muted-500">Sort by:</span>
-                <select
+                <CustomSelect
                   value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value)}
-                  className={cn(
-                    "text-sm border border-accent-300 rounded-lg px-3 py-1.5 bg-white",
-                    "text-text-700 focus:outline-none focus:ring-2 focus:ring-primary-500",
-                  )}
-                >
-                  <option value="recent">Most Recent</option>
-                  <option value="highest">Highest Rated</option>
-                  <option value="lowest">Lowest Rated</option>
-                </select>
+                  onChange={(val: string) => setSortBy(val)}
+                  options={[
+                    { value: "recent", label: "Most Recent" },
+                    { value: "highest", label: "Highest Rated" },
+                    { value: "lowest", label: "Lowest Rated" },
+                  ]}
+                  wrapperClassName="w-40"
+                  className="border-accent-300 py-1.5 px-3 h-8 text-sm"
+                />
               </div>
             </div>
 

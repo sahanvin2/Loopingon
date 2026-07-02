@@ -1,4 +1,4 @@
-import { Worker, Queue, type Job } from "bullmq";
+import { Worker, Queue, type Job } from "../mock-bullmq.js";
 import { REDIS_URL } from "../config/redis.js";
 import { prisma } from "../config/database.js";
 import { payHereConfig } from "../config/payment.js";

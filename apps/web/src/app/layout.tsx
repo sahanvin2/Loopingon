@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Playfair_Display, Inter } from "next/font/google";
+import { Lora, Outfit } from "next/font/google";
 import { Providers } from "@/providers";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
@@ -10,16 +10,16 @@ import { PwaProvider } from "@/components/shared/pwa-provider";
 import { PageTracker } from "@/components/shared/page-tracker";
 import "@/styles/globals.css";
 
-const playfairDisplay = Playfair_Display({
+const lora = Lora({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
-  variable: "--font-playfair-display",
+  variable: "--font-lora",
   display: "swap",
 });
 
-const inter = Inter({
+const outfit = Outfit({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-outfit",
   display: "swap",
 });
 
@@ -137,7 +137,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${playfairDisplay.variable} ${inter.variable}`}
+      className={`${lora.variable} ${outfit.variable}`}
       suppressHydrationWarning
     >
       <body className="min-h-screen bg-surface-50 font-sans text-text-900 antialiased">

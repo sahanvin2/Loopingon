@@ -11,6 +11,7 @@ import { LoadingSkeleton } from "@/components/shared/loading-skeleton";
 import { get, post, patch, del } from "@/lib/api-client";
 import { formatDate } from "@/lib/utils";
 import type { Coupon, PaginatedResponse } from "@/types";
+import { CustomSelect } from "@/components/shared/custom-select";
 
 export default function AdminCouponsPage() {
   const queryClient = useQueryClient();
@@ -135,11 +136,15 @@ export default function AdminCouponsPage() {
                 <div className="grid grid-cols-2 gap-3">
                   <div>
                     <label className="block text-sm font-medium text-text-700 mb-1">Type</label>
-                    <select {...register("discountType")} className="w-full px-3 py-2 border border-accent-200 rounded-lg text-sm">
-                      <option value="PERCENTAGE">Percentage</option>
-                      <option value="FIXED_AMOUNT">Fixed Amount</option>
-                      <option value="FREE_SHIPPING">Free Shipping</option>
-                    </select>
+                    <CustomSelect
+                      {...register("discountType")}
+                      options={[
+                        { value: "PERCENTAGE", label: "Percentage" },
+                        { value: "FIXED_AMOUNT", label: "Fixed Amount" },
+                        { value: "FREE_SHIPPING", label: "Free Shipping" },
+                      ]}
+                      className="border-accent-200 py-2 px-3"
+                    />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-text-700 mb-1">Value</label>

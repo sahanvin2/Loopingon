@@ -12,6 +12,7 @@ import { LoadingSkeleton } from "@/components/shared/loading-skeleton";
 import { get, patch } from "@/lib/api-client";
 import { formatDate, formatPrice } from "@/lib/utils";
 import type { User, ApiResponse } from "@/types";
+import { CustomSelect } from "@/components/shared/custom-select";
 
 export default function AdminUserDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -67,15 +68,16 @@ export default function AdminUserDetailPage() {
               <Badge variant={user.isActive ? "muted" : "red"} size="sm">
                 {user.isActive ? "Active" : "Banned"}
               </Badge>
-              <select
+              <CustomSelect
                 value={user.role}
-                onChange={(e) => roleMutation.mutate(e.target.value)}
-                className="px-2 py-1 text-xs border border-accent-200 rounded-md"
-              >
-                <option value="CUSTOMER">Customer</option>
-                <option value="VENDOR">Vendor</option>
-                <option value="ADMIN">Admin</option>
-              </select>
+                onChange={(val: string) => roleMutation.mutate(val)}
+                options={[
+                  { value: "CUSTOMER", label: "Customer" },
+                  { value: "VENDOR", label: "Vendor" },
+                  { value: "ADMIN", label: "Admin" },
+                ]}
+                className="border-accent-200 py-1 px-2 text-xs h-7"
+              />
             </div>
           </div>
         </div>

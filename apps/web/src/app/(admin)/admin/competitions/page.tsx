@@ -14,6 +14,7 @@ import { get, post, patch, del } from "@/lib/api-client";
 import { formatDate } from "@/lib/utils";
 import { COMPETITION_STATUS_MAP, CRAFT_TYPES } from "@/lib/constants";
 import type { Competition, PaginatedResponse } from "@/types";
+import { CustomSelect } from "@/components/shared/custom-select";
 
 export default function AdminCompetitionsPage() {
   const queryClient = useQueryClient();
@@ -128,10 +129,11 @@ export default function AdminCompetitionsPage() {
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-text-700 mb-1">Craft Type</label>
-                  <select {...register("craftType")} className="w-full px-3 py-2 border border-accent-200 rounded-lg text-sm">
-                    <option value="">All</option>
-                    {CRAFT_TYPES.map((ct) => <option key={ct.value} value={ct.value}>{ct.label}</option>)}
-                  </select>
+                  <CustomSelect
+                    {...register("craftType")}
+                    options={[{ value: "", label: "All" }, ...CRAFT_TYPES as unknown as {value: string, label: string}[]]}
+                    className="border-accent-200 py-2 px-3"
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-text-700 mb-1">Prize Description</label>
@@ -153,12 +155,16 @@ export default function AdminCompetitionsPage() {
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-text-700 mb-1">Status</label>
-                  <select {...register("status")} className="w-full px-3 py-2 border border-accent-200 rounded-lg text-sm">
-                    <option value="UPCOMING">Upcoming</option>
-                    <option value="ACTIVE">Active</option>
-                    <option value="JUDGING">Judging</option>
-                    <option value="COMPLETED">Completed</option>
-                  </select>
+                  <CustomSelect
+                    {...register("status")}
+                    options={[
+                      { value: "UPCOMING", label: "Upcoming" },
+                      { value: "ACTIVE", label: "Active" },
+                      { value: "JUDGING", label: "Judging" },
+                      { value: "COMPLETED", label: "Completed" },
+                    ]}
+                    className="border-accent-200 py-2 px-3"
+                  />
                 </div>
                 <div className="flex gap-3 pt-3">
                   <button type="button" onClick={() => setShowModal(false)} className="flex-1 px-4 py-2.5 border border-accent-200 rounded-lg text-sm">Cancel</button>

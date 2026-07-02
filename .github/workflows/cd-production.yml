@@ -90,6 +90,10 @@ jobs:
             echo "IMAGE_TAG=${{ github.sha }}" > .env.deploy
             export IMAGE_TAG=${{ github.sha }}
 
+            echo "Running automated SSL certificate setup..."
+            chmod +x scripts/setup-ssl.sh
+            ./scripts/setup-ssl.sh
+
             docker compose -f docker/docker-compose.prod.yml pull
 
             docker compose -f docker/docker-compose.prod.yml up -d --remove-orphans

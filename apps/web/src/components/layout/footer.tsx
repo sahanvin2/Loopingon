@@ -67,36 +67,33 @@ export function Footer() {
   ];
 
   return (
-    <footer className="mt-0 border-t border-surface-200 bg-white">
-      <div className="container-page mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 py-16">
+    <footer className="w-full bg-[#FCFDFD] border-t border-surface-200">
+      <div className="max-w-8xl mx-auto px-4 sm:px-6 xl:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-12 py-16">
+          
           {/* Brand & Social */}
-          <div className="lg:col-span-1">
+          <div className="lg:col-span-1 flex flex-col">
             <Link
               href="/"
-              className="flex items-center gap-2 shrink-0 group mb-6"
+              className="flex items-center gap-2 group focus:outline-none mb-4"
               aria-label="Kandyam home"
             >
-              <span className="grid h-10 w-10 place-items-center text-primary-500 group-hover:scale-105 transition-transform bg-primary-50 rounded-xl">
-                 <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
-                   <path d="M12 2L2 22h20L12 2zm0 4.5l6.5 13.5h-13L12 6.5z" />
-                 </svg>
-              </span>
-              <span className="font-serif text-3xl tracking-tight text-navy-900 font-bold">
-                Kandyam
-              </span>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#F7444E" className="w-8 h-8 shrink-0">
+                <path d="M12 2L2 22h20L12 2zm0 4.5l6.5 13.5h-13L12 6.5z" />
+              </svg>
+              <span className="font-serif text-2xl tracking-tight text-navy-900 font-bold hidden sm:block">Kandyam</span>
             </Link>
-            <p className="text-sm text-text-500 mb-8 leading-relaxed">
-              Your global marketplace for unique, handcrafted, and luxury goods from sellers worldwide.
+            <p className="text-xs font-medium text-text-500 mb-6 leading-relaxed pr-4">
+              A global marketplace for unique, creative and one-of-a-kind items from independent sellers around the world.
             </p>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3 mt-auto">
               {socialLinks.map((social) => (
                 <a
                   key={social.label}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="grid h-10 w-10 place-items-center rounded-full bg-surface-100 text-text-600 hover:text-white hover:bg-navy-900 transition-all shadow-sm"
+                  className="text-text-400 hover:text-[#E63946] transition-colors"
                   aria-label={social.label}
                 >
                   <social.icon className="h-4 w-4" />
@@ -108,63 +105,78 @@ export function Footer() {
           {/* Links Grid: 4 Columns */}
           <div className="lg:col-span-4 grid grid-cols-2 md:grid-cols-4 gap-8">
             <div>
-              <h4 className="font-serif text-lg font-bold text-navy-900 mb-6">Shop</h4>
-              <ul className="space-y-4 text-sm text-text-600">
-                <li><Link href="/categories/home-decor" className="hover:text-primary-600 hover:underline underline-offset-4">Home Decor</Link></li>
-                <li><Link href="/categories/jewelry" className="hover:text-primary-600 hover:underline underline-offset-4">Jewelry</Link></li>
-                <li><Link href="/categories/fashion" className="hover:text-primary-600 hover:underline underline-offset-4">Fashion</Link></li>
-                <li><Link href="/categories/art" className="hover:text-primary-600 hover:underline underline-offset-4">Art & Collectibles</Link></li>
-                <li><Link href="/categories" className="hover:text-primary-600 hover:underline underline-offset-4">All Categories</Link></li>
+              <h4 className="font-serif text-sm font-bold text-navy-900 mb-5">Shop</h4>
+              <ul className="space-y-3 text-[13px] font-medium text-text-500">
+                <li><Link href="/products" className="hover:text-[#E63946] transition-colors">All Products</Link></li>
+                <li><Link href="/products?sort=salesCount" className="hover:text-[#E63946] transition-colors">Best Sellers</Link></li>
+                <li><Link href="/products?sort=newest" className="hover:text-[#E63946] transition-colors">New Arrivals</Link></li>
+                <li><Link href="/deals" className="hover:text-[#E63946] transition-colors">Deals</Link></li>
+                <li><Link href="/gift-cards" className="hover:text-[#E63946] transition-colors">Gift Cards</Link></li>
               </ul>
             </div>
             
             <div>
-              <h4 className="font-serif text-lg font-bold text-navy-900 mb-6">Help</h4>
-              <ul className="space-y-4 text-sm text-text-600">
-                <li><Link href="/help-center" className="hover:text-primary-600 hover:underline underline-offset-4">Help Center</Link></li>
-                <li><Link href="/trust" className="hover:text-primary-600 hover:underline underline-offset-4">Trust & Safety</Link></li>
-                <li><Link href="/privacy-settings" className="hover:text-primary-600 hover:underline underline-offset-4">Privacy Settings</Link></li>
-                <li><Link href="/contact" className="hover:text-primary-600 hover:underline underline-offset-4">Contact Us</Link></li>
-                <li><Link href="/returns" className="hover:text-primary-600 hover:underline underline-offset-4">Returns</Link></li>
+              <h4 className="font-serif text-sm font-bold text-navy-900 mb-5">Help</h4>
+              <ul className="space-y-3 text-[13px] font-medium text-text-500">
+                <li><Link href="/faq" className="hover:text-[#E63946] transition-colors">FAQs</Link></li>
+                <li><Link href="/shipping" className="hover:text-[#E63946] transition-colors">Shipping & Delivery</Link></li>
+                <li><Link href="/returns" className="hover:text-[#E63946] transition-colors">Returns & Exchanges</Link></li>
+                <li><Link href="/contact" className="hover:text-[#E63946] transition-colors">Contact Us</Link></li>
+                <li><Link href="/track-order" className="hover:text-[#E63946] transition-colors">Track Order</Link></li>
               </ul>
             </div>
 
             <div>
-              <h4 className="font-serif text-lg font-bold text-navy-900 mb-6">Sellers</h4>
-              <ul className="space-y-4 text-sm text-text-600">
-                <li><Link href="/sell" className="hover:text-primary-600 hover:underline underline-offset-4">Start Selling</Link></li>
-                <li><Link href="/handbook" className="hover:text-primary-600 hover:underline underline-offset-4">Seller Handbook</Link></li>
-                <li><Link href="/community" className="hover:text-primary-600 hover:underline underline-offset-4">Community</Link></li>
-                <li><Link href="/seller-policy" className="hover:text-primary-600 hover:underline underline-offset-4">Seller Policies</Link></li>
-                {isSeller && <li><Link href="/vendor/dashboard" className="hover:text-primary-600 hover:underline underline-offset-4">Seller Dashboard</Link></li>}
+              <h4 className="font-serif text-sm font-bold text-navy-900 mb-5">About</h4>
+              <ul className="space-y-3 text-[13px] font-medium text-text-500">
+                <li><Link href="/our-story" className="hover:text-[#E63946] transition-colors">Our Story</Link></li>
+                <li><Link href="/careers" className="hover:text-[#E63946] transition-colors">Careers</Link></li>
+                <li><Link href="/press" className="hover:text-[#E63946] transition-colors">Press</Link></li>
+                <li><Link href="/sustainability" className="hover:text-[#E63946] transition-colors">Sustainability</Link></li>
+                <li><Link href="/blog" className="hover:text-[#E63946] transition-colors">Blog</Link></li>
               </ul>
             </div>
 
             <div>
-              <h4 className="font-serif text-lg font-bold text-navy-900 mb-6">Company</h4>
-              <ul className="space-y-4 text-sm text-text-600">
-                <li><Link href="/about" className="hover:text-primary-600 hover:underline underline-offset-4">About Kandyam</Link></li>
-                <li><Link href="/policies" className="hover:text-primary-600 hover:underline underline-offset-4">Policies</Link></li>
-                <li><Link href="/careers" className="hover:text-primary-600 hover:underline underline-offset-4">Careers</Link></li>
-                <li><Link href="/press" className="hover:text-primary-600 hover:underline underline-offset-4">Press</Link></li>
-                <li><Link href="/impact" className="hover:text-primary-600 hover:underline underline-offset-4">Impact</Link></li>
+              <h4 className="font-serif text-sm font-bold text-navy-900 mb-5">Sell on Kandyam</h4>
+              <ul className="space-y-3 text-[13px] font-medium text-text-500">
+                <li><Link href="/sell" className="hover:text-[#E63946] transition-colors">Become a Seller</Link></li>
+                <li><Link href="/handbook" className="hover:text-[#E63946] transition-colors">Seller Handbook</Link></li>
+                <li><Link href="/community" className="hover:text-[#E63946] transition-colors">Creator Community</Link></li>
+                <li><Link href="/affiliate" className="hover:text-[#E63946] transition-colors">Affiliate Program</Link></li>
+                {isSeller && <li><Link href="/vendor/dashboard" className="hover:text-[#E63946] transition-colors mt-2 text-[#62A7B0]">Seller Dashboard</Link></li>}
               </ul>
             </div>
           </div>
+
+          {/* Secure Payments */}
+          <div className="lg:col-span-1 flex flex-col lg:items-end">
+             <h4 className="font-serif text-sm font-bold text-navy-900 mb-5 text-left lg:text-right w-full">Secure Payments</h4>
+             <div className="flex items-center gap-2 flex-wrap lg:justify-end">
+               <div className="w-10 h-7 bg-white border border-surface-200 rounded flex items-center justify-center overflow-hidden">
+                 <img src="https://img.icons8.com/color/48/visa.png" alt="Visa" className="h-5 w-auto object-contain" />
+               </div>
+               <div className="w-10 h-7 bg-white border border-surface-200 rounded flex items-center justify-center overflow-hidden">
+                 <img src="https://img.icons8.com/color/48/mastercard.png" alt="Mastercard" className="h-5 w-auto object-contain" />
+               </div>
+               <div className="w-10 h-7 bg-white border border-surface-200 rounded flex items-center justify-center overflow-hidden">
+                 <img src="https://img.icons8.com/color/48/paypal.png" alt="PayPal" className="h-5 w-auto object-contain" />
+               </div>
+               <div className="w-10 h-7 bg-white border border-surface-200 rounded flex items-center justify-center overflow-hidden">
+                 <img src="https://img.icons8.com/color/48/apple-pay.png" alt="Apple Pay" className="h-5 w-auto object-contain" />
+               </div>
+             </div>
+          </div>
+
         </div>
 
         {/* Bottom text */}
-        <div className="border-t border-surface-200 py-8 flex flex-col md:flex-row items-center justify-between gap-6 text-sm text-text-500">
-          <div className="flex items-center gap-6">
-            <span className="font-semibold text-navy-900">Sri Lanka</span>
-            <span>English (US)</span>
-            <span>LKR</span>
-          </div>
+        <div className="border-t border-surface-200 py-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-medium text-text-400">
           <p>© {new Date().getFullYear()} Kandyam. All rights reserved.</p>
-          <div className="flex flex-wrap items-center justify-center gap-6">
-            <Link href="/terms" className="hover:text-navy-900 hover:underline underline-offset-4">Terms of Use</Link>
-            <Link href="/privacy" className="hover:text-navy-900 hover:underline underline-offset-4">Privacy</Link>
-            <Link href="/cookies" className="hover:text-navy-900 hover:underline underline-offset-4">Cookie Policy</Link>
+          <div className="flex items-center gap-6">
+            <Link href="/privacy" className="hover:text-navy-900 transition-colors">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-navy-900 transition-colors">Terms of Service</Link>
+            <Link href="/cookies" className="hover:text-navy-900 transition-colors">Cookies</Link>
           </div>
         </div>
       </div>

@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { cn } from "@/lib/utils";
 import { SRI_LANKAN_DISTRICTS } from "@/lib/constants";
+import { CustomSelect } from "@/components/shared/custom-select";
 
 interface AddressFormProps {
   initialData?: Partial<AddressFormData>;
@@ -166,22 +167,16 @@ export function AddressForm({
           <label className="block text-sm font-medium text-text-700 mb-1">
             District <span className="text-red-500">*</span>
           </label>
-          <select
+          <CustomSelect
             value={form.district}
-            onChange={(e) => updateField("district", e.target.value)}
+            onChange={(val: string) => updateField("district", val)}
+            options={SRI_LANKAN_DISTRICTS as unknown as string[]}
+            placeholder="Select district"
             className={cn(
-              "w-full px-3 py-2.5 rounded-lg border text-sm bg-white",
-              errors.district ? "border-red-500" : "border-accent-300",
-              "focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent",
+              errors.district ? "border-red-500 hover:border-red-600" : "border-accent-300",
+              "focus:ring-2 focus:ring-primary-500 px-3 py-2.5"
             )}
-          >
-            <option value="">Select district</option>
-            {SRI_LANKAN_DISTRICTS.map((d) => (
-              <option key={d} value={d}>
-                {d}
-              </option>
-            ))}
-          </select>
+          />
           {errors.district && <p className="text-xs text-red-600 mt-1">{errors.district}</p>}
         </div>
       </div>

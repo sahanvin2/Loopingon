@@ -13,7 +13,11 @@ import {
   type TokenPayload,
 } from "../utils/jwt.js";
 import { generateOTP } from "../utils/otp.js";
+import { sendSMS } from "../utils/sms.js";
 import { generateTOTPSecret, generateBackupCodes, verifyTOTP } from "../utils/totp.js";
+
+// In-memory store for OTPs (since Redis is mocked)
+const otpStore = new Map<string, { code: string; expiresAt: number }>();
 import { logger } from "../middleware/errorHandler.middleware.js";
 import {
   addVerificationEmailJob,
@@ -347,30 +351,46 @@ export async function facebookAuth(profile: { id: string; email: string; name: s
 
 export async function sendOTP(phone: string) {
   const user = await prisma.user.findFirst({ where: { phone } });
-  if (!user) throw new AppError("No account found with this phone", 404, "USER_NOT_FOUND");
+  if (!user) {
+    // If not found in User, we might still want to verify phone numbers for signup or guests.
+    // For now, we will allow generating OTPs for any phone number.
+  }
 
   const otp = generateOTP();
+  const expiresAt = Date.now() + 5 * 60 * 1000; // 5 mins
+  otpStore.set(phone, { code: otp, expiresAt });
 
-  // In production, send via SMS gateway (Twilio). For now just return.
-  // Twilio client: await twilioClient.messages.create({ body: `Your OTP: ${otp}`, to: phone, from: TWILIO_PHONE });
+  const message = `Kandyam: Your verification code is ${otp}. Valid for 5 minutes.`;
+  await sendSMS({ recipient: phone, message });
 
-  return { otp };
+  return { message: "OTP sent successfully" };
 }
 
 export async function verifyOTP(phone: string, code: string) {
+  const stored = otpStore.get(phone);
+  if (!stored) throw new AppError("OTP not found or expired", 400, "INVALID_OTP");
+  
+  if (Date.now() > stored.expiresAt) {
+    otpStore.delete(phone);
+    throw new AppError("OTP has expired", 400, "EXPIRED_OTP");
+  }
+
+  if (stored.code !== code) {
+    throw new AppError("Invalid OTP", 400, "INVALID_OTP");
+  }
+
+  // Clear OTP
+  otpStore.delete(phone);
+
   const user = await prisma.user.findFirst({ where: { phone } });
-  if (!user) throw new AppError("No account found with this phone", 404, "USER_NOT_FOUND");
+  if (user) {
+    await prisma.user.update({
+      where: { id: user.id },
+      data: { phoneVerified: true },
+    });
+  }
 
-  // In production, verify against stored OTP in Redis
-  // const storedOTP = await redis.get(`otp:${phone}`);
-  // if (storedOTP !== code) throw new AppError("Invalid OTP", 400, "INVALID_OTP");
-
-  await prisma.user.update({
-    where: { id: user.id },
-    data: { phoneVerified: true },
-  });
-
-  return { verified: true };
+  return { message: "Phone verified successfully" };
 }
 
 export async function setup2FA(userId: string) {

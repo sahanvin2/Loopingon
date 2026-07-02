@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { Package, Phone, Clock, Search, MapPin, Weight, Truck, ShoppingBag } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
+import { CustomSelect } from "@/components/shared/custom-select";
 
 const CATEGORIES = [
   "Electronics & Gadgets",
@@ -155,10 +156,12 @@ export default function CustomOrdersPage() {
               </div>
               <div>
                 <label className="block text-sm font-medium text-text-700 mb-1">Category</label>
-                <select value={form.category} onChange={(e) => handleChange("category", e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl border border-surface-300 text-sm focus:ring-2 focus:ring-primary-500 focus:outline-none bg-white">
-                  {CATEGORIES.map(c => <option key={c}>{c}</option>)}
-                </select>
+                <CustomSelect
+                  value={form.category}
+                  onChange={(val: string) => handleChange("category", val)}
+                  options={CATEGORIES}
+                  className="border-surface-300 focus:ring-2 focus:ring-primary-500"
+                />
               </div>
               <div>
                 <label className="block text-sm font-medium text-text-700 mb-1">Quantity</label>
@@ -202,10 +205,12 @@ export default function CustomOrdersPage() {
               </div>
               <div>
                 <label className="block text-sm font-medium text-text-700 mb-1">District</label>
-                <select value={form.district} onChange={(e) => handleChange("district", e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl border border-surface-300 text-sm focus:ring-2 focus:ring-primary-500 focus:outline-none bg-white">
-                  {DISTRICTS.map(d => <option key={d}>{d}</option>)}
-                </select>
+                <CustomSelect
+                  value={form.district}
+                  onChange={(val: string) => handleChange("district", val)}
+                  options={DISTRICTS}
+                  className="border-surface-300 focus:ring-2 focus:ring-primary-500"
+                />
               </div>
               <div className="sm:col-span-2">
                 <label className="block text-sm font-medium text-text-700 mb-1">Address</label>

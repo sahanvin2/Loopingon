@@ -1,4 +1,4 @@
-import { Worker, Queue, type Job } from "bullmq";
+import { Worker, Queue, type Job } from "../mock-bullmq.js";
 import { REDIS_URL } from "../config/redis.js";
 import { sendEmail } from "../config/email.js";
 import { logger } from "../middleware/errorHandler.middleware.js";
@@ -47,6 +47,11 @@ interface WelcomeEmailJob {
   data: { email: string; name?: string };
 }
 
+interface SellerWelcomeEmailJob {
+  type: "sendSellerWelcomeEmail";
+  data: { email: string; name?: string; storeName?: string };
+}
+
 interface CartUpdateJob {
   type: "sendCartUpdate";
   data: {
@@ -74,14 +79,31 @@ interface AbandonedCartReminderJob {
   };
 }
 
+interface PromotionalEmailJob {
+  type: "sendPromotionalEmail";
+  data: {
+    email: string;
+    subject: string;
+    title: string;
+    subtitle?: string;
+    heroImage?: string;
+    heroCtaText?: string;
+    heroCtaLink?: string;
+    curatedProducts?: Array<{ name: string; price: number; image: string; link: string }>;
+    featuredProducts?: Array<{ name: string; price: number; image: string; link: string }>;
+  };
+}
+
 type EmailJobData =
   | VerificationEmailJob
   | PasswordResetEmailJob
   | OrderConfirmationJob
   | ShippingUpdateJob
   | WelcomeEmailJob
+  | SellerWelcomeEmailJob
   | CartUpdateJob
-  | AbandonedCartReminderJob;
+  | AbandonedCartReminderJob
+  | PromotionalEmailJob;
 
 const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:3000";
 const PLATFORM_NAME = process.env.PLATFORM_NAME || "Movia";
@@ -102,7 +124,7 @@ function emailTemplate(title: string, content: string): string {
       <td align="center">
         <table width="600" cellpadding="0" cellspacing="0" style="background-color:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
           <tr>
-            <td style="background:linear-gradient(135deg,#4F46E5,#7C3AED);padding:32px 40px;text-align:center;">
+            <td style="background:linear-gradient(135deg,#FA6873,#F7444E);padding:32px 40px;text-align:center;">
               <h1 style="color:#ffffff;font-size:28px;font-weight:700;margin:0;letter-spacing:-0.5px;">${PLATFORM_NAME}</h1>
               <p style="color:rgba(255,255,255,0.85);font-size:14px;margin:8px 0 0 0;">Where Sri Lankan Craft Meets the World</p>
             </td>
@@ -118,12 +140,19 @@ function emailTemplate(title: string, content: string): string {
                 <tr>
                   <td style="color:#6c757d;font-size:12px;line-height:1.6;">
                     <p style="margin:0 0 8px 0;">This email was sent by ${PLATFORM_NAME}.</p>
-                    <p style="margin:0 0 8px 0;">Need help? Contact us at <a href="mailto:no-reply@movia.club" style="color:#4F46E5;text-decoration:none;">no-reply@movia.club</a></p>
+                    <p style="margin:0 0 16px 0;">
+                      <a href="${FRONTEND_URL}/legal/privacy" style="color:#F7444E;text-decoration:none;">Privacy Policy</a> &nbsp;|&nbsp; 
+                      <a href="${FRONTEND_URL}/legal/terms" style="color:#F7444E;text-decoration:none;">Terms of Use</a> &nbsp;|&nbsp; 
+                      <a href="${FRONTEND_URL}/dashboard/settings" style="color:#F7444E;text-decoration:none;">Email Preferences</a> &nbsp;|&nbsp; 
+                      <a href="${FRONTEND_URL}/unsubscribe" style="color:#F7444E;text-decoration:none;">Unsubscribe</a>
+                    </p>
+                    <p style="margin:0 0 8px 0;">If you cannot unsubscribe from the mailing list or have concerns about your personal data, please email <a href="mailto:support@kandyam.com" style="color:#F7444E;text-decoration:none;">support@kandyam.com</a></p>
+                    <p style="margin:0 0 16px 0;">Kandyam E-commerce Private Limited, 42 Galle Road, Colombo 03, Sri Lanka</p>
                     <p style="margin:0;color:#adb5bd;">&copy; ${new Date().getFullYear()} ${PLATFORM_NAME}. All rights reserved.</p>
                   </td>
-                  <td align="right">
+                  <td align="right" valign="bottom">
                     <a href="${FRONTEND_URL}" style="display:inline-block;margin-left:12px;text-decoration:none;">
-                      <img src="${FRONTEND_URL}/logo-small.png" alt="${PLATFORM_NAME}" width="40" height="40" style="border-radius:8px;" />
+                      <img src="${FRONTEND_URL}/icon.svg" alt="${PLATFORM_NAME}" width="40" height="40" style="border-radius:8px;" />
                     </a>
                   </td>
                 </tr>
@@ -151,12 +180,12 @@ function buildVerificationHtml(name: string | undefined, token: string): string 
     <table width="100%" cellpadding="0" cellspacing="0">
       <tr>
         <td align="center" style="padding:8px 0 32px 0;">
-          <a href="${verifyUrl}" style="display:inline-block;background:linear-gradient(135deg,#4F46E5,#7C3AED);color:#ffffff;text-decoration:none;padding:14px 40px;border-radius:8px;font-size:16px;font-weight:600;letter-spacing:0.3px;">Verify Email Address</a>
+          <a href="${verifyUrl}" style="display:inline-block;background:linear-gradient(135deg,#FA6873,#F7444E);color:#ffffff;text-decoration:none;padding:14px 40px;border-radius:8px;font-size:16px;font-weight:600;letter-spacing:0.3px;">Verify Email Address</a>
         </td>
       </tr>
     </table>
     <p style="color:#6c757d;font-size:14px;line-height:1.6;margin:0 0 8px 0;">If the button doesn't work, copy and paste this link into your browser:</p>
-    <p style="color:#4F46E5;font-size:13px;line-height:1.6;margin:0 0 24px 0;word-break:break-all;">${verifyUrl}</p>
+    <p style="color:#F7444E;font-size:13px;line-height:1.6;margin:0 0 24px 0;word-break:break-all;">${verifyUrl}</p>
     <div style="background-color:#fff3cd;border:1px solid #ffc107;border-radius:8px;padding:16px 20px;margin:0 0 8px 0;">
       <p style="color:#856404;font-size:14px;line-height:1.6;margin:0;"><strong>Security Note:</strong> This verification link expires in 24 hours. If you did not create an account with ${PLATFORM_NAME}, please ignore this email.</p>
     </div>
@@ -177,12 +206,12 @@ function buildPasswordResetHtml(name: string | undefined, token: string): string
     <table width="100%" cellpadding="0" cellspacing="0">
       <tr>
         <td align="center" style="padding:8px 0 32px 0;">
-          <a href="${resetUrl}" style="display:inline-block;background:linear-gradient(135deg,#4F46E5,#7C3AED);color:#ffffff;text-decoration:none;padding:14px 40px;border-radius:8px;font-size:16px;font-weight:600;letter-spacing:0.3px;">Reset My Password</a>
+          <a href="${resetUrl}" style="display:inline-block;background:linear-gradient(135deg,#FA6873,#F7444E);color:#ffffff;text-decoration:none;padding:14px 40px;border-radius:8px;font-size:16px;font-weight:600;letter-spacing:0.3px;">Reset My Password</a>
         </td>
       </tr>
     </table>
     <p style="color:#6c757d;font-size:14px;line-height:1.6;margin:0 0 8px 0;">Or copy and paste this link:</p>
-    <p style="color:#4F46E5;font-size:13px;line-height:1.6;margin:0 0 24px 0;word-break:break-all;">${resetUrl}</p>
+    <p style="color:#F7444E;font-size:13px;line-height:1.6;margin:0 0 24px 0;word-break:break-all;">${resetUrl}</p>
     <div style="background-color:#fff3cd;border:1px solid #ffc107;border-radius:8px;padding:16px 20px;margin:0 0 8px 0;">
       <p style="color:#856404;font-size:14px;line-height:1.6;margin:0;"><strong>Security Note:</strong> This link expires in 1 hour and can only be used once. If you didn't request a password reset, please ignore this email — your password will remain unchanged.</p>
     </div>
@@ -234,11 +263,11 @@ function buildOrderConfirmationHtml(
     <h2 style="color:#1a1a2e;font-size:22px;margin:0 0 8px 0;">Order Confirmed!</h2>
     <p style="color:#28a745;font-size:14px;font-weight:600;margin:0 0 24px 0;">&#10003; Payment Successful</p>
     <p style="color:#495057;font-size:16px;line-height:1.7;margin:0 0 24px 0;">${greeting}</p>
-    <p style="color:#495057;font-size:16px;line-height:1.7;margin:0 0 24px 0;">Your order <strong style="color:#4F46E5;">${orderNumber}</strong> has been confirmed and is being processed. You'll receive shipping updates as your items make their way to you.</p>
+    <p style="color:#495057;font-size:16px;line-height:1.7;margin:0 0 24px 0;">Your order <strong style="color:#F7444E;">${orderNumber}</strong> has been confirmed and is being processed. You'll receive shipping updates as your items make their way to you.</p>
 
     <table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e9ecef;border-radius:8px;overflow:hidden;margin:0 0 24px 0;">
       <thead>
-        <tr style="background-color:#4F46E5;">
+        <tr style="background-color:#F7444E;">
           <th style="padding:12px 16px;color:#ffffff;font-size:13px;font-weight:600;text-align:left;text-transform:uppercase;letter-spacing:0.5px;">Item</th>
           <th style="padding:12px 16px;color:#ffffff;font-size:13px;font-weight:600;text-align:center;text-transform:uppercase;letter-spacing:0.5px;">Qty</th>
           <th style="padding:12px 16px;color:#ffffff;font-size:13px;font-weight:600;text-align:right;text-transform:uppercase;letter-spacing:0.5px;">Price</th>
@@ -373,6 +402,48 @@ function buildWelcomeHtml(name: string | undefined): string {
   );
 }
 
+function buildSellerWelcomeHtml(name: string | undefined, storeName: string | undefined): string {
+  const greeting = name ? `Welcome, ${name}!` : "Welcome to Kandyam!";
+  
+  return emailTemplate(
+    "Welcome to the Kandyam Artisan Community",
+    `
+    <h2 style="color:#1a1a2e;font-size:22px;margin:0 0 16px 0;">${greeting}</h2>
+    <p style="color:#495057;font-size:16px;line-height:1.7;margin:0 0 24px 0;">We are absolutely thrilled to welcome you and ${storeName ? `<strong>${storeName}</strong>` : "your store"} to the Kandyam marketplace. Your craftsmanship is exactly what our global community is looking for.</p>
+
+    <div style="background:linear-gradient(135deg,#F7F8F3,#FFFFFF);border:1px solid #E5E7EB;border-radius:12px;padding:20px;margin:0 0 24px 0;">
+      <h3 style="color:#1a1a2e;font-size:17px;margin:0 0 12px 0;">Your Next Steps as an Artisan</h3>
+      <table width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+          <td style="padding:8px 0;vertical-align:top;width:28px;"><span style="color:#4F46E5;font-size:18px;">1.</span></td>
+          <td style="padding:8px 0;color:#495057;font-size:14px;line-height:1.6;"><strong>Complete your store profile:</strong> Add a banner, profile picture, and your unique story.</td>
+        </tr>
+        <tr>
+          <td style="padding:8px 0;vertical-align:top;"><span style="color:#4F46E5;font-size:18px;">2.</span></td>
+          <td style="padding:8px 0;color:#495057;font-size:14px;line-height:1.6;"><strong>Add your first products:</strong> Upload high-quality photos and detailed descriptions of your crafts.</td>
+        </tr>
+        <tr>
+          <td style="padding:8px 0;vertical-align:top;"><span style="color:#4F46E5;font-size:18px;">3.</span></td>
+          <td style="padding:8px 0;color:#495057;font-size:14px;line-height:1.6;"><strong>Setup payouts:</strong> Connect your bank account so you can get paid bi-weekly.</td>
+        </tr>
+      </table>
+    </div>
+
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 24px 0;">
+      <tr>
+        <td align="center" style="padding:8px 0;">
+          <a href="${FRONTEND_URL}/seller/dashboard" style="display:inline-block;background:linear-gradient(135deg,#4F46E5,#7C3AED);color:#ffffff;text-decoration:none;padding:14px 40px;border-radius:8px;font-size:16px;font-weight:600;letter-spacing:0.3px;">Go to Seller Dashboard</a>
+        </td>
+      </tr>
+    </table>
+
+    <div style="background-color:#e7f3ff;border:1px solid #b3d9ff;border-radius:8px;padding:16px 20px;margin:0 0 8px 0;">
+      <p style="color:#004085;font-size:14px;line-height:1.6;margin:0;"><strong>Need help setting up?</strong> Contact our artisan support team at <a href="mailto:artisans@kandyam.com" style="color:#4F46E5;text-decoration:none;font-weight:600;">artisans@kandyam.com</a>.</p>
+    </div>
+    `
+  );
+}
+
 function buildCartUpdateHtml(
   name: string | undefined,
   productName: string,
@@ -474,14 +545,97 @@ function buildAbandonedCartReminderHtml(
     <table width="100%" cellpadding="0" cellspacing="0" style="margin:28px 0;">
       <tr>
         <td align="center">
-          <a href="${FRONTEND_URL}/cart" style="display:inline-block;background:#F7444E;color:#ffffff;text-decoration:none;padding:16px 48px;border-radius:12px;font-size:16px;font-weight:700;letter-spacing:0.3px;box-shadow:0 4px 14px rgba(247,68,78,0.4);">Return to Cart</a>
+      <p style="color:#9CA3AF;font-size:12px;text-align:center;margin:16px 0 0 0;">No payment needed — pay cash when your order arrives via Koombiyo.</p>
+    </div>
+    `
+  );
+}
+
+function buildPromotionalHtml(
+  title: string,
+  subtitle?: string,
+  heroImage?: string,
+  heroCtaText?: string,
+  heroCtaLink?: string,
+  curatedProducts?: Array<{ name: string; price: number; image: string; link: string }>,
+  featuredProducts?: Array<{ name: string; price: number; image: string; link: string }>
+): string {
+  let innerHtml = `
+    <h2 style="color:#1a1a2e;font-size:24px;font-weight:700;margin:0 0 12px 0;text-align:center;">${title}</h2>
+  `;
+
+  if (subtitle) {
+    innerHtml += `<p style="color:#495057;font-size:16px;line-height:1.6;margin:0 0 24px 0;text-align:center;">${subtitle}</p>`;
+  }
+
+  if (heroImage) {
+    innerHtml += `<div style="text-align:center;margin:0 0 24px 0;"><img src="${heroImage}" alt="${title}" style="max-width:100%;border-radius:12px;height:auto;" /></div>`;
+  }
+
+  if (heroCtaText && heroCtaLink) {
+    innerHtml += `
+      <table width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 32px 0;">
+        <tr>
+          <td align="center">
+            <a href="${heroCtaLink}" style="display:inline-block;background-color:#E63946;color:#ffffff;text-decoration:none;padding:14px 40px;border-radius:8px;font-size:16px;font-weight:600;">${heroCtaText}</a>
+          </td>
+        </tr>
+      </table>
+    `;
+  }
+
+  const renderProductGrid = (products: Array<{ name: string; price: number; image: string; link: string }>) => {
+    let gridHtml = `<table width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 32px 0;"><tr>`;
+    products.forEach((product, idx) => {
+      if (idx > 0 && idx % 3 === 0) {
+        gridHtml += `</tr><tr><td colspan="3" height="16"></td></tr><tr>`;
+      }
+      gridHtml += `
+        <td width="31%" valign="top" align="center" style="background:#f8f9fa;border-radius:8px;padding:12px;border:1px solid #e9ecef;">
+          <a href="${product.link}" style="text-decoration:none;color:inherit;display:block;">
+            <img src="${product.image}" alt="${product.name}" style="width:100%;max-width:140px;height:auto;border-radius:6px;margin:0 0 12px 0;aspect-ratio:1/1;object-fit:cover;" />
+            <h4 style="color:#1a1a2e;font-size:13px;font-weight:600;margin:0 0 6px 0;text-align:left;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${product.name}</h4>
+            <p style="color:#E63946;font-size:14px;font-weight:700;margin:0;text-align:left;">LKR ${product.price.toLocaleString("en-LK", { minimumFractionDigits: 2 })}</p>
+          </a>
+        </td>
+      `;
+      if (idx % 3 !== 2 && idx !== products.length - 1) {
+        gridHtml += `<td width="3%"></td>`; // spacer
+      }
+    });
+    // Pad remaining cells if row is not full
+    const remainder = products.length % 3;
+    if (remainder === 1) {
+      gridHtml += `<td width="3%"></td><td width="31%"></td><td width="3%"></td><td width="31%"></td>`;
+    } else if (remainder === 2) {
+      gridHtml += `<td width="3%"></td><td width="31%"></td>`;
+    }
+    gridHtml += `</tr></table>`;
+    return gridHtml;
+  };
+
+  if (curatedProducts && curatedProducts.length > 0) {
+    innerHtml += `<h3 style="color:#1a1a2e;font-size:18px;margin:0 0 16px 0;">Curated for you</h3>`;
+    innerHtml += renderProductGrid(curatedProducts);
+  }
+
+  if (featuredProducts && featuredProducts.length > 0) {
+    innerHtml += `<h3 style="color:#1a1a2e;font-size:18px;margin:0 0 16px 0;">Featured products</h3>`;
+    innerHtml += renderProductGrid(featuredProducts);
+  }
+
+  innerHtml += `
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin:24px 0 0 0;">
+      <tr>
+        <td align="center">
+          <a href="${FRONTEND_URL}/products" style="display:inline-block;background-color:#E63946;color:#ffffff;text-decoration:none;padding:12px 32px;border-radius:24px;font-size:15px;font-weight:600;">View more</a>
         </td>
       </tr>
     </table>
-    
-    <p style="color:#9CA3AF;font-size:12px;text-align:center;margin:16px 0 0 0;">No payment needed — pay cash when your order arrives via Koombiyo.</p>
-    `
-  );
+    <p style="color:#868e96;font-size:12px;line-height:1.5;margin:24px 0 0 0;text-align:center;">Pricing, discounts, and stock levels are accurate at the time of sending but may change. Check the product details page for updates.</p>
+  `;
+
+  return emailTemplate(title, innerHtml);
 }
 
 let emailQueue: Queue<EmailJobData> | null = null;
@@ -573,6 +727,16 @@ const emailWorker = new Worker<EmailJobData>(
         break;
       }
 
+      case "sendSellerWelcomeEmail": {
+        const html = buildSellerWelcomeHtml(data.name, (data as any).storeName);
+        await sendEmail({
+          to: data.email,
+          subject: `Welcome to the ${PLATFORM_NAME} Artisan Community!`,
+          html,
+        });
+        break;
+      }
+
       case "sendCartUpdate": {
         const html = buildCartUpdateHtml(
           data.name,
@@ -607,6 +771,24 @@ const emailWorker = new Worker<EmailJobData>(
         await sendEmail({
           to: data.email,
           subject: `${subject} - ${PLATFORM_NAME}`,
+          html,
+        });
+        break;
+      }
+
+      case "sendPromotionalEmail": {
+        const html = buildPromotionalHtml(
+          data.title,
+          data.subtitle,
+          data.heroImage,
+          data.heroCtaText,
+          data.heroCtaLink,
+          data.curatedProducts,
+          data.featuredProducts
+        );
+        await sendEmail({
+          to: data.email,
+          subject: data.subject,
           html,
         });
         break;
@@ -685,6 +867,13 @@ export async function addWelcomeEmailJob(email: string, name?: string) {
   } as WelcomeEmailJob);
 }
 
+export async function addSellerWelcomeEmailJob(email: string, name?: string, storeName?: string) {
+  return getEmailQueue().add("seller-welcome", {
+    type: "sendSellerWelcomeEmail",
+    data: { email, name, storeName },
+  } as SellerWelcomeEmailJob);
+}
+
 export async function addCartUpdateJob(
   email: string,
   productName: string,
@@ -714,6 +903,23 @@ export async function addAbandonedCartReminderJob(
     type: "sendAbandonedCartReminder",
     data: { email, name, cartItemCount, cartTotal, firstItemName, firstItemImage, hoursAbandoned },
   } as AbandonedCartReminderJob);
+}
+
+export async function addPromotionalEmailJob(
+  email: string,
+  subject: string,
+  title: string,
+  subtitle?: string,
+  heroImage?: string,
+  heroCtaText?: string,
+  heroCtaLink?: string,
+  curatedProducts?: Array<{ name: string; price: number; image: string; link: string }>,
+  featuredProducts?: Array<{ name: string; price: number; image: string; link: string }>
+) {
+  return getEmailQueue().add("promotional-email", {
+    type: "sendPromotionalEmail",
+    data: { email, subject, title, subtitle, heroImage, heroCtaText, heroCtaLink, curatedProducts, featuredProducts },
+  } as PromotionalEmailJob);
 }
 
 export { emailWorker };

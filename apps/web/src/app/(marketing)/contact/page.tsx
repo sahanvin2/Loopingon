@@ -6,6 +6,7 @@ import { Mail, Phone, MapPin, MessageSquare, Send, Clock, CheckCircle } from "lu
 import { z } from "zod";
 import { cn } from "@/lib/utils";
 import { post } from "@/lib/api-client";
+import { CustomSelect } from "@/components/shared/custom-select";
 
 const contactFormSchema = z.object({
   name: z.string().min(2, "Name is required"),
@@ -120,14 +121,11 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <label htmlFor="subject" className="mb-1.5 block text-sm font-medium text-text-700">Subject</label>
-                    <select
+                    <CustomSelect
                       id="subject" name="subject" value={form.subject} onChange={handleChange}
-                      className={cn("w-full rounded-lg border px-4 py-3 text-sm text-text-900 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 focus:outline-none", errors.subject ? "border-red-400" : "border-text-200")}
-                    >
-                      {subjects.map((s) => (
-                        <option key={s.value} value={s.value}>{s.label}</option>
-                      ))}
-                    </select>
+                      options={subjects}
+                      className={cn(errors.subject ? "border-red-400 hover:border-red-500" : "border-text-200", "focus:ring-2 focus:ring-primary-500/20")}
+                    />
                     {errors.subject && <p className="mt-1 text-xs text-red-500">{errors.subject}</p>}
                   </div>
                   <div>

@@ -42,8 +42,8 @@
   --color-surface-800: 31 41 55;
   --color-surface-900: 0 44 62;
 
-  --font-serif: "Playfair Display", "Cormorant Garamond", Georgia, serif;
-  --font-sans: "Inter", system-ui, sans-serif;
+  --font-serif: var(--font-lora), "Lora", Georgia, serif;
+  --font-sans: var(--font-outfit), "Outfit", system-ui, sans-serif;
 }
 
 @layer base {

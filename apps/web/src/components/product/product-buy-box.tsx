@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { useRouter } from "next/navigation";
 import {
-  Heart, Minus, Plus, Shield, Truck, RotateCcw, Gift, Sparkles, Palette, Crown,
+  Heart, Minus, Plus, Shield, Truck, RotateCcw, Gift, Sparkles, Palette, Crown, ChevronDown,
 } from "lucide-react";
 import { cn, formatPrice, calculateDiscount } from "@/lib/utils";
 import type { Product, ProductVariant } from "@/types";
@@ -14,8 +14,22 @@ import { useUIStore } from "@/stores/ui-store";
 import { useLoyaltyDiscount } from "@/hooks/use-loyalty";
 import { Badge } from "@/components/shared/badge";
 
-interface ProductBuyBoxProps {
-  product: Product;
+function getColorHex(name: string, attrHex: string | null): string {
+  if (attrHex) return attrHex;
+  const n = name.toLowerCase();
+  if (n.includes("beige")) return "#E8D8C8";
+  if (n.includes("brown")) return "#8B5A2B";
+  if (n.includes("black")) return "#1A1A1A";
+  if (n.includes("white")) return "#F5F5F0";
+  if (n.includes("sand")) return "#E2CAAA";
+  if (n.includes("honey")) return "#E5A65D";
+  if (n.includes("caramel")) return "#C68E5A";
+  if (n.includes("peach")) return "#FFD3B6";
+  if (n.includes("rose")) return "#FFB7B2";
+  if (n.includes("pink")) return "#FFC6FF";
+  if (n.includes("blue")) return "#BDE0FE";
+  if (n.includes("green")) return "#CAFFBF";
+  return "#D1D5DB";
 }
 
 function getStockStatus(product: Product, selectedVariant?: ProductVariant): {
@@ -29,14 +43,13 @@ function getStockStatus(product: Product, selectedVariant?: ProductVariant): {
   return { label: "In Stock", color: "text-green-600" };
 }
 
-export function ProductBuyBox({ product }: ProductBuyBoxProps) {
-  const [quantity, setQuantity] = useState(1);
-  const [selectedVariant, setSelectedVariant] = useState<ProductVariant | null>(null);
-  const addToCart = useAddToCart();
-  const { isWishlisted, toggle } = useToggleWishlist(product.id);
-  const { isAuthenticated } = useAuthStore();
-  const { openModal } = useUIStore();
-  const router = useRouter();
+export interface ProductPriceAreaProps {
+  product: Product;
+  selectedVariant: ProductVariant | null;
+  setSelectedVariant: (v: ProductVariant | null) => void;
+}
+
+export function ProductPriceArea({ product, selectedVariant, setSelectedVariant }: ProductPriceAreaProps) {
   const { data: loyaltyDiscount } = useLoyaltyDiscount();
   const loyaltyOff = loyaltyDiscount?.data?.discount || 0;
   const loyaltyTier = loyaltyDiscount?.data?.tier || null;
@@ -46,42 +59,9 @@ export function ProductBuyBox({ product }: ProductBuyBoxProps) {
   const price = variantPrice || parseFloat(product.price);
   const originalPrice = product.compareAtPrice ? parseFloat(product.compareAtPrice) : undefined;
   const discount = originalPrice ? calculateDiscount(price, originalPrice) : 0;
-  const stock = getStockStatus(product, selectedVariant ?? undefined);
-
-  const handleAddToCart = () => {
-    addToCart.mutate({
-      productId: product.id,
-      variantId: selectedVariant?.id ?? undefined,
-      quantity,
-    });
-  };
-
-  const handleBuyNow = () => {
-    if (stock.label === "Out of Stock") return;
-    if (!isAuthenticated) {
-      openModal("signin");
-      return;
-    }
-    addToCart.mutate({
-      productId: product.id,
-      variantId: selectedVariant?.id ?? undefined,
-      quantity,
-    }, {
-      onSuccess: () => {
-        router.push("/checkout");
-      },
-      onError: () => {
-        // Auth error already handled by useAddToCart
-      }
-    });
-  };
-
-  const handleSendAsGift = () => {
-    router.push(`/gift?product=${product.id}&variant=${selectedVariant?.id || ""}&qty=${quantity}&price=${price}&title=${encodeURIComponent(product.title)}`);
-  };
 
   return (
-    <div className="space-y-6 pt-6 mt-6 border-t border-accent-200">
+    <div className="space-y-6">
       {/* Loyalty Discount Banner */}
       {loyaltyOff > 0 && (
         <div className="p-3 bg-gradient-to-r from-green-50 to-emerald-50 border border-green-300 rounded-xl flex items-center gap-2">
@@ -128,19 +108,53 @@ export function ProductBuyBox({ product }: ProductBuyBoxProps) {
 
       {/* Color / Variant Selector */}
       {variants.length > 0 && (
-        <div>
-          <div className="flex items-center gap-2 mb-3">
+        <div className="space-y-3 pt-2">
+          <div className="flex items-center gap-2">
             <Palette className="w-4 h-4 text-muted-500" />
-            <label className="text-xs tracking-wider uppercase font-medium text-text-500">
+            <label className="text-xs tracking-wider uppercase font-semibold text-text-500">
               {selectedVariant ? `Selected: ${selectedVariant.name}` : "Select Option"}
             </label>
           </div>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-3">
             {variants.map((variant) => {
               const isSelected = selectedVariant?.id === variant.id;
               const isOutOfStock = variant.quantity === 0;
               const variantAttr = variant.attributes as Record<string, string> | null;
-              const colorHex = variantAttr?.color || variantAttr?.hex || null;
+              const attrHex = variantAttr?.color || variantAttr?.hex || null;
+
+              const isColor = attrHex || ["beige", "black", "white", "brown", "sand", "honey", "caramel", "coconut", "peach", "rose", "pink", "blue", "green"].some(c => variant.name.toLowerCase().includes(c));
+
+              if (isColor) {
+                const hexColor = getColorHex(variant.name, attrHex);
+                return (
+                  <button
+                    key={variant.id}
+                    type="button"
+                    disabled={isOutOfStock}
+                    onClick={() => setSelectedVariant(variant)}
+                    className={cn(
+                      "relative w-9 h-9 rounded-full border-2 transition-all flex items-center justify-center shrink-0",
+                      isSelected
+                        ? "border-neutral-900 scale-110 shadow-md ring-2 ring-neutral-200 ring-offset-1"
+                        : isOutOfStock
+                          ? "border-neutral-200 opacity-30 cursor-not-allowed"
+                          : "border-neutral-200 hover:border-neutral-400 hover:scale-105",
+                    )}
+                    title={`${variant.name}${isOutOfStock ? " (Out of Stock)" : ""}`}
+                    aria-label={`Select ${variant.name}`}
+                  >
+                    <span
+                      className="block w-full h-full rounded-full border border-black/10"
+                      style={{ backgroundColor: hexColor }}
+                    />
+                    {isOutOfStock && (
+                      <span className="absolute inset-0 flex items-center justify-center">
+                        <span className="w-full h-0.5 bg-neutral-400 rotate-45" />
+                      </span>
+                    )}
+                  </button>
+                );
+              }
 
               return (
                 <button
@@ -149,29 +163,18 @@ export function ProductBuyBox({ product }: ProductBuyBoxProps) {
                   disabled={isOutOfStock}
                   onClick={() => setSelectedVariant(variant)}
                   className={cn(
-                    "relative px-4 py-2.5 rounded-xl border text-sm font-medium transition-all",
+                    "relative px-4 py-2.5 rounded-xl border text-sm font-semibold transition-all",
                     isSelected
-                      ? "border-primary-500 bg-primary-50 text-primary-700 ring-2 ring-primary-200"
+                      ? "border-neutral-900 bg-neutral-50 text-neutral-900 ring-1 ring-neutral-900"
                       : isOutOfStock
-                        ? "border-accent-200 bg-surface-100 text-muted-400 cursor-not-allowed line-through"
-                        : "border-accent-200 bg-white text-text-700 hover:border-primary-300 hover:bg-primary-50/50",
+                        ? "border-neutral-200 bg-neutral-100 text-neutral-400 cursor-not-allowed line-through"
+                        : "border-neutral-200 bg-white text-text-700 hover:border-neutral-400 hover:bg-neutral-50/50",
                   )}
                 >
-                  {colorHex && (
-                    <span
-                      className="inline-block w-3 h-3 rounded-full mr-1.5 align-middle border border-black/10"
-                      style={{ backgroundColor: colorHex }}
-                    />
-                  )}
                   {variant.name}
                   {variant.price && (
                     <span className="ml-1 text-xs text-muted-500">
                       +{formatPrice(parseFloat(variant.price))}
-                    </span>
-                  )}
-                  {isOutOfStock && (
-                    <span className="absolute -top-1 -right-1 px-1.5 py-0.5 bg-red-500 text-white text-[9px] rounded-full">
-                      ×
                     </span>
                   )}
                 </button>
@@ -183,32 +186,84 @@ export function ProductBuyBox({ product }: ProductBuyBoxProps) {
           )}
         </div>
       )}
+    </div>
+  );
+}
 
+export interface ProductActionAreaProps {
+  product: Product;
+  selectedVariant: ProductVariant | null;
+  quantity: number;
+  setQuantity: (q: number) => void;
+}
+
+export function ProductActionArea({ product, selectedVariant, quantity, setQuantity }: ProductActionAreaProps) {
+  const addToCart = useAddToCart();
+  const { isWishlisted, toggle } = useToggleWishlist(product.id);
+  const { isAuthenticated } = useAuthStore();
+  const { openModal } = useUIStore();
+  const router = useRouter();
+
+  const variantPrice = selectedVariant?.price ? parseFloat(selectedVariant.price) : null;
+  const price = variantPrice || parseFloat(product.price);
+  const stock = getStockStatus(product, selectedVariant ?? undefined);
+
+  const handleAddToCart = () => {
+    addToCart.mutate({
+      productId: product.id,
+      variantId: selectedVariant?.id ?? undefined,
+      quantity,
+    });
+  };
+
+  const handleBuyNow = () => {
+    if (stock.label === "Out of Stock") return;
+    if (!isAuthenticated) {
+      openModal("signin");
+      return;
+    }
+    addToCart.mutate({
+      productId: product.id,
+      variantId: selectedVariant?.id ?? undefined,
+      quantity,
+    }, {
+      onSuccess: () => {
+        router.push("/checkout");
+      },
+      onError: () => {}
+    });
+  };
+
+  const handleSendAsGift = () => {
+    router.push(`/gift?product=${product.id}&variant=${selectedVariant?.id || ""}&qty=${quantity}&price=${price}&title=${encodeURIComponent(product.title)}`);
+  };
+
+  return (
+    <div className="space-y-6">
       {/* Stock Status */}
-      <div className={cn("text-sm tracking-wide uppercase font-medium", stock.color)}>
-        {stock.label}
+      <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider">
+        <span className={cn("w-2 h-2 rounded-full", stock.color.includes("green") ? "bg-green-500 animate-pulse-soft" : stock.color.includes("amber") ? "bg-amber-500" : "bg-red-500")} />
+        <span className={stock.color}>{stock.label}</span>
       </div>
 
       {/* Quantity Selector */}
       <div className="flex flex-col gap-2">
-        <label className="text-xs tracking-wider uppercase font-medium text-text-500">Quantity</label>
-        <div className="flex items-center w-fit border border-text-200 rounded-none overflow-hidden">
+        <label className="text-[10px] tracking-widest uppercase font-bold text-neutral-500">Quantity</label>
+        <div className="flex items-center w-36 h-12 bg-white rounded-full border-2 border-neutral-200 overflow-hidden shadow-sm transition-all hover:border-neutral-300">
           <button
             type="button"
-            onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-            disabled={quantity <= 1}
-            className={cn("p-3 bg-white text-text-600 hover:bg-accent-50 hover:text-text-900 transition-colors", "disabled:opacity-50 disabled:cursor-not-allowed")}
-            aria-label="Decrease quantity"
+            onClick={() => setQuantity(Math.max(1, quantity - 1))}
+            className="flex-1 h-full flex items-center justify-center text-neutral-500 hover:bg-neutral-50 hover:text-neutral-900 transition-colors"
           >
             <Minus className="w-4 h-4" />
           </button>
-          <span className="w-12 text-center bg-white text-text-900 font-medium text-sm select-none border-x border-text-200 py-3">{quantity}</span>
+          <div className="flex-1 h-full flex items-center justify-center font-bold text-neutral-900 text-sm border-x border-neutral-100">
+            {quantity}
+          </div>
           <button
             type="button"
-            onClick={() => setQuantity((q) => q + 1)}
-            disabled={quantity >= product.quantity && !product.madeToOrder}
-            className={cn("p-3 bg-white text-text-600 hover:bg-accent-50 hover:text-text-900 transition-colors", "disabled:opacity-50 disabled:cursor-not-allowed")}
-            aria-label="Increase quantity"
+            onClick={() => setQuantity(Math.min(selectedVariant?.quantity || product.quantity || 10, quantity + 1))}
+            className="flex-1 h-full flex items-center justify-center text-neutral-500 hover:bg-neutral-50 hover:text-neutral-900 transition-colors"
           >
             <Plus className="w-4 h-4" />
           </button>
@@ -219,33 +274,32 @@ export function ProductBuyBox({ product }: ProductBuyBoxProps) {
       <div className="space-y-4 pt-2">
         <button
           type="button"
-          onClick={handleAddToCart}
-          disabled={addToCart.isPending || product.quantity === 0}
-          className={cn("relative w-full py-4 overflow-hidden rounded-xl bg-text-900 text-white text-sm tracking-[0.1em] uppercase font-semibold",
-            "transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.2)] hover:-translate-y-0.5",
+          onClick={handleBuyNow}
+          disabled={product.quantity === 0}
+          className={cn("relative w-full py-4 overflow-hidden rounded-full bg-rose-600 text-white text-sm tracking-[0.1em] uppercase font-bold",
+            "transition-all duration-300 hover:bg-rose-700 hover:shadow-[0_8px_30px_rgba(225,29,72,0.3)] hover:-translate-y-0.5",
             "disabled:opacity-50 disabled:cursor-not-allowed group")}
         >
-          <div className="absolute inset-0 bg-white/20 translate-y-[100%] group-hover:translate-y-[0%] transition-transform duration-300 ease-out" />
-          <span className="relative z-10">{addToCart.isPending ? "Adding..." : product.quantity === 0 ? "Out of Stock" : "Add to Bag"}</span>
+          Buy It Now
         </button>
 
         <button
           type="button"
-          onClick={handleBuyNow}
-          disabled={product.quantity === 0}
-          className={cn("w-full py-4 rounded-xl border border-text-900 text-text-900 text-sm tracking-[0.1em] uppercase font-semibold",
-            "transition-all duration-300 hover:bg-text-900 hover:text-white hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:-translate-y-0.5",
+          onClick={handleAddToCart}
+          disabled={addToCart.isPending || product.quantity === 0}
+          className={cn("w-full py-4 rounded-full border border-black bg-white text-black text-sm tracking-[0.1em] uppercase font-bold",
+            "transition-all duration-300 hover:bg-neutral-50 hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] hover:-translate-y-0.5",
             "disabled:opacity-50 disabled:cursor-not-allowed")}
         >
-          Buy Now
+          {addToCart.isPending ? "Adding..." : product.quantity === 0 ? "Out of Stock" : "Add to Cart"}
         </button>
 
         <button
           type="button"
           onClick={handleSendAsGift}
           disabled={product.quantity === 0}
-          className={cn("w-full py-4 rounded-xl bg-gradient-to-r from-rose-500 via-purple-500 to-indigo-500 text-white text-sm tracking-[0.1em] uppercase font-semibold",
-            "transition-all duration-500 hover:from-rose-600 hover:via-purple-600 hover:to-indigo-600 shadow-soft-md hover:shadow-[0_8px_30px_rgba(168,85,247,0.4)] hover:-translate-y-0.5 flex items-center justify-center gap-2",
+          className={cn("w-full py-4 rounded-full bg-gradient-to-r from-purple-500 to-indigo-500 text-white text-sm tracking-[0.1em] uppercase font-bold",
+            "transition-all duration-500 hover:from-purple-600 hover:to-indigo-600 shadow-[0_4px_15px_rgba(99,102,241,0.3)] hover:shadow-[0_8px_25px_rgba(99,102,241,0.5)] hover:-translate-y-0.5 flex items-center justify-center gap-2",
             "disabled:opacity-50 disabled:cursor-not-allowed")}
         >
           <Gift className="w-4 h-4" />
@@ -261,33 +315,12 @@ export function ProductBuyBox({ product }: ProductBuyBoxProps) {
             }
             toggle();
           }}
-          className={cn("w-full py-3 text-xs tracking-wider uppercase font-medium transition-colors flex items-center justify-center gap-2",
+          className={cn("w-full py-3 text-xs tracking-wider uppercase font-semibold transition-colors flex items-center justify-center gap-2",
             isWishlisted ? "text-primary-600" : "text-text-600 hover:text-primary-600")}
         >
           <Heart className={cn("w-4 h-4", isWishlisted && "fill-current")} />
           {isWishlisted ? "Saved to Wishlist" : "Add to Wishlist"}
         </button>
-      </div>
-
-      {/* Delivery Info */}
-      <div className="space-y-3 pt-4 mt-4 border-t border-accent-200">
-        <div className="flex items-start gap-3 text-sm text-text-600">
-          <Truck className="w-4 h-4 text-text-400 shrink-0 mt-0.5" />
-          <div>
-            <p className="text-sm text-text-700">
-              {product.freeShippingDomestic ? "Free SL Post Delivery" : `SL Post — Rs. ${product.shippingPrice ? Number(product.shippingPrice).toLocaleString() : "400"}`}
-            </p>
-            <p className="text-xs text-muted-500">1-3 business days • Express available at checkout</p>
-          </div>
-        </div>
-        <div className="flex items-start gap-3 text-xs text-text-600">
-          <RotateCcw className="w-4 h-4 text-text-400 shrink-0 mt-0.5" />
-          <span>7-day easy returns</span>
-        </div>
-        <div className="flex items-start gap-3 text-xs text-text-600">
-          <Shield className="w-4 h-4 text-text-400 shrink-0 mt-0.5" />
-          <span>Secure payment via PayHere</span>
-        </div>
       </div>
     </div>
   );

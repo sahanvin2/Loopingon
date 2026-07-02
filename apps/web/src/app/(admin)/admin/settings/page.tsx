@@ -8,6 +8,7 @@ import { Save, Eye, EyeOff } from "lucide-react";
 import { LoadingSkeleton } from "@/components/shared/loading-skeleton";
 import { get, patch } from "@/lib/api-client";
 import type { ApiResponse } from "@/types";
+import { CustomSelect } from "@/components/shared/custom-select";
 
 export default function AdminSettingsPage() {
   const queryClient = useQueryClient();
@@ -54,11 +55,15 @@ export default function AdminSettingsPage() {
           </div>
           <div>
             <label className="block text-sm font-medium mb-1">Payout Schedule</label>
-            <select {...register("payoutSchedule")} className="w-full px-3 py-2 border border-accent-200 rounded-lg text-sm">
-              <option value="WEEKLY">Weekly</option>
-              <option value="BIWEEKLY">Bi-weekly</option>
-              <option value="MONTHLY">Monthly</option>
-            </select>
+            <CustomSelect
+              {...register("payoutSchedule")}
+              options={[
+                { value: "WEEKLY", label: "Weekly" },
+                { value: "BIWEEKLY", label: "Bi-weekly" },
+                { value: "MONTHLY", label: "Monthly" },
+              ]}
+              className="border-accent-200 focus:ring-2 focus:ring-primary-500 py-2 px-3"
+            />
           </div>
         </div>
 

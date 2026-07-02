@@ -24,6 +24,7 @@ import { get, patch, post, del } from "@/lib/api-client";
 import { cn, formatDate } from "@/lib/utils";
 import { profileSchema, passwordChangeSchema, type ProfileInput, type PasswordChangeInput } from "@/lib/validators";
 import type { ApiResponse } from "@/types";
+import { CustomSelect } from "@/components/shared/custom-select";
 
 const settingsTabs = [
   { key: "profile", label: "Profile", icon: UserIcon },
@@ -187,25 +188,27 @@ export default function SettingsPage() {
                   <label className="block text-sm font-medium text-text-700 mb-1">
                     Language
                   </label>
-                  <select
+                  <CustomSelect
                     {...registerProfile("preferredLanguage")}
-                    className="w-full px-3 py-2 border border-accent-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500"
-                  >
-                    <option value="en">English</option>
-                    <option value="si">සිංහල</option>
-                    <option value="ta">தமிழ்</option>
-                  </select>
+                    options={[
+                      { value: "en", label: "English" },
+                      { value: "si", label: "සිංහල" },
+                      { value: "ta", label: "தமிழ்" },
+                    ]}
+                    className="border-accent-200 focus:ring-2 focus:ring-primary-500 py-2 px-3"
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-text-700 mb-1">
                     Currency
                   </label>
-                  <select
+                  <CustomSelect
                     {...registerProfile("currency")}
-                    className="w-full px-3 py-2 border border-accent-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500"
-                  >
-                    <option value="LKR">LKR</option>
-                  </select>
+                    options={[
+                      { value: "LKR", label: "LKR" },
+                    ]}
+                    className="border-accent-200 focus:ring-2 focus:ring-primary-500 py-2 px-3"
+                  />
                 </div>
               </div>
 

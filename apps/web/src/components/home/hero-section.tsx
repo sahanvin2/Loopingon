@@ -2,10 +2,11 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
+import { Search, Heart } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
 
-const popularSearches = [
+const POPULAR_SEARCHES = [
   "Wall Art",
   "Jewelry",
   "Home Decor",
@@ -14,122 +15,150 @@ const popularSearches = [
   "Gift for Her",
 ];
 
+const HERO_IMAGES = [
+  // Column 1
+  "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=400&h=500&fit=crop", // Necklace
+  "https://images.unsplash.com/photo-1520201163981-8cc95007dd2a?w=400&h=400&fit=crop", // Macrame / Texture
+  // Column 2
+  "https://images.unsplash.com/photo-1603006905003-be475563bc59?w=400&h=400&fit=crop", // Candle
+  "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=400&h=500&fit=crop", // Abstract Art
+  // Column 3
+  "https://images.unsplash.com/photo-1578500494198-246f612d3b3d?w=400&h=500&fit=crop", // Ceramic Vase
+  "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=400&h=400&fit=crop", // Leather Bag
+];
+
 export function HeroSection() {
-  const [searchQuery, setSearchQuery] = useState("");
   const router = useRouter();
+  const [query, setQuery] = useState("");
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    if (searchQuery.trim()) {
-      router.push(`/products?q=${encodeURIComponent(searchQuery.trim())}`);
+    if (query.trim()) {
+      router.push(`/products?q=${encodeURIComponent(query.trim())}`);
     }
   };
 
   return (
-    <section className="relative w-full bg-[#FCFaf8] pt-12 pb-20 overflow-hidden">
-      {/* Decorative top left marks */}
-      <div className="absolute left-8 top-12 opacity-30">
-        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M10 5L15 20" stroke="#F7444E" strokeWidth="2" strokeLinecap="round" />
-          <path d="M5 10L20 15" stroke="#F7444E" strokeWidth="2" strokeLinecap="round" />
-          <path d="M20 5V20" stroke="#F7444E" strokeWidth="2" strokeLinecap="round" />
-        </svg>
-      </div>
-
-      {/* Decorative top right heart outline */}
-      <div className="absolute right-[55%] top-16 opacity-30 hidden lg:block">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#78BCC4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-        </svg>
-      </div>
-
-      <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="relative w-full bg-[#FCFDFD] overflow-hidden pt-12 pb-16 lg:pt-20 lg:pb-24 border-b border-surface-100">
+      <div className="max-w-8xl mx-auto px-4 sm:px-6 xl:px-8">
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-8">
           
-          {/* Left Column: Text & Search */}
-          <div className="w-full lg:w-[45%] flex flex-col z-10 pt-4 lg:pt-10">
-            <h1 className="font-serif text-5xl sm:text-6xl lg:text-[4.5rem] font-bold leading-[1.1] tracking-tight text-text-900">
-              Find things you'll love.<br />
-              <span className="text-primary-500">Support sellers worldwide.</span>
-            </h1>
+          {/* Left Content */}
+          <div className="w-full lg:w-[45%] xl:w-[40%] flex flex-col items-start relative z-10">
+
             
-            <p className="mt-6 text-lg text-muted-600 max-w-lg leading-relaxed">
-              Shop handmade, vintage, custom and unique items from independent sellers around the world.
-            </p>
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <h1 className="font-serif text-[42px] leading-[1.1] sm:text-5xl lg:text-6xl tracking-tight text-navy-900 font-bold mb-2">
+                Discover products you'll love.
+                <span className="block text-[#E63946]">From local favorites to global finds.</span>
+              </h1>
+              
+              <p className="mt-6 text-lg text-text-600 max-w-lg font-medium leading-relaxed">
+                Explore a curated selection of premium goods, exclusive deals, and unique items from independent creators everywhere.
+              </p>
+            </motion.div>
 
             {/* Search Bar */}
-            <div className="mt-10 max-w-xl">
-              <form onSubmit={handleSearch} className="relative flex items-center bg-white rounded-full p-1.5 shadow-sm border border-surface-300">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="w-full max-w-[500px] mt-10"
+            >
+              <form 
+                onSubmit={handleSearch}
+                className="relative flex items-center w-full h-14 bg-white border-2 border-surface-200 rounded-full overflow-hidden shadow-sm focus-within:border-[#E63946] focus-within:ring-4 focus-within:ring-[#E63946]/10 transition-all"
+              >
                 <input
                   type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
                   placeholder="What are you looking for?"
-                  className="flex-grow bg-transparent px-5 py-3 text-text-900 outline-none placeholder:text-muted-400"
+                  className="w-full h-full pl-6 pr-[110px] bg-transparent outline-none text-base placeholder:text-text-400"
                 />
-                <button
+                <button 
                   type="submit"
-                  className="rounded-full bg-primary-500 px-8 py-3.5 font-bold text-white transition-colors hover:bg-primary-600"
+                  className="absolute right-1 top-1 bottom-1 px-6 bg-[#E63946] hover:bg-[#D92D3A] text-white font-medium rounded-full transition-colors flex items-center justify-center"
                 >
                   Search
                 </button>
               </form>
-            </div>
+            </motion.div>
 
             {/* Popular Searches */}
-            <div className="mt-8">
-              <p className="text-xs text-muted-500 mb-3 font-medium">Popular searches:</p>
-              <div className="flex flex-wrap gap-2.5">
-                {popularSearches.map((term) => (
-                  <Link
-                    key={term}
-                    href={`/products?q=${encodeURIComponent(term)}`}
-                    className="rounded-full border border-surface-300 bg-white px-4 py-2 text-xs font-semibold text-text-700 transition-colors hover:bg-surface-100 hover:text-text-900"
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="mt-8"
+            >
+              <p className="text-xs font-semibold text-text-400 uppercase tracking-wider mb-3">
+                Popular searches:
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {POPULAR_SEARCHES.map((tag) => (
+                  <button
+                    key={tag}
+                    onClick={() => {
+                      setQuery(tag);
+                      router.push(`/products?q=${encodeURIComponent(tag)}`);
+                    }}
+                    className="px-4 py-1.5 bg-white border border-surface-200 rounded-full text-sm font-medium text-text-600 hover:border-[#E63946] hover:text-[#E63946] transition-colors shadow-sm"
                   >
-                    {term}
-                  </Link>
+                    {tag}
+                  </button>
                 ))}
               </div>
-            </div>
+            </motion.div>
           </div>
 
-          {/* Right Column: Image Collage */}
-          <div className="w-full lg:w-[55%] relative mt-12 lg:mt-0">
-            {/* Floating Badge */}
-            <div className="absolute right-0 lg:-right-8 top-[30%] z-20 flex h-32 w-32 items-center justify-center rounded-full bg-white shadow-soft-xl border border-surface-100 rotate-12">
-              <p className="text-center font-serif text-lg font-bold leading-tight text-text-900 -rotate-12">
-                Millions<br />of unique<br />finds
-              </p>
-            </div>
+          {/* Right Content - Image Collage */}
+          <div className="w-full lg:w-[55%] xl:w-[60%] relative mt-12 lg:mt-0">
+            {/* The Floating Badge */}
+            <motion.div 
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.6, type: "spring" }}
+              className="absolute -right-4 top-1/4 z-20 hidden md:flex w-32 h-32 bg-white rounded-full border border-dashed border-[#E63946] items-center justify-center p-4 text-center shadow-xl transform rotate-12"
+            >
+              <div>
+                <p className="text-[#E63946] font-bold text-lg leading-tight font-serif">Millions</p>
+                <p className="text-text-600 text-xs font-medium">of unique finds</p>
+              </div>
+            </motion.div>
 
-            <div className="grid grid-cols-3 gap-3 sm:gap-4 lg:gap-5 h-[400px] sm:h-[500px] lg:h-[600px]">
+            <div className="grid grid-cols-3 gap-3 sm:gap-4 md:gap-5 h-[400px] sm:h-[500px] lg:h-[600px]">
               {/* Column 1 */}
-              <div className="flex flex-col gap-3 sm:gap-4 lg:gap-5">
-                <div className="relative h-[65%] w-full rounded-2xl overflow-hidden">
-                  <Image src="https://images.unsplash.com/photo-1599643477874-c11c470eb06b?q=80&w=600&auto=format&fit=crop" alt="Jewelry" fill className="object-cover hover:scale-105 transition-transform duration-700" />
+              <div className="flex flex-col gap-3 sm:gap-4 md:gap-5 pt-8">
+                <div className="relative w-full h-[55%] rounded-2xl overflow-hidden shadow-md group">
+                  <Image src={HERO_IMAGES[0]} alt="Jewelry" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover group-hover:scale-105 transition-transform duration-700" />
                 </div>
-                <div className="relative h-[35%] w-full rounded-2xl overflow-hidden">
-                  <Image src="https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?q=80&w=600&auto=format&fit=crop" alt="Textiles" fill className="object-cover hover:scale-105 transition-transform duration-700" />
+                <div className="relative w-full h-[45%] rounded-2xl overflow-hidden shadow-md group">
+                  <Image src={HERO_IMAGES[1]} alt="Macrame" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover group-hover:scale-105 transition-transform duration-700" />
                 </div>
               </div>
-              
+
               {/* Column 2 */}
-              <div className="flex flex-col gap-3 sm:gap-4 lg:gap-5 pt-8">
-                <div className="relative h-[45%] w-full rounded-2xl overflow-hidden">
-                  <Image src="https://images.unsplash.com/photo-1603006905003-be475563bc59?q=80&w=600&auto=format&fit=crop" alt="Candle" fill className="object-cover hover:scale-105 transition-transform duration-700" />
+              <div className="flex flex-col gap-3 sm:gap-4 md:gap-5 pb-8">
+                <div className="relative w-full h-[45%] rounded-2xl overflow-hidden shadow-md group">
+                  <Image src={HERO_IMAGES[2]} alt="Candle" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover group-hover:scale-105 transition-transform duration-700" />
                 </div>
-                <div className="relative h-[55%] w-full rounded-2xl overflow-hidden">
-                  <Image src="https://images.unsplash.com/photo-1544441893-675973e31985?q=80&w=600&auto=format&fit=crop" alt="Clothing" fill className="object-cover hover:scale-105 transition-transform duration-700" />
+                <div className="relative w-full h-[55%] rounded-2xl overflow-hidden shadow-md group">
+                  <Image src={HERO_IMAGES[3]} alt="Abstract Art" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover group-hover:scale-105 transition-transform duration-700" />
                 </div>
               </div>
-              
+
               {/* Column 3 */}
-              <div className="flex flex-col gap-3 sm:gap-4 lg:gap-5">
-                <div className="relative h-[35%] w-full rounded-2xl overflow-hidden">
-                  <Image src="https://images.unsplash.com/photo-1613564834361-9436948817d1?q=80&w=600&auto=format&fit=crop" alt="Vase" fill className="object-cover hover:scale-105 transition-transform duration-700" />
+              <div className="flex flex-col gap-3 sm:gap-4 md:gap-5 pt-12">
+                <div className="relative w-full h-[50%] rounded-2xl overflow-hidden shadow-md group">
+                  <Image src={HERO_IMAGES[4]} alt="Ceramic Vase" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover group-hover:scale-105 transition-transform duration-700" />
                 </div>
-                <div className="relative h-[65%] w-full rounded-2xl overflow-hidden">
-                  <Image src="https://images.unsplash.com/photo-1590874103328-eac38a683ce7?q=80&w=600&auto=format&fit=crop" alt="Leather Bag" fill className="object-cover hover:scale-105 transition-transform duration-700" />
+                <div className="relative w-full h-[50%] rounded-2xl overflow-hidden shadow-md group">
+                  <Image src={HERO_IMAGES[5]} alt="Leather Bag" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover group-hover:scale-105 transition-transform duration-700" />
                 </div>
               </div>
             </div>

@@ -1,4 +1,5 @@
 import { buildQueryString } from "./utils";
+import { useAuthStore } from "@/stores/auth-store";
 
 export class ApiError extends Error {
   status: number;
@@ -28,6 +29,15 @@ export interface RequestOptions extends Omit<RequestInit, "body"> {
 async function getAccessToken(): Promise<string | null> {
   if (typeof window === "undefined") return null;
 
+  // 1. Try to get it directly from the in-memory Zustand store first (immediate)
+  try {
+    const memToken = useAuthStore.getState().accessToken;
+    if (memToken) return memToken;
+  } catch (e) {
+    // ignore
+  }
+
+  // 2. Fallback to localStorage (async sync)
   try {
     const stored = localStorage.getItem("auth-storage");
     if (stored) {

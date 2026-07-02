@@ -67,7 +67,7 @@ export function FeaturedCreators() {
                 <Image
                   src={creator.storeLogo ? getImageUrl(creator.storeLogo) : "/images/placeholder-avatar.svg"}
                   alt={creator.storeName}
-                  fill
+                  fill sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-cover"
                 />
               </Link>

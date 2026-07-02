@@ -161,7 +161,14 @@ export function VendorStorefrontHeader({ vendor }: VendorStorefrontHeaderProps) 
             <button
               key={tab}
               type="button"
-              onClick={() => setActiveTab(tab)}
+              onClick={() => {
+                setActiveTab(tab);
+                const el = document.getElementById(tab.toLowerCase());
+                if (el) {
+                  const y = el.getBoundingClientRect().top + window.scrollY - 100;
+                  window.scrollTo({ top: y, behavior: 'smooth' });
+                }
+              }}
               className={cn(
                 "px-6 py-3 text-sm font-medium transition-colors border-b-2 shrink-0",
                 activeTab === tab

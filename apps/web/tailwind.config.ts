@@ -91,8 +91,8 @@ const config: Config = {
         },
       },
       fontFamily: {
-        serif: ["Cormorant Garamond", "Playfair Display", "Georgia", "serif"],
-        sans: ["Inter", "system-ui", "sans-serif"],
+        serif: ["var(--font-lora)", "Lora", "Georgia", "serif"],
+        sans: ["var(--font-outfit)", "Outfit", "system-ui", "sans-serif"],
         sinhala: ["Noto Sans Sinhala", "system-ui", "sans-serif"],
         tamil: ["Noto Sans Tamil", "system-ui", "sans-serif"],
       },

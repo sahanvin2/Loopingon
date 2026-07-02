@@ -19,6 +19,7 @@ import { Badge } from "@/components/shared/badge";
 import { PRODUCT_STATUS_MAP } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import type { Product, ApiResponse } from "@/types";
+import { CustomSelect } from "@/components/shared/custom-select";
 
 export default function VendorEditProductPage() {
   const { id } = useParams<{ id: string }>();
@@ -173,12 +174,12 @@ export default function VendorEditProductPage() {
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-text-700 mb-1">Craft Type *</label>
-              <select {...register("craftType")} className="w-full px-3 py-2 border border-accent-200 rounded-lg text-sm">
-                <option value="">Select craft type</option>
-                {CRAFT_TYPES.map((ct) => (
-                  <option key={ct.value} value={ct.value}>{ct.label}</option>
-                ))}
-              </select>
+              <CustomSelect
+                {...register("craftType")}
+                options={CRAFT_TYPES as unknown as {value: string, label: string}[]}
+                placeholder="Select craft type"
+                className="border-accent-200 focus:ring-2 focus:ring-primary-500"
+              />
             </div>
           </div>
           <div>

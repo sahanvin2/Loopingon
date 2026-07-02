@@ -11,3 +11,9 @@ coverage
 .tmp
 *.tsbuildinfo
 .DS_Store
+Assets/product_images_final/
+Assets/*.xlsx
+Assets/*.jpg
+Assets/*.jpeg
+Assets/*.png
+Assets/*.webp

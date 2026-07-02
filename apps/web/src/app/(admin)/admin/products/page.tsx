@@ -11,6 +11,7 @@ import { Badge } from "@/components/shared/badge";
 import { get, del, patch, post } from "@/lib/api-client";
 import { formatPrice, formatDate } from "@/lib/utils";
 import type { Product, PaginatedResponse } from "@/types";
+import { CustomSelect } from "@/components/shared/custom-select";
 
 const PRODUCT_STATUS_MAP: Record<string, { label: string; variant: string }> = {
   PUBLISHED: { label: "Published", variant: "green" },
@@ -116,10 +117,13 @@ export default function AdminProductsPage() {
               </button>
             )}
           </form>
-          <select value={status} onChange={(e) => { setStatus(e.target.value); setPage(1); }}
-            className="px-3 py-2 rounded-lg border border-accent-200 bg-white text-sm">
-            {statusFilters.map((f) => <option key={f.key} value={f.key}>{f.label}</option>)}
-          </select>
+          <CustomSelect
+            value={status}
+            onChange={(val: string) => { setStatus(val); setPage(1); }}
+            options={statusFilters.map(f => ({ value: f.key, label: f.label }))}
+            wrapperClassName="w-48"
+            className="border-accent-200 bg-white py-2 px-3 h-9"
+          />
         </div>
       </div>
 

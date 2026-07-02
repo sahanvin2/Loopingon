@@ -11,6 +11,7 @@ import { get } from "@/lib/api-client";
 import { cn, formatPrice } from "@/lib/utils";
 import { toast } from "sonner";
 import * as XLSX from "xlsx";
+import { CustomSelect } from "@/components/shared/custom-select";
 
 interface Order {
   id: string;
@@ -198,20 +199,24 @@ export default function SalesLedgerPage() {
             placeholder="Search orders..." className="pl-10 pr-4 py-2 rounded-lg border border-surface-300 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 w-56"
           />
         </div>
-        <select value={status} onChange={(e) => { setStatus(e.target.value); setPage(1); }}
-          className="px-4 py-2 rounded-lg border border-surface-300 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary-500"
-        >
-          <option value="">All Statuses</option>
-          <option value="PENDING_PAYMENT">Pending Payment</option>
-          <option value="CONFIRMED">Confirmed</option>
-          <option value="PROCESSING">Processing</option>
-          <option value="SHIPPED">Shipped</option>
-          <option value="DELIVERED">Delivered</option>
-          <option value="COMPLETED">Completed</option>
-          <option value="CANCELLED">Cancelled</option>
-          <option value="REFUNDED">Refunded</option>
-          <option value="RETURN_REQUESTED">Return Requested</option>
-        </select>
+        <CustomSelect
+          value={status}
+          onChange={(val: string) => { setStatus(val); setPage(1); }}
+          options={[
+            { value: "", label: "All Statuses" },
+            { value: "PENDING_PAYMENT", label: "Pending Payment" },
+            { value: "CONFIRMED", label: "Confirmed" },
+            { value: "PROCESSING", label: "Processing" },
+            { value: "SHIPPED", label: "Shipped" },
+            { value: "DELIVERED", label: "Delivered" },
+            { value: "COMPLETED", label: "Completed" },
+            { value: "CANCELLED", label: "Cancelled" },
+            { value: "REFUNDED", label: "Refunded" },
+            { value: "RETURN_REQUESTED", label: "Return Requested" },
+          ]}
+          wrapperClassName="w-56"
+          className="border-surface-300 bg-white focus:ring-2 focus:ring-primary-500 py-2 px-4 h-9"
+        />
         {isFetching && <Loader2 className="w-4 h-4 animate-spin text-muted-400" />}
       </div>
 

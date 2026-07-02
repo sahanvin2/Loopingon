@@ -91,7 +91,7 @@ export function ShopByCategoryCards() {
                 <p className="text-xs text-muted-500 leading-snug">{category.subtitle}</p>
               </div>
               <div className="w-16 h-16 sm:w-20 sm:h-20 shrink-0 rounded-lg overflow-hidden relative bg-surface-100">
-                <Image src={category.image} alt={category.title} fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+                <Image src={category.image} alt={category.title} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover group-hover:scale-110 transition-transform duration-500" />
               </div>
             </Link>
           ))}

@@ -15,6 +15,7 @@ import { FileUpload } from "@/components/forms/file-upload";
 import { RichEditor } from "@/components/forms/rich-editor";
 import { TagInput } from "@/components/forms/tag-input";
 import { cn } from "@/lib/utils";
+import { CustomSelect } from "@/components/shared/custom-select";
 
 export default function VendorNewProductPage() {
   const router = useRouter();
@@ -106,22 +107,27 @@ export default function VendorNewProductPage() {
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-text-700 mb-1">Category *</label>
-              <select multiple {...register("categories")} className="w-full px-3 py-2 border border-accent-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500" size={1}>
-                <option value="">Select category</option>
-                <option value="pottery">Pottery & Ceramics</option>
-                <option value="wood_carving">Wood Carving</option>
-                <option value="textiles">Textiles</option>
-              </select>
+              <CustomSelect
+                multiple
+                {...register("categories")}
+                options={[
+                  { value: "pottery", label: "Pottery & Ceramics" },
+                  { value: "wood_carving", label: "Wood Carving" },
+                  { value: "textiles", label: "Textiles" },
+                ]}
+                placeholder="Select categories"
+                className="border-accent-200 focus:ring-2 focus:ring-primary-500"
+              />
               {errors.categories && <p className="text-xs text-red-600 mt-1">{errors.categories.message}</p>}
             </div>
             <div>
               <label className="block text-sm font-medium text-text-700 mb-1">Craft Type *</label>
-              <select {...register("craftType")} className="w-full px-3 py-2 border border-accent-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500">
-                <option value="">Select craft type</option>
-                {CRAFT_TYPES.map((ct) => (
-                  <option key={ct.value} value={ct.value}>{ct.label}</option>
-                ))}
-              </select>
+              <CustomSelect
+                {...register("craftType")}
+                options={CRAFT_TYPES as unknown as {value: string, label: string}[]}
+                placeholder="Select craft type"
+                className="border-accent-200 focus:ring-2 focus:ring-primary-500"
+              />
               {errors.craftType && <p className="text-xs text-red-600 mt-1">{errors.craftType.message}</p>}
             </div>
           </div>

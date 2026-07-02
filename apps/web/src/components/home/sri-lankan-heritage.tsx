@@ -58,7 +58,7 @@ export function SriLankanHeritage() {
                   <Image
                     src={getImageUrl(item.image)}
                     alt={item.name}
-                    fill
+                    fill sizes="(max-width: 768px) 100vw, 50vw"
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
                   />
                 ) : (

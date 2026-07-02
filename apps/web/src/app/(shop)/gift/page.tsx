@@ -24,11 +24,13 @@ import {
   ArrowRight,
   Minus,
   Plus,
+  ChevronDown,
 } from "lucide-react";
 import { useCartStore } from "@/stores/cart-store";
 import { useAuthStore } from "@/stores/auth-store";
 import { SRI_LANKAN_DISTRICTS } from "@/lib/constants";
 import { cn, formatPrice } from "@/lib/utils";
+import { CustomSelect } from "@/components/shared/custom-select";
 
 const OCCASIONS = [
   "Birthday",
@@ -51,8 +53,55 @@ const OCCASIONS = [
 
 export default function GiftPage() {
   const router = useRouter();
-  const { items, removeItem, updateQuantity, subtotal } = useCartStore();
+  const { items: cartItems, removeItem, updateQuantity, subtotal: cartSubtotal } = useCartStore();
   const { isAuthenticated } = useAuthStore();
+
+  const [directItems, setDirectItems] = useState<any[]>([]);
+  const [isDirect, setIsDirect] = useState(false);
+
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const productId = params.get("product");
+      if (productId) {
+        setIsDirect(true);
+        setDirectItems([{
+          id: "direct-item",
+          productId,
+          variantId: params.get("variant") || null,
+          quantity: Number(params.get("qty")) || 1,
+          price: params.get("price") || "0",
+          product: { 
+            title: params.get("title") ? decodeURIComponent(params.get("title") as string) : "Gift Item",
+            freeShippingDomestic: true, // Assuming free shipping for simplicity if not passed
+            shippingPrice: 0
+          }
+        }]);
+      }
+    }
+  }, []);
+
+  const items = isDirect ? directItems : cartItems;
+  const subtotal = isDirect 
+    ? directItems.reduce((acc, item) => acc + (parseFloat(item.price) * item.quantity), 0)
+    : cartSubtotal;
+
+  const handleUpdateQuantity = (id: string, qty: number) => {
+    if (qty < 1) return;
+    if (isDirect) {
+      setDirectItems(prev => prev.map(item => item.id === id ? { ...item, quantity: qty } : item));
+    } else {
+      updateQuantity(id, qty);
+    }
+  };
+
+  const handleRemoveItem = (id: string) => {
+    if (isDirect) {
+      setDirectItems([]);
+    } else {
+      removeItem(id);
+    }
+  };
 
   const [step, setStep] = useState(0);
   const [recipient, setRecipient] = useState({
@@ -70,8 +119,10 @@ export default function GiftPage() {
   const [occasion, setOccasion] = useState("");
   const [giftWrap, setGiftWrap] = useState(false);
   const [fromName, setFromName] = useState("");
+  const [fromPhone, setFromPhone] = useState("");
 
   const getShippingCost = useMemo(() => {
+    if (subtotal >= 10000) return 0;
     return items.reduce((acc, item) => {
       const p = item.product;
       if (!p) return acc;
@@ -104,6 +155,7 @@ export default function GiftPage() {
       occasion,
       giftWrap,
       fromName,
+      fromPhone,
       items: items.map((item) => ({
         productId: item.productId,
         variantId: item.variantId,
@@ -216,7 +268,7 @@ export default function GiftPage() {
                             <div className="flex items-center gap-1">
                               <button
                                 type="button"
-                                onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                                onClick={() => handleUpdateQuantity(item.id, item.quantity - 1)}
                                 className="w-7 h-7 rounded-lg border border-accent-200 flex items-center justify-center hover:bg-surface-100 transition-colors"
                               >
                                 <Minus className="w-3 h-3" />
@@ -224,7 +276,7 @@ export default function GiftPage() {
                               <span className="w-8 text-center text-sm font-medium">{item.quantity}</span>
                               <button
                                 type="button"
-                                onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                                onClick={() => handleUpdateQuantity(item.id, item.quantity + 1)}
                                 className="w-7 h-7 rounded-lg border border-accent-200 flex items-center justify-center hover:bg-surface-100 transition-colors"
                               >
                                 <Plus className="w-3 h-3" />
@@ -232,7 +284,7 @@ export default function GiftPage() {
                             </div>
                             <button
                               type="button"
-                              onClick={() => removeItem(item.id)}
+                              onClick={() => handleRemoveItem(item.id)}
                               className="text-xs text-red-500 hover:text-red-700 flex items-center gap-1 transition-colors"
                             >
                               <Trash2 className="w-3 h-3" />
@@ -266,17 +318,31 @@ export default function GiftPage() {
                     </div>
                     <h2 className="text-lg font-semibold text-navy-900">From (You)</h2>
                   </div>
-                  <div>
-                    <label className="block text-sm font-medium text-text-700 mb-1.5">
-                      Your Name
-                    </label>
-                    <input
-                      type="text"
-                      value={fromName}
-                      onChange={(e) => setFromName(e.target.value)}
-                      placeholder="How should the recipient know who sent this?"
-                      className="w-full px-4 py-3 rounded-xl border border-accent-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all text-sm"
-                    />
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-text-700 mb-1.5">
+                        Your Name
+                      </label>
+                      <input
+                        type="text"
+                        value={fromName}
+                        onChange={(e) => setFromName(e.target.value)}
+                        placeholder="How should the recipient know who sent this?"
+                        className="w-full px-4 py-3 rounded-xl border border-accent-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all text-sm"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-text-700 mb-1.5">
+                        Your Phone Number
+                      </label>
+                      <input
+                        type="tel"
+                        value={fromPhone}
+                        onChange={(e) => setFromPhone(e.target.value)}
+                        placeholder="+94 7X XXX XXXX"
+                        className="w-full px-4 py-3 rounded-xl border border-accent-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all text-sm"
+                      />
+                    </div>
                   </div>
                 </div>
 
@@ -381,20 +447,12 @@ export default function GiftPage() {
                         <label className="block text-sm font-medium text-text-700 mb-1.5">
                           District <span className="text-red-400">*</span>
                         </label>
-                        <select
+                        <CustomSelect
                           value={deliveryAddress.district}
-                          onChange={(e) =>
-                            setDeliveryAddress({ ...deliveryAddress, district: e.target.value })
-                          }
-                          className="w-full px-4 py-3 rounded-xl border border-accent-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all text-sm bg-white"
-                        >
-                          <option value="">Select district</option>
-                          {SRI_LANKAN_DISTRICTS.map((d: string) => (
-                            <option key={d} value={d}>
-                              {d}
-                            </option>
-                          ))}
-                        </select>
+                          onChange={(val) => setDeliveryAddress({ ...deliveryAddress, district: val })}
+                          options={SRI_LANKAN_DISTRICTS as unknown as string[]}
+                          placeholder="Select district"
+                        />
                       </div>
                     </div>
                     <div>
@@ -428,18 +486,12 @@ export default function GiftPage() {
                       <label className="block text-sm font-medium text-text-700 mb-1.5">
                         Occasion (optional)
                       </label>
-                      <select
+                      <CustomSelect
                         value={occasion}
-                        onChange={(e) => setOccasion(e.target.value)}
-                        className="w-full px-4 py-3 rounded-xl border border-accent-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all text-sm bg-white"
-                      >
-                        <option value="">Select occasion</option>
-                        {OCCASIONS.map((o) => (
-                          <option key={o} value={o}>
-                            {o}
-                          </option>
-                        ))}
-                      </select>
+                        onChange={(val) => setOccasion(val)}
+                        options={OCCASIONS}
+                        placeholder="Select occasion"
+                      />
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-text-700 mb-1.5">
@@ -496,7 +548,7 @@ export default function GiftPage() {
                   <div className="space-y-4 text-sm">
                     <div className="flex justify-between py-2 border-b border-accent-100">
                       <span className="text-muted-500">From</span>
-                      <span className="font-medium text-text-900">{fromName || "You"}</span>
+                      <span className="font-medium text-text-900">{fromName || "You"}{fromPhone ? ` (${fromPhone})` : ""}</span>
                     </div>
                     <div className="flex justify-between py-2 border-b border-accent-100">
                       <span className="text-muted-500">Recipient</span>
@@ -543,6 +595,13 @@ export default function GiftPage() {
                         </span>
                       </div>
                     )}
+                    <div className="bg-white/40 p-4 rounded-xl border border-white/40">
+                      <p className="text-sm font-semibold text-text-900 mb-1">Shipping & Delivery</p>
+                      <p className="text-xs text-muted-600">
+                        Free Standard Delivery on orders over Rs. 10,000.
+                        Gifts typically arrive within 2-3 business days.
+                      </p>
+                    </div>
                   </div>
                 </div>
               </motion.div>
@@ -624,7 +683,7 @@ export default function GiftPage() {
                 {getShippingCost === 0 && (
                   <div className="bg-primary-50 border border-primary-200 rounded-xl p-3 text-xs text-primary-700 mb-4 flex items-center gap-2">
                     <Check className="w-4 h-4 shrink-0" />
-                    Free SL Post delivery on orders over Rs. 5,000
+                    Free Standard Delivery on orders over Rs. 10,000
                   </div>
                 )}
 

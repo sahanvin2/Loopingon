@@ -20,6 +20,7 @@ import { get, patch } from "@/lib/api-client";
 import { cn, formatDate, formatPrice } from "@/lib/utils";
 import { ORDER_STATUS_MAP } from "@/lib/constants";
 import type { Order, ApiResponse } from "@/types";
+import { CustomSelect } from "@/components/shared/custom-select";
 
 export default function VendorOrderDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -276,21 +277,22 @@ export default function VendorOrderDetailPage() {
                   <label className="block text-sm font-medium text-text-700 mb-1">
                     Courier
                   </label>
-                  <select
+                  <CustomSelect
                     value={trackingForm.courierName}
-                    onChange={(e) =>
-                      setTrackingForm({ ...trackingForm, courierName: e.target.value })
+                    onChange={(val: string) =>
+                      setTrackingForm({ ...trackingForm, courierName: val })
                     }
-                    className="w-full px-3 py-2 border border-accent-200 rounded-lg text-sm"
-                  >
-                    <option value="">Select courier</option>
-                    <option value="Domex">Domex</option>
-                    <option value="Sri Lanka Post">Sri Lanka Post</option>
-                    <option value="PromptXpress">PromptXpress</option>
-                    <option value="Koombiyo">Koombiyo</option>
-                    <option value="DHL">DHL</option>
-                    <option value="FedEx">FedEx</option>
-                  </select>
+                    options={[
+                      { value: "Domex", label: "Domex" },
+                      { value: "Sri Lanka Post", label: "Sri Lanka Post" },
+                      { value: "PromptXpress", label: "PromptXpress" },
+                      { value: "Koombiyo", label: "Koombiyo" },
+                      { value: "DHL", label: "DHL" },
+                      { value: "FedEx", label: "FedEx" },
+                    ]}
+                    placeholder="Select courier"
+                    className="border-accent-200 focus:ring-2 focus:ring-primary-500 py-2 px-3"
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-text-700 mb-1">

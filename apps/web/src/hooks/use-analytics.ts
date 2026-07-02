@@ -92,7 +92,8 @@ function flushEvents() {
   }
 
   try {
-    fetch("/api/v1/analytics/events", {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000/api/v1";
+    fetch(`${apiUrl}/analytics/events`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ events, sessionId: getSessionId() }),

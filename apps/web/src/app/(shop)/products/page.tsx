@@ -10,6 +10,7 @@ import { Pagination } from "@/components/shared/pagination";
 import { LoadingSkeleton } from "@/components/shared/loading-skeleton";
 import { Search, X, SlidersHorizontal } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { CustomSelect } from "@/components/shared/custom-select";
 
 const ALL_CATEGORIES = [
   { label: "All Categories", slug: "" },
@@ -285,15 +286,13 @@ export default function ProductsPage() {
               Filters
               {hasAnyFilter && <span className="w-2 h-2 rounded-full bg-primary-500 ml-0.5" />}
             </button>
-            <select
+            <CustomSelect
               value={activeSort}
-              onChange={(e) => navigate({ sort: e.target.value })}
-              className="h-11 px-3 rounded-xl border border-surface-300 bg-white text-sm font-medium text-text-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-            >
-              {SORT_OPTIONS.map((o) => (
-                <option key={o.value} value={o.value}>{o.label}</option>
-              ))}
-            </select>
+              onChange={(val: string) => navigate({ sort: val })}
+              options={SORT_OPTIONS}
+              wrapperClassName="w-48"
+              className="h-11 border-surface-300 font-medium text-text-600"
+            />
           </div>
         </div>
 

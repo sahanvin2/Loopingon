@@ -185,16 +185,31 @@ const PLACEHOLDER_AVATAR = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2
 
 export function getImageUrl(path: string | null | undefined): string {
   if (!path) return PLACEHOLDER_PRODUCT;
+  
+  const cdnUrl = "https://kandyam-store.b-cdn.net"; // Hardcoded to bypass Next.js .env cache
+
+  // Intercept existing B2 absolute URLs and rewrite them to the CDN
+  if (path.includes("f005.backblazeb2.com")) {
+    return path.replace("https://f005.backblazeb2.com/file/movia-prod", cdnUrl).replace("https://f005.backblazeb2.com/file/kandyam-prod", cdnUrl);
+  }
+
   if (path.startsWith("http")) return path;
-  if (path.startsWith("/")) return path;
-  return `${process.env.NEXT_PUBLIC_CDN_URL || ""}/${path}`;
+  if (path.startsWith("/")) return `${cdnUrl}${path}`;
+  return `${cdnUrl}/${path}`;
 }
 
 export function getAvatarUrl(path: string | null | undefined): string {
   if (!path) return PLACEHOLDER_AVATAR;
+
+  const cdnUrl = "https://kandyam-store.b-cdn.net"; // Hardcoded to bypass Next.js .env cache
+
+  if (path.includes("f005.backblazeb2.com")) {
+    return path.replace("https://f005.backblazeb2.com/file/movia-prod", cdnUrl).replace("https://f005.backblazeb2.com/file/kandyam-prod", cdnUrl);
+  }
+
   if (path.startsWith("http")) return path;
-  if (path.startsWith("/")) return path;
-  return `${process.env.NEXT_PUBLIC_CDN_URL || ""}/${path}`;
+  if (path.startsWith("/")) return `${cdnUrl}${path}`;
+  return `${cdnUrl}/${path}`;
 }
 
 export function copyToClipboard(text: string): Promise<boolean> {

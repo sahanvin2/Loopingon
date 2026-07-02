@@ -3,15 +3,8 @@ import RedisStore from "rate-limit-redis";
 import { getRedisClient } from "../config/redis.js";
 
 function createRedisStore() {
-  try {
-    const client = getRedisClient();
-    return new RedisStore({
-      sendCommand: (...args: string[]): Promise<any> => (client as any).call(...args) as any,
-      prefix: "ratelimit:",
-    });
-  } catch {
-    return undefined;
-  }
+  // Use in-memory store when Redis is disabled
+  return undefined;
 }
 
 export const generalLimiter = rateLimit({

@@ -6,6 +6,7 @@ import type { Product } from "@/types";
 import { RatingStars } from "@/components/shared/rating-stars";
 import { VendorBadge } from "@/components/vendor/vendor-badge";
 import { ShareButtons } from "@/components/product/share-buttons";
+import { Star, Award, Leaf, ShieldCheck } from "lucide-react";
 
 interface ProductInfoProps {
   product: Product;
@@ -17,7 +18,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
       {/* Brand & Vendor */}
       {product.vendor && (
         <Link
-          href={`/artisans/${product.vendor.storeSlug}`}
+          href={`/vendors/${product.vendor.storeSlug}`}
           className="inline-flex items-center gap-2 text-sm text-text-500 hover:text-primary-700 font-medium tracking-widest uppercase transition-colors"
         >
           {product.vendor.storeName}
@@ -26,7 +27,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
       )}
 
       {/* Title */}
-      <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-text-900 leading-[1.1] tracking-tight">
+      <h1 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-extrabold uppercase tracking-tight text-text-900 leading-none">
         {product.title}
       </h1>
 
@@ -47,30 +48,14 @@ export function ProductInfo({ product }: ProductInfoProps) {
         </Link>
       </div>
 
+
+
       {/* Short Description */}
-      {product.shortDescription && (
+      {!!product.shortDescription && product.shortDescription !== "0" && (
         <p className="text-text-600 leading-relaxed text-base pt-2">
           {product.shortDescription}
         </p>
       )}
-
-      {/* Detailed specs or attributes */}
-      <div className="pt-4">
-        <ul className="space-y-3 text-sm text-text-700 font-medium">
-          {product.isHandmade && (
-            <li className="flex items-center gap-3">
-              <span className="w-1.5 h-1.5 rounded-full bg-text-900"></span>
-              Authentic Handmade Quality
-            </li>
-          )}
-          {product.isEcoFriendly && (
-            <li className="flex items-center gap-3">
-              <span className="w-1.5 h-1.5 rounded-full bg-text-900"></span>
-              Eco-Friendly Materials
-            </li>
-          )}
-        </ul>
-      </div>
 
       <div className="pt-4">
         <ShareButtons productTitle={product.title} />

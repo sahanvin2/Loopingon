@@ -11,8 +11,8 @@ const PORT = parseInt(process.env.PORT || "4000", 10);
 const HOST = process.env.HOST || "0.0.0.0";
 
 async function main() {
-  await prisma.$connect();
-  logger.info("Prisma connected");
+  // await prisma.$connect();
+  // logger.info("Prisma connected");
 
   await connectRedis();
   logger.info("Redis connected");
@@ -70,3 +70,5 @@ main().catch((err) => {
   console.error("Failed to start server:", err);
   process.exit(1);
 });
+
+// Restart trigger

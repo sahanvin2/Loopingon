@@ -11,6 +11,7 @@ import { LoadingSkeleton } from "@/components/shared/loading-skeleton";
 import { get, post, patch, del } from "@/lib/api-client";
 import { cn } from "@/lib/utils";
 import type { VendorBankDetail, ApiResponse } from "@/types";
+import { CustomSelect } from "@/components/shared/custom-select";
 
 export default function VendorBankDetailsPage() {
   const queryClient = useQueryClient();
@@ -197,13 +198,14 @@ export default function VendorBankDetailsPage() {
             <label className="block text-sm font-medium text-text-700 mb-1">
               Account Type
             </label>
-            <select
+            <CustomSelect
               {...register("accountType")}
-              className="w-full px-3 py-2 border border-accent-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500"
-            >
-              <option value="Savings">Savings</option>
-              <option value="Current">Current</option>
-            </select>
+              options={[
+                { value: "Savings", label: "Savings" },
+                { value: "Current", label: "Current" },
+              ]}
+              className="border-accent-200 focus:ring-2 focus:ring-primary-500 py-2 px-3"
+            />
           </div>
           <label className="flex items-center gap-2">
             <input

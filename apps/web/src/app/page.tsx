@@ -1,81 +1,52 @@
 import { Suspense } from "react";
-import { LuxuryHero } from "@/components/home/luxury-hero";
+import { HeroSection } from "@/components/home/hero-section";
 import { TrustBar } from "@/components/home/trust-bar";
-import { CategoryCircle } from "@/components/home/category-circle";
-import { TrendingWeek } from "@/components/home/trending-week";
-import { RecommendedForYou } from "@/components/home/recommended-for-you";
-import { RecentlyViewed } from "@/components/home/recently-viewed";
-import { FeaturedCreators } from "@/components/home/featured-creators";
-import { 
-  FlashDeals, 
-  GiftFinder, 
-  ProductGrids, 
-  ShopByRegion, 
-  HeritageCollection, 
-  CustomerReviewsDark, 
-  NewsletterSimple, 
-  MobileAppSection 
-} from "@/components/home/luxury-sections";
-import { LoadingSkeleton } from "@/components/shared/loading-skeleton";
+import { DiscoveryRow } from "@/components/home/discovery-row";
+import { CategoryIconRow } from "@/components/home/category-icon-row";
+import { PromoBanners } from "@/components/home/promo-banners";
+import { ProductGrids } from "@/components/home/product-grids";
+import { ShopByCategory } from "@/components/home/shop-by-category";
+import { MeetOurSellers } from "@/components/home/meet-our-sellers";
+import { SocialProofTestimonial } from "@/components/home/social-proof-testimonial";
+import { BottomCTA } from "@/components/home/bottom-cta";
 
 export const metadata = {
-  title: "Kandiyam - Premium Marketplace for Handcrafted Sri Lankan Treasures",
-  description: "Kandiyam connects you with skilled Sri Lankan sellers. Discover unique handcrafted masks, batik, jewelry, wooden carvings, and luxury crafts from sellers worldwide.",
+  title: "Kandyam - Discover products you'll love. From local favorites to global finds.",
+  description: "Explore a curated selection of premium goods, exclusive deals, and unique items from independent creators everywhere on Kandyam.",
 };
 
 export default function HomePage() {
   return (
-    <div className="flex flex-col w-full bg-main">
+    <div className="flex flex-col w-full bg-[#FCFDFD]">
       {/* 1. Hero Section */}
-      <LuxuryHero />
+      <HeroSection />
       
       {/* 2. Trust Bar */}
       <TrustBar />
       
-      {/* 3. Category Grid */}
-      <CategoryCircle />
+      {/* 3. Discovery Row (Trending, Editors Picks, Recently Viewed) */}
+      <DiscoveryRow />
       
-      {/* 4. Trending This Week */}
-      <TrendingWeek />
+      {/* 4. Category Icons */}
+      <CategoryIconRow />
       
-      {/* 5. Product Grids: New Arrivals + Best Sellers */}
-      <Suspense fallback={<LoadingSkeleton variant="product-card" count={4} className="py-12" />}>
-        <ProductGrids />
-      </Suspense>
-
-      {/* 6. Flash Deals with Countdown */}
-      <FlashDeals />
-
-      {/* 7. Recommended For You - Horizontal Carousel */}
-      <Suspense fallback={<LoadingSkeleton variant="product-card" count={4} className="py-12" />}>
-        <RecommendedForYou />
-      </Suspense>
-
-      {/* 8. Recently Viewed */}
-      <Suspense fallback={<LoadingSkeleton variant="product-card" count={4} className="py-12" />}>
-        <RecentlyViewed />
-      </Suspense>
+      {/* 5. Promo Banners */}
+      <PromoBanners />
       
-      {/* 9. Gift Finder */}
-      <GiftFinder />
+      {/* 6. Product Grids (New Arrivals, Best Sellers, Your Choice) */}
+      <ProductGrids />
       
-      {/* 10. Shop By Region */}
-      <ShopByRegion />
+      {/* 7. Shop by Category (Bento box) */}
+      <ShopByCategory />
       
-      {/* 11. Heritage Collection - Premium */}
-      <HeritageCollection />
+      {/* 8. Meet Our Sellers */}
+      <MeetOurSellers />
       
-      {/* 12. Featured Sellers */}
-      <Suspense fallback={<LoadingSkeleton variant="product-card" count={3} className="py-12" />}>
-        <FeaturedCreators />
-      </Suspense>
+      {/* 9. Social Proof / Testimonials */}
+      <SocialProofTestimonial />
       
-      {/* 13. Customer Reviews - Social Proof */}
-      <CustomerReviewsDark />
-      
-      {/* 14. Newsletter + Mobile App */}
-      <NewsletterSimple />
-      <MobileAppSection />
+      {/* 10. Bottom CTA (Newsletter & App) */}
+      <BottomCTA />
     </div>
   );
 }

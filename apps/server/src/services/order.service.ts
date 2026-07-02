@@ -6,6 +6,7 @@ import { getPaginationParams, buildPaginationResult } from "../utils/pagination.
 import { generateOrderNumber } from "../utils/slug.js";
 import { addOrderConfirmationJob } from "../workers/email.worker.js";
 import { logger } from "../middleware/errorHandler.middleware.js";
+import { sendAdminOrderNotification, sendCustomerOrderSMS } from "../utils/sms.js";
 
 export async function createOrder(
   userId: string,
@@ -312,6 +313,24 @@ export async function createOrder(
     );
   } catch (err) {
     logger.warn("Failed to queue order confirmation email", err);
+  }
+
+  // Send admin SMS notification
+  try {
+    await sendAdminOrderNotification(order.orderNumber, totalAmount, orderItems.length);
+  } catch (err) {
+    logger.warn("Failed to send admin SMS notification", err);
+  }
+
+  // Send customer SMS notification (COD confirmation)
+  if (data.paymentMethod === "CASH_ON_DELIVERY" || data.paymentMethod === "COD" || !data.paymentMethod || data.paymentMethod.toUpperCase().includes("CASH")) {
+    try {
+      if (shippingAddress.phone) {
+        await sendCustomerOrderSMS(shippingAddress.phone, order.orderNumber, totalAmount);
+      }
+    } catch (err) {
+      logger.warn("Failed to send customer order SMS notification", err);
+    }
   }
 
   return order;

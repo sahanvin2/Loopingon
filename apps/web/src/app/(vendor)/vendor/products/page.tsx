@@ -20,6 +20,7 @@ import { get, del } from "@/lib/api-client";
 import { cn, formatPrice, formatDate } from "@/lib/utils";
 import { PRODUCT_STATUS_MAP } from "@/lib/constants";
 import type { Product, PaginatedResponse } from "@/types";
+import { CustomSelect } from "@/components/shared/custom-select";
 
 const statusFilters = [
   { key: "all", label: "All" },
@@ -89,20 +90,16 @@ export default function VendorProductsPage() {
             className="w-full pl-10 pr-4 py-2 border border-accent-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500"
           />
         </div>
-        <select
+        <CustomSelect
           value={statusFilter}
-          onChange={(e) => {
-            setStatusFilter(e.target.value);
+          onChange={(val: string) => {
+            setStatusFilter(val);
             setPage(1);
           }}
-          className="px-3 py-2 border border-accent-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500"
-        >
-          {statusFilters.map((f) => (
-            <option key={f.key} value={f.key}>
-              {f.label}
-            </option>
-          ))}
-        </select>
+          options={statusFilters.map(f => ({ value: f.key, label: f.label }))}
+          wrapperClassName="w-48"
+          className="border-accent-200 focus:ring-2 focus:ring-primary-500 py-2 px-3 h-9"
+        />
       </div>
 
       {selectedRows.size > 0 && (

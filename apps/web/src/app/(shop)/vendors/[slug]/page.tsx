@@ -65,12 +65,12 @@ async function VendorContent({ slug }: { slug: string }) {
 
       <div className="bg-surface-50 py-12">
         <div className="mx-auto max-w-7xl px-4">
-          <section className="mb-12">
+          <section id="products" className="mb-12">
             <h2 className="mb-6 font-serif text-2xl font-bold text-text-900">Products</h2>
             <ProductGrid products={Array.isArray(products) ? products as any[] : []} />
           </section>
 
-          <section className="mb-12 rounded-xl bg-white p-6 shadow-soft-sm">
+          <section id="about" className="mb-12 rounded-xl bg-white p-6 shadow-soft-sm scroll-mt-24">
             <h2 className="font-serif text-2xl font-bold text-text-900">About the Seller</h2>
             <VendorStory
               story={vendor.craftDescription || vendor.storeDescription || ""}
@@ -78,13 +78,22 @@ async function VendorContent({ slug }: { slug: string }) {
             />
           </section>
 
-          <section className="rounded-xl bg-white p-6 shadow-soft-sm">
+          <section id="reviews" className="mb-12 rounded-xl bg-white p-6 shadow-soft-sm scroll-mt-24">
             <h2 className="font-serif text-2xl font-bold text-text-900">Reviews</h2>
             <ProductReviews
               reviews={safeReviews as any[]}
               averageRating={averageRating}
               reviewCount={reviewCount}
             />
+          </section>
+
+          <section id="policies" className="rounded-xl bg-white p-6 shadow-soft-sm scroll-mt-24">
+            <h2 className="font-serif text-2xl font-bold text-text-900 mb-4">Shop Policies</h2>
+            <div className="prose prose-sm max-w-none text-muted-600 space-y-4">
+              <p><strong>Shipping:</strong> Standard delivery times apply. Items are typically dispatched within 1-3 business days.</p>
+              <p><strong>Returns:</strong> We accept returns within 7 days of delivery. Items must be unused and in their original packaging.</p>
+              <p><strong>Cancellations:</strong> Cancellations are accepted within 24 hours of purchase.</p>
+            </div>
           </section>
         </div>
       </div>

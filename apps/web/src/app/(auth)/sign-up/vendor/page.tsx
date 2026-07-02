@@ -12,6 +12,7 @@ import { vendorApplicationSchema } from "@/lib/validators";
 import { cn } from "@/lib/utils";
 import { SRI_LANKAN_DISTRICTS, CRAFT_TYPES } from "@/lib/constants";
 import { useDebounce } from "@/hooks/use-debounce";
+import { CustomSelect } from "@/components/shared/custom-select";
 
 type VendorApplicationFormValues = {
   email: string;
@@ -248,19 +249,23 @@ export default function SignUpVendorPage() {
                   </div>
                   <div>
                     <label className="text-sm font-medium text-text-700">Business Type</label>
-                    <select {...register("businessType")} className="mt-1.5 w-full rounded-lg border border-text-200 px-4 py-3 text-sm focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 focus:outline-none">
-                      {businessTypes.map((bt) => <option key={bt.value} value={bt.value}>{bt.label}</option>)}
-                    </select>
+                    <CustomSelect
+                      {...register("businessType")}
+                      options={businessTypes}
+                      className="mt-1.5 border-text-200 focus:ring-2 focus:ring-primary-500/20"
+                    />
                   </div>
                   <div><label className="text-sm font-medium text-text-700">Business Registration Number</label><input {...register("businessRegistrationNo")} placeholder="Optional" className="mt-1.5 w-full rounded-lg border border-text-200 px-4 py-3 text-sm focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 focus:outline-none" /></div>
                   <div><label className="text-sm font-medium text-text-700">Tax ID</label><input {...register("taxId")} placeholder="Optional" className="mt-1.5 w-full rounded-lg border border-text-200 px-4 py-3 text-sm focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 focus:outline-none" /></div>
                   <div><label className="text-sm font-medium text-text-700">Workshop City</label><input {...register("workshopCity")} placeholder="e.g. Colombo" className="mt-1.5 w-full rounded-lg border border-text-200 px-4 py-3 text-sm" /></div>
                   <div>
                     <label className="text-sm font-medium text-text-700">District</label>
-                    <select {...register("workshopDistrict")} className="mt-1.5 w-full rounded-lg border border-text-200 px-4 py-3 text-sm">
-                      <option value="">Select district</option>
-                      {SRI_LANKAN_DISTRICTS.map((d) => <option key={d} value={d}>{d}</option>)}
-                    </select>
+                    <CustomSelect
+                      {...register("workshopDistrict")}
+                      options={SRI_LANKAN_DISTRICTS as unknown as string[]}
+                      placeholder="Select district"
+                      className="mt-1.5 border-text-200 focus:ring-2 focus:ring-primary-500/20"
+                    />
                   </div>
                   <div>
                     <label className="text-sm font-medium text-text-700">Store Description</label>

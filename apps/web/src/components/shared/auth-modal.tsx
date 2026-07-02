@@ -11,6 +11,7 @@ import { signInSchema, customerSignUpSchema, type SignInInput, type CustomerSign
 import { cn } from "@/lib/utils";
 import { useUIStore } from "@/stores/ui-store";
 import { createClient } from "@/utils/supabase/client";
+import { toast } from "sonner";
 
 export function AuthModal() {
   const { activeModal, closeModal } = useUIStore();
@@ -109,6 +110,7 @@ function SignInForm({ onSwitch, onSuccess }: { onSwitch: () => void; onSuccess: 
     try {
       const result = await login.mutateAsync(data);
       onSuccess();
+      toast.success("Successfully signed in!");
       if (result.user.role === "VENDOR") {
         router.push("/vendor/dashboard");
       } else if (result.user.role === "ADMIN" || result.user.role === "SUPER_ADMIN") {
@@ -117,7 +119,9 @@ function SignInForm({ onSwitch, onSuccess }: { onSwitch: () => void; onSuccess: 
         router.push("/dashboard");
       }
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : "Invalid email or password");
+      const msg = err instanceof Error ? err.message : "Invalid email or password";
+      setError(msg);
+      toast.error(msg);
     }
   };
 
@@ -247,9 +251,12 @@ function SignUpForm({ onSwitch, onSuccess }: { onSwitch: () => void; onSuccess: 
     try {
       await signup.mutateAsync(data);
       onSuccess();
+      toast.success("Account created successfully!");
       router.push("/verify-email");
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : "Failed to create account");
+      const msg = err instanceof Error ? err.message : "Failed to create account";
+      setError(msg);
+      toast.error(msg);
     }
   };
 

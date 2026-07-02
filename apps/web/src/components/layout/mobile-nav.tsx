@@ -27,6 +27,7 @@ import { useAuthStore } from "@/stores/auth-store";
 import { useUIStore } from "@/stores/ui-store";
 import { LanguageSwitcher } from "@/components/shared/language-switcher";
 import { CurrencySwitcher } from "@/components/shared/currency-switcher";
+import { FOOTER_LINKS } from "@/lib/constants";
 
 const navSections = [
   { icon: ShoppingBag, label: "Shop", href: "/products" },
@@ -39,31 +40,7 @@ const navSections = [
   { icon: HelpCircle, label: "Help", href: "/help-center" },
 ];
 
-const categories = [
-  {
-    label: "Home Decor",
-    href: "/products?category=home-decor",
-    subcategories: [
-      { label: "Wall Art", href: "/products?category=home-decor&subcategory=wall-art" },
-      { label: "Vases & Pots", href: "/products?category=home-decor&subcategory=vases" },
-      { label: "Rugs", href: "/products?category=home-decor&subcategory=rugs" },
-    ]
-  },
-  {
-    label: "Jewelry",
-    href: "/products?category=jewelry",
-    subcategories: [
-      { label: "Necklaces", href: "/products?category=jewelry&subcategory=necklaces" },
-      { label: "Earrings", href: "/products?category=jewelry&subcategory=earrings" },
-      { label: "Bracelets", href: "/products?category=jewelry&subcategory=bracelets" },
-    ]
-  },
-  { label: "Bags & Accessories", href: "/products?category=bags" },
-  { label: "Candles", href: "/products?category=candles" },
-  { label: "Wood Crafts", href: "/products?category=wood" },
-  { label: "Pottery & Ceramics", href: "/products?category=pottery" },
-  { label: "Fashion & Apparel", href: "/products?category=clothing" },
-];
+const categories: any[] = FOOTER_LINKS.categories as any;
 
 const accountLinks = [
   { icon: LayoutDashboard, label: "Dashboard", href: "/dashboard" },
