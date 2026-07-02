@@ -74,6 +74,8 @@ function getFAQs(categorySlug: string | undefined): { q: string; a: string }[] {
   ];
 }
 
+import { useAnalytics } from "@/hooks/use-analytics";
+
 export function ProductDetail({ product }: ProductDetailProps) {
   const images = product.images || [];
   const videos = product.videos || [];
@@ -83,6 +85,14 @@ export function ProductDetail({ product }: ProductDetailProps) {
   const [faqOpen, setFaqOpen] = React.useState<number | null>(null);
   const [selectedVariant, setSelectedVariant] = React.useState<any>(null);
   const [quantity, setQuantity] = React.useState(1);
+
+  const { trackInteraction } = useAnalytics();
+
+  React.useEffect(() => {
+    if (product.id) {
+      trackInteraction({ type: "VIEW", productId: product.id });
+    }
+  }, [product.id, trackInteraction]);
 
   const hasSpecs = product.materials?.length > 0 || product.dimensions || product.weight || product.craftType || product.processingTime;
 

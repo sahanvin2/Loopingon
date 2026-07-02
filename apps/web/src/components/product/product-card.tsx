@@ -20,10 +20,14 @@ interface ProductCardProps {
   showQuickView?: boolean;
 }
 
+import { useAnalytics } from "@/hooks/use-analytics";
+
 export function ProductCard({ product, className, showQuickView = true }: ProductCardProps) {
   const { isWishlisted, toggle, isLoading: wishlistLoading } = useToggleWishlist(product.id);
   const addToCart = useAddToCart();
   const [isQuickViewOpen, setIsQuickViewOpen] = useState(false);
+  
+  const { trackInteraction } = useAnalytics();
 
   const primaryImage = product.images?.find((img) => img.isPrimary) || product.images?.[0];
   const imageUrl = getImageUrl(primaryImage?.medium || primaryImage?.url);
@@ -96,6 +100,9 @@ export function ProductCard({ product, className, showQuickView = true }: Produc
           type="button"
           onClick={(e) => {
             e.preventDefault();
+            if (!isWishlisted) {
+              trackInteraction({ type: "WISHLIST", productId: product.id });
+            }
             toggle();
           }}
           disabled={wishlistLoading}
@@ -162,6 +169,7 @@ export function ProductCard({ product, className, showQuickView = true }: Produc
             type="button"
             onClick={(e) => {
               e.preventDefault();
+              trackInteraction({ type: "ADD_TO_CART", productId: product.id });
               addToCart.mutate({ productId: product.id, quantity: 1 });
             }}
             disabled={addToCart.isPending}
@@ -222,7 +230,10 @@ export function ProductCard({ product, className, showQuickView = true }: Produc
             <div className="mt-auto pt-6 flex flex-col gap-3">
               <button
                 type="button"
-                onClick={() => addToCart.mutate({ productId: product.id, quantity: 1 })}
+                onClick={() => {
+                  trackInteraction({ type: "ADD_TO_CART", productId: product.id });
+                  addToCart.mutate({ productId: product.id, quantity: 1 });
+                }}
                 disabled={addToCart.isPending || (product.quantity !== undefined && product.quantity <= 0)}
                 className={cn(
                   "w-full py-3 px-4 rounded-xl font-medium shadow-sm transition-all duration-200",

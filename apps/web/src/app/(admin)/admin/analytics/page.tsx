@@ -25,10 +25,17 @@ export default function AdminAnalyticsPage() {
 
   const stats = statsData?.data;
 
+  const { data: telemetryData } = useQuery({
+    queryKey: ["admin", "telemetry", dateRange],
+    queryFn: () => get<ApiResponse<any>>("/analytics/dashboard", { period: dateRange }),
+  });
+
+  const telemetry = telemetryData?.data;
+
   return (
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-text-900">Analytics</h1>
+        <h1 className="text-2xl font-bold text-text-900">Analytics & Telemetry</h1>
         <div className="flex items-center gap-2">
           <div className="flex gap-1 bg-white rounded-lg border border-accent-200 p-1">
             {["7d", "30d", "90d", "1y"].map((range) => (
@@ -61,18 +68,73 @@ export default function AdminAnalyticsPage() {
       )}
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <ChartCard title="Revenue Trend">
+        <ChartCard title="Page Views Trend">
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={[]}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="date" /><YAxis /><Tooltip /><Line type="monotone" dataKey="revenue" stroke="#c86482" strokeWidth={2} /></LineChart>
+              <LineChart data={telemetry?.pageVisits || []}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="date" />
+                <YAxis />
+                <Tooltip />
+                <Line type="monotone" dataKey="views" stroke="#c86482" strokeWidth={2} />
+              </LineChart>
             </ResponsiveContainer>
           </div>
         </ChartCard>
-        <ChartCard title="Orders by Status">
+        
+        <ChartCard title="User Interactions">
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
-              <PieChart><Pie data={[]} cx="50%" cy="50%" outerRadius={80} dataKey="value" label>{COLORS.map((c, i) => <Cell key={i} fill={c} />)}</Pie><Tooltip /></PieChart>
+              <BarChart data={telemetry?.interactions?.map((i: any) => ({ name: i.type, count: i._count.id })) || []}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip />
+                <Bar dataKey="count" fill="#dc9b91" />
+              </BarChart>
             </ResponsiveContainer>
+          </div>
+        </ChartCard>
+
+        <ChartCard title="Top Pages Visited">
+          <div className="h-64 overflow-y-auto">
+            <table className="w-full text-sm text-left text-muted-600">
+              <thead className="text-xs text-text-700 uppercase bg-surface-100">
+                <tr>
+                  <th className="px-4 py-2 rounded-l-lg">Path</th>
+                  <th className="px-4 py-2">Views</th>
+                </tr>
+              </thead>
+              <tbody>
+                {telemetry?.topPages?.map((page: any, idx: number) => (
+                  <tr key={idx} className="border-b border-surface-200">
+                    <td className="px-4 py-2 font-medium text-text-900 truncate max-w-[200px]">{page.path}</td>
+                    <td className="px-4 py-2">{page._count.id}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </ChartCard>
+
+        <ChartCard title="Top Search Queries">
+          <div className="h-64 overflow-y-auto">
+            <table className="w-full text-sm text-left text-muted-600">
+              <thead className="text-xs text-text-700 uppercase bg-surface-100">
+                <tr>
+                  <th className="px-4 py-2 rounded-l-lg">Query</th>
+                  <th className="px-4 py-2">Searches</th>
+                </tr>
+              </thead>
+              <tbody>
+                {telemetry?.searchQueries?.map((search: any, idx: number) => (
+                  <tr key={idx} className="border-b border-surface-200">
+                    <td className="px-4 py-2 font-medium text-text-900">{search.query}</td>
+                    <td className="px-4 py-2">{search._count.id}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </ChartCard>
       </div>

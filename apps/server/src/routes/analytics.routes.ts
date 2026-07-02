@@ -1,31 +1,13 @@
-import { Router } from "express";
-import type { Request, Response, NextFunction } from "express";
-import { authenticate } from "../middleware/auth.middleware.js";
-import { successResponse } from "../utils/response.js";
+import { Router } from 'express';
+import { trackAnalytics, getDashboardStats } from '../controllers/analytics.controller';
+import { authenticate } from '../middleware/auth.middleware';
 
 const router = Router();
 
-router.post(
-  "/events",
-  async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const { events, sessionId } = req.body;
+// Ingestion endpoint for frontend tracking
+router.post('/track', trackAnalytics);
 
-      if (!events || !Array.isArray(events)) {
-        return successResponse(res, { received: 0 });
-      }
-
-      // Store analytics events for processing
-      console.info(
-        `[analytics] Received ${events.length} events from session ${sessionId}: ` +
-          events.map((e: any) => e.type).join(", "),
-      );
-
-      successResponse(res, { received: events.length });
-    } catch (err) {
-      next(err);
-    }
-  },
-);
+// Admin dashboard endpoint
+router.get('/dashboard', authenticate, getDashboardStats);
 
 export default router;

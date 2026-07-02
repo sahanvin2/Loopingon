@@ -1,6 +1,6 @@
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["fullTextSearch", "postgresqlExtensions"]
+  previewFeatures = ["fullTextSearch", "postgresqlExtensions", "multiSchema"]
   binaryTargets   = ["native", "linux-musl", "linux-musl-openssl-3.0.x"]
 }
 
@@ -8,6 +8,7 @@ datasource db {
   provider   = "postgresql"
   url        = env("DATABASE_URL")
   extensions = [pg_trgm, pgcrypto, vector]
+  schemas    = ["public", "auth"]
 }
 
 // ============ ENUMS ============
@@ -19,6 +20,7 @@ enum UserRole {
   CUSTOMER
   SUPPORT
   MODERATOR
+  @@schema("public")
 }
 
 enum VendorStatus {
@@ -28,6 +30,7 @@ enum VendorStatus {
   REJECTED
   SUSPENDED
   BANNED
+  @@schema("public")
 }
 
 enum ProductStatus {
@@ -38,6 +41,7 @@ enum ProductStatus {
   OUT_OF_STOCK
   DISCONTINUED
   FLAGGED
+  @@schema("public")
 }
 
 enum OrderStatus {
@@ -54,6 +58,7 @@ enum OrderStatus {
   RETURNED
   REFUNDED
   COMPLETED
+  @@schema("public")
 }
 
 enum PaymentStatus {
@@ -65,6 +70,7 @@ enum PaymentStatus {
   PARTIALLY_REFUNDED
   HELD_IN_ESCROW
   RELEASED_TO_VENDOR
+  @@schema("public")
 }
 
 enum PayoutStatus {
@@ -73,6 +79,7 @@ enum PayoutStatus {
   COMPLETED
   FAILED
   CANCELLED
+  @@schema("public")
 }
 
 enum ShippingMethod {
@@ -82,6 +89,7 @@ enum ShippingMethod {
   SAME_DAY
   INTERNATIONAL
   PICKUP
+  @@schema("public")
 }
 
 enum NotificationType {
@@ -102,6 +110,7 @@ enum NotificationType {
   REMINDER
   REFERRAL_EARNED
   LOYALTY_POINTS
+  @@schema("public")
 }
 
 enum NotificationChannel {
@@ -110,6 +119,7 @@ enum NotificationChannel {
   WHATSAPP
   PUSH
   IN_APP
+  @@schema("public")
 }
 
 enum CompetitionStatus {
@@ -118,6 +128,7 @@ enum CompetitionStatus {
   JUDGING
   COMPLETED
   CANCELLED
+  @@schema("public")
 }
 
 enum DiscountType {
@@ -125,6 +136,7 @@ enum DiscountType {
   FIXED_AMOUNT
   FREE_SHIPPING
   BUY_X_GET_Y
+  @@schema("public")
 }
 
 enum ReportStatus {
@@ -132,6 +144,7 @@ enum ReportStatus {
   UNDER_REVIEW
   RESOLVED
   DISMISSED
+  @@schema("public")
 }
 
 // ==================== USERS & AUTH ====================
@@ -180,15 +193,21 @@ model User {
   referralsReceived   Referral[]           @relation("ReferralReferred")
   loyaltyAccount      LoyaltyAccount?
   competitionEntries  CompetitionEntry[]
+  productInteractions ProductInteraction[]
+
   competitionVotes    CompetitionVote[]
   auditLogs           AuditLog[]
   supportTickets      SupportTicket[]      @relation("TicketCreator")
   supportReplies      SupportTicketReply[] @relation("ReplyUser")
+  trackingSessions    TrackingSession[]
+    searchQueries       SearchQuery[]
+
 
   @@index([email])
   @@index([role])
   @@index([deletedAt])
   @@map("users")
+  @@schema("public")
 }
 
 model Session {
@@ -206,6 +225,7 @@ model Session {
   @@index([userId])
   @@index([token])
   @@map("sessions")
+  @@schema("public")
 }
 
 model RefreshToken {
@@ -223,6 +243,7 @@ model RefreshToken {
   @@index([token])
   @@index([family])
   @@map("refresh_tokens")
+  @@schema("public")
 }
 
 model Address {
@@ -252,6 +273,7 @@ model Address {
 
   @@index([userId])
   @@map("addresses")
+  @@schema("public")
 }
 
 model CustomerProfile {
@@ -274,6 +296,7 @@ model CustomerProfile {
   user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("customer_profiles")
+  @@schema("public")
 }
 
 // ==================== VENDORS ====================
@@ -350,6 +373,7 @@ model Vendor {
   @@index([rating])
   @@index([deletedAt])
   @@map("vendors")
+  @@schema("public")
 }
 
 model VendorBankDetail {
@@ -370,6 +394,7 @@ model VendorBankDetail {
 
   @@index([vendorId])
   @@map("vendor_bank_details")
+  @@schema("public")
 }
 
 model VendorVerificationDoc {
@@ -387,6 +412,7 @@ model VendorVerificationDoc {
 
   @@index([vendorId])
   @@map("vendor_verification_docs")
+  @@schema("public")
 }
 
 model StorefrontSettings {
@@ -405,6 +431,7 @@ model StorefrontSettings {
   vendor          Vendor  @relation(fields: [vendorId], references: [id], onDelete: Cascade)
 
   @@map("storefront_settings")
+  @@schema("public")
 }
 
 model VendorAnalytics {
@@ -425,6 +452,7 @@ model VendorAnalytics {
   @@unique([vendorId, date])
   @@index([vendorId, date])
   @@map("vendor_analytics")
+  @@schema("public")
 }
 
 // ==================== CATEGORIES ====================
@@ -457,6 +485,7 @@ model Category {
   @@index([parentId])
   @@index([level])
   @@map("categories")
+  @@schema("public")
 }
 
 model ProductCategory {
@@ -468,6 +497,7 @@ model ProductCategory {
 
   @@id([productId, categoryId])
   @@map("product_categories")
+  @@schema("public")
 }
 
 // ==================== PRODUCTS ====================
@@ -530,6 +560,7 @@ model Product {
   cartItems           CartItem[]
   inventoryLogs       InventoryLog[]
   competitionEntries  CompetitionEntry[]
+  productInteractions ProductInteraction[]
 
   @@index([vendorId])
   @@index([slug])
@@ -541,6 +572,7 @@ model Product {
   @@index([deletedAt])
   @@index([isFeatured, status])
   @@map("products")
+  @@schema("public")
 }
 
 model ProductImage {
@@ -562,6 +594,7 @@ model ProductImage {
 
   @@index([productId])
   @@map("product_images")
+  @@schema("public")
 }
 
 model ProductVideo {
@@ -577,6 +610,7 @@ model ProductVideo {
 
   @@index([productId])
   @@map("product_videos")
+  @@schema("public")
 }
 
 model ProductVariant {
@@ -595,6 +629,7 @@ model ProductVariant {
 
   @@index([productId])
   @@map("product_variants")
+  @@schema("public")
 }
 
 model ProductTag {
@@ -607,6 +642,7 @@ model ProductTag {
   @@index([tag])
   @@index([productId])
   @@map("product_tags")
+  @@schema("public")
 }
 
 model InventoryLog {
@@ -623,6 +659,7 @@ model InventoryLog {
   @@index([productId])
   @@index([createdAt])
   @@map("inventory_logs")
+  @@schema("public")
 }
 
 // ==================== CART ====================
@@ -638,6 +675,7 @@ model Cart {
   items               CartItem[]
 
   @@map("carts")
+  @@schema("public")
 }
 
 model CartItem {
@@ -655,6 +693,7 @@ model CartItem {
 
   @@unique([cartId, productId, variantId])
   @@map("cart_items")
+  @@schema("public")
 }
 
 // ==================== ORDERS ====================
@@ -724,6 +763,7 @@ model Order {
   @@index([createdAt])
   @@index([vendorPayoutStatus])
   @@map("orders")
+  @@schema("public")
 }
 
 model OrderItem {
@@ -744,6 +784,7 @@ model OrderItem {
   @@index([orderId])
   @@index([productId])
   @@map("order_items")
+  @@schema("public")
 }
 
 model OrderStatusHistory {
@@ -758,6 +799,7 @@ model OrderStatusHistory {
 
   @@index([orderId])
   @@map("order_status_history")
+  @@schema("public")
 }
 
 model Shipment {
@@ -780,6 +822,7 @@ model Shipment {
   @@index([orderId])
   @@index([trackingNumber])
   @@map("shipments")
+  @@schema("public")
 }
 
 model OrderDispute {
@@ -797,6 +840,7 @@ model OrderDispute {
   order       Order        @relation(fields: [orderId], references: [id], onDelete: Cascade)
 
   @@map("order_disputes")
+  @@schema("public")
 }
 
 // ==================== WISHLIST ====================
@@ -813,6 +857,7 @@ model Wishlist {
   items     WishlistItem[]
 
   @@map("wishlists")
+  @@schema("public")
 }
 
 model WishlistItem {
@@ -827,6 +872,7 @@ model WishlistItem {
 
   @@unique([wishlistId, productId])
   @@map("wishlist_items")
+  @@schema("public")
 }
 
 // ==================== REVIEWS ====================
@@ -861,6 +907,7 @@ model Review {
   @@index([vendorId])
   @@index([rating])
   @@map("reviews")
+  @@schema("public")
 }
 
 // ==================== MESSAGES ====================
@@ -879,6 +926,7 @@ model MessageThread {
 
   @@index([orderId])
   @@map("message_threads")
+  @@schema("public")
 }
 
 model Message {
@@ -897,6 +945,7 @@ model Message {
   @@index([threadId])
   @@index([senderId])
   @@map("messages")
+  @@schema("public")
 }
 
 // ==================== NOTIFICATIONS ====================
@@ -921,6 +970,7 @@ model Notification {
   @@index([type])
   @@index([createdAt])
   @@map("notifications")
+  @@schema("public")
 }
 
 // ==================== PAYMENTS ====================
@@ -955,6 +1005,7 @@ model PaymentTransaction {
   @@index([gatewayTransactionId])
   @@index([createdAt])
   @@map("payment_transactions")
+  @@schema("public")
 }
 
 model PayoutSchedule {
@@ -981,6 +1032,7 @@ model PayoutSchedule {
   @@index([status])
   @@index([periodStart, periodEnd])
   @@map("payout_schedules")
+  @@schema("public")
 }
 
 // ==================== COUPONS ====================
@@ -1012,6 +1064,7 @@ model Coupon {
   @@index([expiresAt])
   @@index([isActive])
   @@map("coupons")
+  @@schema("public")
 }
 
 model CouponUsage {
@@ -1027,6 +1080,7 @@ model CouponUsage {
 
   @@unique([couponId, userId, orderId])
   @@map("coupon_usages")
+  @@schema("public")
 }
 
 // ==================== REFERRALS ====================
@@ -1047,6 +1101,7 @@ model ReferralCode {
   referrals   Referral[]
 
   @@map("referral_codes")
+  @@schema("public")
 }
 
 model Referral {
@@ -1067,6 +1122,7 @@ model Referral {
 
   @@unique([referredUserId])
   @@map("referrals")
+  @@schema("public")
 }
 
 // ==================== LOYALTY ====================
@@ -1086,6 +1142,7 @@ model LoyaltyAccount {
   transactions    LoyaltyTransaction[]
 
   @@map("loyalty_accounts")
+  @@schema("public")
 }
 
 model LoyaltyTransaction {
@@ -1103,6 +1160,7 @@ model LoyaltyTransaction {
 
   @@index([accountId, createdAt])
   @@map("loyalty_transactions")
+  @@schema("public")
 }
 
 // ==================== COMPETITIONS ====================
@@ -1134,6 +1192,7 @@ model Competition {
   @@index([status])
   @@index([slug])
   @@map("competitions")
+  @@schema("public")
 }
 
 model CompetitionEntry {
@@ -1158,6 +1217,7 @@ model CompetitionEntry {
 
   @@unique([competitionId, productId])
   @@map("competition_entries")
+  @@schema("public")
 }
 
 model CompetitionVote {
@@ -1171,6 +1231,7 @@ model CompetitionVote {
 
   @@unique([entryId, userId])
   @@map("competition_votes")
+  @@schema("public")
 }
 
 // ==================== SUPPORT ====================
@@ -1196,6 +1257,7 @@ model SupportTicket {
   @@index([status])
   @@index([ticketNumber])
   @@map("support_tickets")
+  @@schema("public")
 }
 
 model SupportTicketReply {
@@ -1211,6 +1273,7 @@ model SupportTicketReply {
   user        User          @relation("ReplyUser", fields: [userId], references: [id])
 
   @@map("support_ticket_replies")
+  @@schema("public")
 }
 
 // ==================== AUDIT ====================
@@ -1235,6 +1298,7 @@ model AuditLog {
   @@index([entity, entityId])
   @@index([createdAt])
   @@map("audit_logs")
+  @@schema("public")
 }
 
 // ==================== CONTENT ====================
@@ -1251,6 +1315,7 @@ model Page {
   updatedAt     DateTime @updatedAt
 
   @@map("pages")
+  @@schema("public")
 }
 
 model Banner {
@@ -1268,6 +1333,7 @@ model Banner {
   updatedAt   DateTime @updatedAt
 
   @@map("banners")
+  @@schema("public")
 }
 
 model BlogPost {
@@ -1291,6 +1357,7 @@ model BlogPost {
   @@index([slug])
   @@index([isPublished])
   @@map("blog_posts")
+  @@schema("public")
 }
 
 model SeoSetting {
@@ -1306,6 +1373,7 @@ model SeoSetting {
   updatedAt   DateTime @updatedAt
 
   @@map("seo_settings")
+  @@schema("public")
 }
 
 model SitemapUrl {
@@ -1317,6 +1385,7 @@ model SitemapUrl {
   createdAt   DateTime @default(now())
 
   @@map("sitemap_urls")
+  @@schema("public")
 }
 
 model SystemSetting {
@@ -1328,6 +1397,7 @@ model SystemSetting {
   updatedAt   DateTime @default(now())
 
   @@map("system_settings")
+  @@schema("public")
 }
 
 model CommissionSetting {
@@ -1344,6 +1414,7 @@ model CommissionSetting {
   updatedAt       DateTime @updatedAt
 
   @@map("commission_settings")
+  @@schema("public")
 }
 
 model ShippingRate {
@@ -1360,4 +1431,102 @@ model ShippingRate {
   updatedAt    DateTime  @updatedAt
 
   @@map("shipping_rates")
+  @@schema("public")
+}
+
+// ==================== ANALYTICS & TRACKING ====================
+
+model TrackingSession {
+  id          String   @id @default(uuid())
+  cookieId    String   @unique
+  userId      String?
+  deviceType  String?
+  browser     String?
+  os          String?
+  country     String?
+  ipAddress   String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user        User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  pageVisits  PageVisit[]
+  productInteractions ProductInteraction[]
+  searchQueries SearchQuery[]
+
+  @@index([cookieId])
+  @@index([userId])
+  @@map("tracking_sessions")
+  @@schema("public")
+}
+
+model PageVisit {
+  id             String   @id @default(uuid())
+  sessionId      String
+  userId         String?
+  path           String
+  title          String?
+  referrer       String?
+  utmSource      String?
+  utmMedium      String?
+  utmCampaign    String?
+  durationSeconds Int?     @default(0)
+  maxScrollDepth Float?    @default(0)
+  createdAt      DateTime @default(now())
+
+  session        TrackingSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@index([sessionId])
+  @@index([path])
+  @@index([createdAt])
+  @@map("page_visits")
+  @@schema("public")
+}
+
+enum InteractionType {
+  VIEW
+  ADD_TO_CART
+  REMOVE_FROM_CART
+  PURCHASE
+  WISHLIST
+  @@schema("public")
+}
+
+model ProductInteraction {
+  id          String         @id @default(uuid())
+  sessionId   String
+  userId      String?
+  productId   String
+  type        InteractionType
+  metadata    Json?
+  createdAt   DateTime       @default(now())
+
+  session     TrackingSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  product     Product         @relation(fields: [productId], references: [id], onDelete: Cascade)
+  user        User?           @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([sessionId])
+  @@index([productId])
+  @@index([type])
+  @@index([createdAt])
+  @@map("product_interactions")
+  @@schema("public")
+}
+
+model SearchQuery {
+  id           String   @id @default(uuid())
+  sessionId    String
+  userId       String?
+  query        String
+  resultsCount Int      @default(0)
+  filters      Json?
+  createdAt    DateTime @default(now())
+
+  session      TrackingSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  user         User?           @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([sessionId])
+  @@index([query])
+  @@index([createdAt])
+  @@map("search_queries")
+  @@schema("public")
 }

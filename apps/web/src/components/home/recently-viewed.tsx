@@ -8,21 +8,24 @@ import type { Product, ApiResponse, PaginationMeta } from "@/types";
 import { ProductCard } from "@/components/product/product-card";
 import { LoadingSkeleton } from "@/components/shared/loading-skeleton";
 
+import Cookies from "js-cookie";
+
 export function RecentlyViewed() {
   const { data, isLoading } = useQuery({
     queryKey: ["products", "recently-viewed"],
     queryFn: async () => {
-      // In a real app, this would fetch from local storage IDs
-      const res = await get<ApiResponse<{ products: Product[]; meta: PaginationMeta }>>(
-        "/products",
-        { sort: "newest", limit: 6 },
+      const cookieId = Cookies.get("kandyam_tracking_session");
+      if (!cookieId) return [];
+      const res = await get<ApiResponse<Product[]>>(
+        "/products/recently-viewed",
+        { cookieId, limit: 6 },
       );
       return res.data;
     },
     staleTime: 60 * 1000,
   });
 
-  const products = data?.products || [];
+  const products = (Array.isArray(data) ? data : (data as any)?.data || []) as Product[];
 
   if (!isLoading && products.length === 0) return null;
 

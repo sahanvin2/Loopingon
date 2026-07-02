@@ -195,19 +195,67 @@ export async function getFeaturedProducts(limit: number = 10) {
 export async function getTrendingProducts(limit: number = 10) {
   const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
 
-  return prisma.product.findMany({
-    where: {
-      status: "PUBLISHED",
-      deletedAt: null,
-      orderItems: { some: { order: { createdAt: { gte: thirtyDaysAgo } } } },
-    },
-    include: {
-      images: { take: 1, orderBy: { sortOrder: "asc" } },
-      vendor: { select: { id: true, storeName: true, storeSlug: true, rating: true } },
-    },
-    orderBy: { salesCount: "desc" },
+  // Get most viewed/purchased products from interactions in the last 30 days
+  const interactions = await prisma.productInteraction.groupBy({
+    by: ['productId'],
+    _count: { productId: true },
+    where: { createdAt: { gte: thirtyDaysAgo } },
+    orderBy: { _count: { productId: 'desc' } },
     take: limit,
   });
+
+  const productIds = interactions.map((i) => i.productId);
+
+  if (productIds.length > 0) {
+    const products = await prisma.product.findMany({
+      where: { id: { in: productIds }, status: "PUBLISHED", deletedAt: null },
+      include: {
+        images: { take: 1, orderBy: { sortOrder: "asc" } },
+        vendor: { select: { id: true, storeName: true, storeSlug: true, rating: true } },
+      },
+    });
+
+    // Sort to match interaction counts
+    return products.sort((a, b) => productIds.indexOf(a.id) - productIds.indexOf(b.id));
+  } else {
+    // Fallback if no tracking data yet
+    return prisma.product.findMany({
+      where: { status: "PUBLISHED", deletedAt: null },
+      include: {
+        images: { take: 1, orderBy: { sortOrder: "asc" } },
+        vendor: { select: { id: true, storeName: true, storeSlug: true, rating: true } },
+      },
+      orderBy: { viewsCount: "desc" },
+      take: limit,
+    });
+  }
+}
+
+export async function getRecentlyViewedProducts(cookieId: string, limit: number = 10) {
+  const interactions = await prisma.productInteraction.findMany({
+    where: { 
+      session: { cookieId }, 
+      type: 'VIEW' 
+    },
+    select: { productId: true },
+    orderBy: { createdAt: 'desc' },
+    distinct: ['productId'],
+    take: limit,
+  });
+
+  const productIds = interactions.map((i) => i.productId);
+
+  if (productIds.length > 0) {
+    const products = await prisma.product.findMany({
+      where: { id: { in: productIds }, status: "PUBLISHED", deletedAt: null },
+      include: {
+        images: { take: 1, orderBy: { sortOrder: "asc" } },
+        vendor: { select: { id: true, storeName: true, storeSlug: true, rating: true } },
+      },
+    });
+    return products.sort((a, b) => productIds.indexOf(a.id) - productIds.indexOf(b.id));
+  }
+  return [];
 }
 
 export async function getNewArrivals(limit: number = 10) {

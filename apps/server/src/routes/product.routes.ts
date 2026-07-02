@@ -71,6 +71,23 @@ router.get(
 );
 
 router.get(
+  "/recently-viewed",
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const cookieId = req.query.cookieId as string;
+      if (!cookieId) {
+        return successResponse(res, []);
+      }
+      const limit = req.query.limit ? parseInt(req.query.limit as string, 10) : 10;
+      const products = await productService.getRecentlyViewedProducts(cookieId, limit);
+      successResponse(res, products);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
+router.get(
   "/new-arrivals",
   async (req: Request, res: Response, next: NextFunction) => {
     try {

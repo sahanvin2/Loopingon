@@ -23,17 +23,16 @@ export function TrendingThisWeek() {
   const { data, isLoading, isError } = useQuery({
     queryKey: ["products", "trending"],
     queryFn: async () => {
-      // Assuming sort=trending works, otherwise just fetch some products for the demo
-      const res = await get<ApiResponse<{ products: Product[]; meta: PaginationMeta }>>(
-        "/products",
-        { limit: 4, sort: "popular" }, // Just 4 for the single row shown in the mockup
+      const res = await get<ApiResponse<Product[]>>(
+        "/products/trending",
+        { limit: 4 },
       );
-      return res.data;
+      return res;
     },
     staleTime: 60 * 1000,
   });
 
-  const products = data?.products || [];
+  const products = Array.isArray(data?.data) ? data.data : (data as unknown as Product[]) || [];
 
   return (
     <section className="py-12 px-4 max-w-8xl mx-auto">

@@ -1,10 +1,10 @@
 "use client";
 
 import { Suspense } from "react";
-import { usePageView } from "@/hooks/use-analytics";
+import { useAnalytics } from "@/hooks/use-analytics";
 
 function PageTrackerInner() {
-  usePageView();
+  useAnalytics();
   return null;
 }
 

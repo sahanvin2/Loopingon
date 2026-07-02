@@ -190,6 +190,8 @@ export function ProductPriceArea({ product, selectedVariant, setSelectedVariant 
   );
 }
 
+import { useAnalytics } from "@/hooks/use-analytics";
+
 export interface ProductActionAreaProps {
   product: Product;
   selectedVariant: ProductVariant | null;
@@ -203,12 +205,15 @@ export function ProductActionArea({ product, selectedVariant, quantity, setQuant
   const { isAuthenticated } = useAuthStore();
   const { openModal } = useUIStore();
   const router = useRouter();
+  
+  const { trackInteraction } = useAnalytics();
 
   const variantPrice = selectedVariant?.price ? parseFloat(selectedVariant.price) : null;
   const price = variantPrice || parseFloat(product.price);
   const stock = getStockStatus(product, selectedVariant ?? undefined);
 
   const handleAddToCart = () => {
+    trackInteraction({ type: "ADD_TO_CART", productId: product.id });
     addToCart.mutate({
       productId: product.id,
       variantId: selectedVariant?.id ?? undefined,
@@ -222,6 +227,7 @@ export function ProductActionArea({ product, selectedVariant, quantity, setQuant
       openModal("signin");
       return;
     }
+    trackInteraction({ type: "PURCHASE", productId: product.id });
     addToCart.mutate({
       productId: product.id,
       variantId: selectedVariant?.id ?? undefined,
@@ -312,6 +318,9 @@ export function ProductActionArea({ product, selectedVariant, quantity, setQuant
             if (!isAuthenticated) {
               openModal("signin");
               return;
+            }
+            if (!isWishlisted) {
+              trackInteraction({ type: "WISHLIST", productId: product.id });
             }
             toggle();
           }}

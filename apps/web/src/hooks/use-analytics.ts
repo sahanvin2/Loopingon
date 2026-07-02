@@ -1,154 +1,102 @@
 "use client";
 
-import { useEffect, useRef, useCallback } from "react";
-import { usePathname } from "next/navigation";
+import { useEffect, useRef } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
+import Cookies from "js-cookie";
+import { v4 as uuidv4 } from "uuid";
 
-interface AnalyticsEvent {
-  type: string;
-  timestamp: string;
-  path: string;
-  data?: Record<string, unknown>;
+interface InteractionPayload {
+  productId: string;
+  type: "VIEW" | "ADD_TO_CART" | "REMOVE_FROM_CART" | "PURCHASE" | "WISHLIST";
+  metadata?: Record<string, any>;
 }
 
-const STORAGE_KEY = "kandyam:analytics";
-const SESSION_KEY = "kandyam:session";
-const MAX_EVENTS = 100;
-const SYNC_INTERVAL = 30000;
-
-function getSessionId(): string {
-  let sessionId = sessionStorage.getItem(SESSION_KEY);
-  if (!sessionId) {
-    sessionId = `s_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`;
-    sessionStorage.setItem(SESSION_KEY, sessionId);
-  }
-  return sessionId;
+interface SearchPayload {
+  query: string;
+  resultsCount: number;
 }
 
-function getConsent(): boolean {
-  try {
-    const stored = localStorage.getItem("kandyam:cookie-consent");
-    if (!stored) return false;
-    const parsed = JSON.parse(stored);
-    return parsed?.preferences?.analytics === true;
-  } catch {
-    return false;
-  }
-}
+const COOKIE_NAME = "kandyam_tracking_session";
+const COOKIE_EXPIRY_DAYS = 365; // 1 year
 
-export function usePageView() {
+export function useAnalytics() {
   const pathname = usePathname();
-  const hasConsent = useRef(getConsent());
+  const searchParams = useSearchParams();
+  const maxScrollDepth = useRef(0);
+  const startTime = useRef(Date.now());
+  
+  // Interactions queue
+  const interactions = useRef<InteractionPayload[]>([]);
+  const searches = useRef<SearchPayload[]>([]);
 
-  useEffect(() => {
-    if (!hasConsent.current) return;
-
-    trackEvent("page_view", { title: document.title, referrer: document.referrer });
-  }, [pathname]);
-}
-
-let eventQueue: AnalyticsEvent[] = [];
-let syncTimer: ReturnType<typeof setTimeout> | null = null;
-
-function trackEvent(type: string, data?: Record<string, unknown>) {
-  if (!getConsent()) return;
-
-  const event: AnalyticsEvent = {
-    type,
-    timestamp: new Date().toISOString(),
-    path: window.location.pathname,
-    data,
+  const getCookieId = () => {
+    let cookieId = Cookies.get(COOKIE_NAME);
+    if (!cookieId) {
+      cookieId = uuidv4();
+      Cookies.set(COOKIE_NAME, cookieId, { expires: COOKIE_EXPIRY_DAYS });
+    }
+    return cookieId;
   };
 
-  eventQueue.push(event);
+  const trackInteraction = (payload: InteractionPayload) => {
+    interactions.current.push(payload);
+  };
 
-  const sessionId = getSessionId();
+  const trackSearch = (payload: SearchPayload) => {
+    searches.current.push(payload);
+  };
 
-  try {
-    const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
-    stored[sessionId] = stored[sessionId] || [];
-    stored[sessionId].push(event);
-    if (stored[sessionId].length > MAX_EVENTS) {
-      stored[sessionId] = stored[sessionId].slice(-MAX_EVENTS);
-    }
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(stored));
-  } catch {}
+  useEffect(() => {
+    // Reset metrics on page change
+    maxScrollDepth.current = 0;
+    startTime.current = Date.now();
+    const currentPath = pathname;
 
-  if (eventQueue.length >= 10) {
-    flushEvents();
-  } else if (!syncTimer) {
-    syncTimer = setTimeout(flushEvents, SYNC_INTERVAL);
-  }
+    const handleScroll = () => {
+      const docHeight = document.documentElement.scrollHeight;
+      const windowHeight = window.innerHeight;
+      const scrollPos = window.scrollY;
+      const currentScrollPercent = Math.min(100, Math.round(((scrollPos + windowHeight) / docHeight) * 100));
+      
+      if (currentScrollPercent > maxScrollDepth.current) {
+        maxScrollDepth.current = currentScrollPercent;
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    // Send payload when leaving the page (beforeunload) or when path changes
+    const sendTelemetry = () => {
+      const durationSeconds = Math.round((Date.now() - startTime.current) / 1000);
+      
+      const payload = {
+        cookieId: getCookieId(),
+        path: currentPath,
+        title: document.title,
+        referrer: document.referrer || undefined,
+        durationSeconds,
+        maxScrollDepth: maxScrollDepth.current,
+        interactions: interactions.current,
+        searchQueries: searches.current
+      };
+
+      // Use navigator.sendBeacon if possible so it works when tab closes
+      const blob = new Blob([JSON.stringify(payload)], { type: "application/json" });
+      navigator.sendBeacon(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000"}/api/v1/analytics/track`, blob);
+      
+      // Clear queues
+      interactions.current = [];
+      searches.current = [];
+    };
+
+    window.addEventListener("beforeunload", sendTelemetry);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("beforeunload", sendTelemetry);
+      sendTelemetry(); // Trigger on route change unmount
+    };
+  }, [pathname, searchParams]);
+
+  return { getCookieId, trackInteraction, trackSearch };
 }
-
-function flushEvents() {
-  if (eventQueue.length === 0) return;
-
-  const events = [...eventQueue];
-  eventQueue = [];
-
-  if (syncTimer) {
-    clearTimeout(syncTimer);
-    syncTimer = null;
-  }
-
-  try {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000/api/v1";
-    fetch(`${apiUrl}/analytics/events`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ events, sessionId: getSessionId() }),
-      keepalive: true,
-    }).catch(() => {});
-  } catch {}
-}
-
-export function trackProductView(productId: string, productTitle: string, vendorId?: string) {
-  trackEvent("product_view", { productId, title: productTitle, vendorId });
-}
-
-export function trackAddToCart(productId: string, productTitle: string, price: string, quantity?: number) {
-  trackEvent("add_to_cart", { productId, title: productTitle, price, quantity: quantity || 1 });
-}
-
-export function trackRemoveFromCart(productId: string) {
-  trackEvent("remove_from_cart", { productId });
-}
-
-export function trackSearch(query: string, resultsCount?: number) {
-  trackEvent("search", { query, results: resultsCount });
-}
-
-export function trackCheckoutStep(step: string, data?: Record<string, unknown>) {
-  trackEvent("checkout_step", { step, ...data });
-}
-
-export function trackPurchase(orderId: string, total: number, items: number) {
-  trackEvent("purchase", { orderId, total, items });
-}
-
-export function trackSignup(method: string) {
-  trackEvent("signup", { method });
-}
-
-export function trackSignin(method: string) {
-  trackEvent("signin", { method });
-}
-
-export function trackWishlistAdd(productId: string, productTitle: string) {
-  trackEvent("wishlist_add", { productId, title: productTitle });
-}
-
-export function trackShare(platform: string, link: string) {
-  trackEvent("share", { platform, link });
-}
-
-export function useClickTracker(elementId: string, action: string) {
-  return useCallback(
-    (data?: Record<string, unknown>) => {
-      trackEvent("click", { element: elementId, action, ...data });
-    },
-    [elementId, action],
-  );
-}
-
-export { flushEvents, trackEvent };
