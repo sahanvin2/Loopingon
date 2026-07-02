@@ -1,4 +1,4 @@
-import { Worker, Queue, type Job } from "../mock-bullmq.js";
+import { Worker, Queue, type Job } from "bullmq";
 import { REDIS_URL } from "../config/redis.js";
 import { sendEmail } from "../config/email.js";
 import { logger } from "../middleware/errorHandler.middleware.js";

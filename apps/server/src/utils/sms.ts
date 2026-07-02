@@ -39,7 +39,7 @@ export async function sendSMS({ recipient, message }: SendSMSParams): Promise<bo
       }),
     });
 
-    const data = await response.json();
+    const data = await response.json() as any;
 
     if (!response.ok || data.status === "error") {
       logger.error(`Failed to send SMS to ${formattedRecipient}: ${data.message || response.statusText}`);

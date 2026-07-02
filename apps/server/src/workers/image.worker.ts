@@ -1,4 +1,4 @@
-import { Worker, Queue, type Job } from "../mock-bullmq.js";
+import { Worker, Queue, type Job } from "bullmq";
 import sharp from "sharp";
 import { REDIS_URL } from "../config/redis.js";
 import { uploadFile } from "../config/storage.js";
