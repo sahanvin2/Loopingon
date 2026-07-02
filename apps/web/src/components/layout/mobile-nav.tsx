@@ -165,7 +165,7 @@ export function MobileNav() {
                                   </Link>
                                   {cat.subcategories && (
                                     <div className="pl-4 pb-1 border-l border-accent-200 ml-1">
-                                      {cat.subcategories.map(sub => (
+                                      {cat.subcategories.map((sub: any) => (
                                         <Link
                                           key={sub.label}
                                           href={sub.href}
