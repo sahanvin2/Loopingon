@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 const prisma = new PrismaClient();
 
 async function main() {
-  console.log("Seeding Loopingon database...");
+  console.log("Seeding Kandyam database...");
 
   // Clean existing data
   console.log("Cleaning existing data...");
@@ -88,7 +88,7 @@ async function main() {
       },
       {
         id: supportId,
-        email: "support@loopingon.com",
+        email: "support@kandyam.com",
         passwordHash: adminHash,
         fullName: "Support Team",
         firstName: "Support",
@@ -110,7 +110,7 @@ async function main() {
     data: [
       {
         key: "platform_name",
-        value: JSON.stringify("Loopingon"),
+        value: JSON.stringify("Kandyam"),
         description: "Platform display name",
       },
       {
@@ -145,16 +145,16 @@ async function main() {
       },
       {
         key: "contact_email",
-        value: JSON.stringify("support@loopingon.com"),
+        value: JSON.stringify("support@kandyam.com"),
         description: "Primary contact email",
       },
       {
         key: "social_links",
         value: JSON.stringify({
-          facebook: "https://facebook.com/loopingon",
-          instagram: "https://instagram.com/loopingon",
-          twitter: "https://twitter.com/loopingon",
-          youtube: "https://youtube.com/@loopingon",
+          facebook: "https://facebook.com/kandyam",
+          instagram: "https://instagram.com/kandyam",
+          twitter: "https://twitter.com/kandyam",
+          youtube: "https://youtube.com/@kandyam",
         }),
         description: "Social media links",
       },
@@ -224,7 +224,7 @@ async function main() {
     data: [
       {
         id: vendorUser1Id,
-        email: "hemachandra@loopingon.com",
+        email: "hemachandra@kandyam.com",
         passwordHash: adminHash,
         fullName: "Hemachandra Weerasinghe",
         firstName: "Hemachandra",
@@ -237,7 +237,7 @@ async function main() {
       },
       {
         id: vendorUser2Id,
-        email: "samantha@loopingon.com",
+        email: "samantha@kandyam.com",
         passwordHash: adminHash,
         fullName: "Samantha Gunawardena",
         firstName: "Samantha",
@@ -250,7 +250,7 @@ async function main() {
       },
       {
         id: vendorUser3Id,
-        email: "deepthi@loopingon.com",
+        email: "deepthi@kandyam.com",
         passwordHash: adminHash,
         fullName: "Deepthi Kulatunga",
         firstName: "Deepthi",
@@ -263,7 +263,7 @@ async function main() {
       },
       {
         id: vendorUser4Id,
-        email: "suresh@loopingon.com",
+        email: "suresh@kandyam.com",
         passwordHash: adminHash,
         fullName: "Suresh Rajapakse",
         firstName: "Suresh",
@@ -285,8 +285,8 @@ async function main() {
         storeName: "Hemachandra Handlooms",
         storeSlug: "hemachandra-handlooms",
         storeDescription: "Fourth-generation handloom weavers from the historic weaving village of Talagune, Uva Province. We specialize in traditional Sri Lankan handloom cotton and silk textiles, preserving centuries-old patterns while innovating for modern tastes. Each piece is handwoven on traditional pit looms using natural dyes derived from indigenous plants, roots, and barks.",
-        storeLogo: "https://loopingon-media.sgp1.digitaloceanspaces.com/seed/vendors/hemachandra-logo.png",
-        storeBanner: "https://loopingon-media.sgp1.digitaloceanspaces.com/seed/vendors/hemachandra-banner.png",
+        storeLogo: "https://kandyam-media.sgp1.digitaloceanspaces.com/seed/vendors/hemachandra-logo.png",
+        storeBanner: "https://kandyam-media.sgp1.digitaloceanspaces.com/seed/vendors/hemachandra-banner.png",
         businessName: "Hemachandra Handloom Weavers (Pvt) Ltd",
         businessRegistrationNo: "PVT-2018-KND-0042",
         businessType: "Private Limited",
@@ -312,8 +312,8 @@ async function main() {
         storeName: "Gunawardena Woodcraft",
         storeSlug: "gunawardena-woodcraft",
         storeDescription: "Master woodcarvers from the Kandyan tradition spanning five generations. Our family workshop in Embekke specializes in intricate wood carvings, traditional Sri Lankan masks (Ambalangoda tradition), and custom furniture crafted from sustainably sourced teak, mahogany, and ebony.",
-        storeLogo: "https://loopingon-media.sgp1.digitaloceanspaces.com/seed/vendors/gunawardena-logo.png",
-        storeBanner: "https://loopingon-media.sgp1.digitaloceanspaces.com/seed/vendors/gunawardena-banner.png",
+        storeLogo: "https://kandyam-media.sgp1.digitaloceanspaces.com/seed/vendors/gunawardena-logo.png",
+        storeBanner: "https://kandyam-media.sgp1.digitaloceanspaces.com/seed/vendors/gunawardena-banner.png",
         businessName: "Gunawardena Wood Carving Studio",
         businessRegistrationNo: "REG-KY-2020-0089",
         businessType: "Sole Proprietorship",
@@ -338,8 +338,8 @@ async function main() {
         storeName: "Kulatunga Pottery Studios",
         storeSlug: "kulatunga-pottery",
         storeDescription: "Traditional pottery studio in the heart of the Matale clay belt. We create hand-thrown terracotta cookware, decorative ceramics, and contemporary tableware using local river clay and traditional wood-fired kilns dating back to the Kandyan Kingdom.",
-        storeLogo: "https://loopingon-media.sgp1.digitaloceanspaces.com/seed/vendors/kulatunga-logo.png",
-        storeBanner: "https://loopingon-media.sgp1.digitaloceanspaces.com/seed/vendors/kulatunga-banner.png",
+        storeLogo: "https://kandyam-media.sgp1.digitaloceanspaces.com/seed/vendors/kulatunga-logo.png",
+        storeBanner: "https://kandyam-media.sgp1.digitaloceanspaces.com/seed/vendors/kulatunga-banner.png",
         businessName: "Kulatunga Pottery & Ceramics",
         businessRegistrationNo: "REG-MT-2019-0155",
         businessType: "Partnership",
@@ -364,8 +364,8 @@ async function main() {
         storeName: "Rajapakse Brass & Gem Workshop",
         storeSlug: "rajapakse-brass-gems",
         storeDescription: "Fine brassware artisans and gem specialists from Galle. Our workshop combines traditional repousse metalwork with precision gem-setting, creating exquisite jewelry, temple offerings, oil lamps, and decorative brass pieces that reflect Sri Lanka's rich metalworking heritage.",
-        storeLogo: "https://loopingon-media.sgp1.digitaloceanspaces.com/seed/vendors/rajapakse-logo.png",
-        storeBanner: "https://loopingon-media.sgp1.digitaloceanspaces.com/seed/vendors/rajapakse-banner.png",
+        storeLogo: "https://kandyam-media.sgp1.digitaloceanspaces.com/seed/vendors/rajapakse-logo.png",
+        storeBanner: "https://kandyam-media.sgp1.digitaloceanspaces.com/seed/vendors/rajapakse-banner.png",
         businessName: "Rajapakse Brassware & Gemstones",
         businessRegistrationNo: "PVT-2022-GL-0012",
         businessType: "Private Limited",
@@ -1579,7 +1579,7 @@ async function main() {
     data: [
       {
         code: "WELCOME10",
-        description: "10% off your first order - welcome to Loopingon!",
+        description: "10% off your first order - welcome to Kandyam!",
         discountType: "PERCENTAGE" as DiscountType,
         discountValue: 10,
         minOrderAmount: 1000.00,
@@ -1635,7 +1635,7 @@ async function main() {
       {
         title: "Discover Sri Lankan Handloom",
         subtitle: "Centuries of weaving tradition in every thread - shop authentic handloom sarees, fabrics, and home textiles",
-        imageUrl: "https://loopingon-media.sgp1.digitaloceanspaces.com/seed/banners/handloom-hero.jpg",
+        imageUrl: "https://kandyam-media.sgp1.digitaloceanspaces.com/seed/banners/handloom-hero.jpg",
         linkUrl: "/categories/handloom-textiles",
         position: "hero_main",
         sortOrder: 1,
@@ -1646,7 +1646,7 @@ async function main() {
       {
         title: "Craft Competition 2025",
         subtitle: "Showcase your craftsmanship and win prizes worth Rs. 500,000. Submit your best handcrafted creation!",
-        imageUrl: "https://loopingon-media.sgp1.digitaloceanspaces.com/seed/banners/competition-hero.jpg",
+        imageUrl: "https://kandyam-media.sgp1.digitaloceanspaces.com/seed/banners/competition-hero.jpg",
         linkUrl: "/competitions",
         position: "hero_secondary",
         sortOrder: 2,
@@ -1657,7 +1657,7 @@ async function main() {
       {
         title: "Artisan Pottery Collection",
         subtitle: "Hand-thrown terracotta cookware and ceramic dinnerware - from Sri Lankan clay to your kitchen",
-        imageUrl: "https://loopingon-media.sgp1.digitaloceanspaces.com/seed/banners/pottery-hero.jpg",
+        imageUrl: "https://kandyam-media.sgp1.digitaloceanspaces.com/seed/banners/pottery-hero.jpg",
         linkUrl: "/categories/pottery-ceramics",
         position: "homepage_middle",
         sortOrder: 3,
@@ -1666,7 +1666,7 @@ async function main() {
       {
         title: "New Arrivals - Woodcarving",
         subtitle: "Exquisite hand-carved masks, statues, and furniture from master woodcarvers",
-        imageUrl: "https://loopingon-media.sgp1.digitaloceanspaces.com/seed/banners/woodcarving-banner.jpg",
+        imageUrl: "https://kandyam-media.sgp1.digitaloceanspaces.com/seed/banners/woodcarving-banner.jpg",
         linkUrl: "/categories/wood-carving-masks",
         position: "homepage_bottom",
         sortOrder: 4,
@@ -1687,14 +1687,14 @@ async function main() {
         content: `<p>The rhythmic clack of the wooden shuttle, the gentle tension of threads stretching across the loom, and hands that have memorized patterns passed down through a hundred generations — this is the world of Sri Lankan handloom weaving.</p>
 <p>Archaeological evidence suggests that textile weaving has existed in Sri Lanka since at least the 6th century BCE. Ancient chronicles like the Mahavamsa describe magnificent textiles presented to royalty, and the intricate frescoes of Sigiriya (5th century CE) depict women wearing finely woven garments with elaborate patterns.</p>
 <p>Today, Sri Lankan handloom is experiencing a renaissance. Young designers are collaborating with village weavers to create contemporary fashion that honors traditional techniques. The distinctive geometric patterns of Dumbara weaving, the vibrant stripes of coastal sarongs, and the luxurious textures of Kandyan silk are finding new audiences worldwide.</p>
-<p>At Loopingon, we work directly with weaving communities in Talagune, Divulapitiya, and Marawila to bring these timeless crafts to a global marketplace. Every purchase supports not just an artisan, but an entire ecosystem of traditional knowledge.</p>`,
-        featuredImage: "https://loopingon-media.sgp1.digitaloceanspaces.com/seed/blog/handloom-weaver.jpg",
+<p>At Kandyam, we work directly with weaving communities in Talagune, Divulapitiya, and Marawila to bring these timeless crafts to a global marketplace. Every purchase supports not just an artisan, but an entire ecosystem of traditional knowledge.</p>`,
+        featuredImage: "https://kandyam-media.sgp1.digitaloceanspaces.com/seed/blog/handloom-weaver.jpg",
         authorId: adminId,
         category: "Crafts & Tradition",
         tags: ["handloom", "weaving", "textiles", "tradition", "Sri Lankan crafts"],
         isPublished: true,
         publishedAt: new Date("2025-01-15"),
-        metaTitle: "The Ancient Art of Sri Lankan Handloom Weaving - Loopingon Blog",
+        metaTitle: "The Ancient Art of Sri Lankan Handloom Weaving - Kandyam Blog",
         metaDescription: "Explore the 2,500-year history of handloom weaving in Sri Lanka, from ancient kingdoms to contemporary fashion.",
       },
       {
@@ -1705,7 +1705,7 @@ async function main() {
 <p>The Kaduru tree (Strychnos nux-vomica) is preferred for its lightweight, easily carved wood that doesn't crack with age. Once cut, the wood is seasoned for several weeks before a master carver begins shaping the mask using traditional chisels — each one named and passed down through families.</p>
 <p>The carving alone can take weeks for a complex mask like the Naga Raksha (Cobra Demon) or the Gara Yaka. After carving comes the meticulous painting process using natural pigments: red from 'gurugal' stone, yellow from 'hiriyal' clay, white from kaolin, and black from burnt coconut shells mixed with 'dummala' resin.</p>
 <p>These masks are not merely decorative — they are sacred objects used in healing rituals (Thovil) and theatrical performances (Kolam) that have been recognized by UNESCO as part of humanity's intangible cultural heritage.</p>`,
-        featuredImage: "https://loopingon-media.sgp1.digitaloceanspaces.com/seed/blog/mask-making.jpg",
+        featuredImage: "https://kandyam-media.sgp1.digitaloceanspaces.com/seed/blog/mask-making.jpg",
         authorId: adminId,
         category: "Crafts & Tradition",
         tags: ["masks", "Ambalangoda", "woodcarving", "Kolam", "tradition", "UNESCO"],
@@ -1721,14 +1721,14 @@ async function main() {
         content: `<p>When Princess Diana chose a Ceylon blue sapphire for her engagement ring, she was continuing a tradition that stretches back over 2,500 years. Sri Lanka, known historically as 'Ratna-Dweepa' (The Island of Gems), has been the world's primary source of fine sapphires since ancient times.</p>
 <p>The Ratnapura region, meaning 'City of Gems' in Sinhala, sits atop a geological treasure trove. For millennia, alluvial deposits of precious stones have been washed down from the central highlands, concentrating in the valley's gem-bearing gravel layers known as 'illam'.</p>
 <p>Sri Lanka is unique in producing sapphires in every color of the rainbow — from the legendary cornflower blue to the extremely rare padparadscha (lotus blossom) pink-orange. The island is also the world's primary source of fine moonstones and many other semi-precious gem varieties.</p>
-<p>At Loopingon, we connect ethical gem miners and artisan jewelers from Galle and Ratnapura directly with customers who appreciate both the beauty of the stones and the importance of responsible sourcing. Every gem in our marketplace comes with a guarantee of ethical origin.</p>`,
-        featuredImage: "https://loopingon-media.sgp1.digitaloceanspaces.com/seed/blog/ceylon-sapphires.jpg",
+<p>At Kandyam, we connect ethical gem miners and artisan jewelers from Galle and Ratnapura directly with customers who appreciate both the beauty of the stones and the importance of responsible sourcing. Every gem in our marketplace comes with a guarantee of ethical origin.</p>`,
+        featuredImage: "https://kandyam-media.sgp1.digitaloceanspaces.com/seed/blog/ceylon-sapphires.jpg",
         authorId: adminId,
         category: "Gems & Jewelry",
         tags: ["sapphires", "gems", "Ratnapura", "Ceylon", "jewelry", "mining"],
         isPublished: true,
         publishedAt: new Date("2025-03-10"),
-        metaTitle: "Ceylon Sapphires: The Gem Legacy of Sri Lanka - Loopingon Blog",
+        metaTitle: "Ceylon Sapphires: The Gem Legacy of Sri Lanka - Kandyam Blog",
         metaDescription: "The story of Sri Lanka's legendary sapphires, from the Ratnapura mines to the world's most famous engagement rings.",
       },
       {
@@ -1738,14 +1738,14 @@ async function main() {
         content: `<p>The red earth of Matale has been shaped by human hands since at least the 3rd century BCE, when the first Sinhala kingdoms established settlements along the Mahaweli River. Today, the pottery villages of Rattota, Udupihilla, and Nalanda continue this ancient tradition.</p>
 <p>Matale clay is particularly prized for its plasticity and its ability to withstand thermal shock — making it ideal for cooking pots that go directly from fire to table. The traditional wood-fired kilns reach temperatures of 900-1000°C, and the unpredictable nature of the wood fire means each piece emerges with unique smoke patterns and color variations.</p>
 <p>Modern Sri Lankan potters are innovating while honoring tradition. Some have incorporated electric kilns for achieving precise glaze effects, while others have developed hybrid techniques that blend traditional terracotta with contemporary design sensibilities. The result is a vibrant pottery scene that produces everything from traditional curry pots (hattiya) to avant-garde sculptural works.</p>
-<p>Loopingon is proud to partner with the Kulatunga family studio and several other Matale potteries to bring these earth-born treasures to homes around the world.</p>`,
-        featuredImage: "https://loopingon-media.sgp1.digitaloceanspaces.com/seed/blog/matale-pottery.jpg",
+<p>Kandyam is proud to partner with the Kulatunga family studio and several other Matale potteries to bring these earth-born treasures to homes around the world.</p>`,
+        featuredImage: "https://kandyam-media.sgp1.digitaloceanspaces.com/seed/blog/matale-pottery.jpg",
         authorId: adminId,
         category: "Crafts & Tradition",
         tags: ["pottery", "Matale", "terracotta", "clay", "traditional", "ceramics"],
         isPublished: true,
         publishedAt: new Date("2025-04-05"),
-        metaTitle: "Pottery of Matale: Ancient Sri Lankan Clay Craft - Loopingon Blog",
+        metaTitle: "Pottery of Matale: Ancient Sri Lankan Clay Craft - Kandyam Blog",
         metaDescription: "Discover the 2,000-year-old pottery tradition of Matale, Sri Lanka — from wood-fired kilns to modern ceramic art.",
       },
       {
@@ -1757,13 +1757,13 @@ async function main() {
 <p><strong>Wood Carving:</strong> Authentic carvings show tool marks — tiny facets created by the chisel. Machine-made pieces are perfectly smooth. Check for the natural grain of the wood continuing through the carving. Sri Lankan carvers typically use Kaduru, ebony, mahogany, jack wood, or teak.</p>
 <p><strong>Pottery:</strong> Hand-thrown pottery will show concentric rings (throw lines) that are evidence of the potter's hands on the wheel. The base will typically have string-cut marks where the pot was cut from the wheel. No two hand-thrown pieces are exactly identical — slight variations in size and shape are marks of authenticity.</p>
 <p><strong>Brassware & Jewelry:</strong> Traditional repousse work shows hammer marks on the reverse side. Cast pieces made using the lost-wax method will have slight surface texture unlike perfectly smooth machine castings. For gemstones, always ask for certification of authenticity, especially for high-value stones.</p>`,
-        featuredImage: "https://loopingon-media.sgp1.digitaloceanspaces.com/seed/blog/handicrafts-guide.jpg",
+        featuredImage: "https://kandyam-media.sgp1.digitaloceanspaces.com/seed/blog/handicrafts-guide.jpg",
         authorId: adminId,
         category: "Buying Guide",
         tags: ["guide", "handicrafts", "buying guide", "authenticity", "Sri Lanka"],
         isPublished: true,
         publishedAt: new Date("2025-05-01"),
-        metaTitle: "Guide to Buying Authentic Sri Lankan Handicrafts - Loopingon",
+        metaTitle: "Guide to Buying Authentic Sri Lankan Handicrafts - Kandyam",
         metaDescription: "Learn how to identify genuine Sri Lankan handicrafts — from handloom textiles to woodcarving, pottery, and brassware.",
       },
     ],
@@ -1776,45 +1776,45 @@ async function main() {
     data: [
       {
         id: uuidv4(),
-        title: "About Loopingon",
+        title: "About Kandyam",
         slug: "about",
-        content: `<h1>About Loopingon</h1><p>Loopingon is Sri Lanka's premier online marketplace dedicated to authentic, handcrafted treasures. We connect skilled artisans from across the island with customers who appreciate craftsmanship, heritage, and ethical trade.</p>`,
-        metaTitle: "About Loopingon - Where Sri Lankan Craft Meets the World",
-        metaDescription: "Learn about Loopingon, Sri Lanka's premier marketplace for authentic handcrafted goods.",
+        content: `<h1>About Kandyam</h1><p>Kandyam is Sri Lanka's premier online marketplace dedicated to authentic, handcrafted treasures. We connect skilled artisans from across the island with customers who appreciate craftsmanship, heritage, and ethical trade.</p>`,
+        metaTitle: "About Kandyam - Where Sri Lankan Craft Meets the World",
+        metaDescription: "Learn about Kandyam, Sri Lanka's premier marketplace for authentic handcrafted goods.",
         isPublished: true,
       },
       {
         id: uuidv4(),
         title: "Contact Us",
         slug: "contact",
-        content: `<h1>Contact Loopingon</h1><p>Have questions or feedback? We'd love to hear from you. Reach out to our team and we'll get back to you within 24 hours.</p>`,
-        metaTitle: "Contact Loopingon",
-        metaDescription: "Get in touch with the Loopingon team for support, inquiries, or feedback.",
+        content: `<h1>Contact Kandyam</h1><p>Have questions or feedback? We'd love to hear from you. Reach out to our team and we'll get back to you within 24 hours.</p>`,
+        metaTitle: "Contact Kandyam",
+        metaDescription: "Get in touch with the Kandyam team for support, inquiries, or feedback.",
         isPublished: true,
       },
       {
         id: uuidv4(),
         title: "Privacy Policy",
         slug: "privacy",
-        content: `<h1>Privacy Policy</h1><p>Loopingon is committed to protecting your privacy. This policy explains how we collect, use, and safeguard your personal information.</p>`,
-        metaTitle: "Privacy Policy - Loopingon",
+        content: `<h1>Privacy Policy</h1><p>Kandyam is committed to protecting your privacy. This policy explains how we collect, use, and safeguard your personal information.</p>`,
+        metaTitle: "Privacy Policy - Kandyam",
         isPublished: true,
       },
       {
         id: uuidv4(),
         title: "Terms & Conditions",
         slug: "terms",
-        content: `<h1>Terms and Conditions</h1><p>By using the Loopingon platform, you agree to these terms and conditions governing the use of our marketplace services.</p>`,
-        metaTitle: "Terms & Conditions - Loopingon",
+        content: `<h1>Terms and Conditions</h1><p>By using the Kandyam platform, you agree to these terms and conditions governing the use of our marketplace services.</p>`,
+        metaTitle: "Terms & Conditions - Kandyam",
         isPublished: true,
       },
       {
         id: uuidv4(),
-        title: "How to Sell on Loopingon",
+        title: "How to Sell on Kandyam",
         slug: "sell",
-        content: `<h1>Become a Vendor</h1><p>Join Loopingon as a vendor and showcase your handcrafted products to customers worldwide. Our platform handles payments, logistics, and marketing so you can focus on what you do best — creating.</p>`,
-        metaTitle: "Sell on Loopingon - Become a Vendor",
-        metaDescription: "Learn how to become a vendor on Loopingon and sell your handcrafted products to a global audience.",
+        content: `<h1>Become a Vendor</h1><p>Join Kandyam as a vendor and showcase your handcrafted products to customers worldwide. Our platform handles payments, logistics, and marketing so you can focus on what you do best — creating.</p>`,
+        metaTitle: "Sell on Kandyam - Become a Vendor",
+        metaDescription: "Learn how to become a vendor on Kandyam and sell your handcrafted products to a global audience.",
         isPublished: true,
       },
       {
@@ -1822,7 +1822,7 @@ async function main() {
         title: "Shipping Information",
         slug: "shipping",
         content: `<h1>Shipping Information</h1><p>We offer domestic shipping across Sri Lanka and international shipping to over 50 countries. Learn about our shipping methods, rates, and delivery times.</p>`,
-        metaTitle: "Shipping Information - Loopingon",
+        metaTitle: "Shipping Information - Kandyam",
         isPublished: true,
       },
       {
@@ -1830,7 +1830,7 @@ async function main() {
         title: "Returns & Refunds",
         slug: "returns",
         content: `<h1>Returns and Refunds Policy</h1><p>We want you to love every purchase. If you're not satisfied, our return policy covers most items within 7 days of delivery.</p>`,
-        metaTitle: "Returns & Refunds - Loopingon",
+        metaTitle: "Returns & Refunds - Kandyam",
         isPublished: true,
       },
     ],
@@ -1843,23 +1843,23 @@ async function main() {
     data: [
       {
         page: "home",
-        title: "Loopingon - Where Sri Lankan Craft Meets the World",
+        title: "Kandyam - Where Sri Lankan Craft Meets the World",
         description: "Discover authentic handcrafted treasures from Sri Lanka's finest artisans. Handloom textiles, wood carvings, pottery, jewelry, and more — each piece a story of heritage and skill.",
         keywords: ["Sri Lankan crafts", "handloom", "handicrafts", "wood carving", "pottery", "jewelry", "Sri Lanka marketplace", "artisan"],
-        ogImage: "https://loopingon-media.sgp1.digitaloceanspaces.com/seo/home-og.jpg",
-        canonicalUrl: "https://loopingon.com",
+        ogImage: "https://kandyam-media.sgp1.digitaloceanspaces.com/seo/home-og.jpg",
+        canonicalUrl: "https://kandyam.com",
       },
       {
         page: "products",
-        title: "All Products - Handcrafted Treasures from Sri Lanka | Loopingon",
+        title: "All Products - Handcrafted Treasures from Sri Lanka | Kandyam",
         description: "Browse our complete collection of handcrafted products from Sri Lankan artisans. Handloom textiles, wood carvings, pottery, brassware, and more.",
         keywords: ["Sri Lankan products", "handcrafted", "artisan", "handmade", "Sri Lanka"],
-        ogImage: "https://loopingon-media.sgp1.digitaloceanspaces.com/seo/products-og.jpg",
+        ogImage: "https://kandyam-media.sgp1.digitaloceanspaces.com/seo/products-og.jpg",
       },
       {
         page: "vendors",
-        title: "Our Artisans - Meet Sri Lanka's Master Craftspeople | Loopingon",
-        description: "Meet the skilled artisans and master craftspeople behind Loopingon's handcrafted treasures. Learn about their traditions, techniques, and stories.",
+        title: "Our Artisans - Meet Sri Lanka's Master Craftspeople | Kandyam",
+        description: "Meet the skilled artisans and master craftspeople behind Kandyam's handcrafted treasures. Learn about their traditions, techniques, and stories.",
         keywords: ["Sri Lankan artisans", "craftspeople", "handloom weavers", "woodcarvers", "potters"],
       },
     ],
@@ -1869,15 +1869,15 @@ async function main() {
   console.log("Creating initial sitemap URLs...");
 
   const sitemapUrls = [
-    { url: "https://loopingon.com", changefreq: "daily", priority: 1.0 },
-    { url: "https://loopingon.com/products", changefreq: "daily", priority: 0.9 },
-    { url: "https://loopingon.com/categories", changefreq: "weekly", priority: 0.8 },
-    { url: "https://loopingon.com/vendors", changefreq: "daily", priority: 0.8 },
-    { url: "https://loopingon.com/blog", changefreq: "daily", priority: 0.7 },
-    { url: "https://loopingon.com/competitions", changefreq: "daily", priority: 0.7 },
-    { url: "https://loopingon.com/about", changefreq: "monthly", priority: 0.5 },
-    { url: "https://loopingon.com/contact", changefreq: "monthly", priority: 0.4 },
-    { url: "https://loopingon.com/sell", changefreq: "monthly", priority: 0.6 },
+    { url: "https://kandyam.com", changefreq: "daily", priority: 1.0 },
+    { url: "https://kandyam.com/products", changefreq: "daily", priority: 0.9 },
+    { url: "https://kandyam.com/categories", changefreq: "weekly", priority: 0.8 },
+    { url: "https://kandyam.com/vendors", changefreq: "daily", priority: 0.8 },
+    { url: "https://kandyam.com/blog", changefreq: "daily", priority: 0.7 },
+    { url: "https://kandyam.com/competitions", changefreq: "daily", priority: 0.7 },
+    { url: "https://kandyam.com/about", changefreq: "monthly", priority: 0.5 },
+    { url: "https://kandyam.com/contact", changefreq: "monthly", priority: 0.4 },
+    { url: "https://kandyam.com/sell", changefreq: "monthly", priority: 0.6 },
   ];
 
   for (const item of sitemapUrls) {

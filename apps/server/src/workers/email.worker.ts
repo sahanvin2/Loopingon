@@ -360,7 +360,7 @@ function buildWelcomeHtml(name: string | undefined): string {
   const greeting = name ? `Welcome, ${name}!` : "Welcome!";
 
   return emailTemplate(
-    "Welcome to Loopingon",
+    "Welcome to Kandyam",
     `
     <h2 style="color:#1a1a2e;font-size:22px;margin:0 0 16px 0;">${greeting}</h2>
     <p style="color:#495057;font-size:16px;line-height:1.7;margin:0 0 24px 0;">Thank you for joining ${PLATFORM_NAME} — Sri Lanka's premier marketplace for authentic, handcrafted treasures. We're thrilled to have you as part of our community.</p>

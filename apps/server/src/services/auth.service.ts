@@ -408,7 +408,7 @@ export async function setup2FA(userId: string) {
     },
   });
 
-  const qrData = `otpauth://totp/Loopingon:${user.email}?secret=${secret}&issuer=Loopingon`;
+  const qrData = `otpauth://totp/Kandyam:${user.email}?secret=${secret}&issuer=Kandyam`;
 
   return { secret, backupCodes, qrData };
 }

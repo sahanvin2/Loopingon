@@ -12,7 +12,7 @@ import routes from "./routes/index.js";
 const swaggerDocument = {
   openapi: "3.0.0",
   info: {
-    title: "Loopingon API",
+    title: "Kandyam API",
     version: "1.0.0",
     description: "Multi-vendor marketplace API",
   },

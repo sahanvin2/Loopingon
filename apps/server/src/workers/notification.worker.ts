@@ -76,7 +76,7 @@ const NOTIFICATION_TEMPLATES: Record<
   },
   VENDOR_VERIFIED: {
     title: "Store Verified",
-    bodyTemplate: "Congratulations! Your store \"{{storeName}}\" has been verified on Loopingon.",
+    bodyTemplate: "Congratulations! Your store \"{{storeName}}\" has been verified on Kandyam.",
     icon: "🎉",
   },
   VENDOR_REJECTED: {
@@ -134,7 +134,7 @@ function resolveBodyTemplate(template: string, data?: Record<string, unknown>): 
 function buildEmailHtml(type: NotificationJobData["type"], title: string, body: string): string {
   const template = NOTIFICATION_TEMPLATES[type];
   const icon = template?.icon || "🔔";
-  const platformName = process.env.PLATFORM_NAME || "Loopingon";
+  const platformName = process.env.PLATFORM_NAME || "Kandyam";
 
   return `
 <!DOCTYPE html>
@@ -229,7 +229,7 @@ const notificationWorker = new Worker<NotificationJobData>(
               const emailHtml = buildEmailHtml(type, title, resolvedBody);
               await sendEmail({
                 to: user.email,
-                subject: `${title} - ${process.env.PLATFORM_NAME || "Loopingon"}`,
+                subject: `${title} - ${process.env.PLATFORM_NAME || "Kandyam"}`,
                 html: emailHtml,
               });
             }

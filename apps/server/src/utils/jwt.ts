@@ -1,8 +1,8 @@
 import jwt from "jsonwebtoken";
 import { v4 as uuidv4 } from "uuid";
 
-const JWT_ACCESS_SECRET = process.env.JWT_ACCESS_SECRET || "loopingon-access-secret-dev";
-const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET || "loopingon-refresh-secret-dev";
+const JWT_ACCESS_SECRET = process.env.JWT_ACCESS_SECRET || "kandyam-access-secret-dev";
+const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET || "kandyam-refresh-secret-dev";
 const RESET_TOKEN_SECRET = process.env.RESET_TOKEN_SECRET || "reset-secret-dev";
 const EMAIL_VERIFY_SECRET = process.env.EMAIL_VERIFY_SECRET || "email-verify-secret-dev";
 

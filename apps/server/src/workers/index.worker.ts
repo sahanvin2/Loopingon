@@ -159,7 +159,7 @@ startWorkers()
       gracefulShutdown("uncaughtException");
     });
 
-    logger.info("Loopingon worker system is running");
+    logger.info("Kandyam worker system is running");
   })
   .catch((err) => {
     logger.error("Failed to start workers:", err);
