@@ -1,6 +1,6 @@
 FROM node:22-alpine AS base
 WORKDIR /app
-RUN apk add --no-cache libc6-compat python3 make g++
+RUN apk add --no-cache libc6-compat python3 make g++ openssl
 
 FROM base AS deps
 COPY package.json package-lock.json* ./
