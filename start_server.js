@@ -15,7 +15,7 @@ async function run() {
     console.log(pull.stdout || pull.stderr);
 
     console.log("Building and starting production containers locally...");
-    const build = await ssh.execCommand('docker compose -f docker/docker-compose.build.yml up -d --build', { cwd: '/opt/loopingon' });
+    const build = await ssh.execCommand('docker compose --env-file .env -f docker/docker-compose.build.yml up -d --build', { cwd: '/opt/loopingon' });
     console.log(build.stdout || build.stderr);
 
     ssh.dispose();
