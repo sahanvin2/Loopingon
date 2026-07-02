@@ -4,6 +4,7 @@ RUN apk add --no-cache libc6-compat python3 make g++ openssl
 
 FROM base AS deps
 COPY package.json package-lock.json* ./
+COPY apps/server/package.json ./apps/server/
 RUN npm install
 
 FROM base AS builder

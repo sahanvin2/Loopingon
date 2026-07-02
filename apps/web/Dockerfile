@@ -8,6 +8,8 @@ RUN npm install --only=production
 
 FROM base AS builder
 COPY package.json package-lock.json* ./
+COPY apps/web/package.json ./apps/web/
+COPY apps/server/package.json ./apps/server/
 RUN npm install
 COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
