@@ -30,7 +30,7 @@ export function DiscoveryRow() {
                 <Flame className="w-5 h-5 text-[#E63946]" />
                 Trending This Week
               </h2>
-              <Link href="/trending" className="text-sm font-medium text-[#62A7B0] hover:text-[#4A8A92] transition-colors">
+              <Link href="/products?sort=popular" className="text-sm font-medium text-[#62A7B0] hover:text-[#4A8A92] transition-colors">
                 View all
               </Link>
             </div>
@@ -68,7 +68,7 @@ export function DiscoveryRow() {
                 <Sparkles className="w-5 h-5 text-[#F4A261]" />
                 Editors' Picks
               </h2>
-              <Link href="/editors-picks" className="text-sm font-medium text-[#62A7B0] hover:text-[#4A8A92] transition-colors">
+              <Link href="/products?isFeatured=1" className="text-sm font-medium text-[#62A7B0] hover:text-[#4A8A92] transition-colors">
                 View all
               </Link>
             </div>
@@ -98,7 +98,7 @@ export function DiscoveryRow() {
                 <Clock className="w-5 h-5 text-text-500" />
                 Recently Viewed
               </h2>
-              <Link href="/recently-viewed" className="text-sm font-medium text-[#62A7B0] hover:text-[#4A8A92] transition-colors">
+              <Link href="/products" className="text-sm font-medium text-[#62A7B0] hover:text-[#4A8A92] transition-colors">
                 View all
               </Link>
             </div>

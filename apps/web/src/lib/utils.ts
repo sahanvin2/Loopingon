@@ -193,6 +193,11 @@ export function getImageUrl(path: string | null | undefined): string {
     return path.replace("https://f005.backblazeb2.com/file/movia-prod", cdnUrl).replace("https://f005.backblazeb2.com/file/kandyam-prod", cdnUrl);
   }
 
+  // Intercept broken DigitalOcean seed images and use a nice placeholder
+  if (path.includes("kandyam-media.sgp1.digitaloceanspaces.com/seed/products/")) {
+    return "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=600&h=600&fit=crop";
+  }
+
   if (path.startsWith("http")) return path;
   if (path.startsWith("/")) return `${cdnUrl}${path}`;
   return `${cdnUrl}/${path}`;

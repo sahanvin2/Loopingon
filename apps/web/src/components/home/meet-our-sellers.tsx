@@ -57,7 +57,7 @@ export function MeetOurSellers() {
             <p className="text-sm font-medium text-text-500 mt-3 mb-4 max-w-xs mx-auto lg:mx-0">
               Discover the stories behind the products you love.
             </p>
-            <Link href="/sellers" className="inline-flex items-center gap-1 text-sm font-bold text-[#E63946] hover:text-[#D92D3A] transition-colors">
+            <Link href="/vendors" className="inline-flex items-center gap-1 text-sm font-bold text-[#E63946] hover:text-[#D92D3A] transition-colors">
               View all sellers <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -66,7 +66,7 @@ export function MeetOurSellers() {
           <div className="w-full lg:w-[55%] flex justify-center overflow-x-auto pb-4 lg:pb-0 scrollbar-hide">
             <div className="flex items-center gap-6 sm:gap-8 px-2">
               {SELLERS.map((seller) => (
-                <Link key={seller.name} href={`/shop/${seller.name.toLowerCase().replace(/\s+/g, '-')}`} className="group flex flex-col items-center min-w-[100px] snap-center">
+                <Link key={seller.name} href={`/vendors/${seller.name.toLowerCase().replace(/\s+/g, '-')}`} className="group flex flex-col items-center min-w-[100px] snap-center">
                   <div className="w-24 h-24 rounded-full overflow-hidden bg-surface-100 border-2 border-transparent group-hover:border-[#E63946] transition-all p-1 shadow-sm">
                     <div className="w-full h-full rounded-full overflow-hidden relative">
                       <Image src={seller.image} alt={seller.name} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover group-hover:scale-110 transition-transform duration-500" />
