@@ -40,7 +40,10 @@ services:
     restart: always
     ports:
       - "6379:6379"
-    command: redis-server --appendonly yes --maxmemory 512mb --maxmemory-policy allkeys-lru --requirepass ${REDIS_PASSWORD}
+    command: >
+      sh -c 'exec redis-server --appendonly yes --maxmemory 512mb --maxmemory-policy allkeys-lru --requirepass "$$REDIS_PASSWORD"'
+    env_file:
+      - .env
     volumes:
       - redis_data:/data
     healthcheck:
