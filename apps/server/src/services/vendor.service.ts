@@ -356,6 +356,18 @@ export async function createProduct(
             create: data.tags.map((tag) => ({ tag })),
           }
         : undefined,
+      images: (data as any).images && Array.isArray((data as any).images) && (data as any).images.length > 0
+        ? {
+            create: (data as any).images.map((img: any, index: number) => ({
+              url: img.url,
+              thumbnail: img.url,
+              medium: img.url,
+              large: img.url,
+              sortOrder: img.sortOrder ?? index,
+              isPrimary: img.isPrimary ?? index === 0,
+            })),
+          }
+        : undefined,
     },
     include: {
       images: true,
@@ -406,6 +418,7 @@ export async function updateProduct(
   const updateData: any = { ...data };
   delete updateData.categoryIds;
   delete updateData.tags;
+  delete updateData.images;
 
   if (data.categoryIds) {
     await prisma.productCategory.deleteMany({ where: { productId } });
@@ -419,6 +432,24 @@ export async function updateProduct(
     await prisma.productTag.createMany({
       data: data.tags.map((tag) => ({ productId, tag })),
     });
+  }
+
+  if ((data as any).images && Array.isArray((data as any).images)) {
+    await prisma.productImage.deleteMany({ where: { productId } });
+    const images = (data as any).images;
+    if (images.length > 0) {
+      await prisma.productImage.createMany({
+        data: images.map((img: any, index: number) => ({
+          productId,
+          url: img.url,
+          thumbnail: img.url,
+          medium: img.url,
+          large: img.url,
+          sortOrder: img.sortOrder ?? index,
+          isPrimary: img.isPrimary ?? index === 0,
+        })),
+      });
+    }
   }
 
   return prisma.product.update({

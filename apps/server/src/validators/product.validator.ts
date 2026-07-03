@@ -62,6 +62,11 @@ export const createProductSchema = z.object({
   shippingWeight: z.number().min(0).optional().nullable(),
   warrantyInfo: z.string().max(500).optional().nullable(),
   attributes: z.record(z.string(), z.string().or(z.number()).or(z.boolean())).optional(),
+  images: z.array(z.object({
+    url: z.string().url(),
+    sortOrder: z.number().optional(),
+    isPrimary: z.boolean().optional(),
+  })).optional(),
 });
 
 export const updateProductSchema = z.object({
@@ -112,6 +117,11 @@ export const updateProductSchema = z.object({
   shippingWeight: z.number().min(0).optional().nullable(),
   warrantyInfo: z.string().max(500).optional().nullable(),
   attributes: z.record(z.string(), z.string().or(z.number()).or(z.boolean())).optional(),
+  images: z.array(z.object({
+    url: z.string().url(),
+    sortOrder: z.number().optional(),
+    isPrimary: z.boolean().optional(),
+  })).optional(),
 });
 
 export const createVariantSchema = z.object({

@@ -20,7 +20,7 @@ export default function AdminAnalyticsPage() {
 
   const { data: statsData, isLoading } = useQuery({
     queryKey: ["admin", "analytics", dateRange],
-    queryFn: () => get<ApiResponse<any>>("/admin/analytics/stats", { period: dateRange }),
+    queryFn: () => get<ApiResponse<any>>("/admin/analytics", { period: dateRange }),
   });
 
   const stats = statsData?.data;
@@ -39,11 +39,10 @@ export default function AdminAnalyticsPage() {
     
     // Add stats
     if (stats) {
-      csv += `Stats,Revenue,${stats.revenue || 0}\n`;
-      csv += `Stats,Orders,${stats.orders || 0}\n`;
-      csv += `Stats,New Users,${stats.newUsers || 0}\n`;
-      csv += `Stats,New Vendors,${stats.newVendors || 0}\n`;
-      csv += `Stats,Avg Order Value,${stats.avgOrderValue || 0}\n`;
+      csv += `Stats,Revenue,${stats.revenueTotal?._sum?.totalAmount || 0}\n`;
+      csv += `Stats,Orders,${stats.totalOrders || 0}\n`;
+      csv += `Stats,Users,${stats.totalCustomers || 0}\n`;
+      csv += `Stats,Vendors,${stats.totalVendors || 0}\n`;
     }
     
     // Add Page Views
@@ -104,11 +103,11 @@ export default function AdminAnalyticsPage() {
         <LoadingSkeleton variant="card" count={5} />
       ) : (
         <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-          <StatCard title="Revenue" value={formatPrice(Number(stats?.revenue || 0))} icon={DollarSign} variant="blush" />
-          <StatCard title="Orders" value={stats?.orders ?? 0} icon={ShoppingBag} variant="rose" />
-          <StatCard title="New Users" value={stats?.newUsers ?? 0} icon={Users} variant="default" />
-          <StatCard title="New Vendors" value={stats?.newVendors ?? 0} icon={Store} variant="muted" />
-          <StatCard title="Avg Order" value={formatPrice(Number(stats?.avgOrderValue || 0))} icon={TrendingUp} variant="default" />
+          <StatCard title="Revenue" value={formatPrice(Number(stats?.revenueTotal?._sum?.totalAmount || 0))} icon={DollarSign} variant="blush" />
+          <StatCard title="Orders" value={stats?.totalOrders ?? 0} icon={ShoppingBag} variant="rose" />
+          <StatCard title="Total Users" value={stats?.totalCustomers ?? 0} icon={Users} variant="default" />
+          <StatCard title="Total Vendors" value={stats?.totalVendors ?? 0} icon={Store} variant="muted" />
+          <StatCard title="Total Products" value={stats?.totalProducts ?? 0} icon={TrendingUp} variant="default" />
         </div>
       )}
 
