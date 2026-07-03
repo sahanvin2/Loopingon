@@ -50,7 +50,7 @@ export function CheckoutForm({ className }: CheckoutFormProps) {
   const [currentStep, setCurrentStep] = useState<CheckoutStep>("shipping");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [orderId, setOrderId] = useState<string | null>(null);
-  const [selectedMethod, setSelectedMethod] = useState("KOOMBIYO");
+  const [selectedMethod, setSelectedMethod] = useState("STANDARD");
   const [orderError, setOrderError] = useState<string | null>(null);
 
   const [shippingData, setShippingData] = useState<ShippingFormData>({

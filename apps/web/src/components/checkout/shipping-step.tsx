@@ -61,14 +61,14 @@ const InputField = ({ label, type = "text", placeholder, value, error, onChange,
   </div>
 );
 
-export function ShippingStep({ initialData, onNext, selectedMethod = "KOOMBIYO", orderError, isSubmitting, className }: ShippingStepProps) {
+export function ShippingStep({ initialData, onNext, selectedMethod = "STANDARD", orderError, isSubmitting, className }: ShippingStepProps) {
   const { items, subtotal } = useCartStore();
 
   const freeThreshold = 5000;
   const isFreeEligible = subtotal >= freeThreshold;
 
   const shippingMethods = [
-    { id: "KOOMBIYO", label: "Koombiyo", description: "1-3 business days", price: isFreeEligible ? 0 : 400, icon: Package },
+    { id: "STANDARD", label: "Koombiyo", description: "1-3 business days", price: isFreeEligible ? 0 : 400, icon: Package },
   ];
 
   const [form, setForm] = useState<ShippingFormData>(initialData || {
