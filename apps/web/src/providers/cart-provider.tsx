@@ -4,23 +4,14 @@ import { useEffect } from "react";
 import { useAuthStore } from "@/stores/auth-store";
 import { useCartStore } from "@/stores/cart-store";
 import { get } from "@/lib/api-client";
+import { useCart } from "@/hooks/use-cart";
 import type { ApiResponse, Cart, CartItem } from "@/types";
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
-  const { isAuthenticated, accessToken } = useAuthStore();
-  const { setCart, items } = useCartStore();
-
-  useEffect(() => {
-    if (isAuthenticated && accessToken) {
-      get<ApiResponse<Cart & { items: CartItem[] }>>("/cart")
-        .then((response) => {
-          setCart(response.data.items || []);
-        })
-        .catch(() => {
-          // Cart sync failure is non-critical
-        });
-    }
-  }, [isAuthenticated, accessToken, setCart]);
+  const { isAuthenticated } = useAuthStore();
+  const { setCart } = useCartStore();
+  
+  useCart();
 
   useEffect(() => {
     if (!isAuthenticated) {

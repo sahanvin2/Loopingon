@@ -37,8 +37,7 @@ export function ShippingStep({ initialData, onNext, selectedMethod = "KOOMBIYO",
   const isFreeEligible = subtotal >= freeThreshold;
 
   const shippingMethods = [
-    { id: "KOOMBIYO", label: "Koombiyo Standard", description: "1-3 business days", price: isFreeEligible ? 0 : 400, icon: Package },
-    { id: "EXPRESS", label: "Koombiyo Express", description: "Next day delivery", price: isFreeEligible ? 300 : 650, icon: Truck },
+    { id: "KOOMBIYO", label: "Koombiyo", description: "1-3 business days", price: isFreeEligible ? 0 : 400, icon: Package },
   ];
 
   const [form, setForm] = useState<ShippingFormData>(initialData || {
@@ -122,7 +121,6 @@ export function ShippingStep({ initialData, onNext, selectedMethod = "KOOMBIYO",
             <InputField label="Full Name" field="fullName" placeholder="First and Last name" colSpan={2} />
             <InputField label="Phone Number" field="phone" type="tel" placeholder="07X XXX XXXX" />
             <InputField label="Contact Number Two" field="contactNumberTwo" type="tel" placeholder="Optional" optional />
-            <InputField label="Facebook Page" field="facebookPage" placeholder="https://facebook.com/my-page" optional colSpan={2} />
           </div>
 
           <div className="pt-2 border-t border-surface-100"></div>
