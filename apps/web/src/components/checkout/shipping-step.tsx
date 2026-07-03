@@ -105,9 +105,6 @@ export function ShippingStep({ initialData, onNext, selectedMethod = "KOOMBIYO",
       if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   };
-
-  };
-
   return (
     <div className={cn("space-y-10", className)}>
       
