@@ -222,7 +222,7 @@ function buildPasswordResetHtml(name: string | undefined, token: string): string
 function buildOrderConfirmationHtml(
   name: string | undefined,
   orderNumber: string,
-  items: Array<{ name: string; quantity: number; price: number; image?: string | null }>;
+  items: Array<{ name: string; quantity: number; price: number; image?: string | null }>,
   total: number,
   shippingAddress?: string,
   estimatedDelivery?: string
