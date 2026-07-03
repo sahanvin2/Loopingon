@@ -256,9 +256,16 @@ export async function createOrder(
     },
   });
 
-  await prisma.customerProfile.update({
+  await prisma.customerProfile.upsert({
     where: { userId },
-    data: {
+    create: {
+      userId,
+      totalOrders: 1,
+      totalSpent: totalAmount,
+      lifetimeValue: totalAmount,
+      lastOrderAt: new Date(),
+    },
+    update: {
       totalOrders: { increment: 1 },
       totalSpent: { increment: totalAmount },
       lifetimeValue: { increment: totalAmount },
