@@ -30,6 +30,37 @@ interface ShippingStepProps {
   className?: string;
 }
 
+interface InputFieldProps {
+  label: string;
+  type?: string;
+  placeholder?: string;
+  value: string;
+  error?: string;
+  onChange: (value: string) => void;
+  colSpan?: number;
+  optional?: boolean;
+}
+
+const InputField = ({ label, type = "text", placeholder, value, error, onChange, colSpan = 1, optional = false }: InputFieldProps) => (
+  <div className={cn(colSpan === 2 && "sm:col-span-2")}>
+    <label className="block text-[13px] font-semibold text-text-700 mb-1.5 ml-0.5">
+      {label} {optional && <span className="text-muted-400 font-normal">(Optional)</span>}
+    </label>
+    <input
+      type={type}
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      placeholder={placeholder}
+      className={cn(
+        "w-full px-4 py-3 rounded-xl border bg-surface-50 text-sm shadow-sm transition-all duration-200",
+        "focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 focus:bg-white",
+        error ? "border-red-400 focus:border-red-500 focus:ring-red-500/20" : "border-surface-300 hover:border-surface-400"
+      )}
+    />
+    {error && <p className="text-xs text-red-500 mt-1.5 ml-1 font-medium">{error}</p>}
+  </div>
+);
+
 export function ShippingStep({ initialData, onNext, selectedMethod = "KOOMBIYO", orderError, isSubmitting, className }: ShippingStepProps) {
   const { items, subtotal } = useCartStore();
 
@@ -57,6 +88,7 @@ export function ShippingStep({ initialData, onNext, selectedMethod = "KOOMBIYO",
     if (!form.email.trim() || !/^\S+@\S+\.\S+$/.test(form.email)) newErrors.email = "Valid email is required";
     if (!form.fullName.trim()) newErrors.fullName = "Full name is required";
     if (!form.phone.trim() || form.phone.length < 10) newErrors.phone = "Valid phone required";
+    if (!form.contactNumberTwo.trim() || form.contactNumberTwo.length < 10) newErrors.contactNumberTwo = "Valid secondary phone required";
     if (!form.addressLine1.trim()) newErrors.addressLine1 = "Address is required";
     if (!form.city.trim()) newErrors.city = "City is required";
     if (!form.district.trim()) newErrors.district = "District is required";
@@ -74,25 +106,7 @@ export function ShippingStep({ initialData, onNext, selectedMethod = "KOOMBIYO",
     }
   };
 
-  const InputField = ({ label, field, type = "text", placeholder, colSpan = 1, optional = false }: { label: string, field: keyof ShippingFormData, type?: string, placeholder?: string, colSpan?: number, optional?: boolean }) => (
-    <div className={cn(colSpan === 2 && "sm:col-span-2")}>
-      <label className="block text-[13px] font-semibold text-text-700 mb-1.5 ml-0.5">
-        {label} {optional && <span className="text-muted-400 font-normal">(Optional)</span>}
-      </label>
-      <input
-        type={type}
-        value={form[field] as string}
-        onChange={(e) => handleChange(field, e.target.value)}
-        placeholder={placeholder}
-        className={cn(
-          "w-full px-4 py-3 rounded-xl border bg-surface-50 text-sm shadow-sm transition-all duration-200",
-          "focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 focus:bg-white",
-          errors[field] ? "border-red-400 focus:border-red-500 focus:ring-red-500/20" : "border-surface-300 hover:border-surface-400"
-        )}
-      />
-      {errors[field] && <p className="text-xs text-red-500 mt-1.5 ml-1 font-medium">{errors[field]}</p>}
-    </div>
-  );
+  };
 
   return (
     <div className={cn("space-y-10", className)}>
@@ -104,7 +118,7 @@ export function ShippingStep({ initialData, onNext, selectedMethod = "KOOMBIYO",
           <h2 className="font-serif text-2xl font-bold text-text-900">Contact</h2>
         </div>
         <div className="bg-white p-5 md:p-6 rounded-2xl border border-surface-200 shadow-soft-sm space-y-4">
-          <InputField label="Email Address" field="email" type="email" placeholder="you@example.com" />
+          <InputField label="Email Address" value={form.email} onChange={(v) => handleChange("email", v)} error={errors.email} type="email" placeholder="you@example.com" />
           <p className="text-xs text-muted-500 ml-1">We'll use this to send you order updates and receipts.</p>
         </div>
       </section>
@@ -118,20 +132,20 @@ export function ShippingStep({ initialData, onNext, selectedMethod = "KOOMBIYO",
         <div className="bg-white p-5 md:p-6 rounded-2xl border border-surface-200 shadow-soft-sm space-y-5">
           
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
-            <InputField label="Full Name" field="fullName" placeholder="First and Last name" colSpan={2} />
-            <InputField label="Phone Number" field="phone" type="tel" placeholder="07X XXX XXXX" />
-            <InputField label="Contact Number Two" field="contactNumberTwo" type="tel" placeholder="Optional" optional />
+            <InputField label="Full Name" value={form.fullName} onChange={(v) => handleChange("fullName", v)} error={errors.fullName} placeholder="First and Last name" colSpan={2} />
+            <InputField label="Phone Number" value={form.phone} onChange={(v) => handleChange("phone", v)} error={errors.phone} type="tel" placeholder="07X XXX XXXX" />
+            <InputField label="Contact Number Two" value={form.contactNumberTwo} onChange={(v) => handleChange("contactNumberTwo", v)} error={errors.contactNumberTwo} type="tel" placeholder="Secondary Phone" />
           </div>
 
           <div className="pt-2 border-t border-surface-100"></div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
-            <InputField label="Address Line 1" field="addressLine1" placeholder="House/Apt number, Street name" colSpan={2} />
-            <InputField label="Address Line 2" field="addressLine2" placeholder="Apartment, suite, unit, etc." optional colSpan={2} />
-            <InputField label="City" field="city" placeholder="Colombo" />
-            <InputField label="District" field="district" placeholder="Colombo" />
-            <InputField label="Postal Code" field="postalCode" placeholder="00100" />
-            <InputField label="Expected Delivery (Due Date)" field="dueDate" type="date" placeholder="Select date" />
+            <InputField label="Address Line 1" value={form.addressLine1} onChange={(v) => handleChange("addressLine1", v)} error={errors.addressLine1} placeholder="House/Apt number, Street name" colSpan={2} />
+            <InputField label="Address Line 2" value={form.addressLine2} onChange={(v) => handleChange("addressLine2", v)} error={errors.addressLine2} placeholder="Apartment, suite, unit, etc." optional colSpan={2} />
+            <InputField label="City" value={form.city} onChange={(v) => handleChange("city", v)} error={errors.city} placeholder="Colombo" />
+            <InputField label="District" value={form.district} onChange={(v) => handleChange("district", v)} error={errors.district} placeholder="Colombo" />
+            <InputField label="Postal Code" value={form.postalCode} onChange={(v) => handleChange("postalCode", v)} error={errors.postalCode} placeholder="00100" />
+            <InputField label="Expected Delivery (Due Date)" value={form.dueDate} onChange={(v) => handleChange("dueDate", v)} error={errors.dueDate} type="date" placeholder="Select date" />
             
             <div className="sm:col-span-2 mt-2">
               <label className="block text-[13px] font-semibold text-text-700 mb-1.5 ml-0.5">
@@ -233,13 +247,26 @@ export function ShippingStep({ initialData, onNext, selectedMethod = "KOOMBIYO",
           onClick={handleSubmit} 
           disabled={isSubmitting}
           className={cn(
-            "w-full py-4 sm:py-5 rounded-2xl text-lg font-bold transition-all duration-300 flex items-center justify-center gap-3",
-            "bg-primary-600 text-white hover:bg-primary-700 shadow-[0_8px_30px_rgb(247,68,78,0.2)] hover:shadow-[0_8px_30px_rgb(247,68,78,0.3)] hover:-translate-y-0.5",
+            "group relative overflow-hidden w-full py-4 sm:py-5 rounded-2xl text-lg font-bold transition-all duration-300 flex items-center justify-center gap-3",
+            "bg-gradient-to-r from-primary-600 to-rose-600 text-white hover:from-primary-700 hover:to-rose-700",
+            "shadow-[0_8px_30px_rgba(247,68,78,0.25)] hover:shadow-[0_8px_30px_rgba(247,68,78,0.4)] hover:-translate-y-1",
             isSubmitting && "opacity-70 cursor-not-allowed hover:translate-y-0"
           )}
         >
-          {isSubmitting ? <Loader2 className="w-6 h-6 animate-spin" /> : null}
-          {isSubmitting ? "Processing Order..." : `Complete Order — Pay on Delivery`}
+          {/* Shine effect */}
+          <div className="absolute inset-0 -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none" />
+          
+          {isSubmitting ? (
+            <>
+              <Loader2 className="w-5 h-5 animate-spin" />
+              Processing...
+            </>
+          ) : (
+            <>
+              Complete Order — Pay on Delivery
+              <ShieldCheck className="w-5 h-5 group-hover:scale-110 transition-transform" />
+            </>
+          )}
         </button>
 
         <div className="mt-6 flex items-center justify-center gap-2 text-muted-500">

@@ -120,7 +120,12 @@ export function CheckoutForm({ className }: CheckoutFormProps) {
       setCurrentStep("confirmation");
       toast.success("Order placed! Pay on delivery.");
     } catch (err: any) {
-      const message = err?.message || "Failed to place order.";
+      let message = "Failed to place order.";
+      if (err?.message) {
+        if (typeof err.message === 'string') message = err.message;
+        else if (Array.isArray(err.message)) message = err.message[0]?.message || err.message[0];
+        else if (typeof err.message === 'object') message = err.message.message || JSON.stringify(err.message);
+      }
       setOrderError(message);
       toast.error(message);
     } finally {
