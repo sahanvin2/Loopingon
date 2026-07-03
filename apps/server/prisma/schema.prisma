@@ -89,6 +89,7 @@ enum ShippingMethod {
   SAME_DAY
   INTERNATIONAL
   PICKUP
+  KOOMBIYO
   @@schema("public")
 }
 
