@@ -1,38 +1,6 @@
 version: "3.8"
 
 services:
-  postgres:
-    image: pgvector/pgvector:pg16
-    container_name: loopingon-postgres-prod
-    restart: always
-    ports:
-      - "5432:5432"
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
-      interval: 15s
-      timeout: 5s
-      retries: 5
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "50m"
-        max-file: "3"
-    deploy:
-      resources:
-        limits:
-          memory: 1g
-          cpus: "1.0"
-        reservations:
-          memory: 512m
-          cpus: "0.5"
-    networks:
-      - loopingon_prod_network
 
   redis:
     image: redis:7-alpine
@@ -71,8 +39,7 @@ services:
     ports:
       - "4000:4000"
     depends_on:
-      postgres:
-        condition: service_healthy
+
       redis:
         condition: service_healthy
     env_file:
@@ -139,8 +106,7 @@ services:
     restart: always
     command: node dist/workers/index.worker.js
     depends_on:
-      postgres:
-        condition: service_healthy
+
       redis:
         condition: service_healthy
     env_file:
@@ -197,8 +163,7 @@ services:
       - loopingon_prod_network
 
 volumes:
-  postgres_data:
-    driver: local
+
   redis_data:
     driver: local
   nginx_logs:

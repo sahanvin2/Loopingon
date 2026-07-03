@@ -209,6 +209,9 @@ export default function OrderDetailPage() {
                 <p className="text-xs text-muted-500">
                   Qty: {item.quantity} x {formatPrice(Number(item.price))}
                 </p>
+                <p className="text-[10px] text-muted-400 font-mono mt-0.5">
+                  ID: {item.productId}
+                </p>
               </div>
               <span className="text-sm font-semibold text-text-900">
                 {formatPrice(Number(item.totalPrice))}

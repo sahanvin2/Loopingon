@@ -221,12 +221,12 @@ export async function getTrendingProducts(limit: number = 10) {
     // Fallback if no tracking data yet
     return prisma.product.findMany({
       where: { status: "PUBLISHED", deletedAt: null },
+      orderBy: { viewsCount: 'desc' },
+      take: limit,
       include: {
         images: { take: 1, orderBy: { sortOrder: "asc" } },
         vendor: { select: { id: true, storeName: true, storeSlug: true, rating: true } },
       },
-      orderBy: { viewsCount: "desc" },
-      take: limit,
     });
   }
 }

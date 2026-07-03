@@ -27,18 +27,31 @@ import {
 
 export async function signup(data: {
   email: string;
-  password: string;
+  password?: string;
   fullName: string;
   role?: "CUSTOMER" | "VENDOR";
 }) {
-  const existing = await prisma.user.findUnique({ where: { email: data.email } });
+  const existing = await prisma.user.findFirst({ where: { email: data.email } });
   if (existing) throw new AppError("Email already registered", 409, "EMAIL_EXISTS");
 
-  const passwordHash = await argon2.hash(data.password);
-  const verificationToken = signEmailVerificationToken("pending", data.email);
+  const passwordHash = data.password ? await argon2.hash(data.password) : "";
+  const crypto = require("crypto");
+  const newUserId = crypto.randomUUID();
+
+  try {
+    // Ensure local auth.users has the UUID to satisfy the foreign key constraint
+    await prisma.$executeRawUnsafe(
+      `INSERT INTO auth.users (id, instance_id, aud, role, email, encrypted_password, email_confirmed_at, recovery_sent_at, last_sign_in_at, raw_app_meta_data, raw_user_meta_data, created_at, updated_at, confirmation_token, recovery_token, email_change_token_new, email_change) 
+       VALUES ('${newUserId}', '00000000-0000-0000-0000-000000000000', 'authenticated', 'authenticated', '${data.email}', '', now(), null, null, '{"provider":"email","providers":["email"]}', '{"name":"${data.fullName}"}', now(), now(), '', '', '', '') 
+       ON CONFLICT DO NOTHING`
+    );
+  } catch (e) {
+    logger.warn("Failed to insert into auth.users", e);
+  }
 
   const user = await prisma.user.create({
     data: {
+      id: newUserId,
       email: data.email,
       passwordHash,
       fullName: data.fullName,
@@ -88,7 +101,7 @@ export async function signup(data: {
 }
 
 export async function signin(email: string, password: string, ipAddress?: string) {
-  const user = await prisma.user.findUnique({ where: { email } });
+  const user = await prisma.user.findFirst({ where: { email } });
   if (!user) throw new AppError("Invalid credentials", 401, "INVALID_CREDENTIALS");
 
   if (user.lockedUntil && user.lockedUntil > new Date()) {
@@ -207,7 +220,7 @@ export async function signout(userId: string, refreshTokenStr: string) {
 }
 
 export async function forgotPassword(email: string) {
-  const user = await prisma.user.findUnique({ where: { email } });
+  const user = await prisma.user.findFirst({ where: { email } });
   if (!user) return;
 
   const token = signResetToken(user.id);
@@ -254,13 +267,26 @@ export async function googleAuth(profile: { id: string; authUserId?: string; ema
   let user = await prisma.user.findUnique({ where: { googleId: profile.id } });
 
   if (!user) {
-    user = await prisma.user.findUnique({ where: { email: profile.email } });
+    user = await prisma.user.findFirst({ where: { email: profile.email } });
     if (user) {
       user = await prisma.user.update({
         where: { id: user.id },
         data: { googleId: profile.id, emailVerified: true, avatar: user.avatar || profile.picture },
       });
     } else {
+      // Ensure local auth.users has the UUID to satisfy the foreign key constraint
+      if (profile.authUserId) {
+        try {
+          await prisma.$executeRawUnsafe(`
+            INSERT INTO auth.users (id, instance_id, aud, role, email, encrypted_password, email_confirmed_at, recovery_sent_at, last_sign_in_at, raw_app_meta_data, raw_user_meta_data, created_at, updated_at, confirmation_token, recovery_token, email_change_token_new, email_change) 
+            VALUES ('${profile.authUserId}', '00000000-0000-0000-0000-000000000000', 'authenticated', 'authenticated', '${profile.email}', '', now(), null, null, '{"provider":"google","providers":["google"]}', '{"name":"${profile.name}"}', now(), now(), '', '', '', '') 
+            ON CONFLICT DO NOTHING
+          `);
+        } catch (e) {
+          logger.warn("Failed to insert into auth.users", e);
+        }
+      }
+
       user = await prisma.user.create({
         data: {
           id: profile.authUserId,
@@ -306,13 +332,26 @@ export async function facebookAuth(profile: { id: string; authUserId?: string; e
   let user = await prisma.user.findUnique({ where: { facebookId: profile.id } });
 
   if (!user) {
-    user = await prisma.user.findUnique({ where: { email: profile.email } });
+    user = await prisma.user.findFirst({ where: { email: profile.email } });
     if (user) {
       user = await prisma.user.update({
         where: { id: user.id },
         data: { facebookId: profile.id, emailVerified: true, avatar: user.avatar || profile.picture },
       });
     } else {
+      // Ensure local auth.users has the UUID to satisfy the foreign key constraint
+      if (profile.authUserId) {
+        try {
+          await prisma.$executeRawUnsafe(`
+            INSERT INTO auth.users (id, instance_id, aud, role, email, encrypted_password, email_confirmed_at, recovery_sent_at, last_sign_in_at, raw_app_meta_data, raw_user_meta_data, created_at, updated_at, confirmation_token, recovery_token, email_change_token_new, email_change) 
+            VALUES ('${profile.authUserId}', '00000000-0000-0000-0000-000000000000', 'authenticated', 'authenticated', '${profile.email}', '', now(), null, null, '{"provider":"facebook","providers":["facebook"]}', '{"name":"${profile.name}"}', now(), now(), '', '', '', '') 
+            ON CONFLICT DO NOTHING
+          `);
+        } catch (e) {
+          logger.warn("Failed to insert into auth.users", e);
+        }
+      }
+
       user = await prisma.user.create({
         data: {
           id: profile.authUserId,

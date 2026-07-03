@@ -29,9 +29,13 @@ export async function createOrder(
     couponCode?: string;
     customerNotes?: string;
     paymentMethod?: string;
+    facebookPage?: string | null;
+    contactNumberTwo?: string | null;
+    orderNote?: string | null;
     isGift?: boolean;
     giftMessage?: string;
     giftWrap?: boolean;
+    expectedDelivery?: string | null;
   }
 ) {
   const [user] = await Promise.all([
@@ -191,6 +195,10 @@ export async function createOrder(
       shippingMethod: (data.shippingMethod as any) || "STANDARD",
       shippingAddressId: shippingAddressId,
       customerNotes: data.customerNotes,
+      facebookPage: data.facebookPage,
+      contactNumberTwo: data.contactNumberTwo,
+      orderNote: data.orderNote,
+      estimatedDelivery: data.expectedDelivery ? new Date(data.expectedDelivery) : undefined,
       giftMessage: data.giftMessage,
       isGift: data.isGift || false,
       giftWrap: data.giftWrap || false,

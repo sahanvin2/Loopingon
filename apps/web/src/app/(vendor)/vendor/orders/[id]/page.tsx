@@ -165,9 +165,28 @@ export default function VendorOrderDetailPage() {
           <div className="space-y-1 text-sm text-text-700">
             <p className="font-medium">{order.shippingAddress.fullName}</p>
             <p>{order.shippingAddress.addressLine1}</p>
+            {order.shippingAddress.addressLine2 && <p>{order.shippingAddress.addressLine2}</p>}
             <p>{order.shippingAddress.city}, {order.shippingAddress.district}</p>
-            <p>{order.shippingAddress.phone}</p>
+            <p className="pt-2"><span className="font-semibold text-text-900">Email:</span> {order.customer?.email || "N/A"}</p>
+            <p><span className="font-semibold text-text-900">Contact 1:</span> {order.shippingAddress.phone}</p>
+            {order.contactNumberTwo && <p><span className="font-semibold text-text-900">Contact 2:</span> {order.contactNumberTwo}</p>}
+            {order.facebookPage && <p><span className="font-semibold text-text-900">Facebook Page:</span> <a href={order.facebookPage.startsWith('http') ? order.facebookPage : `https://${order.facebookPage}`} target="_blank" rel="noopener noreferrer" className="text-primary-600 hover:underline">{order.facebookPage}</a></p>}
+            {order.estimatedDelivery && <p><span className="font-semibold text-text-900">Due Date:</span> {formatDate(order.estimatedDelivery)}</p>}
+            <p><span className="font-semibold text-text-900">Payment Method:</span> {order.paymentMethod || "COD"}</p>
           </div>
+        </div>
+      )}
+
+      {order.orderNote && (
+        <div className="bg-amber-50 rounded-xl border border-amber-200 p-6">
+          <h2 className="text-lg font-semibold text-amber-900 mb-2">Order Note</h2>
+          <p className="text-sm text-amber-800 whitespace-pre-wrap">{order.orderNote}</p>
+        </div>
+      )}
+      {order.customerNotes && !order.orderNote && (
+        <div className="bg-amber-50 rounded-xl border border-amber-200 p-6">
+          <h2 className="text-lg font-semibold text-amber-900 mb-2">Customer Notes</h2>
+          <p className="text-sm text-amber-800 whitespace-pre-wrap">{order.customerNotes}</p>
         </div>
       )}
 
@@ -178,25 +197,21 @@ export default function VendorOrderDetailPage() {
         <table className="w-full">
           <thead>
             <tr className="border-b border-accent-200">
-              <th className="px-3 py-3 text-left text-xs font-semibold text-muted-500 uppercase">
-                Item
-              </th>
-              <th className="px-3 py-3 text-right text-xs font-semibold text-muted-500 uppercase">
-                Qty
-              </th>
-              <th className="px-3 py-3 text-right text-xs font-semibold text-muted-500 uppercase">
-                Price
-              </th>
-              <th className="px-3 py-3 text-right text-xs font-semibold text-muted-500 uppercase">
-                Total
-              </th>
+              <th className="px-3 py-3 text-left text-xs font-semibold text-muted-500 uppercase">Product</th>
+              <th className="px-3 py-3 text-left text-xs font-semibold text-muted-500 uppercase">Product ID</th>
+              <th className="px-3 py-3 text-right text-xs font-semibold text-muted-500 uppercase">Qty</th>
+              <th className="px-3 py-3 text-right text-xs font-semibold text-muted-500 uppercase">Retail Price</th>
+              <th className="px-3 py-3 text-right text-xs font-semibold text-muted-500 uppercase">Total</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-surface-50">
             {order.items?.map((item) => (
               <tr key={item.id}>
-                <td className="px-3 py-3 text-sm text-text-700">
+                <td className="px-3 py-3 text-sm text-text-700 font-medium">
                   {item.productTitle}
+                </td>
+                <td className="px-3 py-3 text-sm text-muted-500 font-mono text-xs">
+                  {item.productId}
                 </td>
                 <td className="px-3 py-3 text-sm text-text-700 text-right">
                   {item.quantity}
@@ -219,24 +234,38 @@ export default function VendorOrderDetailPage() {
         </h2>
         <div className="space-y-2 text-sm">
           <div className="flex justify-between">
-            <span className="text-muted-500">Order Total</span>
+            <span className="text-muted-500">Retail Sale Amount</span>
+            <span className="font-medium text-text-900">
+              {formatPrice(Number(order.subtotal || 0))}
+            </span>
+          </div>
+          {Number(order.discountAmount) > 0 && (
+            <div className="flex justify-between">
+              <span className="text-muted-500">Discounted Amount</span>
+              <span className="font-medium text-red-600">
+                -{formatPrice(Number(order.discountAmount))}
+              </span>
+            </div>
+          )}
+          <div className="flex justify-between">
+            <span className="text-muted-500">Order Total (with shipping/tax)</span>
             <span className="font-medium text-text-900">
               {formatPrice(Number(order.totalAmount || 0))}
             </span>
           </div>
           <div className="flex justify-between">
             <span className="text-muted-500">
-              Commission ({order.commissionRate || 20}%)
+              Platform Commission ({order.commissionRate || 20}%)
             </span>
             <span className="font-medium text-red-600">
               -{formatPrice(Number(order.commissionAmount || 0))}
             </span>
           </div>
-          <div className="flex justify-between border-t border-accent-200 pt-2">
-            <span className="font-semibold text-text-900">
-              Your Earnings
+          <div className="flex justify-between border-t border-accent-200 pt-2 bg-green-50/50 -mx-6 px-6 pb-2 rounded-b-xl mt-2">
+            <span className="font-bold text-green-800">
+              Estimated Profit
             </span>
-            <span className="font-semibold text-muted-600">
+            <span className="font-bold text-green-700 text-lg">
               {formatPrice(Number(order.vendorPayoutAmount || 0))}
             </span>
           </div>

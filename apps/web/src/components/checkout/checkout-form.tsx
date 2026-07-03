@@ -21,14 +21,16 @@ interface ShippingFormData {
   email: string;
   fullName: string;
   phone: string;
-  altPhone: string;
+  contactNumberTwo: string;
   addressLine1: string;
   addressLine2: string;
   city: string;
   district: string;
   postalCode: string;
   country: string;
-  deliveryInstructions?: string;
+  facebookPage: string;
+  orderNote: string;
+  dueDate: string;
 }
 
 interface GiftFormData {
@@ -55,14 +57,16 @@ export function CheckoutForm({ className }: CheckoutFormProps) {
     email: user?.email || "",
     fullName: user?.fullName || "",
     phone: user?.phone || "",
-    altPhone: "",
+    contactNumberTwo: "",
     addressLine1: "",
     addressLine2: "",
     city: "",
     district: "",
     postalCode: "",
     country: "Sri Lanka",
-    deliveryInstructions: "",
+    facebookPage: "",
+    orderNote: "",
+    dueDate: "",
   });
 
   const [giftData, setGiftData] = useState<GiftFormData>({
@@ -92,7 +96,6 @@ export function CheckoutForm({ className }: CheckoutFormProps) {
           email: data.email,
           fullName: data.fullName,
           phone: data.phone,
-          altPhone: data.altPhone,
           addressLine1: data.addressLine1,
           addressLine2: data.addressLine2,
           city: data.city,
@@ -102,7 +105,10 @@ export function CheckoutForm({ className }: CheckoutFormProps) {
         },
         shippingMethod: method,
         paymentMethod: "COD",
-        customerNotes: data.deliveryInstructions ? `Delivery Instructions: ${data.deliveryInstructions}\n\n${giftData.isGift ? `Gift: ${giftData.giftMessage}` : ""}` : (giftData.isGift ? `Gift: ${giftData.giftMessage}` : undefined),
+        contactNumberTwo: data.contactNumberTwo,
+        facebookPage: data.facebookPage,
+        orderNote: data.orderNote,
+        expectedDelivery: data.dueDate,
         isGift: giftData.isGift,
         giftMessage: giftData.giftMessage || undefined,
         giftWrap: giftData.giftWrap || undefined,

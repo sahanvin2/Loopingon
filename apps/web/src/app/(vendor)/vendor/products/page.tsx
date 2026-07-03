@@ -163,8 +163,9 @@ export default function VendorProductsPage() {
                   <p className="font-medium text-text-900 text-sm">
                     {row.title}
                   </p>
+                  <p className="text-[11px] font-mono text-muted-500 mt-0.5">ID: {row.id}</p>
                   {row.sku && (
-                    <p className="text-xs text-muted-500">{row.sku}</p>
+                    <p className="text-[11px] text-muted-500 mt-0.5">SKU: {row.sku}</p>
                   )}
                 </div>
               ),

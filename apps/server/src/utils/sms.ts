@@ -58,7 +58,7 @@ export async function sendAdminOrderNotification(orderNumber: string, amount: nu
   const adminPhone = process.env.ADMIN_PHONE_NUMBER;
   if (!adminPhone) {
     logger.warn("ADMIN_PHONE_NUMBER is not configured. Admin SMS not sent.");
-    return;
+    return false;
   }
 
   const message = `Kandyam: New Order #${orderNumber}! Total: LKR ${amount.toLocaleString()}. ${itemCount} items. Check admin dashboard for details.`;

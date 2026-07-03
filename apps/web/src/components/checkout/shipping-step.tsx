@@ -5,18 +5,20 @@ import { Truck, Package, Loader2, ShieldCheck, Mail, MapPin, CreditCard, Info } 
 import { cn } from "@/lib/utils";
 import { useCartStore } from "@/stores/cart-store";
 
-interface ShippingFormData {
+export interface ShippingFormData {
   email: string;
   fullName: string;
   phone: string;
-  altPhone: string;
+  contactNumberTwo: string;
   addressLine1: string;
   addressLine2: string;
   city: string;
   district: string;
   postalCode: string;
   country: string;
-  deliveryInstructions?: string;
+  facebookPage: string;
+  orderNote: string;
+  dueDate: string;
 }
 
 interface ShippingStepProps {
@@ -40,7 +42,7 @@ export function ShippingStep({ initialData, onNext, selectedMethod = "KOOMBIYO",
   ];
 
   const [form, setForm] = useState<ShippingFormData>(initialData || {
-    email: "", fullName: "", phone: "", altPhone: "", addressLine1: "", addressLine2: "", city: "", district: "", postalCode: "", country: "Sri Lanka", deliveryInstructions: ""
+    email: "", fullName: "", phone: "", contactNumberTwo: "", addressLine1: "", addressLine2: "", city: "", district: "", postalCode: "", country: "Sri Lanka", facebookPage: "", orderNote: "", dueDate: ""
   });
   
   const [method, setMethod] = useState(selectedMethod);
@@ -59,6 +61,7 @@ export function ShippingStep({ initialData, onNext, selectedMethod = "KOOMBIYO",
     if (!form.addressLine1.trim()) newErrors.addressLine1 = "Address is required";
     if (!form.city.trim()) newErrors.city = "City is required";
     if (!form.district.trim()) newErrors.district = "District is required";
+    if (!form.dueDate?.trim()) newErrors.dueDate = "Due date is required";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -118,7 +121,8 @@ export function ShippingStep({ initialData, onNext, selectedMethod = "KOOMBIYO",
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
             <InputField label="Full Name" field="fullName" placeholder="First and Last name" colSpan={2} />
             <InputField label="Phone Number" field="phone" type="tel" placeholder="07X XXX XXXX" />
-            <InputField label="Alternate Phone" field="altPhone" type="tel" placeholder="Optional" optional />
+            <InputField label="Contact Number Two" field="contactNumberTwo" type="tel" placeholder="Optional" optional />
+            <InputField label="Facebook Page" field="facebookPage" placeholder="https://facebook.com/my-page" optional colSpan={2} />
           </div>
 
           <div className="pt-2 border-t border-surface-100"></div>
@@ -129,14 +133,15 @@ export function ShippingStep({ initialData, onNext, selectedMethod = "KOOMBIYO",
             <InputField label="City" field="city" placeholder="Colombo" />
             <InputField label="District" field="district" placeholder="Colombo" />
             <InputField label="Postal Code" field="postalCode" placeholder="00100" />
+            <InputField label="Expected Delivery (Due Date)" field="dueDate" type="date" placeholder="Select date" />
             
             <div className="sm:col-span-2 mt-2">
               <label className="block text-[13px] font-semibold text-text-700 mb-1.5 ml-0.5">
-                Delivery Instructions <span className="text-muted-400 font-normal">(Optional)</span>
+                Order Note / Delivery Instructions <span className="text-muted-400 font-normal">(Optional)</span>
               </label>
               <textarea
-                value={form.deliveryInstructions}
-                onChange={(e) => handleChange("deliveryInstructions", e.target.value)}
+                value={form.orderNote}
+                onChange={(e) => handleChange("orderNote", e.target.value)}
                 placeholder="E.g., Leave at the front door, call before arriving..."
                 rows={2}
                 className="w-full px-4 py-3 rounded-xl border border-surface-300 bg-surface-50 text-sm shadow-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 focus:bg-white hover:border-surface-400 resize-none"

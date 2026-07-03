@@ -11,7 +11,7 @@ import { Save, Eye, Trash2, ArrowLeft, Loader2 } from "lucide-react";
 import { get, patch, del } from "@/lib/api-client";
 import { productFormSchema, type ProductFormInput } from "@/lib/validators";
 import { CRAFT_TYPES } from "@/lib/constants";
-import { FileUpload } from "@/components/forms/file-upload";
+import { ImageManager } from "@/components/forms/image-manager";
 import { RichEditor } from "@/components/forms/rich-editor";
 import { TagInput } from "@/components/forms/tag-input";
 import { LoadingSkeleton } from "@/components/shared/loading-skeleton";
@@ -191,22 +191,14 @@ export default function VendorEditProductPage() {
         <div className="bg-white rounded-xl border border-accent-200 p-6 space-y-4">
           <h2 className="text-lg font-semibold text-text-900">Media</h2>
           <div>
-            <label className="block text-sm font-medium text-text-700 mb-1">Product Images</label>
-            <FileUpload maxFiles={10} accept="image/*" />
-            {product.images && product.images.length > 0 && (
-              <div className="grid grid-cols-4 gap-2 mt-3">
-                {product.images.map((img) => (
-                  <div key={img.id} className="relative rounded-md overflow-hidden border border-accent-200">
-                    <img src={img.thumbnail || img.url} alt={img.alt || product.title} className="w-full aspect-square object-cover" />
-                    {img.isPrimary && (
-                      <span className="absolute top-1 left-1 bg-primary-600 text-white text-[10px] px-1.5 py-0.5 rounded">
-                        Primary
-                      </span>
-                    )}
-                  </div>
-                ))}
-              </div>
-            )}
+            <label className="block text-sm font-medium text-text-700 mb-4">Product Images</label>
+            <ImageManager 
+              productId={id} 
+              initialImages={product.images || []} 
+              onImagesChange={() => {
+                queryClient.invalidateQueries({ queryKey: ["vendor", "product", id] });
+              }} 
+            />
           </div>
         </div>
 

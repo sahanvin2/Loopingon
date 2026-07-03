@@ -736,6 +736,10 @@ model Order {
   paymentStatus        PaymentStatus @default(PENDING)
   paidAt               DateTime?
 
+  contactNumberTwo     String?
+  facebookPage         String?
+  orderNote            String?
+
   processingAt         DateTime?
   shippedAt            DateTime?
   deliveredAt          DateTime?

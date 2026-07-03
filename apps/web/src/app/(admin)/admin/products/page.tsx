@@ -2,16 +2,20 @@
 
 import React, { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { Pencil, Trash2, Check, X, Loader2, Search } from "lucide-react";
+import { Pencil, Trash2, Check, X, Loader2, Search, GripVertical } from "lucide-react";
 import { toast } from "sonner";
+import { Reorder } from "framer-motion";
 import { LoadingSkeleton } from "@/components/shared/loading-skeleton";
 import { EmptyState } from "@/components/shared/empty-state";
 import { Pagination } from "@/components/shared/pagination";
 import { Badge } from "@/components/shared/badge";
-import { get, del, patch, post } from "@/lib/api-client";
+import { get, del, patch, post, uploadMultipleFiles } from "@/lib/api-client";
 import { formatPrice, formatDate } from "@/lib/utils";
 import type { Product, PaginatedResponse } from "@/types";
 import { CustomSelect } from "@/components/shared/custom-select";
+import { RichEditor } from "@/components/forms/rich-editor";
+import { FileUpload } from "@/components/forms/file-upload";
+import { v4 as uuidv4 } from "uuid";
 
 const PRODUCT_STATUS_MAP: Record<string, { label: string; variant: string }> = {
   PUBLISHED: { label: "Published", variant: "green" },
@@ -37,7 +41,15 @@ export default function AdminProductsPage() {
   const [searchInput, setSearchInput] = useState("");
   const [selectedRows, setSelectedRows] = useState<Set<string>>(new Set());
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
-  const [editForm, setEditForm] = useState({ title: "", price: "", compareAtPrice: "", quantity: "", description: "" });
+  const [isUploading, setIsUploading] = useState(false);
+  const [editForm, setEditForm] = useState({ 
+    title: "", 
+    price: "", 
+    compareAtPrice: "", 
+    quantity: "", 
+    description: "",
+    images: [] as any[]
+  });
 
   const { data, isLoading } = useQuery({
     queryKey: ["admin", "products", page, status, search],
@@ -62,8 +74,14 @@ export default function AdminProductsPage() {
   });
 
   const updateMutation = useMutation({
-    mutationFn: ({ id, data }: { id: string; data: any }) => patch(`/admin/products/${id}`, data),
-    onSuccess: () => { queryClient.invalidateQueries({ queryKey: ["admin", "products"] }); setEditingProduct(null); toast.success("Product updated"); },
+    mutationFn: async ({ id, data }: { id: string; data: any }) => {
+      return patch(`/admin/products/${id}`, data);
+    },
+    onSuccess: () => { 
+      queryClient.invalidateQueries({ queryKey: ["admin", "products"] }); 
+      setEditingProduct(null); 
+      toast.success("Product updated successfully!"); 
+    },
     onError: () => toast.error("Failed to update product"),
   });
 
@@ -78,21 +96,87 @@ export default function AdminProductsPage() {
       compareAtPrice: product.compareAtPrice?.toString() || "",
       quantity: product.quantity?.toString() || "0",
       description: product.description || "",
+      images: product.images ? [...product.images] : []
     });
   };
 
-  const saveEdit = () => {
+  const saveEdit = async () => {
     if (!editingProduct) return;
-    updateMutation.mutate({
-      id: editingProduct.id,
-      data: {
-        title: editForm.title,
-        price: editForm.price,
-        compareAtPrice: editForm.compareAtPrice || null,
-        quantity: parseInt(editForm.quantity),
-        description: editForm.description,
-      },
+    setIsUploading(true);
+
+    try {
+      // 1. Separate new files from existing images
+      const filesToUpload = editForm.images.filter(img => img.file).map(img => img.file);
+      
+      let uploadedUrls: any[] = [];
+      if (filesToUpload.length > 0) {
+        const res = await uploadMultipleFiles<any>("/media/multiple", filesToUpload, "files", { folder: "products" });
+        uploadedUrls = Array.isArray(res) ? res : res.data || [];
+      }
+
+      // 2. Map back to the correct order, assigning URLs to the new files
+      let uploadIndex = 0;
+      const finalImages = editForm.images.map((img, index) => {
+        let url = img.url;
+        let thumbnail = img.thumbnail;
+        
+        if (img.file) {
+          const uploaded = uploadedUrls[uploadIndex];
+          url = uploaded?.url || url;
+          thumbnail = uploaded?.thumbnail || uploaded?.url || url;
+          uploadIndex++;
+        }
+        
+        return {
+          id: img.id || uuidv4(),
+          url,
+          thumbnail,
+          isPrimary: index === 0, // First item in reordered list is primary
+          alt: img.alt || editForm.title
+        };
+      });
+
+      // 3. Patch the product
+      updateMutation.mutate({
+        id: editingProduct.id,
+        data: {
+          title: editForm.title,
+          price: editForm.price,
+          compareAtPrice: editForm.compareAtPrice || null,
+          quantity: parseInt(editForm.quantity),
+          description: editForm.description,
+          images: finalImages
+        },
+      });
+    } catch (err) {
+      toast.error("Failed to upload images");
+    } finally {
+      setIsUploading(false);
+    }
+  };
+
+  const removeExistingImage = (imageId: string) => {
+    setEditForm(prev => {
+      const imgToRemove = prev.images.find(img => img.id === imageId);
+      if (imgToRemove?.previewUrl) {
+        URL.revokeObjectURL(imgToRemove.previewUrl);
+      }
+      return {
+        ...prev,
+        images: prev.images.filter(img => img.id !== imageId)
+      };
     });
+  };
+
+  const handleNewUpload = (files: File[]) => {
+    const newImgs = files.map(file => ({
+      id: uuidv4(),
+      file,
+      url: URL.createObjectURL(file), // Temp preview
+      previewUrl: URL.createObjectURL(file), // Stored so we can revoke it
+      isPrimary: false
+    }));
+    setEditForm(prev => ({ ...prev, images: [...prev.images, ...newImgs] }));
   };
 
   return (
@@ -212,16 +296,25 @@ export default function AdminProductsPage() {
 
       {/* Edit Modal */}
       {editingProduct && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm" onClick={() => setEditingProduct(null)}>
-          <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-lg max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
-            <h2 className="text-xl font-bold text-text-900 mb-6">Edit Product</h2>
-            <div className="space-y-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4 overflow-y-auto" onClick={() => setEditingProduct(null)}>
+          <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-3xl max-h-[95vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <h2 className="text-xl font-bold text-text-900">Edit Product</h2>
+                <p className="text-xs text-muted-500 font-mono mt-1">ID: {editingProduct.id}</p>
+              </div>
+              <button onClick={() => setEditingProduct(null)} className="text-muted-500 hover:text-text-900 transition-colors">
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+            <div className="space-y-6">
               <div>
                 <label className="block text-sm font-medium text-text-700 mb-1">Title</label>
                 <input value={editForm.title} onChange={(e) => setEditForm(p => ({ ...p, title: e.target.value }))}
                   className="w-full px-3 py-2 rounded-lg border border-accent-200 text-sm focus:ring-2 focus:ring-primary-500 focus:outline-none" />
               </div>
-              <div className="grid grid-cols-2 gap-4">
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-text-700 mb-1">Price (Rs.)</label>
                   <input type="number" value={editForm.price} onChange={(e) => setEditForm(p => ({ ...p, price: e.target.value }))}
@@ -233,24 +326,79 @@ export default function AdminProductsPage() {
                     className="w-full px-3 py-2 rounded-lg border border-accent-200 text-sm focus:ring-2 focus:ring-primary-500 focus:outline-none" />
                 </div>
               </div>
+
               <div>
                 <label className="block text-sm font-medium text-text-700 mb-1">Stock Quantity</label>
                 <input type="number" value={editForm.quantity} onChange={(e) => setEditForm(p => ({ ...p, quantity: e.target.value }))}
                   className="w-full px-3 py-2 rounded-lg border border-accent-200 text-sm focus:ring-2 focus:ring-primary-500 focus:outline-none" />
               </div>
+
               <div>
-                <label className="block text-sm font-medium text-text-700 mb-1">Description</label>
-                <textarea rows={3} value={editForm.description} onChange={(e) => setEditForm(p => ({ ...p, description: e.target.value }))}
-                  className="w-full px-3 py-2 rounded-lg border border-accent-200 text-sm focus:ring-2 focus:ring-primary-500 focus:outline-none resize-none" />
+                <div className="flex items-center justify-between mb-2">
+                  <label className="block text-sm font-medium text-text-700">Product Images</label>
+                  <span className="text-xs text-muted-500">Drag to reorder. First image is primary.</span>
+                </div>
+                
+                {editForm.images.length > 0 && (
+                  <Reorder.Group 
+                    axis="x" 
+                    values={editForm.images} 
+                    onReorder={(newOrder) => setEditForm(p => ({ ...p, images: newOrder }))}
+                    className="flex flex-wrap gap-3 mb-4"
+                  >
+                    {editForm.images.map((img: any, index: number) => (
+                      <Reorder.Item 
+                        key={img.id} 
+                        value={img}
+                        className="relative group rounded-lg overflow-hidden border border-accent-200 w-24 h-24 sm:w-28 sm:h-28 cursor-grab active:cursor-grabbing bg-surface-50"
+                      >
+                        <img src={img.thumbnail || img.url} alt="" className="w-full h-full object-cover" />
+                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                          <div className="p-1.5 bg-white/20 text-white rounded-md cursor-grab active:cursor-grabbing hover:bg-white/40">
+                            <GripVertical className="w-4 h-4" />
+                          </div>
+                          <button 
+                            type="button" 
+                            onClick={() => removeExistingImage(img.id)}
+                            className="p-1.5 bg-red-600 text-white rounded-md hover:bg-red-700 shadow-sm"
+                            title="Remove image"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
+                        {index === 0 && (
+                          <span className="absolute top-1 left-1 bg-primary-600 text-white text-[10px] px-1.5 py-0.5 rounded shadow-sm font-medium">
+                            Primary
+                          </span>
+                        )}
+                      </Reorder.Item>
+                    ))}
+                  </Reorder.Group>
+                )}
+                
+                <FileUpload 
+                  maxFiles={10 - editForm.images.length} 
+                  accept="image/*" 
+                  onUpload={handleNewUpload}
+                />
               </div>
+
+              <div>
+                <label className="block text-sm font-medium text-text-700 mb-1">Description (Supports Rich Text, PDF Links & Embeds)</label>
+                <RichEditor 
+                  value={editForm.description} 
+                  onChange={(val: string) => setEditForm(p => ({ ...p, description: val }))} 
+                />
+              </div>
+
             </div>
-            <div className="flex gap-3 mt-6">
-              <button onClick={saveEdit} disabled={updateMutation.isPending}
-                className="flex-1 py-2.5 bg-primary-600 text-white font-medium rounded-xl hover:bg-primary-700 disabled:opacity-50 flex items-center justify-center gap-2">
-                {updateMutation.isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : null} Save Changes
-              </button>
-              <button onClick={() => setEditingProduct(null)} className="flex-1 py-2.5 border border-accent-200 text-text-600 font-medium rounded-xl hover:bg-surface-50">
+            <div className="flex justify-end gap-3 mt-8 pt-4 border-t border-accent-100">
+              <button onClick={() => setEditingProduct(null)} className="px-6 py-2.5 border border-accent-200 text-text-600 font-medium rounded-xl hover:bg-surface-50 transition-colors">
                 Cancel
+              </button>
+              <button onClick={saveEdit} disabled={updateMutation.isPending || isUploading}
+                className="px-8 py-2.5 bg-primary-600 text-white font-medium rounded-xl hover:bg-primary-700 disabled:opacity-50 flex items-center gap-2 transition-colors">
+                {(updateMutation.isPending || isUploading) ? <Loader2 className="w-4 h-4 animate-spin" /> : null} Save Changes
               </button>
             </div>
           </div>

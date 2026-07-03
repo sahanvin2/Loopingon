@@ -57,7 +57,7 @@ export function AuthModal() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 10 }}
             transition={{ duration: 0.2 }}
-            className="relative w-full max-w-md max-h-[95vh] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] rounded-3xl bg-white p-6 md:p-8 shadow-[0_30px_80px_-20px_rgba(176,86,110,0.5)]"
+            className="relative w-full max-w-md max-h-[calc(100dvh-2rem)] sm:max-h-[85vh] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] rounded-3xl bg-white p-6 md:p-8 shadow-[0_30px_80px_-20px_rgba(176,86,110,0.5)]"
             onClick={(e) => e.stopPropagation()}
           >
             <button
@@ -127,12 +127,20 @@ function SignInForm({ onSwitch, onSuccess }: { onSwitch: () => void; onSuccess: 
 
   const supabase = createClient();
 
+  const getRedirectUrl = () => {
+    let origin = window.location.origin;
+    if (origin.includes('0.0.0.0')) {
+      origin = origin.replace('0.0.0.0', 'localhost');
+    }
+    return `${origin}/auth/callback`;
+  };
+
   const handleGoogleSignIn = async () => {
     try {
       const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: `${window.location.origin}/auth/callback`,
+          redirectTo: getRedirectUrl(),
         },
       });
       if (error) throw error;
@@ -146,7 +154,7 @@ function SignInForm({ onSwitch, onSuccess }: { onSwitch: () => void; onSuccess: 
       const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'facebook',
         options: {
-          redirectTo: `${window.location.origin}/auth/callback`,
+          redirectTo: getRedirectUrl(),
         },
       });
       if (error) throw error;
@@ -276,12 +284,20 @@ function SignUpForm({ onSwitch, onSuccess }: { onSwitch: () => void; onSuccess: 
 
   const supabase = createClient();
 
+  const getRedirectUrl = () => {
+    let origin = window.location.origin;
+    if (origin.includes('0.0.0.0')) {
+      origin = origin.replace('0.0.0.0', 'localhost');
+    }
+    return `${origin}/auth/callback`;
+  };
+
   const handleGoogleSignIn = async () => {
     try {
       const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: `${window.location.origin}/auth/callback`,
+          redirectTo: getRedirectUrl(),
         },
       });
       if (error) throw error;
@@ -295,7 +311,7 @@ function SignUpForm({ onSwitch, onSuccess }: { onSwitch: () => void; onSuccess: 
       const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'facebook',
         options: {
-          redirectTo: `${window.location.origin}/auth/callback`,
+          redirectTo: getRedirectUrl(),
         },
       });
       if (error) throw error;

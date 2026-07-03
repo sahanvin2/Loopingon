@@ -799,3 +799,9 @@ export async function updateVendorSettings(
     data,
   });
 }
+
+export async function reorderProductImages(productId: string, vendorId: string, imageIds: string[]) {
+  const product = await prisma.product.findUnique({ where: { id: productId, vendorId } });
+  if (!product) throw new AppError('Product not found', 404, 'PRODUCT_NOT_FOUND');
+  await Promise.all(imageIds.map((id, index) => prisma.productImage.update({ where: { id, productId }, data: { sortOrder: index } })));
+}

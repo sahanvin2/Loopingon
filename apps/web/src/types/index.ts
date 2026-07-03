@@ -427,6 +427,9 @@ export interface Order {
   paymentId: string | null;
   paymentMethod: string | null;
   paymentStatus: PaymentStatus;
+  contactNumberTwo?: string | null;
+  facebookPage?: string | null;
+  orderNote?: string | null;
   paidAt: string | null;
   processingAt: string | null;
   shippedAt: string | null;

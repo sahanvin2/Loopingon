@@ -27,10 +27,14 @@ export const createOrderSchema = z.object({
   paymentMethod: z.string().min(1, "Payment method is required").max(100).optional(),
   couponCode: z.string().max(50).optional().nullable(),
   customerNotes: z.string().max(500).optional().nullable(),
+  facebookPage: z.string().max(200).optional().nullable(),
+  contactNumberTwo: z.string().regex(/^\+?[0-9]{7,15}$/, "Invalid phone number").optional().nullable(),
+  orderNote: z.string().max(1000).optional().nullable(),
   isGift: z.boolean().optional(),
   giftMessage: z.string().max(300).optional().nullable(),
   giftWrap: z.boolean().optional(),
   useWalletBalance: z.boolean().optional(),
+  expectedDelivery: z.string().optional().nullable(),
 });
 
 export const checkoutSchema = z.object({

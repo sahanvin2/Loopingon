@@ -4,28 +4,17 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Flame, Star, Sparkles, Clock } from "lucide-react";
+import Cookies from "js-cookie";
 
 import { useQuery } from "@tanstack/react-query";
 import { get } from "@/lib/api-client";
-import type { Product } from "@/types";
-
-const TRENDING_ITEMS = [
-  { id: 1, name: "Boho Ceramic Vase", price: "$42.50", rating: 4.8, reviews: 120, image: "https://images.unsplash.com/photo-1612196808214-b8e1d6145a8c?w=200&h=200&fit=crop" },
-  { id: 2, name: "Gold Hoop Earrings", price: "$26.00", rating: 4.9, reviews: 86, image: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=200&h=200&fit=crop" },
-  { id: 3, name: "Minimalist Desk Lamp", price: "$68.00", rating: 4.7, reviews: 44, image: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=200&h=200&fit=crop" },
-];
-
-const RECENTLY_VIEWED = [
-  { id: 1, name: "Wooden Wall Clock", price: "$35.00", image: "https://images.unsplash.com/photo-1563861826100-9cb868fdbe1c?w=300&h=400&fit=crop" },
-  { id: 2, name: "Scented Soy Candle", price: "$22.00", image: "https://images.unsplash.com/photo-1603006905003-be475563bc59?w=300&h=400&fit=crop" },
-  { id: 3, name: "Macrame Wall Hanging", price: "$28.00", image: "https://images.unsplash.com/photo-1520201163981-8cc95007dd2a?w=300&h=400&fit=crop" },
-];
+import type { Product, ApiResponse } from "@/types";
 
 export function DiscoveryRow() {
   const { data: trendingItems = [] } = useQuery({
     queryKey: ["products", "trending"],
     queryFn: async () => {
-      const res = await get<{ data: Product[] }>("/products", { sort: "salesCount", order: "desc", limit: 3 } as any);
+      const res = await get<ApiResponse<Product[]>>("/products/trending", { limit: 3 });
       return res.data || [];
     },
     staleTime: 5 * 60 * 1000,
@@ -34,28 +23,44 @@ export function DiscoveryRow() {
   const { data: recentlyViewedItems = [] } = useQuery({
     queryKey: ["products", "recent"],
     queryFn: async () => {
-      const res = await get<{ data: Product[] }>("/products", { sort: "rating", order: "desc", limit: 3 } as any);
+      const cookieId = Cookies.get("kandyam_tracking_session");
+      if (!cookieId) return [];
+      const res = await get<ApiResponse<Product[]>>("/products/recently-viewed", { cookieId, limit: 3 });
       return res.data || [];
     },
     staleTime: 5 * 60 * 1000,
   });
 
-  // Map API data or fallback to defaults
-  const displayTrending = trendingItems.length > 0 ? trendingItems.slice(0, 3).map((item: any) => ({
+  const { data: featuredItems = [] } = useQuery({
+    queryKey: ["products", "featured"],
+    queryFn: async () => {
+      const res = await get<ApiResponse<Product[]>>("/products/featured", { limit: 1 });
+      return res.data || [];
+    },
+    staleTime: 5 * 60 * 1000,
+  });
+
+  const displayTrending = trendingItems.slice(0, 3).map((item) => ({
     id: item.id,
+    slug: item.slug || item.id,
     name: item.title,
     price: `${item.currency === 'LKR' ? 'Rs.' : '$'}${item.price}`,
     rating: item.averageRating || 4.5,
     reviews: item.reviewCount || 10,
-    image: item.images?.[0]?.url || "https://images.unsplash.com/photo-1612196808214-b8e1d6145a8c?w=200&h=200&fit=crop"
-  })) : TRENDING_ITEMS;
+    image: item.images?.[0]?.url || "/placeholder.png"
+  }));
 
-  const displayRecent = recentlyViewedItems.length > 0 ? recentlyViewedItems.slice(0, 3).map((item: any) => ({
+  const displayRecent = recentlyViewedItems.slice(0, 3).map((item) => ({
     id: item.id,
+    slug: item.slug || item.id,
     name: item.title,
     price: `${item.currency === 'LKR' ? 'Rs.' : '$'}${item.price}`,
-    image: item.images?.[0]?.url || "https://images.unsplash.com/photo-1563861826100-9cb868fdbe1c?w=300&h=400&fit=crop"
-  })) : RECENTLY_VIEWED;
+    image: item.images?.[0]?.url || "/placeholder.png"
+  }));
+
+  if (displayTrending.length === 0 && displayRecent.length === 0) {
+    // Optionally return null if nothing to show, but for now we'll render whatever exists.
+  }
 
   return (
     <section className="w-full bg-[#FCFDFD] py-16 border-b border-surface-100">
@@ -69,14 +74,14 @@ export function DiscoveryRow() {
                 <Flame className="w-5 h-5 text-[#E63946]" />
                 Trending This Week
               </h2>
-              <Link href="/products?sort=popular" className="text-sm font-medium text-[#62A7B0] hover:text-[#4A8A92] transition-colors">
+              <Link href="/products?sortBy=popular" className="text-sm font-medium text-[#62A7B0] hover:text-[#4A8A92] transition-colors">
                 View all
               </Link>
             </div>
             
             <div className="flex flex-col gap-6">
-              {displayTrending.map((item, index) => (
-                <Link href={`/products/${item.id}`} key={item.id} className="flex items-center gap-4 group cursor-pointer">
+              {displayTrending.length > 0 ? displayTrending.map((item, index) => (
+                <Link href={`/products/${item.slug}`} key={item.id} className="flex items-center gap-4 group cursor-pointer">
                   <div className="relative shrink-0">
                     <div className="w-16 h-16 rounded-xl overflow-hidden bg-surface-100">
                       <Image src={item.image} alt={item.name} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover group-hover:scale-105 transition-transform" />
@@ -96,7 +101,9 @@ export function DiscoveryRow() {
                     </div>
                   </div>
                 </Link>
-              ))}
+              )) : (
+                <p className="text-sm text-text-500">No trending items yet.</p>
+              )}
             </div>
           </div>
 
@@ -112,22 +119,41 @@ export function DiscoveryRow() {
               </Link>
             </div>
             
-            <Link href="/products?isFeatured=1" className="group cursor-pointer block">
-              <div className="w-full h-[240px] rounded-2xl overflow-hidden relative bg-surface-100">
-                <Image 
-                  src="https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=800&h=500&fit=crop" 
-                  alt="Scandi Living Room" 
-                  fill sizes="(max-width: 768px) 100vw, 50vw" 
-                  className="object-cover group-hover:scale-105 transition-transform duration-700" 
-                />
-              </div>
-              <div className="mt-4">
-                <h3 className="text-lg font-bold text-navy-900">Scandi Living Room Collection</h3>
-                <p className="text-sm font-medium text-[#E63946] mt-1 flex items-center gap-1">
-                  Shop the look <span className="text-lg leading-none">&rarr;</span>
-                </p>
-              </div>
-            </Link>
+            {featuredItems.length > 0 ? (
+              <Link href={`/products/${featuredItems[0].slug || featuredItems[0].id}`} className="group cursor-pointer block">
+                <div className="w-full h-[240px] rounded-2xl overflow-hidden relative bg-surface-100">
+                  <Image 
+                    src={featuredItems[0].images?.[0]?.url || "https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=800&h=500&fit=crop"} 
+                    alt={featuredItems[0].title} 
+                    fill sizes="(max-width: 768px) 100vw, 50vw" 
+                    className="object-cover group-hover:scale-105 transition-transform duration-700" 
+                  />
+                </div>
+                <div className="mt-4">
+                  <h3 className="text-lg font-bold text-navy-900 line-clamp-1">{featuredItems[0].title}</h3>
+                  <p className="text-sm font-medium text-[#E63946] mt-1 flex items-center gap-1">
+                    Shop the look <span className="text-lg leading-none">&rarr;</span>
+                  </p>
+                </div>
+              </Link>
+            ) : (
+              <Link href="/products?isFeatured=1" className="group cursor-pointer block">
+                <div className="w-full h-[240px] rounded-2xl overflow-hidden relative bg-surface-100">
+                  <Image 
+                    src="https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=800&h=500&fit=crop" 
+                    alt="Scandi Living Room" 
+                    fill sizes="(max-width: 768px) 100vw, 50vw" 
+                    className="object-cover group-hover:scale-105 transition-transform duration-700" 
+                  />
+                </div>
+                <div className="mt-4">
+                  <h3 className="text-lg font-bold text-navy-900">Editors' Picks Collection</h3>
+                  <p className="text-sm font-medium text-[#E63946] mt-1 flex items-center gap-1">
+                    Shop the look <span className="text-lg leading-none">&rarr;</span>
+                  </p>
+                </div>
+              </Link>
+            )}
           </div>
 
           {/* Recently Viewed */}
@@ -143,8 +169,8 @@ export function DiscoveryRow() {
             </div>
             
             <div className="grid grid-cols-3 gap-3 sm:gap-4">
-              {displayRecent.map((item) => (
-                <Link href={`/products/${item.id}`} key={item.id} className="group cursor-pointer block">
+              {displayRecent.length > 0 ? displayRecent.map((item) => (
+                <Link href={`/products/${item.slug}`} key={item.id} className="group cursor-pointer block">
                   <div className="w-full aspect-[3/4] rounded-xl overflow-hidden bg-surface-100 mb-3 relative">
                     <Image src={item.image} alt={item.name} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />
                   </div>
@@ -153,7 +179,9 @@ export function DiscoveryRow() {
                   </h3>
                   <p className="text-xs font-medium text-text-600 mt-1">{item.price}</p>
                 </Link>
-              ))}
+              )) : (
+                <p className="text-sm text-text-500 col-span-3">No recently viewed items.</p>
+              )}
             </div>
           </div>
 

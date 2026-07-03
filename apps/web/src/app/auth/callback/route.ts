@@ -28,41 +28,48 @@ export async function GET(request: Request) {
         };
 
         // Call the Express backend to get custom JWTs
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://server:4000/api/v1';
+        const apiUrl = process.env.INTERNAL_API_URL || 'http://server:4000/api/v1';
         const queryParams = new URLSearchParams(profile as any).toString();
         const response = await fetch(`${apiUrl}/auth/${provider}/callback?${queryParams}`, {
           method: 'GET',
           headers: { 'Content-Type': 'application/json' }
         });
 
+        const appUrl = process.env.NEXT_PUBLIC_APP_URL || requestUrl.origin;
+        let redirectResponse = NextResponse.redirect(new URL(next, appUrl));
+
         if (response.ok) {
           const apiData = await response.json();
           if (apiData.data?.accessToken && apiData.data?.refreshToken) {
-            // Set temporary cookie for client to pick up
-            const cookieStore = await cookies();
             const tokensObj = JSON.stringify({
               accessToken: apiData.data.accessToken,
               refreshToken: apiData.data.refreshToken,
               user: apiData.data.user
             });
-            cookieStore.set('auth_sync_tokens', tokensObj, {
+            redirectResponse.cookies.set('auth_sync_tokens', tokensObj, {
               path: '/',
               maxAge: 60, // 60 seconds is enough to sync
               sameSite: 'lax',
               secure: process.env.NODE_ENV === 'production'
             });
           }
+        } else {
+          console.error('Failed to sync with Express API, status:', response.status);
         }
+
+        return redirectResponse;
       } catch (err) {
         console.error('Failed to sync with Express API:', err);
       }
-
-      return NextResponse.redirect(new URL(next, process.env.NEXT_PUBLIC_APP_URL || requestUrl.origin));
+      
+      const fallbackUrl = process.env.NEXT_PUBLIC_APP_URL || requestUrl.origin;
+      return NextResponse.redirect(new URL(next, fallbackUrl));
     } else {
       console.error('OAuth Code Exchange Error:', error?.message);
     }
   }
 
   // Fallback to error or home page if something went wrong
-  return NextResponse.redirect(new URL('/?error=auth', process.env.NEXT_PUBLIC_APP_URL || requestUrl.origin));
+  const finalFallbackUrl = process.env.NEXT_PUBLIC_APP_URL || requestUrl.origin;
+  return NextResponse.redirect(new URL('/?error=auth', finalFallbackUrl));
 }

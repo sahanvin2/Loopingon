@@ -62,11 +62,19 @@ export default function SignUpCustomerPage() {
 
   const supabase = createClient();
 
+  const getRedirectUrl = () => {
+    let origin = window.location.origin;
+    if (origin.includes('0.0.0.0')) {
+      origin = origin.replace('0.0.0.0', 'localhost');
+    }
+    return `${origin}/auth/callback`;
+  };
+
   const handleGoogleSignIn = async () => {
     try {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
-        options: { redirectTo: `${window.location.origin}/auth/callback` },
+        options: { redirectTo: getRedirectUrl() },
       });
       if (error) throw error;
     } catch (err: any) {
@@ -78,7 +86,7 @@ export default function SignUpCustomerPage() {
     try {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'facebook',
-        options: { redirectTo: `${window.location.origin}/auth/callback` },
+        options: { redirectTo: getRedirectUrl() },
       });
       if (error) throw error;
     } catch (err: any) {

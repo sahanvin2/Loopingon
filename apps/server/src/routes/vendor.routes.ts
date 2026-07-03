@@ -247,6 +247,26 @@ router.post(
   }
 );
 
+router.patch(
+  "/dashboard/products/:productId/images/reorder",
+  authenticate,
+  requireVendor,
+  requireVendorProductOwnership,
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { imageIds } = req.body;
+      if (!Array.isArray(imageIds)) {
+        res.status(400).json({ status: "error", message: "imageIds must be an array" });
+        return;
+      }
+      await vendorService.reorderProductImages(req.params.productId, req.user!.vendor!.id, imageIds);
+      successResponse(res, { success: true });
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
 router.delete(
   "/dashboard/products/images/:imageId",
   authenticate,

@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useRef, useState } from "react";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import LinkExtension from "@tiptap/extension-link";
@@ -23,8 +23,12 @@ import {
   Quote,
   Code,
   Minus,
+  FileText,
+  Loader2
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { uploadFile } from "@/lib/api-client";
+import { toast } from "sonner";
 
 interface RichEditorProps {
   content?: string;
@@ -53,7 +57,7 @@ function ToolbarButton({
       onClick={onClick}
       disabled={disabled}
       className={cn(
-        "p-1.5 rounded text-muted-600 hover:bg-muted-100 transition-colors",
+        "p-1.5 rounded text-muted-600 hover:bg-muted-100 transition-colors flex items-center justify-center",
         "disabled:opacity-40 disabled:cursor-not-allowed",
         isActive && "bg-primary-100 text-primary-700",
       )}
@@ -72,6 +76,8 @@ export function RichEditor({
   placeholder = "Write something...",
   className,
 }: RichEditorProps) {
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [isUploading, setIsUploading] = useState(false);
   const initialContent = value ?? content ?? "";
 
   const editor = useEditor({
@@ -83,6 +89,8 @@ export function RichEditor({
         openOnClick: false,
         HTMLAttributes: {
           class: "text-primary-600 underline hover:text-primary-700",
+          target: "_blank",
+          rel: "noopener noreferrer",
         },
       }),
       ImageExtension.configure({
@@ -125,6 +133,31 @@ export function RichEditor({
     }
   };
 
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    try {
+      setIsUploading(true);
+      const res = await uploadFile<any>("/media/upload", file, "file", { folder: "documents" });
+      const url = res.data?.url || res.url || res;
+      
+      // If it's an image, embed it. Otherwise, create a link with the file name.
+      if (file.type.startsWith("image/")) {
+        editor.chain().focus().setImage({ src: url }).run();
+      } else {
+        editor.chain().focus().insertContent(`<a href="${url}" target="_blank" rel="noopener noreferrer">${file.name}</a> `).run();
+      }
+    } catch (error) {
+      toast.error("Failed to upload file");
+    } finally {
+      setIsUploading(false);
+      if (fileInputRef.current) {
+        fileInputRef.current.value = "";
+      }
+    }
+  };
+
   return (
     <div
       className={cn(
@@ -133,6 +166,13 @@ export function RichEditor({
         className,
       )}
     >
+      <input 
+        type="file" 
+        ref={fileInputRef} 
+        className="hidden" 
+        onChange={handleFileUpload}
+        accept="application/pdf,image/*,.doc,.docx,.txt"
+      />
       <div className="flex items-center gap-0.5 px-2 py-1.5 border-b border-accent-200 bg-surface-50 flex-wrap">
         <ToolbarButton
           onClick={() => editor.chain().focus().toggleBold().run()}
@@ -204,7 +244,15 @@ export function RichEditor({
         <div className="w-px h-5 bg-surface-300 mx-1" />
 
         <ToolbarButton onClick={addLink} label="Add Link" icon={LinkIcon} />
-        <ToolbarButton onClick={addImage} label="Add Image" icon={ImageIcon} />
+        <ToolbarButton onClick={addImage} label="Add Image via URL" icon={ImageIcon} />
+        
+        <ToolbarButton 
+          onClick={() => fileInputRef.current?.click()} 
+          disabled={isUploading}
+          label="Upload File/PDF" 
+          icon={isUploading ? Loader2 : FileText} 
+        />
+
         <ToolbarButton
           onClick={() => editor.chain().focus().setHorizontalRule().run()}
           label="Divider"

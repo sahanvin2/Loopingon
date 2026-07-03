@@ -4,10 +4,11 @@ import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Save, Eye, Trash2, ArrowLeft } from "lucide-react";
+import { Save, Eye, Trash2, ArrowLeft, Info } from "lucide-react";
+import { toast } from "sonner";
 import { post } from "@/lib/api-client";
 import { productFormSchema, type ProductFormInput } from "@/lib/validators";
 import { CRAFT_TYPES } from "@/lib/constants";
@@ -19,6 +20,7 @@ import { CustomSelect } from "@/components/shared/custom-select";
 
 export default function VendorNewProductPage() {
   const router = useRouter();
+  const queryClient = useQueryClient();
 
   const {
     register,
@@ -41,10 +43,11 @@ export default function VendorNewProductPage() {
   });
 
   const createMutation = useMutation({
-    mutationFn: (data: ProductFormInput) =>
-      post("/vendor/products", { ...data, status: data.status || "DRAFT" }),
-    onSuccess: () => {
-      router.push("/vendor/products");
+    mutationFn: (data: ProductFormInput) => post<{ data: { id: string } }>("/vendor/products", data),
+    onSuccess: (res) => {
+      queryClient.invalidateQueries({ queryKey: ["vendor", "products"] });
+      toast.success("Product created! Now add images.");
+      router.push(`/vendor/products/${res.data.id}/edit`);
     },
   });
 
@@ -72,19 +75,20 @@ export default function VendorNewProductPage() {
             <Save className="w-4 h-4 inline mr-1" />
             Save as Draft
           </button>
-          <button type="button" className="px-4 py-2 bg-white border border-accent-200 rounded-lg text-sm font-medium hover:bg-surface-50">
-            <Eye className="w-4 h-4 inline mr-1" />
-            Preview
+        </div>
+        <div className="flex justify-end gap-3">
+          <Link href="/vendor/products" className="px-6 py-2 bg-white border border-accent-200 rounded-lg text-sm font-medium text-text-700 hover:bg-surface-50">
+            Cancel
+          </Link>
+          <button
+            type="submit"
+            form="product-form"
+            disabled={isSubmitting || createMutation.isPending}
+            className="px-6 py-2 bg-primary-600 text-white rounded-lg text-sm font-medium hover:bg-primary-700 disabled:opacity-50"
+          >
+            {isSubmitting || createMutation.isPending ? "Saving..." : "Save & Add Media"}
           </button>
         </div>
-        <button
-          type="submit"
-          form="product-form"
-          disabled={isSubmitting || createMutation.isPending}
-          className="px-6 py-2 bg-primary-600 text-white rounded-lg text-sm font-medium hover:bg-primary-700 disabled:opacity-50"
-        >
-          {isSubmitting || createMutation.isPending ? "Submitting..." : "Submit for Review"}
-        </button>
       </div>
 
       <form id="product-form" onSubmit={handleSubmit(onSubmit)} className="space-y-6">
@@ -138,14 +142,9 @@ export default function VendorNewProductPage() {
         </div>
 
         <div className="bg-white rounded-xl border border-accent-200 p-6 space-y-4">
-          <h2 className="text-lg font-semibold text-text-900">Media</h2>
-          <div>
-            <label className="block text-sm font-medium text-text-700 mb-1">Product Images (max 10)</label>
-            <FileUpload maxFiles={10} accept="image/*" />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-text-700 mb-1">Product Videos (max 3)</label>
-            <FileUpload maxFiles={3} accept="video/*" />
+          <div className="flex items-center gap-2 p-4 bg-primary-50 text-primary-700 rounded-lg border border-primary-100">
+            <Info className="w-5 h-5 flex-shrink-0" />
+            <p className="text-sm">You can add product images and videos after saving the basic product details.</p>
           </div>
         </div>
 

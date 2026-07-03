@@ -32,6 +32,51 @@ export default function AdminAnalyticsPage() {
 
   const telemetry = telemetryData?.data;
 
+  const handleExport = () => {
+    if (!telemetry && !stats) return;
+
+    let csv = "Category,Metric,Value\n";
+    
+    // Add stats
+    if (stats) {
+      csv += `Stats,Revenue,${stats.revenue || 0}\n`;
+      csv += `Stats,Orders,${stats.orders || 0}\n`;
+      csv += `Stats,New Users,${stats.newUsers || 0}\n`;
+      csv += `Stats,New Vendors,${stats.newVendors || 0}\n`;
+      csv += `Stats,Avg Order Value,${stats.avgOrderValue || 0}\n`;
+    }
+    
+    // Add Page Views
+    if (telemetry?.pageVisits) {
+      telemetry.pageVisits.forEach((pv: any) => {
+        csv += `Page Views,${pv.date},${pv.views}\n`;
+      });
+    }
+    
+    // Add Interactions
+    if (telemetry?.interactions) {
+      telemetry.interactions.forEach((i: any) => {
+        csv += `Interactions,${i.type},${i._count.id}\n`;
+      });
+    }
+    
+    // Add Top Pages
+    if (telemetry?.topPages) {
+      telemetry.topPages.forEach((p: any) => {
+        csv += `Top Pages,${p.path},${p._count.id}\n`;
+      });
+    }
+
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.setAttribute("href", url);
+    link.setAttribute("download", `kandyam_analytics_${dateRange}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
       <div className="flex items-center justify-between">
@@ -49,8 +94,8 @@ export default function AdminAnalyticsPage() {
               </button>
             ))}
           </div>
-          <button className="px-4 py-2 bg-white border border-accent-200 rounded-lg text-sm font-medium flex items-center gap-2">
-            <Download className="w-4 h-4" /> Export
+          <button onClick={handleExport} className="px-4 py-2 bg-white border border-accent-200 rounded-lg text-sm font-medium flex items-center gap-2 hover:bg-gray-50 transition-colors">
+            <Download className="w-4 h-4" /> Export CSV
           </button>
         </div>
       </div>

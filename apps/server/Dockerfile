@@ -12,8 +12,7 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 RUN npm run db:generate
-RUN npx prisma generate
-RUN npm run build
+RUN npx turbo run build --filter=@kandyam/server
 
 FROM base AS runner
 WORKDIR /app
@@ -23,10 +22,10 @@ ENV NODE_ENV=production
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 appuser
 
-COPY --from=builder /app/package.json ./
+COPY --from=builder /app/apps/server/package.json ./
 COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/prisma ./prisma
+COPY --from=builder /app/apps/server/dist ./dist
+COPY --from=builder /app/apps/server/prisma ./prisma
 
 RUN chown -R appuser:nodejs /app
 
