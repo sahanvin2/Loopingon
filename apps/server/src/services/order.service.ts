@@ -313,6 +313,7 @@ export async function createOrder(
         name: item.productTitle,
         quantity: item.quantity,
         price: item.price,
+        image: item.productImage,
       })),
       totalAmount,
       user.fullName,

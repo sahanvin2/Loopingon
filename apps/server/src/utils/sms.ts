@@ -66,6 +66,6 @@ export async function sendAdminOrderNotification(orderNumber: string, amount: nu
 }
 
 export async function sendCustomerOrderSMS(phone: string, orderNumber: string, amount: number) {
-  const message = `Kandyam: Your order #${orderNumber} for LKR ${amount.toLocaleString()} is confirmed! We will notify you once it ships. Thanks for shopping with us!`;
+  const message = `🎉 Hi there! Your order #${orderNumber} for LKR ${amount.toLocaleString()} is confirmed on Kandyam. We're packing it up & will notify you once it ships. Thanks for shopping!`;
   return sendSMS({ recipient: phone, message });
 }

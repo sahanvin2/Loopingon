@@ -21,7 +21,7 @@ interface OrderConfirmationJob {
     email: string;
     name?: string;
     orderNumber: string;
-    items: Array<{ name: string; quantity: number; price: number }>;
+    items: Array<{ name: string; quantity: number; price: number; image?: string | null }>;
     total: number;
     shippingAddress?: string;
     estimatedDelivery?: string;
@@ -222,7 +222,7 @@ function buildPasswordResetHtml(name: string | undefined, token: string): string
 function buildOrderConfirmationHtml(
   name: string | undefined,
   orderNumber: string,
-  items: Array<{ name: string; quantity: number; price: number }>,
+  items: Array<{ name: string; quantity: number; price: number; image?: string | null }>;
   total: number,
   shippingAddress?: string,
   estimatedDelivery?: string
@@ -232,11 +232,14 @@ function buildOrderConfirmationHtml(
     .map(
       (item, idx) => `
     <tr style="${idx % 2 === 0 ? "background-color:#f8f9fa;" : ""}">
+      <td style="padding:12px 16px;border-bottom:1px solid #e9ecef;width:60px;">
+        ${item.image ? `<img src="${item.image}" alt="${item.name}" width="50" height="50" style="border-radius:6px;object-fit:cover;display:block;" />` : `<div style="width:50px;height:50px;background:#e9ecef;border-radius:6px;display:block;"></div>`}
+      </td>
       <td style="padding:12px 16px;border-bottom:1px solid #e9ecef;color:#495057;font-size:14px;">
         <strong>${item.name}</strong>
       </td>
       <td style="padding:12px 16px;border-bottom:1px solid #e9ecef;color:#495057;font-size:14px;text-align:center;">${item.quantity}</td>
-      <td style="padding:12px 16px;border-bottom:1px solid #e9ecef;color:#495057;font-size:14px;text-align:right;">LKR ${item.price.toLocaleString("en-LK", { minimumFractionDigits: 2 })}</td>
+      <td style="padding:12px 16px;border-bottom:1px solid #e9ecef;color:#495057;font-size:14px;text-align:right;white-space:nowrap;">LKR ${item.price.toLocaleString("en-LK", { minimumFractionDigits: 2 })}</td>
     </tr>`
     )
     .join("");

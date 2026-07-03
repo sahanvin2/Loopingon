@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Truck, Package, Loader2, ShieldCheck, Mail, MapPin, CreditCard, Info } from "lucide-react";
+import { Truck, Package, Loader2, ShieldCheck, Mail, MapPin, CreditCard, Info, Clock } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useCartStore } from "@/stores/cart-store";
 
@@ -162,66 +162,86 @@ export function ShippingStep({ initialData, onNext, selectedMethod = "KOOMBIYO",
 
       {/* 3. Shipping Method */}
       <section>
-        <div className="flex items-center gap-2 mb-4">
-          <Truck className="w-5 h-5 text-text-900" />
+        <div className="flex items-center gap-3 mb-5">
+          <div className="w-10 h-10 rounded-full bg-primary-50 flex items-center justify-center shrink-0">
+            <Truck className="w-5 h-5 text-primary-600" />
+          </div>
           <h2 className="font-serif text-2xl font-bold text-text-900">Shipping Method</h2>
         </div>
-        <div className="bg-white p-5 md:p-6 rounded-2xl border border-surface-200 shadow-soft-sm space-y-3">
-          {shippingMethods.map((m) => {
-            const isSelected = method === m.id;
-            return (
-              <button 
-                key={m.id} 
-                type="button" 
-                onClick={() => setMethod(m.id)}
-                className={cn(
-                  "w-full flex items-center justify-between p-4 rounded-xl border-2 text-left transition-all duration-200",
-                  isSelected 
-                    ? "border-primary-500 bg-primary-50/50 shadow-sm" 
-                    : "border-surface-200 hover:border-surface-300 hover:bg-surface-50"
-                )}
-              >
-                <div className="flex items-center gap-4">
+        <div className="bg-white p-5 md:p-6 rounded-2xl border border-surface-200 shadow-soft-sm">
+          <div className="space-y-3">
+            {shippingMethods.map((m) => {
+              const isSelected = method === m.id;
+              return (
+                <button 
+                  key={m.id} 
+                  type="button" 
+                  onClick={() => setMethod(m.id)}
+                  className={cn(
+                    "w-full flex items-start sm:items-center justify-between p-4 sm:p-5 rounded-xl border-2 text-left transition-all duration-300 relative overflow-hidden group",
+                    isSelected 
+                      ? "border-primary-500 bg-primary-50/50 shadow-sm" 
+                      : "border-surface-200 hover:border-primary-300 hover:bg-surface-50"
+                  )}
+                >
+                  {/* Active highlight subtle gradient */}
+                  {isSelected && (
+                    <div className="absolute inset-0 bg-gradient-to-r from-primary-100/50 to-transparent opacity-50 pointer-events-none" />
+                  )}
+                  
+                  <div className="flex items-center gap-4 relative z-10">
+                    <div className={cn(
+                      "w-6 h-6 rounded-full border-2 flex items-center justify-center shrink-0 transition-all duration-300 shadow-sm", 
+                      isSelected ? "border-primary-600 bg-primary-600 scale-110" : "border-surface-300 bg-white group-hover:border-primary-400"
+                    )}>
+                      {isSelected && <div className="w-2.5 h-2.5 rounded-full bg-white animate-in zoom-in duration-200" />}
+                    </div>
+                    <div className="flex flex-col">
+                      <span className={cn("text-base font-bold transition-colors", isSelected ? "text-primary-900" : "text-text-900")}>
+                        {m.label}
+                      </span>
+                      <span className="text-sm text-muted-500 mt-0.5 flex items-center gap-1">
+                        <Clock className="w-3.5 h-3.5 inline" /> {m.description}
+                      </span>
+                    </div>
+                  </div>
                   <div className={cn(
-                    "w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 transition-colors", 
-                    isSelected ? "border-primary-600 bg-primary-600" : "border-surface-300 bg-white"
+                    "relative z-10 mt-3 sm:mt-0 px-3 py-1.5 rounded-lg font-bold text-sm transition-colors",
+                    m.price === 0 
+                      ? isSelected ? "bg-teal-100 text-teal-800" : "bg-teal-50 text-teal-700"
+                      : isSelected ? "bg-primary-100 text-primary-900" : "bg-surface-100 text-text-900"
                   )}>
-                    {isSelected && <div className="w-2 h-2 rounded-full bg-white" />}
+                    {m.price === 0 ? "FREE" : `Rs. ${m.price}`}
                   </div>
-                  <div className="flex flex-col">
-                    <span className={cn("text-sm font-bold", isSelected ? "text-primary-900" : "text-text-900")}>{m.label}</span>
-                    <span className="text-xs text-muted-500 mt-0.5">{m.description}</span>
-                  </div>
-                </div>
-                <span className={cn("text-sm font-bold", m.price === 0 ? "text-teal-600" : "text-text-900")}>
-                  {m.price === 0 ? "FREE" : `Rs. ${m.price}`}
-                </span>
-              </button>
-            );
-          })}
+                </button>
+              );
+            })}
+          </div>
         </div>
       </section>
 
       {/* 4. Payment */}
       <section>
-        <div className="flex items-center gap-2 mb-4">
-          <CreditCard className="w-5 h-5 text-text-900" />
+        <div className="flex items-center gap-3 mb-5">
+          <div className="w-10 h-10 rounded-full bg-green-50 flex items-center justify-center shrink-0">
+            <CreditCard className="w-5 h-5 text-green-600" />
+          </div>
           <h2 className="font-serif text-2xl font-bold text-text-900">Payment</h2>
         </div>
         <div className="bg-white p-5 md:p-6 rounded-2xl border border-surface-200 shadow-soft-sm">
-          <div className="bg-green-50 border border-green-200 rounded-xl p-5 relative overflow-hidden">
+          <div className="bg-gradient-to-r from-green-50 to-emerald-50/30 border border-green-200 rounded-xl p-5 relative overflow-hidden group transition-all duration-300 hover:shadow-sm hover:border-green-300">
             {/* Active highlight border top */}
-            <div className="absolute top-0 left-0 w-full h-1 bg-green-500"></div>
+            <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-green-500 to-emerald-500"></div>
             
             <div className="flex items-start gap-4">
-              <div className="w-10 h-10 rounded-full bg-white shadow-sm border border-green-200 flex items-center justify-center shrink-0">
-                <svg className="w-5 h-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+              <div className="w-12 h-12 rounded-full bg-white shadow-sm border border-green-100 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform duration-300">
+                <svg className="w-6 h-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <div>
-                <p className="text-base font-bold text-text-900 mb-1">Cash on Delivery (COD)</p>
-                <p className="text-sm text-muted-500 leading-relaxed">
+              <div className="pt-1">
+                <p className="text-lg font-bold text-green-900 mb-1">Cash on Delivery (COD)</p>
+                <p className="text-sm text-green-700/80 leading-relaxed font-medium">
                   Pay with cash when your order is delivered to your doorstep. No online payment required today.
                 </p>
               </div>

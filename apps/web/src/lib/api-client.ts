@@ -117,11 +117,12 @@ async function request<T>(
         if (response.status === 401 && typeof window !== "undefined") {
           window.dispatchEvent(new CustomEvent("auth:unauthorized"));
         }
+        const errorMessage = typeof data.message === 'string' ? data.message : (typeof data.error === 'string' ? data.error : data.error?.message) || `Request failed with status ${response.status}`;
         throw new ApiError(
-          data.message || data.error || `Request failed with status ${response.status}`,
+          errorMessage,
           response.status,
-          data.code || data.errorCode || "REQUEST_ERROR",
-          data.details || data.errors || null,
+          data.code || data.error?.code || data.errorCode || "REQUEST_ERROR",
+          data.details || data.error?.details || data.errors || null,
         );
       }
 

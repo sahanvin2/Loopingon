@@ -99,7 +99,7 @@ export function CheckoutForm({ className }: CheckoutFormProps) {
           addressLine1: data.addressLine1,
           addressLine2: data.addressLine2,
           city: data.city,
-          district: data.district,
+          state: data.district,
           postalCode: data.postalCode,
           country: data.country,
         },
