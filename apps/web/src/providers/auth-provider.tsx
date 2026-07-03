@@ -21,7 +21,38 @@ const AuthContext = createContext<AuthContextValue | null>(null);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const { isAuthenticated, isLoading, user } = useAuthStore();
-  const { data: currentUser, isLoading: isQueryLoading } = useCurrentUser();
+  const { data: currentUser, isLoading: isQueryLoading, refetch } = useCurrentUser();
+
+  // Sync OAuth tokens from cookie to localStorage and Zustand
+  useEffect(() => {
+    try {
+      const match = document.cookie.match(/(?:^|;\s*)auth_sync_tokens=([^;]*)/);
+      if (match && match[1]) {
+        const decoded = decodeURIComponent(match[1]);
+        const tokens = JSON.parse(decoded);
+        
+        if (tokens.accessToken && tokens.refreshToken) {
+          localStorage.setItem('accessToken', tokens.accessToken);
+          localStorage.setItem('refreshToken', tokens.refreshToken);
+          
+          const { setAccessToken, setRefreshToken, setUser } = useAuthStore.getState();
+          setAccessToken(tokens.accessToken);
+          setRefreshToken(tokens.refreshToken);
+          if (tokens.user) {
+            setUser(tokens.user);
+          }
+          
+          // Force refresh current user
+          refetch();
+          
+          // Delete cookie
+          document.cookie = "auth_sync_tokens=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        }
+      }
+    } catch (err) {
+      console.error('Failed to parse auth_sync_tokens:', err);
+    }
+  }, [refetch]);
 
   const value: AuthContextValue = {
     user: user || currentUser || null,

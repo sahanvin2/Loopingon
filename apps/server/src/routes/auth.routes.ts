@@ -212,6 +212,7 @@ router.get(
     try {
       const profile = {
         id: req.query.id as string,
+        authUserId: req.query.authUserId as string | undefined,
         email: req.query.email as string,
         name: req.query.name as string,
         picture: req.query.picture as string | undefined,
@@ -230,6 +231,7 @@ router.get(
     try {
       const profile = {
         id: req.query.id as string,
+        authUserId: req.query.authUserId as string | undefined,
         email: req.query.email as string,
         name: req.query.name as string,
         picture: req.query.picture as string | undefined,

@@ -250,7 +250,7 @@ export async function verifyEmail(token: string) {
   });
 }
 
-export async function googleAuth(profile: { id: string; email: string; name: string; picture?: string }) {
+export async function googleAuth(profile: { id: string; authUserId?: string; email: string; name: string; picture?: string }) {
   let user = await prisma.user.findUnique({ where: { googleId: profile.id } });
 
   if (!user) {
@@ -263,6 +263,7 @@ export async function googleAuth(profile: { id: string; email: string; name: str
     } else {
       user = await prisma.user.create({
         data: {
+          id: profile.authUserId,
           email: profile.email,
           fullName: profile.name,
           googleId: profile.id,
@@ -301,7 +302,7 @@ export async function googleAuth(profile: { id: string; email: string; name: str
 
 
 
-export async function facebookAuth(profile: { id: string; email: string; name: string; picture?: string }) {
+export async function facebookAuth(profile: { id: string; authUserId?: string; email: string; name: string; picture?: string }) {
   let user = await prisma.user.findUnique({ where: { facebookId: profile.id } });
 
   if (!user) {
@@ -314,6 +315,7 @@ export async function facebookAuth(profile: { id: string; email: string; name: s
     } else {
       user = await prisma.user.create({
         data: {
+          id: profile.authUserId,
           email: profile.email,
           fullName: profile.name,
           facebookId: profile.id,
