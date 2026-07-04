@@ -355,8 +355,12 @@ export function ProductDetail({ product }: ProductDetailProps) {
                 </div>
                 <div className="flex items-center gap-2 pt-3 border-t border-accent-200">
                   <button
-                    onClick={() => contactVendorMutation.mutate(product.vendor.userId)}
-                    disabled={contactVendorMutation.isPending}
+                    onClick={() => {
+                      if (product.vendor?.userId) {
+                        contactVendorMutation.mutate(product.vendor.userId);
+                      }
+                    }}
+                    disabled={contactVendorMutation.isPending || !product.vendor?.userId}
                     className="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 bg-white border border-accent-300 text-text-700 rounded-lg text-xs font-semibold hover:bg-surface-100 transition-colors disabled:opacity-50"
                   >
                     <MessageCircle className="w-3.5 h-3.5" />
