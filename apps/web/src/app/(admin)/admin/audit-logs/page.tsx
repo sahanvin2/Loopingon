@@ -27,6 +27,9 @@ export default function AdminAuditLogsPage() {
         entityId: string;
         details: Record<string, unknown>;
         ipAddress: string;
+        device?: string;
+        country?: string;
+        city?: string;
       }>>("/admin/audit-logs", {
         page,
         limit: 30,

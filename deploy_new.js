@@ -12,7 +12,8 @@ async function run() {
     const projectDir = findDir.stdout.trim() || '/opt/loopingon';
     console.log(`Project directory found at: ${projectDir}`);
 
-    console.log('Running git pull...');
+    console.log('Running git reset and pull...');
+    await ssh.execCommand('git checkout -- .', { cwd: projectDir });
     const pull = await ssh.execCommand('git pull origin main', { cwd: projectDir });
     console.log(pull.stdout);
     if(pull.stderr) console.error(pull.stderr);
