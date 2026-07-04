@@ -313,7 +313,7 @@ export default function OrderDetailPage() {
         {order.vendor?.userId && (
           <button
             type="button"
-            onClick={() => contactVendorMutation.mutate(order.vendor.userId)}
+            onClick={() => contactVendorMutation.mutate(order.vendor!.userId)}
             disabled={contactVendorMutation.isPending}
             className="inline-flex items-center gap-2 px-5 py-2.5 bg-white border border-accent-200 rounded-lg text-sm font-medium text-text-700 hover:bg-surface-50 transition-colors disabled:opacity-50"
           >
