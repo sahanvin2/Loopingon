@@ -698,7 +698,7 @@ const emailWorker = new Worker<EmailJobData>(
       }
 
       case "sendOrderConfirmation": {
-        const { email: orderEmail, name: orderName, orderId, orderNumber, items, total, shippingAddress, estimatedDelivery } = job.data;
+        const { email: orderEmail, name: orderName, orderId, orderNumber, items, total, shippingAddress, estimatedDelivery } = data as OrderConfirmationJob["data"];
         const orderHtml = buildOrderConfirmationHtml(
           orderName,
           orderId,

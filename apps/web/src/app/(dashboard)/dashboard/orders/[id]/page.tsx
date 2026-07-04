@@ -64,7 +64,7 @@ export default function OrderDetailPage() {
         subject: `Regarding Order #${order?.orderNumber}`,
         orderId: order?.id 
       }),
-    onSuccess: (res) => {
+    onSuccess: (res: any) => {
       if (res.data?.id) {
         router.push(`/dashboard/messages?threadId=${res.data.id}`);
       } else {
