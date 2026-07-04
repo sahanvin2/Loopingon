@@ -20,9 +20,6 @@ export async function sendSMS({ recipient, message }: SendSMSParams): Promise<bo
     formattedRecipient = "94" + formattedRecipient;
   }
 
-  // Truncate message to 160 characters if necessary
-  const finalMessage = message.length > 160 ? message.substring(0, 157) + "..." : message;
-
   try {
     const response = await fetch("https://app.text.lk/api/v3/sms/send", {
       method: "POST",
@@ -33,9 +30,9 @@ export async function sendSMS({ recipient, message }: SendSMSParams): Promise<bo
       },
       body: JSON.stringify({
         recipient: formattedRecipient,
-        sender_id: "kandyam", // Max 11 chars
+        sender_id: "kandyam",
         type: "plain",
-        message: finalMessage,
+        message,
       }),
     });
 
@@ -61,11 +58,22 @@ export async function sendAdminOrderNotification(orderNumber: string, amount: nu
     return false;
   }
 
-  const message = `Kandyam: New Order #${orderNumber}! Total: LKR ${amount.toLocaleString()}. ${itemCount} items. Check admin dashboard for details.`;
+  const message = `Kandyam: New Order #${orderNumber}! Total: LKR ${amount.toLocaleString()}. ${itemCount} item(s). Check admin dashboard.`;
   return sendSMS({ recipient: adminPhone, message });
 }
 
-export async function sendCustomerOrderSMS(phone: string, orderNumber: string, amount: number) {
-  const message = `🎉 Hi there! Your order #${orderNumber} for LKR ${amount.toLocaleString()} is confirmed on Kandyam. We're packing it up & will notify you once it ships. Thanks for shopping!`;
+export async function sendCustomerOrderSMS(
+  phone: string,
+  orderNumber: string,
+  amount: number,
+  customerName?: string,
+  itemNames?: string[],
+) {
+  const name = customerName || "there";
+  const itemText = itemNames && itemNames.length > 0
+    ? itemNames.slice(0, 2).join(", ") + (itemNames.length > 2 ? ` +${itemNames.length - 2} more` : "")
+    : "your items";
+
+  const message = `Hi ${name}! Your Kandyam order #${orderNumber} is confirmed.\n\nItems: ${itemText}\nTotal (COD): Rs. ${amount.toLocaleString()}\n\nWe'll notify you when it ships via Koombiyo.\nTrack: kandyam.com/track-order\n\nThank you for shopping with Kandyam!`;
   return sendSMS({ recipient: phone, message });
 }

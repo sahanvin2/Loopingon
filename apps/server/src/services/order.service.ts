@@ -170,8 +170,8 @@ export async function createOrder(
   }
 
   const shippingCost = data.shippingMethod === "FREE" ? 0 : calculatedShippingCost;
-  const taxAmount = Math.round(subtotal * 0.08 * 100) / 100;
-  const totalAmount = subtotal + shippingCost + taxAmount - discountAmount;
+  const taxAmount = 0; // No tax for now
+  const totalAmount = subtotal + shippingCost - discountAmount;
 
   const commissionRate = vendor.commissionRate || 20;
   const commissionAmount = Math.round((subtotal - discountAmount) * (commissionRate / 100) * 100) / 100;
@@ -338,11 +338,18 @@ export async function createOrder(
     logger.warn("Failed to send admin SMS notification", err);
   }
 
-  // Send customer SMS notification (COD confirmation)
+  // Send customer SMS notification to 1st phone only (COD confirmation)
   if (data.paymentMethod === "CASH_ON_DELIVERY" || data.paymentMethod === "COD" || !data.paymentMethod || data.paymentMethod.toUpperCase().includes("CASH")) {
     try {
       if (shippingAddress.phone) {
-        await sendCustomerOrderSMS(shippingAddress.phone, order.orderNumber, totalAmount);
+        const itemNames = orderItems.map((item) => item.productTitle);
+        await sendCustomerOrderSMS(
+          shippingAddress.phone,
+          order.orderNumber,
+          totalAmount,
+          user.fullName || shippingAddress.fullName,
+          itemNames,
+        );
       }
     } catch (err) {
       logger.warn("Failed to send customer order SMS notification", err);

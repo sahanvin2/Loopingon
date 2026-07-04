@@ -105,9 +105,9 @@ type EmailJobData =
   | AbandonedCartReminderJob
   | PromotionalEmailJob;
 
-const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:3000";
-const PLATFORM_NAME = process.env.PLATFORM_NAME || "Movia";
-const EMAIL_FROM = process.env.SMTP_FROM || process.env.EMAIL_FROM || "Movia <no-reply@movia.club>";
+const FRONTEND_URL = process.env.FRONTEND_URL || "https://kandyam.com";
+const PLATFORM_NAME = process.env.PLATFORM_NAME || "Kandyam";
+const EMAIL_FROM = process.env.SMTP_FROM || process.env.EMAIL_FROM || "Kandyam <no-reply@kandyam.com>";
 
 function emailTemplate(title: string, content: string): string {
   return `
@@ -227,53 +227,42 @@ function buildOrderConfirmationHtml(
   shippingAddress?: string,
   estimatedDelivery?: string
 ): string {
-  const greeting = name ? `Hello ${name},` : "Hello,";
+  const greeting = name ? `Hi ${name},` : "Hi there,";
+  const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
   const itemsHtml = items
     .map(
-      (item, idx) => `
-    <tr style="${idx % 2 === 0 ? "background-color:#f8f9fa;" : ""}">
-      <td style="padding:12px 16px;border-bottom:1px solid #e9ecef;width:60px;">
-        ${item.image ? `<img src="${item.image}" alt="${item.name}" width="50" height="50" style="border-radius:6px;object-fit:cover;display:block;" />` : `<div style="width:50px;height:50px;background:#e9ecef;border-radius:6px;display:block;"></div>`}
+      (item) => `
+    <tr>
+      <td style="padding:14px 16px;border-bottom:1px solid #f0f0f0;">
+        <table cellpadding="0" cellspacing="0"><tr>
+          ${item.image ? `<td style="width:56px;padding-right:12px;vertical-align:top;"><img src="${item.image}" alt="${item.name}" width="48" height="48" style="border-radius:8px;object-fit:cover;display:block;" /></td>` : ""}
+          <td style="vertical-align:top;"><span style="color:#1a1a2e;font-size:14px;font-weight:600;">${item.name}</span><br/><span style="color:#9CA3AF;font-size:12px;">Qty: ${item.quantity}</span></td>
+        </tr></table>
       </td>
-      <td style="padding:12px 16px;border-bottom:1px solid #e9ecef;color:#495057;font-size:14px;">
-        <strong>${item.name}</strong>
-      </td>
-      <td style="padding:12px 16px;border-bottom:1px solid #e9ecef;color:#495057;font-size:14px;text-align:center;">${item.quantity}</td>
-      <td style="padding:12px 16px;border-bottom:1px solid #e9ecef;color:#495057;font-size:14px;text-align:right;white-space:nowrap;">LKR ${item.price.toLocaleString("en-LK", { minimumFractionDigits: 2 })}</td>
+      <td style="padding:14px 16px;border-bottom:1px solid #f0f0f0;text-align:right;color:#1a1a2e;font-size:14px;font-weight:600;white-space:nowrap;">Rs. ${(item.price * item.quantity).toLocaleString("en-LK", { minimumFractionDigits: 2 })}</td>
     </tr>`
     )
     .join("");
 
-  let extrasHtml = "";
-  if (shippingAddress) {
-    extrasHtml += `
-    <div style="margin:24px 0 16px 0;">
-      <h3 style="color:#1a1a2e;font-size:16px;margin:0 0 8px 0;">Shipping Address</h3>
-      <p style="color:#495057;font-size:14px;line-height:1.6;margin:0;">${shippingAddress}</p>
-    </div>`;
-  }
-  if (estimatedDelivery) {
-    extrasHtml += `
-    <div style="margin:0 0 16px 0;">
-      <h3 style="color:#1a1a2e;font-size:16px;margin:0 0 8px 0;">Estimated Delivery</h3>
-      <p style="color:#495057;font-size:14px;line-height:1.6;margin:0;">${estimatedDelivery}</p>
-    </div>`;
-  }
+  const shippingCost = total - subtotal;
 
   return emailTemplate(
-    "Order Confirmed",
+    "Order Confirmed — Kandyam",
     `
-    <h2 style="color:#1a1a2e;font-size:22px;margin:0 0 8px 0;">Order Confirmed!</h2>
-    <p style="color:#28a745;font-size:14px;font-weight:600;margin:0 0 24px 0;">&#10003; Payment Successful</p>
-    <p style="color:#495057;font-size:16px;line-height:1.7;margin:0 0 24px 0;">${greeting}</p>
-    <p style="color:#495057;font-size:16px;line-height:1.7;margin:0 0 24px 0;">Your order <strong style="color:#F7444E;">${orderNumber}</strong> has been confirmed and is being processed. You'll receive shipping updates as your items make their way to you.</p>
+    <h2 style="color:#1a1a2e;font-size:22px;margin:0 0 6px 0;">Your Order is Confirmed! 🎉</h2>
+    <p style="color:#495057;font-size:15px;line-height:1.7;margin:0 0 20px 0;">${greeting}</p>
+    <p style="color:#495057;font-size:15px;line-height:1.7;margin:0 0 24px 0;">Thank you for your order! We've received your order <strong style="color:#1a1a2e;">#${orderNumber}</strong> and it's now being prepared for delivery.</p>
 
-    <table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e9ecef;border-radius:8px;overflow:hidden;margin:0 0 24px 0;">
+    <div style="background-color:#FFF7ED;border-left:4px solid #F97316;padding:14px 18px;border-radius:0 8px 8px 0;margin:0 0 24px 0;">
+      <p style="color:#92400E;font-size:14px;line-height:1.5;margin:0;"><strong>💰 Cash on Delivery:</strong> No payment is needed right now. Pay <strong>Rs. ${total.toLocaleString("en-LK", { minimumFractionDigits: 2 })}</strong> when your order arrives.</p>
+    </div>
+
+    <table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #f0f0f0;border-radius:10px;overflow:hidden;margin:0 0 20px 0;">
       <thead>
-        <tr style="background-color:#F7444E;">
-          <th style="padding:12px 16px;color:#ffffff;font-size:13px;font-weight:600;text-align:left;text-transform:uppercase;letter-spacing:0.5px;">Item</th>
-          <th style="padding:12px 16px;color:#ffffff;font-size:13px;font-weight:600;text-align:center;text-transform:uppercase;letter-spacing:0.5px;">Qty</th>
-          <th style="padding:12px 16px;color:#ffffff;font-size:13px;font-weight:600;text-align:right;text-transform:uppercase;letter-spacing:0.5px;">Price</th>
+        <tr style="background-color:#f8f9fa;">
+          <th style="padding:12px 16px;color:#6B7280;font-size:12px;font-weight:600;text-align:left;text-transform:uppercase;letter-spacing:0.5px;">Item</th>
+          <th style="padding:12px 16px;color:#6B7280;font-size:12px;font-weight:600;text-align:right;text-transform:uppercase;letter-spacing:0.5px;">Amount</th>
         </tr>
       </thead>
       <tbody>
@@ -283,17 +272,38 @@ function buildOrderConfirmationHtml(
 
     <table width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 24px 0;">
       <tr>
-        <td align="right" style="padding:16px 0;">
-          <span style="color:#1a1a2e;font-size:20px;font-weight:700;">Total: LKR ${total.toLocaleString("en-LK", { minimumFractionDigits: 2 })}</span>
-        </td>
+        <td style="padding:6px 16px;color:#6B7280;font-size:13px;">Subtotal</td>
+        <td style="padding:6px 16px;color:#1a1a2e;font-size:13px;text-align:right;">Rs. ${subtotal.toLocaleString("en-LK", { minimumFractionDigits: 2 })}</td>
+      </tr>
+      ${shippingCost > 0 ? `<tr>
+        <td style="padding:6px 16px;color:#6B7280;font-size:13px;">Shipping (Koombiyo)</td>
+        <td style="padding:6px 16px;color:#1a1a2e;font-size:13px;text-align:right;">Rs. ${shippingCost.toLocaleString("en-LK", { minimumFractionDigits: 2 })}</td>
+      </tr>` : ""}
+      <tr>
+        <td style="padding:10px 16px;border-top:2px solid #1a1a2e;color:#1a1a2e;font-size:16px;font-weight:700;">Total (COD)</td>
+        <td style="padding:10px 16px;border-top:2px solid #1a1a2e;color:#1a1a2e;font-size:16px;font-weight:700;text-align:right;">Rs. ${total.toLocaleString("en-LK", { minimumFractionDigits: 2 })}</td>
       </tr>
     </table>
 
-    ${extrasHtml}
+    ${shippingAddress ? `
+    <div style="background-color:#f8f9fa;border-radius:10px;padding:16px 20px;margin:0 0 16px 0;">
+      <p style="color:#6B7280;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin:0 0 6px 0;">📦 Delivering To</p>
+      <p style="color:#1a1a2e;font-size:14px;line-height:1.6;margin:0;">${shippingAddress}</p>
+    </div>` : ""}
 
-    <div style="background-color:#e7f3ff;border:1px solid #b3d9ff;border-radius:8px;padding:16px 20px;margin:0 0 8px 0;">
-      <p style="color:#004085;font-size:14px;line-height:1.6;margin:0;">Track your order anytime at <a href="${FRONTEND_URL}/orders" style="color:#4F46E5;text-decoration:none;font-weight:600;">${FRONTEND_URL}/orders</a></p>
-    </div>
+    ${estimatedDelivery ? `
+    <div style="background-color:#f8f9fa;border-radius:10px;padding:16px 20px;margin:0 0 20px 0;">
+      <p style="color:#6B7280;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin:0 0 6px 0;">🚚 Estimated Delivery</p>
+      <p style="color:#1a1a2e;font-size:14px;line-height:1.6;margin:0;">${estimatedDelivery}</p>
+    </div>` : ""}
+
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin:24px 0 0 0;">
+      <tr>
+        <td align="center">
+          <a href="${FRONTEND_URL}/track-order" style="display:inline-block;background-color:#1a1a2e;color:#ffffff;text-decoration:none;padding:14px 36px;border-radius:8px;font-size:14px;font-weight:600;">Track Your Order</a>
+        </td>
+      </tr>
+    </table>
     `
   );
 }
