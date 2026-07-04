@@ -39,10 +39,10 @@ const TIER_BG: Record<string, string> = {
 
 const ALL_TIERS = [
   { name: "none", label: "Free", minSpent: 0, reward: 0, icon: "⬜", color: "gray" },
-  { name: "bronze", label: "Bronze", minSpent: 10000, reward: 2000, icon: "🥉", color: "amber" },
-  { name: "silver", label: "Silver", minSpent: 25000, reward: 5000, icon: "🥈", color: "slate" },
-  { name: "gold", label: "Gold", minSpent: 50000, reward: 10000, icon: "🥇", color: "yellow" },
-  { name: "elite", label: "Elite", minSpent: 200000, reward: 50000, icon: "👑", color: "purple" },
+  { name: "bronze", label: "Bronze", minSpent: 10000, reward: 800, icon: "🥉", color: "amber" },
+  { name: "silver", label: "Silver", minSpent: 25000, reward: 2000, icon: "🥈", color: "slate" },
+  { name: "gold", label: "Gold", minSpent: 50000, reward: 4000, icon: "🥇", color: "yellow" },
+  { name: "elite", label: "Elite", minSpent: 200000, reward: 20000, icon: "👑", color: "purple" },
 ];
 
 export default function LoyaltyPage() {
@@ -200,18 +200,9 @@ export default function LoyaltyPage() {
             <Crown className="w-5 h-5 text-green-600 shrink-0 mt-0.5" />
             <div>
               <p className="text-sm font-semibold text-text-900">Elite Benefits</p>
-              <p className="text-xs text-muted-600">Elite members get Rs. 50,000 off — usable on any product on the platform.</p>
+              <p className="text-xs text-muted-600">Elite members get Rs. 20,000 off — usable on any product on the platform.</p>
             </div>
           </div>
-        </div>
-      </div>
-
-      {/* Gold Tier Minimum Purchase */}
-      <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 flex items-start gap-3">
-        <Shield className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
-        <div className="text-sm text-amber-800">
-          <p className="font-semibold mb-1">Gold Tier Redemption Rule</p>
-          <p>Gold tier's Rs. 10,000 reward can only be applied to purchases of Rs. 90,000 or more. This ensures the reward is meaningful for both you and our sellers.</p>
         </div>
       </div>
 

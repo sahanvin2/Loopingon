@@ -40,7 +40,7 @@ export default function CustomerInvoicePage({ params }: { params: Promise<{ id: 
       {/* Print styles - force single page */}
       <style>{`
         @media print {
-          @page { margin: 12mm 10mm; size: A4; }
+          @page { margin: 5mm; size: A4; }
           body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
           nav, header, footer, aside, .print\\:hidden { display: none !important; }
           .print-invoice { 
@@ -49,8 +49,11 @@ export default function CustomerInvoicePage({ params }: { params: Promise<{ id: 
             padding: 0 !important; 
             margin: 0 !important;
             page-break-inside: avoid;
+            transform: scale(0.95);
+            transform-origin: top left;
+            width: 105%;
           }
-          .print-invoice * { font-size: 92% !important; }
+          .print-invoice * { font-size: 90% !important; }
         }
       `}</style>
 

@@ -93,11 +93,17 @@ export default function AdminOrdersPage() {
             { header: "Comm.", accessor: (row: any) => formatPrice(Number(row.commissionAmount || 0)) },
             {
               header: "Status",
-              accessor: (row: any) => (
-                <Badge variant={row.status === "DELIVERED" ? "muted" : row.status === "CANCELLED" ? "red" : "amber"} size="sm">
-                  {ORDER_STATUS_MAP[row.status]?.label || row.status}
-                </Badge>
-              ),
+              accessor: (row: any) => {
+                let variant: "green" | "red" | "amber" | "muted" = "amber";
+                if (row.status === "DELIVERED" || row.status === "COMPLETED") variant = "green";
+                else if (["CANCELLED", "REFUNDED", "RETURNED", "RETURN_REQUESTED", "FAILED"].includes(row.status)) variant = "red";
+                
+                return (
+                  <Badge variant={variant} size="sm">
+                    {ORDER_STATUS_MAP[row.status]?.label || row.status}
+                  </Badge>
+                );
+              },
             },
             {
               header: "Action",

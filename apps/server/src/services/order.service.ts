@@ -36,6 +36,7 @@ export async function createOrder(
     giftMessage?: string;
     giftWrap?: boolean;
     expectedDelivery?: string | null;
+    useLoyaltyBalance?: boolean;
   }
 ) {
   const [user] = await Promise.all([
@@ -123,7 +124,7 @@ export async function createOrder(
 
     // Add shipping cost for this product (multiplied by quantity or just once? Usually once per item unit, or base + per unit. Let's do per unit for now or just flat per product. The user said 250-600 mostly 400. Let's do flat per product * quantity to be safe, or just item.quantity * (product.shippingPrice || 400))
     // The user said "it can 250 to 600 rs based on the company... mostly 400 rs"
-    const productShipping = product.freeShippingDomestic ? 0 : (product.shippingPrice ? Number(product.shippingPrice) : 400);
+    const productShipping = product.shippingPrice ? Number(product.shippingPrice) : 400;
     calculatedShippingCost += productShipping * item.quantity;
 
     orderItems.push({
@@ -171,7 +172,21 @@ export async function createOrder(
 
   const shippingCost = data.shippingMethod === "FREE" ? 0 : calculatedShippingCost;
   const taxAmount = 0; // No tax for now
-  const totalAmount = subtotal + shippingCost - discountAmount;
+  
+  let appliedLoyaltyAmount = 0;
+  if (data.useLoyaltyBalance) {
+    const loyaltyAccount = await prisma.loyaltyAccount.findUnique({ where: { userId } });
+    if (loyaltyAccount && Number(loyaltyAccount.rewardBalance) > 0) {
+      appliedLoyaltyAmount = Number(loyaltyAccount.rewardBalance);
+    }
+  }
+
+  const totalAmountPreLoyalty = subtotal + shippingCost - discountAmount;
+  let finalTotalAmount = totalAmountPreLoyalty - appliedLoyaltyAmount;
+  if (finalTotalAmount < 0) {
+    appliedLoyaltyAmount = totalAmountPreLoyalty;
+    finalTotalAmount = 0;
+  }
 
   const commissionRate = vendor.commissionRate || 20;
   const commissionAmount = Math.round((subtotal - discountAmount) * (commissionRate / 100) * 100) / 100;
@@ -188,7 +203,7 @@ export async function createOrder(
       taxAmount,
       discountAmount,
       couponCode: appliedCouponCode,
-      totalAmount,
+      totalAmount: finalTotalAmount,
       commissionRate,
       commissionAmount,
       vendorPayoutAmount,
@@ -248,6 +263,25 @@ export async function createOrder(
     }
   }
 
+  if (appliedLoyaltyAmount > 0) {
+    await prisma.loyaltyAccount.update({
+      where: { userId },
+      data: { rewardBalance: { decrement: appliedLoyaltyAmount } }
+    });
+    const acc = await prisma.loyaltyAccount.findUnique({ where: { userId } });
+    if (acc) {
+      await prisma.loyaltyTransaction.create({
+        data: {
+          accountId: acc.id,
+          amount: appliedLoyaltyAmount,
+          type: "REDEMPTION",
+          description: `Redeemed loyalty balance for order ${order.orderNumber}`,
+          reference: order.id
+        }
+      });
+    }
+  }
+
   await prisma.vendor.update({
     where: { id: vendorId },
     data: {
@@ -261,14 +295,14 @@ export async function createOrder(
     create: {
       userId,
       totalOrders: 1,
-      totalSpent: totalAmount,
-      lifetimeValue: totalAmount,
+      totalSpent: finalTotalAmount,
+      lifetimeValue: finalTotalAmount,
       lastOrderAt: new Date(),
     },
     update: {
       totalOrders: { increment: 1 },
-      totalSpent: { increment: totalAmount },
-      lifetimeValue: { increment: totalAmount },
+      totalSpent: { increment: finalTotalAmount },
+      lifetimeValue: { increment: finalTotalAmount },
       lastOrderAt: new Date(),
     },
   });
@@ -292,14 +326,14 @@ export async function createOrder(
     create: {
       vendorId: vendorId,
       date: today,
-      revenue: totalAmount,
+      revenue: finalTotalAmount,
       commission: commissionAmount,
       orders: 1,
       views: 0,
       conversionRate: 0,
     },
     update: {
-      revenue: { increment: totalAmount },
+      revenue: { increment: finalTotalAmount },
       commission: { increment: commissionAmount },
       orders: { increment: 1 },
     },
@@ -312,8 +346,8 @@ export async function createOrder(
       type: "NEW_MESSAGE",
       channel: "IN_APP",
       title: "New Order Received! 🎉",
-      body: `You received a new order #${order.orderNumber} worth ${totalAmount.toLocaleString()} LKR. View your dashboard to process it.`,
-      data: { orderId: order.id, orderNumber: order.orderNumber, amount: totalAmount },
+      body: `You received a new order #${order.orderNumber} worth ${finalTotalAmount.toLocaleString()} LKR. View your dashboard to process it.`,
+      data: { orderId: order.id, orderNumber: order.orderNumber, amount: finalTotalAmount },
     },
   });
 
@@ -329,7 +363,7 @@ export async function createOrder(
         price: item.price,
         image: item.productImage,
       })),
-      totalAmount,
+      finalTotalAmount,
       user.fullName,
       `${shippingAddress.addressLine1}${shippingAddress.addressLine2 ? ", " + shippingAddress.addressLine2 : ""}, ${shippingAddress.city}, ${shippingAddress.district}`,
       "3-5 business days"
@@ -340,7 +374,7 @@ export async function createOrder(
 
   // Send admin SMS notification
   try {
-    await sendAdminOrderNotification(order.orderNumber, totalAmount, orderItems.length);
+    await sendAdminOrderNotification(order.orderNumber, finalTotalAmount, orderItems.length);
   } catch (err) {
     logger.warn("Failed to send admin SMS notification", err);
   }
@@ -353,7 +387,7 @@ export async function createOrder(
         await sendCustomerOrderSMS(
           shippingAddress.phone,
           order.orderNumber,
-          totalAmount,
+          finalTotalAmount,
           user.fullName || shippingAddress.fullName,
           itemNames,
         );

@@ -4,6 +4,9 @@ import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useMutation } from "@tanstack/react-query";
+import { post } from "@/lib/api-client";
 import { cn, getImageUrl } from "@/lib/utils";
 import type { Product } from "@/types";
 import { ProductImages } from "@/components/product/product-images";
@@ -77,12 +80,31 @@ function getFAQs(categorySlug: string | undefined): { q: string; a: string }[] {
 import { useAnalytics } from "@/hooks/use-analytics";
 
 export function ProductDetail({ product }: ProductDetailProps) {
+  const [activeTab, setActiveTab] = React.useState("description");
+  const [faqOpen, setFaqOpen] = React.useState<number | null>(null);
+  const router = useRouter();
+
+  const contactVendorMutation = useMutation({
+    mutationFn: (vendorUserId: string) => 
+      post(`/messages/threads`, { 
+        participantId: vendorUserId, 
+        subject: `Regarding Product: ${product.title}`,
+        productId: product.id 
+      }),
+    onSuccess: (res: any) => {
+      if (res.data?.id) {
+        router.push(`/dashboard/messages?threadId=${res.data.id}`);
+      } else {
+        router.push(`/dashboard/messages`);
+      }
+    },
+  });
+
   const images = product.images || [];
   const videos = product.videos || [];
   const reviews = product.reviews || [];
   const variants = product.variants || [];
   const primaryCategory = product.categories?.[0]?.category;
-  const [faqOpen, setFaqOpen] = React.useState<number | null>(null);
   const [selectedVariant, setSelectedVariant] = React.useState<any>(null);
   const [quantity, setQuantity] = React.useState(1);
 
@@ -332,13 +354,14 @@ export function ProductDetail({ product }: ProductDetailProps) {
                   </div>
                 </div>
                 <div className="flex items-center gap-2 pt-3 border-t border-accent-200">
-                  <Link
-                    href={`/dashboard/messages?vendor=${product.vendorId}`}
-                    className="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 bg-white border border-accent-300 text-text-700 rounded-lg text-xs font-semibold hover:bg-surface-100 transition-colors"
+                  <button
+                    onClick={() => contactVendorMutation.mutate(product.vendor.userId)}
+                    disabled={contactVendorMutation.isPending}
+                    className="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 bg-white border border-accent-300 text-text-700 rounded-lg text-xs font-semibold hover:bg-surface-100 transition-colors disabled:opacity-50"
                   >
                     <MessageCircle className="w-3.5 h-3.5" />
-                    Message Seller
-                  </Link>
+                    {contactVendorMutation.isPending ? "Connecting..." : "Message Seller"}
+                  </button>
                 </div>
               </div>
             )}

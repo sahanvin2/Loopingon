@@ -115,7 +115,7 @@ export const metadata: Metadata = {
   category: "ecommerce",
   icons: {
     icon: [
-      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/icon.png", type: "image/png" },
     ],
     apple: [
       { url: "/apple-touch-icon.png", sizes: "180x180" },

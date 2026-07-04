@@ -5,19 +5,29 @@ import Image from "next/image";
 import { useCartStore } from "@/stores/cart-store";
 import { formatPrice } from "@/lib/utils";
 import { cn } from "@/lib/utils";
+import { useQuery } from "@tanstack/react-query";
+import { get } from "@/lib/api-client";
+import { Crown } from "lucide-react";
 
 export function OrderSummary() {
-  const { items, subtotal } = useCartStore();
+  const { items, subtotal, useLoyaltyBalance, setUseLoyaltyBalance } = useCartStore();
+
+  const { data: loyaltyData } = useQuery({
+    queryKey: ["loyalty"],
+    queryFn: () => get<any>("/loyalty"),
+  });
+  
+  const rewardBalance = loyaltyData?.data?.rewardBalance ? Number(loyaltyData.data.rewardBalance) : 0;
 
   const shipping = items.reduce((acc, item) => {
     const p = item.product;
     if (!p) return acc;
-    if (p.freeShippingDomestic) return acc;
     const cost = p.shippingPrice ? Number(p.shippingPrice) : 400; // default to 400
     return acc + (cost * item.quantity);
   }, 0);
 
-  const total = subtotal + shipping;
+  const appliedLoyalty = useLoyaltyBalance && rewardBalance > 0 ? Math.min(rewardBalance, subtotal + shipping) : 0;
+  const total = subtotal + shipping - appliedLoyalty;
 
   const totalSavings = items.reduce((acc, item) => {
     const compareAt = item.product?.compareAtPrice ? parseFloat(item.product.compareAtPrice.toString()) : 0;
@@ -103,12 +113,30 @@ export function OrderSummary() {
         )}
         <div className="flex justify-between text-text-600">
           <span>Shipping</span>
-          {shipping === 0 ? (
-            <span className="font-medium text-teal-600">Free</span>
-          ) : (
-            <span className="font-medium text-text-900">{formatPrice(shipping)}</span>
-          )}
+          <span className="font-medium text-text-900">{formatPrice(shipping)}</span>
         </div>
+        
+        {rewardBalance > 0 && (
+          <div className="flex items-start gap-3 mt-4 pt-4 border-t border-surface-200">
+            <input 
+              type="checkbox"
+              id="useLoyalty"
+              checked={useLoyaltyBalance}
+              onChange={(e) => setUseLoyaltyBalance(e.target.checked)}
+              className="mt-1 w-4 h-4 text-primary-600 border-primary-500 rounded focus:ring-primary-500"
+            />
+            <div className="flex-1">
+              <label htmlFor="useLoyalty" className="text-sm font-semibold text-text-900 flex items-center gap-1.5 cursor-pointer">
+                <Crown className="w-4 h-4 text-amber-500" />
+                Use Loyalty Balance
+              </label>
+              <p className="text-xs text-muted-500">Available: {formatPrice(rewardBalance)}</p>
+            </div>
+            {useLoyaltyBalance && (
+              <span className="font-medium text-green-600">-{formatPrice(appliedLoyalty)}</span>
+            )}
+          </div>
+        )}
       </div>
 
       <div className="pt-4 mt-4 border-t border-surface-200 flex justify-between items-center">

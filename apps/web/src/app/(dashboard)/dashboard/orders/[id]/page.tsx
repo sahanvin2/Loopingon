@@ -131,17 +131,17 @@ export default function OrderDetailPage() {
               Placed on {formatDate(order.createdAt)}
             </p>
           </div>
-          <Badge
-            variant={
-              order.status === "DELIVERED" || order.status === "COMPLETED"
-                ? "muted"
-                : order.status === "CANCELLED"
-                  ? "red"
-                  : "amber"
-            }
-          >
-            {ORDER_STATUS_MAP[order.status]?.label || order.status}
-          </Badge>
+          {(() => {
+            let variant: "green" | "red" | "amber" | "muted" = "amber";
+            if (order.status === "DELIVERED" || order.status === "COMPLETED") variant = "green";
+            else if (["CANCELLED", "REFUNDED", "RETURNED", "RETURN_REQUESTED", "FAILED"].includes(order.status)) variant = "red";
+            
+            return (
+              <Badge variant={variant}>
+                {ORDER_STATUS_MAP[order.status]?.label || order.status}
+              </Badge>
+            );
+          })()}
         </div>
 
         <OrderTimeline

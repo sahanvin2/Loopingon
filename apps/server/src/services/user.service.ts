@@ -248,3 +248,37 @@ export async function uploadAvatar(userId: string, _file: Express.Multer.File) {
 
   return { url };
 }
+
+export async function cancelOrder(orderId: string, userId: string) {
+  const order = await prisma.order.findUnique({ where: { id: orderId } });
+  if (!order) throw new AppError("Order not found", 404, "ORDER_NOT_FOUND");
+  if (order.customerId !== userId) throw new AppError("Unauthorized", 403, "UNAUTHORIZED");
+
+  // Check if within 24 hours
+  const hoursSinceOrder = (new Date().getTime() - new Date(order.createdAt).getTime()) / (1000 * 60 * 60);
+  if (hoursSinceOrder > 24) {
+    throw new AppError("Order can only be cancelled within 24 hours of placement", 400, "CANCEL_TIMEOUT");
+  }
+
+  // Ensure it's not already shipped or delivered
+  if (["DELIVERED", "COMPLETED", "CANCELLED", "REFUNDED", "SHIPPED", "READY_TO_SHIP"].includes(order.status)) {
+    throw new AppError("Order cannot be cancelled at this stage", 400, "INVALID_STATE");
+  }
+
+  const [updatedOrder] = await prisma.$transaction([
+    prisma.order.update({
+      where: { id: orderId },
+      data: { status: "CANCELLED" },
+    }),
+    prisma.orderStatusHistory.create({
+      data: {
+        orderId,
+        status: "CANCELLED",
+        note: "Cancelled by customer request",
+        changedBy: userId,
+      },
+    }),
+  ]);
+
+  return updatedOrder;
+}

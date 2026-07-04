@@ -14,10 +14,10 @@ export interface LoyaltyTier {
 
 export const LOYALTY_TIERS: LoyaltyTier[] = [
   { name: "none",   label: "No Tier",   minSpent: 0,      reward: 0,      color: "gray",   icon: "⬜", minPurchaseForRedemption: 0 },
-  { name: "bronze", label: "Bronze",     minSpent: 10000,  reward: 2000,   color: "amber",  icon: "🥉", minPurchaseForRedemption: 0 },
-  { name: "silver", label: "Silver",     minSpent: 25000,  reward: 5000,   color: "slate",  icon: "🥈", minPurchaseForRedemption: 0 },
-  { name: "gold",   label: "Gold",       minSpent: 50000,  reward: 10000,  color: "yellow", icon: "🥇", minPurchaseForRedemption: 90000 },
-  { name: "elite",  label: "Elite",      minSpent: 200000, reward: 50000,  color: "purple", icon: "👑", minPurchaseForRedemption: 0 },
+  { name: "bronze", label: "Bronze",     minSpent: 10000,  reward: 800,    color: "amber",  icon: "🥉", minPurchaseForRedemption: 0 },
+  { name: "silver", label: "Silver",     minSpent: 25000,  reward: 2000,   color: "slate",  icon: "🥈", minPurchaseForRedemption: 0 },
+  { name: "gold",   label: "Gold",       minSpent: 50000,  reward: 4000,   color: "yellow", icon: "🥇", minPurchaseForRedemption: 0 },
+  { name: "elite",  label: "Elite",      minSpent: 200000, reward: 20000,  color: "purple", icon: "👑", minPurchaseForRedemption: 0 },
 ];
 
 function calculateTier(totalSpent: number): { tier: LoyaltyTier; progress: number; nextTier: LoyaltyTier | null; remaining: number } {

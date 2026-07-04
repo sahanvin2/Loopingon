@@ -113,6 +113,7 @@ export function CheckoutForm({ className }: CheckoutFormProps) {
         giftMessage: giftData.giftMessage || undefined,
         giftWrap: giftData.giftWrap || undefined,
         couponCode: undefined,
+        useLoyaltyBalance: useCartStore.getState().useLoyaltyBalance,
       });
 
       setOrderId(res.data.id);

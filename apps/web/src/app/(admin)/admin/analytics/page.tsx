@@ -38,11 +38,11 @@ export default function AdminAnalyticsPage() {
     let csv = "Category,Metric,Value\n";
     
     // Add stats
-    if (stats) {
-      csv += `Stats,Revenue,${stats.revenueTotal?._sum?.totalAmount || 0}\n`;
-      csv += `Stats,Orders,${stats.totalOrders || 0}\n`;
-      csv += `Stats,Users,${stats.totalCustomers || 0}\n`;
-      csv += `Stats,Vendors,${stats.totalVendors || 0}\n`;
+    if (stats && stats.overview) {
+      csv += `Stats,Revenue,${stats.overview.totalRevenue || 0}\n`;
+      csv += `Stats,Orders,${stats.overview.totalOrders || 0}\n`;
+      csv += `Stats,Users,${stats.overview.totalCustomers || 0}\n`;
+      csv += `Stats,Vendors,${stats.overview.totalVendors || 0}\n`;
     }
     
     // Add Page Views
@@ -103,11 +103,11 @@ export default function AdminAnalyticsPage() {
         <LoadingSkeleton variant="card" count={5} />
       ) : (
         <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-          <StatCard title="Revenue" value={formatPrice(Number(stats?.revenueTotal?._sum?.totalAmount || 0))} icon={DollarSign} variant="blush" />
-          <StatCard title="Orders" value={stats?.totalOrders ?? 0} icon={ShoppingBag} variant="rose" />
-          <StatCard title="Total Users" value={stats?.totalCustomers ?? 0} icon={Users} variant="default" />
-          <StatCard title="Total Vendors" value={stats?.totalVendors ?? 0} icon={Store} variant="muted" />
-          <StatCard title="Total Products" value={stats?.totalProducts ?? 0} icon={TrendingUp} variant="default" />
+          <StatCard title="Revenue" value={formatPrice(Number(stats?.overview?.totalRevenue || 0))} icon={DollarSign} variant="blush" />
+          <StatCard title="Orders" value={stats?.overview?.totalOrders ?? 0} icon={ShoppingBag} variant="rose" />
+          <StatCard title="Total Users" value={stats?.overview?.totalCustomers ?? 0} icon={Users} variant="default" />
+          <StatCard title="Total Vendors" value={stats?.overview?.totalVendors ?? 0} icon={Store} variant="muted" />
+          <StatCard title="Total Products" value={stats?.overview?.totalProducts ?? 0} icon={TrendingUp} variant="default" />
         </div>
       )}
 

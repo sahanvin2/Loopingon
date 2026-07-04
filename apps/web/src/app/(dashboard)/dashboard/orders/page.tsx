@@ -123,23 +123,23 @@ export default function OrdersPage() {
                     {new Date(order.createdAt).toLocaleDateString()}
                   </span>
                 </div>
-                <Badge
-                  variant={
-                    order.status === "DELIVERED" || order.status === "COMPLETED"
-                      ? "muted"
-                      : order.status === "CANCELLED"
-                        ? "red"
-                        : "amber"
-                  }
-                  size="sm"
-                >
-                  {ORDER_STATUS_MAP[order.status]?.label || order.status}
-                </Badge>
+                
+                {(() => {
+                  let variant: "green" | "red" | "amber" | "muted" = "amber";
+                  if (order.status === "DELIVERED" || order.status === "COMPLETED") variant = "green";
+                  else if (["CANCELLED", "REFUNDED", "RETURNED", "RETURN_REQUESTED", "FAILED"].includes(order.status)) variant = "red";
+                  
+                  return (
+                    <Badge variant={variant} size="sm">
+                      {ORDER_STATUS_MAP[order.status]?.label || order.status}
+                    </Badge>
+                  );
+                })()}
               </div>
 
               {order.items && (
                 <div className="flex items-center gap-2 mt-3">
-                  {order.items.slice(0, 3).map((item, i) => (
+                  {order.items.slice(0, 3).map((item: any, i: number) => (
                     <div
                       key={item.id}
                       className="w-10 h-10 rounded-md border border-accent-200 overflow-hidden bg-surface-50"

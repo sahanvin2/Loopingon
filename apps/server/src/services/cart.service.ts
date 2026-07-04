@@ -1,6 +1,5 @@
 import { prisma } from "../config/database.js";
 import { AppError } from "../middleware/errorHandler.middleware.js";
-import { addCartUpdateJob } from "../workers/email.worker.js";
 import { logger } from "../middleware/errorHandler.middleware.js";
 
 export async function getCart(userId: string) {
@@ -95,29 +94,6 @@ export async function addToCart(
     });
   }
 
-  // Send cart update email
-  try {
-    const [user, cartItems] = await Promise.all([
-      prisma.user.findUnique({ where: { id: userId }, select: { email: true, fullName: true } }),
-      prisma.cartItem.findMany({ where: { cartId: cart.id }, include: { product: { select: { price: true } } } }),
-    ]);
-
-    if (user) {
-      const cartTotal = cartItems.reduce((sum, ci) => sum + Number(ci.price) * ci.quantity, 0);
-      await addCartUpdateJob(
-        user.email,
-        product.title,
-        quantity,
-        Number(price),
-        cartItems.length,
-        cartTotal,
-        user.fullName,
-        product.images?.[0]?.url || undefined
-      );
-    }
-  } catch (err) {
-    logger.warn("Failed to queue cart update email", err);
-  }
 
   return item;
 }

@@ -12,6 +12,8 @@ interface CartState {
   updateQuantity: (itemId: string, quantity: number) => void;
   clearCart: () => void;
   setCart: (items: CartItem[]) => void;
+  useLoyaltyBalance: boolean;
+  setUseLoyaltyBalance: (useLoyalty: boolean) => void;
 }
 
 function calculateSummary(items: CartItem[]): { itemCount: number; subtotal: number } {
@@ -28,6 +30,8 @@ export const useCartStore = create<CartState>()(
       items: [],
       itemCount: 0,
       subtotal: 0,
+      useLoyaltyBalance: false,
+      setUseLoyaltyBalance: (useLoyaltyBalance) => set({ useLoyaltyBalance }),
 
       addItem: (item) => {
         const { items } = get();

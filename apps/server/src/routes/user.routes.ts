@@ -152,6 +152,19 @@ router.get(
   }
 );
 
+router.patch(
+  "/orders/:id/cancel",
+  authenticate,
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const order = await userService.cancelOrder(req.params.id, req.user!.id);
+      successResponse(res, order);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
 router.post(
   "/upload-avatar",
   authenticate,
