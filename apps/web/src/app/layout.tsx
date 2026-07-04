@@ -113,14 +113,6 @@ export const metadata: Metadata = {
     yandex: undefined,
   },
   category: "ecommerce",
-  icons: {
-    icon: [
-      { url: "/icon.svg", type: "image/svg+xml" },
-    ],
-    apple: [
-      { url: "/apple-touch-icon.png", sizes: "180x180" },
-    ],
-  },
   manifest: "/site.webmanifest",
   appleWebApp: {
     title: "Kandyam",
