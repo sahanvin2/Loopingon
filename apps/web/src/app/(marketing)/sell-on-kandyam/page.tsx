@@ -12,7 +12,7 @@ export const metadata = {
 };
 
 const benefits = [
-  { icon: DollarSign, title: "80% Profit to You", description: "Keep the vast majority of your earnings. Only a 20% commission — no hidden fees, listing charges, or monthly subscriptions." },
+  { icon: DollarSign, title: "90% Profit to You", description: "Keep the vast majority of your earnings. Only a 10% commission — no hidden fees, listing charges, or monthly subscriptions." },
   { icon: Globe, title: "Global Customer Reach", description: "Your products reach customers everywhere. We handle marketing, SEO, and visibility so you can focus on your business." },
   { icon: Store, title: "Free Store Setup", description: "Create your storefront at zero cost. Customize your banner, add your story, and showcase your products — all included." },
   { icon: Megaphone, title: "Marketing & Promotion", description: "Your products appear in our featured sections, email campaigns, and social media promotions. We invest in driving traffic to your store." },
@@ -134,7 +134,7 @@ export default function SellOnKandyamPage() {
           <div className="grid items-center gap-16 lg:grid-cols-2">
             <div>
               <h2 className="font-serif text-3xl font-bold text-text-900 md:text-4xl">Transparent & Fair Commission</h2>
-              <p className="mt-4 text-lg text-muted-600 leading-relaxed">We only make money when you make a sale. Our straightforward 20% commission covers everything from marketing to payment processing.</p>
+              <p className="mt-4 text-lg text-muted-600 leading-relaxed">We only make money when you make a sale. Our straightforward 10% commission covers everything from marketing to payment processing.</p>
               
               <div className="mt-10 space-y-4">
                 <div className="flex items-center gap-6 rounded-2xl border border-muted-200 bg-white p-6 shadow-soft-sm">
@@ -151,7 +151,7 @@ export default function SellOnKandyamPage() {
                     <Lock className="h-8 w-8 text-text-700" />
                   </div>
                   <div>
-                    <p className="text-3xl font-bold text-text-900">20%</p>
+                    <p className="text-3xl font-bold text-text-900">10%</p>
                     <p className="font-medium text-text-700">Platform commission</p>
                   </div>
                 </div>
@@ -181,7 +181,7 @@ export default function SellOnKandyamPage() {
                     <span className="text-xl font-bold">Rs. 10,000</span>
                   </div>
                   <div className="flex justify-between items-center border-b border-white/20 pb-4">
-                    <span className="text-lg text-primary-200">Kandyam Fee (20%)</span>
+                    <span className="text-lg text-primary-200">Kandyam Fee (10%)</span>
                     <span className="text-xl font-bold text-primary-300">- Rs. 2,000</span>
                   </div>
                   <div className="flex justify-between items-center pt-2">

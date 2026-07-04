@@ -1,4 +1,4 @@
-﻿import { Metadata } from "next";
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Terms of Service",
@@ -58,9 +58,9 @@ export default function TermsOfServicePage() {
           <section>
             <h2>5. Payments & Fees</h2>
             <h3>5.1 Platform Commission</h3>
-            <p>Kandyam charges a 20% commission on each completed sale (including shipping fees). This is the only fee — there are no listing fees, subscription fees, or hidden charges.</p>
+            <p>Kandyam charges a 10% commission on each completed sale (including shipping fees). This is the only fee — there are no listing fees, subscription fees, or hidden charges.</p>
             <h3>5.2 Payouts</h3>
-            <p>Vendor payouts are processed once your balance reaches Rs. 10,000 to registered Sri Lankan bank accounts. This equates to approximately Rs. 12,500 in sales (20% platform commission applied). The minimum threshold helps reduce per-transaction bank charges and government taxes. Payouts are processed within 5 working days of the threshold being met.</p>
+            <p>Vendor payouts are processed once your balance reaches Rs. 10,000 to registered Sri Lankan bank accounts. This equates to approximately Rs. 11,111 in sales (10% platform commission applied). The minimum threshold helps reduce per-transaction bank charges and government taxes. Payouts are processed within 5 working days of the threshold being met.</p>
             <h3>5.3 Refunds</h3>
             <p>In case of refunds, the platform commission is also refunded proportionally. Refunds are processed to the buyer&apos;s original payment method within 3-5 business days.</p>
           </section>

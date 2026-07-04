@@ -54,7 +54,7 @@ const guides = [
     title: "Shop Management",
     description: "Tips on managing inventory, pricing strategies, and providing world-class customer service.",
     href: "#management",
-    content: "Check your dashboard daily for new orders and messages. Keep your inventory numbers accurate to avoid selling items you don't have. Price your items to cover materials, labor, shipping supplies, and the 20% platform commission, while remaining competitive in the market."
+    content: "Check your dashboard daily for new orders and messages. Keep your inventory numbers accurate to avoid selling items you don't have. Price your items to cover materials, labor, shipping supplies, and the 10% platform commission, while remaining competitive in the market."
   }
 ];
 

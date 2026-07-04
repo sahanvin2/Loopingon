@@ -24,7 +24,7 @@ const faqResponses: Record<string, string> = {
   return: "We have an easy 7-day return policy. If you're not satisfied with your purchase, you can return it within 7 days for a full refund. Items must be in original condition.",
   payment: "We accept Visa, Mastercard, American Express, PayHere, and Payable. All payments are securely processed with buyer protection.",
   artisan: "Kandyam features over 4,500 verified Sri Lankan sellers. Each seller is verified through our thorough review process to ensure authentic, quality premium products.",
-  commission: "Our platform commission is 20% for vendors. This covers payment processing, buyer protection, marketing, and platform maintenance.",
+  commission: "Our platform commission is 10% for vendors. This covers payment processing, buyer protection, marketing, and platform maintenance.",
   competition: "We run monthly craft competitions with amazing prizes. You can submit your best work to compete with sellers across Sri Lanka. Winners receive cash prizes and featured exposure.",
 };
 

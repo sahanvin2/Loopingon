@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import { Search, CreditCard, Truck, Star, ClipboardCheck, Store, Package, Wallet, BadgeCheck } from "lucide-react";
 
 export const metadata = {
@@ -23,7 +23,7 @@ const sellerSteps = [
 const faqs = [
   { q: "How does the escrow payment system work?", a: "When you place an order, your payment is held securely by Kandyam. The seller ships your product, and funds are only released to them once you confirm satisfactory receipt. This protects both buyers and sellers." },
   { q: "How long does shipping take?", a: "Domestic shipping (within Sri Lanka) takes 2-5 business days. International shipping typically takes 7-21 business days depending on the destination country and shipping method selected." },
-  { q: "What is Kandyam's commission on sales?", a: "Kandyam takes a 20% commission on each sale. Sellers keep 80% of the sale price. There are no hidden fees, listing fees, or monthly charges." },
+  { q: "What is Kandyam's commission on sales?", a: "Kandyam takes a 10% commission on each sale. Sellers keep 90% of the sale price. There are no hidden fees, listing fees, or monthly charges." },
   { q: "Can I return a product if I'm not satisfied?", a: "Yes. We have a 7-day return policy for most products. Items must be unused and in original packaging. Custom orders and digital items are non-returnable." },
   { q: "How do I know the products are genuine?", a: "Every vendor on Kandyam goes through a verification process. We require photos of the workshop, craft process documentation, and verification documents. Products are reviewed before being published." },
   { q: "How are sellers paid?", a: "Sellers receive payouts to their registered Sri Lankan bank account once their balance reaches Rs. 10,000. Payouts are processed within 5 working days. You can track all earnings, commissions, and payout history from your vendor dashboard." },

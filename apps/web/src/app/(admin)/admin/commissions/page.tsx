@@ -66,13 +66,13 @@ export default function AdminCommissionsPage() {
 
       <div className="bg-white rounded-lg border border-accent-200 p-4 flex items-center gap-3">
         <Percent className="w-5 h-5 text-primary-600" />
-        <span className="text-sm text-text-700">Default Platform Commission: <strong>20%</strong></span>
+        <span className="text-sm text-text-700">Default Platform Commission: <strong>10%</strong></span>
       </div>
 
       {isLoading ? (
         <LoadingSkeleton variant="table-row" count={5} />
       ) : rules.length === 0 ? (
-        <EmptyState title="No commission rules" description="Default 20% applies" />
+        <EmptyState title="No commission rules" description="Default 10% applies" />
       ) : (
         <div className="bg-white rounded-lg border border-accent-200 overflow-x-auto">
           <table className="w-full text-sm">

@@ -52,7 +52,7 @@ export default function SellerPolicyPage() {
               Joining Kandyam and opening a shop is free. We only make money when you make a sale.
             </p>
             <ul>
-              <li><strong>Commission Fee:</strong> We charge a flat 20% commission on the total sale price (including shipping) of each transaction.</li>
+              <li><strong>Commission Fee:</strong> We charge a flat 10% commission on the total sale price (including shipping) of each transaction.</li>
               <li><strong>Payouts:</strong> Payments are processed weekly and transferred directly to your designated bank account once the buyer has confirmed delivery.</li>
               <li><strong>Taxes:</strong> Sellers are responsible for collecting and paying any applicable taxes related to their sales.</li>
             </ul>
