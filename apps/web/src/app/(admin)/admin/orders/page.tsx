@@ -17,9 +17,11 @@ import type { Order, PaginatedResponse } from "@/types";
 
 const statusTabs = [
   { key: "all", label: "All" },
+  { key: "PENDING_PAYMENT", label: "Pending" },
   { key: "PROCESSING", label: "Processing" },
   { key: "SHIPPED", label: "Shipped" },
   { key: "DELIVERED", label: "Delivered" },
+  { key: "COMPLETED", label: "Completed" },
   { key: "CANCELLED", label: "Cancelled" },
 ];
 

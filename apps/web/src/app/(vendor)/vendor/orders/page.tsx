@@ -18,11 +18,12 @@ import { useState } from "react";
 
 const statusTabs = [
   { key: "all", label: "All" },
-  { key: "NEW", label: "New" },
+  { key: "PENDING_PAYMENT", label: "New" },
   { key: "PROCESSING", label: "Processing" },
   { key: "READY_TO_SHIP", label: "Ready to Ship" },
   { key: "SHIPPED", label: "Shipped" },
   { key: "DELIVERED", label: "Delivered" },
+  { key: "COMPLETED", label: "Completed" },
   { key: "CANCELLED", label: "Cancelled" },
 ];
 

@@ -188,7 +188,7 @@ export async function createOrder(
     finalTotalAmount = 0;
   }
 
-  const commissionRate = vendor.commissionRate || 20;
+  const commissionRate = vendor.commissionRate || 10;
   const commissionAmount = Math.round((subtotal - discountAmount) * (commissionRate / 100) * 100) / 100;
   const vendorPayoutAmount = Math.round((subtotal - discountAmount - commissionAmount) * 100) / 100;
 

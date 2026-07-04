@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "react-hot-toast";
 import {
   ArrowLeft,
   Copy,
@@ -25,18 +26,7 @@ import { cn, formatDate, formatPrice, copyToClipboard } from "@/lib/utils";
 import { ORDER_STATUS_MAP } from "@/lib/constants";
 import type { Order, ApiResponse } from "@/types";
 
-const timelineSteps = [
-  { key: "PENDING_PAYMENT", label: "Order Placed", done: true },
-  { key: "PAYMENT_CONFIRMED", label: "Payment Confirmed", done: false },
-  { key: "PROCESSING", label: "Processing", done: false },
-  { key: "READY_TO_SHIP", label: "Ready to Ship", done: false },
-  { key: "SHIPPED", label: "Shipped", done: false },
-  { key: "IN_TRANSIT", label: "In Transit", done: false },
-  { key: "OUT_FOR_DELIVERY", label: "Out for Delivery", done: false },
-  { key: "DELIVERED", label: "Delivered", done: false },
-];
-
-const statusOrder = timelineSteps.map((s) => s.key);
+// timelineSteps are dynamically generated based on order paymentMethod
 
 export default function OrderDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -54,7 +44,11 @@ export default function OrderDetailPage() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["order", id] });
       setIsCancelModalOpen(false);
+      toast.success("Order cancelled successfully");
     },
+    onError: (err: any) => {
+      toast.error(err.message || "Failed to cancel order");
+    }
   });
 
   const contactVendorMutation = useMutation({
@@ -75,8 +69,28 @@ export default function OrderDetailPage() {
 
   const order = data?.data;
 
+  const dynamicTimelineSteps = React.useMemo(() => {
+    const base = [
+      { key: "PENDING_PAYMENT", label: "Order Placed", done: true },
+      { key: "PAYMENT_CONFIRMED", label: "Payment Confirmed", done: false },
+      { key: "PROCESSING", label: "Processing", done: false },
+      { key: "READY_TO_SHIP", label: "Ready to Ship", done: false },
+      { key: "SHIPPED", label: "Shipped", done: false },
+      { key: "IN_TRANSIT", label: "In Transit", done: false },
+      { key: "OUT_FOR_DELIVERY", label: "Out for Delivery", done: false },
+      { key: "DELIVERED", label: "Delivered", done: false },
+    ];
+    if (order?.paymentMethod === "COD") {
+      const pc = base.splice(1, 1)[0];
+      base.push(pc);
+    }
+    return base;
+  }, [order?.paymentMethod]);
+
+  const currentStatusOrder = dynamicTimelineSteps.map(s => s.key);
+
   const currentStepIndex = order
-    ? statusOrder.indexOf(order.status)
+    ? currentStatusOrder.indexOf(order.status)
     : 0;
 
   const isEligibleForReturn =
@@ -145,7 +159,7 @@ export default function OrderDetailPage() {
         </div>
 
         <OrderTimeline
-          steps={timelineSteps.map((step, i) => ({
+          steps={dynamicTimelineSteps.map((step, i) => ({
             ...step,
             done: i <= currentStepIndex,
             completedAt: i <= currentStepIndex ? order.createdAt : undefined,

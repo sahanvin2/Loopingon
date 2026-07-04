@@ -1,4 +1,7 @@
 import { type Request, type Response, type NextFunction } from "express";
+import requestIp from "request-ip";
+import { UAParser } from "ua-parser-js";
+import geoip from "geoip-lite";
 import { prisma } from "../config/database.js";
 import { logger } from "./errorHandler.middleware.js";
 
@@ -20,13 +23,27 @@ export function auditLog(options: AuditLogOptions) {
 
       setImmediate(async () => {
         try {
+          const clientIp = requestIp.getClientIp(req) || req.ip || req.headers["x-forwarded-for"] as string || "127.0.0.1";
+          const userAgentStr = req.headers["user-agent"] || "";
+          
+          const parser = new UAParser(userAgentStr);
+          const result = parser.getResult();
+          const device = result.device.type ? `${result.device.vendor} ${result.device.type}` : (result.os.name || "Unknown");
+          
+          const geo = geoip.lookup(clientIp);
+          const country = geo?.country || null;
+          const city = geo?.city || null;
+
           const auditData: Record<string, unknown> = {
             action: options.action,
             entity: options.entity,
             entityId: options.entityId ? options.entityId(req) : req.params.id || null,
             userId: req.user?.id || null,
-            ipAddress: req.ip || req.headers["x-forwarded-for"] as string || null,
-            userAgent: req.headers["user-agent"] || null,
+            ipAddress: clientIp,
+            userAgent: userAgentStr,
+            device,
+            country,
+            city,
             metadata: {
               method: req.method,
               url: req.originalUrl,
@@ -56,6 +73,9 @@ export function auditLog(options: AuditLogOptions) {
               userId: auditData.userId as string | null,
               ipAddress: auditData.ipAddress as string | null,
               userAgent: auditData.userAgent as string | null,
+              device: auditData.device as string | null,
+              country: auditData.country as string | null,
+              city: auditData.city as string | null,
               metadata: auditData.metadata as any,
               oldValue: (auditData.oldValue as any) || undefined,
               newValue: (auditData.newValue as any) || undefined,
@@ -96,6 +116,9 @@ export async function createAuditLogEntry(
         userId: data.userId || null,
         ipAddress: data.ipAddress || null,
         userAgent: data.userAgent || null,
+        device: data.device || null,
+        country: data.country || null,
+        city: data.city || null,
         oldValue: data.oldValue as any || undefined,
         newValue: data.newValue as any || undefined,
         metadata: data.metadata as any || undefined,

@@ -74,6 +74,8 @@ export default function AdminAuditLogsPage() {
                 <th className="px-4 py-3 text-left text-xs font-semibold text-muted-500 uppercase">Entity ID</th>
                 <th className="px-4 py-3 text-left text-xs font-semibold text-muted-500 uppercase">Details</th>
                 <th className="px-4 py-3 text-left text-xs font-semibold text-muted-500 uppercase">IP</th>
+                <th className="px-4 py-3 text-left text-xs font-semibold text-muted-500 uppercase">Device</th>
+                <th className="px-4 py-3 text-left text-xs font-semibold text-muted-500 uppercase">Location</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-surface-50">
@@ -97,6 +99,8 @@ export default function AdminAuditLogsPage() {
                     </button>
                   </td>
                   <td className="px-4 py-3 font-mono text-xs">{log.ipAddress}</td>
+                  <td className="px-4 py-3 text-xs">{log.device || "Unknown"}</td>
+                  <td className="px-4 py-3 text-xs">{log.country ? `${log.city || ""}, ${log.country}`.replace(/^, /, "") : "Unknown"}</td>
                 </tr>
               ))}
             </tbody>
