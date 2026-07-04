@@ -58,7 +58,7 @@ export async function sendAdminOrderNotification(orderNumber: string, amount: nu
     return false;
   }
 
-  const message = `Kandyam: New Order #${orderNumber}! Total: LKR ${amount.toLocaleString()}. ${itemCount} item(s). Check admin dashboard.`;
+  const message = `Kandyam: New Order #${orderNumber}! Total: LKR ${amount.toLocaleString()}. ${itemCount} item(s). Check dashboard.`;
   return sendSMS({ recipient: adminPhone, message });
 }
 

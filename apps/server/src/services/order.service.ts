@@ -273,6 +273,12 @@ export async function createOrder(
     },
   });
 
+  // Clear the user's cart
+  const userCart = await prisma.cart.findUnique({ where: { userId } });
+  if (userCart) {
+    await prisma.cartItem.deleteMany({ where: { cartId: userCart.id } });
+  }
+
   // Update vendor daily analytics
   const today = new Date();
   today.setHours(0, 0, 0, 0);
@@ -315,6 +321,7 @@ export async function createOrder(
   try {
     await addOrderConfirmationJob(
       user.email,
+      order.id,
       order.orderNumber,
       orderItems.map((item) => ({
         name: item.productTitle,

@@ -295,6 +295,24 @@ router.get(
   }
 );
 
+router.patch(
+  "/orders/:orderId/status",
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const order = await adminService.updateOrderStatus(
+        req.params.orderId,
+        req.user!.id,
+        req.body.status,
+        req.body.paymentStatus,
+        req.body.note
+      );
+      successResponse(res, order);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
 // ==================== PAYMENTS ====================
 
 router.get(

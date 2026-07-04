@@ -1,8 +1,8 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import {
@@ -12,13 +12,15 @@ import {
   MapPin,
   Phone,
   ExternalLink,
+  Printer,
 } from "lucide-react";
 import { OrderTimeline } from "@/components/order/order-timeline";
 import { TrackingMap } from "@/components/order/tracking-map";
 import { Badge } from "@/components/shared/badge";
 import { EmptyState } from "@/components/shared/empty-state";
 import { LoadingSkeleton } from "@/components/shared/loading-skeleton";
-import { get, patch } from "@/lib/api-client";
+import { Modal } from "@/components/shared/modal";
+import { get, patch, post } from "@/lib/api-client";
 import { cn, formatDate, formatPrice, copyToClipboard } from "@/lib/utils";
 import { ORDER_STATUS_MAP } from "@/lib/constants";
 import type { Order, ApiResponse } from "@/types";
@@ -39,6 +41,8 @@ const statusOrder = timelineSteps.map((s) => s.key);
 export default function OrderDetailPage() {
   const { id } = useParams<{ id: string }>();
   const queryClient = useQueryClient();
+  const router = useRouter();
+  const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["order", id],
@@ -49,6 +53,23 @@ export default function OrderDetailPage() {
     mutationFn: () => patch(`/users/orders/${id}/cancel`, { reason: "Customer request" }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["order", id] });
+      setIsCancelModalOpen(false);
+    },
+  });
+
+  const contactVendorMutation = useMutation({
+    mutationFn: (vendorUserId: string) => 
+      post(`/messages/threads`, { 
+        participantId: vendorUserId, 
+        subject: `Regarding Order #${order?.orderNumber}`,
+        orderId: order?.id 
+      }),
+    onSuccess: (res) => {
+      if (res.data?.id) {
+        router.push(`/dashboard/messages?threadId=${res.data.id}`);
+      } else {
+        router.push(`/dashboard/messages`);
+      }
     },
   });
 
@@ -282,24 +303,31 @@ export default function OrderDetailPage() {
 
       <div className="flex flex-wrap gap-3">
         <Link
-          href={`/dashboard/messages?order=${order.id}`}
-          className="inline-flex items-center gap-2 px-5 py-2.5 bg-white border border-accent-200 rounded-lg text-sm font-medium text-text-700 hover:bg-surface-50 transition-colors"
+          href={`/dashboard/orders/${order.id}/invoice`}
+          className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary-600 border border-transparent rounded-lg text-sm font-medium text-white hover:bg-primary-700 transition-colors"
         >
-          Contact Vendor
+          <Printer className="w-4 h-4" />
+          View & Print Invoice
         </Link>
+
+        {order.vendor?.userId && (
+          <button
+            type="button"
+            onClick={() => contactVendorMutation.mutate(order.vendor.userId)}
+            disabled={contactVendorMutation.isPending}
+            className="inline-flex items-center gap-2 px-5 py-2.5 bg-white border border-accent-200 rounded-lg text-sm font-medium text-text-700 hover:bg-surface-50 transition-colors disabled:opacity-50"
+          >
+            {contactVendorMutation.isPending ? "Connecting..." : "Contact Vendor"}
+          </button>
+        )}
 
         {canCancel && (
           <button
             type="button"
-            onClick={() => {
-              if (window.confirm("Are you sure you want to cancel this order?")) {
-                cancelMutation.mutate();
-              }
-            }}
-            disabled={cancelMutation.isPending}
+            onClick={() => setIsCancelModalOpen(true)}
             className="inline-flex items-center gap-2 px-5 py-2.5 bg-red-50 border border-red-200 rounded-lg text-sm font-medium text-red-600 hover:bg-red-100 transition-colors disabled:opacity-50"
           >
-            {cancelMutation.isPending ? "Cancelling..." : "Cancel Order"}
+            Cancel Order
           </button>
         )}
 
@@ -361,6 +389,33 @@ export default function OrderDetailPage() {
           </div>
         </div>
       )}
+
+      <Modal
+        isOpen={isCancelModalOpen}
+        onClose={() => setIsCancelModalOpen(false)}
+        title="Cancel Order"
+      >
+        <div className="space-y-4">
+          <p className="text-sm text-text-700">
+            You can cancel your order within 24 hours of placing it. This action cannot be undone. Are you sure you want to proceed?
+          </p>
+          <div className="flex items-center justify-end gap-3 mt-6">
+            <button
+              onClick={() => setIsCancelModalOpen(false)}
+              className="px-4 py-2 text-sm font-medium text-text-700 bg-white border border-accent-200 rounded-lg hover:bg-surface-50"
+            >
+              Keep Order
+            </button>
+            <button
+              onClick={() => cancelMutation.mutate()}
+              disabled={cancelMutation.isPending}
+              className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 disabled:opacity-50"
+            >
+              {cancelMutation.isPending ? "Cancelling..." : "Confirm Cancel"}
+            </button>
+          </div>
+        </div>
+      </Modal>
     </motion.div>
   );
 }

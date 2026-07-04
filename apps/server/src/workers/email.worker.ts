@@ -20,6 +20,7 @@ interface OrderConfirmationJob {
   data: {
     email: string;
     name?: string;
+    orderId: string;
     orderNumber: string;
     items: Array<{ name: string; quantity: number; price: number; image?: string | null }>;
     total: number;
@@ -124,9 +125,8 @@ function emailTemplate(title: string, content: string): string {
       <td align="center">
         <table width="600" cellpadding="0" cellspacing="0" style="background-color:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
           <tr>
-            <td style="background:linear-gradient(135deg,#FA6873,#F7444E);padding:32px 40px;text-align:center;">
-              <h1 style="color:#ffffff;font-size:28px;font-weight:700;margin:0;letter-spacing:-0.5px;">${PLATFORM_NAME}</h1>
-              <p style="color:rgba(255,255,255,0.85);font-size:14px;margin:8px 0 0 0;">Where Sri Lankan Craft Meets the World</p>
+            <td style="background-color:#ffffff;padding:32px 40px;text-align:center;border-bottom:1px solid #f0f0f0;">
+              <h1 style="color:#1a1a2e;font-size:24px;font-weight:700;margin:0;letter-spacing:-0.5px;">${PLATFORM_NAME}</h1>
             </td>
           </tr>
           <tr>
@@ -139,14 +139,12 @@ function emailTemplate(title: string, content: string): string {
               <table width="100%" cellpadding="0" cellspacing="0">
                 <tr>
                   <td style="color:#6c757d;font-size:12px;line-height:1.6;">
-                    <p style="margin:0 0 8px 0;">This email was sent by ${PLATFORM_NAME}.</p>
+                    <p style="margin:0 0 16px 0;">This email was sent by ${PLATFORM_NAME}.</p>
                     <p style="margin:0 0 16px 0;">
-                      <a href="${FRONTEND_URL}/legal/privacy" style="color:#F7444E;text-decoration:none;">Privacy Policy</a> &nbsp;|&nbsp; 
-                      <a href="${FRONTEND_URL}/legal/terms" style="color:#F7444E;text-decoration:none;">Terms of Use</a> &nbsp;|&nbsp; 
-                      <a href="${FRONTEND_URL}/dashboard/settings" style="color:#F7444E;text-decoration:none;">Email Preferences</a> &nbsp;|&nbsp; 
-                      <a href="${FRONTEND_URL}/unsubscribe" style="color:#F7444E;text-decoration:none;">Unsubscribe</a>
+                      <a href="${FRONTEND_URL}/privacy" style="color:#1a1a2e;text-decoration:none;">Privacy Policy</a> &nbsp;|&nbsp; 
+                      <a href="${FRONTEND_URL}/contact" style="color:#1a1a2e;text-decoration:none;">Contact Support</a>
                     </p>
-                    <p style="margin:0 0 8px 0;">If you cannot unsubscribe from the mailing list or have concerns about your personal data, please email <a href="mailto:support@kandyam.com" style="color:#F7444E;text-decoration:none;">support@kandyam.com</a></p>
+                    <p style="margin:0 0 8px 0;">If you have any questions, please email <a href="mailto:support@kandyam.com" style="color:#1a1a2e;text-decoration:none;">support@kandyam.com</a></p>
                     <p style="margin:0 0 16px 0;">Kandyam E-commerce Private Limited, 42 Galle Road, Colombo 03, Sri Lanka</p>
                     <p style="margin:0;color:#adb5bd;">&copy; ${new Date().getFullYear()} ${PLATFORM_NAME}. All rights reserved.</p>
                   </td>
@@ -221,6 +219,7 @@ function buildPasswordResetHtml(name: string | undefined, token: string): string
 
 function buildOrderConfirmationHtml(
   name: string | undefined,
+  orderId: string,
   orderNumber: string,
   items: Array<{ name: string; quantity: number; price: number; image?: string | null }>,
   total: number,
@@ -299,8 +298,11 @@ function buildOrderConfirmationHtml(
 
     <table width="100%" cellpadding="0" cellspacing="0" style="margin:24px 0 0 0;">
       <tr>
-        <td align="center">
-          <a href="${FRONTEND_URL}/track-order" style="display:inline-block;background-color:#1a1a2e;color:#ffffff;text-decoration:none;padding:14px 36px;border-radius:8px;font-size:14px;font-weight:600;">Track Your Order</a>
+        <td align="center" style="padding-right: 8px;">
+          <a href="${FRONTEND_URL}/dashboard/orders/${orderId}" style="display:inline-block;background-color:#1a1a2e;color:#ffffff;text-decoration:none;padding:12px 24px;border-radius:6px;font-size:14px;font-weight:600;">Track Your Order</a>
+        </td>
+        <td align="center" style="padding-left: 8px;">
+          <a href="${FRONTEND_URL}/dashboard/orders/${orderId}/invoice" style="display:inline-block;background-color:#ffffff;color:#1a1a2e;border:1px solid #1a1a2e;text-decoration:none;padding:12px 24px;border-radius:6px;font-size:14px;font-weight:600;">View & Print Invoice</a>
         </td>
       </tr>
     </table>
@@ -696,18 +698,20 @@ const emailWorker = new Worker<EmailJobData>(
       }
 
       case "sendOrderConfirmation": {
-        const html = buildOrderConfirmationHtml(
-          data.name,
-          data.orderNumber,
-          data.items,
-          data.total,
-          data.shippingAddress,
-          data.estimatedDelivery
+        const { email: orderEmail, name: orderName, orderId, orderNumber, items, total, shippingAddress, estimatedDelivery } = job.data;
+        const orderHtml = buildOrderConfirmationHtml(
+          orderName,
+          orderId,
+          orderNumber,
+          items,
+          total,
+          shippingAddress,
+          estimatedDelivery
         );
         await sendEmail({
-          to: data.email,
-          subject: `Order Confirmed - ${data.orderNumber}`,
-          html,
+          to: orderEmail,
+          subject: `Order Confirmed - ${orderNumber}`,
+          html: orderHtml,
         });
         break;
       }
@@ -844,17 +848,22 @@ export async function addPasswordResetEmailJob(email: string, token: string, nam
 
 export async function addOrderConfirmationJob(
   email: string,
+  orderId: string,
   orderNumber: string,
-  items: Array<{ name: string; quantity: number; price: number }>,
+  items: Array<{ name: string; quantity: number; price: number; image?: string | null }>,
   total: number,
   name?: string,
   shippingAddress?: string,
   estimatedDelivery?: string
 ) {
-  return getEmailQueue().add("order-confirmation", {
-    type: "sendOrderConfirmation",
-    data: { email, name, orderNumber, items, total, shippingAddress, estimatedDelivery },
-  } as OrderConfirmationJob);
+  if (!emailQueue) return;
+
+  await emailQueue.add(
+    "sendOrderConfirmation",
+    {
+      type: "sendOrderConfirmation",
+      data: { email, name, orderId, orderNumber, items, total, shippingAddress, estimatedDelivery },
+    } as OrderConfirmationJob);
 }
 
 export async function addShippingUpdateJob(

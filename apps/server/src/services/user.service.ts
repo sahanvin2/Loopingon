@@ -226,7 +226,7 @@ export async function getOrderDetail(orderId: string, userId: string) {
       },
       statusHistory: { orderBy: { createdAt: "desc" } },
       shipments: true,
-      vendor: { select: { id: true, storeName: true, storeSlug: true, storeLogo: true } },
+      vendor: { select: { id: true, userId: true, storeName: true, storeSlug: true, storeLogo: true } },
       shippingAddress: true,
     },
   });

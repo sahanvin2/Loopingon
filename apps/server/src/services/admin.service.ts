@@ -331,6 +331,46 @@ export async function getOrderDetail(orderId: string) {
   return order;
 }
 
+export async function updateOrderStatus(
+  orderId: string,
+  adminId: string,
+  status?: string,
+  paymentStatus?: string,
+  note?: string
+) {
+  const order = await prisma.order.findUnique({ where: { id: orderId } });
+  if (!order) throw new AppError("Order not found", 404, "ORDER_NOT_FOUND");
+
+  const updateData: any = {};
+  if (status) updateData.status = status as any;
+  if (paymentStatus) updateData.paymentStatus = paymentStatus as any;
+
+  if (status === "SHIPPED") {
+    updateData.shippedAt = new Date();
+  }
+  if (status === "DELIVERED") {
+    updateData.deliveredAt = new Date();
+    updateData.actualDelivery = new Date();
+  }
+
+  const [updatedOrder] = await prisma.$transaction([
+    prisma.order.update({
+      where: { id: orderId },
+      data: updateData,
+    }),
+    prisma.orderStatusHistory.create({
+      data: {
+        orderId,
+        status: status ? (status as any) : order.status,
+        note: note || `Admin updated order. Status: ${status || 'unchanged'}, Payment: ${paymentStatus || 'unchanged'}`,
+        changedBy: adminId,
+      },
+    }),
+  ]);
+
+  return updatedOrder;
+}
+
 // ============ PAYMENTS ============
 
 export async function getPayments(

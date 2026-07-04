@@ -21,10 +21,15 @@ import type { MessageThread, Message, ApiResponse } from "@/types";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
 
+import { useSearchParams } from "next/navigation";
+
 export default function MessagesPage() {
   const { user } = useAuthStore();
   const queryClient = useQueryClient();
-  const [selectedThreadId, setSelectedThreadId] = useState<string | null>(null);
+  const searchParams = useSearchParams();
+  const threadIdParam = searchParams.get("threadId");
+  
+  const [selectedThreadId, setSelectedThreadId] = useState<string | null>(threadIdParam || null);
   const [newMessage, setNewMessage] = useState("");
   const [search, setSearch] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);

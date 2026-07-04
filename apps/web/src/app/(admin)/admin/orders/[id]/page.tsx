@@ -4,22 +4,31 @@ import React from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { motion } from "framer-motion";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { ArrowLeft, Printer } from "lucide-react";
 import { Badge } from "@/components/shared/badge";
 import { EmptyState } from "@/components/shared/empty-state";
 import { LoadingSkeleton } from "@/components/shared/loading-skeleton";
-import { get } from "@/lib/api-client";
+import { get, patch } from "@/lib/api-client";
 import { formatDate, formatPrice } from "@/lib/utils";
 import { ORDER_STATUS_MAP } from "@/lib/constants";
 import type { Order, ApiResponse } from "@/types";
 
 export default function AdminOrderDetailPage() {
   const { id } = useParams<{ id: string }>();
+  const queryClient = useQueryClient();
 
   const { data, isLoading } = useQuery({
     queryKey: ["admin", "order", id],
     queryFn: () => get<ApiResponse<Order>>(`/admin/orders/${id}`),
+  });
+
+  const updateStatusMutation = useMutation({
+    mutationFn: (updates: { status?: string; paymentStatus?: string; note?: string }) =>
+      patch(`/admin/orders/${id}/status`, updates),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["admin", "order", id] });
+    },
   });
 
   const order = data?.data;
@@ -42,12 +51,34 @@ export default function AdminOrderDetailPage() {
       </div>
 
       <div className="bg-white rounded-xl border border-accent-200 p-6">
-        <div className="flex justify-between mb-6">
+        <div className="flex flex-col sm:flex-row justify-between mb-6 gap-4">
           <div>
             <h1 className="text-xl font-mono font-bold text-text-900">{order.orderNumber}</h1>
             <p className="text-sm text-muted-500">Placed: {formatDate(order.createdAt)}</p>
           </div>
-          <Badge variant="amber">{ORDER_STATUS_MAP[order.status]?.label || order.status}</Badge>
+          <div className="flex items-center gap-3">
+            <select
+              value={order.status}
+              onChange={(e) => updateStatusMutation.mutate({ status: e.target.value })}
+              disabled={updateStatusMutation.isPending}
+              className="text-sm border-accent-200 rounded-md focus:ring-primary-500 focus:border-primary-500 bg-surface-50 py-1.5 pl-3 pr-8"
+            >
+              {Object.entries(ORDER_STATUS_MAP).map(([key, value]) => (
+                <option key={key} value={key}>{value.label}</option>
+              ))}
+            </select>
+            <select
+              value={order.paymentStatus}
+              onChange={(e) => updateStatusMutation.mutate({ paymentStatus: e.target.value })}
+              disabled={updateStatusMutation.isPending}
+              className="text-sm border-accent-200 rounded-md focus:ring-primary-500 focus:border-primary-500 bg-surface-50 py-1.5 pl-3 pr-8"
+            >
+              <option value="PENDING">Pending</option>
+              <option value="COMPLETED">Completed</option>
+              <option value="FAILED">Failed</option>
+              <option value="REFUNDED">Refunded</option>
+            </select>
+          </div>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">

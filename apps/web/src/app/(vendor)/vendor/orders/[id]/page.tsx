@@ -56,10 +56,6 @@ export default function VendorOrderDetailPage() {
 
   const order = data?.data;
 
-  const canProcess = order?.status === "PAYMENT_CONFIRMED";
-  const canReadyShip = order?.status === "PROCESSING";
-  const canShip = order?.status === "READY_TO_SHIP";
-
   if (isLoading) {
     return (
       <div className="space-y-6">
@@ -102,58 +98,29 @@ export default function VendorOrderDetailPage() {
               Placed on {formatDate(order.createdAt)}
             </p>
           </div>
-          <Badge variant="amber">
-            {ORDER_STATUS_MAP[order.status]?.label || order.status}
-          </Badge>
+          <div className="flex items-center gap-3">
+            <select
+              value={order.status}
+              onChange={(e) => updateStatusMutation.mutate({ status: e.target.value })}
+              disabled={updateStatusMutation.isPending}
+              className="text-sm border-accent-200 rounded-md focus:ring-primary-500 focus:border-primary-500 bg-surface-50 py-1.5 pl-3 pr-8"
+            >
+              {Object.entries(ORDER_STATUS_MAP).map(([key, value]) => (
+                <option key={key} value={key}>{value.label}</option>
+              ))}
+            </select>
+          </div>
         </div>
 
         <div className="flex flex-wrap gap-2">
-          {canProcess && (
-            <button
-              type="button"
-              onClick={() =>
-                updateStatusMutation.mutate({ status: "PROCESSING" })
-              }
-              disabled={updateStatusMutation.isPending}
-              className="px-4 py-2 bg-muted-600 text-white rounded-lg text-sm font-medium hover:bg-muted-700 disabled:opacity-50"
-            >
-              Mark as Processing
-            </button>
-          )}
-          {canReadyShip && (
-            <button
-              type="button"
-              onClick={() =>
-                updateStatusMutation.mutate({ status: "READY_TO_SHIP" })
-              }
-              disabled={updateStatusMutation.isPending}
-              className="px-4 py-2 bg-accent-500 text-white rounded-lg text-sm font-medium hover:bg-accent-600 disabled:opacity-50"
-            >
-              Mark as Ready to Ship
-            </button>
-          )}
-          {(canReadyShip || canShip) && (
-            <button
-              type="button"
-              onClick={() => setShowTrackingModal(true)}
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700"
-            >
-              <Truck className="w-4 h-4 inline mr-1" />
-              Add Tracking
-            </button>
-          )}
-          {canShip && (
-            <button
-              type="button"
-              onClick={() =>
-                updateStatusMutation.mutate({ status: "SHIPPED" })
-              }
-              disabled={updateStatusMutation.isPending || !order.trackingNumber}
-              className="px-4 py-2 bg-purple-600 text-white rounded-lg text-sm font-medium hover:bg-purple-700 disabled:opacity-50"
-            >
-              Mark as Shipped
-            </button>
-          )}
+          <button
+            type="button"
+            onClick={() => setShowTrackingModal(true)}
+            className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700"
+          >
+            <Truck className="w-4 h-4 inline mr-1" />
+            Update Tracking Info
+          </button>
         </div>
       </div>
 
