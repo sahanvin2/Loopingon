@@ -101,6 +101,9 @@ export async function createAuditLogEntry(
     userId?: string;
     ipAddress?: string;
     userAgent?: string;
+    device?: string;
+    country?: string;
+    city?: string;
     oldValue?: Record<string, unknown>;
     newValue?: Record<string, unknown>;
     description?: string;
