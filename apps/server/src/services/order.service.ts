@@ -498,6 +498,12 @@ export async function cancelOrder(orderId: string, userId: string, reason: strin
     });
   }
 
+  // Unconditionally reverse pending payout amount that was incremented at creation
+  await prisma.vendor.update({
+    where: { id: order.vendorId },
+    data: { pendingPayoutAmount: { decrement: Number(order.vendorPayoutAmount || 0) } },
+  });
+
   if (order.paymentStatus === "COMPLETED") {
     await prisma.paymentTransaction.updateMany({
       where: { orderId },
@@ -506,12 +512,6 @@ export async function cancelOrder(orderId: string, userId: string, reason: strin
     await prisma.order.update({
       where: { id: orderId },
       data: { paymentStatus: "REFUNDED" },
-    });
-
-    // Reverse pending payout amount
-    await prisma.vendor.update({
-      where: { id: order.vendorId },
-      data: { pendingPayoutAmount: { decrement: Number(order.vendorPayoutAmount || 0) } },
     });
 
     // Reverse referral commission if any

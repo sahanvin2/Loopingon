@@ -82,8 +82,8 @@ export default function AdminDashboardPage() {
         <StatCard title="Total Vendors" value={stats?.totalVendors ?? 0} icon={Store} variant="muted" />
         <StatCard title="Total Products" value={stats?.totalProducts ?? 0} icon={Package} variant="rose" />
         <StatCard title="Total Orders" value={stats?.totalOrders ?? 0} icon={ShoppingBag} variant="blush" />
-        <StatCard title="Total Revenue" value={`Rs. ${formatPrice(Number(stats?.totalRevenue || 0))}`} icon={DollarSign} variant="blush" />
-        <StatCard title="Today's Revenue" value={`Rs. ${formatPrice(Number(stats?.revenueToday || 0))}`} icon={TrendingUp} variant="muted" />
+        <StatCard title="Total Revenue" value={formatPrice(Number(stats?.totalRevenue || 0))} icon={DollarSign} variant="blush" />
+        <StatCard title="Today's Revenue" value={formatPrice(Number(stats?.revenueToday || 0))} icon={TrendingUp} variant="muted" />
         <StatCard title="Today's Orders" value={stats?.ordersToday ?? 0} icon={ShoppingBag} variant="amber" />
         <StatCard title="Pending Vendors" value={stats?.pendingVendors ?? 0} icon={ShieldCheck} variant="rose" />
       </motion.div>

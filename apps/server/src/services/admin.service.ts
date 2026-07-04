@@ -25,7 +25,7 @@ export async function getDashboard() {
     prisma.vendor.count({ where: { status: "PENDING", deletedAt: null } }),
     prisma.order.findMany({ take: 5, orderBy: { createdAt: "desc" }, include: { customer: { select: { id: true, fullName: true } }, vendor: { select: { id: true, storeName: true } } } }),
     prisma.order.count({ where: { createdAt: { gte: new Date(new Date().setHours(0, 0, 0, 0)) } } }),
-    prisma.order.aggregate({ where: { createdAt: { gte: new Date(new Date().setHours(0, 0, 0, 0)) } }, _sum: { totalAmount: true } }),
+    prisma.order.aggregate({ where: { status: { in: ["DELIVERED", "COMPLETED"] }, createdAt: { gte: new Date(new Date().setHours(0, 0, 0, 0)) } }, _sum: { totalAmount: true } }),
   ]);
 
   return {

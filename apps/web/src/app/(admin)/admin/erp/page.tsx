@@ -47,10 +47,10 @@ export default function ErpDashboardPage() {
 
   const cards = [
     { label: "Today's Orders", value: d?.ordersToday || 0, icon: ShoppingBag, color: "text-blue-600", bg: "bg-blue-50", trend: "+12%" },
-    { label: "Today's Revenue", value: `Rs. ${formatPrice(d?.revenueToday || 0)}`, icon: DollarSign, color: "text-green-600", bg: "bg-green-50", trend: "+8%" },
+    { label: "Today's Revenue", value: formatPrice(d?.revenueToday || 0), icon: DollarSign, color: "text-green-600", bg: "bg-green-50", trend: "+8%" },
     { label: "Total Orders", value: d?.totalOrders || 0, icon: Package, color: "text-purple-600", bg: "bg-purple-50", trend: "" },
-    { label: "Total Revenue", value: `Rs. ${formatPrice(d?.totalRevenue || 0)}`, icon: TrendingUp, color: "text-emerald-600", bg: "bg-emerald-50", trend: "" },
-    { label: "Refunds & Returns", value: `Rs. ${formatPrice(d?.totalRefunds || 0)} (${d?.returnedOrdersCount || 0})`, icon: RotateCcw, color: "text-red-600", bg: "bg-red-50", trend: "" },
+    { label: "Total Revenue", value: formatPrice(d?.totalRevenue || 0), icon: TrendingUp, color: "text-emerald-600", bg: "bg-emerald-50", trend: "" },
+    { label: "Refunds & Returns", value: `${formatPrice(d?.totalRefunds || 0)} (${d?.returnedOrdersCount || 0})`, icon: RotateCcw, color: "text-red-600", bg: "bg-red-50", trend: "" },
     { label: "Products", value: d?.totalProducts || 0, icon: BarChart3, color: "text-rose-600", bg: "bg-rose-50", trend: "" },
   ];
 
@@ -121,7 +121,7 @@ export default function ErpDashboardPage() {
                   <td className="px-6 py-3 font-medium text-text-800">{order.orderNumber}</td>
                   <td className="px-6 py-3 text-text-600">{order.customer.fullName}</td>
                   <td className="px-6 py-3 text-text-600">{order.vendor.storeName}</td>
-                  <td className="px-6 py-3 font-medium">Rs. {formatPrice(order.totalAmount)}</td>
+                  <td className="px-6 py-3 font-medium">{formatPrice(order.totalAmount)}</td>
                   <td className="px-6 py-3">
                     <span className={cn("px-2 py-0.5 rounded-full text-xs font-medium",
                       order.status === "COMPLETED" ? "bg-green-100 text-green-700" :

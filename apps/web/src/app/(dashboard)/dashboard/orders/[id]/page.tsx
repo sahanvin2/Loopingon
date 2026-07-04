@@ -82,7 +82,7 @@ export default function OrderDetailPage() {
     ];
     if (order?.paymentMethod === "COD") {
       const pc = base.splice(1, 1)[0];
-      base.push(pc);
+      base.splice(6, 0, pc);
     }
     return base;
   }, [order?.paymentMethod]);

@@ -1,6 +1,7 @@
 import { prisma } from "../config/database.js";
 import { AppError } from "../middleware/errorHandler.middleware.js";
 import { getPaginationParams, buildPaginationResult } from "../utils/pagination.js";
+import * as orderService from "./order.service.js";
 
 export async function getProfile(userId: string) {
   const user = await prisma.user.findUnique({
@@ -265,20 +266,5 @@ export async function cancelOrder(orderId: string, userId: string) {
     throw new AppError("Order cannot be cancelled at this stage", 400, "INVALID_STATE");
   }
 
-  const [updatedOrder] = await prisma.$transaction([
-    prisma.order.update({
-      where: { id: orderId },
-      data: { status: "CANCELLED" },
-    }),
-    prisma.orderStatusHistory.create({
-      data: {
-        orderId,
-        status: "CANCELLED",
-        note: "Cancelled by customer request",
-        changedBy: userId,
-      },
-    }),
-  ]);
-
-  return updatedOrder;
+  return await orderService.cancelOrder(orderId, userId, "Cancelled by customer request");
 }
