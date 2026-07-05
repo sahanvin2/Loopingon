@@ -5,7 +5,7 @@ async function run() {
   try {
     console.log('Connecting to DigitalOcean droplet...');
     await ssh.connect({
-      host: '159.65.227.217',
+      host: '134.209.68.3',
       username: 'root',
       password: '@20040301Sa',
       tryKeyboard: true,

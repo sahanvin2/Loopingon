@@ -5,12 +5,17 @@ async function run() {
   try {
     console.log('Connecting to DigitalOcean droplet...');
     await ssh.connect({
-      host: '159.65.227.217',
+      host: '134.209.68.3',
       username: 'root',
       password: '@20040301Sa',
       tryKeyboard: true,
     });
     console.log('Connected successfully!');
+
+    console.log('Syncing modified files...');
+    await ssh.putFile('apps/web/src/app/sitemap.ts', '/opt/loopingon/apps/web/src/app/sitemap.ts');
+    await ssh.putFile('apps/web/Dockerfile', '/opt/loopingon/apps/web/Dockerfile');
+
 
     console.log('Building server image...');
     await ssh.execCommand('docker build -t registry.digitalocean.com/loopingon/server:latest -f apps/server/Dockerfile .', { 

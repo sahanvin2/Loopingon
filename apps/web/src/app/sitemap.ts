@@ -44,6 +44,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
+  if (process.env.SKIP_BUILD_FETCH === "true") {
+    return routes;
+  }
+
   try {
     // Fetch products
     const productsRes = await fetch(`${API_URL}/products?limit=1000`, { next: { revalidate: 3600 } });

@@ -2,10 +2,7 @@ const sharp = require('sharp');
 const fs = require('fs');
 
 const svg = `<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-  <!-- Soft shadow -->
-  <polygon points="256,60 480,460 32,460" fill="rgba(0,0,0,0.1)"/>
-  <!-- Main red triangle -->
-  <polygon points="256,50 480,450 32,450" fill="#E63946" stroke="#D90429" stroke-width="8" stroke-linejoin="round"/>
+  <polygon points="256,80 440,420 72,420" fill="none" stroke="#F04B50" stroke-width="60" stroke-linejoin="miter"/>
 </svg>`;
 
 async function main() {
@@ -29,7 +26,7 @@ async function main() {
   await sharp(input).resize(32, 32).png().toFile('d:/Mern/Loopingon/loopingon/apps/web/src/app/favicon.ico');
   await sharp(input).resize(32, 32).png().toFile(outDir + 'favicon.ico');
 
-  console.log('Successfully generated the red triangle icons!');
+  console.log('Successfully generated the hollow red triangle icons!');
 }
 
 main().catch(console.error);
