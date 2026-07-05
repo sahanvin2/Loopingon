@@ -2,6 +2,7 @@ import { Router } from "express";
 import type { Request, Response, NextFunction } from "express";
 import { authenticate } from "../middleware/auth.middleware.js";
 import { requireRole } from "../middleware/rbac.middleware.js";
+import { auditMiddleware } from "../middleware/audit.middleware.js";
 import * as adminService from "../services/admin.service.js";
 import * as auditService from "../services/audit.service.js";
 import * as paymentService from "../services/payment.service.js";
@@ -11,6 +12,7 @@ const router = Router();
 
 router.use(authenticate);
 router.use(requireRole("SUPER_ADMIN", "ADMIN"));
+router.use(auditMiddleware);
 
 // ==================== DASHBOARD ====================
 

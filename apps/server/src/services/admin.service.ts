@@ -591,18 +591,18 @@ export async function setCommissions(data: Record<string, unknown>) {
 
 export async function getAdminAnalytics() {
   const [
-    totalVendors, totalCustomers, totalProducts, totalOrders,
+    totalVendors, totalUsers, totalProducts, totalOrders,
     revenueTotal, revenueThisMonth, conversionRate,
     pendingOrders, processingOrders, shippedOrders,
   ] = await Promise.all([
     prisma.vendor.count({ where: { deletedAt: null } }),
-    prisma.user.count({ where: { role: "CUSTOMER", deletedAt: null } }),
+    prisma.user.count({ where: { deletedAt: null } }),
     prisma.product.count({ where: { deletedAt: null } }),
     prisma.order.count(),
-    prisma.order.aggregate({ where: { status: { in: ["DELIVERED", "COMPLETED"] } }, _sum: { totalAmount: true } }),
+    prisma.order.aggregate({ where: { status: { notIn: ["CANCELLED", "REFUNDED", "RETURNED"] } }, _sum: { commissionAmount: true } }),
     prisma.order.aggregate({
-      where: { status: { in: ["DELIVERED", "COMPLETED"] }, createdAt: { gte: new Date(new Date().getFullYear(), new Date().getMonth(), 1) } },
-      _sum: { totalAmount: true },
+      where: { status: { notIn: ["CANCELLED", "REFUNDED", "RETURNED"] }, createdAt: { gte: new Date(new Date().getFullYear(), new Date().getMonth(), 1) } },
+      _sum: { commissionAmount: true },
     }),
     prisma.order.aggregate({ _avg: { totalAmount: true } }),
     prisma.order.count({ where: { status: "PENDING_PAYMENT" } }),
@@ -617,11 +617,11 @@ export async function getAdminAnalytics() {
   return {
     overview: {
       totalVendors,
-      totalCustomers,
+      totalCustomers: totalUsers, // Keep key the same for frontend compatibility but send the totalUsers value
       totalProducts,
       totalOrders: totalOrdersNum,
-      totalRevenue: revenueTotal._sum.totalAmount || 0,
-      revenueThisMonth: revenueThisMonth._sum.totalAmount || 0,
+      totalRevenue: revenueTotal._sum.commissionAmount || 0,
+      revenueThisMonth: revenueThisMonth._sum.commissionAmount || 0,
       avgOrderValue: conversionRate._avg.totalAmount || 0,
       conversionRate: totalVisits > 0 ? (totalOrdersNum / totalVisits) * 100 : 0,
     },

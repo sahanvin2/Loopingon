@@ -34,6 +34,7 @@ export const createOrderSchema = z.object({
   giftMessage: z.string().max(300).optional().nullable(),
   giftWrap: z.boolean().optional(),
   useWalletBalance: z.boolean().optional(),
+  useLoyaltyBalance: z.boolean().optional(),
   expectedDelivery: z.string().optional().nullable(),
 });
 
