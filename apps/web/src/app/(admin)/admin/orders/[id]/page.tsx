@@ -120,7 +120,7 @@ export default function AdminOrderDetailPage() {
         <div className="bg-white rounded-xl border border-accent-200 p-6">
           <h2 className="text-lg font-semibold mb-4">Order Items</h2>
           <table className="w-full text-sm">
-            <thead><tr className="border-b"><th className="text-left py-2">Item</th><th className="text-left py-2">Product ID</th><th className="text-right py-2">Qty</th><th className="text-right py-2">Price</th><th className="text-right py-2">Vendor Earning</th><th className="text-right py-2">Kandyam Comm.</th><th className="text-right py-2">Total</th></tr></thead>
+            <thead><tr className="border-b"><th className="text-left py-2">Item</th><th className="text-left py-2">Product ID</th><th className="text-right py-2">Qty</th><th className="text-right py-2">Price</th><th className="text-right py-2">Total</th></tr></thead>
             <tbody>
               {order.items.map((item) => (
                 <tr key={item.id} className="border-b border-accent-100">
@@ -128,8 +128,6 @@ export default function AdminOrderDetailPage() {
                   <td className="py-2 text-xs text-muted-500">{item.productId}</td>
                   <td className="text-right py-2">{item.quantity}</td>
                   <td className="text-right py-2">{formatPrice(Number(item.price))}</td>
-                  <td className="text-right py-2 text-green-700">{formatPrice(Number(item.price) * (1 - (order.commissionRate || 10) / 100))}</td>
-                  <td className="text-right py-2 text-blue-700">{formatPrice(Number(item.price) * ((order.commissionRate || 10) / 100))}</td>
                   <td className="text-right py-2 font-medium">{formatPrice(Number(item.totalPrice))}</td>
                 </tr>
               ))}

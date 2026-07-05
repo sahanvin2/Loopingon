@@ -189,8 +189,31 @@ export async function createOrder(
   }
 
   const commissionRate = vendor.commissionRate || 10;
-  const commissionAmount = Math.round((subtotal - discountAmount) * (commissionRate / 100) * 100) / 100;
-  const vendorPayoutAmount = Math.round((subtotal - discountAmount - commissionAmount) * 100) / 100;
+  
+  let commissionAmount = 0;
+  let vendorPayoutAmount = 0;
+
+  for (const item of orderItems) {
+    const product = await prisma.product.findUnique({ where: { id: item.productId } });
+    const itemSub = Number(item.price) * item.quantity;
+    
+    if (product && product.costPrice && Number(product.costPrice) > 0) {
+      const profitPerItem = Number(item.price) - Number(product.costPrice);
+      commissionAmount += profitPerItem * item.quantity;
+      vendorPayoutAmount += Number(product.costPrice) * item.quantity;
+    } else {
+      const itemComm = itemSub * (commissionRate / 100);
+      commissionAmount += itemComm;
+      vendorPayoutAmount += (itemSub - itemComm);
+    }
+  }
+
+  // Deduct the discount from Kandyam's commission
+  commissionAmount -= discountAmount;
+  if (commissionAmount < 0) commissionAmount = 0;
+
+  commissionAmount = Math.round(commissionAmount * 100) / 100;
+  vendorPayoutAmount = Math.round(vendorPayoutAmount * 100) / 100;
 
   const order = await prisma.order.create({
     data: {

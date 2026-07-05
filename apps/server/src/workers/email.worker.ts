@@ -856,14 +856,13 @@ export async function addOrderConfirmationJob(
   shippingAddress?: string,
   estimatedDelivery?: string
 ) {
-  if (!emailQueue) return;
-
-  await emailQueue.add(
+  return getEmailQueue().add(
     "sendOrderConfirmation",
     {
       type: "sendOrderConfirmation",
       data: { email, name, orderId, orderNumber, items, total, shippingAddress, estimatedDelivery },
-    } as OrderConfirmationJob);
+    } as OrderConfirmationJob
+  );
 }
 
 export async function addShippingUpdateJob(
