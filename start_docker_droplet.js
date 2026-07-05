@@ -32,13 +32,14 @@ async function run() {
     });
 
     console.log('Building nginx image...');
-    await ssh.execCommand('docker build -t registry.digitalocean.com/loopingon/nginx:latest -f docker/nginx/Dockerfile .', { 
+    await ssh.execCommand('docker build -t registry.digitalocean.com/loopingon/nginx:latest -f docker/nginx/Dockerfile docker/nginx', { 
       cwd: '/opt/loopingon',
       onStdout: (c) => process.stdout.write(c.toString('utf8')),
       onStderr: (c) => process.stderr.write(c.toString('utf8'))
     });
 
     console.log('Starting Docker Compose...');
+    await ssh.execCommand('touch docker/.env', { cwd: '/opt/loopingon' });
     const result = await ssh.execCommand('docker compose -f docker/docker-compose.prod.yml up -d', { 
       cwd: '/opt/loopingon',
       onStdout: (c) => process.stdout.write(c.toString('utf8')),

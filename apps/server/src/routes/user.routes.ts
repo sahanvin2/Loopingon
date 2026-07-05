@@ -165,6 +165,20 @@ router.patch(
   }
 );
 
+router.patch(
+  "/orders/:id/return",
+  authenticate,
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const reason = req.body.reason || "Customer requested return";
+      const order = await userService.returnOrder(req.params.id, req.user!.id, reason);
+      successResponse(res, order);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
 router.post(
   "/upload-avatar",
   authenticate,

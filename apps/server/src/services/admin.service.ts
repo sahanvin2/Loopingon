@@ -22,11 +22,11 @@ export async function getDashboard() {
     prisma.vendor.count({ where: { deletedAt: null } }),
     prisma.product.count({ where: { deletedAt: null } }),
     prisma.order.count(),
-    prisma.order.aggregate({ where: { status: { in: ["DELIVERED", "COMPLETED"] } }, _sum: { totalAmount: true } }),
+    prisma.order.aggregate({ where: { status: { notIn: ["CANCELLED", "REFUNDED", "RETURNED"] } }, _sum: { commissionAmount: true } }),
     prisma.vendor.count({ where: { status: "PENDING", deletedAt: null } }),
     prisma.order.findMany({ take: 5, orderBy: { createdAt: "desc" }, include: { customer: { select: { id: true, fullName: true } }, vendor: { select: { id: true, storeName: true } } } }),
     prisma.order.count({ where: { createdAt: { gte: new Date(new Date().setHours(0, 0, 0, 0)) } } }),
-    prisma.order.aggregate({ where: { status: { in: ["DELIVERED", "COMPLETED"] }, createdAt: { gte: new Date(new Date().setHours(0, 0, 0, 0)) } }, _sum: { totalAmount: true } }),
+    prisma.order.aggregate({ where: { status: { notIn: ["CANCELLED", "REFUNDED", "RETURNED"] }, createdAt: { gte: new Date(new Date().setHours(0, 0, 0, 0)) } }, _sum: { commissionAmount: true } }),
   ]);
 
   return {
@@ -34,11 +34,11 @@ export async function getDashboard() {
     totalVendors,
     totalProducts,
     totalOrders,
-    totalRevenue: totalRevenue._sum.totalAmount || 0,
+    totalRevenue: totalRevenue._sum.commissionAmount || 0,
     pendingVendors,
     recentOrders,
     ordersToday,
-    revenueToday: revenueToday._sum.totalAmount || 0,
+    revenueToday: revenueToday._sum.commissionAmount || 0,
   };
 }
 

@@ -268,3 +268,11 @@ export async function cancelOrder(orderId: string, userId: string) {
 
   return await orderService.cancelOrder(orderId, userId, "Cancelled by customer request");
 }
+
+export async function returnOrder(orderId: string, userId: string, reason: string) {
+  const order = await prisma.order.findUnique({ where: { id: orderId } });
+  if (!order) throw new AppError("Order not found", 404, "ORDER_NOT_FOUND");
+  if (order.customerId !== userId) throw new AppError("Unauthorized", 403, "UNAUTHORIZED");
+
+  return await orderService.returnOrder(orderId, userId, reason);
+}

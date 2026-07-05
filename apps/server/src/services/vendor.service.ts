@@ -213,22 +213,26 @@ export async function getDashboardOverview(vendorId: string) {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
-  const [todayOrders, todayRevenue] = await Promise.all([
+  const [todayOrders, todayRevenue, allTimeRevenue] = await Promise.all([
     prisma.order.count({
-      where: { vendorId, createdAt: { gte: today } },
+      where: { vendorId, createdAt: { gte: today }, status: { notIn: ["CANCELLED", "REFUNDED", "RETURNED"] } },
     }),
     prisma.order.aggregate({
-      where: { vendorId, createdAt: { gte: today } },
-      _sum: { totalAmount: true },
+      where: { vendorId, createdAt: { gte: today }, status: { notIn: ["CANCELLED", "REFUNDED", "RETURNED"] } },
+      _sum: { vendorPayoutAmount: true },
+    }),
+    prisma.order.aggregate({
+      where: { vendorId, status: { notIn: ["CANCELLED", "REFUNDED", "RETURNED"] } },
+      _sum: { vendorPayoutAmount: true },
     }),
   ]);
 
   return {
     totalProducts: vendor.totalProducts,
     totalOrders: vendor.totalOrders,
-    totalRevenue: vendor.totalRevenue,
+    totalRevenue: allTimeRevenue._sum.vendorPayoutAmount || 0,
     todayOrders,
-    todayRevenue: todayRevenue._sum.totalAmount || 0,
+    todayRevenue: todayRevenue._sum.vendorPayoutAmount || 0,
     rating: vendor.rating,
     reviewCount: vendor.reviewCount,
     responseRate: vendor.responseRate,

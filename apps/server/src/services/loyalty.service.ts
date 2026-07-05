@@ -59,18 +59,9 @@ export async function getBalance(userId: string) {
 
   const { tier, progress, nextTier, remaining } = calculateTier(totalSpent);
 
-  if (account.claimedTier && account.claimedTier === tier.name) {
-    return {
-      totalSpent,
-      tier: { name: "none", label: "No Tier", reward: 0, color: "gray", icon: "⬜" },
-      progress: 0,
-      nextTier: LOYALTY_TIERS[1],
-      remaining: LOYALTY_TIERS[1].minSpent - totalSpent,
-      rewardBalance: Number(account.rewardBalance),
-      claimed: true,
-      claimedTier: account.claimedTier,
-    };
-  }
+  const claimedTierIndex = LOYALTY_TIERS.findIndex(t => t.name === account.claimedTier);
+  const currentTierIndex = LOYALTY_TIERS.findIndex(t => t.name === tier.name);
+  const isClaimed = claimedTierIndex >= currentTierIndex && currentTierIndex > 0;
 
   return {
     totalSpent,
@@ -78,9 +69,9 @@ export async function getBalance(userId: string) {
     progress,
     nextTier,
     remaining,
-    rewardBalance: tier.reward,
-    claimed: false,
-    claimedTier: null,
+    rewardBalance: Number(account.rewardBalance),
+    claimed: isClaimed,
+    claimedTier: account.claimedTier,
   };
 }
 
