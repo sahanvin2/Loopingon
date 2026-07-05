@@ -41,9 +41,10 @@ services:
 
   server:
     build:
-      context: ../apps/server
-      dockerfile: Dockerfile
+      context: ..
+      dockerfile: apps/server/Dockerfile
       target: runner
+    image: registry.digitalocean.com/loopingon/server:latest
     container_name: loopingon-server
     restart: unless-stopped
     ports:
@@ -67,9 +68,10 @@ services:
 
   web:
     build:
-      context: ../apps/web
-      dockerfile: Dockerfile
+      context: ..
+      dockerfile: apps/web/Dockerfile
       target: runner
+    image: registry.digitalocean.com/loopingon/web:latest
     container_name: loopingon-web
     restart: unless-stopped
     ports:
@@ -89,9 +91,10 @@ services:
 
   worker:
     build:
-      context: ../apps/server
-      dockerfile: Dockerfile
+      context: ..
+      dockerfile: apps/server/Dockerfile
       target: runner
+    image: registry.digitalocean.com/loopingon/server:latest
     container_name: loopingon-worker
     restart: unless-stopped
     command: node dist/workers/index.worker.js
