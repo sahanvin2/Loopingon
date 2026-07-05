@@ -11,11 +11,11 @@
   "lang": "en-LK",
   "categories": ["shopping", "lifestyle", "art"],
   "icons": [
-    { "src": "/favicon-16x16.png", "sizes": "16x16", "type": "image/png" },
-    { "src": "/favicon-32x32.png", "sizes": "32x32", "type": "image/png" },
-    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" },
-    { "src": "/icons/icon-192x192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
-    { "src": "/icons/icon-512x512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+    { "src": "/favicon-16x16.png?v=2", "sizes": "16x16", "type": "image/png" },
+    { "src": "/favicon-32x32.png?v=2", "sizes": "32x32", "type": "image/png" },
+    { "src": "/apple-touch-icon.png?v=2", "sizes": "180x180", "type": "image/png" },
+    { "src": "/icons/icon-192x192.png?v=2", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/icons/icon-512x512.png?v=2", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
   ],
   "screenshots": [
     {
@@ -32,21 +32,21 @@
       "short_name": "Shop",
       "description": "Browse handmade products",
       "url": "/products",
-      "icons": [{ "src": "/favicon-32x32.png", "sizes": "32x32" }]
+      "icons": [{ "src": "/favicon-32x32.png?v=2", "sizes": "32x32" }]
     },
     {
       "name": "My Cart",
       "short_name": "Cart",
       "description": "View your shopping cart",
       "url": "/cart",
-      "icons": [{ "src": "/favicon-32x32.png", "sizes": "32x32" }]
+      "icons": [{ "src": "/favicon-32x32.png?v=2", "sizes": "32x32" }]
     },
     {
       "name": "Gift Cards",
       "short_name": "Gifts",
       "description": "Send a gift card",
       "url": "/gift",
-      "icons": [{ "src": "/favicon-32x32.png", "sizes": "32x32" }]
+      "icons": [{ "src": "/favicon-32x32.png?v=2", "sizes": "32x32" }]
     }
   ]
 }

@@ -32,7 +32,7 @@ fi
 # 4. Create .env file
 echo "Configuring .env file..."
 cat <<EOF > /opt/loopingon/.env
-CORS_ORIGIN=https://kandyam.com,https://www.kandyam.com,http://165.227.90.181
+CORS_ORIGIN=https://kandyam.com,https://www.kandyam.com,http://165.227.90.181,http://159.65.227.217
 NEXT_PUBLIC_APP_URL=https://kandyam.com
 NEXT_PUBLIC_API_URL=https://kandyam.com/api/v1
 # Provide fallbacks for DB if they aren't generated yet
