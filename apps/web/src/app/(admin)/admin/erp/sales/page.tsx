@@ -121,12 +121,14 @@ export default function SalesLedgerPage() {
   const pagination = data?.pagination;
 
   const summary = useMemo(() => {
-    return orders.reduce((acc, o) => ({
-      totalSales: acc.totalSales + (Number(o.totalAmount) || 0),
-      totalCommissions: acc.totalCommissions + (Number(o.commissionAmount) || 0),
-      totalVendorPayouts: acc.totalVendorPayouts + (Number(o.vendorPayoutAmount) || 0),
-      count: acc.count + 1,
-    }), { totalSales: 0, totalCommissions: 0, totalVendorPayouts: 0, count: 0 });
+    return orders
+      .filter(o => !["CANCELLED", "REFUNDED", "RETURN_REQUESTED"].includes(o.status))
+      .reduce((acc, o) => ({
+        totalSales: acc.totalSales + (Number(o.totalAmount) || 0),
+        totalCommissions: acc.totalCommissions + (Number(o.commissionAmount) || 0),
+        totalVendorPayouts: acc.totalVendorPayouts + (Number(o.vendorPayoutAmount) || 0),
+        count: acc.count + 1,
+      }), { totalSales: 0, totalCommissions: 0, totalVendorPayouts: 0, count: 0 });
   }, [orders]);
 
   const handleExport = async () => {
@@ -154,7 +156,7 @@ export default function SalesLedgerPage() {
     CONFIRMED: "bg-cyan-100 text-cyan-700",
     PENDING_PAYMENT: "bg-yellow-100 text-yellow-700",
     PAYMENT_CONFIRMED: "bg-lime-100 text-lime-700",
-    CANCELLED: "bg-red-100 text-red-700",
+    CANCELLED: "bg-red-600 text-white font-semibold",
     REFUNDED: "bg-orange-100 text-orange-700",
     RETURN_REQUESTED: "bg-pink-100 text-pink-700",
   };

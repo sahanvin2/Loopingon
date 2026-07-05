@@ -532,6 +532,8 @@ export async function cancelOrder(orderId: string, userId: string, reason: strin
     }
   }
 
+  await reverseOrderSideEffects(orderId, order.customerId, Number(order.totalAmount));
+
   return updated;
 }
 
@@ -568,5 +570,49 @@ export async function returnOrder(orderId: string, userId: string, reason: strin
     },
   });
 
+  await reverseOrderSideEffects(orderId, order.customerId, Number(order.totalAmount));
+
   return updated;
+}
+
+export async function reverseOrderSideEffects(orderId: string, customerId: string, orderTotal: number) {
+  // Check if already refunded to prevent double refund
+  const existingRefund = await prisma.loyaltyTransaction.findFirst({
+    where: { reference: orderId, type: "REFUND" }
+  });
+  if (existingRefund) return;
+
+  // 1. Reverse CustomerProfile totalSpent
+  await prisma.customerProfile.updateMany({
+    where: { userId: customerId },
+    data: { 
+      totalSpent: { decrement: orderTotal },
+      lifetimeValue: { decrement: orderTotal }
+    }
+  });
+
+  // 2. Refund loyalty points if used
+  const redemption = await prisma.loyaltyTransaction.findFirst({
+    where: { 
+      reference: orderId,
+      type: "REDEMPTION"
+    }
+  });
+
+  if (redemption && redemption.amount) {
+    await prisma.loyaltyAccount.update({
+      where: { id: redemption.accountId },
+      data: { rewardBalance: { increment: redemption.amount } }
+    });
+    
+    await prisma.loyaltyTransaction.create({
+      data: {
+        accountId: redemption.accountId,
+        amount: redemption.amount,
+        type: "REFUND",
+        description: `Refund for cancelled order`,
+        reference: orderId
+      }
+    });
+  }
 }

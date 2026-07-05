@@ -1,5 +1,6 @@
 import { Prisma } from "@prisma/client";
 import { prisma } from "../config/database.js";
+import { reverseOrderSideEffects } from "./order.service.js";
 import { AppError } from "../middleware/errorHandler.middleware.js";
 import { getPaginationParams, buildPaginationResult } from "../utils/pagination.js";
 
@@ -367,6 +368,10 @@ export async function updateOrderStatus(
       },
     }),
   ]);
+
+  if (["CANCELLED", "REFUNDED", "RETURNED", "RETURN_REQUESTED"].includes(updatedOrder.status)) {
+    await reverseOrderSideEffects(orderId, order.customerId, Number(order.totalAmount));
+  }
 
   return updatedOrder;
 }

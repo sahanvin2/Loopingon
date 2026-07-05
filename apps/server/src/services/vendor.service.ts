@@ -4,6 +4,7 @@ import { AppError } from "../middleware/errorHandler.middleware.js";
 import { logger } from "../middleware/errorHandler.middleware.js";
 import { getPaginationParams, buildPaginationResult } from "../utils/pagination.js";
 import { addShippingUpdateJob } from "../workers/email.worker.js";
+import { reverseOrderSideEffects } from "./order.service.js";
 
 export async function applyVendor(
   userId: string,
@@ -682,6 +683,10 @@ export async function updateOrderStatus(
     }
   } catch (err) {
     logger.warn("Failed to queue shipping update email", err);
+  }
+
+  if (["CANCELLED", "REFUNDED", "RETURNED", "RETURN_REQUESTED"].includes(updatedOrder.status)) {
+    await reverseOrderSideEffects(orderId, order.customerId, Number(order.totalAmount));
   }
 
   return updatedOrder;
