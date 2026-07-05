@@ -25,6 +25,7 @@
     "docker:down": "docker compose -f docker/docker-compose.yml down"
   },
   "devDependencies": {
+    "decode-ico": "^0.4.1",
     "prettier": "^3.4.0",
     "turbo": "^2.3.0",
     "typescript": "^5.5.0"

@@ -81,7 +81,7 @@ export const metadata: Metadata = {
     url: "https://kandyam.com",
     images: [
       {
-        url: "https://cdn.kandyam.com/og-image.jpg",
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "Kandyam - Premium Products from Sri Lanka",
@@ -94,7 +94,7 @@ export const metadata: Metadata = {
     title: "Kandyam - Sri Lanka's E-commerce Marketplace",
     description:
       "Discover unique handcrafted treasures made by skilled Sri Lankan sellers.",
-    images: ["https://cdn.kandyam.com/og-image.jpg"],
+    images: ["/og-image.jpg"],
     creator: "@kandyam",
   },
   robots: {
