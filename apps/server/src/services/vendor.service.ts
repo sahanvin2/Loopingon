@@ -278,7 +278,7 @@ export async function getVendorProducts(
     prisma.product.findMany({
       where,
       include: {
-        images: { take: 1, orderBy: { sortOrder: "asc" } },
+        images: { orderBy: { sortOrder: "asc" } },
         categories: { include: { category: true } },
       },
       orderBy: { createdAt: "desc" },

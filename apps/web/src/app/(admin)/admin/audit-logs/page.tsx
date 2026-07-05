@@ -18,22 +18,11 @@ export default function AdminAuditLogsPage() {
   const { data, isLoading } = useQuery({
     queryKey: ["admin", "audit-logs", search, page],
     queryFn: () =>
-      get<PaginatedResponse<{
-        id: string;
-        timestamp: string;
-        user: string;
-        action: string;
-        entity: string;
-        entityId: string;
-        details: Record<string, unknown>;
-        ipAddress: string;
-        device?: string;
-        country?: string;
-        city?: string;
-      }>>("/admin/audit-logs", {
+      get<PaginatedResponse<any>>("/admin/audit-logs", {
         page,
         limit: 30,
-        search: search || undefined,
+        // The backend expects specific filters like userId or action, not a generic search.
+        // We will just pass nothing for now unless we implement specific filters.
       }),
   });
 
@@ -82,26 +71,26 @@ export default function AdminAuditLogsPage() {
               </tr>
             </thead>
             <tbody className="divide-y divide-surface-50">
-              {logs.map((log) => (
+              {logs.map((log: any) => (
                 <tr key={log.id}>
-                  <td className="px-4 py-3 text-xs whitespace-nowrap">{formatDateTime(log.timestamp)}</td>
-                  <td className="px-4 py-3">{log.user || "—"}</td>
+                  <td className="px-4 py-3 text-xs whitespace-nowrap">{formatDateTime(log.createdAt)}</td>
+                  <td className="px-4 py-3">{log.user?.fullName || log.user?.email || log.userId || "System"}</td>
                   <td className="px-4 py-3 font-medium">{log.action}</td>
                   <td className="px-4 py-3">{log.entity}</td>
-                  <td className="px-4 py-3 font-mono text-xs">{log.entityId}</td>
+                  <td className="px-4 py-3 font-mono text-xs">{log.entityId || "—"}</td>
                   <td className="px-4 py-3 text-xs max-w-xs">
                     <button
                       type="button"
                       className="text-primary-600 hover:underline"
                       onClick={() => {
-                        const details = JSON.stringify(log.details, null, 2);
+                        const details = JSON.stringify({ oldValue: log.oldValue, newValue: log.newValue, metadata: log.metadata }, null, 2);
                         alert(details);
                       }}
                     >
                       View Details
                     </button>
                   </td>
-                  <td className="px-4 py-3 font-mono text-xs">{log.ipAddress}</td>
+                  <td className="px-4 py-3 font-mono text-xs">{log.ipAddress || "—"}</td>
                   <td className="px-4 py-3 text-xs">{log.device || "Unknown"}</td>
                   <td className="px-4 py-3 text-xs">{log.country ? `${log.city || ""}, ${log.country}`.replace(/^, /, "") : "Unknown"}</td>
                 </tr>

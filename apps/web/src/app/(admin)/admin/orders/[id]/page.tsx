@@ -89,6 +89,33 @@ export default function AdminOrderDetailPage() {
         </div>
       </div>
 
+      {order.shippingAddress && (
+        <div className="bg-white rounded-xl border border-accent-200 p-6">
+          <h2 className="text-lg font-semibold text-text-900 mb-3">
+            Customer Info
+          </h2>
+          <div className="space-y-1 text-sm text-text-700">
+            <p className="font-medium">{order.shippingAddress.fullName}</p>
+            <p>{order.shippingAddress.addressLine1}</p>
+            {order.shippingAddress.addressLine2 && <p>{order.shippingAddress.addressLine2}</p>}
+            <p>{order.shippingAddress.city}, {order.shippingAddress.district}</p>
+            <p className="pt-2"><span className="font-semibold text-text-900">Email:</span> {order.customer?.email || "N/A"}</p>
+            <p><span className="font-semibold text-text-900">Contact 1:</span> {order.shippingAddress.phone}</p>
+            {order.contactNumberTwo && <p><span className="font-semibold text-text-900">Contact 2:</span> {order.contactNumberTwo}</p>}
+            {order.facebookPage && <p><span className="font-semibold text-text-900">Facebook Page:</span> <a href={order.facebookPage.startsWith('http') ? order.facebookPage : `https://${order.facebookPage}`} target="_blank" rel="noopener noreferrer" className="text-primary-600 hover:underline">{order.facebookPage}</a></p>}
+            {order.estimatedDelivery && <p><span className="font-semibold text-text-900">Due Date:</span> {formatDate(order.estimatedDelivery)}</p>}
+            <p><span className="font-semibold text-text-900">Payment Method:</span> {order.paymentMethod || "COD"}</p>
+          </div>
+        </div>
+      )}
+
+      {order.orderNote && (
+        <div className="bg-amber-50 rounded-xl border border-amber-200 p-6">
+          <h2 className="text-lg font-semibold text-amber-900 mb-2">Order Note</h2>
+          <p className="text-sm text-amber-800 whitespace-pre-wrap">{order.orderNote}</p>
+        </div>
+      )}
+
       {order.items && (
         <div className="bg-white rounded-xl border border-accent-200 p-6">
           <h2 className="text-lg font-semibold mb-4">Order Items</h2>

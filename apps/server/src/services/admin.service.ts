@@ -217,7 +217,7 @@ export async function getProducts(
       where,
       include: {
         vendor: { select: { id: true, storeName: true } },
-        images: { take: 1, orderBy: { sortOrder: "asc" } },
+        images: { orderBy: { sortOrder: "asc" } },
       },
       orderBy: { createdAt: "desc" },
       skip: (p - 1) * l,

@@ -122,9 +122,9 @@ export default function SalesLedgerPage() {
 
   const summary = useMemo(() => {
     return orders.reduce((acc, o) => ({
-      totalSales: acc.totalSales + o.totalAmount,
-      totalCommissions: acc.totalCommissions + (o.commissionAmount || 0),
-      totalVendorPayouts: acc.totalVendorPayouts + (o.vendorPayoutAmount || 0),
+      totalSales: acc.totalSales + (Number(o.totalAmount) || 0),
+      totalCommissions: acc.totalCommissions + (Number(o.commissionAmount) || 0),
+      totalVendorPayouts: acc.totalVendorPayouts + (Number(o.vendorPayoutAmount) || 0),
       count: acc.count + 1,
     }), { totalSales: 0, totalCommissions: 0, totalVendorPayouts: 0, count: 0 });
   }, [orders]);
@@ -176,9 +176,9 @@ export default function SalesLedgerPage() {
       {/* Summary Cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {[
-          { label: "Total Sales", value: `Rs. ${formatPrice(summary.totalSales)}`, icon: DollarSign, color: "text-green-600", bg: "bg-green-50" },
-          { label: "Commissions", value: `Rs. ${formatPrice(summary.totalCommissions)}`, icon: TrendingUp, color: "text-blue-600", bg: "bg-blue-50" },
-          { label: "Vendor Payouts", value: `Rs. ${formatPrice(summary.totalVendorPayouts)}`, icon: ShoppingBag, color: "text-purple-600", bg: "bg-purple-50" },
+          { label: "Total Sales", value: `${formatPrice(summary.totalSales)}`, icon: DollarSign, color: "text-green-600", bg: "bg-green-50" },
+          { label: "Commissions", value: `${formatPrice(summary.totalCommissions)}`, icon: TrendingUp, color: "text-blue-600", bg: "bg-blue-50" },
+          { label: "Vendor Payouts", value: `${formatPrice(summary.totalVendorPayouts)}`, icon: ShoppingBag, color: "text-purple-600", bg: "bg-purple-50" },
           { label: "Orders", value: summary.count, icon: RotateCcw, color: "text-orange-600", bg: "bg-orange-50" },
         ].map((card) => (
           <div key={card.label} className="bg-white rounded-xl border border-surface-200 p-4 shadow-soft-sm">
@@ -243,9 +243,9 @@ export default function SalesLedgerPage() {
                   <td className="px-4 py-3 text-text-600">{new Date(order.createdAt).toLocaleDateString()}</td>
                   <td className="px-4 py-3 text-text-600">{order.customer.fullName}</td>
                   <td className="px-4 py-3 text-text-600">{order.vendor.storeName}</td>
-                  <td className="px-4 py-3 font-medium">Rs. {formatPrice(order.totalAmount)}</td>
-                  <td className="px-4 py-3 text-green-600">Rs. {formatPrice(order.commissionAmount || 0)}</td>
-                  <td className="px-4 py-3 text-purple-600">Rs. {formatPrice(order.vendorPayoutAmount || 0)}</td>
+                  <td className="px-4 py-3 font-medium">{formatPrice(order.totalAmount)}</td>
+                  <td className="px-4 py-3 text-green-600">{formatPrice(order.commissionAmount || 0)}</td>
+                  <td className="px-4 py-3 text-purple-600">{formatPrice(order.vendorPayoutAmount || 0)}</td>
                   <td className="px-4 py-3">
                     <span className={cn("px-2 py-0.5 rounded-full text-xs font-medium", statusColors[order.status] || "bg-gray-100 text-gray-700")}>
                       {order.status?.replace(/_/g, " ")}
