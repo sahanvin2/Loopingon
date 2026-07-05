@@ -13,7 +13,7 @@ export function auditMiddleware(req: Request, res: Response, next: NextFunction)
   res.on("finish", () => {
     // Only log successful actions
     if (res.statusCode >= 200 && res.statusCode < 300) {
-      const user = req.user as User | undefined;
+      const user = req.user as any;
       let action = method;
       let entity = "UNKNOWN";
 
