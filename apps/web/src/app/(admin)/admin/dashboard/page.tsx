@@ -46,8 +46,9 @@ export default function AdminDashboardPage() {
   // Build chart data from analytics
   const chartData = analytics?.revenueByDay || analytics?.revenueTrend || [];
 
-  // Activity from recent orders
+  // Activity from recent orders and audit logs
   const recentOrders = stats?.recentOrders || [];
+  const recentActivity = stats?.recentActivity || [];
 
   if (isLoading) {
     return (
@@ -142,6 +143,34 @@ export default function AdminDashboardPage() {
             ) : (
               <div className="flex items-center justify-center h-full text-muted-500 text-sm py-8">
                 No recent orders
+              </div>
+            )}
+          </div>
+        </ChartCard>
+      </div>
+
+      <div className="mt-6">
+        <ChartCard title="Recent Audit Activity">
+          <div className="max-h-64 overflow-y-auto">
+            {recentActivity.length > 0 ? (
+              <div className="divide-y divide-surface-100">
+                {recentActivity.map((log: any) => (
+                  <div key={log.id} className="px-2 py-3 hover:bg-surface-50 transition-colors rounded-lg flex items-start justify-between">
+                    <div>
+                      <p className="text-sm font-medium text-text-800">{log.action}</p>
+                      <p className="text-xs text-muted-500">
+                        {log.user?.fullName || log.userId || "System"} • {log.entity} {log.entityId ? `(${log.entityId})` : ""}
+                      </p>
+                    </div>
+                    <div className="text-right text-xs text-muted-400 whitespace-nowrap ml-4">
+                      {new Date(log.createdAt).toLocaleString()}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="flex items-center justify-center h-full text-muted-500 text-sm py-8">
+                No recent activity recorded
               </div>
             )}
           </div>

@@ -17,6 +17,7 @@ export async function getDashboard() {
     recentOrders,
     ordersToday,
     revenueToday,
+    recentActivity,
   ] = await Promise.all([
     prisma.user.count({ where: { deletedAt: null } }),
     prisma.vendor.count({ where: { deletedAt: null } }),
@@ -27,6 +28,7 @@ export async function getDashboard() {
     prisma.order.findMany({ take: 5, orderBy: { createdAt: "desc" }, include: { customer: { select: { id: true, fullName: true } }, vendor: { select: { id: true, storeName: true } } } }),
     prisma.order.count({ where: { createdAt: { gte: new Date(new Date().setHours(0, 0, 0, 0)) } } }),
     prisma.order.aggregate({ where: { status: { notIn: ["CANCELLED", "REFUNDED", "RETURNED"] }, createdAt: { gte: new Date(new Date().setHours(0, 0, 0, 0)) } }, _sum: { commissionAmount: true } }),
+    prisma.auditLog.findMany({ take: 5, orderBy: { createdAt: "desc" }, include: { user: { select: { id: true, fullName: true, email: true } } } }),
   ]);
 
   return {
@@ -39,6 +41,7 @@ export async function getDashboard() {
     recentOrders,
     ordersToday,
     revenueToday: revenueToday._sum.commissionAmount || 0,
+    recentActivity,
   };
 }
 
