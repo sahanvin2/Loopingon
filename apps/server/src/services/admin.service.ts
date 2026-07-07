@@ -256,6 +256,25 @@ export async function deleteProduct(productId: string, adminId: string) {
 export async function updateProduct(productId: string, data: any, adminId: string) {
   const product = await prisma.product.findUnique({ where: { id: productId } });
   if (!product) throw new AppError("Product not found", 404);
+
+  if (data.images && Array.isArray(data.images)) {
+    await prisma.productImage.deleteMany({ where: { productId } });
+    const images = data.images;
+    if (images.length > 0) {
+      await prisma.productImage.createMany({
+        data: images.map((img: any, index: number) => ({
+          productId,
+          url: img.url,
+          thumbnail: img.thumbnail || img.url,
+          medium: img.medium || img.url,
+          large: img.large || img.url,
+          sortOrder: img.sortOrder ?? index,
+          isPrimary: img.isPrimary ?? index === 0,
+        })),
+      });
+    }
+  }
+
   return prisma.product.update({
     where: { id: productId },
     data: {
@@ -271,6 +290,7 @@ export async function updateProduct(productId: string, data: any, adminId: strin
       shippingPrice: data.shippingPrice,
       updatedAt: new Date(),
     },
+    include: { images: { orderBy: { sortOrder: "asc" } } },
   });
 }
 
