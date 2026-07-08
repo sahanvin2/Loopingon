@@ -197,7 +197,7 @@ export async function updateUser(userId: string, data: { fullName?: string; phon
       await prisma.vendor.create({
         data: {
           userId,
-          storeName: `${user.fullName || 'Admin'} Official Store`,
+          storeName: `${user.fullName || 'Admin'} Official Store ${Math.floor(Math.random() * 10000)}`,
           storeSlug,
           storeDescription: "Official store account.",
           status: "VERIFIED",

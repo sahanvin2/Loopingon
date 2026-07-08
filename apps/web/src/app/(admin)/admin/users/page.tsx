@@ -10,7 +10,7 @@ import { Badge } from "@/components/shared/badge";
 import { EmptyState } from "@/components/shared/empty-state";
 import { LoadingSkeleton } from "@/components/shared/loading-skeleton";
 import { Pagination } from "@/components/shared/pagination";
-import { get, patch } from "@/lib/api-client";
+import { get, patch, post } from "@/lib/api-client";
 import { formatDate, formatPrice } from "@/lib/utils";
 import type { User, PaginatedResponse } from "@/types";
 
@@ -30,8 +30,8 @@ export default function AdminUsersPage() {
   });
 
   const banMutation = useMutation({
-    mutationFn: ({ id, isActive }: { id: string; isActive: boolean }) =>
-      patch(`/admin/users/${id}`, { isActive }),
+    mutationFn: ({ id }: { id: string; isActive: boolean }) =>
+      post(`/admin/users/${id}/ban`),
     onSuccess: () =>
       queryClient.invalidateQueries({ queryKey: ["admin", "users"] }),
   });
