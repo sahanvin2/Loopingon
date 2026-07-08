@@ -176,12 +176,6 @@ export function Header() {
             <Link href="/products" className="text-sm font-medium text-text-700 hover:text-primary-600 transition-colors">
               Shop
             </Link>
-            <Link href="/custom-orders" className="text-sm font-medium text-text-700 hover:text-primary-600 transition-colors">
-              Custom Orders
-            </Link>
-            <Link href="/gift-ideas" className="text-sm font-medium text-text-700 hover:text-primary-600 transition-colors">
-              Gift Ideas
-            </Link>
             <Link href="/deals" className="text-sm font-medium text-text-700 hover:text-primary-600 transition-colors">
               Deals
             </Link>
