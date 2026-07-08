@@ -35,7 +35,7 @@ jobs:
             --file apps/server/Dockerfile \
             --tag $DOCKER_REGISTRY/server:$IMAGE_TAG \
             --tag $DOCKER_REGISTRY/server:latest \
-            apps/server
+            .
 
       - name: Build Web Docker Image
         run: |
@@ -43,7 +43,7 @@ jobs:
             --file apps/web/Dockerfile \
             --tag $DOCKER_REGISTRY/web:$IMAGE_TAG \
             --tag $DOCKER_REGISTRY/web:latest \
-            apps/web
+            .
 
       - name: Build Nginx Docker Image
         run: |
