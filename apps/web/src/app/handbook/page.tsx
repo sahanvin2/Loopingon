@@ -1,53 +1,140 @@
-import React from "react";
+import { Metadata } from "next";
 import Link from "next/link";
-import { BookOpen, TrendingUp, Camera, MessageSquare, ArrowRight } from "lucide-react";
+import { BookOpen, Camera, Search, TrendingUp, ShieldCheck, ArrowRight, Package } from "lucide-react";
 
-export const metadata = {
-  title: "Seller Handbook | Kandyam",
-  description: "Your comprehensive guide to running a successful shop on Kandyam.",
+export const metadata: Metadata = {
+  title: "Seller Handbook - Kandyam",
+  description: "The ultimate guide to running a successful digital shop on Kandyam. Learn about SEO, digital assets, licensing, and marketing.",
 };
 
-const GUIDES = [
-  { icon: Camera, title: "Photography Guide", desc: "Learn how to take stunning product photos that sell." },
-  { icon: TrendingUp, title: "SEO Basics", desc: "Optimize your listings to get found in search results." },
-  { icon: MessageSquare, title: "Customer Service", desc: "Best practices for communicating with buyers." },
-  { icon: BookOpen, title: "Shop Policies", desc: "How to write clear and fair policies for your shop." },
+const guides = [
+  {
+    id: "digital-assets",
+    icon: <Camera className="h-6 w-6" />,
+    title: "Digital Assets & Covers",
+    description: "Learn how to create high-quality cover images, gameplay screenshots, and promotional trailers for your software.",
+    href: "#digital-assets",
+    content: "Great visuals are crucial for selling digital goods. Ensure your cover images are high resolution and accurately represent the software or game. Include screenshots of the actual UI or gameplay so buyers know what they are getting. A short promotional trailer or demo video can increase conversion rates significantly."
+  },
+  {
+    id: "seo",
+    icon: <Search className="h-6 w-6" />,
+    title: "Search Engine Optimization",
+    description: "Master Kandyam search. Learn how to write compelling titles and use tags to get found by more buyers.",
+    href: "#seo",
+    content: "When naming your digital products, use clear and descriptive titles that include what the item is (e.g., 'Steam Key', 'Windows License'). Avoid 'cute' names that a buyer would never type into a search bar. Utilize all available tags, and ensure your descriptions list system requirements, language support, and DRM details."
+  },
+  {
+    id: "delivery",
+    icon: <Package className="h-6 w-6" />,
+    title: "Instant Delivery & Licensing",
+    description: "Best practices for managing license keys, secure downloads, and automated delivery.",
+    href: "#delivery",
+    content: "Our platform handles automated delivery, but you must ensure your stock of keys is accurate. If you are selling direct downloads, ensure your files are virus-scanned, compressed efficiently, and hosted securely. Always provide clear activation instructions for license keys."
+  },
+  {
+    id: "marketing",
+    icon: <TrendingUp className="h-6 w-6" />,
+    title: "Marketing Your Shop",
+    description: "How to use social media, Twitch streams, and Kandyam Ads to drive consistent traffic to your listings.",
+    href: "#marketing",
+    content: "Leverage Twitch, YouTube, and X (Twitter) to show gameplay or software tutorials. Link your Kandyam store in your bio and video descriptions. Engage with potential customers by responding to comments and offering beta access or giveaways to increase your follower base. Participate in our seasonal gaming sales."
+  },
+  {
+    id: "safety",
+    icon: <ShieldCheck className="h-6 w-6" />,
+    title: "Trust & Safety",
+    description: "Understanding our policies, handling disputes professionally, and protecting your seller account.",
+    href: "#safety",
+    content: "Always communicate with buyers through the Kandyam platform to ensure a record of conversation. If a dispute arises over a claimed 'invalid key', remain professional and use our dispute resolution tools. Familiarize yourself with our Anti-Fraud and Digital Delivery policies to ensure your store remains in good standing."
+  },
+  {
+    id: "management",
+    icon: <BookOpen className="h-6 w-6" />,
+    title: "Shop Management",
+    description: "Tips on managing key inventory, regional pricing strategies, and providing world-class support.",
+    href: "#management",
+    content: "Check your dashboard daily for low-stock alerts on your license keys. Use our regional pricing tools to offer fair prices across different currencies. Provide clear documentation and fast technical support to minimize refund requests and maintain a high rating."
+  }
 ];
 
-export default function HandbookPage() {
+
+export default function SellerHandbookPage() {
   return (
-    <main className="min-h-screen bg-[#FCFDFD] py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        
-        <div className="bg-[#E2F0F1] rounded-3xl p-10 md:p-16 mb-16 relative overflow-hidden">
-          <div className="relative z-10 max-w-2xl">
-            <h1 className="font-serif text-4xl md:text-5xl font-bold text-navy-900 mb-6">The Seller Handbook</h1>
-            <p className="text-lg font-medium text-text-700 mb-8">
-              Everything you need to know to start, manage, and grow your business on Kandyam. From beginner guides to advanced strategies.
-            </p>
-            <div className="relative max-w-md">
-              <input type="text" placeholder="Search the handbook..." className="w-full h-12 rounded-full pl-6 pr-12 text-sm focus:outline-none focus:ring-2 focus:ring-[#62A7B0]" />
-              <button className="absolute right-3 top-3 text-[#62A7B0]">
-                <ArrowRight className="w-6 h-6" />
-              </button>
-            </div>
+    <div className="bg-surface-50 pb-20">
+      {/* Hero Section */}
+      <section className="bg-white py-20 border-b border-surface-200">
+        <div className="mx-auto max-w-4xl px-4 text-center">
+          <span className="text-sm font-bold tracking-wider text-primary-600 uppercase">Education & Resources</span>
+          <h1 className="mt-4 font-serif text-4xl font-bold text-text-900 md:text-5xl">
+            The Seller Handbook
+          </h1>
+          <p className="mt-6 text-lg text-muted-600">
+            Everything you need to know about starting, running, and scaling your business on Kandyam. Expert advice and actionable tips.
+          </p>
+        </div>
+      </section>
+
+      {/* Grid Section */}
+      <section className="py-20">
+        <div className="mx-auto max-w-7xl px-4">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {guides.map((guide, index) => (
+              <div key={index} className="group relative overflow-hidden rounded-2xl bg-white p-8 shadow-soft-sm transition-all hover:-translate-y-1 hover:shadow-soft-lg">
+                <div className="mb-6 inline-flex rounded-xl bg-primary-50 p-4 text-primary-600 group-hover:bg-primary-600 group-hover:text-white transition-colors">
+                  {guide.icon}
+                </div>
+                <h3 className="mb-3 font-serif text-xl font-bold text-text-900">{guide.title}</h3>
+                <p className="mb-6 text-muted-600 line-clamp-3">
+                  {guide.description}
+                </p>
+                <Link href={guide.href} className="inline-flex items-center text-sm font-bold text-primary-600 group-hover:text-primary-700">
+                  Read Guide <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </div>
+            ))}
           </div>
         </div>
+      </section>
 
-        <h2 className="font-serif text-2xl font-bold text-navy-900 mb-8">Essential Reading</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {GUIDES.map((guide) => (
-            <Link key={guide.title} href="#" className="group bg-white border border-surface-200 rounded-2xl p-6 hover:shadow-md hover:border-[#62A7B0]/50 transition-all">
-              <div className="w-12 h-12 rounded-xl bg-surface-50 flex items-center justify-center mb-6 group-hover:bg-[#62A7B0] group-hover:text-white transition-colors text-[#62A7B0]">
-                <guide.icon className="w-6 h-6" />
+      {/* Detailed Content Sections */}
+      <section className="mx-auto max-w-4xl px-4 pb-20">
+        <div className="space-y-16">
+          {guides.map((guide) => (
+            <div key={guide.id} id={guide.id} className="scroll-mt-24 rounded-2xl bg-white p-8 md:p-10 shadow-soft-sm">
+              <div className="flex items-center gap-4 mb-6">
+                <div className="inline-flex rounded-xl bg-primary-50 p-3 text-primary-600">
+                  {guide.icon}
+                </div>
+                <h2 className="font-serif text-2xl font-bold text-text-900">{guide.title}</h2>
               </div>
-              <h3 className="font-bold text-lg text-navy-900 mb-2">{guide.title}</h3>
-              <p className="text-sm font-medium text-text-600 leading-relaxed">{guide.desc}</p>
-            </Link>
+              <p className="text-muted-700 leading-relaxed text-lg">
+                {guide.content}
+              </p>
+            </div>
           ))}
         </div>
+      </section>
 
-      </div>
-    </main>
+      {/* Newsletter */}
+      <section className="py-20 bg-primary-900 text-white rounded-3xl mx-4 lg:mx-auto lg:max-w-7xl">
+        <div className="mx-auto max-w-3xl px-4 text-center">
+          <h2 className="font-serif text-3xl font-bold md:text-4xl">Get Seller Tips in Your Inbox</h2>
+          <p className="mt-4 text-primary-100">
+            Subscribe to the Seller Success Newsletter for weekly advice, trend reports, and platform updates.
+          </p>
+          <form className="mt-8 flex flex-col gap-3 sm:flex-row justify-center">
+            <input 
+              type="email" 
+              placeholder="Enter your email address" 
+              className="w-full max-w-sm rounded-lg px-4 py-3 text-text-900 focus:outline-none focus:ring-2 focus:ring-primary-500"
+            />
+            <button className="rounded-lg bg-accent-500 px-6 py-3 font-semibold text-white transition-colors hover:bg-accent-600">
+              Subscribe
+            </button>
+          </form>
+        </div>
+      </section>
+    </div>
   );
 }

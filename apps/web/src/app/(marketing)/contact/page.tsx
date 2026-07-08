@@ -184,7 +184,7 @@ export default function ContactPage() {
                     <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-primary-600" />
                     <div>
                       <p className="text-sm font-medium text-text-800">Office</p>
-                      <p className="text-sm text-muted-600">42 Galle Road, Colombo 03, Sri Lanka</p>
+                      <p className="text-sm text-muted-600">Rambukkana, Kegalle, Sri Lanka</p>
                     </div>
                   </div>
                   <div className="flex gap-3">

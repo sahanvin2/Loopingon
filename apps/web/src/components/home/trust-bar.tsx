@@ -11,8 +11,8 @@ const TRUST_ITEMS = [
   },
   {
     icon: <Wand2 className="w-5 h-5 text-text-700" />,
-    title: "Customize Your Order",
-    subtitle: "Made just for you",
+    title: "Instant Delivery",
+    subtitle: "Automated via email",
   },
   {
     icon: <RefreshCcw className="w-5 h-5 text-[#E63946]" />,

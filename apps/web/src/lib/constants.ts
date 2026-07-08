@@ -65,7 +65,7 @@ export const SRI_LANKAN_DISTRICTS = [
   "Anuradhapura",
   "Badulla",
   "Batticaloa",
-  "Colombo",
+  "Kegalle",
   "Galle",
   "Gampaha",
   "Hambantota",
@@ -187,7 +187,7 @@ export const SHIPPING_METHODS = [
   {
     value: "SAME_DAY",
     label: "Same Day Delivery",
-    description: "Available within Colombo and suburbs",
+    description: "Available within Kegalle and suburbs",
     estimatedDays: "Same day",
   },
   {
@@ -403,9 +403,9 @@ export const CONTACT_INFO = {
   whatsapp: "+94 77 123 4567",
   address: {
     line1: "42 Galle Road",
-    line2: "Colombo 03",
-    city: "Colombo",
-    district: "Colombo",
+    line2: "Rambukkana",
+    city: "Kegalle",
+    district: "Kegalle",
     country: "Sri Lanka",
   },
 } as const;

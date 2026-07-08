@@ -25,6 +25,7 @@ import adminRoutes from "./admin.routes.js";
 import aiRoutes from "./ai.routes.js";
 import healthRoutes from "./health.routes.js";
 import exportRoutes from "./export.routes.js";
+import jobsRoutes from "./jobs.routes.js";
 
 const router = Router();
 
@@ -54,5 +55,6 @@ router.use("/admin", adminRoutes);
 router.use("/ai", aiRoutes);
 router.use("/health", healthRoutes);
 router.use("/export", exportRoutes);
+router.use("/jobs", jobsRoutes);
 
 export default router;
