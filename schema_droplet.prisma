@@ -152,7 +152,7 @@ enum ReportStatus {
 // ==================== USERS & AUTH ====================
 
 model User {
-  id                  String     @id @default(uuid())
+  id                  String     @id @default(cuid())
   email               String     @unique
   emailVerified       Boolean    @default(false)
   emailVerifiedAt     DateTime?
@@ -213,7 +213,7 @@ model User {
 }
 
 model Session {
-  id           String   @id @default(uuid())
+  id           String   @id @default(cuid())
   userId       String
   token        String   @unique
   ipAddress    String?
@@ -231,7 +231,7 @@ model Session {
 }
 
 model RefreshToken {
-  id        String   @id @default(uuid())
+  id        String   @id @default(cuid())
   userId    String
   token     String   @unique
   family    String
@@ -249,7 +249,7 @@ model RefreshToken {
 }
 
 model Address {
-  id             String    @id @default(uuid())
+  id             String    @id @default(cuid())
   userId         String
   label          String?
   fullName       String
@@ -279,7 +279,7 @@ model Address {
 }
 
 model CustomerProfile {
-  id                 String   @id @default(uuid())
+  id                 String   @id @default(cuid())
   userId             String   @unique
   dateOfBirth        DateTime?
   gender             String?
@@ -304,7 +304,7 @@ model CustomerProfile {
 // ==================== VENDORS ====================
 
 model Vendor {
-  id                  String       @id @default(uuid())
+  id                  String       @id @default(cuid())
   userId              String       @unique
   storeName           String       @unique
   storeSlug           String       @unique
@@ -344,7 +344,7 @@ model Vendor {
   avgResponseTime     Float        @default(0)
   onTimeDeliveryRate  Float        @default(0)
   returnRate          Float        @default(0)
-  commissionRate      Float        @default(20.0)
+  commissionRate      Float        @default(10.0)
 
   nextPayoutDate      DateTime?
   lastPayoutDate      DateTime?
@@ -379,7 +379,7 @@ model Vendor {
 }
 
 model VendorBankDetail {
-  id              String   @id @default(uuid())
+  id              String   @id @default(cuid())
   vendorId        String
   bankName        String
   branchName      String
@@ -400,7 +400,7 @@ model VendorBankDetail {
 }
 
 model VendorVerificationDoc {
-  id          String   @id @default(uuid())
+  id          String   @id @default(cuid())
   vendorId    String
   docType     String
   docUrl      String
@@ -418,7 +418,7 @@ model VendorVerificationDoc {
 }
 
 model StorefrontSettings {
-  id              String  @id @default(uuid())
+  id              String  @id @default(cuid())
   vendorId        String  @unique
   themeColor      String?
   customCss       String?
@@ -437,7 +437,7 @@ model StorefrontSettings {
 }
 
 model VendorAnalytics {
-  id           String   @id @default(uuid())
+  id           String   @id @default(cuid())
   vendorId     String
   date         DateTime
   views        Int      @default(0)
@@ -460,7 +460,7 @@ model VendorAnalytics {
 // ==================== CATEGORIES ====================
 
 model Category {
-  id              String     @id @default(uuid())
+  id              String     @id @default(cuid())
   name            String
   slug            String     @unique
   description     String?
@@ -505,7 +505,7 @@ model ProductCategory {
 // ==================== PRODUCTS ====================
 
 model Product {
-  id                  String        @id @default(uuid())
+  id                  String        @id @default(cuid())
   vendorId            String
   title               String
   slug                String        @unique
@@ -519,9 +519,9 @@ model Product {
   sku                 String?
   status              ProductStatus @default(DRAFT)
   isFeatured          Boolean       @default(false)
-  isHandmade          Boolean       @default(false)
+  isHandmade          Boolean       @default(true)
   isCustomizable      Boolean       @default(false)
-  isDigital           Boolean       @default(true)
+  isDigital           Boolean       @default(false)
   isEcoFriendly       Boolean       @default(false)
   isFairTrade         Boolean       @default(false)
   craftType           String?
@@ -578,7 +578,7 @@ model Product {
 }
 
 model ProductImage {
-  id         String   @id @default(uuid())
+  id         String   @id @default(cuid())
   productId  String
   url        String
   thumbnail  String
@@ -600,7 +600,7 @@ model ProductImage {
 }
 
 model ProductVideo {
-  id          String   @id @default(uuid())
+  id          String   @id @default(cuid())
   productId   String
   url         String
   thumbnailUrl String?
@@ -616,7 +616,7 @@ model ProductVideo {
 }
 
 model ProductVariant {
-  id        String   @id @default(uuid())
+  id        String   @id @default(cuid())
   productId String
   name      String
   sku       String?
@@ -635,7 +635,7 @@ model ProductVariant {
 }
 
 model ProductTag {
-  id        String  @id @default(uuid())
+  id        String  @id @default(cuid())
   productId String
   tag       String
 
@@ -648,7 +648,7 @@ model ProductTag {
 }
 
 model InventoryLog {
-  id         String   @id @default(uuid())
+  id         String   @id @default(cuid())
   productId  String
   variantId  String?
   change     Int
@@ -667,7 +667,7 @@ model InventoryLog {
 // ==================== CART ====================
 
 model Cart {
-  id                  String     @id @default(uuid())
+  id                  String     @id @default(cuid())
   userId              String     @unique
   abandonedEmailStage Int        @default(0)
   createdAt           DateTime   @default(now())
@@ -681,7 +681,7 @@ model Cart {
 }
 
 model CartItem {
-  id        String   @id @default(uuid())
+  id        String   @id @default(cuid())
   cartId    String
   productId String
   variantId String?
@@ -701,7 +701,7 @@ model CartItem {
 // ==================== ORDERS ====================
 
 model Order {
-  id                   String       @id @default(uuid())
+  id                   String       @id @default(cuid())
   orderNumber          String       @unique
   customerId           String
   vendorId             String
@@ -714,13 +714,13 @@ model Order {
   totalAmount          Decimal      @db.Decimal(12, 2)
   currency             String       @default("LKR")
 
-  commissionRate       Float        @default(20.0)
+  commissionRate       Float        @default(10.0)
   commissionAmount     Decimal      @default(0) @db.Decimal(12, 2)
   vendorPayoutAmount   Decimal      @default(0) @db.Decimal(12, 2)
   vendorPayoutStatus   PayoutStatus?
 
   shippingMethod       ShippingMethod?
-  shippingAddressId    String?
+  shippingAddressId    String
   trackingNumber       String?
   trackingUrl          String?
   courierName          String?
@@ -754,7 +754,7 @@ model Order {
 
   customer             User         @relation("OrderCustomer", fields: [customerId], references: [id])
   vendor               Vendor       @relation("OrderVendor", fields: [vendorId], references: [id])
-  shippingAddress      Address?      @relation("OrderShippingAddress", fields: [shippingAddressId], references: [id])
+  shippingAddress      Address      @relation("OrderShippingAddress", fields: [shippingAddressId], references: [id])
   items                OrderItem[]
   statusHistory        OrderStatusHistory[]
   shipments            Shipment[]
@@ -773,7 +773,7 @@ model Order {
 }
 
 model OrderItem {
-  id           String    @id @default(uuid())
+  id           String    @id @default(cuid())
   orderId      String
   productId    String
   variantId    String?
@@ -794,7 +794,7 @@ model OrderItem {
 }
 
 model OrderStatusHistory {
-  id        String      @id @default(uuid())
+  id        String      @id @default(cuid())
   orderId   String
   status    OrderStatus
   note      String?
@@ -809,7 +809,7 @@ model OrderStatusHistory {
 }
 
 model Shipment {
-  id              String   @id @default(uuid())
+  id              String   @id @default(cuid())
   orderId         String
   courierName     String
   trackingNumber  String
@@ -832,7 +832,7 @@ model Shipment {
 }
 
 model OrderDispute {
-  id          String       @id @default(uuid())
+  id          String       @id @default(cuid())
   orderId     String       @unique
   reason      String
   description String
@@ -852,7 +852,7 @@ model OrderDispute {
 // ==================== WISHLIST ====================
 
 model Wishlist {
-  id        String         @id @default(uuid())
+  id        String         @id @default(cuid())
   userId    String         @unique
   name      String         @default("My Wishlist")
   isPublic  Boolean        @default(false)
@@ -867,7 +867,7 @@ model Wishlist {
 }
 
 model WishlistItem {
-  id         String   @id @default(uuid())
+  id         String   @id @default(cuid())
   wishlistId String
   productId  String
   addedPrice Decimal? @db.Decimal(10, 2)
@@ -884,7 +884,7 @@ model WishlistItem {
 // ==================== REVIEWS ====================
 
 model Review {
-  id          String   @id @default(uuid())
+  id          String   @id @default(cuid())
   productId   String
   orderId     String   @unique
   customerId  String
@@ -919,7 +919,7 @@ model Review {
 // ==================== MESSAGES ====================
 
 model MessageThread {
-  id              String    @id @default(uuid())
+  id              String    @id @default(cuid())
   subject         String?
   orderId         String?
   createdAt       DateTime  @default(now())
@@ -936,7 +936,7 @@ model MessageThread {
 }
 
 model Message {
-  id          String        @id @default(uuid())
+  id          String        @id @default(cuid())
   threadId    String
   senderId    String
   content     String
@@ -957,7 +957,7 @@ model Message {
 // ==================== NOTIFICATIONS ====================
 
 model Notification {
-  id              String             @id @default(uuid())
+  id              String             @id @default(cuid())
   userId          String
   type            NotificationType
   channel         NotificationChannel
@@ -982,7 +982,7 @@ model Notification {
 // ==================== PAYMENTS ====================
 
 model PaymentTransaction {
-  id                String        @id @default(uuid())
+  id                String        @id @default(cuid())
   orderId           String?
   userId            String
   vendorId          String?
@@ -1015,7 +1015,7 @@ model PaymentTransaction {
 }
 
 model PayoutSchedule {
-  id              String        @id @default(uuid())
+  id              String        @id @default(cuid())
   vendorId        String
   periodStart     DateTime
   periodEnd       DateTime
@@ -1044,7 +1044,7 @@ model PayoutSchedule {
 // ==================== COUPONS ====================
 
 model Coupon {
-  id              String       @id @default(uuid())
+  id              String       @id @default(cuid())
   code            String       @unique
   description     String?
   discountType    DiscountType
@@ -1074,7 +1074,7 @@ model Coupon {
 }
 
 model CouponUsage {
-  id        String   @id @default(uuid())
+  id        String   @id @default(cuid())
   couponId  String
   userId    String
   orderId   String
@@ -1092,7 +1092,7 @@ model CouponUsage {
 // ==================== REFERRALS ====================
 
 model ReferralCode {
-  id              String     @id @default(uuid())
+  id              String     @id @default(cuid())
   userId          String     @unique
   code            String     @unique
   totalReferrals  Int        @default(0)
@@ -1111,7 +1111,7 @@ model ReferralCode {
 }
 
 model Referral {
-  id              String   @id @default(uuid())
+  id              String   @id @default(cuid())
   referrerId      String
   referredUserId  String
   referralCodeStr String
@@ -1134,7 +1134,7 @@ model Referral {
 // ==================== LOYALTY ====================
 
 model LoyaltyAccount {
-  id              String              @id @default(uuid())
+  id              String              @id @default(cuid())
   userId          String              @unique
   totalSpent      Decimal             @default(0) @db.Decimal(12, 2)
   tier            String              @default("none")
@@ -1152,7 +1152,7 @@ model LoyaltyAccount {
 }
 
 model LoyaltyTransaction {
-  id          String   @id @default(uuid())
+  id          String   @id @default(cuid())
   accountId   String
   amount      Decimal? @db.Decimal(10, 2)
   type        String
@@ -1172,7 +1172,7 @@ model LoyaltyTransaction {
 // ==================== COMPETITIONS ====================
 
 model Competition {
-  id              String            @id @default(uuid())
+  id              String            @id @default(cuid())
   title           String
   slug            String            @unique
   description     String
@@ -1202,7 +1202,7 @@ model Competition {
 }
 
 model CompetitionEntry {
-  id            String            @id @default(uuid())
+  id            String            @id @default(cuid())
   competitionId String
   userId        String
   productId     String
@@ -1227,7 +1227,7 @@ model CompetitionEntry {
 }
 
 model CompetitionVote {
-  id        String   @id @default(uuid())
+  id        String   @id @default(cuid())
   entryId   String
   userId    String
   createdAt DateTime @default(now())
@@ -1243,7 +1243,7 @@ model CompetitionVote {
 // ==================== SUPPORT ====================
 
 model SupportTicket {
-  id          String                @id @default(uuid())
+  id          String                @id @default(cuid())
   ticketNumber String               @unique
   userId      String
   subject     String
@@ -1267,7 +1267,7 @@ model SupportTicket {
 }
 
 model SupportTicketReply {
-  id          String        @id @default(uuid())
+  id          String        @id @default(cuid())
   ticketId    String
   userId      String
   content     String
@@ -1285,7 +1285,7 @@ model SupportTicketReply {
 // ==================== AUDIT ====================
 
 model AuditLog {
-  id          String   @id @default(uuid())
+  id          String   @id @default(cuid())
   userId      String?
   action      String
   entity      String
@@ -1313,7 +1313,7 @@ model AuditLog {
 // ==================== CONTENT ====================
 
 model Page {
-  id            String   @id @default(uuid())
+  id            String   @id @default(cuid())
   title         String
   slug          String   @unique
   content       String
@@ -1328,7 +1328,7 @@ model Page {
 }
 
 model Banner {
-  id          String   @id @default(uuid())
+  id          String   @id @default(cuid())
   title       String
   subtitle    String?
   imageUrl    String
@@ -1346,7 +1346,7 @@ model Banner {
 }
 
 model BlogPost {
-  id              String   @id @default(uuid())
+  id              String   @id @default(cuid())
   title           String
   slug            String   @unique
   excerpt         String?
@@ -1370,7 +1370,7 @@ model BlogPost {
 }
 
 model SeoSetting {
-  id          String   @id @default(uuid())
+  id          String   @id @default(cuid())
   page        String   @unique
   title       String
   description String
@@ -1386,7 +1386,7 @@ model SeoSetting {
 }
 
 model SitemapUrl {
-  id          String   @id @default(uuid())
+  id          String   @id @default(cuid())
   url         String   @unique
   changefreq  String   @default("weekly")
   priority    Float    @default(0.5)
@@ -1398,7 +1398,7 @@ model SitemapUrl {
 }
 
 model SystemSetting {
-  id          String @id @default(uuid())
+  id          String @id @default(cuid())
   key         String @unique
   value       Json
   description String?
@@ -1410,7 +1410,7 @@ model SystemSetting {
 }
 
 model CommissionSetting {
-  id              String   @id @default(uuid())
+  id              String   @id @default(cuid())
   name            String
   rate            Float
   minOrderAmount  Decimal? @db.Decimal(10, 2)
@@ -1427,7 +1427,7 @@ model CommissionSetting {
 }
 
 model ShippingRate {
-  id            String   @id @default(uuid())
+  id            String   @id @default(cuid())
   name          String
   courierName   String
   domesticRate  Decimal  @db.Decimal(10, 2)
@@ -1446,7 +1446,7 @@ model ShippingRate {
 // ==================== ANALYTICS & TRACKING ====================
 
 model TrackingSession {
-  id          String   @id @default(uuid())
+  id          String   @id @default(cuid())
   cookieId    String   @unique
   userId      String?
   deviceType  String?
@@ -1469,7 +1469,7 @@ model TrackingSession {
 }
 
 model PageVisit {
-  id             String   @id @default(uuid())
+  id             String   @id @default(cuid())
   sessionId      String
   userId         String?
   path           String
@@ -1501,7 +1501,7 @@ enum InteractionType {
 }
 
 model ProductInteraction {
-  id          String         @id @default(uuid())
+  id          String         @id @default(cuid())
   sessionId   String
   userId      String?
   productId   String
@@ -1522,7 +1522,7 @@ model ProductInteraction {
 }
 
 model SearchQuery {
-  id           String   @id @default(uuid())
+  id           String   @id @default(cuid())
   sessionId    String
   userId       String?
   query        String

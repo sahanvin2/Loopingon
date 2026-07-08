@@ -14,8 +14,7 @@ RUN npm install
 COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV SKIP_BUILD_FETCH=true
-ENV NEXT_PUBLIC_SUPABASE_URL="http://127.0.0.1:8000"
-ENV NEXT_PUBLIC_SUPABASE_ANON_KEY="dummy"
+
 RUN npx turbo run build --filter=@kandyam/web
 
 FROM base AS runner

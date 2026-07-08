@@ -13,81 +13,82 @@ const config: Config = {
     extend: {
       colors: {
         primary: {
-          50: "#FFF1F2",
-          100: "#FFDDE0",
-          200: "#FFB8BE",
-          300: "#FF8C94",
-          400: "#FA6873", // Accent
-          500: "#F7444E", // Primary Coral
-          600: "#E63946", // Primary Hover
-          700: "#D92F3A",
-          800: "#BC2530",
-          900: "#A71E29",
+          50: "#FAFAFA",
+          100: "#F4F4F5",
+          200: "#E4E4E7",
+          300: "#D4D4D8",
+          400: "#A1A1AA",
+          500: "#71717A",
+          600: "#52525B",
+          700: "#3F3F46",
+          800: "#27272A",
+          900: "#18181B", // Primary Black
+          950: "#09090B",
         },
         accent: {
-          50: "#F2FBFC",
-          100: "#D8F0F3",
-          200: "#BEE5E9",
-          300: "#A6D6DC",
-          400: "#8FC9D0",
-          500: "#78BCC4", // Teal
-          600: "#62A7B0",
-          700: "#4F97A0",
-          800: "#3E7D86",
-          900: "#2E6670",
+          50: "#FFFFFF",
+          100: "#FAFAFA",
+          200: "#F5F5F5",
+          300: "#E5E5E5",
+          400: "#D4D4D4",
+          500: "#A3A3A3", // Silver
+          600: "#737373",
+          700: "#525252",
+          800: "#404040",
+          900: "#262626",
         },
         navy: {
-          50: "#E8F0F4",
-          100: "#D0E1E8",
-          200: "#AEC8D6",
-          300: "#8AAEC2",
-          400: "#6894AB",
-          500: "#002C3E", // Navy
-          600: "#002534",
-          700: "#001E2A",
-          800: "#001822",
-          900: "#00131B",
+          50: "#F9FAFB",
+          100: "#F3F4F6",
+          200: "#E5E7EB",
+          300: "#D1D5DB",
+          400: "#9CA3AF",
+          500: "#6B7280",
+          600: "#4B5563",
+          700: "#374151",
+          800: "#1F2937",
+          900: "#111827", // Dark Slate
         },
         luxury: {
-          bg: "#002C3E",
-          gold: "#D4AF37",
-          light: "#F9E7A1",
+          bg: "#0A0A0A",
+          gold: "#A3A3A3", // Replaced gold with silver
+          light: "#FAFAFA",
         },
-        main: "#FAFAF8",
+        main: "#FFFFFF",
         surface: {
-          50: "#FAFAF8", // Background main (from spec)
-          100: "#F7F8F3", // Surface / bg-soft
-          200: "#E4E8D8",
-          300: "#D6DDC2", // Border
-          400: "#C6D1AB",
-          500: "#9ca3af",
-          600: "#4b5563",
-          700: "#374151", // Body Text
-          800: "#1f2937",
-          900: "#002C3E", // Heading Text
+          50: "#FFFFFF", // Background main
+          100: "#FAFAFA", // Surface / bg-soft
+          200: "#F4F4F5",
+          300: "#E4E4E7", // Border
+          400: "#D4D4D8",
+          500: "#A1A1AA",
+          600: "#71717A",
+          700: "#52525B", // Body Text
+          800: "#3F3F46",
+          900: "#18181B", // Heading Text
         },
         text: {
-          50: "#F7F8F3",
-          100: "#F1F3EB",
-          200: "#E4E8D8",
-          300: "#D6DDC2",
-          400: "#9ca3af",
-          500: "#6b7280", // Muted Text
-          600: "#4b5563",
-          700: "#374151",
-          800: "#1f2937",
-          900: "#002C3E", // Navy
+          50: "#FFFFFF",
+          100: "#FAFAFA",
+          200: "#E4E4E7",
+          300: "#D4D4D8",
+          400: "#A1A1AA",
+          500: "#71717A", // Muted Text
+          600: "#52525B",
+          700: "#3F3F46",
+          800: "#27272A",
+          900: "#18181B", // Black
         },
         muted: {
-          100: "#F1F3EB",
-          200: "#E4E8D8",
-          300: "#D6DDC2",
-          400: "#9ca3af",
-          500: "#6b7280",
-          600: "#4b5563",
-          700: "#374151",
-          800: "#1f2937",
-          900: "#002C3E", // Navy
+          100: "#FAFAFA",
+          200: "#F4F4F5",
+          300: "#E4E4E7",
+          400: "#D4D4D8",
+          500: "#A1A1AA",
+          600: "#71717A",
+          700: "#52525B",
+          800: "#3F3F46",
+          900: "#18181B",
         },
       },
       fontFamily: {
@@ -107,14 +108,14 @@ const config: Config = {
         full: "9999px",
       },
       boxShadow: {
-        "soft-sm": "0 1px 3px rgba(247, 68, 78, 0.06)",
-        soft: "0 4px 12px rgba(247, 68, 78, 0.08)",
-        "soft-md": "0 6px 20px rgba(247, 68, 78, 0.10)",
-        "soft-lg": "0 10px 32px rgba(247, 68, 78, 0.12)",
-        "soft-xl": "0 20px 40px rgba(247, 68, 78, 0.15)",
-        "inner-soft": "inset 0 2px 4px rgba(247, 68, 78, 0.06)",
-        primary: "0 4px 14px rgba(247, 68, 78, 0.25)",
-        accent: "0 4px 14px rgba(120, 188, 196, 0.15)",
+        "soft-sm": "0 1px 3px rgba(0, 0, 0, 0.06)",
+        soft: "0 4px 12px rgba(0, 0, 0, 0.08)",
+        "soft-md": "0 6px 20px rgba(0, 0, 0, 0.10)",
+        "soft-lg": "0 10px 32px rgba(0, 0, 0, 0.12)",
+        "soft-xl": "0 20px 40px rgba(0, 0, 0, 0.15)",
+        "inner-soft": "inset 0 2px 4px rgba(0, 0, 0, 0.06)",
+        primary: "0 4px 14px rgba(0, 0, 0, 0.25)",
+        accent: "0 4px 14px rgba(255, 255, 255, 0.15)",
       },
       animation: {
         "fade-in": "fadeIn 0.5s ease-out",
@@ -162,10 +163,10 @@ const config: Config = {
         },
       },
       backgroundImage: {
-        "gradient-primary": "linear-gradient(135deg, #F7444E, #E63946)",
-        "gradient-accent": "linear-gradient(135deg, #A6D6DC, #78BCC4)",
-        "gradient-brand": "linear-gradient(135deg, #FA6873 0%, #F7444E 100%)",
-        "gradient-hero": "linear-gradient(135deg, #FFF1F2 0%, #F7F8F3 50%, #FFDDE0 100%)",
+        "gradient-primary": "linear-gradient(135deg, #27272A, #09090B)",
+        "gradient-accent": "linear-gradient(135deg, #FFFFFF, #E5E5E5)",
+        "gradient-brand": "linear-gradient(135deg, #52525B 0%, #18181B 100%)",
+        "gradient-hero": "linear-gradient(135deg, #FAFAFA 0%, #F4F4F5 50%, #E4E4E7 100%)",
       },
       spacing: {
         18: "4.5rem",

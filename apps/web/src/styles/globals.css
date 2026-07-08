@@ -3,44 +3,9 @@
 @tailwind utilities;
 
 :root {
-  --color-primary: 247 68 78;
-  --color-accent: 120 188 196;
-  --color-surface: 241 243 235;
-  --color-text: 0 44 62;
-  --color-muted: 107 114 128;
-
-  --color-primary-50: 255 241 242;
-  --color-primary-100: 255 221 224;
-  --color-primary-200: 255 184 190;
-  --color-primary-300: 255 140 148;
-  --color-primary-400: 250 104 115;
-  --color-primary-500: 247 68 78;
-  --color-primary-600: 230 57 70;
-  --color-primary-700: 217 47 58;
-  --color-primary-800: 188 37 48;
-  --color-primary-900: 167 30 41;
-
-  --color-accent-50: 242 251 252;
-  --color-accent-100: 216 240 243;
-  --color-accent-200: 190 229 233;
-  --color-accent-300: 166 214 220;
-  --color-accent-400: 143 201 208;
-  --color-accent-500: 120 188 196;
-  --color-accent-600: 98 167 176;
-  --color-accent-700: 79 151 160;
-  --color-accent-800: 62 125 134;
-  --color-accent-900: 46 102 112;
-
-  --color-surface-50: 247 248 243;
-  --color-surface-100: 241 243 235;
-  --color-surface-200: 228 232 216;
-  --color-surface-300: 214 221 194;
-  --color-surface-400: 198 209 171;
-  --color-surface-500: 156 163 175;
-  --color-surface-600: 75 85 99;
-  --color-surface-700: 55 65 81;
-  --color-surface-800: 31 41 55;
-  --color-surface-900: 0 44 62;
+  --color-surface: 250 250 250;
+  --color-text: 24 24 27;
+  --color-muted: 113 113 122;
 
   --font-serif: var(--font-lora), "Lora", Georgia, serif;
   --font-sans: var(--font-outfit), "Outfit", system-ui, sans-serif;
@@ -94,15 +59,15 @@
   }
 
   .pattern-dots {
-    background-image: radial-gradient(rgba(247, 68, 78, 0.12) 1px, transparent 1px);
+    background-image: radial-gradient(rgba(0, 0, 0, 0.12) 1px, transparent 1px);
     background-size: 20px 20px;
   }
 
   .pattern-lines {
     background-image: repeating-linear-gradient(
       45deg,
-      rgba(250, 104, 115, 0.08) 0px,
-      rgba(250, 104, 115, 0.08) 1px,
+      rgba(0, 0, 0, 0.08) 0px,
+      rgba(0, 0, 0, 0.08) 1px,
       transparent 1px,
       transparent 12px
     );
@@ -126,7 +91,7 @@
 
   .soft-card:hover {
     @apply -translate-y-1 shadow-lg;
-    box-shadow: 0 20px 40px -20px rgba(247, 68, 78, 0.25);
+    box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.25);
   }
 
   .btn-primary {

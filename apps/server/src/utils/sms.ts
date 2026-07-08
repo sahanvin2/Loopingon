@@ -74,6 +74,6 @@ export async function sendCustomerOrderSMS(
     ? itemNames.slice(0, 2).join(", ") + (itemNames.length > 2 ? ` +${itemNames.length - 2} more` : "")
     : "your items";
 
-  const message = `Hi ${name}! Your Kandyam order #${orderNumber} is confirmed.\n\nItems: ${itemText}\nTotal (COD): Rs. ${amount.toLocaleString()}\n\nWe'll notify you when it ships via Koombiyo.\nTrack: kandyam.com/track-order\n\nThank you for shopping with Kandyam!`;
+  const message = `Hi ${name}! Your Kandyam order #${orderNumber} is confirmed.\n\nItems: ${itemText}\nTotal Paid: Rs. ${amount.toLocaleString()}\n\nYour digital products are ready to download in your dashboard.\n\nThank you for shopping with Kandyam!`;
   return sendSMS({ recipient: phone, message });
 }

@@ -12,6 +12,7 @@ async function run() {
       'apps/server/src/services/product.service.ts',
       'apps/server/src/validators/order.validator.ts',
       'apps/server/tsconfig.json',
+      'apps/web/Dockerfile',
       'apps/web/public/sitemap-0.xml',
       'apps/web/src/app/(admin)/admin/analytics/page.tsx',
       'apps/web/src/app/(admin)/admin/products/page.tsx',

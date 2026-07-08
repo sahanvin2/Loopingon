@@ -7,24 +7,24 @@ import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 
 const POPULAR_SEARCHES = [
-  "Wall Art",
-  "Jewelry",
-  "Home Decor",
-  "Candles",
-  "Clothing",
-  "Gift for Her",
+  "Game Keys",
+  "Software",
+  "Gift Cards",
+  "E-Books",
+  "Templates",
+  "Digital Art",
 ];
 
 const HERO_IMAGES = [
   // Column 1
-  "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=400&h=500&fit=crop", // Necklace
-  "https://images.unsplash.com/photo-1520201163981-8cc95007dd2a?w=400&h=400&fit=crop", // Macrame / Texture
+  "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400&h=500&fit=crop", // Gaming
+  "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&h=400&fit=crop", // Retro gaming
   // Column 2
-  "https://images.unsplash.com/photo-1603006905003-be475563bc59?w=400&h=400&fit=crop", // Candle
-  "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=400&h=500&fit=crop", // Abstract Art
+  "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&h=400&fit=crop", // Code
+  "https://images.unsplash.com/photo-1614680376593-902f74cf0d41?w=400&h=500&fit=crop", // Abstract
   // Column 3
-  "https://images.unsplash.com/photo-1578500494198-246f612d3b3d?w=400&h=500&fit=crop", // Ceramic Vase
-  "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=400&h=400&fit=crop", // Leather Bag
+  "https://images.unsplash.com/photo-1555680202-c86f0e12f086?w=400&h=500&fit=crop", // Dev
+  "https://images.unsplash.com/photo-1606144042898-3331b016335a?w=400&h=400&fit=crop", // Apps
 ];
 
 export function HeroSection() {

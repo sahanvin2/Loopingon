@@ -17,26 +17,10 @@ const steps: { key: CheckoutStep; label: string }[] = [
   { key: "confirmation", label: "Confirmed" },
 ];
 
-interface ShippingFormData {
+interface BillingFormData {
   email: string;
   fullName: string;
   phone: string;
-  contactNumberTwo: string;
-  addressLine1: string;
-  addressLine2: string;
-  city: string;
-  district: string;
-  postalCode: string;
-  country: string;
-  facebookPage: string;
-  orderNote: string;
-  dueDate: string;
-}
-
-interface GiftFormData {
-  isGift: boolean;
-  giftMessage: string;
-  giftWrap: boolean;
 }
 
 interface CheckoutFormProps {
@@ -50,34 +34,16 @@ export function CheckoutForm({ className }: CheckoutFormProps) {
   const [currentStep, setCurrentStep] = useState<CheckoutStep>("shipping");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [orderId, setOrderId] = useState<string | null>(null);
-  const [selectedMethod, setSelectedMethod] = useState("STANDARD");
   const [orderError, setOrderError] = useState<string | null>(null);
 
-  const [shippingData, setShippingData] = useState<ShippingFormData>({
+  const [billingData, setBillingData] = useState<BillingFormData>({
     email: user?.email || "",
     fullName: user?.fullName || "",
     phone: user?.phone || "",
-    contactNumberTwo: "",
-    addressLine1: "",
-    addressLine2: "",
-    city: "",
-    district: "",
-    postalCode: "",
-    country: "Sri Lanka",
-    facebookPage: "",
-    orderNote: "",
-    dueDate: "",
   });
 
-  const [giftData, setGiftData] = useState<GiftFormData>({
-    isGift: false,
-    giftMessage: "",
-    giftWrap: false,
-  });
-
-  const handleShippingNext = useCallback(async (data: ShippingFormData, method: string) => {
-    setShippingData(data);
-    setSelectedMethod(method);
+  const handleNext = useCallback(async (data: BillingFormData) => {
+    setBillingData(data);
     setIsSubmitting(true);
     setOrderError(null);
 
@@ -96,22 +62,14 @@ export function CheckoutForm({ className }: CheckoutFormProps) {
           email: data.email,
           fullName: data.fullName,
           phone: data.phone,
-          addressLine1: data.addressLine1,
-          addressLine2: data.addressLine2,
-          city: data.city,
-          state: data.district,
-          postalCode: data.postalCode,
-          country: data.country,
+          addressLine1: "Digital",
+          city: "Digital",
+          state: "Digital",
+          postalCode: "00000",
+          country: "Sri Lanka",
         },
-        shippingMethod: method,
-        paymentMethod: "COD",
-        contactNumberTwo: data.contactNumberTwo,
-        facebookPage: data.facebookPage,
-        orderNote: data.orderNote,
-        expectedDelivery: data.dueDate,
-        isGift: giftData.isGift,
-        giftMessage: giftData.giftMessage || undefined,
-        giftWrap: giftData.giftWrap || undefined,
+        shippingMethod: "DIGITAL",
+        paymentMethod: "ONLINE",
         couponCode: undefined,
         useLoyaltyBalance: useCartStore.getState().useLoyaltyBalance,
       });
@@ -119,7 +77,7 @@ export function CheckoutForm({ className }: CheckoutFormProps) {
       setOrderId(res.data.id);
       clearCart();
       setCurrentStep("confirmation");
-      toast.success("Order placed! Pay on delivery.");
+      toast.success("Order placed successfully!");
     } catch (err: any) {
       let message = "Failed to place order.";
       if (err?.message) {
@@ -132,7 +90,7 @@ export function CheckoutForm({ className }: CheckoutFormProps) {
     } finally {
       setIsSubmitting(false);
     }
-  }, [items, giftData, clearCart]);
+  }, [items, clearCart]);
 
   const currentIndex = steps.findIndex((s) => s.key === currentStep);
 
@@ -184,9 +142,8 @@ export function CheckoutForm({ className }: CheckoutFormProps) {
             exit={{ opacity: 0, x: -20 }}
           >
             <ShippingStep
-              initialData={shippingData}
-              onNext={handleShippingNext}
-              selectedMethod={selectedMethod}
+              initialData={billingData}
+              onNext={handleNext}
               orderError={orderError}
               isSubmitting={isSubmitting}
             />
@@ -213,7 +170,7 @@ export function CheckoutForm({ className }: CheckoutFormProps) {
               Your order has been placed successfully.
             </p>
             <p className="text-muted-500 max-w-md mx-auto mb-8 text-sm">
-              Pay cash when your order arrives. We will deliver via Koombiyo within 1-3 business days.
+              Your secure online payment is complete. You can now access your digital products from your dashboard.
             </p>
             <div className="flex items-center justify-center gap-4">
               <a

@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { get } from "@/lib/api-client";
 import { cn } from "@/lib/utils";
-import type { Product, ApiResponse, PaginationMeta } from "@/types";
+import type { Product, ApiResponse } from "@/types";
 import { ProductCard } from "@/components/product/product-card";
 import { LoadingSkeleton } from "@/components/shared/loading-skeleton";
 
@@ -24,16 +24,16 @@ export function RelatedProducts({ productId, categoryId }: RelatedProductsProps)
   const { data, isLoading } = useQuery({
     queryKey: ["products", "related", productId],
     queryFn: async () => {
-      const res = await get<ApiResponse<{ products: Product[]; meta: PaginationMeta }>>(
-        "/products",
-        { limit: 12, sort: "newest" },
+      const res = await get<ApiResponse<Product[]>>(
+        `/products/${productId}/related`,
+        { limit: 12 },
       );
       return res.data;
     },
     staleTime: 5 * 60 * 1000,
   });
 
-  const products = data?.products?.filter((p) => p.id !== productId) || [];
+  const products = data?.filter((p) => p.id !== productId) || [];
 
   useEffect(() => {
     const el = scrollRef.current;

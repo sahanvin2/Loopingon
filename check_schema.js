@@ -5,8 +5,8 @@ async function run() {
     console.log('Connecting...');
     await ssh.connect({ host: '165.227.90.181', username: 'root', password: '@20040301Sa', tryKeyboard: true });
     
-    console.log('Fetching logs...');
-    const res = await ssh.execCommand('docker logs --tail 100 loopingon-server');
+    console.log('Checking schema in container...');
+    const res = await ssh.execCommand('docker exec loopingon-server cat prisma/schema.prisma | grep "model Product {" -A 5');
     console.log(res.stdout);
     if(res.stderr) console.error(res.stderr);
 

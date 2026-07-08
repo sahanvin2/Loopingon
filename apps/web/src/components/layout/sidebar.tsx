@@ -123,7 +123,6 @@ const vendorItems: SidebarSection[] = [
     heading: "Settings",
     items: [
       { label: "Settings", href: "/vendor/settings", icon: Settings },
-      { label: "Shipping", href: "/vendor/shipping", icon: Truck },
       { label: "Bank Details", href: "/vendor/bank-details", icon: CreditCard },
     ],
   },

@@ -1,30 +1,18 @@
 "use client";
 
 import React, { useState } from "react";
-import { Truck, Package, Loader2, ShieldCheck, Mail, MapPin, CreditCard, Info, Clock } from "lucide-react";
+import { Loader2, ShieldCheck, Mail, CreditCard, Info } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useCartStore } from "@/stores/cart-store";
 
-export interface ShippingFormData {
+export interface BillingFormData {
   email: string;
   fullName: string;
   phone: string;
-  contactNumberTwo: string;
-  addressLine1: string;
-  addressLine2: string;
-  city: string;
-  district: string;
-  postalCode: string;
-  country: string;
-  facebookPage: string;
-  orderNote: string;
-  dueDate: string;
 }
 
 interface ShippingStepProps {
-  initialData?: ShippingFormData;
-  onNext: (data: ShippingFormData, method: string) => void;
-  selectedMethod?: string;
+  initialData?: BillingFormData;
+  onNext: (data: BillingFormData) => void;
   orderError?: string | null;
   isSubmitting?: boolean;
   className?: string;
@@ -38,13 +26,12 @@ interface InputFieldProps {
   error?: string;
   onChange: (value: string) => void;
   colSpan?: number;
-  optional?: boolean;
 }
 
-const InputField = ({ label, type = "text", placeholder, value, error, onChange, colSpan = 1, optional = false }: InputFieldProps) => (
+const InputField = ({ label, type = "text", placeholder, value, error, onChange, colSpan = 1 }: InputFieldProps) => (
   <div className={cn(colSpan === 2 && "sm:col-span-2")}>
     <label className="block text-[13px] font-semibold text-text-700 mb-1.5 ml-0.5">
-      {label} {optional && <span className="text-muted-400 font-normal">(Optional)</span>}
+      {label}
     </label>
     <input
       type={type}
@@ -61,50 +48,35 @@ const InputField = ({ label, type = "text", placeholder, value, error, onChange,
   </div>
 );
 
-export function ShippingStep({ initialData, onNext, selectedMethod = "STANDARD", orderError, isSubmitting, className }: ShippingStepProps) {
-  const { items, subtotal } = useCartStore();
-
-  const freeThreshold = 5000;
-  const isFreeEligible = subtotal >= freeThreshold;
-
-  const shippingMethods = [
-    { id: "STANDARD", label: "Koombiyo", description: "1-3 business days", price: isFreeEligible ? 0 : 400, icon: Package },
-  ];
-
-  const [form, setForm] = useState<ShippingFormData>(initialData || {
-    email: "", fullName: "", phone: "", contactNumberTwo: "", addressLine1: "", addressLine2: "", city: "", district: "", postalCode: "", country: "Sri Lanka", facebookPage: "", orderNote: "", dueDate: ""
+export function ShippingStep({ initialData, onNext, orderError, isSubmitting, className }: ShippingStepProps) {
+  const [form, setForm] = useState<BillingFormData>(initialData || {
+    email: "", fullName: "", phone: ""
   });
   
-  const [method, setMethod] = useState(selectedMethod);
-  const [errors, setErrors] = useState<Partial<Record<keyof ShippingFormData, string>>>({});
+  const [errors, setErrors] = useState<Partial<Record<keyof BillingFormData, string>>>({});
 
-  const handleChange = (field: keyof ShippingFormData, value: string) => {
+  const handleChange = (field: keyof BillingFormData, value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }));
     if (errors[field]) setErrors((prev) => ({ ...prev, [field]: undefined }));
   };
 
   const validate = (): boolean => {
-    const newErrors: Partial<Record<keyof ShippingFormData, string>> = {};
+    const newErrors: Partial<Record<keyof BillingFormData, string>> = {};
     if (!form.email.trim() || !/^\S+@\S+\.\S+$/.test(form.email)) newErrors.email = "Valid email is required";
     if (!form.fullName.trim()) newErrors.fullName = "Full name is required";
     if (!form.phone.trim() || form.phone.length < 10) newErrors.phone = "Valid phone required";
-    if (!form.contactNumberTwo.trim() || form.contactNumberTwo.length < 10) newErrors.contactNumberTwo = "Valid secondary phone required";
-    if (!form.addressLine1.trim()) newErrors.addressLine1 = "Address is required";
-    if (!form.city.trim()) newErrors.city = "City is required";
-    if (!form.district.trim()) newErrors.district = "District is required";
-    if (!form.dueDate?.trim()) newErrors.dueDate = "Due date is required";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = () => {
-    if (validate()) onNext(form, method);
+    if (validate()) onNext(form);
     else {
-      // scroll to first error
       const firstError = document.querySelector('.border-red-400');
       if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   };
+
   return (
     <div className={cn("space-y-10", className)}>
       
@@ -112,137 +84,43 @@ export function ShippingStep({ initialData, onNext, selectedMethod = "STANDARD",
       <section>
         <div className="flex items-center gap-2 mb-4">
           <Mail className="w-5 h-5 text-text-900" />
-          <h2 className="font-serif text-2xl font-bold text-text-900">Contact</h2>
+          <h2 className="font-serif text-2xl font-bold text-text-900">Contact & Billing</h2>
         </div>
         <div className="bg-white p-5 md:p-6 rounded-2xl border border-surface-200 shadow-soft-sm space-y-4">
           <InputField label="Email Address" value={form.email} onChange={(v) => handleChange("email", v)} error={errors.email} type="email" placeholder="you@example.com" />
-          <p className="text-xs text-muted-500 ml-1">We'll use this to send you order updates and receipts.</p>
-        </div>
-      </section>
-
-      {/* 2. Delivery Address */}
-      <section>
-        <div className="flex items-center gap-2 mb-4">
-          <MapPin className="w-5 h-5 text-text-900" />
-          <h2 className="font-serif text-2xl font-bold text-text-900">Delivery</h2>
-        </div>
-        <div className="bg-white p-5 md:p-6 rounded-2xl border border-surface-200 shadow-soft-sm space-y-5">
+          <p className="text-xs text-muted-500 ml-1 mb-4">We'll use this to send you access to your digital products.</p>
+          
+          <div className="pt-2 border-t border-surface-100 mb-4"></div>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
             <InputField label="Full Name" value={form.fullName} onChange={(v) => handleChange("fullName", v)} error={errors.fullName} placeholder="First and Last name" colSpan={2} />
-            <InputField label="Phone Number" value={form.phone} onChange={(v) => handleChange("phone", v)} error={errors.phone} type="tel" placeholder="07X XXX XXXX" />
-            <InputField label="Contact Number Two" value={form.contactNumberTwo} onChange={(v) => handleChange("contactNumberTwo", v)} error={errors.contactNumberTwo} type="tel" placeholder="Secondary Phone" />
-          </div>
-
-          <div className="pt-2 border-t border-surface-100"></div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
-            <InputField label="Address Line 1" value={form.addressLine1} onChange={(v) => handleChange("addressLine1", v)} error={errors.addressLine1} placeholder="House/Apt number, Street name" colSpan={2} />
-            <InputField label="Address Line 2" value={form.addressLine2} onChange={(v) => handleChange("addressLine2", v)} error={errors.addressLine2} placeholder="Apartment, suite, unit, etc." optional colSpan={2} />
-            <InputField label="City" value={form.city} onChange={(v) => handleChange("city", v)} error={errors.city} placeholder="Colombo" />
-            <InputField label="District" value={form.district} onChange={(v) => handleChange("district", v)} error={errors.district} placeholder="Colombo" />
-            <InputField label="Postal Code" value={form.postalCode} onChange={(v) => handleChange("postalCode", v)} error={errors.postalCode} placeholder="00100" />
-            <InputField label="Expected Delivery (Due Date)" value={form.dueDate} onChange={(v) => handleChange("dueDate", v)} error={errors.dueDate} type="date" placeholder="Select date" />
-            
-            <div className="sm:col-span-2 mt-2">
-              <label className="block text-[13px] font-semibold text-text-700 mb-1.5 ml-0.5">
-                Order Note / Delivery Instructions <span className="text-muted-400 font-normal">(Optional)</span>
-              </label>
-              <textarea
-                value={form.orderNote}
-                onChange={(e) => handleChange("orderNote", e.target.value)}
-                placeholder="E.g., Leave at the front door, call before arriving..."
-                rows={2}
-                className="w-full px-4 py-3 rounded-xl border border-surface-300 bg-surface-50 text-sm shadow-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 focus:bg-white hover:border-surface-400 resize-none"
-              />
-            </div>
+            <InputField label="Phone Number" value={form.phone} onChange={(v) => handleChange("phone", v)} error={errors.phone} type="tel" placeholder="07X XXX XXXX" colSpan={2} />
           </div>
         </div>
       </section>
 
-      {/* 3. Shipping Method */}
+      {/* 2. Payment */}
       <section>
         <div className="flex items-center gap-3 mb-5">
-          <div className="w-10 h-10 rounded-full bg-primary-50 flex items-center justify-center shrink-0">
-            <Truck className="w-5 h-5 text-primary-600" />
-          </div>
-          <h2 className="font-serif text-2xl font-bold text-text-900">Shipping Method</h2>
-        </div>
-        <div className="bg-white p-5 md:p-6 rounded-2xl border border-surface-200 shadow-soft-sm">
-          <div className="space-y-3">
-            {shippingMethods.map((m) => {
-              const isSelected = method === m.id;
-              return (
-                <button 
-                  key={m.id} 
-                  type="button" 
-                  onClick={() => setMethod(m.id)}
-                  className={cn(
-                    "w-full flex items-start sm:items-center justify-between p-4 sm:p-5 rounded-xl border-2 text-left transition-all duration-300 relative overflow-hidden group",
-                    isSelected 
-                      ? "border-primary-500 bg-primary-50/50 shadow-sm" 
-                      : "border-surface-200 hover:border-primary-300 hover:bg-surface-50"
-                  )}
-                >
-                  {/* Active highlight subtle gradient */}
-                  {isSelected && (
-                    <div className="absolute inset-0 bg-gradient-to-r from-primary-100/50 to-transparent opacity-50 pointer-events-none" />
-                  )}
-                  
-                  <div className="flex items-center gap-4 relative z-10">
-                    <div className={cn(
-                      "w-6 h-6 rounded-full border-2 flex items-center justify-center shrink-0 transition-all duration-300 shadow-sm", 
-                      isSelected ? "border-primary-600 bg-primary-600 scale-110" : "border-surface-300 bg-white group-hover:border-primary-400"
-                    )}>
-                      {isSelected && <div className="w-2.5 h-2.5 rounded-full bg-white animate-in zoom-in duration-200" />}
-                    </div>
-                    <div className="flex flex-col">
-                      <span className={cn("text-base font-bold transition-colors", isSelected ? "text-primary-900" : "text-text-900")}>
-                        {m.label}
-                      </span>
-                      <span className="text-sm text-muted-500 mt-0.5 flex items-center gap-1">
-                        <Clock className="w-3.5 h-3.5 inline" /> {m.description}
-                      </span>
-                    </div>
-                  </div>
-                  <div className={cn(
-                    "relative z-10 mt-3 sm:mt-0 px-3 py-1.5 rounded-lg font-bold text-sm transition-colors",
-                    m.price === 0 
-                      ? isSelected ? "bg-teal-100 text-teal-800" : "bg-teal-50 text-teal-700"
-                      : isSelected ? "bg-primary-100 text-primary-900" : "bg-surface-100 text-text-900"
-                  )}>
-                    {m.price === 0 ? "FREE" : `Rs. ${m.price}`}
-                  </div>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* 4. Payment */}
-      <section>
-        <div className="flex items-center gap-3 mb-5">
-          <div className="w-10 h-10 rounded-full bg-green-50 flex items-center justify-center shrink-0">
-            <CreditCard className="w-5 h-5 text-green-600" />
+          <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center shrink-0">
+            <CreditCard className="w-5 h-5 text-blue-600" />
           </div>
           <h2 className="font-serif text-2xl font-bold text-text-900">Payment</h2>
         </div>
         <div className="bg-white p-5 md:p-6 rounded-2xl border border-surface-200 shadow-soft-sm">
-          <div className="bg-gradient-to-r from-green-50 to-emerald-50/30 border border-green-200 rounded-xl p-5 relative overflow-hidden group transition-all duration-300 hover:shadow-sm hover:border-green-300">
-            {/* Active highlight border top */}
-            <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-green-500 to-emerald-500"></div>
+          <div className="bg-gradient-to-r from-blue-50 to-indigo-50/30 border border-blue-200 rounded-xl p-5 relative overflow-hidden group transition-all duration-300 hover:shadow-sm hover:border-blue-300">
+            <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-blue-500 to-indigo-500"></div>
             
             <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-full bg-white shadow-sm border border-green-100 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform duration-300">
-                <svg className="w-6 h-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              <div className="w-12 h-12 rounded-full bg-white shadow-sm border border-blue-100 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform duration-300">
+                <svg className="w-6 h-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
                 </svg>
               </div>
               <div className="pt-1">
-                <p className="text-lg font-bold text-green-900 mb-1">Cash on Delivery (COD)</p>
-                <p className="text-sm text-green-700/80 leading-relaxed font-medium">
-                  Pay with cash when your order is delivered to your doorstep. No online payment required today.
+                <p className="text-lg font-bold text-blue-900 mb-1">Secure Online Payment</p>
+                <p className="text-sm text-blue-700/80 leading-relaxed font-medium">
+                  Pay securely with your credit/debit card. Your payment is processed instantly and you will receive your digital products right away.
                 </p>
               </div>
             </div>
@@ -270,7 +148,6 @@ export function ShippingStep({ initialData, onNext, selectedMethod = "STANDARD",
             isSubmitting && "opacity-70 cursor-not-allowed hover:translate-y-0"
           )}
         >
-          {/* Shine effect */}
           <div className="absolute inset-0 -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none" />
           
           {isSubmitting ? (
@@ -280,7 +157,7 @@ export function ShippingStep({ initialData, onNext, selectedMethod = "STANDARD",
             </>
           ) : (
             <>
-              Complete Order — Pay on Delivery
+              Proceed to Payment
               <ShieldCheck className="w-5 h-5 group-hover:scale-110 transition-transform" />
             </>
           )}

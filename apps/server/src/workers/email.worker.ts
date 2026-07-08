@@ -253,8 +253,8 @@ function buildOrderConfirmationHtml(
     <p style="color:#495057;font-size:15px;line-height:1.7;margin:0 0 20px 0;">${greeting}</p>
     <p style="color:#495057;font-size:15px;line-height:1.7;margin:0 0 24px 0;">Thank you for your order! We've received your order <strong style="color:#1a1a2e;">#${orderNumber}</strong> and it's now being prepared for delivery.</p>
 
-    <div style="background-color:#FFF7ED;border-left:4px solid #F97316;padding:14px 18px;border-radius:0 8px 8px 0;margin:0 0 24px 0;">
-      <p style="color:#92400E;font-size:14px;line-height:1.5;margin:0;"><strong>💰 Cash on Delivery:</strong> No payment is needed right now. Pay <strong>Rs. ${total.toLocaleString("en-LK", { minimumFractionDigits: 2 })}</strong> when your order arrives.</p>
+    <div style="background-color:#F0FDF4;border-left:4px solid #16A34A;padding:14px 18px;border-radius:0 8px 8px 0;margin:0 0 24px 0;">
+      <p style="color:#166534;font-size:14px;line-height:1.5;margin:0;"><strong>✅ Payment Successful:</strong> Your digital products are now available in your dashboard.</p>
     </div>
 
     <table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #f0f0f0;border-radius:10px;overflow:hidden;margin:0 0 20px 0;">
@@ -275,26 +275,19 @@ function buildOrderConfirmationHtml(
         <td style="padding:6px 16px;color:#1a1a2e;font-size:13px;text-align:right;">Rs. ${subtotal.toLocaleString("en-LK", { minimumFractionDigits: 2 })}</td>
       </tr>
       ${shippingCost > 0 ? `<tr>
-        <td style="padding:6px 16px;color:#6B7280;font-size:13px;">Shipping (Koombiyo)</td>
+        <td style="padding:6px 16px;color:#6B7280;font-size:13px;">Shipping</td>
         <td style="padding:6px 16px;color:#1a1a2e;font-size:13px;text-align:right;">Rs. ${shippingCost.toLocaleString("en-LK", { minimumFractionDigits: 2 })}</td>
       </tr>` : ""}
       <tr>
-        <td style="padding:10px 16px;border-top:2px solid #1a1a2e;color:#1a1a2e;font-size:16px;font-weight:700;">Total (COD)</td>
+        <td style="padding:10px 16px;border-top:2px solid #1a1a2e;color:#1a1a2e;font-size:16px;font-weight:700;">Total Paid</td>
         <td style="padding:10px 16px;border-top:2px solid #1a1a2e;color:#1a1a2e;font-size:16px;font-weight:700;text-align:right;">Rs. ${total.toLocaleString("en-LK", { minimumFractionDigits: 2 })}</td>
       </tr>
     </table>
 
-    ${shippingAddress ? `
     <div style="background-color:#f8f9fa;border-radius:10px;padding:16px 20px;margin:0 0 16px 0;">
-      <p style="color:#6B7280;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin:0 0 6px 0;">📦 Delivering To</p>
-      <p style="color:#1a1a2e;font-size:14px;line-height:1.6;margin:0;">${shippingAddress}</p>
-    </div>` : ""}
-
-    ${estimatedDelivery ? `
-    <div style="background-color:#f8f9fa;border-radius:10px;padding:16px 20px;margin:0 0 20px 0;">
-      <p style="color:#6B7280;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin:0 0 6px 0;">🚚 Estimated Delivery</p>
-      <p style="color:#1a1a2e;font-size:14px;line-height:1.6;margin:0;">${estimatedDelivery}</p>
-    </div>` : ""}
+      <p style="color:#6B7280;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin:0 0 6px 0;">📦 Digital Delivery</p>
+      <p style="color:#1a1a2e;font-size:14px;line-height:1.6;margin:0;">Your products are available for immediate download in your dashboard.</p>
+    </div>
 
     <table width="100%" cellpadding="0" cellspacing="0" style="margin:24px 0 0 0;">
       <tr>
@@ -552,7 +545,7 @@ function buildAbandonedCartReminderHtml(
         </tr>
         <tr>
           <td style="padding:6px 0;color:#9CA3AF;font-size:12px;">Delivery</td>
-          <td style="padding:6px 0;color:#10B981;font-size:13px;font-weight:500;">Cash on Delivery</td>
+          <td style="padding:6px 0;color:#10B981;font-size:13px;font-weight:500;">Instant Digital Download</td>
         </tr>
       </table>
     </div>
@@ -560,7 +553,7 @@ function buildAbandonedCartReminderHtml(
     <table width="100%" cellpadding="0" cellspacing="0" style="margin:28px 0;">
       <tr>
         <td align="center">
-      <p style="color:#9CA3AF;font-size:12px;text-align:center;margin:16px 0 0 0;">No payment needed — pay cash when your order arrives via Koombiyo.</p>
+      <p style="color:#9CA3AF;font-size:12px;text-align:center;margin:16px 0 0 0;">Pay securely online and get instant access.</p>
     </div>
     `
   );
