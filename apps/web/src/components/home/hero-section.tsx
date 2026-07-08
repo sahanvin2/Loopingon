@@ -13,6 +13,8 @@ const POPULAR_SEARCHES = [
   "E-Books",
   "Templates",
   "Digital Art",
+  "Courses",
+  "AI Prompts",
 ];
 
 const HERO_IMAGES = [
@@ -21,10 +23,10 @@ const HERO_IMAGES = [
   "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&h=400&fit=crop", // Retro gaming
   // Column 2
   "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&h=400&fit=crop", // Code
-  "https://images.unsplash.com/photo-1614680376593-902f74cf0d41?w=400&h=500&fit=crop", // Abstract
+  "https://images.unsplash.com/photo-1558655146-d09347e92766?w=400&h=500&fit=crop", // Web Design
   // Column 3
-  "https://images.unsplash.com/photo-1555680202-c86f0e12f086?w=400&h=500&fit=crop", // Dev
-  "https://images.unsplash.com/photo-1606144042898-3331b016335a?w=400&h=400&fit=crop", // Apps
+  "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=500&fit=crop", // AI Art
+  "https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?w=400&h=400&fit=crop", // Movies / Entertainment
 ];
 
 export function HeroSection() {
@@ -53,12 +55,12 @@ export function HeroSection() {
               transition={{ duration: 0.6 }}
             >
               <h1 className="font-serif text-[42px] leading-[1.1] sm:text-5xl lg:text-6xl tracking-tight text-navy-900 font-bold mb-2">
-                Discover products you'll love.
-                <span className="block text-[#E63946]">From local favorites to global finds.</span>
+                Discover digital products you'll love.
+                <span className="block text-[#E63946]">Instant delivery. Global access.</span>
               </h1>
               
               <p className="mt-6 text-lg text-text-600 max-w-lg font-medium leading-relaxed">
-                Explore a curated selection of premium goods, exclusive deals, and unique items from independent creators everywhere.
+                Explore a curated selection of premium game keys, software, gift cards, and creative assets from creators everywhere.
               </p>
             </motion.div>
 
@@ -126,8 +128,8 @@ export function HeroSection() {
               className="absolute -right-4 top-1/4 z-20 hidden md:flex w-32 h-32 bg-white rounded-full border border-dashed border-[#E63946] items-center justify-center p-4 text-center shadow-xl transform rotate-12"
             >
               <div>
-                <p className="text-[#E63946] font-bold text-lg leading-tight font-serif">Millions</p>
-                <p className="text-text-600 text-xs font-medium">of unique finds</p>
+                <p className="text-[#E63946] font-bold text-lg leading-tight font-serif">Thousands</p>
+                <p className="text-text-600 text-xs font-medium">of digital finds</p>
               </div>
             </motion.div>
 

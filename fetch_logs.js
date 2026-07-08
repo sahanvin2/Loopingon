@@ -5,13 +5,14 @@ async function run() {
     console.log('Connecting...');
     await ssh.connect({ host: '165.227.90.181', username: 'root', password: '@20040301Sa', tryKeyboard: true });
     
-    console.log('Fetching logs...');
-    const res = await ssh.execCommand('docker logs --tail 100 loopingon-server');
-    console.log(res.stdout);
-    if(res.stderr) console.error(res.stderr);
-
+    console.log('Fetching server logs...');
+    const result = await ssh.execCommand('docker logs loopingon-server-prod --tail 500', { cwd: '/opt/loopingon' });
+    fs.writeFileSync('server_logs.txt', result.stdout || result.stderr);
     console.log('Done!');
-    ssh.dispose();
+    setTimeout(() => {
+        ssh.dispose();
+        process.exit(0);
+    }, 1000);
   } catch (e) {
     console.error(e);
     if(ssh) ssh.dispose();

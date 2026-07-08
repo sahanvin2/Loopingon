@@ -1,0 +1,200 @@
+prisma:query INSERT INTO "public"."sitemap_urls" ("id","url","changefreq","priority","lastmod","createdAt") VALUES ($1,$2,$3,$4,$5,$6) ON CONFLICT ("url") DO UPDATE SET "changefreq" = $7, "priority" = $8, "lastmod" = $9 WHERE ("public"."sitemap_urls"."url" = $10 AND 1=1) RETURNING "public"."sitemap_urls"."id", "public"."sitemap_urls"."url", "public"."sitemap_urls"."changefreq", "public"."sitemap_urls"."priority", "public"."sitemap_urls"."lastmod", "public"."sitemap_urls"."createdAt"
+prisma:query COMMIT
+prisma:query BEGIN
+prisma:query DEALLOCATE ALL
+prisma:query INSERT INTO "public"."sitemap_urls" ("id","url","changefreq","priority","lastmod","createdAt") VALUES ($1,$2,$3,$4,$5,$6) ON CONFLICT ("url") DO UPDATE SET "changefreq" = $7, "priority" = $8, "lastmod" = $9 WHERE ("public"."sitemap_urls"."url" = $10 AND 1=1) RETURNING "public"."sitemap_urls"."id", "public"."sitemap_urls"."url", "public"."sitemap_urls"."changefreq", "public"."sitemap_urls"."priority", "public"."sitemap_urls"."lastmod", "public"."sitemap_urls"."createdAt"
+prisma:query COMMIT
+prisma:query BEGIN
+prisma:query DEALLOCATE ALL
+prisma:query INSERT INTO "public"."sitemap_urls" ("id","url","changefreq","priority","lastmod","createdAt") VALUES ($1,$2,$3,$4,$5,$6) ON CONFLICT ("url") DO UPDATE SET "changefreq" = $7, "priority" = $8, "lastmod" = $9 WHERE ("public"."sitemap_urls"."url" = $10 AND 1=1) RETURNING "public"."sitemap_urls"."id", "public"."sitemap_urls"."url", "public"."sitemap_urls"."changefreq", "public"."sitemap_urls"."priority", "public"."sitemap_urls"."lastmod", "public"."sitemap_urls"."createdAt"
+prisma:query COMMIT
+prisma:query BEGIN
+prisma:query DEALLOCATE ALL
+prisma:query INSERT INTO "public"."sitemap_urls" ("id","url","changefreq","priority","lastmod","createdAt") VALUES ($1,$2,$3,$4,$5,$6) ON CONFLICT ("url") DO UPDATE SET "changefreq" = $7, "priority" = $8, "lastmod" = $9 WHERE ("public"."sitemap_urls"."url" = $10 AND 1=1) RETURNING "public"."sitemap_urls"."id", "public"."sitemap_urls"."url", "public"."sitemap_urls"."changefreq", "public"."sitemap_urls"."priority", "public"."sitemap_urls"."lastmod", "public"."sitemap_urls"."createdAt"
+prisma:query COMMIT
+prisma:query BEGIN
+prisma:query DEALLOCATE ALL
+prisma:query INSERT INTO "public"."sitemap_urls" ("id","url","changefreq","priority","lastmod","createdAt") VALUES ($1,$2,$3,$4,$5,$6) ON CONFLICT ("url") DO UPDATE SET "changefreq" = $7, "priority" = $8, "lastmod" = $9 WHERE ("public"."sitemap_urls"."url" = $10 AND 1=1) RETURNING "public"."sitemap_urls"."id", "public"."sitemap_urls"."url", "public"."sitemap_urls"."changefreq", "public"."sitemap_urls"."priority", "public"."sitemap_urls"."lastmod", "public"."sitemap_urls"."createdAt"
+prisma:query COMMIT
+prisma:query BEGIN
+prisma:query DEALLOCATE ALL
+prisma:query INSERT INTO "public"."sitemap_urls" ("id","url","changefreq","priority","lastmod","createdAt") VALUES ($1,$2,$3,$4,$5,$6) ON CONFLICT ("url") DO UPDATE SET "changefreq" = $7, "priority" = $8, "lastmod" = $9 WHERE ("public"."sitemap_urls"."url" = $10 AND 1=1) RETURNING "public"."sitemap_urls"."id", "public"."sitemap_urls"."url", "public"."sitemap_urls"."changefreq", "public"."sitemap_urls"."priority", "public"."sitemap_urls"."lastmod", "public"."sitemap_urls"."createdAt"
+prisma:query COMMIT
+prisma:query BEGIN
+prisma:query DEALLOCATE ALL
+prisma:query INSERT INTO "public"."sitemap_urls" ("id","url","changefreq","priority","lastmod","createdAt") VALUES ($1,$2,$3,$4,$5,$6) ON CONFLICT ("url") DO UPDATE SET "changefreq" = $7, "priority" = $8, "lastmod" = $9 WHERE ("public"."sitemap_urls"."url" = $10 AND 1=1) RETURNING "public"."sitemap_urls"."id", "public"."sitemap_urls"."url", "public"."sitemap_urls"."changefreq", "public"."sitemap_urls"."priority", "public"."sitemap_urls"."lastmod", "public"."sitemap_urls"."createdAt"
+prisma:query COMMIT
+prisma:query BEGIN
+prisma:query DEALLOCATE ALL
+prisma:query INSERT INTO "public"."sitemap_urls" ("id","url","changefreq","priority","lastmod","createdAt") VALUES ($1,$2,$3,$4,$5,$6) ON CONFLICT ("url") DO UPDATE SET "changefreq" = $7, "priority" = $8, "lastmod" = $9 WHERE ("public"."sitemap_urls"."url" = $10 AND 1=1) RETURNING "public"."sitemap_urls"."id", "public"."sitemap_urls"."url", "public"."sitemap_urls"."changefreq", "public"."sitemap_urls"."priority", "public"."sitemap_urls"."lastmod", "public"."sitemap_urls"."createdAt"
+prisma:query COMMIT
+prisma:query BEGIN
+prisma:query DEALLOCATE ALL
+prisma:query INSERT INTO "public"."sitemap_urls" ("id","url","changefreq","priority","lastmod","createdAt") VALUES ($1,$2,$3,$4,$5,$6) ON CONFLICT ("url") DO UPDATE SET "changefreq" = $7, "priority" = $8, "lastmod" = $9 WHERE ("public"."sitemap_urls"."url" = $10 AND 1=1) RETURNING "public"."sitemap_urls"."id", "public"."sitemap_urls"."url", "public"."sitemap_urls"."changefreq", "public"."sitemap_urls"."priority", "public"."sitemap_urls"."lastmod", "public"."sitemap_urls"."createdAt"
+prisma:query COMMIT
+prisma:query SELECT 1
+prisma:query BEGIN
+prisma:query DEALLOCATE ALL
+prisma:query INSERT INTO "public"."sitemap_urls" ("id","url","changefreq","priority","lastmod","createdAt") VALUES ($1,$2,$3,$4,$5,$6) ON CONFLICT ("url") DO UPDATE SET "changefreq" = $7, "priority" = $8, "lastmod" = $9 WHERE ("public"."sitemap_urls"."url" = $10 AND 1=1) RETURNING "public"."sitemap_urls"."id", "public"."sitemap_urls"."url", "public"."sitemap_urls"."changefreq", "public"."sitemap_urls"."priority", "public"."sitemap_urls"."lastmod", "public"."sitemap_urls"."createdAt"
+prisma:query COMMIT
+prisma:query BEGIN
+prisma:query DEALLOCATE ALL
+prisma:query INSERT INTO "public"."sitemap_urls" ("id","url","changefreq","priority","lastmod","createdAt") VALUES ($1,$2,$3,$4,$5,$6) ON CONFLICT ("url") DO UPDATE SET "changefreq" = $7, "priority" = $8, "lastmod" = $9 WHERE ("public"."sitemap_urls"."url" = $10 AND 1=1) RETURNING "public"."sitemap_urls"."id", "public"."sitemap_urls"."url", "public"."sitemap_urls"."changefreq", "public"."sitemap_urls"."priority", "public"."sitemap_urls"."lastmod", "public"."sitemap_urls"."createdAt"
+prisma:query COMMIT
+prisma:query BEGIN
+prisma:query DEALLOCATE ALL
+prisma:query INSERT INTO "public"."sitemap_urls" ("id","url","changefreq","priority","lastmod","createdAt") VALUES ($1,$2,$3,$4,$5,$6) ON CONFLICT ("url") DO UPDATE SET "changefreq" = $7, "priority" = $8, "lastmod" = $9 WHERE ("public"."sitemap_urls"."url" = $10 AND 1=1) RETURNING "public"."sitemap_urls"."id", "public"."sitemap_urls"."url", "public"."sitemap_urls"."changefreq", "public"."sitemap_urls"."priority", "public"."sitemap_urls"."lastmod", "public"."sitemap_urls"."createdAt"
+prisma:query COMMIT
+prisma:query BEGIN
+prisma:query DEALLOCATE ALL
+prisma:query INSERT INTO "public"."sitemap_urls" ("id","url","changefreq","priority","lastmod","createdAt") VALUES ($1,$2,$3,$4,$5,$6) ON CONFLICT ("url") DO UPDATE SET "changefreq" = $7, "priority" = $8, "lastmod" = $9 WHERE ("public"."sitemap_urls"."url" = $10 AND 1=1) RETURNING "public"."sitemap_urls"."id", "public"."sitemap_urls"."url", "public"."sitemap_urls"."changefreq", "public"."sitemap_urls"."priority", "public"."sitemap_urls"."lastmod", "public"."sitemap_urls"."createdAt"
+prisma:query COMMIT
+prisma:query BEGIN
+prisma:query DEALLOCATE ALL
+prisma:query INSERT INTO "public"."sitemap_urls" ("id","url","changefreq","priority","lastmod","createdAt") VALUES ($1,$2,$3,$4,$5,$6) ON CONFLICT ("url") DO UPDATE SET "changefreq" = $7, "priority" = $8, "lastmod" = $9 WHERE ("public"."sitemap_urls"."url" = $10 AND 1=1) RETURNING "public"."sitemap_urls"."id", "public"."sitemap_urls"."url", "public"."sitemap_urls"."changefreq", "public"."sitemap_urls"."priority", "public"."sitemap_urls"."lastmod", "public"."sitemap_urls"."createdAt"
+prisma:query COMMIT
+prisma:query BEGIN
+prisma:query DEALLOCATE ALL
+prisma:query INSERT INTO "public"."sitemap_urls" ("id","url","changefreq","priority","lastmod","createdAt") VALUES ($1,$2,$3,$4,$5,$6) ON CONFLICT ("url") DO UPDATE SET "changefreq" = $7, "priority" = $8, "lastmod" = $9 WHERE ("public"."sitemap_urls"."url" = $10 AND 1=1) RETURNING "public"."sitemap_urls"."id", "public"."sitemap_urls"."url", "public"."sitemap_urls"."changefreq", "public"."sitemap_urls"."priority", "public"."sitemap_urls"."lastmod", "public"."sitemap_urls"."createdAt"
+prisma:query COMMIT
+prisma:query BEGIN
+prisma:query DEALLOCATE ALL
+prisma:query INSERT INTO "public"."sitemap_urls" ("id","url","changefreq","priority","lastmod","createdAt") VALUES ($1,$2,$3,$4,$5,$6) ON CONFLICT ("url") DO UPDATE SET "changefreq" = $7, "priority" = $8, "lastmod" = $9 WHERE ("public"."sitemap_urls"."url" = $10 AND 1=1) RETURNING "public"."sitemap_urls"."id", "public"."sitemap_urls"."url", "public"."sitemap_urls"."changefreq", "public"."sitemap_urls"."priority", "public"."sitemap_urls"."lastmod", "public"."sitemap_urls"."createdAt"
+prisma:query COMMIT
+prisma:query BEGIN
+prisma:query DEALLOCATE ALL
+prisma:query INSERT INTO "public"."sitemap_urls" ("id","url","changefreq","priority","lastmod","createdAt") VALUES ($1,$2,$3,$4,$5,$6) ON CONFLICT ("url") DO UPDATE SET "changefreq" = $7, "priority" = $8, "lastmod" = $9 WHERE ("public"."sitemap_urls"."url" = $10 AND 1=1) RETURNING "public"."sitemap_urls"."id", "public"."sitemap_urls"."url", "public"."sitemap_urls"."changefreq", "public"."sitemap_urls"."priority", "public"."sitemap_urls"."lastmod", "public"."sitemap_urls"."createdAt"
+prisma:query COMMIT
+prisma:query BEGIN
+prisma:query DEALLOCATE ALL
+prisma:query INSERT INTO "public"."sitemap_urls" ("id","url","changefreq","priority","lastmod","createdAt") VALUES ($1,$2,$3,$4,$5,$6) ON CONFLICT ("url") DO UPDATE SET "changefreq" = $7, "priority" = $8, "lastmod" = $9 WHERE ("public"."sitemap_urls"."url" = $10 AND 1=1) RETURNING "public"."sitemap_urls"."id", "public"."sitemap_urls"."url", "public"."sitemap_urls"."changefreq", "public"."sitemap_urls"."priority", "public"."sitemap_urls"."lastmod", "public"."sitemap_urls"."createdAt"
+prisma:query COMMIT
+prisma:query BEGIN
+prisma:query DEALLOCATE ALL
+prisma:query INSERT INTO "public"."sitemap_urls" ("id","url","changefreq","priority","lastmod","createdAt") VALUES ($1,$2,$3,$4,$5,$6) ON CONFLICT ("url") DO UPDATE SET "changefreq" = $7, "priority" = $8, "lastmod" = $9 WHERE ("public"."sitemap_urls"."url" = $10 AND 1=1) RETURNING "public"."sitemap_urls"."id", "public"."sitemap_urls"."url", "public"."sitemap_urls"."changefreq", "public"."sitemap_urls"."priority", "public"."sitemap_urls"."lastmod", "public"."sitemap_urls"."createdAt"
+prisma:query COMMIT
+prisma:query BEGIN
+prisma:query DEALLOCATE ALL
+prisma:query INSERT INTO "public"."sitemap_urls" ("id","url","changefreq","priority","lastmod","createdAt") VALUES ($1,$2,$3,$4,$5,$6) ON CONFLICT ("url") DO UPDATE SET "changefreq" = $7, "priority" = $8, "lastmod" = $9 WHERE ("public"."sitemap_urls"."url" = $10 AND 1=1) RETURNING "public"."sitemap_urls"."id", "public"."sitemap_urls"."url", "public"."sitemap_urls"."changefreq", "public"."sitemap_urls"."priority", "public"."sitemap_urls"."lastmod", "public"."sitemap_urls"."createdAt"
+prisma:query COMMIT
+prisma:query BEGIN
+prisma:query DEALLOCATE ALL
+prisma:query INSERT INTO "public"."sitemap_urls" ("id","url","changefreq","priority","lastmod","createdAt") VALUES ($1,$2,$3,$4,$5,$6) ON CONFLICT ("url") DO UPDATE SET "changefreq" = $7, "priority" = $8, "lastmod" = $9 WHERE ("public"."sitemap_urls"."url" = $10 AND 1=1) RETURNING "public"."sitemap_urls"."id", "public"."sitemap_urls"."url", "public"."sitemap_urls"."changefreq", "public"."sitemap_urls"."priority", "public"."sitemap_urls"."lastmod", "public"."sitemap_urls"."createdAt"
+prisma:query COMMIT
+prisma:query BEGIN
+prisma:query DEALLOCATE ALL
+prisma:query INSERT INTO "public"."sitemap_urls" ("id","url","changefreq","priority","lastmod","createdAt") VALUES ($1,$2,$3,$4,$5,$6) ON CONFLICT ("url") DO UPDATE SET "changefreq" = $7, "priority" = $8, "lastmod" = $9 WHERE ("public"."sitemap_urls"."url" = $10 AND 1=1) RETURNING "public"."sitemap_urls"."id", "public"."sitemap_urls"."url", "public"."sitemap_urls"."changefreq", "public"."sitemap_urls"."priority", "public"."sitemap_urls"."lastmod", "public"."sitemap_urls"."createdAt"
+prisma:query COMMIT
+prisma:query SELECT 1
+prisma:query BEGIN
+prisma:query DEALLOCATE ALL
+prisma:query INSERT INTO "public"."sitemap_urls" ("id","url","changefreq","priority","lastmod","createdAt") VALUES ($1,$2,$3,$4,$5,$6) ON CONFLICT ("url") DO UPDATE SET "changefreq" = $7, "priority" = $8, "lastmod" = $9 WHERE ("public"."sitemap_urls"."url" = $10 AND 1=1) RETURNING "public"."sitemap_urls"."id", "public"."sitemap_urls"."url", "public"."sitemap_urls"."changefreq", "public"."sitemap_urls"."priority", "public"."sitemap_urls"."lastmod", "public"."sitemap_urls"."createdAt"
+prisma:query COMMIT
+prisma:query BEGIN
+prisma:query DEALLOCATE ALL
+prisma:query INSERT INTO "public"."sitemap_urls" ("id","url","changefreq","priority","lastmod","createdAt") VALUES ($1,$2,$3,$4,$5,$6) ON CONFLICT ("url") DO UPDATE SET "changefreq" = $7, "priority" = $8, "lastmod" = $9 WHERE ("public"."sitemap_urls"."url" = $10 AND 1=1) RETURNING "public"."sitemap_urls"."id", "public"."sitemap_urls"."url", "public"."sitemap_urls"."changefreq", "public"."sitemap_urls"."priority", "public"."sitemap_urls"."lastmod", "public"."sitemap_urls"."createdAt"
+prisma:query COMMIT
+prisma:query BEGIN
+prisma:query DEALLOCATE ALL
+prisma:query INSERT INTO "public"."sitemap_urls" ("id","url","changefreq","priority","lastmod","createdAt") VALUES ($1,$2,$3,$4,$5,$6) ON CONFLICT ("url") DO UPDATE SET "changefreq" = $7, "priority" = $8, "lastmod" = $9 WHERE ("public"."sitemap_urls"."url" = $10 AND 1=1) RETURNING "public"."sitemap_urls"."id", "public"."sitemap_urls"."url", "public"."sitemap_urls"."changefreq", "public"."sitemap_urls"."priority", "public"."sitemap_urls"."lastmod", "public"."sitemap_urls"."createdAt"
+prisma:query COMMIT
+prisma:query BEGIN
+prisma:query DEALLOCATE ALL
+prisma:query INSERT INTO "public"."sitemap_urls" ("id","url","changefreq","priority","lastmod","createdAt") VALUES ($1,$2,$3,$4,$5,$6) ON CONFLICT ("url") DO UPDATE SET "changefreq" = $7, "priority" = $8, "lastmod" = $9 WHERE ("public"."sitemap_urls"."url" = $10 AND 1=1) RETURNING "public"."sitemap_urls"."id", "public"."sitemap_urls"."url", "public"."sitemap_urls"."changefreq", "public"."sitemap_urls"."priority", "public"."sitemap_urls"."lastmod", "public"."sitemap_urls"."createdAt"
+prisma:query COMMIT
+prisma:query BEGIN
+prisma:query DEALLOCATE ALL
+prisma:query INSERT INTO "public"."sitemap_urls" ("id","url","changefreq","priority","lastmod","createdAt") VALUES ($1,$2,$3,$4,$5,$6) ON CONFLICT ("url") DO UPDATE SET "changefreq" = $7, "priority" = $8, "lastmod" = $9 WHERE ("public"."sitemap_urls"."url" = $10 AND 1=1) RETURNING "public"."sitemap_urls"."id", "public"."sitemap_urls"."url", "public"."sitemap_urls"."changefreq", "public"."sitemap_urls"."priority", "public"."sitemap_urls"."lastmod", "public"."sitemap_urls"."createdAt"
+prisma:query COMMIT
+prisma:query BEGIN
+prisma:query DEALLOCATE ALL
+prisma:query INSERT INTO "public"."sitemap_urls" ("id","url","changefreq","priority","lastmod","createdAt") VALUES ($1,$2,$3,$4,$5,$6) ON CONFLICT ("url") DO UPDATE SET "changefreq" = $7, "priority" = $8, "lastmod" = $9 WHERE ("public"."sitemap_urls"."url" = $10 AND 1=1) RETURNING "public"."sitemap_urls"."id", "public"."sitemap_urls"."url", "public"."sitemap_urls"."changefreq", "public"."sitemap_urls"."priority", "public"."sitemap_urls"."lastmod", "public"."sitemap_urls"."createdAt"
+prisma:query COMMIT
+prisma:query BEGIN
+prisma:query DEALLOCATE ALL
+prisma:query INSERT INTO "public"."sitemap_urls" ("id","url","changefreq","priority","lastmod","createdAt") VALUES ($1,$2,$3,$4,$5,$6) ON CONFLICT ("url") DO UPDATE SET "changefreq" = $7, "priority" = $8, "lastmod" = $9 WHERE ("public"."sitemap_urls"."url" = $10 AND 1=1) RETURNING "public"."sitemap_urls"."id", "public"."sitemap_urls"."url", "public"."sitemap_urls"."changefreq", "public"."sitemap_urls"."priority", "public"."sitemap_urls"."lastmod", "public"."sitemap_urls"."createdAt"
+prisma:query COMMIT
+prisma:query BEGIN
+prisma:query DEALLOCATE ALL
+prisma:query INSERT INTO "public"."sitemap_urls" ("id","url","changefreq","priority","lastmod","createdAt") VALUES ($1,$2,$3,$4,$5,$6) ON CONFLICT ("url") DO UPDATE SET "changefreq" = $7, "priority" = $8, "lastmod" = $9 WHERE ("public"."sitemap_urls"."url" = $10 AND 1=1) RETURNING "public"."sitemap_urls"."id", "public"."sitemap_urls"."url", "public"."sitemap_urls"."changefreq", "public"."sitemap_urls"."priority", "public"."sitemap_urls"."lastmod", "public"."sitemap_urls"."createdAt"
+prisma:query COMMIT
+prisma:query BEGIN
+prisma:query DEALLOCATE ALL
+prisma:query INSERT INTO "public"."sitemap_urls" ("id","url","changefreq","priority","lastmod","createdAt") VALUES ($1,$2,$3,$4,$5,$6) ON CONFLICT ("url") DO UPDATE SET "changefreq" = $7, "priority" = $8, "lastmod" = $9 WHERE ("public"."sitemap_urls"."url" = $10 AND 1=1) RETURNING "public"."sitemap_urls"."id", "public"."sitemap_urls"."url", "public"."sitemap_urls"."changefreq", "public"."sitemap_urls"."priority", "public"."sitemap_urls"."lastmod", "public"."sitemap_urls"."createdAt"
+prisma:query COMMIT
+prisma:query BEGIN
+prisma:query DEALLOCATE ALL
+prisma:query INSERT INTO "public"."sitemap_urls" ("id","url","changefreq","priority","lastmod","createdAt") VALUES ($1,$2,$3,$4,$5,$6) ON CONFLICT ("url") DO UPDATE SET "changefreq" = $7, "priority" = $8, "lastmod" = $9 WHERE ("public"."sitemap_urls"."url" = $10 AND 1=1) RETURNING "public"."sitemap_urls"."id", "public"."sitemap_urls"."url", "public"."sitemap_urls"."changefreq", "public"."sitemap_urls"."priority", "public"."sitemap_urls"."lastmod", "public"."sitemap_urls"."createdAt"
+prisma:query COMMIT
+prisma:query BEGIN
+prisma:query DEALLOCATE ALL
+prisma:query INSERT INTO "public"."sitemap_urls" ("id","url","changefreq","priority","lastmod","createdAt") VALUES ($1,$2,$3,$4,$5,$6) ON CONFLICT ("url") DO UPDATE SET "changefreq" = $7, "priority" = $8, "lastmod" = $9 WHERE ("public"."sitemap_urls"."url" = $10 AND 1=1) RETURNING "public"."sitemap_urls"."id", "public"."sitemap_urls"."url", "public"."sitemap_urls"."changefreq", "public"."sitemap_urls"."priority", "public"."sitemap_urls"."lastmod", "public"."sitemap_urls"."createdAt"
+prisma:query COMMIT
+prisma:query BEGIN
+prisma:query DEALLOCATE ALL
+prisma:query INSERT INTO "public"."sitemap_urls" ("id","url","changefreq","priority","lastmod","createdAt") VALUES ($1,$2,$3,$4,$5,$6) ON CONFLICT ("url") DO UPDATE SET "changefreq" = $7, "priority" = $8, "lastmod" = $9 WHERE ("public"."sitemap_urls"."url" = $10 AND 1=1) RETURNING "public"."sitemap_urls"."id", "public"."sitemap_urls"."url", "public"."sitemap_urls"."changefreq", "public"."sitemap_urls"."priority", "public"."sitemap_urls"."lastmod", "public"."sitemap_urls"."createdAt"
+prisma:query COMMIT
+prisma:query BEGIN
+prisma:query DEALLOCATE ALL
+prisma:query INSERT INTO "public"."sitemap_urls" ("id","url","changefreq","priority","lastmod","createdAt") VALUES ($1,$2,$3,$4,$5,$6) ON CONFLICT ("url") DO UPDATE SET "changefreq" = $7, "priority" = $8, "lastmod" = $9 WHERE ("public"."sitemap_urls"."url" = $10 AND 1=1) RETURNING "public"."sitemap_urls"."id", "public"."sitemap_urls"."url", "public"."sitemap_urls"."changefreq", "public"."sitemap_urls"."priority", "public"."sitemap_urls"."lastmod", "public"."sitemap_urls"."createdAt"
+prisma:query COMMIT
+prisma:query SELECT 1
+prisma:query BEGIN
+prisma:query DEALLOCATE ALL
+prisma:query INSERT INTO "public"."sitemap_urls" ("id","url","changefreq","priority","lastmod","createdAt") VALUES ($1,$2,$3,$4,$5,$6) ON CONFLICT ("url") DO UPDATE SET "changefreq" = $7, "priority" = $8, "lastmod" = $9 WHERE ("public"."sitemap_urls"."url" = $10 AND 1=1) RETURNING "public"."sitemap_urls"."id", "public"."sitemap_urls"."url", "public"."sitemap_urls"."changefreq", "public"."sitemap_urls"."priority", "public"."sitemap_urls"."lastmod", "public"."sitemap_urls"."createdAt"
+prisma:query COMMIT
+prisma:query BEGIN
+prisma:query DEALLOCATE ALL
+prisma:query INSERT INTO "public"."sitemap_urls" ("id","url","changefreq","priority","lastmod","createdAt") VALUES ($1,$2,$3,$4,$5,$6) ON CONFLICT ("url") DO UPDATE SET "changefreq" = $7, "priority" = $8, "lastmod" = $9 WHERE ("public"."sitemap_urls"."url" = $10 AND 1=1) RETURNING "public"."sitemap_urls"."id", "public"."sitemap_urls"."url", "public"."sitemap_urls"."changefreq", "public"."sitemap_urls"."priority", "public"."sitemap_urls"."lastmod", "public"."sitemap_urls"."createdAt"
+prisma:query COMMIT
+prisma:query BEGIN
+prisma:query DEALLOCATE ALL
+prisma:query INSERT INTO "public"."sitemap_urls" ("id","url","changefreq","priority","lastmod","createdAt") VALUES ($1,$2,$3,$4,$5,$6) ON CONFLICT ("url") DO UPDATE SET "changefreq" = $7, "priority" = $8, "lastmod" = $9 WHERE ("public"."sitemap_urls"."url" = $10 AND 1=1) RETURNING "public"."sitemap_urls"."id", "public"."sitemap_urls"."url", "public"."sitemap_urls"."changefreq", "public"."sitemap_urls"."priority", "public"."sitemap_urls"."lastmod", "public"."sitemap_urls"."createdAt"
+prisma:query COMMIT
+prisma:query BEGIN
+prisma:query DEALLOCATE ALL
+prisma:query INSERT INTO "public"."sitemap_urls" ("id","url","changefreq","priority","lastmod","createdAt") VALUES ($1,$2,$3,$4,$5,$6) ON CONFLICT ("url") DO UPDATE SET "changefreq" = $7, "priority" = $8, "lastmod" = $9 WHERE ("public"."sitemap_urls"."url" = $10 AND 1=1) RETURNING "public"."sitemap_urls"."id", "public"."sitemap_urls"."url", "public"."sitemap_urls"."changefreq", "public"."sitemap_urls"."priority", "public"."sitemap_urls"."lastmod", "public"."sitemap_urls"."createdAt"
+prisma:query COMMIT
+prisma:query BEGIN
+prisma:query DEALLOCATE ALL
+prisma:query INSERT INTO "public"."sitemap_urls" ("id","url","changefreq","priority","lastmod","createdAt") VALUES ($1,$2,$3,$4,$5,$6) ON CONFLICT ("url") DO UPDATE SET "changefreq" = $7, "priority" = $8, "lastmod" = $9 WHERE ("public"."sitemap_urls"."url" = $10 AND 1=1) RETURNING "public"."sitemap_urls"."id", "public"."sitemap_urls"."url", "public"."sitemap_urls"."changefreq", "public"."sitemap_urls"."priority", "public"."sitemap_urls"."lastmod", "public"."sitemap_urls"."createdAt"
+prisma:query COMMIT
+prisma:query BEGIN
+prisma:query DEALLOCATE ALL
+prisma:query INSERT INTO "public"."sitemap_urls" ("id","url","changefreq","priority","lastmod","createdAt") VALUES ($1,$2,$3,$4,$5,$6) ON CONFLICT ("url") DO UPDATE SET "changefreq" = $7, "priority" = $8, "lastmod" = $9 WHERE ("public"."sitemap_urls"."url" = $10 AND 1=1) RETURNING "public"."sitemap_urls"."id", "public"."sitemap_urls"."url", "public"."sitemap_urls"."changefreq", "public"."sitemap_urls"."priority", "public"."sitemap_urls"."lastmod", "public"."sitemap_urls"."createdAt"
+prisma:query COMMIT
+prisma:query BEGIN
+prisma:query DEALLOCATE ALL
+prisma:query INSERT INTO "public"."sitemap_urls" ("id","url","changefreq","priority","lastmod","createdAt") VALUES ($1,$2,$3,$4,$5,$6) ON CONFLICT ("url") DO UPDATE SET "changefreq" = $7, "priority" = $8, "lastmod" = $9 WHERE ("public"."sitemap_urls"."url" = $10 AND 1=1) RETURNING "public"."sitemap_urls"."id", "public"."sitemap_urls"."url", "public"."sitemap_urls"."changefreq", "public"."sitemap_urls"."priority", "public"."sitemap_urls"."lastmod", "public"."sitemap_urls"."createdAt"
+prisma:query COMMIT
+prisma:query BEGIN
+prisma:query DEALLOCATE ALL
+prisma:query INSERT INTO "public"."sitemap_urls" ("id","url","changefreq","priority","lastmod","createdAt") VALUES ($1,$2,$3,$4,$5,$6) ON CONFLICT ("url") DO UPDATE SET "changefreq" = $7, "priority" = $8, "lastmod" = $9 WHERE ("public"."sitemap_urls"."url" = $10 AND 1=1) RETURNING "public"."sitemap_urls"."id", "public"."sitemap_urls"."url", "public"."sitemap_urls"."changefreq", "public"."sitemap_urls"."priority", "public"."sitemap_urls"."lastmod", "public"."sitemap_urls"."createdAt"
+prisma:query COMMIT
+prisma:query BEGIN
+prisma:query DEALLOCATE ALL
+prisma:query INSERT INTO "public"."sitemap_urls" ("id","url","changefreq","priority","lastmod","createdAt") VALUES ($1,$2,$3,$4,$5,$6) ON CONFLICT ("url") DO UPDATE SET "changefreq" = $7, "priority" = $8, "lastmod" = $9 WHERE ("public"."sitemap_urls"."url" = $10 AND 1=1) RETURNING "public"."sitemap_urls"."id", "public"."sitemap_urls"."url", "public"."sitemap_urls"."changefreq", "public"."sitemap_urls"."priority", "public"."sitemap_urls"."lastmod", "public"."sitemap_urls"."createdAt"
+prisma:query COMMIT
+prisma:query BEGIN
+prisma:query DEALLOCATE ALL
+prisma:query INSERT INTO "public"."sitemap_urls" ("id","url","changefreq","priority","lastmod","createdAt") VALUES ($1,$2,$3,$4,$5,$6) ON CONFLICT ("url") DO UPDATE SET "changefreq" = $7, "priority" = $8, "lastmod" = $9 WHERE ("public"."sitemap_urls"."url" = $10 AND 1=1) RETURNING "public"."sitemap_urls"."id", "public"."sitemap_urls"."url", "public"."sitemap_urls"."changefreq", "public"."sitemap_urls"."priority", "public"."sitemap_urls"."lastmod", "public"."sitemap_urls"."createdAt"
+prisma:query COMMIT
+prisma:query BEGIN
+prisma:query DEALLOCATE ALL
+prisma:query INSERT INTO "public"."sitemap_urls" ("id","url","changefreq","priority","lastmod","createdAt") VALUES ($1,$2,$3,$4,$5,$6) ON CONFLICT ("url") DO UPDATE SET "changefreq" = $7, "priority" = $8, "lastmod" = $9 WHERE ("public"."sitemap_urls"."url" = $10 AND 1=1) RETURNING "public"."sitemap_urls"."id", "public"."sitemap_urls"."url", "public"."sitemap_urls"."changefreq", "public"."sitemap_urls"."priority", "public"."sitemap_urls"."lastmod", "public"."sitemap_urls"."createdAt"
+prisma:query COMMIT
+prisma:query BEGIN
+prisma:query DEALLOCATE ALL
+prisma:query INSERT INTO "public"."sitemap_urls" ("id","url","changefreq","priority","lastmod","createdAt") VALUES ($1,$2,$3,$4,$5,$6) ON CONFLICT ("url") DO UPDATE SET "changefreq" = $7, "priority" = $8, "lastmod" = $9 WHERE ("public"."sitemap_urls"."url" = $10 AND 1=1) RETURNING "public"."sitemap_urls"."id", "public"."sitemap_urls"."url", "public"."sitemap_urls"."changefreq", "public"."sitemap_urls"."priority", "public"."sitemap_urls"."lastmod", "public"."sitemap_urls"."createdAt"
+prisma:query COMMIT
+prisma:query BEGIN
+prisma:query DEALLOCATE ALL
+prisma:query INSERT INTO "public"."sitemap_urls" ("id","url","changefreq","priority","lastmod","createdAt") VALUES ($1,$2,$3,$4,$5,$6) ON CONFLICT ("url") DO UPDATE SET "changefreq" = $7, "priority" = $8, "lastmod" = $9 WHERE ("public"."sitemap_urls"."url" = $10 AND 1=1) RETURNING "public"."sitemap_urls"."id", "public"."sitemap_urls"."url", "public"."sitemap_urls"."changefreq", "public"."sitemap_urls"."priority", "public"."sitemap_urls"."lastmod", "public"."sitemap_urls"."createdAt"
+prisma:query COMMIT
+prisma:query SELECT 1
+prisma:query BEGIN
+prisma:query DEALLOCATE ALL
+prisma:query INSERT INTO "public"."sitemap_urls" ("id","url","changefreq","priority","lastmod","createdAt") VALUES ($1,$2,$3,$4,$5,$6) ON CONFLICT ("url") DO UPDATE SET "changefreq" = $7, "priority" = $8, "lastmod" = $9 WHERE ("public"."sitemap_urls"."url" = $10 AND 1=1) RETURNING "public"."sitemap_urls"."id", "public"."sitemap_urls"."url", "public"."sitemap_urls"."changefreq", "public"."sitemap_urls"."priority", "public"."sitemap_urls"."lastmod", "public"."sitemap_urls"."createdAt"
+prisma:query COMMIT
+2026-07-07 20:11:02 [[32minfo[39m]: Sitemap generated with 2564 URLs (502107 bytes)
+2026-07-07 20:11:02 [[32minfo[39m]: Sitemap job sitemap-1783451927661 completed

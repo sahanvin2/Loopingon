@@ -188,7 +188,27 @@ export async function getUserDetail(userId: string) {
 }
 
 export async function updateUser(userId: string, data: { fullName?: string; phone?: string; role?: string; isActive?: boolean; emailVerified?: boolean }) {
-  return prisma.user.update({ where: { id: userId }, data: data as any });
+  const user = await prisma.user.update({ where: { id: userId }, data: data as any });
+
+  if (data.role === "VENDOR" || data.role === "ADMIN" || data.role === "SUPER_ADMIN") {
+    const existingVendor = await prisma.vendor.findUnique({ where: { userId } });
+    if (!existingVendor) {
+      const storeSlug = (user.fullName || "User").toLowerCase().replace(/[^a-z0-9]+/g, "-") + "-" + Math.floor(Math.random() * 10000);
+      await prisma.vendor.create({
+        data: {
+          userId,
+          storeName: `${user.fullName || 'Admin'} Official Store`,
+          storeSlug,
+          storeDescription: "Official store account.",
+          status: "VERIFIED",
+          verifiedAt: new Date(),
+          verifiedBy: "SYSTEM",
+        }
+      });
+    }
+  }
+
+  return user;
 }
 
 export async function banUser(userId: string, adminId: string) {

@@ -27,11 +27,11 @@ export function Footer() {
     {
       title: "Shop",
       links: [
-        { label: "Electronics", href: "/categories/electronics" },
-        { label: "Home & Living", href: "/categories/home-living" },
-        { label: "Clothing", href: "/categories/clothing" },
-        { label: "Jewelry & Accessories", href: "/categories/jewelry" },
-        { label: "Art & Collectibles", href: "/categories/art" },
+        { label: "Games", href: "/products?category=games" },
+        { label: "Software", href: "/products?category=software" },
+        { label: "Gift Cards", href: "/products?category=gift-cards" },
+        { label: "AI Prompts", href: "/products?category=ai-productivity" },
+        { label: "Courses", href: "/products?category=educational" },
         { label: "All Categories", href: "/categories" },
       ],
     },

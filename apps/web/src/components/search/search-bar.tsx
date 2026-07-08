@@ -8,17 +8,17 @@ import { cn } from "@/lib/utils";
 import { useDebounce } from "@/hooks/use-debounce";
 
 const POPULAR_SEARCHES = [
-  "Batik Tote Bag",
-  "Clay Planter",
-  "Wooden Name Board",
-  "Soy Wax Candle",
-  "Resin Ocean Art",
+  "Game Keys",
+  "Software",
+  "Gift Cards",
+  "Templates",
+  "Courses",
 ];
 
 const CATEGORY_SUGGESTIONS = [
-  { name: "Home Decor", icon: Tag },
-  { name: "Jewelry", icon: Tag },
-  { name: "Bags & Accessories", icon: Tag },
+  { name: "Games", icon: Tag },
+  { name: "Software", icon: Tag },
+  { name: "Gift Cards", icon: Tag },
 ];
 
 interface SearchBarProps {

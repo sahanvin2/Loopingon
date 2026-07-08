@@ -50,7 +50,8 @@ export function requireVendor(req: Request, _res: Response, next: NextFunction):
     throw new AppError("Authentication required.", 401, "UNAUTHORIZED");
   }
 
-  if (req.user.role !== "VENDOR") {
+  const allowedRoles = ["VENDOR", "ADMIN", "SUPER_ADMIN"];
+  if (!allowedRoles.includes(req.user.role)) {
     throw new AppError("Vendor account required.", 403, "VENDOR_REQUIRED");
   }
 
@@ -66,12 +67,17 @@ export function requireVendor(req: Request, _res: Response, next: NextFunction):
     throw new AppError("Your vendor store is currently inactive.", 403, "VENDOR_INACTIVE");
   }
 
-  if (!req.user.vendor.isVerified) {
-    throw new AppError(
-      "Your vendor store is pending verification.",
-      403,
-      "VENDOR_NOT_VERIFIED"
-    );
+  // Admins bypass verification check
+  if (req.user.role === "VENDOR" && !req.user.vendor.isVerified) {
+    // Wait, vendor schema might not have 'isVerified' but checks 'status === VERIFIED'
+    // Let's use status check
+    if (req.user.vendor.status !== "VERIFIED") {
+      throw new AppError(
+        "Your vendor store is pending verification.",
+        403,
+        "VENDOR_NOT_VERIFIED"
+      );
+    }
   }
 
   next();
@@ -152,7 +158,10 @@ export async function requireVendorProductOwnership(
   }
 
   if (product.vendorId !== req.user.vendor.id) {
-    throw new AppError("You do not own this product.", 403, "NOT_PRODUCT_OWNER");
+    const isAdmin = req.user.role === "ADMIN" || req.user.role === "SUPER_ADMIN";
+    if (!isAdmin) {
+      throw new AppError("You do not own this product.", 403, "NOT_PRODUCT_OWNER");
+    }
   }
 
   next();

@@ -32,23 +32,14 @@ import { useLogout } from "@/hooks/use-auth";
 import { SearchBar } from "@/components/search/search-bar";
 
 const PRODUCT_CATEGORIES = [
-  { label: "Accessories", href: "/products?category=accessories" },
-  { label: "Art & Collectibles", href: "/products?category=art-collectibles" },
-  { label: "Bags & Purses", href: "/products?category=bags-purses" },
-  { label: "Bath & Beauty", href: "/products?category=bath-beauty" },
-  { label: "Books, Movies & Music", href: "/products?category=books-movies-music" },
-  { label: "Clothing", href: "/products?category=clothing" },
-  { label: "Craft Supplies & Tools", href: "/products?category=craft-supplies-tools" },
-  { label: "Electronics & Accessories", href: "/products?category=electronics-accessories" },
-  { label: "Gifts", href: "/products?category=gifts" },
-  { label: "Home & Living", href: "/products?category=home-living" },
-  { label: "Jewelry", href: "/products?category=jewelry" },
-  { label: "Kids & Baby", href: "/products?category=kids-baby" },
-  { label: "Paper & Party Supplies", href: "/products?category=paper-party-supplies" },
-  { label: "Pet Supplies", href: "/products?category=pet-supplies" },
-  { label: "Shoes", href: "/products?category=shoes" },
-  { label: "Toys & Games", href: "/products?category=toys-games" },
-  { label: "Weddings", href: "/products?category=weddings" },
+  { label: "Games", href: "/products?category=games" },
+  { label: "Software", href: "/products?category=software" },
+  { label: "Gift Cards", href: "/products?category=gift-cards" },
+  { label: "AI & Productivity", href: "/products?category=ai-productivity" },
+  { label: "Educational", href: "/products?category=educational" },
+  { label: "Creative Assets", href: "/products?category=creative-assets" },
+  { label: "Web Development", href: "/products?category=web-development" },
+  { label: "Digital Services", href: "/products?category=digital-services" },
 ];
 
 export function Header() {

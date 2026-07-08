@@ -3,29 +3,29 @@
 import React from "react";
 import Link from "next/link";
 import { 
-  Home, 
-  Gem, 
-  Shirt, 
-  Watch, 
-  Palette, 
-  Sparkles, 
-  Heart, 
   Gamepad2, 
-  Book, 
+  Monitor, 
+  Code, 
+  Palette, 
+  Gift, 
+  GraduationCap, 
+  Server, 
+  Headphones, 
+  BookOpen, 
   MoreHorizontal 
 } from "lucide-react";
 
 const categories = [
-  { name: "Home & Living", icon: Home, href: "/categories/home-living" },
-  { name: "Jewelry", icon: Gem, href: "/categories/jewelry" },
-  { name: "Clothing", icon: Shirt, href: "/categories/clothing" },
-  { name: "Accessories", icon: Watch, href: "/categories/accessories" },
-  { name: "Art & Collectibles", icon: Palette, href: "/categories/art-collectibles" },
-  { name: "Beauty", icon: Sparkles, href: "/categories/beauty" },
-  { name: "Wedding", icon: Heart, href: "/categories/wedding" },
-  { name: "Toys & Games", icon: Gamepad2, href: "/categories/toys-games" },
-  { name: "Books", icon: Book, href: "/categories/books" },
-  { name: "More", icon: MoreHorizontal, href: "/categories" },
+  { name: "Games", icon: Gamepad2, href: "/products?category=games" },
+  { name: "Software", icon: Monitor, href: "/products?category=software" },
+  { name: "Gift Cards", icon: Gift, href: "/products?category=gift-cards" },
+  { name: "Templates", icon: Code, href: "/products?category=web-development" },
+  { name: "Creative Assets", icon: Palette, href: "/products?category=creative-assets" },
+  { name: "Courses", icon: GraduationCap, href: "/products?category=educational" },
+  { name: "AI Prompts", icon: Server, href: "/products?category=ai-productivity" },
+  { name: "Audio", icon: Headphones, href: "/products?category=digital-services" },
+  { name: "E-Books", icon: BookOpen, href: "/products?category=educational" },
+  { name: "More", icon: MoreHorizontal, href: "/products" },
 ];
 
 export function CircleCategories() {

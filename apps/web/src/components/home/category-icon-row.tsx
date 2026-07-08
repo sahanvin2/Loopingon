@@ -3,28 +3,28 @@
 import React from "react";
 import Link from "next/link";
 import { 
-  Home, 
-  Gem, 
-  Shirt, 
-  Briefcase, 
-  Palette, 
-  Sparkles, 
-  HeartHandshake, 
   Gamepad2, 
+  Monitor, 
+  Code, 
+  Palette, 
+  Gift, 
+  GraduationCap, 
+  Server, 
+  Headphones, 
   BookOpen, 
   MoreHorizontal 
 } from "lucide-react";
 
 const CATEGORIES = [
-  { name: "Home & Living", icon: Home, href: "/products?category=home-living", color: "text-[#62A7B0]" },
-  { name: "Jewelry", icon: Gem, href: "/products?category=jewelry", color: "text-[#62A7B0]" },
-  { name: "Clothing", icon: Shirt, href: "/products?category=clothing", color: "text-[#62A7B0]" },
-  { name: "Accessories", icon: Briefcase, href: "/products?category=accessories", color: "text-[#62A7B0]" },
-  { name: "Art & Collectibles", icon: Palette, href: "/products?category=art-collectibles", color: "text-[#E63946]" },
-  { name: "Beauty", icon: Sparkles, href: "/products?category=beauty", color: "text-[#E63946]" },
-  { name: "Wedding", icon: HeartHandshake, href: "/products?category=weddings", color: "text-[#F4A261]" },
-  { name: "Toys & Games", icon: Gamepad2, href: "/products?category=toys-games", color: "text-[#F4A261]" },
-  { name: "Books", icon: BookOpen, href: "/products?category=books", color: "text-[#E63946]" },
+  { name: "Games", icon: Gamepad2, href: "/products?category=games", color: "text-[#62A7B0]" },
+  { name: "Software", icon: Monitor, href: "/products?category=software", color: "text-[#62A7B0]" },
+  { name: "Gift Cards", icon: Gift, href: "/products?category=gift-cards", color: "text-[#62A7B0]" },
+  { name: "Templates", icon: Code, href: "/products?category=web-development", color: "text-[#62A7B0]" },
+  { name: "Creative Assets", icon: Palette, href: "/products?category=creative-assets", color: "text-[#E63946]" },
+  { name: "Courses", icon: GraduationCap, href: "/products?category=educational", color: "text-[#E63946]" },
+  { name: "AI Prompts", icon: Server, href: "/products?category=ai-productivity", color: "text-[#F4A261]" },
+  { name: "Audio", icon: Headphones, href: "/products?category=digital-services", color: "text-[#F4A261]" },
+  { name: "E-Books", icon: BookOpen, href: "/products?category=educational", color: "text-[#E63946]" },
   { name: "More", icon: MoreHorizontal, href: "/products", color: "text-text-500" },
 ];
 

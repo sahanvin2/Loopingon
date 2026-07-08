@@ -124,10 +124,10 @@ export default function NotFound() {
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             {[
-              { label: "Home & Living", href: "/categories/home-living" },
-              { label: "Clothing", href: "/categories/clothing" },
-              { label: "Jewelry", href: "/categories/jewelry" },
-              { label: "Gifts", href: "/categories/gifts" },
+              { label: "Games", href: "/products?category=games" },
+              { label: "Software", href: "/products?category=software" },
+              { label: "Gift Cards", href: "/products?category=gift-cards" },
+              { label: "AI Prompts", href: "/products?category=ai-productivity" },
             ].map((link) => (
               <Link
                 key={link.href}

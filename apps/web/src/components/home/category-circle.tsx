@@ -1,22 +1,22 @@
 import React from "react";
 import Link from "next/link";
 import { 
-  Home, Gem, Shirt, Sparkles, Palette, 
-  Archive, Clock, Briefcase, BookOpen, ToyBrick 
+  Gamepad2, Monitor, Code, Palette, Gift, 
+  GraduationCap, Server, Headphones, BookOpen, MoreHorizontal 
 } from "lucide-react";
 
 export function CategoryCircle() {
   const categories = [
-    { name: "Home Decor", icon: Home, href: "/categories/home-decor", color: "bg-orange-50 text-orange-600" },
-    { name: "Jewelry", icon: Gem, href: "/categories/jewelry", color: "bg-purple-50 text-purple-600" },
-    { name: "Fashion", icon: Shirt, href: "/categories/fashion", color: "bg-pink-50 text-pink-600" },
-    { name: "Beauty", icon: Sparkles, href: "/categories/beauty", color: "bg-rose-50 text-rose-600" },
-    { name: "Art", icon: Palette, href: "/categories/art", color: "bg-blue-50 text-blue-600" },
-    { name: "Collectibles", icon: Archive, href: "/categories/collectibles", color: "bg-amber-50 text-amber-600" },
-    { name: "Vintage", icon: Clock, href: "/categories/vintage", color: "bg-emerald-50 text-emerald-600" },
-    { name: "Bags", icon: Briefcase, href: "/categories/bags", color: "bg-indigo-50 text-indigo-600" },
-    { name: "Books", icon: BookOpen, href: "/categories/books", color: "bg-cyan-50 text-cyan-600" },
-    { name: "Toys", icon: ToyBrick, href: "/categories/toys", color: "bg-red-50 text-red-600" },
+    { name: "Games", icon: Gamepad2, href: "/products?category=games", color: "bg-orange-50 text-orange-600" },
+    { name: "Software", icon: Monitor, href: "/products?category=software", color: "bg-purple-50 text-purple-600" },
+    { name: "Gift Cards", icon: Gift, href: "/products?category=gift-cards", color: "bg-pink-50 text-pink-600" },
+    { name: "Templates", icon: Code, href: "/products?category=web-development", color: "bg-rose-50 text-rose-600" },
+    { name: "Creative Assets", icon: Palette, href: "/products?category=creative-assets", color: "bg-blue-50 text-blue-600" },
+    { name: "Courses", icon: GraduationCap, href: "/products?category=educational", color: "bg-amber-50 text-amber-600" },
+    { name: "AI Prompts", icon: Server, href: "/products?category=ai-productivity", color: "bg-emerald-50 text-emerald-600" },
+    { name: "Audio", icon: Headphones, href: "/products?category=digital-services", color: "bg-indigo-50 text-indigo-600" },
+    { name: "E-Books", icon: BookOpen, href: "/products?category=educational", color: "bg-cyan-50 text-cyan-600" },
+    { name: "More", icon: MoreHorizontal, href: "/products", color: "bg-red-50 text-red-600" },
   ];
 
   return (

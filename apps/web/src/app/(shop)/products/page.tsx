@@ -14,23 +14,14 @@ import { CustomSelect } from "@/components/shared/custom-select";
 
 const ALL_CATEGORIES = [
   { label: "All Categories", slug: "" },
-  { label: "Electronics", slug: "electronics-accessories" },
-  { label: "Home & Living", slug: "home-living" },
-  { label: "Kids & Baby", slug: "kids-baby" },
-  { label: "Bath & Beauty", slug: "bath-beauty" },
-  { label: "Accessories", slug: "accessories" },
-  { label: "Jewelry", slug: "jewelry" },
-  { label: "Craft Supplies", slug: "craft-supplies-tools" },
-  { label: "Bags & Purses", slug: "bags-purses" },
-  { label: "Books & Music", slug: "books-movies-music" },
-  { label: "Clothing", slug: "clothing" },
-  { label: "Toys & Games", slug: "toys-games" },
-  { label: "Paper & Party", slug: "paper-party-supplies" },
-  { label: "Art & Collectibles", slug: "art-collectibles" },
-  { label: "Pet Supplies", slug: "pet-supplies" },
-  { label: "Shoes", slug: "shoes" },
-  { label: "Gifts", slug: "gifts" },
-  { label: "Weddings", slug: "weddings" },
+  { label: "Games", slug: "games" },
+  { label: "Software", slug: "software" },
+  { label: "Gift Cards", slug: "gift-cards" },
+  { label: "AI Prompts", slug: "ai-productivity" },
+  { label: "Courses", slug: "educational" },
+  { label: "Creative Assets", slug: "creative-assets" },
+  { label: "Web Development", slug: "web-development" },
+  { label: "Digital Services", slug: "digital-services" },
 ];
 
 const PRICE_RANGES = [

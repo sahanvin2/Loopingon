@@ -261,21 +261,21 @@ export function ProductGrids() {
 
 export function ShopByRegion() {
   const regions = [
-    { name: "Kandy", description: "Hill Country", color: "from-amber-500 to-orange-600" },
-    { name: "Galle", description: "Coastal", color: "from-blue-500 to-cyan-600" },
-    { name: "Jaffna", description: "Northern", color: "from-purple-500 to-indigo-600" },
-    { name: "Matara", description: "Southern", color: "from-teal-500 to-emerald-600" },
-    { name: "Anuradhapura", description: "Heritage", color: "from-red-500 to-rose-600" },
-    { name: "Kurunegala", description: "Central", color: "from-green-500 to-lime-600" },
+    { name: "Steam", description: "PC Gaming", color: "from-blue-600 to-indigo-800" },
+    { name: "Xbox", description: "Console", color: "from-green-500 to-green-700" },
+    { name: "PSN", description: "PlayStation", color: "from-blue-400 to-blue-600" },
+    { name: "Origin", description: "EA Games", color: "from-orange-500 to-red-600" },
+    { name: "Epic", description: "PC Gaming", color: "from-gray-700 to-gray-900" },
+    { name: "Nintendo", description: "Switch", color: "from-red-500 to-red-700" },
   ];
 
   return (
     <section className="py-20 bg-main">
       <div className="container-page mx-auto">
         <div className="flex flex-col items-center mb-12">
-          <span className="text-xs font-bold text-primary-500 uppercase tracking-[0.2em] mb-2">Discover Local</span>
-          <h2 className="text-3xl md:text-4xl font-serif font-bold text-navy-900 text-center">Shop by Region</h2>
-          <p className="text-text-500 mt-2">Explore crafts from every corner of Sri Lanka</p>
+          <span className="text-xs font-bold text-primary-500 uppercase tracking-[0.2em] mb-2">Discover Platforms</span>
+          <h2 className="text-3xl md:text-4xl font-serif font-bold text-navy-900 text-center">Shop by Platform</h2>
+          <p className="text-text-500 mt-2">Explore games and software for your favorite platforms</p>
           <div className="w-16 h-1 bg-primary-500 mt-4 rounded-full"></div>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5">
@@ -301,12 +301,12 @@ export function ShopByRegion() {
 
 export function HeritageCollection() {
   const topCategories = [
-    { name: "Electronics", slug: "electronics-accessories", desc: "Gadgets & tech" },
-    { name: "Home & Living", slug: "home-living", desc: "Essentials for home" },
-    { name: "Kids & Baby", slug: "kids-baby", desc: "For little ones" },
-    { name: "Bath & Beauty", slug: "bath-beauty", desc: "Personal care" },
-    { name: "Fashion", slug: "clothing", desc: "Style & apparel" },
-    { name: "Sports", slug: "accessories", desc: "Fitness & outdoors" },
+    { name: "Games", slug: "games", desc: "PC & Console" },
+    { name: "Software", slug: "software", desc: "OS & Productivity" },
+    { name: "Gift Cards", slug: "gift-cards", desc: "Wallet top-ups" },
+    { name: "AI Prompts", slug: "ai-productivity", desc: "Creative AI tools" },
+    { name: "Courses", slug: "educational", desc: "Learn new skills" },
+    { name: "Templates", slug: "web-development", desc: "Web & Design" },
   ];
 
   return (
@@ -316,7 +316,7 @@ export function HeritageCollection() {
       <div className="container-page mx-auto relative z-10 flex flex-col items-center text-center">
         <span className="text-luxury-gold uppercase tracking-[0.3em] text-sm font-bold mb-4">Top Categories</span>
         <h2 className="text-5xl md:text-6xl font-serif font-bold text-white mb-6 leading-tight">Shop by<br/>Category</h2>
-        <p className="text-navy-100 max-w-2xl text-lg mb-12 leading-relaxed">Browse thousands of products across our most popular categories. From electronics and home essentials to fashion and beauty — find exactly what you need.</p>
+        <p className="text-navy-100 max-w-2xl text-lg mb-12 leading-relaxed">Browse thousands of digital products across our most popular categories. From AAA games to professional software — get instant delivery.</p>
         
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5 w-full mb-12">
           {topCategories.map((item) => (

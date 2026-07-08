@@ -140,14 +140,14 @@ export function DiscoveryRow() {
               <Link href="/products?isFeatured=1" className="group cursor-pointer block">
                 <div className="w-full h-[240px] rounded-2xl overflow-hidden relative bg-surface-100">
                   <Image 
-                    src="https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=800&h=500&fit=crop" 
-                    alt="Scandi Living Room" 
+                    src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&h=500&fit=crop" 
+                    alt="Gaming Setup" 
                     fill sizes="(max-width: 768px) 100vw, 50vw" 
                     className="object-cover group-hover:scale-105 transition-transform duration-700" 
                   />
                 </div>
                 <div className="mt-4">
-                  <h3 className="text-lg font-bold text-navy-900">Editors' Picks Collection</h3>
+                  <h3 className="text-lg font-bold text-navy-900">Premium Games & Software</h3>
                   <p className="text-sm font-medium text-[#E63946] mt-1 flex items-center gap-1">
                     Shop the look <span className="text-lg leading-none">&rarr;</span>
                   </p>
