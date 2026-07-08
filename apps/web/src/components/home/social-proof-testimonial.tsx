@@ -15,7 +15,7 @@ export function SocialProofTestimonial() {
             <Quote className="w-12 h-12 text-[#E63946] shrink-0 opacity-80" />
             <div>
               <h2 className="font-serif text-2xl md:text-3xl font-bold text-white leading-tight">
-                "Kandyam is my go-to for unique, high-quality finds and supporting small businesses."
+                "Kandyam is my go-to for top-tier digital assets, software, and supporting independent creators."
               </h2>
               <div className="flex items-center gap-4 mt-6">
                 <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-[#62A7B0]">
@@ -38,10 +38,10 @@ export function SocialProofTestimonial() {
           <div className="w-full lg:w-1/2 flex flex-col sm:flex-row items-center gap-6 lg:justify-end relative">
             <div className="flex gap-3">
               {[
-                "https://images.unsplash.com/photo-1601392740426-907c7b028119?w=120&h=160&fit=crop",
-                "https://images.unsplash.com/photo-1544931170-3ca1337cce88?w=120&h=160&fit=crop",
-                "https://images.unsplash.com/photo-1603006905003-be475563bc59?w=120&h=160&fit=crop",
-                "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=120&h=160&fit=crop",
+                "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=120&h=160&fit=crop", // Retro PC / gaming
+                "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=120&h=160&fit=crop", // Code
+                "https://images.unsplash.com/photo-1614680376593-902f74cf0d41?w=120&h=160&fit=crop", // Abstract digital
+                "https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=120&h=160&fit=crop", // Programming
               ].map((src, i) => (
                 <div key={i} className="w-20 h-24 sm:w-24 sm:h-28 rounded-2xl overflow-hidden border border-white/20 shadow-lg transform hover:-translate-y-2 transition-transform duration-300">
                   <Image src={src} alt={`Customer purchase ${i+1}`} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />

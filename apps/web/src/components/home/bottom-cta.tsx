@@ -45,8 +45,8 @@ export function BottomCTA() {
             
             <div className="absolute right-0 bottom-0 w-1/3 h-[120%] translate-y-[10%] hidden sm:block">
               <Image 
-                src="https://images.unsplash.com/photo-1596401057633-54a8fe8ef647?w=300&h=400&fit=crop" 
-                alt="Decorative dried flowers" 
+                src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=300&h=400&fit=crop" 
+                alt="Digital artwork" 
                 fill sizes="(max-width: 768px) 100vw, 50vw" 
                 className="object-contain object-bottom opacity-90 mix-blend-multiply" 
               />

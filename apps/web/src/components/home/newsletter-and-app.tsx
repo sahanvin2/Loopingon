@@ -44,7 +44,7 @@ export function NewsletterAndApp() {
             </div>
             
             <div className="absolute right-0 bottom-0 w-48 h-48 opacity-60 pointer-events-none hidden sm:block">
-              <Image src="https://images.unsplash.com/photo-1505691938895-1758d7bef511?q=80&w=400&auto=format&fit=crop" alt="Floral decor" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover rounded-tl-full mix-blend-multiply" />
+              <Image src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=400&auto=format&fit=crop" alt="Abstract digital waves" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover rounded-tl-full mix-blend-multiply" />
             </div>
           </div>
 
