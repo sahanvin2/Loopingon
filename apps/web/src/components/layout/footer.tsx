@@ -27,41 +27,41 @@ export function Footer() {
     {
       title: "Shop",
       links: [
-        { label: "Games", href: "/products?category=games" },
-        { label: "Software", href: "/products?category=software" },
-        { label: "Gift Cards", href: "/products?category=gift-cards" },
-        { label: "AI Prompts", href: "/products?category=ai-productivity" },
-        { label: "Courses", href: "/products?category=educational" },
-        { label: "All Categories", href: "/categories" },
-      ],
-    },
-    {
-      title: "Sell",
-      links: [
-        { label: "Start Selling", href: "/sell-on-kandyam" },
-        { label: "Seller Handbook", href: "/help-center/seller" },
-        { label: "Teams & Community", href: "/community" },
-        { label: "Seller Policies", href: "/seller-policy" },
-        ...(isSeller ? [{ label: "Seller Dashboard", href: "/vendor/dashboard" }] : []),
-      ],
-    },
-    {
-      title: "About",
-      links: [
-        { label: "About Kandyam", href: "/about-us" },
-        { label: "Policies", href: "/policies" },
-        { label: "Careers", href: "/careers" },
-        { label: "Press", href: "/press" },
-        { label: "Impact", href: "/impact" },
+        { label: "All Products", href: "/products" },
+        { label: "Best Sellers", href: "/products?sort=salesCount" },
+        { label: "New Arrivals", href: "/products?sort=newest" },
+        { label: "Deals", href: "/deals" },
+        { label: "Gift Cards", href: "/gift-cards" },
       ],
     },
     {
       title: "Help",
       links: [
-        { label: "Help Center", href: "/help-center" },
-        { label: "Trust & Safety", href: "/trust" },
-        { label: "Privacy Settings", href: "/privacy-settings" },
+        { label: "FAQs", href: "/faq" },
+        { label: "Shipping & Delivery", href: "/shipping" },
+        { label: "Returns & Exchanges", href: "/returns" },
         { label: "Contact Us", href: "/contact" },
+        { label: "Track Order", href: "/track-order" },
+      ],
+    },
+    {
+      title: "About",
+      links: [
+        { label: "Our Story", href: "/our-story" },
+        { label: "Careers", href: "/careers" },
+        { label: "Press", href: "/press" },
+        { label: "Sustainability", href: "/sustainability" },
+        { label: "Blog", href: "/blog" },
+      ],
+    },
+    {
+      title: "Sell on Kandyam",
+      links: [
+        { label: "Become a Seller", href: "/sell" },
+        { label: "Seller Handbook", href: "/handbook" },
+        { label: "Creator Community", href: "/community" },
+        { label: "Affiliate Program", href: "/affiliate" },
+        ...(isSeller ? [{ label: "Seller Dashboard", href: "/vendor/dashboard" }] : []),
       ],
     },
   ];
@@ -104,49 +104,20 @@ export function Footer() {
 
           {/* Links Grid: 4 Columns */}
           <div className="lg:col-span-4 grid grid-cols-2 md:grid-cols-4 gap-8">
-            <div>
-              <h4 className="font-serif text-sm font-bold text-navy-900 mb-5">Shop</h4>
-              <ul className="space-y-3 text-[13px] font-medium text-text-500">
-                <li><Link href="/products" className="hover:text-[#E63946] transition-colors">All Products</Link></li>
-                <li><Link href="/products?sort=salesCount" className="hover:text-[#E63946] transition-colors">Best Sellers</Link></li>
-                <li><Link href="/products?sort=newest" className="hover:text-[#E63946] transition-colors">New Arrivals</Link></li>
-                <li><Link href="/deals" className="hover:text-[#E63946] transition-colors">Deals</Link></li>
-                <li><Link href="/gift-cards" className="hover:text-[#E63946] transition-colors">Gift Cards</Link></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h4 className="font-serif text-sm font-bold text-navy-900 mb-5">Help</h4>
-              <ul className="space-y-3 text-[13px] font-medium text-text-500">
-                <li><Link href="/faq" className="hover:text-[#E63946] transition-colors">FAQs</Link></li>
-                <li><Link href="/shipping" className="hover:text-[#E63946] transition-colors">Shipping & Delivery</Link></li>
-                <li><Link href="/returns" className="hover:text-[#E63946] transition-colors">Returns & Exchanges</Link></li>
-                <li><Link href="/contact" className="hover:text-[#E63946] transition-colors">Contact Us</Link></li>
-                <li><Link href="/track-order" className="hover:text-[#E63946] transition-colors">Track Order</Link></li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-serif text-sm font-bold text-navy-900 mb-5">About</h4>
-              <ul className="space-y-3 text-[13px] font-medium text-text-500">
-                <li><Link href="/our-story" className="hover:text-[#E63946] transition-colors">Our Story</Link></li>
-                <li><Link href="/careers" className="hover:text-[#E63946] transition-colors">Careers</Link></li>
-                <li><Link href="/press" className="hover:text-[#E63946] transition-colors">Press</Link></li>
-                <li><Link href="/sustainability" className="hover:text-[#E63946] transition-colors">Sustainability</Link></li>
-                <li><Link href="/blog" className="hover:text-[#E63946] transition-colors">Blog</Link></li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-serif text-sm font-bold text-navy-900 mb-5">Sell on Kandyam</h4>
-              <ul className="space-y-3 text-[13px] font-medium text-text-500">
-                <li><Link href="/sell" className="hover:text-[#E63946] transition-colors">Become a Seller</Link></li>
-                <li><Link href="/handbook" className="hover:text-[#E63946] transition-colors">Seller Handbook</Link></li>
-                <li><Link href="/community" className="hover:text-[#E63946] transition-colors">Creator Community</Link></li>
-                <li><Link href="/affiliate" className="hover:text-[#E63946] transition-colors">Affiliate Program</Link></li>
-                {isSeller && <li><Link href="/vendor/dashboard" className="hover:text-[#E63946] transition-colors mt-2 text-[#62A7B0]">Seller Dashboard</Link></li>}
-              </ul>
-            </div>
+            {footerColumns.map((col, idx) => (
+              <div key={idx}>
+                <h4 className="font-serif text-sm font-bold text-navy-900 mb-5">{col.title}</h4>
+                <ul className="space-y-3 text-[13px] font-medium text-text-500">
+                  {col.links.map((link, lidx) => (
+                    <li key={lidx}>
+                      <Link href={link.href} className="hover:text-[#E63946] transition-colors">
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
 
           {/* Secure Payments */}

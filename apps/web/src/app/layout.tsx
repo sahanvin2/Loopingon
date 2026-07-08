@@ -35,27 +35,26 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: "Kandyam - Sri Lanka's E-commerce Marketplace",
+    default: "Kandyam - A global marketplace for unique, creative and one-of-a-kind items",
     template: "%s | Kandyam",
   },
   description:
-    "Kandyam connects skilled Sri Lankan sellers with customers worldwide. " +
-    "Discover unique handcrafted treasures made with traditional techniques and authentic materials.",
+    "A global marketplace for unique, creative and one-of-a-kind items from independent sellers around the world. Shop digital assets, software, templates, gift cards, and more.",
   keywords: [
-    "Sri Lanka",
-    "Premium Products",
-    "seller marketplace",
-    "handicrafts",
-    "pottery",
-    "wood carving",
-    "batik",
-    "textiles",
-    "brass work",
-    "jewelry",
-    "traditional crafts",
-    "fair trade",
-    "ethical shopping",
-    "Sri Lankan sellers",
+    "global marketplace",
+    "digital products",
+    "software",
+    "game keys",
+    "gift cards",
+    "templates",
+    "digital assets",
+    "creative assets",
+    "subscriptions",
+    "AI prompts",
+    "e-books",
+    "online courses",
+    "digital services",
+    "independent creators",
     "kandyam",
   ],
   authors: [{ name: "Kandyam", url: "https://kandyam.com" }],
@@ -72,28 +71,27 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    locale: "en_LK",
+    locale: "en_US",
     siteName: "Kandyam",
-    title: "Kandyam - Sri Lanka's E-commerce Marketplace",
+    title: "Kandyam - A global marketplace for unique, creative and one-of-a-kind items",
     description:
-      "Discover unique handcrafted treasures made by skilled Sri Lankan sellers. " +
-      "Shop pottery, wood carving, textiles, jewelry, and more.",
+      "A global marketplace for unique, creative and one-of-a-kind items from independent sellers around the world.",
     url: "https://kandyam.com",
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Kandyam - Premium Products from Sri Lanka",
+        alt: "Kandyam - Digital Marketplace",
         type: "image/jpeg",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Kandyam - Sri Lanka's E-commerce Marketplace",
+    title: "Kandyam - A global marketplace for unique, creative and one-of-a-kind items",
     description:
-      "Discover unique handcrafted treasures made by skilled Sri Lankan sellers.",
+      "A global marketplace for unique, creative and one-of-a-kind items from independent sellers around the world.",
     images: ["/og-image.jpg"],
     creator: "@kandyam",
   },

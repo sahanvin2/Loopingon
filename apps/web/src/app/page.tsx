@@ -11,8 +11,8 @@ import { SocialProofTestimonial } from "@/components/home/social-proof-testimoni
 import { BottomCTA } from "@/components/home/bottom-cta";
 
 export const metadata = {
-  title: "Kandyam - Discover products you'll love. From local favorites to global finds.",
-  description: "Explore a curated selection of premium goods, exclusive deals, and unique items from independent creators everywhere on Kandyam.",
+  title: "Kandyam - A global marketplace for unique, creative and one-of-a-kind items",
+  description: "Explore a curated selection of digital assets, software, templates, gift cards, and unique items from independent creators everywhere on Kandyam.",
 };
 
 export default function HomePage() {

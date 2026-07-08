@@ -2,7 +2,7 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Terms of Service",
-  description: "Kandyam Terms of Service: Rules and guidelines for buying and selling Premium Products on our platform. Protect your rights as a buyer or seller.",
+  description: "Kandyam Terms of Service: Rules and guidelines for buying and selling digital products on our platform. Protect your rights as a buyer or seller.",
 };
 
 export default function TermsOfServicePage() {
@@ -15,7 +15,7 @@ export default function TermsOfServicePage() {
         <div className="mt-10 space-y-8 text-sm leading-relaxed text-muted-700 [&_h2]:font-serif [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-text-900 [&_h2]:mt-8 [&_h3]:font-semibold [&_h3]:text-text-800 [&_h3]:mt-6 [&_p]:mt-3 [&_ul]:mt-3 [&_ul]:list-disc [&_ul]:pl-6 [&_li]:mt-1">
           <section>
             <h2>1. Acceptance of Terms</h2>
-            <p>By accessing or using Kandyam (&quot;the Platform&quot;, &quot;we&quot;, &quot;our&quot;), you agree to be bound by these Terms of Service (&quot;Terms&quot;). If you do not agree, do not use the Platform. These Terms constitute a legally binding agreement between you and Kandyam (Pvt) Ltd, a company registered in Sri Lanka.</p>
+            <p>By accessing or using Kandyam (&quot;the Platform&quot;, &quot;we&quot;, &quot;our&quot;), you agree to be bound by these Terms of Service (&quot;Terms&quot;). If you do not agree, do not use the Platform. These Terms constitute a legally binding agreement between you and Kandyam Inc.</p>
           </section>
 
           <section>
@@ -33,41 +33,41 @@ export default function TermsOfServicePage() {
           <section>
             <h2>3. Buying Terms</h2>
             <h3>3.1 Order Placement</h3>
-            <p>All orders are subject to acceptance by the vendor. Prices are listed in Sri Lankan Rupees (LKR) unless otherwise displayed in your chosen currency. We reserve the right to cancel orders due to pricing errors, stock issues, or suspected fraud.</p>
-            <h3>3.2 Payment</h3>
-            <p>Payment is processed at the time of order. Funds are held in escrow until you confirm satisfactory receipt or the 7-day inspection period expires. This protects both buyers and sellers.</p>
+            <p>All orders are subject to acceptance by the vendor. Prices are listed in USD unless otherwise displayed in your chosen currency. We reserve the right to cancel orders due to pricing errors, stock issues, or suspected fraud.</p>
+            <h3>3.2 Payment & Delivery</h3>
+            <p>Payment is processed at the time of order. Digital products are delivered immediately upon successful payment verification. Funds are held in escrow to protect buyers.</p>
             <h3>3.3 Inspection Period</h3>
-            <p>You have 7 days from delivery to inspect your item and raise any issues. If no dispute is raised within 7 days, funds are automatically released to the vendor.</p>
+            <p>You have 7 days from purchase to inspect your digital item and raise any issues (e.g., file corruption, misrepresentation). If no dispute is raised, funds are released to the vendor.</p>
           </section>
 
           <section>
             <h2>4. Selling Terms</h2>
             <h3>4.1 Eligibility</h3>
-            <p>To sell on Kandyam, you must complete the vendor application process, including identity verification and craft documentation. We reserve the right to reject any application.</p>
+            <p>To sell on Kandyam, you must complete the vendor application process, including identity verification and portfolio review. We reserve the right to reject any application.</p>
             <h3>4.2 Product Requirements</h3>
             <ul>
-              <li>All products must be premium or handcrafted, primarily by you or your team.</li>
-              <li>Products must be accurately described with truthful images and details.</li>
-              <li>Prohibited items include mass-produced goods, counterfeit items, weapons, drugs, and items illegal under Sri Lankan law.</li>
+              <li>All products must be high-quality digital assets created by you or your team.</li>
+              <li>Products must be accurately described with truthful previews and details.</li>
+              <li>Prohibited items include stolen assets, malware, illegal content, and anything violating global copyright laws.</li>
               <li>Vendors must maintain a minimum average rating of 3.0 stars.</li>
             </ul>
-            <h3>4.3 Fulfillment</h3>
-            <p>Vendors must ship orders within the stated processing time (typically 1-7 business days). Delays must be communicated to the buyer promptly. Repeated late shipments may result in account penalties.</p>
+            <h3>4.3 Delivery</h3>
+            <p>Vendors must ensure all digital files are properly uploaded and accessible. Broken links or corrupted files may result in account penalties.</p>
           </section>
 
           <section>
             <h2>5. Payments & Fees</h2>
             <h3>5.1 Platform Commission</h3>
-            <p>Kandyam charges a 10% commission on each completed sale (including shipping fees). This is the only fee — there are no listing fees, subscription fees, or hidden charges.</p>
+            <p>Kandyam charges a 10% commission on each completed sale. This is the only fee — there are no listing fees, subscription fees, or hidden charges.</p>
             <h3>5.2 Payouts</h3>
-            <p>Vendor payouts are processed once your balance reaches Rs. 10,000 to registered Sri Lankan bank accounts. This equates to approximately Rs. 11,111 in sales (10% platform commission applied). The minimum threshold helps reduce per-transaction bank charges and government taxes. Payouts are processed within 5 working days of the threshold being met.</p>
+            <p>Vendor payouts are processed once your balance reaches $50 to your registered bank or PayPal account. Payouts are processed within 5 working days of the threshold being met.</p>
             <h3>5.3 Refunds</h3>
             <p>In case of refunds, the platform commission is also refunded proportionally. Refunds are processed to the buyer&apos;s original payment method within 3-5 business days.</p>
           </section>
 
           <section>
             <h2>6. Disputes & Returns</h2>
-            <p>Buyers may request returns within 7 days of delivery. Disputes are first mediated between buyer and vendor through our messaging system. If unresolved, Kandyam will review evidence from both parties and make a binding decision. See our <a href="/return-policy" className="text-primary-600 hover:underline">Return Policy</a> for full details.</p>
+            <p>Buyers may request refunds within 7 days of purchase for valid reasons (e.g., defective files). Disputes are first mediated between buyer and vendor through our messaging system. If unresolved, Kandyam will review evidence from both parties and make a binding decision. See our <a href="/return-policy" className="text-primary-600 hover:underline">Refund Policy</a> for full details.</p>
           </section>
 
           <section>
@@ -99,14 +99,13 @@ export default function TermsOfServicePage() {
 
           <section>
             <h2>11. Governing Law</h2>
-            <p>These Terms are governed by the laws of the Democratic Socialist Republic of Sri Lanka. Any disputes shall be resolved exclusively in the courts of Colombo, Sri Lanka.</p>
+            <p>These Terms are governed by global e-commerce standard laws. Any disputes shall be resolved exclusively through arbitration or applicable courts.</p>
           </section>
 
           <section>
             <h2>12. Contact</h2>
             <p>
-              Kandyam (Pvt) Ltd<br />
-              42 Galle Road, Colombo 03, Sri Lanka<br />
+              Kandyam Inc.<br />
               Email: legal@kandyam.com
             </p>
           </section>

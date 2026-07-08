@@ -37,8 +37,8 @@ export default function CookiePolicyPage() {
             <p>We use Google Analytics to understand how visitors interact with our website. Google Analytics uses cookies to collect anonymous usage data. You can opt out at <a href="https://tools.google.com/dlpage/gaoptout" className="text-primary-600 hover:underline" target="_blank" rel="noopener noreferrer">tools.google.com/dlpage/gaoptout</a>.</p>
             <h3>Facebook Pixel</h3>
             <p>We use Facebook Pixel to measure the effectiveness of our advertising and to show relevant ads to people who have visited our site. You can manage your Facebook ad preferences in your Facebook account settings.</p>
-            <h3>PayHere</h3>
-            <p>Our payment processor PayHere uses cookies for fraud prevention and security. These are essential for processing payments securely.</p>
+            <h3>Stripe & PayPal</h3>
+            <p>Our payment processors Stripe and PayPal use cookies for fraud prevention and security. These are essential for processing payments securely.</p>
           </section>
 
           <section>
