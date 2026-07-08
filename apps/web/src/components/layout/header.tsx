@@ -100,13 +100,19 @@ export function Header() {
             className="bg-[#62A7B0] text-white text-xs font-medium relative z-[60] overflow-hidden"
           >
             <div className="max-w-8xl mx-auto flex items-center justify-center py-2.5 px-4 text-center">
-              <span className="flex items-center gap-2 sm:gap-6 flex-wrap justify-center">
-                <span className="flex items-center gap-1.5"><Gift className="w-3.5 h-3.5" /> Customize your order to make it unique</span>
-                <span className="hidden sm:inline opacity-50">|</span>
-                <span className="flex items-center gap-1.5"><ShieldCheck className="w-3.5 h-3.5" /> Support independent sellers</span>
-                <span className="hidden sm:inline opacity-50">|</span>
-                <span className="flex items-center gap-1.5"><Tag className="w-3.5 h-3.5" /> Electronics, Fashion, Home & more</span>
-              </span>
+              <div className="flex-1 flex justify-center items-center gap-6 text-xs font-medium px-4">
+            <span className="hidden md:flex items-center gap-1.5">
+              <Gift className="w-3.5 h-3.5" /> Instant delivery on all digital products
+            </span>
+            <span className="hidden md:inline-block text-white/30">|</span>
+            <span className="flex items-center gap-1.5">
+              <ShieldCheck className="w-3.5 h-3.5" /> 100% verified digital licenses
+            </span>
+            <span className="hidden md:inline-block text-white/30">|</span>
+            <span className="hidden lg:flex items-center gap-1.5">
+              <Tag className="w-3.5 h-3.5" /> Games, Software, Gift Cards & more
+            </span>
+          </div>
               <button 
                 onClick={() => setShowAnnouncement(false)}
                 className="absolute right-4 flex items-center gap-1 text-white/80 hover:text-white transition-colors focus:outline-none p-1 text-[10px] uppercase tracking-wider"

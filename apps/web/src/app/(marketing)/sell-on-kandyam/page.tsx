@@ -23,15 +23,15 @@ const benefits = [
 const steps = [
   { step: "01", title: "Apply for a Store", description: "Fill out our simple application form. We review all applications within 24 hours to ensure high quality on our marketplace." },
   { step: "02", title: "Set Up Your Shop", description: "Customize your store profile, upload your logo, and tell your unique brand story to connect with buyers." },
-  { step: "03", title: "List Your Products", description: "Take beautiful photos, write detailed descriptions, and set your prices. Listing is always 100% free." },
-  { step: "04", title: "Start Selling", description: "We market your products. When you get an order, simply package it securely and ship it to the customer." },
+  { step: "03", title: "List Your Digital Products", description: "Upload your digital assets, write detailed descriptions, and set your prices. Listing is always 100% free." },
+  { step: "04", title: "Automated Instant Delivery", description: "We market your products. When a customer buys, our platform securely and instantly delivers the license key or file to them." },
 ];
 
 const faqs = [
-  { q: "Are there any listing fees?", a: "No, listing products on Kandyam is completely free. You can list as many products as you want without ever paying a listing fee." },
+  { q: "Are there any listing fees?", a: "No, listing digital products on Kandyam is completely free. You can list as many products as you want without ever paying a listing fee." },
   { q: "When do I get paid?", a: "Payments are processed every fortnight (14 days) directly to your bank account, provided your balance exceeds Rs. 10,000." },
-  { q: "What can I sell?", a: "Kandyam is for premium, unique, premium, or carefully curated boutique items. We do not allow mass-produced drop-shipped goods or counterfeit items." },
-  { q: "Do I need to handle shipping?", a: "Yes, sellers are responsible for packaging and shipping their own items to the buyer using a reliable courier service with tracking." },
+  { q: "What can I sell?", a: "Kandyam is for premium digital products, including software licenses, video games, digital gift cards, and templates." },
+  { q: "Do I need to handle delivery?", a: "No, Kandyam handles secure, instant digital delivery of all your sold files and license keys to the buyer automatically." },
 ];
 
 export default function SellOnKandyamPage() {
@@ -44,12 +44,12 @@ export default function SellOnKandyamPage() {
         <div className="relative mx-auto max-w-6xl px-4 py-24 md:py-32">
           <div className="max-w-2xl">
             <h1 className="font-serif text-4xl font-bold text-white md:text-5xl lg:text-6xl leading-[1.1]">
-              Turn Your Passion <br />
-              <span className="text-primary-300">Into Income.</span>
+              Monetize Your <br />
+              <span className="text-primary-300">Digital Assets.</span>
             </h1>
             <p className="mt-6 text-lg text-surface-200">
-              Join thousands of sellers already on Kandyam. Keep 80% of your
-              earnings, reach customers globally, and grow your independent business today.
+              Join thousands of digital creators on Kandyam. Keep 80% of your
+              earnings, reach gamers and software users globally, and grow your digital business today.
             </p>
             <Link
               href="/sign-up/vendor"

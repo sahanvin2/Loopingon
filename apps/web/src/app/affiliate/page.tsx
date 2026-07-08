@@ -4,7 +4,7 @@ import { DollarSign, Share2, Award, ArrowRight } from "lucide-react";
 
 export const metadata = {
   title: "Affiliate Program | Kandyam",
-  description: "Earn commission by sharing your favorite Kandyam finds with your audience.",
+  description: "Earn commission by sharing your favorite Kandyam digital products with your audience.",
 };
 
 export default function AffiliatePage() {
@@ -16,7 +16,7 @@ export default function AffiliatePage() {
           <div className="relative z-10 max-w-3xl">
             <h1 className="font-serif text-4xl md:text-5xl font-bold text-white mb-6">Earn With Kandyam</h1>
             <p className="text-lg font-medium text-white/80 mb-10">
-              Join the Kandyam Affiliate Program and earn commission on every sale generated through your unique links. Perfect for bloggers, influencers, and creators.
+              Join the Kandyam Affiliate Program and earn commission on every sale generated through your unique links. Perfect for gaming bloggers, tech influencers, and streamers.
             </p>
             <Link href="#" className="inline-flex items-center gap-2 bg-[#E63946] hover:bg-[#D92D3A] text-white font-bold px-8 py-4 rounded-full transition-all">
               Apply Now <ArrowRight className="w-5 h-5" />
@@ -40,7 +40,7 @@ export default function AffiliatePage() {
               <Award className="w-8 h-8 text-[#F4A261]" />
             </div>
             <h3 className="font-bold text-xl text-navy-900 mb-3">2. Inspire</h3>
-            <p className="text-text-600 font-medium">Help your audience discover incredible handcrafted and unique items they'll love.</p>
+            <p className="text-text-600 font-medium">Help your audience discover incredible software, games, and digital keys they'll love.</p>
           </div>
 
           <div className="text-center">

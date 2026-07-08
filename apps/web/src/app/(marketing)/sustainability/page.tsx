@@ -15,26 +15,26 @@ export const metadata: Metadata = {
 };
 
 const stats = [
-  { label: "Eco-Friendly Packaging", value: "80%", icon: Package },
-  { label: "Trees Planted", value: "15,000+", icon: Trees },
-  { label: "Certified Sustainable Materials", value: "60%", icon: Leaf },
+  { label: "Digital Items", value: "100+", icon: Package },
+  { label: "Zero-Waste Deliveries", value: "100%", icon: Leaf },
+  { label: "Carbon-Neutral Servers", value: "100%", icon: Trees },
 ];
 
 const initiatives = [
-  { icon: Package, title: "Plastic-Free Packaging", description: "All Kandyam shipments use biodegradable, recycled, or reusable packaging materials. We've eliminated single-use plastics from our entire supply chain." },
-  { icon: Trees, title: "Tree Planting Program", description: "For every 100 orders, we plant a tree in Sri Lanka's central highlands. Working with local reforestation partners, we've planted over 15,000 trees since 2021." },
-  { icon: Ship, title: "Carbon-Neutral Shipping", description: "We offset 100% of carbon emissions from international shipping through certified carbon offset programs. Every international order is climate-neutral." },
-  { icon: GraduationCap, title: "Seller Education", description: "We provide free workshops to our sellers on sustainable material sourcing, waste reduction, and eco-friendly production methods." },
+  { icon: Package, title: "Zero-Waste Digital Delivery", description: "All our 100+ digital products are delivered instantly via secure digital downloads or email. We've completely eliminated physical shipping from our platform." },
+  { icon: Trees, title: "Green Cloud Infrastructure", description: "We run our servers and databases on 100% renewable energy. Every download and transaction on Kandyam is completely carbon-neutral." },
+  { icon: Ship, title: "No International Shipping", description: "By switching to a fully digital storefront, we have eliminated 100% of the carbon emissions associated with global air and sea freight." },
+  { icon: GraduationCap, title: "Creator Education", description: "We provide resources to our digital creators on optimizing software builds and reducing the carbon footprint of their digital assets." },
 ];
 
 const tips = [
-  "Choose locally sourced, natural materials whenever possible",
-      "Support sellers who use traditional, low-waste production methods",
-  "Opt for consolidated shipping to reduce carbon footprint",
-  "Look for our 'Eco-Friendly' badge on sustainable products",
-  "Buy quality premium items that last a lifetime, not fast fashion",
-  "Reuse or repurpose packaging materials from your orders",
-  "Share your sustainable purchases on social media to inspire others",
+  "Choose digital downloads over physical media whenever possible",
+  "Support creators who optimize their software for lower energy consumption",
+  "Delete unneeded digital files to save cloud storage energy",
+  "Look for our 'Eco-Friendly' badge on low-footprint digital products",
+  "Buy quality digital licenses that don't require constant re-purchasing",
+  "Turn off your devices when not playing games or using software",
+  "Share your digital purchases securely to prevent wasteful duplicate downloads",
 ];
 
 async function EcoFriendlyProducts() {
@@ -56,8 +56,8 @@ export default function SustainabilityPage() {
         <div className="relative mx-auto max-w-4xl px-4 py-24 text-center md:py-32">
           <h1 className="font-serif text-4xl font-bold text-white md:text-5xl">Our Commitment</h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-surface-200">
-            premium is inherently sustainable. We&apos;re building on that foundation to ensure
-            every aspect of Kandyam leaves a positive impact on our planet.
+            Digital commerce is inherently sustainable. We&apos;re building on that foundation to ensure
+            our platform of 100+ premium digital goods leaves a positive impact on our planet.
           </p>
         </div>
       </section>
@@ -125,7 +125,7 @@ export default function SustainabilityPage() {
         <div className="mx-auto max-w-6xl px-4 text-center">
           <h2 className="font-serif text-3xl font-bold text-text-900">Our Partners</h2>
           <div className="mt-10 grid grid-cols-2 gap-8 sm:grid-cols-4">
-            {["Eco-Pack Lanka", "Reforest Sri Lanka", "Green Carbon Fund", "Sustainable Crafts Council"].map((name) => (
+            {["Green Cloud Network", "Digital Climate Alliance", "Renewable Energy Fund", "Zero Waste Tech"].map((name) => (
               <div key={name} className="rounded-xl bg-white p-6 shadow-soft-sm">
                 <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-muted-50">
                   <Heart className="h-8 w-8 text-muted-500" />

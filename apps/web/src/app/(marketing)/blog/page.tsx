@@ -9,8 +9,8 @@ import { Pagination } from "@/components/shared/pagination";
 import { LoadingSkeleton } from "@/components/shared/loading-skeleton";
 
 export const metadata: Metadata = {
-  title: "Blog - Stories of Sri Lankan Craft & Culture",
-  description: "Read stories about Sri Lankan crafts, seller profiles, craft techniques, cultural heritage, and the Kandyam community.",
+  title: "Blog - Tech News & Digital Creators",
+  description: "Read stories about software development, gaming news, digital creator profiles, and the Kandyam community.",
 };
 
 interface BlogPageProps {
@@ -39,11 +39,11 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
       <section className="bg-surface-50 py-16">
         <div className="mx-auto max-w-6xl px-4">
           <h1 className="text-center font-serif text-4xl font-bold text-text-900 md:text-5xl">
-            Stories of Craft & Culture
+            Tech News & Creator Stories
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-center text-lg text-muted-600">
-            Discover the stories behind Sri Lankan crafts, meet the sellers, and explore the
-            rich cultural heritage woven into every premium creation.
+            Discover the latest in gaming and software, meet the developers behind the code, and explore the
+            thriving digital economy within the Kandyam community.
           </p>
         </div>
       </section>

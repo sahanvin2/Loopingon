@@ -18,7 +18,7 @@ export default function CommunityPage() {
             Kandyam Community
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-primary-100">
-            Connect with thousands of independent sellers. Share tips, ask questions, and grow your business together in a supportive environment.
+            Connect with thousands of digital creators. Share software development tips, discuss game marketing, and grow your digital business together.
           </p>
           <div className="mt-10 flex justify-center gap-4">
             <Link
@@ -63,9 +63,9 @@ export default function CommunityPage() {
               <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-green-100 text-green-600">
                 <MessageSquare className="h-8 w-8" />
               </div>
-              <h3 className="mb-3 font-serif text-xl font-bold text-text-900">Local Teams</h3>
+              <h3 className="mb-3 font-serif text-xl font-bold text-text-900">Developer Groups</h3>
               <p className="text-muted-600">
-                Join region-specific or category-specific teams to network with peers, collaborate on marketing, and cross-promote.
+                Join niche-specific groups (like Indie Devs, SaaS Founders, or UI Designers) to network with peers and collaborate on launches.
               </p>
             </div>
           </div>
@@ -77,11 +77,11 @@ export default function CommunityPage() {
         <div className="mx-auto max-w-4xl px-4 text-center">
           <Star className="mx-auto mb-8 h-12 w-12 text-yellow-400" />
           <blockquote className="font-serif text-2xl font-medium leading-relaxed text-text-900 md:text-4xl">
-            "The Kandyam community was instrumental in helping me set up my shop. The advice I got on product photography literally doubled my sales in one month."
+            "The Kandyam community was instrumental in helping me launch my software. The feedback I got during beta testing literally saved my project."
           </blockquote>
           <div className="mt-8">
-            <div className="font-bold text-text-900">Sarah Jenkins</div>
-            <div className="text-muted-500">Top Rated Seller since June 2026</div>
+            <div className="font-bold text-text-900">Alex Chen</div>
+            <div className="text-muted-500">Top Rated Developer since 2026</div>
           </div>
         </div>
       </section>

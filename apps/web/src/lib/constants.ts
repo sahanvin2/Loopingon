@@ -1,8 +1,8 @@
 export const SITE_NAME = "Kandyam";
-export const SITE_TAGLINE = "Sri Lanka's premier marketplace for premium products";
+export const SITE_TAGLINE = "Your global marketplace for premium digital products";
 export const SITE_DESCRIPTION =
-  "Kandyam connects skilled Sri Lankan artisans with customers worldwide. " +
-  "Discover unique handcrafted treasures made with traditional techniques and authentic materials.";
+  "Kandyam connects talented digital creators with customers worldwide. " +
+  "Discover a curated selection of 100+ premium digital items, including software, game keys, and gift cards.";
 export const SITE_URL = "https://kandyam.com";
 
 export const NAV_LINKS = [

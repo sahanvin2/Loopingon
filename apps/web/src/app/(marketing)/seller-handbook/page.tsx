@@ -4,17 +4,17 @@ import { BookOpen, Camera, Search, TrendingUp, ShieldCheck, ArrowRight, Package 
 
 export const metadata: Metadata = {
   title: "Seller Handbook - Kandyam",
-  description: "The ultimate guide to running a successful shop on Kandyam. Learn about SEO, photography, shipping, and marketing.",
+  description: "The ultimate guide to running a successful digital shop on Kandyam. Learn about SEO, digital assets, licensing, and marketing.",
 };
 
 const guides = [
   {
-    id: "photography",
+    id: "digital-assets",
     icon: <Camera className="h-6 w-6" />,
-    title: "Product Photography",
-    description: "Learn how to take professional-quality photos using just your smartphone. Lighting, angles, and staging tips.",
-    href: "#photography",
-    content: "Good photography is the most important factor in online sales. Ensure you have ample natural light, use a clean and uncluttered background, and provide multiple angles of your product. If selling lifestyle goods, include a shot of the product in use so buyers can visualize scale and function. Avoid using heavy filters that distort the actual color."
+    title: "Digital Assets & Covers",
+    description: "Learn how to create high-quality cover images, gameplay screenshots, and promotional trailers for your software.",
+    href: "#digital-assets",
+    content: "Great visuals are crucial for selling digital goods. Ensure your cover images are high resolution and accurately represent the software or game. Include screenshots of the actual UI or gameplay so buyers know what they are getting. A short promotional trailer or demo video can increase conversion rates significantly."
   },
   {
     id: "seo",
@@ -22,23 +22,23 @@ const guides = [
     title: "Search Engine Optimization",
     description: "Master Kandyam search. Learn how to write compelling titles and use tags to get found by more buyers.",
     href: "#seo",
-    content: "When naming your products, use clear and descriptive titles that include what the item is, the material, and the color. Avoid 'cute' names that a buyer would never type into a search bar. Utilize all available tags, and ensure your product descriptions are detailed, answering any potential questions the buyer might have before they need to ask."
+    content: "When naming your digital products, use clear and descriptive titles that include what the item is (e.g., 'Steam Key', 'Windows License'). Avoid 'cute' names that a buyer would never type into a search bar. Utilize all available tags, and ensure your descriptions list system requirements, language support, and DRM details."
   },
   {
-    id: "shipping",
+    id: "delivery",
     icon: <Package className="h-6 w-6" />,
-    title: "Shipping & Fulfillment",
-    description: "Best practices for packaging securely, choosing the right couriers, and managing international shipments.",
-    href: "#shipping",
-    content: "Always package your items securely with bubble wrap or eco-friendly alternatives. Include a handwritten thank-you note to add a personal touch. When shipping internationally, ensure all customs declarations are accurate to avoid delays. Update the tracking number on Kandyam immediately after dispatch."
+    title: "Instant Delivery & Licensing",
+    description: "Best practices for managing license keys, secure downloads, and automated delivery.",
+    href: "#delivery",
+    content: "Our platform handles automated delivery, but you must ensure your stock of keys is accurate. If you are selling direct downloads, ensure your files are virus-scanned, compressed efficiently, and hosted securely. Always provide clear activation instructions for license keys."
   },
   {
     id: "marketing",
     icon: <TrendingUp className="h-6 w-6" />,
     title: "Marketing Your Shop",
-    description: "How to use social media, email newsletters, and Kandyam Ads to drive consistent traffic to your listings.",
+    description: "How to use social media, Twitch streams, and Kandyam Ads to drive consistent traffic to your listings.",
     href: "#marketing",
-    content: "Leverage Instagram and TikTok to show behind-the-scenes videos of how you create your products. Link your Kandyam store in your bio. Engage with potential customers by responding to comments and running small giveaways to increase your follower base. On Kandyam, ensure you participate in platform-wide sales events."
+    content: "Leverage Twitch, YouTube, and X (Twitter) to show gameplay or software tutorials. Link your Kandyam store in your bio and video descriptions. Engage with potential customers by responding to comments and offering beta access or giveaways to increase your follower base. Participate in our seasonal gaming sales."
   },
   {
     id: "safety",
@@ -46,17 +46,18 @@ const guides = [
     title: "Trust & Safety",
     description: "Understanding our policies, handling disputes professionally, and protecting your seller account.",
     href: "#safety",
-    content: "Always communicate with buyers through the Kandyam platform to ensure a record of conversation. If a dispute arises, remain professional and focus on finding a solution. Familiarize yourself with Kandyam's Seller Policies (updated June 2026) to ensure your store remains in good standing."
+    content: "Always communicate with buyers through the Kandyam platform to ensure a record of conversation. If a dispute arises over a claimed 'invalid key', remain professional and use our dispute resolution tools. Familiarize yourself with our Anti-Fraud and Digital Delivery policies to ensure your store remains in good standing."
   },
   {
     id: "management",
     icon: <BookOpen className="h-6 w-6" />,
     title: "Shop Management",
-    description: "Tips on managing inventory, pricing strategies, and providing world-class customer service.",
+    description: "Tips on managing key inventory, regional pricing strategies, and providing world-class support.",
     href: "#management",
-    content: "Check your dashboard daily for new orders and messages. Keep your inventory numbers accurate to avoid selling items you don't have. Price your items to cover materials, labor, shipping supplies, and the 10% platform commission, while remaining competitive in the market."
+    content: "Check your dashboard daily for low-stock alerts on your license keys. Use our regional pricing tools to offer fair prices across different currencies. Provide clear documentation and fast technical support to minimize refund requests and maintain a high rating."
   }
 ];
+
 
 export default function SellerHandbookPage() {
   return (
