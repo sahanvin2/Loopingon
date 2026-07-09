@@ -22,6 +22,9 @@ export default function VendorNewProductPage() {
   const router = useRouter();
   const queryClient = useQueryClient();
 
+  const [images, setImages] = React.useState<File[]>([]);
+  const fileInputRef = React.useRef<HTMLInputElement>(null);
+
   const {
     register,
     handleSubmit,
@@ -43,12 +46,26 @@ export default function VendorNewProductPage() {
   });
 
   const createMutation = useMutation({
-    mutationFn: (data: ProductFormInput) => post<{ data: { id: string } }>("/vendor/products", data),
+    mutationFn: async (data: ProductFormInput) => {
+      const res = await post<{ data: { id: string } }>("/vendor/dashboard/products", data);
+      const productId = res.data.id;
+      if (images.length > 0) {
+        const formData = new FormData();
+        images.forEach((file) => formData.append("images", file));
+        await post(`/vendor/dashboard/products/${productId}/images`, formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        });
+      }
+      return res;
+    },
     onSuccess: (res) => {
       queryClient.invalidateQueries({ queryKey: ["vendor", "products"] });
-      toast.success("Product created! Now add images.");
-      router.push(`/vendor/products/${res.data.id}/edit`);
+      toast.success("Product created successfully!");
+      router.push(`/vendor/products`);
     },
+    onError: () => {
+      toast.error("Failed to create product");
+    }
   });
 
   const onSubmit = (data: ProductFormInput) => {
@@ -58,6 +75,17 @@ export default function VendorNewProductPage() {
   const handleSaveDraft = () => {
     const data = watch();
     createMutation.mutate({ ...data, status: "DRAFT" } as ProductFormInput);
+  };
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const newFiles = Array.from(e.target.files);
+      setImages((prev) => [...prev, ...newFiles].slice(0, 10)); // max 10 images
+    }
+  };
+
+  const removeImage = (index: number) => {
+    setImages((prev) => prev.filter((_, i) => i !== index));
   };
 
   return (
@@ -86,7 +114,7 @@ export default function VendorNewProductPage() {
             disabled={isSubmitting || createMutation.isPending}
             className="px-6 py-2 bg-primary-600 text-white rounded-lg text-sm font-medium hover:bg-primary-700 disabled:opacity-50"
           >
-            {isSubmitting || createMutation.isPending ? "Saving..." : "Save & Add Media"}
+            {isSubmitting || createMutation.isPending ? "Saving..." : "Save Product"}
           </button>
         </div>
       </div>
@@ -142,9 +170,51 @@ export default function VendorNewProductPage() {
         </div>
 
         <div className="bg-white rounded-xl border border-accent-200 p-6 space-y-4">
-          <div className="flex items-center gap-2 p-4 bg-primary-50 text-primary-700 rounded-lg border border-primary-100">
-            <Info className="w-5 h-5 flex-shrink-0" />
-            <p className="text-sm">You can add product images and videos after saving the basic product details.</p>
+          <h2 className="text-lg font-semibold text-text-900">Media</h2>
+          <div>
+            <label className="block text-sm font-medium text-text-700 mb-4">Product Images (Max 10)</label>
+            <div
+              className="border-2 border-dashed border-accent-300 rounded-xl p-8 text-center hover:bg-surface-50 transition-colors cursor-pointer"
+              onClick={() => fileInputRef.current?.click()}
+            >
+              <input
+                type="file"
+                ref={fileInputRef}
+                className="hidden"
+                multiple
+                accept="image/*"
+                onChange={handleImageChange}
+              />
+              <div className="w-12 h-12 bg-primary-50 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg className="w-6 h-6 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <p className="text-sm font-medium text-text-900">Click to upload images</p>
+              <p className="text-xs text-muted-500 mt-1">PNG, JPG, WEBP up to 5MB</p>
+            </div>
+
+            {images.length > 0 && (
+              <div className="mt-4 grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-4">
+                {images.map((file, index) => (
+                  <div key={index} className="relative aspect-square rounded-lg overflow-hidden group">
+                    <img src={URL.createObjectURL(file)} alt="preview" className="w-full h-full object-cover" />
+                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          removeImage(index);
+                        }}
+                        className="p-1.5 bg-red-500 text-white rounded hover:bg-red-600"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
 
