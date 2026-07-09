@@ -1,0 +1,13 @@
+node_modules
+.next
+.git
+.gitignore
+.env
+Dockerfile
+.dockerignore
+out
+dist
+apps/web/node_modules
+apps/web/.next
+apps/server/node_modules
+apps/server/dist
