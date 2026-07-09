@@ -46,7 +46,7 @@ export default function AdminVendorsPage() {
 
   const verifyMutation = useMutation({
     mutationFn: (id: string) =>
-      patch(`/admin/vendors/${id}/${"VERIFIED"}`, { notes: "Approved by admin" }),
+      post(`/admin/vendors/${id}/verify`, { notes: "Approved by admin" }),
     onSuccess: () =>
       queryClient.invalidateQueries({ queryKey: ["admin", "vendors"] }),
   });
