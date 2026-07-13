@@ -172,7 +172,7 @@ export default function CustomerInvoicePage({ params }: { params: Promise<{ id: 
               </div>
               {Number(order.shippingCost) > 0 && (
                 <div className="flex justify-between text-sm text-text-600">
-                  <span>Shipping (Koombiyo)</span>
+                  <span>Shipping</span>
                   <span>Rs. {Number(order.shippingCost).toLocaleString(undefined, { minimumFractionDigits: 2 })}</span>
                 </div>
               )}

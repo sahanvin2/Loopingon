@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
+import { toast } from "react-hot-toast";
 import { post } from "@/lib/api-client";
 import { cn, getImageUrl } from "@/lib/utils";
 import type { Product } from "@/types";
@@ -71,7 +72,7 @@ function getFAQs(categorySlug: string | undefined): { q: string; a: string }[] {
   if (!categorySlug) return [];
   const match = Object.entries(CATEGORY_FAQS).find(([key]) => categorySlug.includes(key));
   return match ? match[1] : [
-    { q: "Is this product available for immediate delivery?", a: "Check the stock status above. In-stock items ship within 1-2 business days via Koombiyo. Out of stock items may be restocked soon." },
+    { q: "Is this product available for immediate delivery?", a: "Digital products are delivered instantly after payment confirmation. You'll receive access details in your orders page immediately." },
     { q: "Can I pay with Cash on Delivery?", a: "Yes! All orders on Kandiyam are Cash on Delivery. Pay only when you receive your order at your doorstep." },
     { q: "How do I contact the seller?", a: "Use the Chat with Seller button on this page to directly message the seller. Most sellers respond within a few hours." },
   ];
@@ -97,6 +98,9 @@ export function ProductDetail({ product }: ProductDetailProps) {
       } else {
         router.push(`/dashboard/messages`);
       }
+    },
+    onError: (err: any) => {
+      toast.error(err?.message || "Failed to start conversation. Please try again.");
     },
   });
 
@@ -213,7 +217,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
                       </div>
                       <div>
                         <p className="text-xs text-muted-500 uppercase tracking-wide">Processing Time</p>
-                        <p className="text-sm font-semibold text-text-900">{product.processingTime} business days</p>
+                        <p className="text-sm font-semibold text-text-900">{product.isDigital ? "Within 6 hours" : `${product.processingTime} business days`}</p>
                       </div>
                     </div>
                   )}
@@ -267,20 +271,18 @@ export function ProductDetail({ product }: ProductDetailProps) {
               />
             </div>
 
-            {/* Shipping & Returns Info */}
+            {/* Shipping & Delivery Info */}
             <div className="bg-gradient-to-br from-teal-50/80 to-blue-50/80 rounded-2xl p-5 border border-teal-100 shadow-sm">
-              <h3 className="font-serif text-lg text-text-900 mb-4">Shipping & Returns</h3>
+              <h3 className="font-serif text-lg text-text-900 mb-4">Delivery</h3>
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
                   <div className="w-8 h-8 rounded-lg bg-white text-teal-600 flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
                     <Truck className="w-4 h-4" />
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-text-900">
-                      {(product.freeShippingDomestic || !product.shippingPrice || Number(product.shippingPrice) === 0) ? "Free Standard Delivery" : `Standard Delivery — Rs. ${Number(product.shippingPrice).toLocaleString()}`}
-                    </p>
+                    <p className="text-sm font-semibold text-text-900">Digital Delivery</p>
                     <p className="text-xs text-muted-600 mt-0.5">
-                      1-3 business days island-wide. Express delivery available at checkout.
+                      Delivered within 6 hours of payment confirmation. Instant access via your orders page.
                     </p>
                   </div>
                 </div>
@@ -289,9 +291,9 @@ export function ProductDetail({ product }: ProductDetailProps) {
                     <RotateCcw className="w-4 h-4" />
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-text-900">Easy Returns</p>
+                    <p className="text-sm font-semibold text-text-900">Instant Access</p>
                     <p className="text-xs text-muted-600 mt-0.5">
-                      7-day return policy. Items must be unused and in original packaging.
+                      No shipping fees. Digital items are delivered directly to your account.
                     </p>
                   </div>
                 </div>

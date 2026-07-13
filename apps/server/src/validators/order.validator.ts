@@ -28,7 +28,7 @@ export const createOrderSchema = z.object({
   couponCode: z.string().max(50).optional().nullable(),
   customerNotes: z.string().max(500).optional().nullable(),
   facebookPage: z.string().max(200).optional().nullable(),
-  contactNumberTwo: z.string().regex(/^\+?[0-9]{7,15}$/, "Invalid secondary phone number"),
+  contactNumberTwo: z.string().regex(/^\+?[0-9]{7,15}$/, "Invalid secondary phone number").optional().nullable(),
   orderNote: z.string().max(1000).optional().nullable(),
   isGift: z.boolean().optional(),
   giftMessage: z.string().max(300).optional().nullable(),

@@ -59,19 +59,46 @@ export default function OrderDetailPage() {
         orderId: order?.id 
       }),
     onSuccess: (res: any) => {
+      toast.success("Opening chat with vendor...");
       if (res.data?.id) {
         router.push(`/dashboard/messages?threadId=${res.data.id}`);
       } else {
         router.push(`/dashboard/messages`);
       }
     },
+    onError: (err: any) => {
+      toast.error(err?.message || "Failed to contact vendor. Please try again.");
+    },
+  });
+
+  const markAsPaidMutation = useMutation({
+    mutationFn: () => post(`/p2p/${id}/pay`, {}),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["order", id] });
+      toast.success("Payment submitted! Waiting for confirmation.");
+    },
+    onError: (err: any) => {
+      toast.error(err?.message || "Failed to submit payment");
+    },
   });
 
   const order = data?.data;
 
   const dynamicTimelineSteps = React.useMemo(() => {
-    const base = [
-      { key: "PENDING_PAYMENT", label: "Order Placed", done: true },
+    const isDigitalOrder = order?.shippingMethod === "DIGITAL" || order?.paymentMethod === "ONLINE";
+    
+    if (isDigitalOrder) {
+      return [
+        { key: "PENDING_PAYMENT", label: "Order Placed", done: false },
+        { key: "PAYMENT_SUBMITTED", label: "Payment Submitted", done: false },
+        { key: "PAYMENT_CONFIRMED", label: "Payment Confirmed", done: false },
+        { key: "DELIVERED", label: "Delivered", done: false },
+        { key: "COMPLETED", label: "Completed", done: false },
+      ];
+    }
+
+    return [
+      { key: "PENDING_PAYMENT", label: "Order Placed", done: false },
       { key: "PAYMENT_CONFIRMED", label: "Payment Confirmed", done: false },
       { key: "PROCESSING", label: "Processing", done: false },
       { key: "READY_TO_SHIP", label: "Ready to Ship", done: false },
@@ -80,12 +107,7 @@ export default function OrderDetailPage() {
       { key: "OUT_FOR_DELIVERY", label: "Out for Delivery", done: false },
       { key: "DELIVERED", label: "Delivered", done: false },
     ];
-    if (order?.paymentMethod === "COD") {
-      const pc = base.splice(1, 1)[0];
-      base.splice(6, 0, pc);
-    }
-    return base;
-  }, [order?.paymentMethod]);
+  }, [order?.shippingMethod, order?.paymentMethod]);
 
   const currentStatusOrder = dynamicTimelineSteps.map(s => s.key);
 
@@ -144,6 +166,15 @@ export default function OrderDetailPage() {
             <p className="text-sm text-muted-500 mt-1">
               Placed on {formatDate(order.createdAt)}
             </p>
+            {order.vendor && (
+              <Link
+                href={`/vendors/${order.vendor.storeSlug}`}
+                className="inline-flex items-center gap-1 mt-1.5 text-sm text-primary-600 hover:text-primary-700 font-medium"
+              >
+                Sold by {order.vendor.storeName}
+                <ExternalLink className="w-3.5 h-3.5" />
+              </Link>
+            )}
           </div>
           {(() => {
             let variant: "green" | "red" | "amber" | "muted" = "amber";
@@ -323,6 +354,17 @@ export default function OrderDetailPage() {
           <Printer className="w-4 h-4" />
           View & Print Invoice
         </Link>
+
+        {order.status === "PENDING_PAYMENT" && (
+          <button
+            type="button"
+            onClick={() => markAsPaidMutation.mutate()}
+            disabled={markAsPaidMutation.isPending}
+            className="inline-flex items-center gap-2 px-5 py-2.5 bg-green-600 border border-transparent rounded-lg text-sm font-medium text-white hover:bg-green-700 transition-colors disabled:opacity-50"
+          >
+            {markAsPaidMutation.isPending ? "Submitting..." : "I've Paid"}
+          </button>
+        )}
 
         {order.vendor?.userId && (
           <button

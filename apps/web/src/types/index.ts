@@ -61,7 +61,8 @@ export type ShippingMethod =
   | "FREE"
   | "SAME_DAY"
   | "INTERNATIONAL"
-  | "PICKUP";
+  | "PICKUP"
+  | "DIGITAL";
 
 export type NotificationType =
   | "ORDER_CONFIRMATION"

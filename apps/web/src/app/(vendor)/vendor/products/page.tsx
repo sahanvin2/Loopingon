@@ -133,7 +133,7 @@ export default function VendorProductsPage() {
         <EmptyState
           icon={<Package className="w-12 h-12" />}
           title="No products yet"
-          description="Add your first handcrafted product!"
+          description="Add your first digital product!"
           action={{ label: "Add Product", href: "/vendor/products/new" }}
         />
       ) : (

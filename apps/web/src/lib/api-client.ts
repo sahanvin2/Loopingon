@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { buildQueryString } from "./utils";
 import { useAuthStore } from "@/stores/auth-store";
 
@@ -175,6 +176,8 @@ export async function get<T>(
 ): Promise<T> {
   return request<T>(endpoint, { method: "GET", params });
 }
+
+export const getCached = cache(get);
 
 export async function post<T>(
   endpoint: string,

@@ -19,6 +19,20 @@ router.get(
   },
 );
 
+// Alias for frontend compatibility
+router.get(
+  "/balance",
+  authenticate,
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const balance = await loyaltyService.getBalance(req.user!.id);
+      successResponse(res, balance);
+    } catch (err) {
+      next(err);
+    }
+  },
+);
+
 router.get(
   "/transactions",
   authenticate,

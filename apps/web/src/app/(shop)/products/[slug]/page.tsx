@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { get } from "@/lib/api-client";
+import { getCached } from "@/lib/api-client";
 import type { Product, ApiResponse } from "@/types";
 import { getImageUrl } from "@/lib/utils";
 import { ProductDetail } from "@/components/product/product-detail";
@@ -17,7 +17,7 @@ interface ProductPageProps {
 export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
   const { slug } = await params;
   try {
-    const res = await get<ApiResponse<Product>>(`/products/${slug}`);
+    const res = await getCached<ApiResponse<Product>>(`/products/${slug}`);
     const product = res.data;
     const primaryImage = product.images?.find((i) => i.isPrimary) || product.images?.[0];
     return {
@@ -40,7 +40,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
   let product: Product | null = null;
 
   try {
-    const res = await get<ApiResponse<Product>>(`/products/${slug}`);
+    const res = await getCached<ApiResponse<Product>>(`/products/${slug}`);
     product = res.data;
   } catch {
     notFound();

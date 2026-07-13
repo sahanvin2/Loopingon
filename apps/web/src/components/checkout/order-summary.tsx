@@ -19,15 +19,9 @@ export function OrderSummary() {
   
   const rewardBalance = loyaltyData?.data?.rewardBalance ? Number(loyaltyData.data.rewardBalance) : 0;
 
-  const shipping = items.reduce((acc, item) => {
-    const p = item.product;
-    if (!p) return acc;
-    const cost = p.shippingPrice ? Number(p.shippingPrice) : 400; // default to 400
-    return acc + (cost * item.quantity);
-  }, 0);
-
-  const appliedLoyalty = useLoyaltyBalance && rewardBalance > 0 ? Math.min(rewardBalance, subtotal + shipping) : 0;
-  const total = subtotal + shipping - appliedLoyalty;
+  const appliedLoyalty = useLoyaltyBalance && rewardBalance > 0 ? Math.min(rewardBalance, subtotal) : 0;
+  const TRANSACTION_FEE = 25;
+  const total = subtotal - appliedLoyalty + TRANSACTION_FEE;
 
   const totalSavings = items.reduce((acc, item) => {
     const compareAt = item.product?.compareAtPrice ? parseFloat(item.product.compareAtPrice.toString()) : 0;
@@ -112,9 +106,10 @@ export function OrderSummary() {
           </div>
         )}
         <div className="flex justify-between text-text-600">
-          <span>Shipping</span>
-          <span className="font-medium text-text-900">{formatPrice(shipping)}</span>
+          <span>Transaction Fee</span>
+          <span className="font-medium text-text-900">{formatPrice(TRANSACTION_FEE)}</span>
         </div>
+
         
         {rewardBalance > 0 && (
           <div className="flex items-start gap-3 mt-4 pt-4 border-t border-surface-200">

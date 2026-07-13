@@ -26,6 +26,7 @@ import aiRoutes from "./ai.routes.js";
 import healthRoutes from "./health.routes.js";
 import exportRoutes from "./export.routes.js";
 import jobsRoutes from "./jobs.routes.js";
+import p2pOrderRoutes from "./p2p-order.routes.js";
 
 const router = Router();
 
@@ -56,5 +57,6 @@ router.use("/ai", aiRoutes);
 router.use("/health", healthRoutes);
 router.use("/export", exportRoutes);
 router.use("/jobs", jobsRoutes);
+router.use("/p2p", p2pOrderRoutes);
 
 export default router;

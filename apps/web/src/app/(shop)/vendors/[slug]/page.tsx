@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { get } from "@/lib/api-client";
+import { get, getCached } from "@/lib/api-client";
 import type { Vendor, ApiResponse } from "@/types";
 import { getImageUrl } from "@/lib/utils";
 import { VendorStorefrontHeader } from "@/components/vendor/vendor-storefront-header";
@@ -18,7 +18,7 @@ interface VendorPageProps {
 export async function generateMetadata({ params }: VendorPageProps): Promise<Metadata> {
   const { slug } = await params;
   try {
-    const res = await get<ApiResponse<Vendor & { products: unknown[] }>>(`/vendors/storefront/${slug}`);
+    const res = await getCached<ApiResponse<Vendor & { products: unknown[] }>>(`/vendors/storefront/${slug}`);
     const vendor = res.data;
     return {
       title: `${vendor.storeName} - Seller on Kandyam`,

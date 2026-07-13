@@ -18,78 +18,52 @@ export async function calculateShipping(
   address: { city?: string; district?: string; country?: string },
   items: Array<{ productId: string; variantId?: string; quantity: number }>
 ) {
-  let totalWeight = 0;
-  let freeShippingAll = true;
   const destination = address.country || "LK";
-  const subtotal = 0;
 
+  let allDigital = true;
   for (const item of items) {
     const product = await prisma.product.findUnique({ where: { id: item.productId } });
     if (!product) continue;
-
-    totalWeight += (product.weight || 0.5) * item.quantity;
-
-    if (!product.freeShippingDomestic) {
-      freeShippingAll = false;
+    if (!product.isDigital) {
+      allDigital = false;
     }
   }
 
-  // Weight-based delivery: Rs. 150 per kg
-  // Koombiyo Standard: Rs. 150/kg (min Rs. 400)
-  // Koombiyo Express: Rs. 650 flat (irrespective of weight)
-  // Free: orders over Rs. 5,000
-
-  const weightKg = Math.ceil(Math.max(totalWeight, 1));
-  const koombiyoCost = Math.max(400, weightKg * 150);
-  const expressCost = 650;
-
-  if (subtotal >= 5000 && destination === "LK") {
+  if (allDigital) {
     return {
       rates: [
         {
-          id: "koombiyo",
-          name: "Koombiyo Delivery",
-          courierName: "Koombiyo",
+          id: "digital",
+          name: "Digital Delivery",
+          courierName: "Instant",
           cost: 0,
-          estimatedDays: 3,
-          freeShippingMinAmount: 5000,
-        },
-        {
-          id: "express",
-          name: "Koombiyo Express",
-          courierName: "Koombiyo Express",
-          cost: 0,
-          estimatedDays: 1,
-          freeShippingMinAmount: 5000,
+          estimatedDays: 0,
+          type: "digital" as const,
         },
       ],
       selected: {
-        method: "FREE",
+        method: "DIGITAL" as const,
         cost: 0,
-        estimatedDays: 3,
-        name: "Free Delivery",
-        courierName: "Koombiyo",
+        estimatedDays: 0,
+        name: "Digital Delivery",
+        courierName: "Instant",
       },
-      totalWeight,
+      totalWeight: 0,
       destination,
     };
   }
 
   const rates = [];
 
-  // Koombiyo rates (always available domestically)
-  if (destination === "LK") {
-    rates.push({
-      id: "koombiyo",
-      name: "Koombiyo Delivery",
-      courierName: "Koombiyo",
-      cost: koombiyoCost,
-      estimatedDays: 3,
-      freeShippingMinAmount: 5000,
-    });
-  }
+  rates.push({
+    id: "standard",
+    name: "Standard Delivery",
+    courierName: "Standard",
+    cost: 400,
+    estimatedDays: 3,
+    freeShippingMinAmount: 5000,
+  });
 
-  // Query dynamic shipping rates from DB
   const shippingRates = await prisma.shippingRate.findMany({
     where: { isActive: true },
     orderBy: { domesticRate: "asc" },
@@ -97,13 +71,11 @@ export async function calculateShipping(
 
   for (const rate of shippingRates) {
     const cost = destination === "LK" ? Number(rate.domesticRate) : Number(rate.internationalRate);
-    const weightMultiplier = totalWeight > 1 ? Math.ceil(totalWeight) : 1;
-
     rates.push({
       id: rate.id,
       name: rate.name,
       courierName: rate.courierName,
-      cost: cost * weightMultiplier,
+      cost,
       estimatedDays: rate.estimatedDays,
       freeShippingMinAmount: rate.freeShippingMinAmount ? Number(rate.freeShippingMinAmount) : null,
     });
@@ -111,8 +83,8 @@ export async function calculateShipping(
 
   return {
     rates,
-    selected: rates.length > 0 ? { ...rates[0], method: "KOOMBIYO" } : null,
-    totalWeight,
+    selected: rates.length > 0 ? { ...rates[0], method: "STANDARD" as const } : null,
+    totalWeight: 0,
     destination,
   };
 }

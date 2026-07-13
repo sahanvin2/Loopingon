@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { get } from "@/lib/api-client";
+import { get, getCached } from "@/lib/api-client";
 import type { Category, Product, ApiResponse, PaginatedResponse } from "@/types";
 import { getImageUrl } from "@/lib/utils";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
@@ -17,7 +17,7 @@ interface CategoryPageProps {
 export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
   const { slug } = await params;
   try {
-    const res = await get<ApiResponse<Category>>(`/categories/${slug}`);
+    const res = await getCached<ApiResponse<Category>>(`/categories/${slug}`);
     return {
       title: res.data.metaTitle || res.data.name,
       description: res.data.metaDescription || res.data.description || `Browse ${res.data.name} sourced by Sri Lankan sellers.`,
@@ -34,7 +34,7 @@ async function CategoryContent({ slug }: { slug: string }) {
   try {
     const catRes = await get<ApiResponse<Category>>(`/categories/${slug}`);
     category = catRes.data;
-    const prodRes = await get<PaginatedResponse<Product>>(`/categories/${category.id}/products`, { limit: 12 });
+    const prodRes = await getCached<PaginatedResponse<Product>>(`/categories/${category.id}/products`, { limit: 12 });
     products = prodRes.data;
   } catch {
     notFound();

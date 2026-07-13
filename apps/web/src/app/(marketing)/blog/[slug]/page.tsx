@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { get } from "@/lib/api-client";
+import { getCached } from "@/lib/api-client";
 import type { BlogPost, ApiResponse } from "@/types";
 import { formatDate, getImageUrl } from "@/lib/utils";
 import { ShareButtons } from "@/components/product/share-buttons";
@@ -14,7 +14,7 @@ interface BlogPostPageProps {
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
   const { slug } = await params;
   try {
-    const res = await get<ApiResponse<BlogPost>>(`/blog/${slug}`);
+    const res = await getCached<ApiResponse<BlogPost>>(`/blog/${slug}`);
     const post = res.data;
     return {
       title: post.metaTitle || post.title,
@@ -37,7 +37,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   let post: BlogPost | null = null;
 
   try {
-    const res = await get<ApiResponse<BlogPost>>(`/blog/${slug}`);
+    const res = await getCached<ApiResponse<BlogPost>>(`/blog/${slug}`);
     post = res.data;
   } catch {
     notFound();

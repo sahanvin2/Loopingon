@@ -89,6 +89,10 @@ export function createApp() {
     });
   });
 
+  app.get("/favicon.ico", (_req: Request, res: Response) => {
+    res.status(204).end();
+  });
+
   app.get("/health/db", async (_req: Request, res: Response, next: NextFunction) => {
     try {
       await prisma.$queryRaw`SELECT 1`;

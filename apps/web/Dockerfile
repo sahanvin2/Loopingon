@@ -14,6 +14,8 @@ RUN npm install
 COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV SKIP_BUILD_FETCH=true
+ENV NEXT_PUBLIC_API_URL=https://kandyam.com/api/v1
+ENV NEXT_PUBLIC_APP_URL=https://kandyam.com
 
 RUN npx turbo run build --filter=@kandyam/web
 

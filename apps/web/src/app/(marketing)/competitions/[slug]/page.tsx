@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { get } from "@/lib/api-client";
+import { getCached } from "@/lib/api-client";
 import type { Competition, CompetitionEntry, ApiResponse, PaginatedResponse } from "@/types";
 import { formatDate, getImageUrl, cn } from "@/lib/utils";
 
@@ -13,7 +13,7 @@ interface CompetitionDetailPageProps {
 export async function generateMetadata({ params }: CompetitionDetailPageProps): Promise<Metadata> {
   const { slug } = await params;
   try {
-    const res = await get<ApiResponse<Competition>>(`/competitions/${slug}`);
+    const res = await getCached<ApiResponse<Competition>>(`/competitions/${slug}`);
     return {
       title: res.data.title,
       description: res.data.description.substring(0, 160),
@@ -41,9 +41,9 @@ export default async function CompetitionDetailPage({ params }: CompetitionDetai
   let entries: CompetitionEntry[] = [];
 
   try {
-    const res = await get<ApiResponse<Competition>>(`/competitions/${slug}`);
+    const res = await getCached<ApiResponse<Competition>>(`/competitions/${slug}`);
     competition = res.data;
-    const entryRes = await get<PaginatedResponse<CompetitionEntry>>(`/competitions/${competition.id}/entries`, { limit: 12 });
+    const entryRes = await getCached<PaginatedResponse<CompetitionEntry>>(`/competitions/${competition.id}/entries`, { limit: 12 });
     entries = entryRes.data;
   } catch {
     notFound();

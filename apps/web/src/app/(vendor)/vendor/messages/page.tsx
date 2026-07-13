@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { io, Socket } from "socket.io-client";
@@ -17,6 +18,7 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
 export default function VendorMessagesPage() {
   const { user } = useAuthStore();
   const queryClient = useQueryClient();
+  const searchParams = useSearchParams();
   const [selectedThreadId, setSelectedThreadId] = useState<string | null>(null);
   const [newMessage, setNewMessage] = useState("");
   const [search, setSearch] = useState("");
@@ -40,6 +42,7 @@ export default function VendorMessagesPage() {
     onSuccess: () => {
       setNewMessage("");
       refetchMessages();
+      queryClient.invalidateQueries({ queryKey: ["vendor", "threads"] });
     },
   });
 
@@ -59,6 +62,14 @@ export default function VendorMessagesPage() {
   }, [messagesData]);
 
   const threads = threadsData?.data || [];
+
+  useEffect(() => {
+    const threadIdFromUrl = searchParams.get("threadId");
+    if (threadIdFromUrl && threads.length > 0 && !selectedThreadId) {
+      setSelectedThreadId(threadIdFromUrl);
+    }
+  }, [threads, searchParams, selectedThreadId]);
+
   const messages = messagesData?.data || [];
   const selectedThread = threads.find((thread) => thread.id === selectedThreadId) || null;
 

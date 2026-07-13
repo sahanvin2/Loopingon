@@ -47,6 +47,7 @@ enum ProductStatus {
 
 enum OrderStatus {
   PENDING_PAYMENT
+  PAYMENT_SUBMITTED
   PAYMENT_CONFIRMED
   PROCESSING
   READY_TO_SHIP
@@ -55,6 +56,8 @@ enum OrderStatus {
   OUT_FOR_DELIVERY
   DELIVERED
   CANCELLED
+  EXPIRED
+  DISPUTED
   RETURN_REQUESTED
   RETURNED
   REFUNDED
@@ -90,7 +93,7 @@ enum ShippingMethod {
   SAME_DAY
   INTERNATIONAL
   PICKUP
-  KOOMBIYO
+  DIGITAL
   @@schema("public")
 }
 
@@ -742,6 +745,16 @@ model Order {
   facebookPage         String?
   orderNote            String?
 
+  // P2P digital order fields
+  referenceCode        String?
+  paymentProofUrl      String?
+  deliveredPayload     String?
+  expiresAt            DateTime?
+  disputeReason        String?
+  disputeResolvedAt    DateTime?
+  disputeResolution    String?
+  paymentSubmittedAt   DateTime?
+
   processingAt         DateTime?
   shippedAt            DateTime?
   deliveredAt          DateTime?
@@ -757,6 +770,7 @@ model Order {
   shippingAddress      Address?      @relation("OrderShippingAddress", fields: [shippingAddressId], references: [id])
   items                OrderItem[]
   statusHistory        OrderStatusHistory[]
+  orderEvents          OrderEvent[]
   shipments            Shipment[]
   dispute              OrderDispute?
   couponUsages         CouponUsage[]
@@ -768,6 +782,7 @@ model Order {
   @@index([status])
   @@index([createdAt])
   @@index([vendorPayoutStatus])
+  @@index([referenceCode])
   @@map("orders")
   @@schema("public")
 }
@@ -1552,5 +1567,25 @@ model JobPosition {
   updatedAt   DateTime @updatedAt
 
   @@map("job_positions")
+  @@schema("public")
+}
+
+// ==================== P2P ORDER EVENTS ====================
+
+model OrderEvent {
+  id          String      @id @default(uuid())
+  orderId     String
+  fromStatus  OrderStatus?
+  toStatus    OrderStatus
+  actor       String
+  actorId     String?
+  note        String?
+  createdAt   DateTime    @default(now())
+
+  order       Order       @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@index([orderId])
+  @@index([createdAt])
+  @@map("order_events")
   @@schema("public")
 }

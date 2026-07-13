@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Loader2, ShieldCheck, Mail, CreditCard, Info } from "lucide-react";
+import { Loader2, ShieldCheck, Mail, CreditCard, Info, Building2, Clock } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export interface BillingFormData {
@@ -103,7 +103,7 @@ export function ShippingStep({ initialData, onNext, orderError, isSubmitting, cl
       <section>
         <div className="flex items-center gap-3 mb-5">
           <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center shrink-0">
-            <CreditCard className="w-5 h-5 text-blue-600" />
+            <Building2 className="w-5 h-5 text-blue-600" />
           </div>
           <h2 className="font-serif text-2xl font-bold text-text-900">Payment</h2>
         </div>
@@ -118,12 +118,16 @@ export function ShippingStep({ initialData, onNext, orderError, isSubmitting, cl
                 </svg>
               </div>
               <div className="pt-1">
-                <p className="text-lg font-bold text-blue-900 mb-1">Secure Online Payment</p>
-                <p className="text-sm text-blue-700/80 leading-relaxed font-medium">
-                  Pay securely with your credit/debit card. Your payment is processed instantly and you will receive your digital products right away.
+                <p className="text-base font-bold text-blue-900 mb-1">Bank Transfer Payment</p>
+                <p className="text-sm text-blue-700/80 leading-relaxed">
+                  After placing your order, you will receive bank details and a reference code. Transfer the exact amount and mark your order as paid to receive instant digital delivery.
                 </p>
               </div>
             </div>
+          </div>
+          <div className="flex items-center gap-2 mt-4 text-xs text-muted-500">
+            <Clock className="w-3.5 h-3.5" />
+            <span>Payment must be completed within 25 minutes of placing the order</span>
           </div>
         </div>
       </section>
@@ -157,7 +161,7 @@ export function ShippingStep({ initialData, onNext, orderError, isSubmitting, cl
             </>
           ) : (
             <>
-              Proceed to Payment
+              Place Order & Pay
               <ShieldCheck className="w-5 h-5 group-hover:scale-110 transition-transform" />
             </>
           )}

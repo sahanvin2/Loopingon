@@ -16,15 +16,18 @@ import {
 import { Badge } from "@/components/shared/badge";
 import { EmptyState } from "@/components/shared/empty-state";
 import { LoadingSkeleton } from "@/components/shared/loading-skeleton";
-import { get, patch } from "@/lib/api-client";
+import { get, patch, post } from "@/lib/api-client";
 import { cn, formatDate, formatPrice } from "@/lib/utils";
 import { ORDER_STATUS_MAP } from "@/lib/constants";
 import type { Order, ApiResponse } from "@/types";
 import { CustomSelect } from "@/components/shared/custom-select";
+import { useRouter } from "next/navigation";
+import { toast } from "react-hot-toast";
 
 export default function VendorOrderDetailPage() {
   const { id } = useParams<{ id: string }>();
   const queryClient = useQueryClient();
+  const router = useRouter();
   const [showTrackingModal, setShowTrackingModal] = useState(false);
   const [trackingForm, setTrackingForm] = useState({
     courierName: "",
@@ -51,6 +54,26 @@ export default function VendorOrderDetailPage() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["vendor", "order", id] });
       setShowTrackingModal(false);
+    },
+  });
+
+  const contactBuyerMutation = useMutation({
+    mutationFn: (customerUserId: string) =>
+      post(`/messages/threads`, {
+        participantId: customerUserId,
+        subject: `Regarding Order #${order?.orderNumber}`,
+        orderId: order?.id,
+      }),
+    onSuccess: (res: any) => {
+      toast.success("Opening chat...");
+      if (res.data?.id) {
+        router.push(`/vendor/messages?threadId=${res.data.id}`);
+      } else {
+        router.push(`/vendor/messages`);
+      }
+    },
+    onError: (err: any) => {
+      toast.error(err?.message || "Failed to start conversation.");
     },
   });
 
@@ -239,13 +262,16 @@ export default function VendorOrderDetailPage() {
         </div>
       </div>
 
-      <Link
-        href={`/vendor/messages?order=${order.id}`}
-        className="inline-flex items-center gap-2 px-5 py-2.5 bg-white border border-accent-200 rounded-lg text-sm font-medium text-text-700 hover:bg-surface-50"
-      >
-        <MessageSquare className="w-4 h-4" />
-        Message Customer
-      </Link>
+      {order.customer?.id && (
+        <button
+          type="button"
+          onClick={() => contactBuyerMutation.mutate(order.customer!.id)}
+          disabled={contactBuyerMutation.isPending}
+          className="inline-flex items-center gap-2 px-5 py-2.5 bg-white border border-accent-200 rounded-lg text-sm font-medium text-text-700 hover:bg-surface-50 disabled:opacity-50"
+        >
+          {contactBuyerMutation.isPending ? "Connecting..." : "Message Customer"}
+        </button>
+      )}
 
       <AnimatePresence>
         {showTrackingModal && (
@@ -282,7 +308,7 @@ export default function VendorOrderDetailPage() {
                       { value: "Domex", label: "Domex" },
                       { value: "Sri Lanka Post", label: "Sri Lanka Post" },
                       { value: "PromptXpress", label: "PromptXpress" },
-                      { value: "Koombiyo", label: "Koombiyo" },
+                      
                       { value: "DHL", label: "DHL" },
                       { value: "FedEx", label: "FedEx" },
                     ]}

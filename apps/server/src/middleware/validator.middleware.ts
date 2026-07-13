@@ -25,6 +25,7 @@ export function validate(schema: ZodSchema) {
     } catch (error) {
       if (error instanceof ZodError) {
         const errors = formatZodErrors(error);
+        console.error("Zod Validation Failed:", JSON.stringify(errors, null, 2));
         throw new AppError("Validation failed", 400, "VALIDATION_ERROR", errors);
       }
       throw error;

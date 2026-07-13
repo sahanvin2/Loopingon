@@ -28,8 +28,14 @@ export async function GET(request: Request) {
         };
 
         // Call the Express backend to get custom JWTs
-        const apiUrl = process.env.INTERNAL_API_URL || 'http://server:4000/api/v1';
-        const queryParams = new URLSearchParams(profile as any).toString();
+        const apiUrl = process.env.INTERNAL_API_URL || process.env.NEXT_PUBLIC_API_URL?.replace('/api/v1', '') || 'http://localhost:4000/api/v1';
+        const queryParams = new URLSearchParams({
+          id: profile.id,
+          authUserId: profile.authUserId || '',
+          email: profile.email,
+          name: profile.name,
+          picture: profile.picture || '',
+        }).toString();
         const response = await fetch(`${apiUrl}/auth/${provider}/callback?${queryParams}`, {
           method: 'GET',
           headers: { 'Content-Type': 'application/json' }

@@ -6,7 +6,7 @@ import { X, Truck, Heart, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const messages = [
-  { text: "Island-wide delivery via Koombiyo", icon: Truck },
+  { text: "Instant digital delivery worldwide", icon: Truck },
   { text: "Support Sri Lankan Sellers", icon: Heart },
   { text: "5,000+ products — Cash on Delivery", icon: Sparkles },
 ];
