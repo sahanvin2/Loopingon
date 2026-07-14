@@ -13,6 +13,7 @@ import { get, patch } from "@/lib/api-client";
 import { formatDate, formatPrice } from "@/lib/utils";
 import type { User, ApiResponse } from "@/types";
 import { CustomSelect } from "@/components/shared/custom-select";
+import { toast } from "react-hot-toast";
 
 export default function AdminUserDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -26,8 +27,13 @@ export default function AdminUserDetailPage() {
   const roleMutation = useMutation({
     mutationFn: (role: string) =>
       patch(`/admin/users/${id}`, { role }),
-    onSuccess: () =>
-      queryClient.invalidateQueries({ queryKey: ["admin", "user", id] }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["admin", "user", id] });
+      toast.success("Role updated successfully");
+    },
+    onError: (err: any) => {
+      toast.error(err?.message || "Failed to update role");
+    },
   });
 
   const user = data?.data;

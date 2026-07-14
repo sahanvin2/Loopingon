@@ -13,6 +13,7 @@ import { Pagination } from "@/components/shared/pagination";
 import { get, patch, post } from "@/lib/api-client";
 import { formatDate, formatPrice } from "@/lib/utils";
 import type { User, PaginatedResponse } from "@/types";
+import { toast } from "react-hot-toast";
 
 export default function AdminUsersPage() {
   const queryClient = useQueryClient();
@@ -34,6 +35,18 @@ export default function AdminUsersPage() {
       post(`/admin/users/${id}/ban`),
     onSuccess: () =>
       queryClient.invalidateQueries({ queryKey: ["admin", "users"] }),
+  });
+
+  const roleMutation = useMutation({
+    mutationFn: ({ id, role }: { id: string; role: string }) =>
+      patch(`/admin/users/${id}`, { role }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["admin", "users"] });
+      toast.success("Role updated");
+    },
+    onError: (err: any) => {
+      toast.error(err?.message || "Failed to update role");
+    },
   });
 
   const users = data?.data || [];
@@ -91,12 +104,22 @@ export default function AdminUsersPage() {
             {
               header: "Role",
               accessor: (row: User) => (
-                <Badge
-                  variant={row.role === "CUSTOMER" ? "muted" : "blush"}
-                  size="sm"
+                <select
+                  value={row.role}
+                  onChange={(e) =>
+                    roleMutation.mutate({
+                      id: row.id,
+                      role: e.target.value,
+                    })
+                  }
+                  className="text-xs font-medium bg-surface-50 border border-accent-200 rounded px-2 py-1 focus:ring-primary-500 focus:border-primary-500"
                 >
-                  {row.role}
-                </Badge>
+                  <option value="CUSTOMER">Customer</option>
+                  <option value="VENDOR">Vendor</option>
+                  <option value="ADMIN">Admin</option>
+                  <option value="SUPER_ADMIN">Super Admin</option>
+                  <option value="SUPPORT">Support</option>
+                </select>
               ),
             },
             {
