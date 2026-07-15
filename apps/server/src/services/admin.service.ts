@@ -200,6 +200,7 @@ export async function updateUser(userId: string, data: { fullName?: string; phon
           storeName: `${user.fullName || 'Admin'} Official Store ${Math.floor(Math.random() * 10000)}`,
           storeSlug,
           storeDescription: "Official store account.",
+          craftType: ["other"],
           status: "VERIFIED",
           verifiedAt: new Date(),
           verifiedBy: "SYSTEM",

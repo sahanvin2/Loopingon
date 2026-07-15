@@ -51,7 +51,7 @@ export const vendorApplicationSchema = z.object({
     .regex(/^[a-zA-Z0-9\s&\-']+$/, "Store name can only contain letters, numbers, spaces, &, -, and '"),
   storeDescription: z
     .string()
-    .min(50, "Please write at least 50 characters describing your craft and store")
+    .min(20, "Please write at least 20 characters describing your store")
     .max(2000, "Description must be less than 2000 characters"),
   businessName: z.string().min(2, "Business name is required").optional(),
   businessRegistrationNo: z.string().optional(),
@@ -74,7 +74,7 @@ export const vendorApplicationSchema = z.object({
   phone: z
     .string()
     .min(1, "Phone number is required")
-    .regex(/^\+94\d{9}$/, "Please enter a valid Sri Lankan phone number (+94XXXXXXXXX)"),
+    .regex(/^\+?[0-9]{7,15}$/, "Please enter a valid phone number"),
   taxId: z.string().optional(),
   websiteUrl: z.string().url("Please enter a valid URL").optional().or(z.literal("")),
   facebookUrl: z.string().url("Please enter a valid URL").optional().or(z.literal("")),
