@@ -26,7 +26,8 @@ if [ ! -d "/opt/loopingon" ]; then
 else
     echo "Repository already exists, pulling latest..."
     cd /opt/loopingon
-    git pull origin main
+    git fetch origin
+    git reset --hard origin/main
 fi
 
 # 4. Create .env file
