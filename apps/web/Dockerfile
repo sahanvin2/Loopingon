@@ -14,6 +14,7 @@ RUN npm install
 COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV SKIP_BUILD_FETCH=true
+ENV NODE_OPTIONS="--max-old-space-size=1024"
 ENV NEXT_PUBLIC_API_URL=https://loopingon.com/api/v1
 ENV NEXT_PUBLIC_APP_URL=https://loopingon.com
 
