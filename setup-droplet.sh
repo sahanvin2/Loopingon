@@ -32,9 +32,9 @@ fi
 # 4. Create .env file
 echo "Configuring .env file..."
 cat <<EOF > /opt/loopingon/.env
-CORS_ORIGIN=https://kandyam.com,https://www.kandyam.com,http://165.227.90.181,http://159.65.227.217,http://134.209.68.3
-NEXT_PUBLIC_APP_URL=https://kandyam.com
-NEXT_PUBLIC_API_URL=https://kandyam.com/api/v1
+CORS_ORIGIN=https://loopingon.com,https://www.loopingon.com,http://134.209.68.3
+NEXT_PUBLIC_APP_URL=https://loopingon.com
+NEXT_PUBLIC_API_URL=https://loopingon.com/api/v1
 # Provide fallbacks for DB if they aren't generated yet
 POSTGRES_USER=loopingon
 POSTGRES_PASSWORD=loopingon_secret
@@ -44,9 +44,9 @@ EOF
 
 # 5. Run SSL Setup
 echo "Running SSL setup..."
-# cd /opt/loopingon
-# chmod +x scripts/setup-ssl.sh
-# ./scripts/setup-ssl.sh
+cd /opt/loopingon
+chmod +x scripts/setup-ssl.sh
+./scripts/setup-ssl.sh
 
 # 6. Start Docker Compose
 echo "Starting Docker Compose..."

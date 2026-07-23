@@ -5,9 +5,9 @@ echo "========================================="
 echo "   Kandyam SSL & Nginx Setup Script"
 echo "========================================="
 
-DOMAIN="kandyam.com"
-WWW_DOMAIN="www.kandyam.com"
-EMAIL="snawarathne10@gmail.com"
+DOMAIN="loopingon.com"
+WWW_DOMAIN="www.loopingon.com"
+EMAIL="snawarathne33@gmail.com"
 
 # The directory where docker-compose expects the SSL certs to be
 SSL_DIR="$(pwd)/docker/nginx/ssl"
@@ -36,7 +36,7 @@ sudo certbot certonly --standalone \
     --non-interactive
 
 echo "[4/4] Copying certificates to Docker Nginx directory..."
-# Certbot saves them in /etc/letsencrypt/live/kandyam.com/
+# Certbot saves them in /etc/letsencrypt/live/loopingon.com/
 sudo cp /etc/letsencrypt/live/$DOMAIN/fullchain.pem "$SSL_DIR/server.crt"
 sudo cp /etc/letsencrypt/live/$DOMAIN/privkey.pem "$SSL_DIR/server.key"
 

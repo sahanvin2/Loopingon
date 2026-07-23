@@ -3,7 +3,7 @@ export const SITE_TAGLINE = "Your global marketplace for premium digital product
 export const SITE_DESCRIPTION =
   "Kandyam connects talented digital creators with customers worldwide. " +
   "Discover a curated selection of 100+ premium digital items, including software, game keys, and gift cards.";
-export const SITE_URL = "https://kandyam.com";
+export const SITE_URL = "https://loopingon.com";
 
 export const NAV_LINKS = [
   { label: "Home", href: "/" },
@@ -359,7 +359,7 @@ export const SOCIAL_LINKS = {
 } as const;
 
 export const CONTACT_INFO = {
-  email: "hello@kandyam.com",
+  email: "hello@loopingon.com",
   phone: "+94 11 234 5678",
   whatsapp: "+94 77 123 4567",
   address: {

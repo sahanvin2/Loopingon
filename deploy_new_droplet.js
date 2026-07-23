@@ -1,4 +1,5 @@
 const { NodeSSH } = require('node-ssh');
+const path = require('path');
 const ssh = new NodeSSH();
 
 async function run() {
@@ -14,7 +15,7 @@ async function run() {
 
     // Upload and run setup-droplet.sh
     console.log('Uploading provisioning script...');
-    await ssh.putFile('d:/Mern/Loopingon/loopingon/setup-droplet.sh', '/root/setup-droplet.sh');
+    await ssh.putFile(path.join(__dirname, 'setup-droplet.sh'), '/root/setup-droplet.sh');
     
     console.log('Running provisioning script (this may take a few minutes)...');
     const provision = await ssh.execCommand('chmod +x /root/setup-droplet.sh && /root/setup-droplet.sh', {

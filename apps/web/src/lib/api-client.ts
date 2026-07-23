@@ -72,7 +72,7 @@ async function request<T>(
     ...fetchOptions
   } = options;
 
-  let baseUrl = process.env.NEXT_PUBLIC_API_URL || "https://kandyam.com/api/v1";
+  let baseUrl = process.env.NEXT_PUBLIC_API_URL || "https://loopingon.com/api/v1";
   
   // Fix for Node 18+ SSR IPv6 localhost resolution issue
   if (typeof window === "undefined" && baseUrl.includes("localhost")) {
@@ -208,7 +208,7 @@ export async function uploadFile<T>(
   fieldName: string = "file",
   extraFields?: Record<string, string>,
 ): Promise<T> {
-  const baseUrl = process.env.NEXT_PUBLIC_API_URL || "https://kandyam.com/api/v1";
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL || "https://loopingon.com/api/v1";
   const url = `${baseUrl}${endpoint}`;
 
   const formData = new FormData();
@@ -252,7 +252,7 @@ export async function uploadMultipleFiles<T>(
   fieldName: string = "files",
   extraFields?: Record<string, string>,
 ): Promise<T> {
-  const baseUrl = process.env.NEXT_PUBLIC_API_URL || "https://kandyam.com/api/v1";
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL || "https://loopingon.com/api/v1";
   const url = `${baseUrl}${endpoint}`;
 
   const formData = new FormData();

@@ -1,39 +1,28 @@
 const { NodeSSH } = require('node-ssh');
 const ssh = new NodeSSH();
-
 async function run() {
   try {
-    console.log("Connecting to Droplet...");
+    console.log('Connecting to droplet...');
     await ssh.connect({ host: '165.227.90.181', username: 'root', password: '@20040301Sa', tryKeyboard: true });
     
-    console.log("Connected. Pulling changes from Git...");
-    // Let's find the loopingon directory first
-    const findDir = await ssh.execCommand('find / -maxdepth 3 -type d -name "loopingon" | head -n 1');
-    const projectDir = findDir.stdout.trim() || '/opt/loopingon';
-    console.log(`Project directory found at: ${projectDir}`);
+    console.log('Creating new folder and cloning...');
+    const clone = await ssh.execCommand('git clone https://github.com/sahanvin2/Loopingon.git /opt/loopingon-digital || (cd /opt/loopingon-digital && git pull)');
+    console.log(clone.stdout);
+    if(clone.stderr) console.error(clone.stderr);
 
-    console.log('Running git reset and pull...');
-    await ssh.execCommand('git checkout -- .', { cwd: projectDir });
-    const pull = await ssh.execCommand('git pull origin main', { cwd: projectDir });
-    console.log(pull.stdout);
-    if(pull.stderr) console.error(pull.stderr);
+    console.log('Uploading .env files...');
+    await ssh.putFile('apps/server/.env', '/opt/loopingon-digital/apps/server/.env');
+    await ssh.putFile('apps/web/.env', '/opt/loopingon-digital/apps/web/.env');
 
-    console.log('Building web app...');
-    const webBuild = await ssh.execCommand('npm install && npm run build', { cwd: `${projectDir}/apps/web` });
-    console.log(webBuild.stdout);
-    if(webBuild.stderr) console.error(webBuild.stderr);
+    console.log('Stopping old containers...');
+    await ssh.execCommand('cd /opt/loopingon && docker compose down');
 
-    console.log('Building server app...');
-    const serverBuild = await ssh.execCommand('npm install && npx prisma generate && npm run build', { cwd: `${projectDir}/apps/server` });
-    console.log(serverBuild.stdout);
-    if(serverBuild.stderr) console.error(serverBuild.stderr);
+    console.log('Building and starting new containers...');
+    const build = await ssh.execCommand('docker compose -f docker/docker-compose.prod.yml up -d --build', { cwd: '/opt/loopingon-digital' });
+    console.log(build.stdout);
+    if(build.stderr) console.error(build.stderr);
 
-    console.log('Restarting services with pm2...');
-    const pm2 = await ssh.execCommand('pm2 restart all');
-    console.log(pm2.stdout);
-    if(pm2.stderr) console.error(pm2.stderr);
-
-    console.log('Done!');
+    console.log('Deployment successful!');
     process.exit(0);
   } catch (e) {
     console.error(e);
