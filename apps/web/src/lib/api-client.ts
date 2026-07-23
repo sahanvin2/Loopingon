@@ -95,6 +95,12 @@ async function request<T>(
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), timeout);
 
+  // If we are in the Docker build process, skip fetches to prevent hanging / SSL errors
+  if (process.env.SKIP_BUILD_FETCH === "true" || process.env.IS_BUILD === "true") {
+    clearTimeout(timeoutId);
+    return { data: [], meta: { total: 0, page: 1, limit: 10, totalPages: 1 } } as unknown as T;
+  }
+
   try {
     const response = await fetch(url, {
       ...fetchOptions,
