@@ -29,7 +29,7 @@ services:
     command: >
       sh -c 'exec redis-server --appendonly yes --maxmemory 512mb --maxmemory-policy allkeys-lru --requirepass "$$REDIS_PASSWORD"'
     env_file:
-      - .env
+      - ../.env
     volumes:
       - redis_data:/data
     healthcheck:
@@ -51,6 +51,10 @@ services:
       - loopingon_prod_network
 
   server:
+    build:
+      context: ..
+      dockerfile: apps/server/Dockerfile
+      target: runner
     image: ${DOCKER_REGISTRY:-registry.digitalocean.com/loopingon}/server:${IMAGE_TAG:-latest}
     container_name: loopingon-server-prod
     restart: always
@@ -63,10 +67,11 @@ services:
       redis:
         condition: service_healthy
     env_file:
-      - .env
+      - ../.env
     environment:
       REDIS_URL: redis://:${REDIS_PASSWORD}@redis:6379
       DATABASE_URL: postgresql://${POSTGRES_USER:-loopingon}:${POSTGRES_PASSWORD:-loopingon_secret}@postgres:5432/${POSTGRES_DB:-loopingon}?schema=public
+      DIRECT_URL: postgresql://${POSTGRES_USER:-loopingon}:${POSTGRES_PASSWORD:-loopingon_secret}@postgres:5432/${POSTGRES_DB:-loopingon}?schema=public
       NODE_ENV: production
     healthcheck:
       test: ["CMD", "node", "-e", "require('http').get('http://localhost:4000/health', (r) => { process.exit(r.statusCode === 200 ? 0 : 1) })"]
@@ -90,6 +95,10 @@ services:
       - loopingon_prod_network
 
   web:
+    build:
+      context: ..
+      dockerfile: apps/web/Dockerfile
+      target: runner
     image: ${DOCKER_REGISTRY:-registry.digitalocean.com/loopingon}/web:${IMAGE_TAG:-latest}
     container_name: loopingon-web-prod
     restart: always
@@ -99,7 +108,7 @@ services:
       server:
         condition: service_healthy
     env_file:
-      - .env
+      - ../.env
     healthcheck:
       test: ["CMD", "node", "-e", "require('http').get('http://localhost:3000/', (r) => { process.exit(r.statusCode === 200 ? 0 : 1) })"]
       interval: 30s
@@ -122,6 +131,10 @@ services:
       - loopingon_prod_network
 
   worker:
+    build:
+      context: ..
+      dockerfile: apps/server/Dockerfile
+      target: runner
     image: ${DOCKER_REGISTRY:-registry.digitalocean.com/loopingon}/server:${IMAGE_TAG:-latest}
     container_name: loopingon-worker-prod
     restart: always
@@ -132,10 +145,11 @@ services:
       redis:
         condition: service_healthy
     env_file:
-      - .env
+      - ../.env
     environment:
       REDIS_URL: redis://:${REDIS_PASSWORD}@redis:6379
       DATABASE_URL: postgresql://${POSTGRES_USER:-loopingon}:${POSTGRES_PASSWORD:-loopingon_secret}@postgres:5432/${POSTGRES_DB:-loopingon}?schema=public
+      DIRECT_URL: postgresql://${POSTGRES_USER:-loopingon}:${POSTGRES_PASSWORD:-loopingon_secret}@postgres:5432/${POSTGRES_DB:-loopingon}?schema=public
       NODE_ENV: production
     logging:
       driver: "json-file"

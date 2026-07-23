@@ -48,13 +48,15 @@ EOF
 # 5. Run SSL Setup
 echo "Running SSL setup..."
 cd /opt/loopingon
+sed -i 's/\r$//' scripts/setup-ssl.sh
 chmod +x scripts/setup-ssl.sh
 ./scripts/setup-ssl.sh
 
 # 6. Start Docker Compose
 echo "Starting Docker Compose..."
+docker compose -f docker/docker-compose.prod.yml down
 docker compose -f docker/docker-compose.prod.yml pull || true
-docker compose -f docker/docker-compose.prod.yml up -d
+docker compose -f docker/docker-compose.prod.yml up -d --build
 
 echo "========================================="
 echo "   Server Provisioning Complete!"
