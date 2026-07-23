@@ -30,6 +30,16 @@ async function run() {
     if (provision.code !== 0) {
       console.error('Script failed with exit code:', provision.code);
     } else {
+      console.log('Running database migrations...');
+      await ssh.execCommand('cd /opt/loopingon && docker compose -f docker/docker-compose.prod.yml exec -T server npx prisma db push --accept-data-loss', {
+        onStdout: chunk => process.stdout.write(chunk.toString('utf8')),
+        onStderr: chunk => process.stderr.write(chunk.toString('utf8')),
+      });
+      console.log('Seeding database...');
+      await ssh.execCommand('cd /opt/loopingon && docker compose -f docker/docker-compose.prod.yml exec -T server npm run db:seed', {
+        onStdout: chunk => process.stdout.write(chunk.toString('utf8')),
+        onStderr: chunk => process.stderr.write(chunk.toString('utf8')),
+      });
       console.log('\nServer update complete! Your site should be up.');
     }
     ssh.dispose();
