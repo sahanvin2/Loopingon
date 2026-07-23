@@ -53,10 +53,30 @@ chmod +x scripts/setup-ssl.sh
 ./scripts/setup-ssl.sh
 
 # 6. Start Docker Compose
-echo "Starting Docker Compose..."
-docker compose -f docker/docker-compose.prod.yml down
-docker compose -f docker/docker-compose.prod.yml pull || true
-docker compose -f docker/docker-compose.prod.yml up -d --build
+echo "Starting Database and Redis..."
+docker compose -f docker/docker-compose.prod.yml up -d postgres redis
+
+echo "Building and starting Server..."
+docker compose -f docker/docker-compose.prod.yml build server worker
+docker compose -f docker/docker-compose.prod.yml up -d server worker
+
+echo "Waiting for server to be healthy..."
+sleep 15
+
+echo "Running Database Migrations and Seeding..."
+docker compose -f docker/docker-compose.prod.yml exec -T server npx prisma db push --accept-data-loss
+docker compose -f docker/docker-compose.prod.yml exec -T server npm run db:seed || true
+
+echo "Seeding images..."
+cat << 'SQL_EOF' > /tmp/seed_images.sql
+INSERT INTO product_images (id, "productId", url, thumbnail, medium, large, "isPrimary", "sortOrder", "createdAt", "updatedAt") SELECT gen_random_uuid(), id, 'https://kandyam-media.sgp1.digitaloceanspaces.com/seed/products/' || slug || '.jpg', 'https://kandyam-media.sgp1.digitaloceanspaces.com/seed/products/' || slug || '.jpg', 'https://kandyam-media.sgp1.digitaloceanspaces.com/seed/products/' || slug || '.jpg', 'https://kandyam-media.sgp1.digitaloceanspaces.com/seed/products/' || slug || '.jpg', true, 0, NOW(), NOW() FROM products ON CONFLICT DO NOTHING;
+SQL_EOF
+docker cp /tmp/seed_images.sql loopingon-postgres-prod:/tmp/seed_images.sql
+docker exec loopingon-postgres-prod psql -U loopingon -d loopingon -f /tmp/seed_images.sql || true
+
+echo "Building and starting Web..."
+docker compose -f docker/docker-compose.prod.yml build web
+docker compose -f docker/docker-compose.prod.yml up -d web
 
 echo "========================================="
 echo "   Server Provisioning Complete!"

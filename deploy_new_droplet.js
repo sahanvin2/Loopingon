@@ -30,26 +30,6 @@ async function run() {
     if (provision.code !== 0) {
       console.error('Script failed with exit code:', provision.code);
     } else {
-      console.log('Running database migrations...');
-      await ssh.execCommand('cd /opt/loopingon && docker compose -f docker/docker-compose.prod.yml exec -T server npx prisma db push --accept-data-loss', {
-        onStdout: chunk => process.stdout.write(chunk.toString('utf8')),
-        onStderr: chunk => process.stderr.write(chunk.toString('utf8')),
-      });
-      console.log('Seeding database...');
-      await ssh.execCommand('cd /opt/loopingon && docker compose -f docker/docker-compose.prod.yml exec -T server npm run db:seed', {
-        onStdout: chunk => process.stdout.write(chunk.toString('utf8')),
-        onStderr: chunk => process.stderr.write(chunk.toString('utf8')),
-      });
-      console.log('Seeding images...');
-      const sql = `INSERT INTO product_images (id, "productId", url, thumbnail, medium, large, "isPrimary", "sortOrder", "createdAt", "updatedAt") SELECT gen_random_uuid(), id, 'https://kandyam-media.sgp1.digitaloceanspaces.com/seed/products/' || slug || '.jpg', 'https://kandyam-media.sgp1.digitaloceanspaces.com/seed/products/' || slug || '.jpg', 'https://kandyam-media.sgp1.digitaloceanspaces.com/seed/products/' || slug || '.jpg', 'https://kandyam-media.sgp1.digitaloceanspaces.com/seed/products/' || slug || '.jpg', true, 0, NOW(), NOW() FROM products ON CONFLICT DO NOTHING;`;
-      const b64 = Buffer.from(sql).toString('base64');
-      await ssh.execCommand(`echo '${b64}' | base64 -d > /root/seed_images.sql`);
-      await ssh.execCommand('docker cp /root/seed_images.sql loopingon-postgres-prod:/tmp/seed_images.sql');
-      await ssh.execCommand('docker exec loopingon-postgres-prod psql -U loopingon -d loopingon -f /tmp/seed_images.sql', {
-        onStdout: chunk => process.stdout.write(chunk.toString('utf8')),
-        onStderr: chunk => process.stderr.write(chunk.toString('utf8')),
-      });
-
       console.log('\nServer update complete! Your site should be up.');
     }
     ssh.dispose();
