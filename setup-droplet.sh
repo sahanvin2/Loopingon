@@ -41,6 +41,8 @@ POSTGRES_USER=loopingon
 POSTGRES_PASSWORD=loopingon_secret
 POSTGRES_DB=loopingon
 REDIS_PASSWORD=redis_secret
+DATABASE_URL="postgresql://loopingon:loopingon_secret@postgres:5432/loopingon?schema=public"
+DIRECT_URL="postgresql://loopingon:loopingon_secret@postgres:5432/loopingon?schema=public"
 EOF
 
 # 5. Run SSL Setup
