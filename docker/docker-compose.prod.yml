@@ -2,6 +2,24 @@ version: "3.8"
 
 services:
 
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: loopingon-postgres-prod
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-loopingon}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-loopingon_secret}
+      POSTGRES_DB: ${POSTGRES_DB:-loopingon}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-loopingon} -d ${POSTGRES_DB:-loopingon}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - loopingon_prod_network
+
   redis:
     image: redis:7-alpine
     container_name: loopingon-redis-prod
@@ -40,12 +58,15 @@ services:
       - "4000:4000"
     depends_on:
 
+      postgres:
+        condition: service_healthy
       redis:
         condition: service_healthy
     env_file:
       - .env
     environment:
       REDIS_URL: redis://:${REDIS_PASSWORD}@redis:6379
+      DATABASE_URL: postgresql://${POSTGRES_USER:-loopingon}:${POSTGRES_PASSWORD:-loopingon_secret}@postgres:5432/${POSTGRES_DB:-loopingon}?schema=public
       NODE_ENV: production
     healthcheck:
       test: ["CMD", "node", "-e", "require('http').get('http://localhost:4000/health', (r) => { process.exit(r.statusCode === 200 ? 0 : 1) })"]
@@ -106,13 +127,15 @@ services:
     restart: always
     command: node dist/workers/index.worker.js
     depends_on:
-
+      postgres:
+        condition: service_healthy
       redis:
         condition: service_healthy
     env_file:
       - .env
     environment:
       REDIS_URL: redis://:${REDIS_PASSWORD}@redis:6379
+      DATABASE_URL: postgresql://${POSTGRES_USER:-loopingon}:${POSTGRES_PASSWORD:-loopingon_secret}@postgres:5432/${POSTGRES_DB:-loopingon}?schema=public
       NODE_ENV: production
     logging:
       driver: "json-file"
@@ -162,7 +185,8 @@ services:
       - loopingon_prod_network
 
 volumes:
-
+  postgres_data:
+    driver: local
   redis_data:
     driver: local
   nginx_logs:
