@@ -10,6 +10,8 @@ import { PwaProvider } from "@/components/shared/pwa-provider";
 import { PageTracker } from "@/components/shared/page-tracker";
 import "@/styles/globals.css";
 
+export const dynamic = 'force-dynamic';
+
 const lora = Lora({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
