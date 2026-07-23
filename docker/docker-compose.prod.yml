@@ -55,7 +55,7 @@ services:
     container_name: loopingon-server-prod
     restart: always
     ports:
-      - "4000:4000"
+      - "127.0.0.1:4005:4000"
     depends_on:
 
       postgres:
@@ -94,7 +94,7 @@ services:
     container_name: loopingon-web-prod
     restart: always
     ports:
-      - "3000:3000"
+      - "127.0.0.1:3005:3000"
     depends_on:
       server:
         condition: service_healthy
@@ -150,37 +150,6 @@ services:
         reservations:
           memory: 128m
           cpus: "0.25"
-    networks:
-      - loopingon_prod_network
-
-  nginx:
-    image: ${DOCKER_REGISTRY:-registry.digitalocean.com/loopingon}/nginx:${IMAGE_TAG:-latest}
-    container_name: loopingon-nginx-prod
-    restart: always
-    ports:
-      - "80:80"
-      - "443:443"
-    depends_on:
-      - web
-      - server
-    volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-      - nginx_logs:/var/log/nginx
-    healthcheck:
-      test: ["CMD", "nginx", "-t"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "50m"
-        max-file: "3"
-    deploy:
-      resources:
-        limits:
-          memory: 256m
-          cpus: "0.5"
     networks:
       - loopingon_prod_network
 
